@@ -59,7 +59,7 @@ export default function UpdateCustomer() {
                 const customerInfo = result?.data?.data?.customer_exist;
                 setCustomerCardInfo(customerInfo || {});
 
-                const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+                const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
                 // Set default values dynamically
                 // fields.forEach((field) => {

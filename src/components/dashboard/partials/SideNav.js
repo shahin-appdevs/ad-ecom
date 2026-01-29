@@ -357,12 +357,9 @@ export default function SideNav() {
 
             localStorage.removeItem("jwtToken");
             localStorage.removeItem("userInfo");
-
-            sessionStorage.removeItem("jwtToken");
-            sessionStorage.removeItem("userInfo");
-            sessionStorage.removeItem("email_verified");
-            sessionStorage.removeItem("sms_verified");
-            sessionStorage.removeItem("two_factor_verified");
+            localStorage.removeItem("email_verified");
+            localStorage.removeItem("sms_verified");
+            localStorage.removeItem("two_factor_verified");
             // sessionStorage.removeItem("active_virtual_system");
 
             successMessage.forEach((msg) => {

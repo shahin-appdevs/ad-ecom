@@ -136,9 +136,6 @@ export default function SideNav() {
             localStorage.removeItem("jwtSellerToken");
             localStorage.removeItem("userInfo");
 
-            sessionStorage.removeItem("jwtSellerToken");
-            sessionStorage.removeItem("userInfo");
-
             successMessage.forEach((msg) => {
                 toast.success(msg);
             });

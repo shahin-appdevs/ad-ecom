@@ -76,7 +76,7 @@ export default function Header() {
     console.log(isLoggedIn);
 
     useEffect(() => {
-        const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
         if (userInfo) {
             setStoredReferCode(userInfo.referral_code);
@@ -142,16 +142,12 @@ export default function Header() {
     }, [searchQuery, searchType]);
 
     useEffect(() => {
-        const token =
-            localStorage.getItem("jwtToken") ||
-            sessionStorage.getItem("jwtToken");
+        const token = localStorage.getItem("jwtToken");
         setIsLoggedIn(!!token);
     }, []);
 
     useEffect(() => {
-        const sellerToken =
-            localStorage.getItem("jwtSellerToken") ||
-            sessionStorage.getItem("jwtSellerToken");
+        const sellerToken = localStorage.getItem("jwtSellerToken");
         setIsSellerLoggedIn(!!sellerToken);
     }, []);
 
@@ -429,7 +425,7 @@ export default function Header() {
                             <input
                                 type="text"
                                 placeholder="Search by name..."
-                                className="w-full border border-primary__color rounded-full px-4 py-3 pl-10 pr-[180px] text-sm focus:outline-none"
+                                className="w-full bg-neutral-100 rounded-full px-4 py-3 pl-10 pr-[180px] text-sm focus:outline-none"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 onFocus={() => setIsSearchFocused(true)}

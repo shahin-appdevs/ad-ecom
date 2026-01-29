@@ -45,7 +45,7 @@ const FlashSaleSkeleton = () => {
                     {[...Array(6)].map((_, index) => (
                         <SwiperSlide key={index}>
                             <div className="bg-[#f1f5f9] rounded-md">
-                                <div className="relative p-[10px]">
+                                <div className="relative">
                                     <div className="w-full h-[150px] sm:h-[215px] bg-gray-300 rounded-md animate-pulse"></div>
                                 </div>
                                 <div className="p-[10px] pt-[5px]">
@@ -336,7 +336,7 @@ export default function FlashSale() {
     return (
         <section className="sm:pt-4">
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
-                <div className="bg-gradient-to-tr relative from-emerald-400 via-teal-500 to-green-500 p-4 lg:py-8 sm:rounded-md">
+                <div className="bg-gradient-to-tr relative bg-primary__color p-4 lg:py-8 sm:rounded-md">
                     <div className="flex sm:gap-3 md:gap-0 items-center justify-between mb-4">
                         <h4 className="text-white">Flash Sale</h4>
 
@@ -455,8 +455,8 @@ export default function FlashSale() {
                                         href={`/product/details?id=${product.id}`}
                                         className="group/card bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
                                     >
-                                        <div className="relative p-[10px]">
-                                            <div className="w-full h-[150px] sm:h-[215px] overflow-hidden">
+                                        <div className="relative">
+                                            <div className="w-full h-[150px] sm:h-[215px] overflow-hidden rounded-t-md">
                                                 <Image
                                                     src={
                                                         product.main_image
@@ -466,16 +466,19 @@ export default function FlashSale() {
                                                     width={100}
                                                     height={100}
                                                     alt={product.title}
-                                                    className="group-hover/card:scale-105 transition-transform duration-300 w-full h-full object-cover rounded-md"
+                                                    className="group-hover/card:scale-105 transition-transform duration-300 w-full h-full object-cover rounded-t-md"
                                                 />
                                             </div>
                                             <span className="absolute right-[8px] top-[8px] text-xs bg-primary__color text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
                                                 {discount} off
                                             </span>
                                         </div>
-                                        <div className="p-[10px] pt-[5px]">
+                                        <div className="p-[10px]">
+                                            <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                                {product.title}
+                                            </h5>
                                             <div className="flex items-center gap-1 mb-1">
-                                                <span className="text-base font-semibold text-primary__color">
+                                                <span className="text-base md:text-lg font-semibold text-primary__color">
                                                     {formatPrice(displayPrice)}
                                                 </span>
                                                 {(hasDiscount ||
@@ -487,9 +490,6 @@ export default function FlashSale() {
                                                     </span>
                                                 )}
                                             </div>
-                                            <h5 className="text-sm font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
-                                                {product.title}
-                                            </h5>
                                             {/* <div className="relative">
                                                 {!states[index]
                                                     ?.showQuantity ? (

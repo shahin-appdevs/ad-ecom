@@ -124,8 +124,8 @@ export default function EmailVerify() {
                     toast.success(msg),
                 );
                 localStorage.removeItem("otpCountdown");
-                sessionStorage.setItem("email_verified", "1");
-                const isPhoneVerified = sessionStorage.getItem("sms_verified");
+                localStorage.setItem("email_verified", "1");
+                const isPhoneVerified = localStorage.getItem("sms_verified");
 
                 if (isPhoneVerified === "0") {
                     // await resendAuthorizationCodeAPI();
@@ -192,7 +192,7 @@ export default function EmailVerify() {
                     <div className="text-sm">
                         {canResend ? (
                             <p>
-                                Didn't receive code?{" "}
+                                Didn&apos;t receive code?{" "}
                                 <button
                                     type="button"
                                     onClick={handleResend}

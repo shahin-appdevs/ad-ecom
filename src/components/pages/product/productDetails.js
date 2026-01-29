@@ -240,7 +240,7 @@ function ProductDetails() {
         //     }
         // };
 
-        const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
         if (userInfo) {
             setIsAffiliate(userInfo?.affiliate_status);
@@ -389,14 +389,10 @@ function ProductDetails() {
     }, [productId]);
 
     useEffect(() => {
-        const token =
-            localStorage.getItem("jwtToken") ||
-            sessionStorage.getItem("jwtToken");
+        const token = localStorage.getItem("jwtToken");
         setIsLoggedIn(!!token);
 
-        const sellerToken =
-            localStorage.getItem("jwtSellerToken") ||
-            sessionStorage.getItem("jwtSellerToken");
+        const sellerToken = localStorage.getItem("jwtSellerToken");
         setIsSellerLoggedIn(!!sellerToken);
     }, []);
 

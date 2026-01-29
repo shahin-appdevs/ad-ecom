@@ -20,7 +20,7 @@ export default function DashboardLayout({ children }) {
         const fetchData = async () => {
             const token =
                 localStorage.getItem("jwtToken") ||
-                sessionStorage.getItem("jwtToken");
+                localStorage.getItem("jwtToken");
 
             if (!token) {
                 router.push("/user/auth/login");
@@ -32,8 +32,8 @@ export default function DashboardLayout({ children }) {
 
                 const userData = response.data.data.user;
 
-                sessionStorage.setItem("sms_verified", userData.sms_verified);
-                sessionStorage.setItem(
+                localStorage.setItem("sms_verified", userData.sms_verified);
+                localStorage.setItem(
                     "two_factor_verified",
                     userData.two_factor_verified,
                 );
@@ -51,13 +51,13 @@ export default function DashboardLayout({ children }) {
                 }
             } catch (error) {
                 if (error.response?.status === 400) {
-                    const smsVerified = sessionStorage.getItem("sms_verified");
-                    const twoFactorVerified = sessionStorage.getItem(
+                    const smsVerified = localStorage.getItem("sms_verified");
+                    const twoFactorVerified = localStorage.getItem(
                         "two_factor_verified",
                     );
 
                     const emailVerified =
-                        sessionStorage.getItem("email_verified");
+                        localStorage.getItem("email_verified");
 
                     if (emailVerified === "0") {
                         router.push("/user/auth/email-verify");
@@ -72,7 +72,7 @@ export default function DashboardLayout({ children }) {
                             "Session expired or invalid. Please login again.",
                         );
                         localStorage.removeItem("jwtToken");
-                        sessionStorage.removeItem("jwtToken");
+                        // sessionStorage.removeItem("jwtToken"); // Removed as per task
                         router.push("/user/auth/login");
                     }
                 } else {

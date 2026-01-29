@@ -38,7 +38,7 @@ export default function Otp() {
                 response.data.message.success.forEach((msg) =>
                     toast.success(msg),
                 );
-                sessionStorage.setItem("two_factor_verified", "1");
+                localStorage.setItem("two_factor_verified", "1");
                 router.push("/user/dashboard");
             }
         } catch (error) {

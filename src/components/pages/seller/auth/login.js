@@ -39,8 +39,8 @@ export default function Login() {
                 setCredentials("");
                 setPassword("");
 
-                sessionStorage.setItem("jwtSellerToken", token);
-                sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+                localStorage.setItem("jwtSellerToken", token);
+                localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
                 if (userInfo.two_factor_status === 1) {
                     router.push("/seller/auth/2fa");

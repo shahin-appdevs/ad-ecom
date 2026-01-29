@@ -17,7 +17,7 @@ const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 const ProductSkeleton = () => {
     return (
         <div className="bg-[#f1f5f9] rounded-md animate-pulse">
-            <div className="relative p-[10px]">
+            <div className="relative">
                 <div className="w-full h-[150px] sm:h-[215px] bg-gray-300 rounded-md"></div>
             </div>
             <div className="p-[10px] pt-[5px]">
@@ -268,7 +268,7 @@ export default function NewProduct() {
             <section className="sm:pt-4">
                 <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
                     <div className="grid grid-cols-1 xl:grid-cols-12 sm:gap-4">
-                        <div className="hidden sm:block col-span-1 xl:col-span-2 bg-white rounded-md p-2.5 relative w-full h-full">
+                        <div className="hidden p-2.5 xl:p-0  sm:block col-span-1 xl:col-span-2 bg-white rounded-md  relative w-full h-full">
                             <ProductSidebar />
                         </div>
                         <div className="col-span-1 xl:col-span-10">
@@ -296,7 +296,7 @@ export default function NewProduct() {
         <section className="sm:pt-4">
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
                 <div className="grid grid-cols-1 xl:grid-cols-12 sm:gap-4">
-                    <div className="hidden sm:block col-span-1 xl:col-span-2 bg-white rounded-md p-2.5 relative w-full h-full">
+                    <div className="hidden p-2.5 xl:p-0 sm:block col-span-1 xl:col-span-2 bg-white rounded-md relative w-full h-full">
                         <ProductSidebar />
                     </div>
                     <div className="col-span-1 xl:col-span-10">
@@ -320,10 +320,10 @@ export default function NewProduct() {
                                             <Link
                                                 href={`/product/details?id=${product.id}`}
                                                 key={index}
-                                                className="bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
+                                                className="group bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
                                             >
-                                                <div className="relative p-[10px]">
-                                                    <div className="w-full h-[150px] sm:h-[215px]">
+                                                <div className="relative ">
+                                                    <div className="w-full h-[150px] sm:h-[215px] rounded-t-md overflow-hidden">
                                                         <Image
                                                             src={
                                                                 product.main_image
@@ -333,7 +333,7 @@ export default function NewProduct() {
                                                             width={100}
                                                             height={100}
                                                             alt={product.title}
-                                                            className="w-full h-full object-cover rounded-md"
+                                                            className="w-full h-full object-cover rounded-t-md group-hover:scale-105 transition-transform duration-200"
                                                         />
                                                     </div>
                                                     {discount && (
@@ -342,7 +342,7 @@ export default function NewProduct() {
                                                         </span>
                                                     )}
                                                 </div>
-                                                <div className="p-[10px] pt-[5px]">
+                                                <div className="p-[10px]">
                                                     <div className="flex items-center gap-1 mb-1">
                                                         <span className="text-base font-semibold text-primary__color">
                                                             {formatPrice(
@@ -358,7 +358,7 @@ export default function NewProduct() {
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <h5 className="text-sm font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                                    <h5 className="text-sm font-normal text-[#4b5563] mb-2 truncate whitespace-nowrap overflow-hidden text-ellipsis">
                                                         {product.title}
                                                     </h5>
                                                     {/* <div className="relative">

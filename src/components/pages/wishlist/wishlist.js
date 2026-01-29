@@ -1,7 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { HeartIcon as SolidHeartIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import {
+    HeartIcon as SolidHeartIcon,
+    XMarkIcon,
+} from "@heroicons/react/24/solid";
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { useCart } from "@/components/context/CartContext";
@@ -28,9 +31,9 @@ export default function Wishlist() {
     }, []);
 
     const removeFromWishlist = (id) => {
-        const updatedWishlist = wishlistItems.filter(item => item.id !== id);
+        const updatedWishlist = wishlistItems.filter((item) => item.id !== id);
         updateWishlist(updatedWishlist);
-        toast.success('Item removed from wishlist');
+        toast.success("Item removed from wishlist");
     };
 
     const moveToCart = (item) => {
@@ -40,10 +43,10 @@ export default function Wishlist() {
             price: item.price,
             image: item.image,
             quantity: 1,
-            base_curr_symbol: item.base_curr_symbol || '৳'
+            base_curr_symbol: item.base_curr_symbol || "৳",
         });
         removeFromWishlist(item.id);
-        toast.success('Item moved to cart');
+        toast.success("Item moved to cart");
     };
 
     return (
@@ -55,7 +58,7 @@ export default function Wishlist() {
                     `My Wishlist (${wishlistCount} items)`
                 )}
             </h2>
-            
+
             {loading ? (
                 <div className="space-y-6">
                     {[...Array(3)].map((_, i) => (
@@ -86,14 +89,20 @@ export default function Wishlist() {
                                             <div className="mt-1 text-sm text-gray-700">
                                                 <div className="flex items-center gap-2">
                                                     <span className="font-semibold">
-                                                        {item.base_curr_symbol || '৳'}{parseFloat(item.price).toFixed(2)}
+                                                        {item.base_curr_symbol ||
+                                                            "৳"}
+                                                        {parseFloat(
+                                                            item.price,
+                                                        ).toFixed(2)}
                                                     </span>
                                                 </div>
                                             </div>
                                         </div>
                                         <button
                                             type="button"
-                                            onClick={() => removeFromWishlist(item.id)}
+                                            onClick={() =>
+                                                removeFromWishlist(item.id)
+                                            }
                                             className="text-gray-500 hover:text-red-600"
                                             aria-label="Remove item"
                                         >
@@ -124,8 +133,12 @@ export default function Wishlist() {
                             <div className="flex justify-center mb-4">
                                 <SolidHeartIcon className="h-12 w-12 text-gray-300" />
                             </div>
-                            <p className="text-lg font-bold text-color__heading">Your wishlist is empty</p>
-                            <p className="text-gray-600 mt-2">Save your favorite items here for later</p>
+                            <p className="text-lg font-bold text-color__heading">
+                                Your wishlist is empty
+                            </p>
+                            <p className="text-gray-600 mt-2">
+                                Save your favorite items here for later
+                            </p>
                             <Button
                                 href="/"
                                 title="Continue Shopping"

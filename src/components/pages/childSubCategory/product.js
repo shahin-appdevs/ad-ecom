@@ -18,7 +18,7 @@ const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 const ProductSkeleton = () => (
     <div className="bg-[#f1f5f9] rounded-md animate-pulse">
-        <div className="relative p-[10px]">
+        <div className="relative">
             <div className="w-full h-[150px] sm:h-[215px] bg-gray-300 rounded-md"></div>
         </div>
         <div className="p-[10px] pt-[5px]">
@@ -347,7 +347,7 @@ function ChildSubCategoryProduct() {
         <section className="sm:pt-4">
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
                 <div className="grid grid-cols-1 xl:grid-cols-12 sm:gap-4">
-                    <div className="hidden sm:block col-span-1 xl:col-span-2 bg-white rounded-md relative w-full h-full">
+                    <div className="hidden sm:block p-2.5  xl:p-0 col-span-1 xl:col-span-2 bg-white rounded-md relative w-full h-full">
                         <ProductSidebar />
                     </div>
                     <div className="col-span-1 xl:col-span-10">
@@ -380,15 +380,15 @@ function ChildSubCategoryProduct() {
                                         <Link
                                             href={`/product/details?id=${product.id}`}
                                             key={`${product.id}-${index}`}
-                                            className="bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
+                                            className="group bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
                                         >
-                                            <div className="relative p-[10px]">
-                                                <div className="w-full h-[150px] sm:h-[215px] relative">
+                                            <div className="relative ">
+                                                <div className="w-full h-[150px] sm:h-[215px] relative rounded-t-md overflow-hidden">
                                                     <Image
                                                         src={product.image}
                                                         fill
                                                         alt={product.title}
-                                                        className="object-cover rounded-md"
+                                                        className="object-cover rounded-t-md group-hover:scale-105 transition-transform duration-200"
                                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                     />
                                                 </div>
@@ -398,7 +398,7 @@ function ChildSubCategoryProduct() {
                                                     </span>
                                                 )}
                                             </div>
-                                            <div className="p-[10px] pt-[5px]">
+                                            <div className="p-[10px]">
                                                 <div className="flex items-center gap-1 mb-1">
                                                     <span className="text-base font-semibold text-primary__color">
                                                         {formatPrice(

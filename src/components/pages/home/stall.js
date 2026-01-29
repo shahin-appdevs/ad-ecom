@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
-import { useHomeData } from '@/components/context/HomeContext';
+import { useHomeData } from "@/components/context/HomeContext";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -22,11 +22,11 @@ const StallSkeleton = () => {
                         slidesPerView={1}
                         spaceBetween={10}
                         breakpoints={{
-                        0: { slidesPerView: 3 },
-                        640: { slidesPerView: 3 },
-                        768: { slidesPerView: 3 },
-                        1024: { slidesPerView: 4 },
-                        1280: { slidesPerView: 7 },
+                            0: { slidesPerView: 3 },
+                            640: { slidesPerView: 3 },
+                            768: { slidesPerView: 3 },
+                            1024: { slidesPerView: 4 },
+                            1280: { slidesPerView: 7 },
                         }}
                     >
                         {[...Array(7)].map((_, index) => (
@@ -42,7 +42,10 @@ const StallSkeleton = () => {
                                     </div>
                                     <div className="flex justify-center gap-2 mt-[-5px]">
                                         {[...Array(3)].map((_, i) => (
-                                            <div key={i} className="w-12 h-12 rounded-md overflow-hidden bg-gray-200 animate-pulse"></div>
+                                            <div
+                                                key={i}
+                                                className="w-12 h-12 rounded-md overflow-hidden bg-gray-200 animate-pulse"
+                                            ></div>
                                         ))}
                                     </div>
                                 </div>
@@ -94,45 +97,53 @@ export default function Stall() {
                     >
                         {stalls.map((stall, index) => (
                             <SwiperSlide key={index}>
-                                <div className="bg-[#f5f5f5] rounded-md p-4 shadow hover:shadow-md transition-shadow">
-                                    <div className="flex items-center justify-center mb-2">
-                                        <div className="w-full h-[100px] sm:h-[120px] rounded-md overflow-hidden">
+                                <div className="bg-[#f5f5f5] rounded-md shadow hover:shadow-md pb-4 transition-shadow">
+                                    <div className="flex items-center justify-center mb-2 ">
+                                        <div className="w-full h-[100px] sm:h-[120px] rounded-t-md overflow-hidden">
                                             <Image
-                                                src={stall.stall_image 
-                                                    ? `${backendBaseURL}/${stall_image_path}/${stall.stall_image}`
-                                                    : `${backendBaseURL}/${homeData.default_image_path}`}
+                                                src={
+                                                    stall.stall_image
+                                                        ? `${backendBaseURL}/${stall_image_path}/${stall.stall_image}`
+                                                        : `${backendBaseURL}/${homeData.default_image_path}`
+                                                }
                                                 alt={stall.stall_name}
                                                 width={50}
                                                 height={50}
-                                                className="object-cover w-full h-full"
+                                                className="object-cover w-full h-full rounded-t-md"
                                             />
                                         </div>
                                     </div>
                                     <div className="text-center relative top-[-20px]">
                                         <h6 className="text-center font-semibold inline-flex text-[10px] sm:text-sm bg-white rounded-full py-1.5 px-5 hover:text-primary__color transition-colors">
-                                            <Link href={`/stalls/details?id=${stall.id}`}>
+                                            <Link
+                                                href={`/stalls/details?id=${stall.id}`}
+                                            >
                                                 {stall.stall_name}
                                             </Link>
                                         </h6>
                                     </div>
                                     <div className="flex justify-center gap-2 mt-[-5px]">
-                                        {stall.products.slice(0, 3).map((product, i) => (
-                                            <Link
-                                                href={`/product/details?id=${product.id}`}
-                                                key={i}
-                                                className="w-12 h-12 rounded-md overflow-hidden bg-white"
-                                            >
-                                                <Image
-                                                    src={product.main_image 
-                                                    ? `${backendBaseURL}/${product_image_path}/${product.main_image}`
-                                                    : `${backendBaseURL}/${homeData.default_image_path}`}
-                                                    alt={product.title}
-                                                    width={48}
-                                                    height={48}
-                                                    className="object-cover w-full h-full"
-                                                />
-                                            </Link>
-                                        ))}
+                                        {stall.products
+                                            .slice(0, 3)
+                                            .map((product, i) => (
+                                                <Link
+                                                    href={`/product/details?id=${product.id}`}
+                                                    key={i}
+                                                    className="w-12 h-12 rounded-md overflow-hidden bg-white"
+                                                >
+                                                    <Image
+                                                        src={
+                                                            product.main_image
+                                                                ? `${backendBaseURL}/${product_image_path}/${product.main_image}`
+                                                                : `${backendBaseURL}/${homeData.default_image_path}`
+                                                        }
+                                                        alt={product.title}
+                                                        width={48}
+                                                        height={48}
+                                                        className="object-cover w-full h-full"
+                                                    />
+                                                </Link>
+                                            ))}
                                     </div>
                                 </div>
                             </SwiperSlide>

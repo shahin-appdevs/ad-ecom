@@ -1,8 +1,8 @@
 "use client";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import ProductSidebar from '@/components/partials/ProductSidebar';
+import ProductSidebar from "@/components/partials/ProductSidebar";
 import { stallGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
@@ -23,7 +23,10 @@ const StallSkeleton = () => {
                     </div>
                     <div className="flex justify-center gap-2 mt-[-5px]">
                         {[...Array(3)].map((_, i) => (
-                            <div key={i} className="w-12 h-12 rounded-md overflow-hidden bg-gray-200 animate-pulse"></div>
+                            <div
+                                key={i}
+                                className="w-12 h-12 rounded-md overflow-hidden bg-gray-200 animate-pulse"
+                            ></div>
                         ))}
                     </div>
                 </div>
@@ -40,10 +43,13 @@ export default function Stall() {
         const fetchStallData = async () => {
             setLoading(true);
             try {
-                const response = await stallGetAPI();   
-                setStallData(response.data.data);                                                        
+                const response = await stallGetAPI();
+                setStallData(response.data.data);
             } catch (error) {
-                toast.error(error.response?.data?.message?.error?.[0] || "Failed to fetch stalls");
+                toast.error(
+                    error.response?.data?.message?.error?.[0] ||
+                        "Failed to fetch stalls",
+                );
             } finally {
                 setLoading(false);
             }
@@ -55,7 +61,7 @@ export default function Stall() {
         <section className="sm:pt-4">
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
                 <div className="grid grid-cols-1 xl:grid-cols-12 sm:gap-4">
-                    <div className="hidden sm:block col-span-1 xl:col-span-2 bg-white rounded-md p-2.5 relative w-full h-full">
+                    <div className="hidden xl:p-0 sm:block col-span-1 xl:col-span-2 bg-white rounded-md p-2.5 relative w-full h-full">
                         <ProductSidebar />
                     </div>
                     <div className="col-span-1 xl:col-span-10">
@@ -68,13 +74,18 @@ export default function Stall() {
                             ) : (
                                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                                     {stallData?.stalls?.map((stall, index) => (
-                                        <div className="bg-[#f5f5f5] rounded-md p-4 shadow hover:shadow-md transition-shadow" key={index}>
+                                        <div
+                                            className="bg-[#f5f5f5] rounded-md p-4 shadow hover:shadow-md transition-shadow"
+                                            key={index}
+                                        >
                                             <div className="flex items-center justify-center mb-2">
                                                 <div className="w-full h-[100px] sm:h-[120px] rounded-md overflow-hidden">
                                                     <Image
-                                                        src={stall.stall_image 
-                                                            ? `${backendBaseURL}/${stall_image_path}/${stall.stall_image}`
-                                                            : `${backendBaseURL}/${stallData.default_image_path}`}
+                                                        src={
+                                                            stall.stall_image
+                                                                ? `${backendBaseURL}/${stall_image_path}/${stall.stall_image}`
+                                                                : `${backendBaseURL}/${stallData.default_image_path}`
+                                                        }
                                                         alt={stall.stall_name}
                                                         width={50}
                                                         height={50}
@@ -84,29 +95,37 @@ export default function Stall() {
                                             </div>
                                             <div className="text-center relative top-[-20px]">
                                                 <h6 className="text-center font-semibold inline-flex text-[10px] sm:text-sm bg-white rounded-full py-1.5 px-5 hover:text-primary__color transition-colors">
-                                                    <Link href={`/stalls/details?id=${stall.id}`}>
+                                                    <Link
+                                                        href={`/stalls/details?id=${stall.id}`}
+                                                    >
                                                         {stall.stall_name}
                                                     </Link>
                                                 </h6>
                                             </div>
                                             <div className="flex justify-center gap-2 mt-[-5px]">
-                                                {stall.products.slice(0, 3).map((product, i) => (
-                                                    <Link
-                                                        href={`/product/details?id=${product.id}`}
-                                                        key={i}
-                                                        className="w-12 h-12 rounded-md overflow-hidden bg-white"
-                                                    >
-                                                        <Image
-                                                            src={product.main_image 
-                                                            ? `${backendBaseURL}/${product_image_path}/${product.main_image}`
-                                                            : `${backendBaseURL}/${stallData.default_image_path}`}
-                                                            alt={product.title}
-                                                            width={48}
-                                                            height={48}
-                                                            className="object-cover w-full h-full"
-                                                        />
-                                                    </Link>
-                                                ))}
+                                                {stall.products
+                                                    .slice(0, 3)
+                                                    .map((product, i) => (
+                                                        <Link
+                                                            href={`/product/details?id=${product.id}`}
+                                                            key={i}
+                                                            className="w-12 h-12 rounded-md overflow-hidden bg-white"
+                                                        >
+                                                            <Image
+                                                                src={
+                                                                    product.main_image
+                                                                        ? `${backendBaseURL}/${product_image_path}/${product.main_image}`
+                                                                        : `${backendBaseURL}/${stallData.default_image_path}`
+                                                                }
+                                                                alt={
+                                                                    product.title
+                                                                }
+                                                                width={48}
+                                                                height={48}
+                                                                className="object-cover w-full h-full"
+                                                            />
+                                                        </Link>
+                                                    ))}
                                             </div>
                                         </div>
                                     ))}

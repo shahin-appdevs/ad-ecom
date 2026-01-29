@@ -187,7 +187,7 @@ export default function AllProduct() {
         <section className="sm:pt-4">
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
                 <div className="grid grid-cols-1 xl:grid-cols-12 sm:gap-4">
-                    <div className="hidden sm:block col-span-1 xl:col-span-2 bg-white rounded-md p-2.5 relative w-full h-full">
+                    <div className="hidden sm:block  xl:p-0  col-span-1 xl:col-span-2 bg-white rounded-md p-2.5 relative w-full h-full">
                         <ProductSidebar />
                     </div>
                     <div className="col-span-1 xl:col-span-10">

@@ -17,8 +17,8 @@ export default function DashboardLayout({ children }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const token = localStorage.getItem("jwtSellerToken") || sessionStorage.getItem("jwtSellerToken");
-            
+            const token = localStorage.getItem("jwtSellerToken");
+
             if (!token) {
                 router.push("/seller/auth/login");
                 return;
@@ -28,24 +28,31 @@ export default function DashboardLayout({ children }) {
                 const response = await dashboardGetSellerAPI();
 
                 const userData = response.data.data.user;
-                
-                sessionStorage.setItem("sms_verified", userData.sms_verified);
-                sessionStorage.setItem("two_factor_verified", userData.two_factor_verified);
+
+                localStorage.setItem("sms_verified", userData.sms_verified);
+                localStorage.setItem(
+                    "two_factor_verified",
+                    userData.two_factor_verified,
+                );
 
                 setDashboardData(response.data.data);
                 setIsLoading(false);
             } catch (error) {
                 if (error.response?.status === 400) {
-                    const smsVerified = sessionStorage.getItem("sms_verified");
-                    const twoFactorVerified = sessionStorage.getItem("two_factor_verified");
+                    const smsVerified = localStorage.getItem("sms_verified");
+                    const twoFactorVerified = localStorage.getItem(
+                        "two_factor_verified",
+                    );
                     if (smsVerified === "0") {
                         router.push("/seller/auth/authorization");
                     } else if (twoFactorVerified === "0") {
                         router.push("/seller/auth/2fa");
                     } else {
-                        toast.error("Session expired or invalid. Please login again.");
+                        toast.error(
+                            "Session expired or invalid. Please login again.",
+                        );
                         localStorage.removeItem("jwtSellerToken");
-                        sessionStorage.removeItem("jwtSellerToken");
+                        // sessionStorage.removeItem("jwtSellerToken");
                         router.push("/seller/auth/login");
                     }
                 } else {
@@ -75,7 +82,7 @@ export default function DashboardLayout({ children }) {
                     {children}
                 </div>
             </div>
-            <DynamicTitle/>
+            <DynamicTitle />
         </DashboardProvider>
     );
 }

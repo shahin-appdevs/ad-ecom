@@ -117,8 +117,8 @@ export default function SmsVerify() {
                     toast.success(msg),
                 );
                 localStorage.removeItem("otpCountdown");
-                sessionStorage.setItem("sms_verified", "1");
-                const is2faVerified = sessionStorage.getItem(
+                localStorage.setItem("sms_verified", "1");
+                const is2faVerified = localStorage.getItem(
                     "two_factor_verified",
                 );
 
@@ -185,7 +185,7 @@ export default function SmsVerify() {
                     <div className="text-sm">
                         {canResend ? (
                             <p>
-                                Didn't receive code?{" "}
+                                Didn&apos;t receive code?{" "}
                                 <button
                                     type="button"
                                     onClick={handleResend}

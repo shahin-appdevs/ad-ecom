@@ -39,14 +39,14 @@ export default function Login() {
                 setCredentials("");
                 setPassword("");
 
-                sessionStorage.setItem("jwtToken", token);
-                sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
-                sessionStorage.setItem(
+                localStorage.setItem("jwtToken", token);
+                localStorage.setItem("userInfo", JSON.stringify(userInfo));
+                localStorage.setItem(
                     "email_verified",
                     userInfo?.email_verified,
                 );
-                sessionStorage.setItem("sms_verified", userInfo?.sms_verified);
-                sessionStorage.setItem(
+                localStorage.setItem("sms_verified", userInfo?.sms_verified);
+                localStorage.setItem(
                     "two_factor_verified",
                     userInfo?.two_factor_verified,
                 );

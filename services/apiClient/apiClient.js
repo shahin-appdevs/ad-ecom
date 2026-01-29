@@ -35,16 +35,11 @@ const apiClientSeller = axios.create({
 
 // Helper function to retrieve token from localStorage or sessionStorage
 const getToken = () => {
-    return (
-        localStorage.getItem("jwtToken") || sessionStorage.getItem("jwtToken")
-    );
+    return localStorage.getItem("jwtToken");
 };
 
 const getSellerToken = () => {
-    return (
-        localStorage.getItem("jwtSellerToken") ||
-        sessionStorage.getItem("jwtSellerToken")
-    );
+    return localStorage.getItem("jwtSellerToken");
 };
 
 // Interceptor for handling 401 Unauthorized responses
@@ -53,11 +48,11 @@ apiClient.interceptors.response.use(
     (error) => {
         if (error.response?.status === 401) {
             localStorage.removeItem("jwtToken");
-            sessionStorage.removeItem("jwtToken");
-            sessionStorage.removeItem("userInfo");
-            sessionStorage.removeItem("email_verified");
-            sessionStorage.removeItem("sms_verified");
-            sessionStorage.removeItem("two_factor_verified");
+            // sessionStorage.removeItem("jwtToken"); // Removed as per task
+            localStorage.removeItem("userInfo");
+            localStorage.removeItem("email_verified");
+            localStorage.removeItem("sms_verified");
+            localStorage.removeItem("two_factor_verified");
             toast.error("Unauthenticated");
             window.location.href = "/user/auth/login";
         }
@@ -70,7 +65,6 @@ apiClientSeller.interceptors.response.use(
     (error) => {
         if (error.response?.status === 401) {
             localStorage.removeItem("jwtSellerToken");
-            sessionStorage.removeItem("jwtSellerToken");
             toast.error("Unauthenticated");
             window.location.href = "/seller/auth/login";
         }

@@ -39,7 +39,7 @@ export default function CreateCustomer() {
                 const fields = result?.data?.data?.customer_create_fields || [];
                 setCustomerFields(fields);
 
-                const userInfo = JSON.parse(sessionStorage.getItem("userInfo"));
+                const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
                 // Set default values dynamically
                 fields.forEach((field) => {

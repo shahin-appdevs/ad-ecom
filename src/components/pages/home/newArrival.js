@@ -322,8 +322,8 @@ export default function NewArrival() {
                                         href={`/product/details?id=${product.id}`}
                                         className="group/card bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
                                     >
-                                        <div className="relative p-[10px] ">
-                                            <div className="w-full h-[150px] sm:h-[215px] overflow-hidden">
+                                        <div className="relative ">
+                                            <div className="w-full h-[150px] sm:h-[215px] overflow-hidden rounded-t-md">
                                                 <Image
                                                     src={
                                                         product.main_image
@@ -333,16 +333,19 @@ export default function NewArrival() {
                                                     width={100}
                                                     height={100}
                                                     alt={product.title}
-                                                    className="group-hover/card:scale-105 transition-transform duration-300 w-full h-full object-cover rounded-md"
+                                                    className="group-hover/card:scale-105 transition-transform duration-300 w-full h-full object-cover rounded-t-md"
                                                 />
                                             </div>
                                             <span className="absolute right-[8px] top-[8px] text-xs bg-primary__color text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
                                                 {discount} off
                                             </span>
                                         </div>
-                                        <div className="p-[10px] pt-[5px]">
+                                        <div className="p-[10px]">
+                                            <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2  truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                                {product.title}
+                                            </h5>
                                             <div className="flex items-center gap-1 mb-1">
-                                                <span className="text-base font-semibold text-primary__color">
+                                                <span className="text-base md:text-lg font-semibold text-primary__color">
                                                     {formatPrice(displayPrice)}
                                                 </span>
                                                 {(hasDiscount ||
@@ -354,9 +357,7 @@ export default function NewArrival() {
                                                     </span>
                                                 )}
                                             </div>
-                                            <h5 className="text-sm font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
-                                                {product.title}
-                                            </h5>
+
                                             {/* <div className="relative">
                                                 {!states[index]
                                                     ?.showQuantity ? (

@@ -8,9 +8,7 @@ const useAuthRedirect = () => {
 
     useEffect(() => {
         const checkAuth = () => {
-            const token =
-                localStorage.getItem("jwtToken") ||
-                sessionStorage.getItem("jwtToken");
+            const token = localStorage.getItem("jwtToken");
             if (token) {
                 router.push("/user/dashboard");
             } else {

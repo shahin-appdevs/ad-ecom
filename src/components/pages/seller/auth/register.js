@@ -57,10 +57,10 @@ export default function Register() {
                 setPassword("");
                 setReferralCode("");
 
-                sessionStorage.setItem("jwtSellerToken", token);
-                sessionStorage.setItem("userInfo", JSON.stringify(userInfo));
+                localStorage.setItem("jwtSellerToken", token);
+                localStorage.setItem("userInfo", JSON.stringify(userInfo));
                 if (userInfo.sms_verified === 0) {
-                    router.push('/seller/auth/authorization');
+                    router.push("/seller/auth/authorization");
                 } else {
                     router.push("/seller/dashboard");
                 }

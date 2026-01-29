@@ -16,7 +16,7 @@ const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 const ProductSkeleton = () => (
     <div className="bg-[#f1f5f9] rounded-md animate-pulse">
-        <div className="relative p-[10px]">
+        <div className="relative ">
             <div className="w-full h-[150px] sm:h-[215px] bg-gray-300 rounded-md"></div>
         </div>
         <div className="p-[10px] pt-[5px]">
