@@ -1,0 +1,117 @@
+/*-------------------------------------------------
+    [ ### Root variables start ]
+-------------------------------------------------*/
+:root {
+    /*----[ Font Size start ]----*/
+    --small__font: 14px;
+    --primary__font: 16px;
+    --heading__one: 40px;
+    --heading__two: 30px;
+    --heading__three: 26px;
+    --heading__four: 24px;
+    --heading__five: 18px;
+    --heading__six: 16px;
+    /*----[ Font Size End ]----*/
+
+    /*----[ Line Height start ]----*/
+    --font__line_height_body: 1.5em;
+    --font__line_height_heading: 1.2em;
+    --font__line_height_paragraph: 1.7em;
+    /*----[ Line Height End ]----*/
+
+    /*----[ Colors start ]----*/
+    --color__heading: 28, 30, 48;
+    --color__paragraph: 107, 110, 140;
+    --color__text: 31, 41, 55;
+
+    --white__color: 255, 255, 255;
+
+    --primary__color: 32, 124, 202;
+    --secondary__color: 21, 112, 239;
+
+    --section__color: 243, 244, 246;
+    --section_secondary_color: 249, 249, 251;
+
+    --body__color: 255, 255, 255;
+
+    --gray__color: 245, 249, 255;
+    --input_bg_color: 248, 250, 252;
+
+    --primary_border_color: 243, 244, 246;
+
+    --gray_border_color: 229, 231, 235;
+
+    --primary__shadow: 0 6px 12px rgba(0, 0, 0, 0.03);
+    --card__shadow: 0px 0 30px 0 rgba(0, 0, 0, 0.08);
+    /*----[ Colors End ]----*/
+}
+
+/*-------------------------------------------------
+    [ ### Root variables end ]
+-------------------------------------------------*/
+
+/*-------------------------------------------------
+    [ ### Root variables Start ]
+-------------------------------------------------*/
+@media (prefers-color-scheme: dark) {
+    // :root{
+    //     // For Dark Color
+    // }
+}
+/*-------------------------------------------------
+    [ ### Root variables end ]
+-------------------------------------------------*/
+
+/*-------------------------------------------------
+    [ ### Font Size Variable start ]
+-------------------------------------------------*/
+$small__font: var(--small__font);
+$primary__font: var(--primary__font);
+$heading__one: var(--heading__one);
+$heading__two: var(--heading__two);
+$heading__three: var(--heading__three);
+$heading__four: var(--heading__four);
+$heading__five: var(--heading__five);
+$heading__six: var(--heading__six);
+/*-------------------------------------------------
+    [ ### Font Size Variable end ]
+-------------------------------------------------*/
+
+/*-------------------------------------------------
+    [ ### Line Height Variable Start ]
+-------------------------------------------------*/
+$font__line_height_body: var(--font__line_height_body);
+$font__line_height_heading: var(--font__line_height_heading);
+$font__line_height_paragraph: var(--font__line_height_paragraph);
+/*-------------------------------------------------
+    [ ### Line Height Variable End ]
+-------------------------------------------------*/
+
+/*-------------------------------------------------
+    [ ### Color Variable Start ]
+-------------------------------------------------*/
+$color__heading: var(--color__heading);
+$color__paragraph: var(--color__paragraph);
+$color__text: var(--color__text);
+
+$white__color: var(--white__color);
+
+$primary__color: var(--primary__color);
+$secondary__color: var(--secondary__color);
+
+$section__color: var(--section__color);
+$section_secondary_color: var(--section_secondary_color);
+
+$body__color: var(--body__color);
+
+$gray__color: var(--gray__color);
+$input_bg_color: var(--input_bg_color);
+
+$primary_border_color: var(--primary_border_color);
+
+$gray_border_color: var(--gray_border_color);
+
+$primary__shadow: var(--primary__shadow);
+/*-------------------------------------------------
+    [ ### Color Variable End ]
+-------------------------------------------------*/
