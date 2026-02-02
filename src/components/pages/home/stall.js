@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import { useHomeData } from "@/components/context/HomeContext";
+import { ArrowRightIcon } from "lucide-react";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -76,8 +77,12 @@ export default function Stall() {
                 <div className="bg-white p-4 sm:rounded-md">
                     <div className="flex items-center justify-between mb-4">
                         <h6>Stalls</h6>
-                        <Link href="/stalls" className="font-semibold">
-                            See All →
+                        <Link
+                            href="/stalls"
+                            className="font-semibold flex items-center gap-1"
+                        >
+                            <span>View More</span>
+                            <ArrowRightIcon size={18} className="w-4 h-4" />
                         </Link>
                     </div>
 

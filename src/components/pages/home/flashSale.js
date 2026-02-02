@@ -18,7 +18,7 @@ const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 const FlashSaleSkeleton = () => {
     return (
         <div className="xl:max-w-[1530px] container mx-auto sm:px-4 pt-4">
-            <div className="bg-gradient-to-tr  from-emerald-400 via-teal-500 to-green-500 p-4 sm:rounded-md">
+            <div className="bg-gray-200/70 p-4 sm:rounded-md">
                 <div className="flex sm:gap-3 md:gap-0 items-center justify-between mb-4">
                     <div className="h-6 w-24 bg-gray-300 rounded animate-pulse"></div>
                     <div className="flex gap-3">
@@ -336,7 +336,7 @@ export default function FlashSale() {
     return (
         <section className="sm:pt-4">
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
-                <div className="bg-gradient-to-tr relative bg-primary__color p-4 lg:py-8 sm:rounded-md">
+                <div className=" relative bg-primary__color p-4 lg:py-8 sm:rounded-md">
                     <div className="flex sm:gap-3 md:gap-0 items-center justify-between mb-4">
                         <h4 className="text-white">Flash Sale</h4>
 
@@ -419,7 +419,7 @@ export default function FlashSale() {
                                 className="text-white font-semibold flex items-center gap-2 border border-white rounded-md px-2 py-2 hover:!bg-primary__color hover:!text-white duration-200"
                             >
                                 <span className="hidden lg:block">
-                                    See More
+                                    View More
                                 </span>{" "}
                                 <ArrowRightIcon size={18} className="w-4 h-4" />
                             </Link>
@@ -469,7 +469,7 @@ export default function FlashSale() {
                                                     className="group-hover/card:scale-105 transition-transform duration-300 w-full h-full object-cover rounded-t-md"
                                                 />
                                             </div>
-                                            <span className="absolute right-[8px] top-[8px] text-xs bg-primary__color text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
+                                            <span className="absolute right-[8px] top-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
                                                 {discount} off
                                             </span>
                                         </div>

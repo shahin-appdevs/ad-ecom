@@ -9,6 +9,7 @@ import product33 from "@public/images/product/product33.jpeg";
 import product34 from "@public/images/product/product34.jpg";
 import product35 from "@public/images/product/product35.png";
 import product36 from "@public/images/product/product36.jpg";
+import { ArrowRightIcon } from "lucide-react";
 
 const products = [
     {
@@ -107,9 +108,10 @@ export default function HomeKitchen() {
                         <div>
                             <Link
                                 href="/"
-                                className="text-[#4b5563] font-semibold"
+                                className="text-[#4b5563] font-semibold flex items-center gap-1"
                             >
-                                See More →
+                                <span>View More</span>
+                                <ArrowRightIcon size={18} className="w-4 h-4" />
                             </Link>
                         </div>
                     </div>

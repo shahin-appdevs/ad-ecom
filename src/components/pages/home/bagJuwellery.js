@@ -17,6 +17,7 @@ import product29 from "@public/images/product/product29.png";
 import product30 from "@public/images/product/product30.jpeg";
 import product31 from "@public/images/product/product31.jpeg";
 import product32 from "@public/images/product/product32.jpeg";
+import { ArrowRightIcon } from "lucide-react";
 
 const products = [
     {
@@ -179,9 +180,10 @@ export default function BagJewellery() {
                         <div>
                             <Link
                                 href="/"
-                                className="text-[#4b5563] font-semibold"
+                                className="text-[#4b5563] font-semibold flex items-center gap-1"
                             >
-                                See More →
+                                <span>View More</span>
+                                <ArrowRightIcon size={18} className="w-4 h-4" />
                             </Link>
                         </div>
                     </div>

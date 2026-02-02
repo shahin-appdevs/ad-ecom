@@ -326,23 +326,26 @@ function RelatedProduct() {
                                             key={`${product.id}-${index}`}
                                             className="bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
                                         >
-                                            <div className="relative p-[10px]">
+                                            <div className="relative">
                                                 <div className="w-full h-[150px] sm:h-[215px] relative">
                                                     <Image
                                                         src={product.image}
                                                         fill
                                                         alt={product.title}
-                                                        className="object-cover rounded-md"
+                                                        className="object-cover rounded-t-md"
                                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                     />
                                                 </div>
                                                 {product.hasDiscount && (
-                                                    <span className="absolute top-[8px] right-[8px] text-xs bg-primary__color text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
+                                                    <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
                                                         {product.discount} off
                                                     </span>
                                                 )}
                                             </div>
                                             <div className="p-[10px] pt-[5px]">
+                                                <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                                    {product.title}
+                                                </h5>
                                                 <div className="flex items-center gap-1 mb-1">
                                                     <span className="text-base font-semibold text-primary__color">
                                                         {formatPrice(
@@ -360,9 +363,7 @@ function RelatedProduct() {
                                                         </span>
                                                     )}
                                                 </div>
-                                                <h5 className="text-sm font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
-                                                    {product.title}
-                                                </h5>
+
                                                 {/* <div className="relative">
                                                     {!states[index]?.showQuantity ? (
                                                         <button

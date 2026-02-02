@@ -422,7 +422,7 @@ function CategoryProduct() {
                                                     />
                                                 </div>
                                                 {product.hasDiscount && (
-                                                    <span className="absolute top-[8px] right-[8px] text-xs bg-primary__color text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
+                                                    <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
                                                         {product.discount} off
                                                     </span>
                                                 )}

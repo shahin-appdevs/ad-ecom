@@ -73,8 +73,6 @@ export default function Header() {
     //     fetchUserProfile();
     // }, [isLoggedIn]);
 
-    console.log(isLoggedIn);
-
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 

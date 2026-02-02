@@ -11,6 +11,7 @@ import { useCart } from "@/components/context/CartContext";
 import { useHomeData } from "@/components/context/HomeContext";
 import { profiledGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { ArrowRightIcon } from "lucide-react";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -288,8 +289,12 @@ export default function NewArrival() {
                     <div className="flex items-center justify-between mb-4">
                         <h6>New Arrival</h6>
                         <div>
-                            <Link href="/product/new" className="font-semibold">
-                                See More →
+                            <Link
+                                href="/product/new"
+                                className="font-semibold flex items-center gap-1"
+                            >
+                                <span>View More</span>
+                                <ArrowRightIcon size={18} className="w-4 h-4" />
                             </Link>
                         </div>
                     </div>
@@ -336,7 +341,7 @@ export default function NewArrival() {
                                                     className="group-hover/card:scale-105 transition-transform duration-300 w-full h-full object-cover rounded-t-md"
                                                 />
                                             </div>
-                                            <span className="absolute right-[8px] top-[8px] text-xs bg-primary__color text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
+                                            <span className="absolute right-[8px] top-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
                                                 {discount} off
                                             </span>
                                         </div>

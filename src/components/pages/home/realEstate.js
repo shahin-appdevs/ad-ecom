@@ -7,6 +7,7 @@ import { useCart } from "@/components/context/CartContext";
 
 import product43 from "@public/images/product/product43.jpg";
 import product44 from "@public/images/product/product44.jpg";
+import { ArrowRightIcon } from "lucide-react";
 
 const products = [
     {
@@ -89,9 +90,10 @@ export default function RealEstate() {
                         <div>
                             <Link
                                 href="/"
-                                className="text-[#4b5563] font-semibold"
+                                className="text-[#4b5563] font-semibold flex items-center gap-1"
                             >
-                                See More →
+                                <span>View More</span>
+                                <ArrowRightIcon size={18} className="w-4 h-4" />
                             </Link>
                         </div>
                     </div>

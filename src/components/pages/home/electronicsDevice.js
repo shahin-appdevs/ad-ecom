@@ -17,6 +17,7 @@ import product17 from "@public/images/product/product17.webp";
 import product18 from "@public/images/product/product18.jpg";
 import product19 from "@public/images/product/product19.webp";
 import product20 from "@public/images/product/product20.jpg";
+import { ArrowRightIcon } from "lucide-react";
 
 const products = [
     {
@@ -179,9 +180,10 @@ export default function ElectronicsDevice() {
                         <div>
                             <Link
                                 href="/"
-                                className="text-[#4b5563] font-semibold"
+                                className="text-[#4b5563] font-semibold flex items-center gap-1"
                             >
-                                See More →
+                                <span>View More</span>
+                                <ArrowRightIcon size={18} className="w-4 h-4" />
                             </Link>
                         </div>
                     </div>

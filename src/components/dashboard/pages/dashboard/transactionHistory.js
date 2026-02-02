@@ -87,7 +87,7 @@ export default function TransactionHistorySection() {
                     className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
                 >
                     <PlusIcon className="h-5 w-5" />
-                    View all
+                    View All
                 </Link>
             </div>
             {loading ? (

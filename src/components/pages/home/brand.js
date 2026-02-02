@@ -6,6 +6,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import { useHomeData } from "@/components/context/HomeContext";
+import { ArrowRightIcon } from "lucide-react";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -66,9 +67,10 @@ export default function Brand() {
                         <div>
                             <Link
                                 href="/brands"
-                                className="text-neutral-500 font-semibold"
+                                className="text-neutral-500 font-semibold flex items-center gap-1"
                             >
-                                See More →
+                                <span>View More</span>
+                                <ArrowRightIcon size={18} className="w-4 h-4" />
                             </Link>
                         </div>
                     </div>
@@ -102,7 +104,7 @@ export default function Brand() {
                                                 width={100}
                                                 height={100}
                                                 alt={brand.title || "Brand"}
-                                                className="w-full h-full object-contain hover:scale-105 transition-all duration-200 rounded-md"
+                                                className="w-full object-contain hover:scale-105 transition-all duration-200 rounded-md h-[80px]"
                                             />
                                         </div>
                                     </div>

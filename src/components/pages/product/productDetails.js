@@ -1,8 +1,15 @@
 "use client";
-import { Suspense, useCallback } from "react";
+import { Fragment, Suspense, useCallback } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { Dialog } from "@headlessui/react";
+import {
+    Dialog,
+    Tab,
+    TabGroup,
+    TabList,
+    TabPanel,
+    TabPanels,
+} from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -35,6 +42,9 @@ import { useCart } from "@/components/context/CartContext";
 import { useWishlist } from "@/components/context/WishlistContext";
 
 import chatUserThree from "@public/images/user/chatUserThree.png";
+import ProductZoomImage from "./productDetails/ProductZoomImage";
+import ProductThumbnails from "./productDetails/ProductThumbnails";
+import VerticalProductGallery from "./productDetails/VerticalSlider";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -375,6 +385,7 @@ function ProductDetails() {
                     setRecentlyViewedProduct(
                         response.data.data.recently_viewed_products,
                     );
+                    console.log(response.data.data.product);
                 } else {
                     toast.error(response?.data?.message?.error?.[0]);
                 }
@@ -641,18 +652,26 @@ function ProductDetails() {
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
                 <div className="bg-white rounded-md p-6 md:p-10">
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8">
-                        <div className="md:col-span-4">
+                        <div className="md:col-span-6">
                             <div>
-                                <div className="border rounded-lg overflow-hidden h-full aspect-square">
-                                    <Image
-                                        src={selectedImage || productData.image}
-                                        alt={productData.title}
-                                        width={600}
-                                        height={800}
-                                        className="w-full h-full object-contain"
-                                    />
+                                <div className="flex gap-2">
+                                    <div className="hidden lg:block">
+                                        <VerticalProductGallery
+                                            productData={productData}
+                                            selectedImage={selectedImage}
+                                            handleThumbnailClick={
+                                                handleThumbnailClick
+                                            }
+                                        />
+                                    </div>
+                                    <div className="relative  rounded-lg overflow-hidden h-full aspect-square">
+                                        <ProductZoomImage
+                                            selectedImage={selectedImage}
+                                            productData={productData}
+                                        />
+                                    </div>
                                 </div>
-                                {[productData.image, ...productData.thumbnails]
+                                {/* {[productData.image, ...productData.thumbnails]
                                     .length > 0 && (
                                     <div className="flex flex-wrap justify-center gap-2 mt-4">
                                         {[
@@ -682,16 +701,33 @@ function ProductDetails() {
                                             </div>
                                         ))}
                                     </div>
-                                )}
+                                )} */}
+
+                                <div className="lg:hidden">
+                                    <ProductThumbnails
+                                        productData={productData}
+                                        selectedImage={selectedImage}
+                                        handleThumbnailClick={
+                                            handleThumbnailClick
+                                        }
+                                    />
+                                </div>
                             </div>
                         </div>
-                        <div className="md:col-span-8">
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 sm:gap-12">
+                        <div className="md:col-span-6">
+                            <div className="grid grid-cols-1 lg:grid-cols-7 gap-0 sm:gap-12">
                                 <div className="lg:col-span-7">
-                                    <h1 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">
-                                        {productData.title}
-                                    </h1>
-                                    <div className="text-primary__color text-lg md:text-xl font-bold mb-2">
+                                    <div className="flex items-start md:items-center gap-2 flex-col-reverse md:flex-row">
+                                        <h1 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">
+                                            {productData.title}{" "}
+                                        </h1>
+                                        <span className="text-green-500  bg-green-50 px-3 border-green-300 text-xs border py-1 rounded-full font-medium">
+                                            {isOutOfStock
+                                                ? "Out of Stock"
+                                                : "In Stock"}
+                                        </span>
+                                    </div>
+                                    <div className="text-primary__color text-lg md:text-2xl font-bold mb-2">
                                         {productData.newPrice}{" "}
                                         {productData.oldPrice && (
                                             <span className="line-through text-gray-400 text-sm md:text-base font-medium ml-2">
@@ -714,7 +750,7 @@ function ProductDetails() {
                                                                     size,
                                                                 )
                                                             }
-                                                            className={`relative px-4 py-2 border rounded font-semibold transition-all ${
+                                                            className={`relative px-4 py-2 w-[60px] h-[40px] border rounded-full font-semibold transition-all ${
                                                                 selectedSize ===
                                                                 size
                                                                     ? "bg-primary__color text-white border-primary__color"
@@ -722,10 +758,10 @@ function ProductDetails() {
                                                             }`}
                                                         >
                                                             {size}
-                                                            {selectedSize ===
+                                                            {/* {selectedSize ===
                                                                 size && (
                                                                 <CheckIcon className="w-4 h-4 absolute -top-1 -right-1 bg-white text-primary__color rounded-full" />
-                                                            )}
+                                                            )} */}
                                                         </button>
                                                     ),
                                                 )}
@@ -747,7 +783,7 @@ function ProductDetails() {
                                                                     color,
                                                                 )
                                                             }
-                                                            className={`relative px-4 py-2 border rounded font-semibold transition-all ${
+                                                            className={`relative px-4 py-2 border rounded-full font-semibold transition-all ${
                                                                 selectedColor ===
                                                                 color
                                                                     ? "bg-primary__color text-white border-primary__color"
@@ -765,7 +801,7 @@ function ProductDetails() {
                                             </div>
                                         </div>
                                     )}
-                                    <div className="flex gap-4 mb-6">
+                                    <div className="mb-6">
                                         {isOutOfStock ? (
                                             <div className="w-full">
                                                 <div className="bg-gray-100 rounded-md py-3 px-4 text-center">
@@ -775,54 +811,72 @@ function ProductDetails() {
                                                 </div>
                                             </div>
                                         ) : (
-                                            <>
-                                                <Button
-                                                    title="Add to cart"
-                                                    variant="primary"
-                                                    size="md"
-                                                    className="w-full !bg-[#f5f5f5] !text-color__heading"
-                                                    onClick={handleAddToCart}
-                                                />
-                                                <Button
-                                                    href={
-                                                        referralCode
-                                                            ? "/checkout"
-                                                            : `/checkout?referCode=${storedReferCode}`
-                                                    }
-                                                    onClick={
-                                                        handleCheckoutClick
-                                                    }
-                                                    title="Buy Now"
-                                                    variant="primary"
-                                                    size="md"
-                                                    className="w-full"
-                                                />
-                                            </>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+                                                <div>
+                                                    <Button
+                                                        title="Add to cart"
+                                                        variant="primary"
+                                                        size="md"
+                                                        className="w-full !bg-[#f5f5f5] !text-color__heading !rounded-full"
+                                                        onClick={
+                                                            handleAddToCart
+                                                        }
+                                                    />
+                                                </div>
+                                                <div className="flex items-center  gap-2">
+                                                    <Button
+                                                        href={
+                                                            referralCode
+                                                                ? "/checkout"
+                                                                : `/checkout?referCode=${storedReferCode}`
+                                                        }
+                                                        onClick={
+                                                            handleCheckoutClick
+                                                        }
+                                                        title="Buy Now"
+                                                        variant="primary"
+                                                        size="md"
+                                                        className="w-full !rounded-full "
+                                                    />
+                                                    <div
+                                                        onClick={handleWishlist}
+                                                        className={`${isInWishlist ? "border-primary__color" : "bg-white"} w-[60px] h-full border  border-gray-300 rounded-full flex items-center justify-center cursor-pointer`}
+                                                    >
+                                                        <button>
+                                                            {isInWishlist ? (
+                                                                <SolidHeartIcon className="w-5 h-5 text-primary__color " />
+                                                            ) : (
+                                                                <HeartIcon className="w-5 h-5" />
+                                                            )}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         )}
                                     </div>
-                                    <div className="grid grid-cols-2 gap-2 text-sm md:text-base text-gray-600 border-l-[5px] border-primary__color pl-3">
+                                    <div className="grid bg-gray-100 rounded-md p-3 grid-cols-1 gap-2 text-sm md:text-base text-gray-600 border-l-[5px] border-primary__color pl-3">
                                         <p>
                                             <strong>Category:</strong>{" "}
-                                            <span className="text-primary__color font-medium">
+                                            <span className="font-medium">
                                                 {productData.category}
                                             </span>
                                         </p>
                                         <p>
                                             <strong>Stock:</strong>{" "}
-                                            <span className="text-primary__color font-medium">
+                                            <span className="font-medium">
                                                 {productData.stock}
                                             </span>
                                         </p>
                                         <p>
                                             <strong>SKU:</strong>{" "}
-                                            <span className="text-primary__color font-medium">
+                                            <span className="font-medium">
                                                 {productData.sku}
                                             </span>
                                         </p>
                                         {productData.warranty_status && (
                                             <p>
                                                 <strong>Warranty:</strong>{" "}
-                                                <span className="text-primary__color font-medium">
+                                                <span className="font-medium">
                                                     {parseInt(
                                                         productData.warranty_days,
                                                     )}{" "}
@@ -850,20 +904,6 @@ function ProductDetails() {
                                         )}
                                     </div>
                                     <div className="flex flex-col md:flex-row md:items-center justify-between mt-6 gap-3 md:gap-0">
-                                        <div className="flex items-center gap-1 text-gray-600">
-                                            <button onClick={handleWishlist}>
-                                                {isInWishlist ? (
-                                                    <SolidHeartIcon className="w-5 h-5 text-primary__color" />
-                                                ) : (
-                                                    <HeartIcon className="w-5 h-5" />
-                                                )}
-                                            </button>
-                                            <span className="text-sm md:text-base font-medium">
-                                                {isInWishlist
-                                                    ? "Remove from wishlist"
-                                                    : "Add to your favourite list"}{" "}
-                                            </span>
-                                        </div>
                                         <div className="flex items-center gap-4 text-gray-600">
                                             <span className="text-sm md:text-base font-semibold">
                                                 Share:
@@ -933,118 +973,98 @@ function ProductDetails() {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="lg:col-span-5 mt-8 lg:mt-0">
-                                    <h6 className="border-b-4 pb-2 mb-3 inline-flex justify-center">
-                                        Recent View
-                                    </h6>
-                                    <div className="max-h-[430px] overflow-y-auto pr-4">
-                                        {recentlyViewedProductsData.length >
-                                        0 ? (
-                                            recentlyViewedProductsData.map(
-                                                (product, index) => (
-                                                    <Link
-                                                        href={`/product/details?id=${product.id}`}
-                                                        key={index}
-                                                        className="border rounded-md p-4 flex  md:items-center gap-4 mb-4"
-                                                    >
-                                                        <div className="w-[47px] h-[60px]">
-                                                            <Image
-                                                                src={
-                                                                    product.image
-                                                                }
-                                                                alt={
-                                                                    product.title
-                                                                }
-                                                                width={47}
-                                                                height={60}
-                                                                className="w-full h-full object-cover shadow-sm border rounded-md"
-                                                            />
-                                                        </div>
-                                                        <div className="md:w-[calc(100%-65px)]">
-                                                            <h6 className="text-base font-medium mb-1">
-                                                                {product.title}
-                                                            </h6>
-                                                            <div className="text-color__heading text-sm font-semibold mb-2">
-                                                                {
-                                                                    product.newPrice
-                                                                }{" "}
-                                                                {product.oldPrice && (
-                                                                    <span className="line-through text-gray-400 text-sm font-medium ml-2">
-                                                                        {
-                                                                            product.oldPrice
-                                                                        }
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                    </Link>
-                                                ),
-                                            )
-                                        ) : (
-                                            <p className="text-gray-500">
-                                                No recently viewed products
-                                            </p>
-                                        )}
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="grid grid-cols-12 ">
-                        <div className="col-span-12">
-                            <div className="mt-8 sm:mt-16 ">
-                                <div>
-                                    <h5 className="mb-3">
-                                        Product Description
-                                    </h5>
-                                    <div className="overflow-x-auto">
-                                        <p
-                                            className="text-color__heading text-sm md:text-base font-medium leading-[28px]"
-                                            dangerouslySetInnerHTML={{
-                                                __html: productData.description,
-                                            }}
-                                        />
-                                    </div>
-                                </div>
 
-                                <div className="mt-6 ">
-                                    <h5 className="mb-3">Product Details</h5>
-                                    <div className="overflow-x-auto">
-                                        <p
-                                            className="text-color__heading text-sm md:text-base font-medium leading-[28px]"
-                                            dangerouslySetInnerHTML={{
-                                                __html: productData.tab_description,
-                                            }}
-                                        />
-                                    </div>
-                                </div>
+                    <div className="border-b border-gray-200 my-6 lg:my-8"></div>
 
-                                <div className="mt-6 text-center">
-                                    <button
-                                        onClick={toggleReviews}
-                                        className="flex items-center gap-2 text-primary__color font-semibold hover:underline"
-                                    >
-                                        {showReviews
-                                            ? "Hide reviews"
-                                            : "Show reviews"}
-                                        <svg
-                                            className={`w-4 h-4 transition-transform ${showReviews ? "rotate-180" : ""}`}
-                                            fill="none"
-                                            stroke="currentColor"
-                                            viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg"
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+                        <TabGroup className="lg:col-span-8">
+                            <TabList
+                                className={"flex items-center gap-0 md:gap-4"}
+                            >
+                                <Tab
+                                    as={Fragment}
+                                    className={
+                                        "px-2 md:px-4 py-2 text-xs md:text-base font-semibold shrink-0"
+                                    }
+                                >
+                                    {({ hover, selected }) => (
+                                        <button
+                                            className={` focus:outline-none  ${hover && "text-primary__color"} ${selected && "text-primary__color border-b-2 border-primary__color"}`}
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                strokeWidth={2}
-                                                d="M19 9l-7 7-7-7"
+                                            Product Description
+                                        </button>
+                                    )}
+                                </Tab>
+
+                                <Tab
+                                    as={Fragment}
+                                    className={
+                                        "px-2 md:px-4 py-2 text-xs md:text-base font-semibold shrink-0"
+                                    }
+                                >
+                                    {({ hover, selected }) => (
+                                        <button
+                                            className={` focus:outline-none ${hover && "text-primary__color"} ${selected && "text-primary__color border-b-2 border-primary__color"}`}
+                                        >
+                                            Product Details
+                                        </button>
+                                    )}
+                                </Tab>
+
+                                <Tab
+                                    as={Fragment}
+                                    className={
+                                        "px-2 md:px-4 py-2 text-xs md:text-base font-semibold shrink-0"
+                                    }
+                                >
+                                    {({ hover, selected }) => (
+                                        <button
+                                            className={` focus:outline-none ${hover && "text-primary__color"} ${selected && "text-primary__color border-b-2 border-primary__color"}`}
+                                        >
+                                            Customer Review
+                                        </button>
+                                    )}
+                                </Tab>
+                            </TabList>
+                            <TabPanels>
+                                {/* tab 1 product details */}
+                                <TabPanel>
+                                    <div className="mt-6 lg:mt-12">
+                                        <h5 className="mb-3">
+                                            Product Description
+                                        </h5>
+                                        <div className="overflow-x-auto">
+                                            <p
+                                                className="text-color__heading text-sm md:text-base font-medium leading-[28px]"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: productData.description,
+                                                }}
                                             />
-                                        </svg>
-                                    </button>
-                                </div>
-                                {showReviews && (
-                                    <div className="mt-12 border-t pt-8">
+                                        </div>
+                                    </div>
+                                </TabPanel>
+                                {/* tab 2 product description */}
+                                <TabPanel>
+                                    <div className="mt-6 lg:mt-12 ">
+                                        <h5 className="mb-3">
+                                            Product Details
+                                        </h5>
+                                        <div className="overflow-x-auto">
+                                            <p
+                                                className="text-color__heading text-sm md:text-base font-medium leading-[28px]"
+                                                dangerouslySetInnerHTML={{
+                                                    __html: productData.tab_description,
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </TabPanel>
+                                {/* tab 3 customer review */}
+                                <TabPanel>
+                                    <div className="mt-6 lg:mt-12">
                                         <h3 className="text-lg md:text-xl font-bold mb-6">
                                             Customer Reviews
                                         </h3>
@@ -1088,6 +1108,7 @@ function ProductDetails() {
                                                                                     i,
                                                                                 ) =>
                                                                                     i <
+                                                                                    div >
                                                                                     item.rating ? (
                                                                                         <SolidStarIcon
                                                                                             key={
@@ -1209,6 +1230,54 @@ function ProductDetails() {
                                             </form>
                                         </div>
                                     </div>
+                                </TabPanel>
+                            </TabPanels>
+                        </TabGroup>
+                        <div className="border-b border-gray-200 my-6 lg:my-8 lg:hidden"></div>
+                        <div className="lg:col-span-4 ">
+                            <h6 className="border-b-4 pb-2 mb-3 inline-flex justify-center">
+                                Recent View
+                            </h6>
+                            <div className="max-h-[600px] overflow-y-auto pr-4 divide-y">
+                                {recentlyViewedProductsData.length > 0 ? (
+                                    recentlyViewedProductsData.map(
+                                        (product, index) => (
+                                            <Link
+                                                href={`/product/details?id=${product.id}`}
+                                                key={index}
+                                                className="  bg-gray-100 p-4 flex  md:items-center gap-4 "
+                                            >
+                                                <div className="w-[60px] h-[60px]">
+                                                    <Image
+                                                        src={product.image}
+                                                        alt={product.title}
+                                                        width={47}
+                                                        height={60}
+                                                        className="w-full h-full object-cover shadow-sm border rounded-md"
+                                                    />
+                                                </div>
+                                                <div className="md:w-[calc(100%-65px)]">
+                                                    <h6 className="text-base font-medium mb-1">
+                                                        {product.title}
+                                                    </h6>
+                                                    <div className="text-color__heading text-sm font-semibold mb-2">
+                                                        {product.newPrice}{" "}
+                                                        {product.oldPrice && (
+                                                            <span className="line-through text-gray-400 text-sm font-medium ml-2">
+                                                                {
+                                                                    product.oldPrice
+                                                                }
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                        ),
+                                    )
+                                ) : (
+                                    <p className="text-gray-500">
+                                        No recently viewed products
+                                    </p>
                                 )}
                             </div>
                         </div>

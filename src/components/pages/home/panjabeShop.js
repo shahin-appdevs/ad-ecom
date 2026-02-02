@@ -13,6 +13,7 @@ import product5 from "@public/images/product/product5.jpg";
 import product6 from "@public/images/product/product6.jpg";
 import product7 from "@public/images/product/product7.jpg";
 import product8 from "@public/images/product/product8.jpg";
+import { ArrowRightIcon } from "lucide-react";
 
 const products = [
     {
@@ -175,9 +176,10 @@ export default function PanjabeShop() {
                         <div>
                             <Link
                                 href="/"
-                                className="text-[#4b5563] font-semibold"
+                                className="text-[#4b5563] font-semibold flex items-center gap-1"
                             >
-                                See More →
+                                <span>View More</span>
+                                <ArrowRightIcon size={18} className="w-4 h-4" />
                             </Link>
                         </div>
                     </div>

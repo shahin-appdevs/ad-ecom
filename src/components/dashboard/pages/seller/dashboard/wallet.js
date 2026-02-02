@@ -29,12 +29,19 @@ export default function WalletSection() {
             <div className="">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 mb-6 border-b-[1.5px] border-[#F5F7FF]">
                     <div>
-                        <h2 className="text-[16px] font-semibold mb-1">Wallet</h2>
-                        <p className="text-xs">Payment wallet for instant transaction</p>
+                        <h2 className="text-[16px] font-semibold mb-1">
+                            Wallet
+                        </h2>
+                        <p className="text-xs">
+                            Payment wallet for instant transaction
+                        </p>
                     </div>
-                    <Link href="/seller/wallets" className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition">
+                    <Link
+                        href="/seller/wallets"
+                        className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
+                    >
                         <PlusIcon className="h-5 w-5" />
-                        View all
+                        View All
                     </Link>
                 </div>
                 {loading ? (
@@ -66,12 +73,14 @@ export default function WalletSection() {
                                     />
                                 </div>
                                 <h3 className="text-[22px] font-bold mb-1">
-                                    {wallet.currency.symbol}{wallet.balance}
+                                    {wallet.currency.symbol}
+                                    {wallet.balance}
                                 </h3>
                                 <p className="font-medium">
-                                    {wallet.currency.name} ({wallet.currency.code})
+                                    {wallet.currency.name} (
+                                    {wallet.currency.code})
                                 </p>
-                                {wallet.currency.default === 1 &&  (
+                                {wallet.currency.default === 1 && (
                                     <span className="absolute top-2 right-2 bg-[#F5F7FF] text-[10px] px-2 py-1 font-semibold rounded">
                                         Default
                                     </span>

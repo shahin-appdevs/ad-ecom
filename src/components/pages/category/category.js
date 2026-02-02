@@ -197,7 +197,7 @@ export default function Categories() {
                                                 </Link>
                                                 <div className="pt-[10px]">
                                                     <h5 className="text-xs md:text-sm font-semibold group-hover:text-primary__color transition duration-300">
-                                                        See All
+                                                        View All
                                                     </h5>
                                                 </div>
                                             </div>
