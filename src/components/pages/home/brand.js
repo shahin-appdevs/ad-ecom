@@ -74,44 +74,122 @@ export default function Brand() {
                             </Link>
                         </div>
                     </div>
-                    <Swiper
-                        slidesPerView={1}
-                        spaceBetween={10}
-                        autoplay={{ delay: 2000, disableOnInteraction: false }}
-                        breakpoints={{
-                            0: { slidesPerView: 3 },
-                            640: { slidesPerView: 3 },
-                            768: { slidesPerView: 3 },
-                            1024: { slidesPerView: 4 },
-                            1280: { slidesPerView: 7 },
-                        }}
-                        modules={[Autoplay]}
-                    >
-                        {brands.map((brand) => (
-                            <SwiperSlide key={brand.id}>
+                    <div>
+                        <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            {brands.map((brand, idx) => (
                                 <Link
+                                    key={idx}
                                     href={`/brands/products?id=${brand.id}`}
                                     className="  w-full"
                                 >
                                     <div className="relative ">
-                                        <div className="w-full h-[100px] rounded-md">
-                                            <Image
-                                                src={
-                                                    brand.image
-                                                        ? `${backendBaseURL}/${brand_image_path}/${brand.image}`
-                                                        : `${backendBaseURL}/${homeData.default_image_path}`
-                                                }
-                                                width={100}
-                                                height={100}
-                                                alt={brand.title || "Brand"}
-                                                className="w-full object-contain hover:scale-105 transition-all duration-200 rounded-md h-[80px]"
-                                            />
+                                        <div className="w-full h-[100px] px-4 flex items-center justify-center rounded-md  bg-gray-100">
+                                            <div className="bg-white p-2  rounded-full w-[60px] h-[60px] shrink-0 flex items-center justify-center">
+                                                <Image
+                                                    src={
+                                                        brand.image
+                                                            ? `${backendBaseURL}/${brand_image_path}/${brand.image}`
+                                                            : `${backendBaseURL}/${homeData.default_image_path}`
+                                                    }
+                                                    width={100}
+                                                    height={100}
+                                                    alt={brand.title || "Brand"}
+                                                    className="w-[50px] object-contain rounded-full hover:scale-105 transition-all duration-200 h-[50px]"
+                                                />
+                                            </div>
+                                            <div className="w-full p-2">
+                                                <h6 className="text-sm md:text-base lg:text-lg font-semibold">
+                                                    {brand?.title}
+                                                </h6>
+                                                <div className="flex ">
+                                                    <p
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: brand?.description?.slice(
+                                                                0,
+                                                                30,
+                                                            ),
+                                                        }}
+                                                    ></p>
+                                                    {brand?.description
+                                                        ?.length > 30 && (
+                                                        <span>...</span>
+                                                    )}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </Link>
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div className="lg:hidden">
+                        <Swiper
+                            slidesPerView={1}
+                            spaceBetween={10}
+                            autoplay={{
+                                delay: 2000,
+                                disableOnInteraction: false,
+                            }}
+                            breakpoints={{
+                                0: { slidesPerView: 1 },
+                                640: { slidesPerView: 1 },
+                                768: { slidesPerView: 2 },
+                                1024: { slidesPerView: 3 },
+                                1280: { slidesPerView: 4 },
+                            }}
+                            modules={[Autoplay]}
+                        >
+                            {brands.map((brand) => (
+                                <SwiperSlide key={brand.id}>
+                                    <Link
+                                        href={`/brands/products?id=${brand.id}`}
+                                        className="  w-full"
+                                    >
+                                        <div className="relative ">
+                                            <div className="w-full h-[100px] px-4 flex items-center justify-center rounded-md  bg-gray-100">
+                                                <div className="bg-white p-2  rounded-full w-[60px] h-[60px] shrink-0 flex items-center justify-center">
+                                                    <Image
+                                                        src={
+                                                            brand.image
+                                                                ? `${backendBaseURL}/${brand_image_path}/${brand.image}`
+                                                                : `${backendBaseURL}/${homeData.default_image_path}`
+                                                        }
+                                                        width={100}
+                                                        height={100}
+                                                        alt={
+                                                            brand.title ||
+                                                            "Brand"
+                                                        }
+                                                        className="w-[50px] object-contain  hover:scale-105 transition-all duration-200 rounded-md h-[50px]"
+                                                    />
+                                                </div>
+                                                <div className="w-full p-2">
+                                                    <h6 className="text-sm md:text-base lg:text-lg font-semibold">
+                                                        {brand.title}
+                                                    </h6>
+                                                    <div className="flex ">
+                                                        <p
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: brand.description.slice(
+                                                                    0,
+                                                                    25,
+                                                                ),
+                                                            }}
+                                                        ></p>
+                                                        {brand.description
+                                                            .length > 25 && (
+                                                            <span>...</span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </div>
                 </div>
             </div>
         </section>

@@ -8,11 +8,14 @@ import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { useCart } from "@/components/context/CartContext";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import {
+    categoryGetAPI,
     childSubCategoryGetAPI,
     productGetAPI,
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { useHomeData } from "@/components/context/HomeContext";
+import { ChevronRight } from "lucide-react";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -52,6 +55,40 @@ function ChildSubCategoryProduct() {
     const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const { homeData, loading: homeLoading } = useHomeData();
+    const [categoryLinks, setCategoryLinks] = useState({});
+
+    useEffect(() => {
+        if (homeData?.product_hierarchical) {
+            const mainCategory = homeData?.product_hierarchical?.find(
+                (cat) => cat.id === parseInt(categoryId),
+            );
+            const childCategories = mainCategory?.child_categories?.find(
+                (cat) => cat.id === parseInt(childCategoryId),
+            );
+
+            const subChildCategories =
+                childCategories?.child_sub_categories?.find(
+                    (cat) => cat.id === parseInt(childSubCategoryId),
+                );
+
+            const categoryLinks = {
+                mainCategory: {
+                    title: mainCategory?.title,
+                    href: `/categories/products?id=${mainCategory?.id}`,
+                },
+                childCategory: {
+                    title: childCategories?.title,
+                    href: `/sub-categories/products?category-id=${mainCategory?.id}&child-id=${childCategories?.id}`,
+                },
+                subChildCategory: {
+                    title: subChildCategories?.title,
+                    href: `child-sub-categories/products?category-id=${mainCategory?.id}&child-id=${childCategories?.id}&sub-child-id=${subChildCategories?.id}`,
+                },
+            };
+            setCategoryLinks(categoryLinks);
+        }
+    }, [homeData, categoryId, childCategoryId, childSubCategoryId]);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -167,6 +204,7 @@ function ChildSubCategoryProduct() {
             try {
                 if (!childCategoryId) return;
                 const response = await childSubCategoryGetAPI(childCategoryId);
+
                 if (response?.data?.data?.all_child_sub_categories) {
                     setChildSubCategories(
                         response.data.data.all_child_sub_categories,
@@ -352,6 +390,54 @@ function ChildSubCategoryProduct() {
                     </div>
                     <div className="col-span-1 xl:col-span-10">
                         <div className="bg-white p-4 rounded-md">
+                            {loading && (
+                                <div className="border-b pb-4 mb-4">
+                                    <div className="flex items-center justify-between gap-3 sm:gap-0 ">
+                                        <div className="h-6 w-3/4 bg-gray-200 rounded animate-pulse"></div>
+                                    </div>
+                                </div>
+                            )}
+                            {!loading && categoryLinks?.mainCategory?.href && (
+                                <div className="border-b mb-4 pb-4 flex items-center flex-wrap md:flex-nowrap gap-2">
+                                    <div className="flex  items-center justify-between ">
+                                        <h5 className="text-sm md:text-base flex items-center gap-2 flex-wrap md:flex-nowrap">
+                                            <Link
+                                                href={
+                                                    categoryLinks?.mainCategory
+                                                        ?.href
+                                                }
+                                                className="text-primary__color"
+                                            >
+                                                {
+                                                    categoryLinks?.mainCategory
+                                                        ?.title
+                                                }
+                                            </Link>
+                                            <ChevronRight size={16} />
+                                            <Link
+                                                href={
+                                                    categoryLinks?.childCategory
+                                                        ?.href
+                                                }
+                                                className="text-primary__color"
+                                            >
+                                                {
+                                                    categoryLinks?.childCategory
+                                                        ?.title
+                                                }
+                                            </Link>
+                                            <ChevronRight size={16} />
+                                            <span>
+                                                {
+                                                    categoryLinks
+                                                        ?.subChildCategory
+                                                        ?.title
+                                                }
+                                            </span>
+                                        </h5>
+                                    </div>
+                                </div>
+                            )}
                             <div className="flex items-center justify-between gap-3 sm:gap-0 mb-4">
                                 {loading ? (
                                     <div className="h-6 w-1/4 bg-gray-200 rounded animate-pulse"></div>

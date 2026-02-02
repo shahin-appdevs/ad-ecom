@@ -14,6 +14,8 @@ import {
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { Menu } from "@headlessui/react";
+import { ChevronRight } from "lucide-react";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -377,50 +379,94 @@ function SubCategoryProduct() {
                     <div className="col-span-1 xl:col-span-10">
                         <div className="bg-white p-4 rounded-md">
                             {loading && (
-                                <div className="border-b pb-4 mb-4">
+                                <div className="border-b  mb-4">
                                     <div className="flex items-center justify-between gap-3 sm:gap-0 mb-4">
                                         <div className="h-6 w-3/4 bg-gray-200 rounded animate-pulse"></div>
                                     </div>
-                                    <ul className="flex items-center gap-4 overflow-x-auto pb-2">
-                                        {[...Array(5)].map((_, i) => (
-                                            <li key={i}>
-                                                <div className="bg-gray-200 h-9 w-24 rounded-[16px] animate-pulse"></div>
-                                            </li>
-                                        ))}
-                                    </ul>
                                 </div>
                             )}
 
                             {!loading && currentSubCategory && (
-                                <div className="border-b pb-4 mb-4">
-                                    <div className="flex items-center justify-between gap-3 sm:gap-0 mb-4">
-                                        <h5>
-                                            Sub Child Categories of{" "}
-                                            <span className="text-primary__color">
+                                <div className="border-b mb-4 pb-4 flex items-center gap-2 flex-wrap md:flex-nowrap">
+                                    <div className="flex  items-center gap-2 ">
+                                        <h5 className="text-sm md:text-base flex items-center gap-2">
+                                            <Link
+                                                href={`/categories/products?id=${currentSubCategory.category.id}`}
+                                                className="text-primary__color"
+                                            >
+                                                {
+                                                    currentSubCategory.category
+                                                        .title
+                                                }
+                                            </Link>
+
+                                            <ChevronRight size={16} />
+                                            <span className="">
                                                 {currentSubCategory.title}
                                             </span>
                                         </h5>
                                     </div>
-                                    <ul className="flex items-center gap-4 overflow-x-auto pb-2">
-                                        <li>
+                                    {childSubCategories?.length > 0 && (
+                                        <ChevronRight
+                                            size={16}
+                                            className="text-neutral-800"
+                                        />
+                                    )}
+                                    <ul className="flex items-center gap-4">
+                                        {/* All */}
+                                        {/* <li>
                                             <Link
                                                 href={`/categories/products?id=${categoryId}`}
-                                                className="bg-[#dcfce7] shadow-md py-[8px] px-[12px] rounded-[16px] text-color__heading font-medium"
+                                                className="bg-[#dcfce7] shadow-md py-2 px-4 rounded-2xl text-color__heading font-medium"
                                             >
                                                 All
                                             </Link>
-                                        </li>
-                                        {childSubCategories?.map(
-                                            (childSubCategory) => (
-                                                <li key={childSubCategory.id}>
-                                                    <Link
-                                                        href={`/child-sub-categories/products?category-id=${categoryId}&child-id${currentSubCategory.id}&sub-child-id=${childSubCategory.id}`}
-                                                        className="bg-white shadow-md py-[8px] px-[12px] rounded-[16px] text-color__heading font-medium"
-                                                    >
-                                                        {childSubCategory.title}
-                                                    </Link>
-                                                </li>
-                                            ),
+                                        </li> */}
+
+                                        {/* Dropdown */}
+                                        {childSubCategories?.length > 0 && (
+                                            <li>
+                                                <Menu
+                                                    as="div"
+                                                    className="relative inline-block text-left"
+                                                >
+                                                    <Menu.Button className="flex text-sm md:text-base items-center gap-2 bg-white border py-1 text-primary__color px-4 rounded-2xl  font-medium">
+                                                        More Categories
+                                                        <ChevronRight
+                                                            size={16}
+                                                        />
+                                                    </Menu.Button>
+
+                                                    <Menu.Items className="absolute p-2 left-0 mt-2 min-w-[240px] rounded-lg bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-50">
+                                                        {childSubCategories.map(
+                                                            (subChild) => (
+                                                                <Menu.Item
+                                                                    key={
+                                                                        subChild.id
+                                                                    }
+                                                                >
+                                                                    {({
+                                                                        active,
+                                                                    }) => (
+                                                                        <Link
+                                                                            href={`/child-sub-categories/products?category-id=${categoryId}&child-id=${currentSubCategory.id}&sub-child-id=${subChild.id}`}
+                                                                            className={`block px-4 rounded py-2 text-xs md:text-sm ${
+                                                                                active
+                                                                                    ? "bg-primary__color text-white"
+                                                                                    : "text-gray-700"
+                                                                            }`}
+                                                                        >
+                                                                            {
+                                                                                subChild.title
+                                                                            }
+                                                                        </Link>
+                                                                    )}
+                                                                </Menu.Item>
+                                                            ),
+                                                        )}
+                                                    </Menu.Items>
+                                                </Menu>
+                                            </li>
                                         )}
                                     </ul>
                                 </div>
