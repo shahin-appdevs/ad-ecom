@@ -356,25 +356,45 @@ export default function FlashProduct() {
                     </div>
                     <div className="col-span-1 xl:col-span-10">
                         <div className="bg-white p-4 rounded-md">
-                            <div className="flex items-center justify-between mb-4">
-                                <h6>Flash Sale</h6>
-                                <div className="flex gap-3 text-sm sm:text-xl font-semibold text-color__heading">
-                                    <div className="text-center flex flex-col">
-                                        <p>{timeLeft.days}</p>
-                                        <span className="text-xs">days</span>
-                                    </div>
-                                    <div className="text-center flex flex-col">
-                                        <p>{timeLeft.hours}</p>
-                                        <span className="text-xs">hours</span>
-                                    </div>
-                                    <div className="text-center flex flex-col">
-                                        <p>{timeLeft.minutes}</p>
-                                        <span className="text-xs">min</span>
-                                    </div>
-                                    <div className="text-center flex flex-col">
-                                        <p>{timeLeft.seconds}</p>
-                                        <span className="text-xs">sec</span>
-                                    </div>
+                            {/* Header */}
+                            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 relative">
+                                {/* Flash Sale Text */}
+                                <h4 className="text-red-500 text-xl font-bold mb-4 lg:mb-0">
+                                    Flash Sale
+                                </h4>
+
+                                {/* Countdown Timer */}
+                                <div className="flex flex-wrap gap-2 justify-start  lg:justify-end">
+                                    {[
+                                        { label: "Days", value: timeLeft.days },
+                                        {
+                                            label: "Hours",
+                                            value: timeLeft.hours,
+                                        },
+                                        {
+                                            label: "Min",
+                                            value: timeLeft.minutes,
+                                        },
+                                        {
+                                            label: "Sec",
+                                            value: timeLeft.seconds,
+                                        },
+                                    ].map((item, i) => (
+                                        <div
+                                            key={i}
+                                            className="text-center flex flex-col items-center justify-center w-[60px] h-[60px] bg-red-500 text-white px-2 py-2 rounded-md shadow-md"
+                                        >
+                                            <p className="text-lg font-bold leading-none">
+                                                {String(item.value).padStart(
+                                                    2,
+                                                    "0",
+                                                )}
+                                            </p>
+                                            <span className="text-xs font-medium">
+                                                {item.label}
+                                            </span>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">

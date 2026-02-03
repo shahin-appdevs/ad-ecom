@@ -310,6 +310,7 @@ export default function NewArrival() {
                             1280: { slidesPerView: 6 },
                         }}
                         modules={[Autoplay]}
+                        className="!py-2"
                     >
                         {new_arrival_products.map((product, index) => {
                             const {
@@ -325,7 +326,7 @@ export default function NewArrival() {
                                 <SwiperSlide key={product.id}>
                                     <Link
                                         href={`/product/details?id=${product.id}`}
-                                        className="group/card bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
+                                        className="group/card bg-gray-100 rounded-md hover:shadow-md transition-shadow block"
                                     >
                                         <div className="relative ">
                                             <div className="w-full h-[150px] sm:h-[215px] overflow-hidden rounded-t-md">

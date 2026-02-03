@@ -334,97 +334,40 @@ export default function FlashSale() {
     }
 
     return (
-        <section className="sm:pt-4">
+        <section className="py-4">
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
-                <div className=" relative bg-primary__color p-4 lg:py-8 sm:rounded-md">
-                    <div className="flex sm:gap-3 md:gap-0 items-center justify-between mb-4">
-                        <h4 className="text-white">Flash Sale</h4>
+                <div className="relative bg-white p-4 sm:rounded-md border border-red-500/20 shadow-md">
+                    {/* Header */}
+                    <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 relative">
+                        {/* Flash Sale Text */}
+                        <h4 className="text-red-500 text-xl font-bold mb-4 lg:mb-0">
+                            Flash Sale
+                        </h4>
 
-                        <div className="absolute hidden lg:block top-0 left-1/2 -translate-x-1/2">
-                            <div
-                                className=" relative inline-flex items-center justify-center px-20 mt-[-50px] lg:mt-0
- 
-                                            before:content-[''] before:absolute before:left-[-20px] before:top-0 before:h-full before:w-[145px] 
-                                            before:bg-[url('/images/shapes/left-shape.png')] before:bg-no-repeat before:bg-contain
-                                        
-                                            after:content-[''] after:absolute after:right-[-60px] after:top-0 after:h-full after:w-[145px] 
-                                            after:bg-[url('/images/shapes/right-shape.png')] after:bg-no-repeat after:bg-contain"
-                            >
-                                <div className="flex flex-wrap bg-white border border-gray-100  px-6 py-3 gap-4 text-sm md:text-base font-semibold text-primary__color justify-center">
-                                    <div className="text-center flex flex-col min-w-[40px]">
-                                        <p className="text-xl">
-                                            {timeLeft.days}
-                                        </p>
-                                        <span className="text-xs text-gray-500 font-normal">
-                                            days
-                                        </span>
-                                    </div>
-                                    <div className="text-center flex flex-col min-w-[40px]">
-                                        <p className="text-xl">
-                                            {timeLeft.hours}
-                                        </p>
-                                        <span className="text-xs text-gray-500 font-normal">
-                                            hours
-                                        </span>
-                                    </div>
-                                    <div className="text-center flex flex-col min-w-[40px]">
-                                        <p className="text-xl">
-                                            {timeLeft.minutes}
-                                        </p>
-                                        <span className="text-xs text-gray-500 font-normal">
-                                            min
-                                        </span>
-                                    </div>
-                                    <div className="text-center flex flex-col min-w-[40px]">
-                                        <p className="text-xl">
-                                            {timeLeft.seconds}
-                                        </p>
-                                        <span className="text-xs text-gray-500 font-normal">
-                                            sec
-                                        </span>
-                                    </div>
+                        {/* Countdown Timer */}
+                        <div className="flex flex-wrap gap-2 justify-start  lg:justify-end">
+                            {[
+                                { label: "Days", value: timeLeft.days },
+                                { label: "Hours", value: timeLeft.hours },
+                                { label: "Min", value: timeLeft.minutes },
+                                { label: "Sec", value: timeLeft.seconds },
+                            ].map((item, i) => (
+                                <div
+                                    key={i}
+                                    className="text-center flex flex-col items-center justify-center w-[60px] h-[60px] bg-red-500 text-white px-2 py-2 rounded-md shadow-md"
+                                >
+                                    <p className="text-lg font-bold leading-none">
+                                        {String(item.value).padStart(2, "0")}
+                                    </p>
+                                    <span className="text-xs font-medium">
+                                        {item.label}
+                                    </span>
                                 </div>
-                            </div>
-                        </div>
-                        <div className="flex lg:hidden flex-wrap text-white py-3  text-sm md:text-base font-semibold justify-center">
-                            <div className="text-center flex flex-col min-w-[40px]">
-                                <p className="text-xl">{timeLeft.days}</p>
-                                <span className="text-xs text-white font-normal">
-                                    days
-                                </span>
-                            </div>
-                            <div className="text-center flex flex-col min-w-[40px]">
-                                <p className="text-xl">{timeLeft.hours}</p>
-                                <span className="text-xs text-white font-normal">
-                                    hours
-                                </span>
-                            </div>
-                            <div className="text-center flex flex-col min-w-[40px]">
-                                <p className="text-xl">{timeLeft.minutes}</p>
-                                <span className="text-xs text-white font-normal">
-                                    min
-                                </span>
-                            </div>
-                            <div className="text-center flex flex-col min-w-[40px]">
-                                <p className="text-xl">{timeLeft.seconds}</p>
-                                <span className="text-xs text-white font-normal">
-                                    sec
-                                </span>
-                            </div>
-                        </div>
-
-                        <div className="">
-                            <Link
-                                href="/product/flash"
-                                className="text-white font-semibold flex items-center gap-2 border border-white rounded-md px-2 py-2 hover:!bg-primary__color hover:!text-white duration-200"
-                            >
-                                <span className="hidden lg:block">
-                                    View More
-                                </span>{" "}
-                                <ArrowRightIcon size={18} className="w-4 h-4" />
-                            </Link>
+                            ))}
                         </div>
                     </div>
+
+                    {/* Swiper Products */}
                     <Swiper
                         slidesPerView={1}
                         spaceBetween={10}
@@ -437,6 +380,7 @@ export default function FlashSale() {
                             1280: { slidesPerView: 6 },
                         }}
                         modules={[Autoplay]}
+                        className="!py-2"
                     >
                         {flash_products.map((product, index) => {
                             const {
@@ -453,7 +397,7 @@ export default function FlashSale() {
                                 <SwiperSlide key={product.id}>
                                     <Link
                                         href={`/product/details?id=${product.id}`}
-                                        className="group/card bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
+                                        className="group/card  bg-gray-100 rounded-md hover:shadow-md transition-shadow block"
                                     >
                                         <div className="relative">
                                             <div className="w-full h-[150px] sm:h-[215px] overflow-hidden rounded-t-md">
@@ -490,73 +434,23 @@ export default function FlashSale() {
                                                     </span>
                                                 )}
                                             </div>
-                                            {/* <div className="relative">
-                                                {!states[index]
-                                                    ?.showQuantity ? (
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.preventDefault();
-                                                            e.stopPropagation();
-                                                            handleToggle(index);
-                                                        }}
-                                                        className="bg-white shadow-sm text-gray-800 text-xs px-4 py-2 rounded-md font-medium flex items-center justify-between w-full"
-                                                        disabled={stock <= 0}
-                                                    >
-                                                        <PlusIcon className="h-5 w-5" />
-                                                        {stock <= 0 ? (
-                                                            <span>
-                                                                Out of Stock
-                                                            </span>
-                                                        ) : (
-                                                            <span className="flex items-center gap-2">
-                                                                Buy Now{" "}
-                                                                <span className="hidden sm:block">
-                                                                    →
-                                                                </span>
-                                                            </span>
-                                                        )}
-                                                    </button>
-                                                ) : (
-                                                    <div className="flex items-center justify-between w-full bg-white shadow-sm rounded-md overflow-hidden">
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-                                                                e.stopPropagation();
-                                                                decreaseQuantity(
-                                                                    index,
-                                                                    1,
-                                                                );
-                                                            }}
-                                                            className="text-gray-800 px-4 py-2"
-                                                        >
-                                                            <MinusIcon className="h-4 w-4" />
-                                                        </button>
-                                                        <span className="px-3 py-1 bg-white text-gray-800">
-                                                            {states[index]
-                                                                ?.quantity || 1}
-                                                        </span>
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-                                                                e.stopPropagation();
-                                                                increaseQuantity(
-                                                                    index,
-                                                                    1,
-                                                                );
-                                                            }}
-                                                            className="text-gray-800 px-4 py-2"
-                                                        >
-                                                            <PlusIcon className="h-4 w-4" />
-                                                        </button>
-                                                    </div>
-                                                )}
-                                            </div> */}
                                         </div>
                                     </Link>
                                 </SwiperSlide>
                             );
                         })}
                     </Swiper>
+
+                    {/* View More Button (Right Bottom) */}
+                    <div className="flex justify-end mt-4">
+                        <Link
+                            href="/product/flash"
+                            className="text-red-500 font-semibold flex items-center gap-2 border border-red-500 rounded-md px-4 py-2 hover:!bg-red-500 hover:!text-white duration-200"
+                        >
+                            <span>View More</span>
+                            <ArrowRightIcon size={18} className="w-4 h-4" />
+                        </Link>
+                    </div>
                 </div>
             </div>
         </section>

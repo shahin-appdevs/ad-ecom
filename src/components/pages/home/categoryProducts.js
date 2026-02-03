@@ -323,7 +323,7 @@ export default function CategoryProducts() {
                                     <Link
                                         href={`/product/details?id=${product.id}`}
                                         key={product.id}
-                                        className="group bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
+                                        className="group bg-gray-100 rounded-md hover:shadow-md transition-shadow block"
                                     >
                                         <div className="relative ">
                                             <div className="w-full h-[150px] sm:h-[215px] rounded-t-md overflow-hidden">
@@ -347,7 +347,7 @@ export default function CategoryProducts() {
                                             </span>
                                         </div>
                                         <div className="p-[10px]">
-                                            <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                            <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 truncate whitespace-nowrap overflow-hidden text-ellipsis">
                                                 {product.title}
                                             </h5>
                                             <div className="flex items-center gap-1 mb-1">
