@@ -248,6 +248,10 @@ function CollectionProduct() {
                             image: response.data.data.collection.image
                                 ? `${backendBaseURL}/${response.data.data.collection_image_path}/${response.data.data.collection.image}`
                                 : `${backendBaseURL}/${response.data.data.default_image_path}`,
+                            coverImage: response.data.data.collection
+                                .cover_image
+                                ? `${backendBaseURL}/${response.data.data.collection_image_path}/${response.data.data.collection.cover_image}`
+                                : `${backendBaseURL}/${response.data.data.default_image_path}`,
                         });
                     }
 
@@ -337,27 +341,27 @@ function CollectionProduct() {
                             ) : (
                                 <>
                                     {collection && (
-                                        <div className="w-full sm:h-[175px] relative group mb-4">
+                                        <div className="w-full relative h-[200px] lg:h-[300px] group mb-4 rounded-md overflow-hidden">
                                             <div className="w-full h-full bg-gray-100 rounded-md overflow-hidden">
                                                 <Image
-                                                    src={collection.image}
+                                                    src={collection.coverImage}
                                                     alt={collection.title}
                                                     className="w-full h-full object-cover"
                                                     width={1470}
                                                     height={300}
                                                 />
-                                                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                    <h3 className="text-white text-lg font-medium text-center px-2">
-                                                        {collection.title}
-                                                    </h3>
-                                                </div>
-                                                <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
-                                                    <h3 className="text-white text-sm font-medium truncate">
-                                                        {collection.title}
-                                                    </h3>
-                                                    <p className="text-white text-xs truncate">
-                                                        {collection.description}
-                                                    </p>
+
+                                                <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t h-full from-black/80 via-black/10 to-transparent">
+                                                    <div className="absolute bottom-0 left-0 right-0 p-2 text-white ">
+                                                        <h3 className=" text-2xl md:text-3xl font-medium truncate text-white">
+                                                            {collection.title}
+                                                        </h3>
+                                                        <p
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: collection.description,
+                                                            }}
+                                                        ></p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -374,7 +378,7 @@ function CollectionProduct() {
                                                     key={`${product.id}-${index}`}
                                                     className="bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
                                                 >
-                                                    <div className="relative p-[10px]">
+                                                    <div className="relative">
                                                         <div className="w-full h-[150px] sm:h-[215px] relative">
                                                             <Image
                                                                 src={
@@ -384,12 +388,12 @@ function CollectionProduct() {
                                                                 alt={
                                                                     product.title
                                                                 }
-                                                                className="object-cover rounded-md"
+                                                                className="object-cover rounded-t-md"
                                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                             />
                                                         </div>
                                                         {product.hasDiscount && (
-                                                            <span className="absolute top-[8px] right-[8px] text-xs bg-primary__color text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
+                                                            <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
                                                                 {
                                                                     product.discount
                                                                 }{" "}
@@ -397,9 +401,12 @@ function CollectionProduct() {
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <div className="p-[10px] pt-[5px]">
+                                                    <div className="p-[10px]">
+                                                        <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                                            {product.title}
+                                                        </h5>
                                                         <div className="flex items-center gap-1 mb-1">
-                                                            <span className="text-base font-semibold text-primary__color">
+                                                            <span className="text-base md:text-lg font-semibold text-primary__color">
                                                                 {formatPrice(
                                                                     product.displayPrice,
                                                                 )}
@@ -415,9 +422,7 @@ function CollectionProduct() {
                                                                 </span>
                                                             )}
                                                         </div>
-                                                        <h5 className="text-sm font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
-                                                            {product.title}
-                                                        </h5>
+
                                                         {/* <div className="relative">
                                                             {!states[index]?.showQuantity ? (
                                                                 <button

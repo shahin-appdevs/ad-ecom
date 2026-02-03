@@ -350,7 +350,7 @@ export default function Header() {
                             <input
                                 type="text"
                                 placeholder="Search by name..."
-                                className="w-full border border-primary__color rounded-full px-4 py-2 pl-10 text-xs focus:outline-none"
+                                className="w-full bg-gray-100 rounded-full px-4 py-2 pl-10 text-xs focus:outline-none"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 onFocus={() => setIsSearchFocused(true)}
@@ -778,7 +778,7 @@ export default function Header() {
                                     <li key={href} className="relative">
                                         <Link
                                             href={href}
-                                            className={`flex items-center gap-1 py-3.5 px-4  after:absolute after:bottom-[-1px] after:left-0  after:h-[1px] after:w-full after:z-10 border border-white rounded-t-md  ${isActive ? "bg-white text-primary__color !border-primary__color !border-b-white after:!bg-white  px-3 " : ""}`}
+                                            className={`${label === "Categories" ? "md:hidden" : ""} flex items-center gap-1 py-3.5 px-4  after:absolute after:bottom-[-1px] after:left-0  after:h-[1px] after:w-full after:z-10 border border-white rounded-t-md  ${isActive ? "bg-white text-primary__color !border-primary__color !border-b-white after:!bg-white  px-3 " : ""}`}
                                         >
                                             {icon}
                                             {label}

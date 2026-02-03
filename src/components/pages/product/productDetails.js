@@ -994,7 +994,7 @@ function ProductDetails() {
                                         <button
                                             className={` focus:outline-none  ${hover && "text-primary__color"} ${selected && "text-primary__color border-b-2 border-primary__color"}`}
                                         >
-                                            Product Description
+                                            Description
                                         </button>
                                     )}
                                 </Tab>
@@ -1009,7 +1009,7 @@ function ProductDetails() {
                                         <button
                                             className={` focus:outline-none ${hover && "text-primary__color"} ${selected && "text-primary__color border-b-2 border-primary__color"}`}
                                         >
-                                            Product Details
+                                            Details
                                         </button>
                                     )}
                                 </Tab>
@@ -1247,7 +1247,7 @@ function ProductDetails() {
                                                 key={index}
                                                 className="  bg-gray-100 p-4 flex  md:items-center gap-4 "
                                             >
-                                                <div className="w-[60px] h-[60px]">
+                                                <div className="w-[60px] h-[60px] aspect-square">
                                                     <Image
                                                         src={product.image}
                                                         alt={product.title}

@@ -10,12 +10,23 @@ const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 const BrandSkeleton = () => {
     return (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {[...Array(10)].map((_, index) => (
-                <div key={index} className="bg-[#f1f5f9] rounded-md">
-                    <div className="relative p-[10px] text-center">
-                        <div className="w-full h-[80px] bg-gray-200 rounded-md animate-pulse"></div>
-                        <div className="mt-2 h-4 bg-gray-200 rounded animate-pulse w-3/4 mx-auto"></div>
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {Array.from({ length: 12 }).map((_, index) => (
+                <div
+                    key={index}
+                    className="bg-gray-100 rounded-md p-[10px] h-full animate-pulse"
+                >
+                    <div className="flex items-center gap-2">
+                        {/* Logo Skeleton */}
+                        <div className="p-3 bg-gray-50 rounded-full w-[60px] h-[60px] md:w-[70px] md:h-[70px] flex items-center justify-center">
+                            <div className="w-full h-full bg-gray-200 rounded-full" />
+                        </div>
+
+                        {/* Text Skeleton */}
+                        <div className="flex-1 space-y-2">
+                            <div className="h-4 bg-gray-200 rounded w-3/4" />
+                            {/* <div className="h-3 bg-gray-200 rounded w-1/2" /> */}
+                        </div>
                     </div>
                 </div>
             ))}
@@ -60,7 +71,7 @@ export default function Brand() {
                             {loading ? (
                                 <BrandSkeleton />
                             ) : (
-                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                                     {brandData?.brands?.data?.map(
                                         (brand, index) => (
                                             <Link
@@ -68,8 +79,8 @@ export default function Brand() {
                                                 key={index}
                                                 className="bg-gray-100 rounded-md hover:shadow-md transition-shadow"
                                             >
-                                                <div className="relative p-[10px] text-center h-full flex flex-col  justify-between">
-                                                    <div className="w-full flex items-center justify-center  ">
+                                                <div className="relative p-[10px] text-center h-full flex items-center gap-2">
+                                                    <div className=" p-3 aspect-square bg-white rounded-full flex w-[60px] md:w-[70px] h-[60px] md:h-[70px] items-center justify-center  ">
                                                         <Image
                                                             src={
                                                                 brand.image
@@ -79,10 +90,10 @@ export default function Brand() {
                                                             width={100}
                                                             height={100}
                                                             alt={brand.title}
-                                                            className="w-full h-full object-cover rounded-md"
+                                                            className="w-full h-full object-contain rounded-md"
                                                         />
                                                     </div>
-                                                    <span className="mt-2 font-medium">
+                                                    <span className="mt-2 text-sm md:text-base lg:text-lg text-neutral-800 font-medium">
                                                         {brand.title}
                                                     </span>
                                                 </div>

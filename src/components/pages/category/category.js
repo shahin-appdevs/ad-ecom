@@ -7,13 +7,14 @@ import {
     childCategoryGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { ArrowRight } from "lucide-react";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 // Skeleton Loading Components
 const CategorySkeleton = () => (
     <div className="text-center  px-[10px] md:p-[10px] ">
-        <div className="w-full  h-[56px] md:h-[106px] bg-gray-200  animate-pulse"></div>
+        <div className="w-full h-[56px] md:h-[106px] bg-gray-200  animate-pulse"></div>
         <div className="pt-[10px]">
             <div className="h-4 bg-gray-200 rounded animate-pulse mx-auto w-3/4"></div>
         </div>
@@ -104,15 +105,15 @@ export default function Categories() {
 
     return (
         <section className="sm:pt-4">
-            <div className="xl:max-w-[1530px]  mx-auto ">
+            <div className="xl:max-w-[1530px] mx-auto ">
                 <div className="bg-white rounded-md">
-                    <div className="flex items-center justify-between gap-3 sm:gap-0 mb-4 py-4 px-6">
+                    <div className="flex items-center justify-between gap-3 sm:gap-0 py-4 px-6">
                         <h5>All Categories</h5>
                     </div>
-                    <div className="grid grid-cols-12 md:grid-cols-12  md:gap-4 ">
+                    <div className="grid grid-cols-12 md:grid-cols-12  md:gap-4">
                         <div className="col-span-3  md:col-span-3 lg:col-span-3 xl:col-span-2 relative w-full h-full">
                             <div className="max-h-[100vh] overflow-y-auto border-r">
-                                <ul className="space-y-6 md:px-2 lg:px-12 ">
+                                <ul className="lg:px-12 space-y-2">
                                     {loading.main
                                         ? Array(8)
                                               .fill(0)
@@ -126,20 +127,27 @@ export default function Categories() {
                                         : categories.map((category) => (
                                               <li
                                                   key={category.id}
-                                                  className={`text-center transition px-2 md:p-2 md:rounded-md cursor-pointer ${
-                                                      selectedCategory?.id ===
-                                                      category.id
-                                                          ? " border-primary__color  border-l-[3px] md:border"
-                                                          : "border-l-[3px] border-transparent md:border md:hover:border md:hover:border-black/20 duration-300"
-                                                  }`}
                                                   onClick={() =>
                                                       handleCategorySelect(
                                                           category,
                                                       )
                                                   }
+                                                  className={`relative text-center py-2 px-2 md:p-2 cursor-pointer overflow-hidden transition-colors duration-300
+                                                    ${
+                                                        selectedCategory?.id ===
+                                                        category.id
+                                                            ? "bg-gray-100"
+                                                            : "hover:bg-gray-50"
+                                                    }`}
                                               >
-                                                  <div className="relative ">
-                                                      <div className="w-full h-[56px] md:h-[106px]">
+                                                  {/* Animated left border */}
+                                                  <span
+                                                      className={`absolute left-0 top-0 w-[3px] bg-primary__color transition-all duration-300 ease-out
+                                                        ${selectedCategory?.id === category.id ? "h-full" : "h-0"}`}
+                                                  />
+
+                                                  <div className="relative flex items-center justify-center">
+                                                      <div className="aspect-square md:h-[106px] md:w-[106px]  overflow-hidden">
                                                           <Image
                                                               src={getCategoryImage(
                                                                   category,
@@ -149,12 +157,13 @@ export default function Categories() {
                                                               alt={
                                                                   category.title
                                                               }
-                                                              className="w-full h-full object-cover "
+                                                              className="w-full h-full  object-cover transition-transform duration-300 group-hover:scale-105"
                                                           />
                                                       </div>
                                                   </div>
+
                                                   <div className="pt-[10px]">
-                                                      <h5 className="text-xs  md:text-sm font-medium">
+                                                      <h5 className="text-xs md:text-sm font-medium">
                                                           {category.title}
                                                       </h5>
                                                   </div>
@@ -181,8 +190,8 @@ export default function Categories() {
                                                     href={`/categories/products?id=${selectedCategory.id}`}
                                                     className="relative "
                                                 >
-                                                    <div className="w-[70px] md:w-[100px] h-[70px] md:h-[100px]  mx-auto transition  ">
-                                                        <Image
+                                                    <div className="w-[70px] md:w-[100px] h-[70px] md:h-[100px]  mx-auto transition flex items-center justify-center border ">
+                                                        {/* <Image
                                                             src={getCategoryImage(
                                                                 selectedCategory,
                                                             )}
@@ -192,7 +201,8 @@ export default function Categories() {
                                                                 selectedCategory.title
                                                             }
                                                             className="w-full h-full object-cover "
-                                                        />
+                                                        /> */}
+                                                        <ArrowRight className="text-primary__color" />
                                                     </div>
                                                 </Link>
                                                 <div className="pt-[10px]">
