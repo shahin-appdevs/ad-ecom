@@ -16,26 +16,34 @@ const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 const CampaignSkeleton = () => (
     <div className="animate-pulse">
-        <div className="flex items-center justify-center mb-4">
-            <div className="flex items-center gap-3 text-sm sm:text-xl font-semibold text-color__heading">
-                <div className="h-4 w-16 bg-gray-300 rounded"></div>
-                {[...Array(4)].map((_, i) => (
-                    <div
-                        key={`timer-skeleton-${i}`}
-                        className="text-center flex flex-col bg-gray-300 p-3 rounded-full"
-                    >
-                        <div className="h-6 w-6 bg-gray-400 mx-auto rounded-sm mb-1"></div>
-                        <div className="h-3 w-8 bg-gray-400 rounded-sm"></div>
+        {/* Banner skeleton */}
+        <div className="w-full relative h-[200px] lg:h-[300px] mb-4 rounded-md overflow-hidden bg-gray-300">
+            {/* Timer skeleton (top-right) */}
+            <div className="absolute top-3 right-3 z-10">
+                <div className="flex items-center gap-2 bg-gray-400/80 px-3 py-2 rounded-full">
+                    <div className="h-3 w-10 bg-gray-500 rounded"></div>
+                    <div className="flex items-center gap-1">
+                        {[...Array(4)].map((_, i) => (
+                            <div
+                                key={`timer-skeleton-${i}`}
+                                className="h-6 w-8 bg-gray-500 rounded-full"
+                            />
+                        ))}
                     </div>
-                ))}
+                </div>
+            </div>
+
+            {/* Bottom content skeleton */}
+            <div className="absolute bottom-0 left-0 right-0 p-3">
+                <div className="h-6 w-1/3 bg-gray-400 rounded mb-2"></div>
+                <div className="h-4 w-2/3 bg-gray-400 rounded"></div>
             </div>
         </div>
-        <div className="w-full sm:h-[175px] relative mb-4 bg-gray-300 rounded-md"></div>
     </div>
 );
 
 const ProductSkeleton = () => (
-    <div className="bg-[#f1f5f9] rounded-md animate-pulse">
+    <div className="bg-gray-100 rounded-md animate-pulse">
         <div className="relative ">
             <div className="w-full h-[150px] sm:h-[215px] bg-gray-300 rounded-md"></div>
         </div>
@@ -392,68 +400,64 @@ function CampaignProduct() {
                             ) : (
                                 <>
                                     {campaign && (
-                                        <>
-                                            <div className="flex items-center justify-center mb-4">
-                                                <div className="flex items-center gap-3 text-sm sm:text-xl font-semibold text-color__heading">
-                                                    <h6>Ends In:</h6>
-                                                    <div className="text-center flex flex-col bg-primary__color p-3 text-white rounded-full">
-                                                        <p>{timeLeft.days}</p>
-                                                        <span className="text-xs">
-                                                            days
+                                        <div className="w-full relative h-[200px] lg:h-[300px] group mb-4 rounded-md overflow-hidden">
+                                            <div className="w-full h-full bg-gray-100 rounded-md overflow-hidden">
+                                                <Image
+                                                    src={campaign.image}
+                                                    alt={campaign.title}
+                                                    className="w-full h-full object-cover"
+                                                    width={1470}
+                                                    height={300}
+                                                />
+
+                                                {/* TIMER — absolute top-right (unchanged logic) */}
+                                                <div className="absolute top-3 right-3 z-10">
+                                                    <div className="flex items-center gap-2 bg-black/60 backdrop-blur-sm px-3 py-2 rounded-full text-white text-xs sm:text-sm">
+                                                        <span className="font-semibold">
+                                                            Ends in
                                                         </span>
+                                                        <div className="flex items-center gap-1">
+                                                            <span className="bg-red-500 px-2 py-1 rounded-full">
+                                                                {timeLeft.days}d
+                                                            </span>
+                                                            <span className="bg-red-500 px-2 py-1 rounded-full">
+                                                                {timeLeft.hours}
+                                                                h
+                                                            </span>
+                                                            <span className="bg-red-500 px-2 py-1 rounded-full">
+                                                                {
+                                                                    timeLeft.minutes
+                                                                }
+                                                                m
+                                                            </span>
+                                                            <span className="bg-red-500 px-2 py-1 rounded-full">
+                                                                {
+                                                                    timeLeft.seconds
+                                                                }
+                                                                s
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                    <div className="text-center flex flex-col bg-primary__color p-3 text-white rounded-full">
-                                                        <p>{timeLeft.hours}</p>
-                                                        <span className="text-xs">
-                                                            hours
-                                                        </span>
-                                                    </div>
-                                                    <div className="text-center flex flex-col bg-primary__color p-3 text-white rounded-full">
-                                                        <p>
-                                                            {timeLeft.minutes}
-                                                        </p>
-                                                        <span className="text-xs">
-                                                            min
-                                                        </span>
-                                                    </div>
-                                                    <div className="text-center flex flex-col bg-primary__color p-3 text-white rounded-full">
-                                                        <p>
-                                                            {timeLeft.seconds}
-                                                        </p>
-                                                        <span className="text-xs">
-                                                            sec
-                                                        </span>
+                                                </div>
+
+                                                {/* Banner overlay (collection-style) */}
+                                                <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t h-full from-black/80 via-black/10 to-transparent">
+                                                    <div className="absolute bottom-0 left-0 right-0 p-2 text-white">
+                                                        <h3 className="text-2xl md:text-3xl font-medium truncate text-white">
+                                                            {campaign.title}
+                                                        </h3>
+                                                        <p
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: campaign.description,
+                                                            }}
+                                                            className="text-sm md:text-base truncate"
+                                                        ></p>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="w-full sm:h-[175px] relative group mb-4">
-                                                <div className="w-full h-full bg-gray-100 rounded-md overflow-hidden">
-                                                    <Image
-                                                        src={campaign.image}
-                                                        alt={campaign.title}
-                                                        className="w-full h-full object-cover"
-                                                        width={1470}
-                                                        height={300}
-                                                    />
-                                                    <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                        <h3 className="text-white text-lg font-medium text-center px-2">
-                                                            {campaign.title}
-                                                        </h3>
-                                                    </div>
-                                                    <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
-                                                        <h3 className="text-white text-sm font-medium truncate">
-                                                            {campaign.title}
-                                                        </h3>
-                                                        <p className="text-white text-xs truncate">
-                                                            {
-                                                                campaign.description
-                                                            }
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </>
+                                        </div>
                                     )}
+
                                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
                                         {products.length === 0 ? (
                                             <div className="col-span-full text-center py-10">
@@ -464,9 +468,9 @@ function CampaignProduct() {
                                                 <Link
                                                     href={`/product/details?id=${product.id}`}
                                                     key={`${product.id}-${index}`}
-                                                    className="bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
+                                                    className="bg-gray-100 rounded-md hover:shadow-md transition-shadow block"
                                                 >
-                                                    <div className="relative p-[10px]">
+                                                    <div className="relative">
                                                         <div className="w-full h-[150px] sm:h-[215px] relative">
                                                             <Image
                                                                 src={
@@ -476,10 +480,11 @@ function CampaignProduct() {
                                                                 alt={
                                                                     product.title
                                                                 }
-                                                                className="object-cover rounded-md"
+                                                                className="object-cover rounded-t-md"
                                                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                             />
                                                         </div>
+
                                                         {product.hasDiscount && (
                                                             <span className="absolute top-[8px] right-[8px] text-xs bg-primary__color text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
                                                                 {
@@ -489,13 +494,19 @@ function CampaignProduct() {
                                                             </span>
                                                         )}
                                                     </div>
-                                                    <div className="p-[10px] pt-[5px]">
+
+                                                    <div className="p-[10px]">
+                                                        <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                                            {product.title}
+                                                        </h5>
+
                                                         <div className="flex items-center gap-1 mb-1">
-                                                            <span className="text-base font-semibold text-primary__color">
+                                                            <span className="text-base md:text-lg font-semibold text-primary__color">
                                                                 {formatPrice(
                                                                     product.displayPrice,
                                                                 )}
                                                             </span>
+
                                                             {(product.hasDiscount ||
                                                                 product.isResellerPrice) && (
                                                                 <span className="text-xs text-[#4b5563] line-through">
@@ -507,62 +518,6 @@ function CampaignProduct() {
                                                                 </span>
                                                             )}
                                                         </div>
-                                                        <h5 className="text-sm font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
-                                                            {product.title}
-                                                        </h5>
-                                                        {/* <div className="relative">
-                                                            {!states[index]?.showQuantity ? (
-                                                                <button
-                                                                    onClick={(e) => {
-                                                                        e.preventDefault();
-                                                                        e.stopPropagation();
-                                                                        handleToggle(index);
-                                                                    }}
-                                                                    className="bg-white shadow-sm text-gray-800 text-xs px-4 py-2 rounded-md font-medium flex items-center justify-between w-full"
-                                                                    disabled={product.stock <= 0}
-                                                                >
-                                                                    <PlusIcon className="h-5 w-5" />
-                                                                    {product.stock <= 0 ? (
-                                                                        <span>Out of Stock</span>
-                                                                    ) : (
-                                                                        <span className="flex items-center gap-2">Buy Now <span className="hidden sm:block">→</span></span>
-                                                                    )}
-                                                                </button>
-                                                            ) : (
-                                                                <div className="flex items-center justify-between w-full bg-white shadow-sm rounded-md overflow-hidden">
-                                                                    <button
-                                                                        onClick={(e) => {
-                                                                            e.preventDefault();
-                                                                            e.stopPropagation();
-                                                                            decreaseQuantity(
-                                                                                index,
-                                                                                1,
-                                                                            );
-                                                                        }}
-                                                                        className="text-gray-800 px-4 py-2"
-                                                                    >
-                                                                        <MinusIcon className="h-4 w-4" />
-                                                                    </button>
-                                                                    <span className="px-3 py-1 bg-white text-gray-800">
-                                                                        {states[index]?.quantity || 1}
-                                                                    </span>
-                                                                    <button
-                                                                        onClick={(e) => {
-                                                                            e.preventDefault();
-                                                                            e.stopPropagation();
-                                                                            increaseQuantity(
-                                                                                index,
-                                                                                1,
-                                                                            );
-                                                                        }}
-                                                                        className="text-gray-800 px-4 py-2"
-                                                                        disabled={states[index]?.quantity >= product.stock}
-                                                                    >
-                                                                        <PlusIcon className="h-4 w-4" />
-                                                                    </button>
-                                                                </div>
-                                                            )}
-                                                        </div> */}
                                                     </div>
                                                 </Link>
                                             ))

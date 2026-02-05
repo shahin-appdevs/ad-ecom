@@ -12,7 +12,7 @@ const StallSkeleton = () => {
     return (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {[...Array(10)].map((_, index) => (
-                <div key={index} className="bg-[#f1f5f9] rounded-md">
+                <div key={index} className="bg-gray-100 rounded-md">
                     <div className="flex items-center justify-center mb-2">
                         <div className="w-full h-[100px] sm:h-[120px] rounded-md overflow-hidden bg-gray-200 animate-pulse"></div>
                     </div>

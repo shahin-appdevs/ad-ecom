@@ -20,7 +20,7 @@ import { ChevronRight } from "lucide-react";
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 const ProductSkeleton = () => (
-    <div className="bg-[#f1f5f9] rounded-md animate-pulse">
+    <div className="bg-gray-100 rounded-md animate-pulse">
         <div className="relative">
             <div className="w-full h-[150px] sm:h-[215px] bg-gray-300 rounded-md"></div>
         </div>
@@ -427,7 +427,7 @@ function CategoryProduct() {
                                         <Link
                                             href={`/product/details?id=${product.id}`}
                                             key={`${product.id}-${index}`}
-                                            className="group bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow block"
+                                            className="group bg-gray-100 rounded-md hover:shadow-md transition-shadow block"
                                         >
                                             <div className="relative ">
                                                 <div className="w-full h-[150px] sm:h-[215px] relative rounded-t-md overflow-hidden">

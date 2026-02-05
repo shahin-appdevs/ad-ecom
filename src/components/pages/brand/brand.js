@@ -77,7 +77,7 @@ export default function Brand() {
                                             <Link
                                                 href={`/brands/products?id=${brand.id}`}
                                                 key={index}
-                                                className="bg-gray-100 rounded-md hover:shadow-md transition-shadow"
+                                                className="group/brand bg-gray-100 rounded-md hover:shadow-md transition-shadow"
                                             >
                                                 <div className="relative p-[10px] text-center h-full flex items-center gap-2">
                                                     <div className=" p-3 aspect-square bg-white rounded-full flex w-[60px] md:w-[70px] h-[60px] md:h-[70px] items-center justify-center  ">
@@ -90,7 +90,7 @@ export default function Brand() {
                                                             width={100}
                                                             height={100}
                                                             alt={brand.title}
-                                                            className="w-full h-full object-contain rounded-md"
+                                                            className="w-full h-full object-contain rounded-md group-hover/brand:scale-105 transition-all duration-200"
                                                         />
                                                     </div>
                                                     <span className="mt-2 text-sm md:text-base lg:text-lg text-neutral-800 font-medium">

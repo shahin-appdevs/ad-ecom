@@ -44,7 +44,7 @@ const FlashSaleSkeleton = () => {
                 >
                     {[...Array(6)].map((_, index) => (
                         <SwiperSlide key={index}>
-                            <div className="bg-[#f1f5f9] rounded-md">
+                            <div className="bg-gray-100 rounded-md">
                                 <div className="relative">
                                     <div className="w-full h-[150px] sm:h-[215px] bg-gray-300 rounded-md animate-pulse"></div>
                                 </div>

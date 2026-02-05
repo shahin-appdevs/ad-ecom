@@ -12,7 +12,7 @@ import { ArrowRightIcon } from "lucide-react";
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 const SkeletonProductCard = () => (
-    <div className="bg-[#f1f5f9] rounded-md">
+    <div className="bg-gray-100 rounded-md">
         <div className="relative p-[10px]">
             <div className="w-full h-[150px] sm:h-[215px] bg-gray-200 rounded-md animate-pulse"></div>
         </div>

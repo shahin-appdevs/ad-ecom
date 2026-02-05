@@ -32,7 +32,7 @@ const BrandSkeleton = () => {
                     >
                         {[...Array(7)].map((_, index) => (
                             <SwiperSlide key={index}>
-                                <div className="bg-[#f1f5f9] rounded-md">
+                                <div className="bg-gray-100 rounded-md">
                                     <div className="relative p-[10px]">
                                         <div className="w-full h-[80px] bg-gray-300 rounded-md animate-pulse"></div>
                                     </div>
@@ -80,7 +80,7 @@ export default function Brand() {
                                 <Link
                                     key={idx}
                                     href={`/brands/products?id=${brand.id}`}
-                                    className="  w-full"
+                                    className=" group/brand w-full hover:shadow-md transition-all duration-200 rounded-md "
                                 >
                                     <div className="relative ">
                                         <div className="w-full h-[100px] px-4 flex items-center justify-center rounded-md  bg-gray-100">
@@ -94,7 +94,7 @@ export default function Brand() {
                                                     width={100}
                                                     height={100}
                                                     alt={brand.title || "Brand"}
-                                                    className="w-[50px] object-contain rounded-full hover:scale-105 transition-all duration-200 h-[50px]"
+                                                    className="w-[50px] group-hover/brand:scale-105 transition-all duration-200 object-contain rounded-full h-[50px]"
                                                 />
                                             </div>
                                             <div className="w-full p-2">

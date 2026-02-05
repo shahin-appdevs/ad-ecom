@@ -191,7 +191,7 @@ export default function Header() {
     ];
 
     const navItems = [
-        { href: "/", label: "Home", icon: <HomeIcon className="w-5 h-5" /> },
+        { href: "/", label: "Home" },
         { href: "/categories", label: "Categories" },
         { href: "/product/new", label: "New Product" },
         { href: "/product/flash", label: "Flash Sale" },
@@ -437,7 +437,7 @@ export default function Header() {
                             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-black">
                                 <MagnifyingGlassIcon className="h-5 w-5" />
                             </span>
-                            <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                            <div className="absolute right-3 top-1/2 transform -translate-y-1/2 z-50">
                                 <div className="relative">
                                     <button
                                         onClick={() =>
@@ -453,9 +453,9 @@ export default function Header() {
                                         <ChevronUpDownIcon className="w-4 h-4 ml-1" />
                                     </button>
                                     {isSearchTypeOpen && (
-                                        <div className="absolute z-10 mt-1 w-full bg-white rounded-md shadow-md overflow-hidden">
-                                            <ul>
-                                                <li>
+                                        <div className="absolute z-10 mt-1 !w-full min-w-[170px] bg-white rounded-md shadow-md overflow-hidden">
+                                            <ul className="!w-full ">
+                                                <li className="!w-full">
                                                     <button
                                                         onClick={() => {
                                                             setSearchType(
@@ -465,12 +465,12 @@ export default function Header() {
                                                                 false,
                                                             );
                                                         }}
-                                                        className={`w-full text-left px-4 py-2 rounded-md text-sm ${searchType === "product" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
+                                                        className={`!w-full text-left px-4 py-2  text-sm ${searchType === "product" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
                                                     >
                                                         Search By Product
                                                     </button>
                                                 </li>
-                                                <li>
+                                                <li className="!w-full">
                                                     <button
                                                         onClick={() => {
                                                             setSearchType(
@@ -480,7 +480,7 @@ export default function Header() {
                                                                 false,
                                                             );
                                                         }}
-                                                        className={`w-full text-left px-4 py-2 rounded-md text-sm ${searchType === "stall" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
+                                                        className={`w-full text-left px-4 py-2  text-sm ${searchType === "stall" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
                                                     >
                                                         Search By Stall
                                                     </button>
@@ -740,32 +740,46 @@ export default function Header() {
                                     </div>
                                 )}
                             </Link>
-                            <Listbox
-                                value={selectedLanguage}
-                                onChange={setSelectedLanguage}
-                            >
-                                <div className="relative">
-                                    <Listbox.Button className="w-full border rounded py-1 px-2 text-sm text-left flex justify-between items-center">
-                                        {selectedLanguage.name}
-                                        <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
-                                    </Listbox.Button>
-                                    <Listbox.Options className="absolute mt-1 w-full bg-white shadow-md rounded-md z-10">
-                                        {languages.map((language) => (
-                                            <Listbox.Option
-                                                key={language.id}
-                                                value={language}
-                                                className={({ active }) =>
-                                                    `cursor-pointer select-none px-4 py-2 text-sm ${active ? "bg-indigo-100" : ""}`
-                                                }
-                                            >
-                                                <span className="flex justify-between">
-                                                    {language.name}
-                                                </span>
-                                            </Listbox.Option>
-                                        ))}
-                                    </Listbox.Options>
+                            <div className="relative max-w-[180px]">
+                                <select
+                                    value={selectedLanguage?.name || ""}
+                                    onChange={(e) => {
+                                        const selected = languages.find(
+                                            (lang) =>
+                                                lang.name === e.target.value,
+                                        );
+                                        setSelectedLanguage(selected);
+                                    }}
+                                    className={`
+                                            w-full
+                                            px-3 py-1.5 pr-9             
+                                            text-sm
+                                            bg-white
+                                            border border-gray-300 rounded-md
+                                            shadow-sm
+                                            focus:outline-none focus:ring-0
+                                            hover:border-gray-400
+                                            transition-colors
+                                            appearance-none
+                                            cursor-pointer
+                                            `}
+                                >
+                                    {languages.map((language) => (
+                                        <option
+                                            key={language.id}
+                                            value={language.code}
+                                            className="text-sm"
+                                        >
+                                            {language.name}
+                                        </option>
+                                    ))}
+                                </select>
+
+                                {/* Custom arrow icon - pointer-events-none so it doesn't block clicks */}
+                                <div className="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none">
+                                    <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
                                 </div>
-                            </Listbox>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -909,7 +923,7 @@ export default function Header() {
                 <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
                     <div className="flex justify-around items-center py-2">
                         <Link href="/" className="flex flex-col items-center">
-                            <HomeIcon className="w-5 h-5 text-gray-700" />
+                            {/* <HomeIcon className="w-5 h-5 text-gray-700" /> */}
                             <span className="text-xs mt-1">Home</span>
                         </Link>
                         <Link

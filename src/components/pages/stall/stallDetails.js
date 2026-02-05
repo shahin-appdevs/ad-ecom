@@ -21,7 +21,7 @@ const StallSkeleton = () => (
 );
 
 const ProductSkeleton = () => (
-    <div className="bg-[#f1f5f9] rounded-md animate-pulse">
+    <div className="bg-gray-100 rounded-md animate-pulse">
         <div className="relative ">
             <div className="w-full h-[150px] sm:h-[215px] bg-gray-300 rounded-md"></div>
         </div>
@@ -368,7 +368,7 @@ function StallDetails() {
                                             products.map((product, index) => (
                                                 <div
                                                     key={`${product.id}-${index}`}
-                                                    className="bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow"
+                                                    className="bg-gray-100 rounded-md hover:shadow-md transition-shadow"
                                                 >
                                                     <div className="relative p-[10px]">
                                                         <div className="w-full h-[150px] sm:h-[215px] relative">

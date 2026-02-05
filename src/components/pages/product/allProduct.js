@@ -199,7 +199,7 @@ export default function AllProduct() {
                                 {products.map((product, index) => (
                                     <div
                                         key={index}
-                                        className="bg-[#f1f5f9] rounded-md hover:shadow-md transition-shadow"
+                                        className="bg-gray-100 rounded-md hover:shadow-md transition-shadow"
                                     >
                                         <div className="relative p-[10px]">
                                             <div className="w-full h-[150px] sm:h-[215px]">
