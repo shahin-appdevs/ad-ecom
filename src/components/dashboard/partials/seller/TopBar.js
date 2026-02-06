@@ -1,4 +1,4 @@
-"use client"
+"use client";
 // Packages
 import { useState, useEffect } from "react";
 import { dashboardGetSellerAPI } from "@root/services/apiClient/apiClient";
@@ -27,7 +27,8 @@ export default function TopBar() {
                 setUserData(userData);
             } catch (error) {
                 toast.error(
-                    error?.response?.data?.message?.error?.[0] || "Something went wrong"
+                    error?.response?.data?.message?.error?.[0] ||
+                        "Something went wrong",
                 );
             } finally {
                 setLoading(false);
@@ -38,15 +39,16 @@ export default function TopBar() {
     }, []);
 
     return (
-        <div className="bg-white__color rounded-[12px] sm:px-8 px-4 py-4 mb-4">
+        <div className="bg-white__color  sm:px-8 px-4 py-4 mb-4">
             <div className="flex items-center">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between w-full gap-4 md:gap-0">
-
                     {/* Title */}
                     {loading ? (
                         <div className="w-32 h-5 bg-gray-200 rounded animate-pulse" />
                     ) : (
-                        <h5 className="font-semibold text-[16px]">{formattedTitle}</h5>
+                        <h5 className="font-semibold text-[16px]">
+                            {formattedTitle}
+                        </h5>
                     )}
 
                     {/* User Info */}
@@ -79,7 +81,10 @@ export default function TopBar() {
                                         <h5 className="text-[14px] md:text-[16px] font-semibold flex gap-2 items-start leading-[15px]">
                                             {userData.username}
                                             <span className="relative top-[-2px] text-[10px] rounded-[4px] text-[#008B3E] bg-[#008b3e1c] py-[2px] px-2">
-                                                {userData?.kycStringStatus?.value}
+                                                {
+                                                    userData?.kycStringStatus
+                                                        ?.value
+                                                }
                                             </span>
                                         </h5>
                                         <span className="text-xs text-color__heading">

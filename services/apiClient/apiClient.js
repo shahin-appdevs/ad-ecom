@@ -296,6 +296,11 @@ export const registerAPI = (formData) => {
     });
 };
 
+// Basic Data GET Api
+export const basicDataGetAPI = () => {
+    return apiClient.get("/get/basic/data");
+};
+
 // Login API (post)
 export const loginAPI = (formData) => {
     return apiClient.post("/user/login", formData, {

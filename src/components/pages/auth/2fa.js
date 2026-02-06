@@ -1,20 +1,20 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
 import { twoFactorAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-
 import logo from "@public/images/logo/favicon.jpeg";
+import Link from "next/link";
+import getImageUrl from "@/components/utility/getImageUrl";
 
 export default function Otp() {
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const router = useRouter();
-
+    const [appSettingsData, setAppSettingsData] = useState(null);
     const handleOtpChange = (e) => {
         const value = e.target.value.replace(/\D/g, "").slice(0, 6);
         const formattedValue = value.match(/.{1,2}/g)?.join(" - ") || value;
@@ -52,61 +52,96 @@ export default function Otp() {
         }
     };
 
+    useEffect(() => {
+        const appSettings = sessionStorage.getItem("appSettings");
+        setAppSettingsData(appSettings ? JSON.parse(appSettings) : null);
+    }, []);
+
     return (
-        <section className="min-h-[calc(100vh-200px)] py-8 xl:py-0 px-4 md:px-0 flex items-center justify-center">
-            <div className="w-full max-w-md border rounded-md bg-white p-6">
-                <h2 className="text-center text-lg font-semibold mb-5 border-b pb-4">
-                    2fa Verification
+        <section className=" flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
+            <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 sm:p-10 overflow-hidden">
+                {/* Header Section */}
+                <h2 className="text-center text-xl font-bold text-gray-900 mb-6 border-b pb-4">
+                    2FA Verification
                 </h2>
-                <div className="flex items-center space-x-3 mb-7">
-                    <Image
-                        src={logo}
-                        alt="Logo"
-                        width={40}
-                        height={40}
-                        className="rounded-full"
-                    />
+
+                <div className="flex items-center space-x-4 mb-8">
+                    <div className="bg-gray-100 p-1.5 rounded-full shadow-sm w-[50px] h-[50px] flex items-center justify-center ">
+                        <Image
+                            src={getImageUrl(
+                                appSettingsData?.site_logo,
+                                appSettingsData?.logo_image_path,
+                            )}
+                            alt="Logo"
+                            width={44}
+                            height={44}
+                            className="rounded-full !bg-white"
+                        />
+                    </div>
                     <div>
-                        <h6 className="font-semibold">JARA B2B.COM</h6>
-                        <p className="text-sm text-gray-600">
+                        <h6 className="font-bold text-gray-900 tracking-tight">
+                            {appSettingsData?.site_name}
+                        </h6>
+                        <p className="text-sm text-gray-500 leading-tight">
                             Enter the verification code sent to your phone
                         </p>
                     </div>
                 </div>
 
-                <form className="space-y-5" onSubmit={handleSubmit}>
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                    {/* OTP Input Field */}
                     <div className="relative">
                         <label
                             htmlFor="otp"
-                            className="absolute -top-2.5 left-4 bg-white px-1 text-xs font-medium text-color__heading"
+                            className=" block left-4 bg-white  px-1.5 text-sm mb-1 font-medium  z-10"
                         >
                             Verification Code
                         </label>
-                        <input
-                            id="otp"
-                            placeholder="Enter 6-digit code"
-                            value={otp}
-                            onChange={handleOtpChange}
-                            maxLength={12}
-                            className={`w-full px-4 pt-3 pb-3 text-sm rounded-md border ${error ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary__color shadow-sm`}
-                        />
-                        <ExclamationCircleIcon className="w-5 h-5 text-primary__color absolute right-3 top-3" />
+                        <div className="relative">
+                            <input
+                                id="otp"
+                                type="text"
+                                placeholder="Enter 6-digit code"
+                                value={otp}
+                                onChange={handleOtpChange}
+                                maxLength={12}
+                                className={`w-full px-4 bg-gray-50 py-3.5 text-base font-medium rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 
+                            ${
+                                error
+                                    ? "border-red-500 focus:ring-red-100"
+                                    : "border-gray-300 focus:border-primary__color focus:ring-primary__color/20"
+                            } shadow-sm`}
+                            />
+                        </div>
                         {error && (
-                            <p className="mt-1 text-sm text-red-600">{error}</p>
+                            <p className="mt-2 text-xs font-medium text-red-600 animate-pulse">
+                                {error}
+                            </p>
                         )}
                     </div>
 
-                    <div className="border-t pt-5">
+                    {/* Action Button */}
+                    <div className="pt-4 border-t border-gray-100">
                         <Button
                             type="submit"
-                            title={loading ? "Verifying..." : "Verify"}
+                            title={loading ? "Verifying..." : "Verify Code"}
                             variant="primary"
                             size="md"
-                            className="w-full"
+                            className="w-full py-3.5 text-base font-bold shadow-lg shadow-primary__color/30 hover:shadow-primary__color/50 transition-all duration-300"
                             disabled={loading}
                         />
                     </div>
                 </form>
+
+                {/* Footer Link */}
+                <div className="mt-8 text-center">
+                    <Link
+                        href="/user/auth/login"
+                        className="text-sm font-semibold text-gray-400 hover:text-primary__color transition-colors uppercase tracking-widest"
+                    >
+                        ← Back to Login
+                    </Link>
+                </div>
             </div>
         </section>
     );

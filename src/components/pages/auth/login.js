@@ -1,14 +1,21 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Button from "@/components/utility/Button";
-import { loginAPI, sendOtpAPI } from "@root/services/apiClient/apiClient";
+import {
+    basicDataGetAPI,
+    loginAPI,
+    sendOtpAPI,
+} from "@root/services/apiClient/apiClient";
 import useAuthRedirect from "@/components/utility/useAuthRedirect";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import logo from "@public/images/logo/favicon.jpeg";
+import ReCAPTCHA from "react-google-recaptcha";
+import { handleApiError } from "@/components/utility/handleApiError";
+import getImageUrl from "@/components/utility/getImageUrl";
 
 export default function Login() {
     useAuthRedirect();
@@ -17,9 +24,40 @@ export default function Login() {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const [showPassword, setShowPassword] = useState(false);
+    const [recaptcha, setRecaptcha] = useState(null);
+    const [loginBasicData, setLoginBasicData] = useState(null);
+    const [appSettingsData, setAppSettingsData] = useState(null);
+
+    const recaptchaRef = useRef();
+
+    const recaptchaChange = (e) => {
+        setRecaptcha(e);
+    };
+
+    // get app settings from session storage
+    useEffect(() => {
+        const appSettings = sessionStorage.getItem("appSettings");
+        setAppSettingsData(appSettings ? JSON.parse(appSettings) : null);
+    }, []);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const result = await basicDataGetAPI();
+                setLoginBasicData(result?.data?.data);
+            } catch (error) {
+                handleApiError(error, "Failed to fetch basic data");
+            }
+        })();
+    }, []);
 
     const submitLogin = async (e) => {
         e.preventDefault();
+
+        if (loginBasicData?.google_recaptcha && !recaptcha) {
+            toast.error("Please verify reCAPTCHA");
+            return;
+        }
 
         setLoading(true);
 
@@ -27,6 +65,7 @@ export default function Login() {
             const formData = new FormData();
             formData.append("credentials", credentials.trim());
             formData.append("password", password);
+            formData.append("g-recaptcha-response", recaptcha);
 
             const response = await loginAPI(formData);
 
@@ -79,7 +118,7 @@ export default function Login() {
     };
 
     return (
-        <section className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <section className=" flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
             <div className="flex w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden">
                 {/* Left Side: Brand/Visual Area (Hidden on mobile) */}
                 <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-slate-900 to-slate-800 p-12 flex-col justify-between relative overflow-hidden">
@@ -91,9 +130,12 @@ export default function Login() {
 
                     <div className="relative z-10">
                         <div className="flex items-center space-x-3 mb-8">
-                            <div className="bg-white/10 p-2 rounded-lg backdrop-blur-sm">
+                            <div className="bg-white/10 p-2 rounded-full backdrop-blur-sm w-[50px] h-[50px] flex items-center justify-center">
                                 <Image
-                                    src={logo}
+                                    src={getImageUrl(
+                                        appSettingsData?.site_logo,
+                                        appSettingsData?.logo_image_path,
+                                    )}
                                     alt="Logo"
                                     width={40}
                                     height={40}
@@ -101,7 +143,7 @@ export default function Login() {
                                 />
                             </div>
                             <span className="text-white text-xl font-bold tracking-wide">
-                                QR eCommerce
+                                {appSettingsData?.site_name}
                             </span>
                         </div>
                         <h2 className="text-4xl font-bold text-gray-400 mb-6 leading-tight">
@@ -114,8 +156,8 @@ export default function Login() {
                     </div>
 
                     <div className="relative z-10 text-sm text-blue-200/60">
-                        © {new Date().getFullYear()} QR eCommerce. All rights
-                        reserved.
+                        © {new Date().getFullYear()}{" "}
+                        {appSettingsData?.site_name}. All rights reserved.
                     </div>
                 </div>
 
@@ -123,7 +165,10 @@ export default function Login() {
                 <div className="w-full md:w-1/2 p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
                     <div className="md:hidden flex items-center space-x-3 mb-8 justify-center">
                         <Image
-                            src={logo}
+                            src={getImageUrl(
+                                appSettingsData?.site_logo,
+                                appSettingsData?.logo_image_path,
+                            )}
                             alt="Logo"
                             width={48}
                             height={48}
@@ -161,10 +206,6 @@ export default function Login() {
                                     className="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary__color/50 focus:border-primary__color transition-all duration-200 bg-gray-50 focus:bg-white"
                                     required
                                 />
-                                {/* Validation Icon */}
-                                {!credentials && (
-                                    <ExclamationCircleIcon className="w-5 h-5 text-gray-400 absolute right-3 top-3.5" />
-                                )}
                             </div>
                         </div>
 
@@ -246,6 +287,16 @@ export default function Login() {
                             </div>
                         </div>
 
+                        {loginBasicData?.google_recaptcha && (
+                            <ReCAPTCHA
+                                ref={recaptchaRef}
+                                sitekey={
+                                    loginBasicData?.google_recaptcha_site_key
+                                }
+                                onChange={recaptchaChange}
+                            />
+                        )}
+
                         <div className="pt-2">
                             <Button
                                 type="submit"
@@ -260,7 +311,7 @@ export default function Login() {
                     {/* Bottom Register Link - Replaced Divider/Grid */}
                     <div className="mt-8 text-center">
                         <p className="text-sm text-gray-600">
-                            Don't have an account?{" "}
+                            Don&apos;t have an account?{" "}
                             <Link
                                 href="/user/auth/register"
                                 className="font-bold text-primary__color hover:underline transition-all"

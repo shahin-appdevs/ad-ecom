@@ -2,7 +2,6 @@
 import WalletSection from "@/components/dashboard/pages/seller/dashboard/wallet";
 import ChatHistorySection from "@/components/dashboard/pages/seller/dashboard/transactionHistory";
 
-
 export default function Dashboard() {
     return (
         <>

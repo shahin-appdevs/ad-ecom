@@ -47,7 +47,16 @@ export default function Footer() {
     const appSettingData = async () => {
         try {
             const result = await appSettingGetAPI();
-            setAppSettings(result?.data?.data);
+            const settings = result?.data?.data;
+            setAppSettings(settings);
+
+            sessionStorage.setItem(
+                "appSettings",
+                JSON.stringify({
+                    ...result?.data?.data?.app_settings?.user?.basic_settings,
+                    logo_image_path: settings?.logo_image_path,
+                }),
+            );
         } catch (error) {
             handleApiError(error);
         }

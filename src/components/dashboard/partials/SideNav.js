@@ -400,7 +400,7 @@ export default function SideNav() {
             )}
 
             <section
-                className={`w-[250px] h-[calc(100vh-32px)] fixed top-4 z-[9998] lg:z-10 lg:left-4 rounded-[12px] px-3 py-6 bg-white transition-all overflow-hidden ${isSidebarOpen ? "left-4" : "-left-full"}`}
+                className={`w-[250px] h-[calc(100vh)] my-4 lg:my-0 rounded-lg lg:rounded-none fixed top-0 z-[9998] lg:z-10 lg:left-0  px-3 py-6 bg-white transition-all overflow-hidden ${isSidebarOpen ? "left-4" : "-left-full"}`}
             >
                 <div className="flex flex-col justify-between h-full">
                     <div className="space-y-5">

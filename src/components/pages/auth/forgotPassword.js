@@ -1,19 +1,21 @@
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Button from "@/components/utility/Button";
-import { forgotPasswordAPI } from '@root/services/apiClient/apiClient';
+import { forgotPasswordAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
 import logo from "@public/images/logo/favicon.jpeg";
+import getImageUrl from "@/components/utility/getImageUrl";
 
 export default function ForgotPassword() {
     const [credentials, setCredentials] = useState("");
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    const [appSettingsData, setAppSettingsData] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,7 +29,9 @@ export default function ForgotPassword() {
 
             if (successMessage) {
                 toast.success(successMessage);
-                router.push(`/user/auth/otp?phone=${encodeURIComponent(credentials)}`);
+                router.push(
+                    `/user/auth/otp?phone=${encodeURIComponent(credentials)}`,
+                );
             } else if (errorMessage) {
                 toast.error(errorMessage);
             } else {
@@ -44,62 +48,106 @@ export default function ForgotPassword() {
             setLoading(false);
         }
     };
+    useEffect(() => {
+        const appSettings = sessionStorage.getItem("appSettings");
+        setAppSettingsData(appSettings ? JSON.parse(appSettings) : null);
+    }, []);
 
     return (
-        <section className="min-h-[calc(100vh-200px)] py-8 xl:py-0 px-4 md:px-0 flex items-center justify-center">
-            <div className="w-full max-w-md border rounded-md bg-white p-6">
-                <h2 className="text-center text-lg font-semibold mb-5 border-b pb-4">Login with Us</h2>
-                <div className="flex items-center space-x-3 mb-7">
-                    <Image
-                        src={logo}
-                        alt="Logo"
-                        width={40}
-                        height={40}
-                        className="rounded-full"
-                    />
-                    <div>
-                        <h6 className="font-semibold">JARA B2B.COM</h6>
-                        <p className="text-sm text-gray-600">এ প্রবেশ করুন ফোন নাম্বার এর মাধ্যমে</p>
+        <section className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
+            <div className="flex w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden">
+                {/* Left Side: Brand/Visual Area (Matching Login) */}
+
+                {/* Right Side: Reset Password Form */}
+                <div className="w-full  p-8  flex flex-col justify-center">
+                    {/* Mobile Logo */}
+                    {/* Header Section */}
+                    <h2 className="text-center text-xl font-bold text-gray-900 mb-6 border-b pb-4">
+                        Reset Password
+                    </h2>
+
+                    {/* Logo Section */}
+                    <div className="flex items-center space-x-4 mb-8">
+                        <div className="bg-gray-100 p-1.5 rounded-full shadow-sm w-[50px] h-[50px] flex items-center justify-center">
+                            <Image
+                                src={getImageUrl(
+                                    appSettingsData?.site_logo,
+                                    appSettingsData?.logo_image_path,
+                                )}
+                                alt="Logo"
+                                width={44}
+                                height={44}
+                                className="rounded-full !bg-white"
+                            />
+                        </div>
+                        <div>
+                            <h6 className="font-bold text-gray-900 tracking-tight">
+                                {appSettingsData?.site_name}
+                            </h6>
+                            <p className="text-sm text-gray-500 leading-tight">
+                                এ প্রবেশ করুন ফোন নাম্বার এর মাধ্যমে
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <form className="space-y-5" onSubmit={handleSubmit}>
-                    <div className="relative">
-                        <label
-                            htmlFor="phone"
-                            className="absolute -top-2.5 left-4 bg-white px-1 text-xs font-medium text-color__heading"
-                        >
-                            Phone
-                        </label>
-                        <input
-                            id="phone"
-                            type="number"
-                            placeholder="Enter Phone"
-                            value={credentials}
-                            onChange={(e) => setCredentials(e.target.value)}
-                            className="w-full px-4 pt-3 pb-3 text-sm rounded-md border border-gray-300 focus:outline-none focus:border-primary__color shadow-sm"
-                            required
-                        />
-                        <ExclamationCircleIcon className="w-5 h-5 text-primary__color absolute right-3 top-3" />
+
+                    <form className="space-y-6" onSubmit={handleSubmit}>
+                        {/* Phone Input Styled like Login */}
+                        <div className="group">
+                            <label
+                                htmlFor="phone"
+                                className="block text-sm font-medium text-gray-700 mb-1"
+                            >
+                                Phone Number
+                            </label>
+                            <div className="relative">
+                                <input
+                                    id="phone"
+                                    type="number"
+                                    placeholder="Enter Phone"
+                                    value={credentials}
+                                    onChange={(e) =>
+                                        setCredentials(e.target.value)
+                                    }
+                                    className="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary__color/50 focus:border-primary__color transition-all duration-200 bg-gray-50 focus:bg-white"
+                                    required
+                                />
+                            </div>
+                        </div>
+
+                        <div className="pt-2">
+                            <Button
+                                type="submit"
+                                title={
+                                    loading ? "Reseting..." : "Reset Password"
+                                }
+                                variant="primary"
+                                size="md"
+                                className="w-full py-3.5 text-base font-bold shadow-lg shadow-primary__color/30 hover:shadow-primary__color/50 transition-all duration-300"
+                                disabled={loading}
+                            />
+                        </div>
+                    </form>
+
+                    {/* Navigation Links - Matching Login Style */}
+                    <div className="mt-10 pt-6 border-t border-gray-100">
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <p className="text-sm text-gray-600">
+                                Remember your password?{" "}
+                                <Link
+                                    href="/user/auth/login"
+                                    className="font-bold text-primary__color hover:underline"
+                                >
+                                    Log In
+                                </Link>
+                            </p>
+                            <Link
+                                href="/user/auth/register"
+                                className="text-sm font-bold text-gray-500 hover:text-primary__color transition-colors"
+                            >
+                                Create Account
+                            </Link>
+                        </div>
                     </div>
-                    <div className="border-t pt-5">
-                        <Button
-                            type="submit"
-                            title={loading ? "Reseting..." : "Reset Password"}
-                            variant="primary"
-                            size="md"
-                            className="w-full"
-                            disabled={loading}
-                        />
-                    </div>
-                </form>
-                <div className="text-center text-color__heading font-semibold mt-4">Or</div>
-                <div className="flex flex-col md:flex-row justify-between gap-2 md:gap-3 mt-4 border-t pt-5">
-                    <Link href="/user/auth/login" className="bg-[#eef2ff] py-2 px-4 w-full text-center font-medium rounded-md text-primary__color hover:underline">
-                        Log In
-                    </Link>
-                    <Link href="/user/auth/register" className="bg-[#eef2ff] py-2 px-4 w-full text-center font-medium rounded-md text-primary__color hover:underline">
-                        Create Account
-                    </Link>
                 </div>
             </div>
         </section>

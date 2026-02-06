@@ -86,7 +86,7 @@ export default function TopBar() {
 
     return (
         <>
-            <div className="bg-white__color rounded-[12px] sm:px-8 px-4 py-4 mb-4">
+            <div className="bg-white__color  sm:px-8 px-4 py-4 mb-4">
                 <div className="flex items-center">
                     <div className="flex  sm:flex-row items-center justify-between w-full gap-4 md:gap-0">
                         {/* Title */}

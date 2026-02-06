@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Listbox } from "@headlessui/react";
@@ -57,6 +57,7 @@ export default function Header() {
     const [referralCode, setReferralCode] = useState("");
     const data = useHomeData() || {};
     const homeData = data.homeData || null;
+    const boxRef = useRef(null);
 
     // useEffect(() => {
     //     const fetchUserProfile = async () => {
@@ -305,6 +306,18 @@ export default function Header() {
         localStorage.setItem("intendedUrl", localUrl);
     };
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (boxRef.current && !boxRef.current.contains(event.target)) {
+                setIsSearchTypeOpen(false); // change state here
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isSearchTypeOpen]);
+
     return (
         <>
             <header className="w-full sticky top-0 left-0 z-50 bg-white border-b lg:border-b-primary__color">
@@ -454,7 +467,10 @@ export default function Header() {
                                     </button>
                                     {isSearchTypeOpen && (
                                         <div className="absolute z-10 mt-1 !w-full min-w-[170px] bg-white rounded-md shadow-md overflow-hidden">
-                                            <ul className="!w-full ">
+                                            <ul
+                                                ref={boxRef}
+                                                className="!w-full "
+                                            >
                                                 <li className="!w-full">
                                                     <button
                                                         onClick={() => {

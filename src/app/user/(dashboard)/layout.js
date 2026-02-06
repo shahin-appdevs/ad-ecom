@@ -96,11 +96,11 @@ export default function DashboardLayout({ children }) {
     return (
         <DashboardProvider value={{ dashboardData }}>
             <WalletProvider>
-                <div className="bg-[#F5F7FF] min-h-screen py-4 px-4">
+                <div className="bg-[#F5F7FF] min-h-screen">
                     <SideNav />
-                    <div className="lg:ps-4 lg:ms-[250px]">
+                    <div className=" lg:ms-[250px]">
                         <TopBar />
-                        {children}
+                        <div className="px-4">{children}</div>
                     </div>
                 </div>
                 <DynamicTitle />

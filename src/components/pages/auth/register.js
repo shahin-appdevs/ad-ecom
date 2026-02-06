@@ -112,7 +112,7 @@ function RegisterComp() {
     };
 
     return (
-        <section className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+        <section className="flex items-center justify-center  py-12 px-4 sm:px-6 lg:px-8">
             <div className="flex w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden">
                 {/* Left Side: Brand/Visual Area (Hidden on mobile) */}
                 <div className="hidden md:flex md:w-1/2 bg-gradient-to-br from-slate-900 to-slate-800 p-12 flex-col justify-between relative overflow-hidden">
@@ -234,7 +234,7 @@ function RegisterComp() {
                         <div className="group">
                             <label
                                 htmlFor="password"
-                                class="block text-sm font-medium text-gray-700 mb-1"
+                                className="block text-sm font-medium text-gray-700 mb-1"
                             >
                                 Password
                             </label>
