@@ -94,7 +94,7 @@ export default function ProductSidebar() {
                     <ChevronDownIcon size={18} />
                 </div>
                 <div className="relative">
-                    <ul>
+                    <ul className="max-h-[65vh] overflow-y-auto">
                         {categories.map((category, index) => (
                             <li
                                 key={index}

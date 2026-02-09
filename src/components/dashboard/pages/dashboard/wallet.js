@@ -101,24 +101,24 @@ export default function WalletSection() {
 
     return (
         <div className="bg-white rounded-[12px] p-4 sm:p-7">
-            <div>
-                <div className="flex flex-wrap gap-3 sm:gap-4 mb-6">
+            <div className="">
+                <div className="flex  border-b-[1px] border-gray-200 mb-6 overflow-x-auto">
                     <button
                         onClick={() => setActiveTab("user")}
-                        className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium ${
+                        className={`px-3 relative text-nowrap sm:px-4  pb-3 text-sm font-medium ${
                             activeTab === "user"
-                                ? "bg-primary__color text-white"
-                                : "bg-gray-100 text-gray-600"
+                                ? " after:absolute after:bottom-[0px] after:left-0  after:h-[2px] after:rounded-lg after:w-full after:z-10 bg-white text-primary__color !border-primary__color  after:!bg-primary__color "
+                                : " text-gray-600"
                         }`}
                     >
                         My Balance
                     </button>
                     <button
                         onClick={() => setActiveTab("shopping")}
-                        className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium ${
+                        className={`px-3 relative  text-nowrap sm:px-4  pb-3 text-sm font-medium ${
                             activeTab === "shopping"
-                                ? "bg-primary__color text-white"
-                                : "bg-gray-100 text-gray-600"
+                                ? "after:absolute after:bottom-[0px] after:left-0  after:h-[2px] after:rounded-lg after:w-full after:z-10 bg-white text-primary__color !border-primary__color  after:!bg-primary__color "
+                                : " text-gray-600"
                         }`}
                     >
                         Shopping Balance
@@ -126,10 +126,10 @@ export default function WalletSection() {
                     {canEarnWallet && (
                         <button
                             onClick={() => setActiveTab("earning")}
-                            className={`px-3 sm:px-4 py-2 rounded-md text-sm font-medium ${
+                            className={`px-3 relative  text-nowrap sm:px-4  pb-3 text-sm font-medium ${
                                 activeTab === "earning"
-                                    ? "bg-primary__color text-white"
-                                    : "bg-gray-100 text-gray-600"
+                                    ? "after:absolute after:bottom-[0px] after:left-0  after:h-[2px] after:rounded-lg after:w-full after:z-10 bg-white text-primary__color !border-primary__color  after:!bg-primary__color "
+                                    : " text-gray-600"
                             }`}
                         >
                             Reward Points

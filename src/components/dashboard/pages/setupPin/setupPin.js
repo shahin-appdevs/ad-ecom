@@ -1,14 +1,18 @@
-'use client';
-import { useState, useEffect } from 'react';
-import { profiledGetAPI, SetupPinAPI, UpdatePinAPI } from "@root/services/apiClient/apiClient";
+"use client";
+import { useState, useEffect } from "react";
+import {
+    profiledGetAPI,
+    SetupPinAPI,
+    UpdatePinAPI,
+} from "@root/services/apiClient/apiClient";
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
-  
+
 export default function SetupPinSection() {
     const [pinCode, setPinCode] = useState("");
     const [oldPin, setOldPin] = useState("");
     const [newPin, setNewPin] = useState("");
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState("");
     const [apiLoading, setApiLoading] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -53,7 +57,9 @@ export default function SetupPinSection() {
             setOldPin("");
             setNewPin("");
         } catch (error) {
-            const errorMessage = error?.response?.data?.message?.error?.[0] || "Something went wrong.";
+            const errorMessage =
+                error?.response?.data?.message?.error?.[0] ||
+                "Something went wrong.";
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -77,63 +83,85 @@ export default function SetupPinSection() {
             {apiLoading ? (
                 <SkeletonLoader />
             ) : !status ? (
-                <form className="space-y-5" onSubmit={handleSetupSubmit}>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="col-span-2">
-                            <label className="block text-sm font-medium mb-2">Setup PIN(Max:4)</label>
-                            <input
-                                type="text"
-                                value={pinCode}
-                                onChange={(e) => setPinCode(e.target.value.slice(0, 4))}
-                                className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                placeholder="Enter PIN..."
-                            />
-                        </div>
+                <div>
+                    <div className="flex items-center justify-between mb-4">
+                        <h5>Setup PIN</h5>
                     </div>
-                    <Button
-                        type="submit"
-                        title={loading ? "Saving..." : "Save & Change"}
-                        variant="primary"
-                        size="md"
-                        className="w-full"
-                        disabled={loading}
-                    />
-                </form>
+                    <form className="space-y-5" onSubmit={handleSetupSubmit}>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="col-span-2">
+                                <label className="block text-sm font-medium mb-2">
+                                    Setup PIN(Max:4)
+                                </label>
+                                <input
+                                    type="text"
+                                    value={pinCode}
+                                    onChange={(e) =>
+                                        setPinCode(e.target.value.slice(0, 4))
+                                    }
+                                    className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                    placeholder="Enter PIN..."
+                                />
+                            </div>
+                        </div>
+                        <Button
+                            type="submit"
+                            title={loading ? "Saving..." : "Save & Change"}
+                            variant="primary"
+                            size="md"
+                            className="w-full"
+                            disabled={loading}
+                        />
+                    </form>
+                </div>
             ) : (
-                <form className="space-y-5" onSubmit={handleUpdateSubmit}>
-                    <div className="grid grid-cols-2 gap-4">
-                        <div className="col-span-2">
-                            <label className="block text-sm font-medium mb-2">Old PIN</label>
-                            <input
-                                type="text"
-                                value={oldPin}
-                                onChange={(e) => setOldPin(e.target.value.slice(0, 4))}
-                                className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                placeholder="Enter old PIN..."
-                                maxLength={4}
-                            />
-                        </div>
-                        <div className="col-span-2">
-                            <label className="block text-sm font-medium mb-2">New PIN</label>
-                            <input
-                                type="text"
-                                value={newPin}
-                                onChange={(e) => setNewPin(e.target.value.slice(0, 4))}
-                                className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                placeholder="Enter new PIN..."
-                                maxLength={4}
-                            />
-                        </div>
+                <div>
+                    <div className="flex items-center justify-between mb-4">
+                        <h5>Update PIN</h5>
                     </div>
-                    <Button
-                        type="submit"
-                        title={loading ? "Updating..." : "Update PIN"}
-                        variant="primary"
-                        size="md"
-                        className="w-full"
-                        disabled={loading}
-                    />
-                </form>
+                    <form className="space-y-5" onSubmit={handleUpdateSubmit}>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div className="col-span-2">
+                                <label className="block text-sm font-medium mb-2">
+                                    Old PIN
+                                </label>
+                                <input
+                                    type="text"
+                                    value={oldPin}
+                                    onChange={(e) =>
+                                        setOldPin(e.target.value.slice(0, 4))
+                                    }
+                                    className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                    placeholder="Enter old PIN..."
+                                    maxLength={4}
+                                />
+                            </div>
+                            <div className="col-span-2">
+                                <label className="block text-sm font-medium mb-2">
+                                    New PIN
+                                </label>
+                                <input
+                                    type="text"
+                                    value={newPin}
+                                    onChange={(e) =>
+                                        setNewPin(e.target.value.slice(0, 4))
+                                    }
+                                    className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                    placeholder="Enter new PIN..."
+                                    maxLength={4}
+                                />
+                            </div>
+                        </div>
+                        <Button
+                            type="submit"
+                            title={loading ? "Updating..." : "Update PIN"}
+                            variant="primary"
+                            size="md"
+                            className="w-full"
+                            disabled={loading}
+                        />
+                    </form>
+                </div>
             )}
         </div>
     );

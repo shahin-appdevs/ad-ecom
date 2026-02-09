@@ -418,7 +418,7 @@ export default function FlashSale() {
                                             </span>
                                         </div>
                                         <div className="p-[10px]">
-                                            <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                            <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 truncate whitespace-nowrap overflow-hidden text-ellipsis">
                                                 {product.title}
                                             </h5>
                                             <div className="flex items-center gap-1 mb-1">

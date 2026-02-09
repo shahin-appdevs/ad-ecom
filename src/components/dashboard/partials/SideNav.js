@@ -657,7 +657,7 @@ export default function SideNav() {
 
 const SidebarSkeleton = () => {
     return (
-        <div className="w-[250px] h-[calc(100vh-32px)] fixed top-4 z-[9998] lg:z-10 lg:left-4 rounded-[12px] px-3 py-6  transition-all overflow-hidden bg-white border-r border-gray-100 flex flex-col p-6 animate-pulse">
+        <div className="w-[250px] h-[calc(100vh-32px)] fixed z-[9998] lg:z-10  rounded-[12px] px-3 py-6  transition-all overflow-hidden bg-white border-r border-gray-100 flex flex-col p-6 animate-pulse">
             {/* Logo Area */}
             <div className="mb-10 flex items-center gap-2">
                 <div className="h-8 w-8 bg-gray-200 rounded-md"></div>

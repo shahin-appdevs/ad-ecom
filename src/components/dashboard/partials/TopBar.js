@@ -19,6 +19,7 @@ export default function TopBar() {
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [logoutLoading, setLogoutLoading] = useState(false);
     const router = useRouter();
+    const [showDropdown, setShowDropdown] = useState(false);
 
     const pathSegments = pathname.split("/").filter(Boolean);
     const lastSegment = pathSegments[pathSegments.length - 1] || "Dashboard";
@@ -86,7 +87,7 @@ export default function TopBar() {
 
     return (
         <>
-            <div className="bg-white__color  sm:px-8 px-4 py-4 mb-4">
+            <div className="bg-white__color  sm:px-8 px-4 py-2 border-l mb-4">
                 <div className="flex items-center">
                     <div className="flex  sm:flex-row items-center justify-between w-full gap-4 md:gap-0">
                         {/* Title */}
@@ -102,11 +103,17 @@ export default function TopBar() {
                         <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4">
                             <div className="flex items-center gap-3">
                                 {/* Avatar + Dropdown */}
-                                <div className="relative group focus-within:group">
+                                <div
+                                    onMouseLeave={() => setShowDropdown(false)}
+                                    className="relative  group focus-within:group"
+                                >
                                     {loading ? (
                                         <div className="h-[42px] w-[42px] rounded-full bg-gray-200 animate-pulse" />
                                     ) : (
                                         <button
+                                            onClick={() =>
+                                                setShowDropdown(!showDropdown)
+                                            }
                                             type="button"
                                             className="outline-none"
                                         >
@@ -131,7 +138,9 @@ export default function TopBar() {
 
                                     {/* Dropdown Menu */}
                                     {!loading && (
-                                        <div className="absolute right-0 mt-2 w-52 rounded-md bg-white shadow-lg ring-1 ring-black/5 opacity-0 invisible group-focus-within:opacity-100 group-focus-within:visible transition-all duration-150 z-20">
+                                        <div
+                                            className={`absolute right-0 mt-0 w-52 rounded-md bg-white shadow-lg ring-1 ring-black/5 ${showDropdown ? "opacity-100 visible" : "opacity-0 invisible"} transition-all duration-150 z-20`}
+                                        >
                                             <div className="px-4 py-3 border-b border-gray-100">
                                                 {/* User Info (moved here, unchanged) */}
                                                 <div className="relative top-1">
@@ -141,32 +150,36 @@ export default function TopBar() {
                                                             <div className="h-3 w-24 bg-gray-200 rounded animate-pulse" />
                                                         </div>
                                                     ) : (
-                                                        <>
-                                                            <h5 className="text-[14px] md:text-[16px] font-semibold flex gap-2 items-start leading-[15px]">
+                                                        <div className="flex flex-col items-center justify-center gap-1">
+                                                            <h5 className="text-[14px] md:text-[16px] lg:text-[18px]  font-semibold flex gap-2 items-start leading-[15px]">
                                                                 {
                                                                     userData.username
                                                                 }
-                                                                <span className="relative top-[-2px] text-[10px] rounded-[4px] text-[#008B3E] bg-[#008b3e1c] py-[2px] px-2">
-                                                                    {
-                                                                        userData
-                                                                            ?.kycStringStatus
-                                                                            ?.value
-                                                                    }
-                                                                </span>
                                                             </h5>
                                                             <span className="text-sm text-color__heading">
                                                                 {
                                                                     userData.mobile
                                                                 }
                                                             </span>
-                                                        </>
+                                                            <span className="relative top-[-2px] text-[10px] rounded-[4px] text-[#008B3E] bg-[#008b3e1c] py-[2px] px-2">
+                                                                {
+                                                                    userData
+                                                                        ?.kycStringStatus
+                                                                        ?.value
+                                                                }
+                                                            </span>
+                                                        </div>
                                                     )}
                                                 </div>
                                             </div>
 
                                             {/* Menu Items  */}
                                             <ul className="py-1 text-sm text-gray-700">
-                                                <li>
+                                                <li
+                                                    onClick={() =>
+                                                        setShowDropdown(false)
+                                                    }
+                                                >
                                                     <Link
                                                         href="/user/user/profile"
                                                         className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
@@ -176,7 +189,11 @@ export default function TopBar() {
                                                     </Link>
                                                 </li>
 
-                                                <li>
+                                                <li
+                                                    onClick={() =>
+                                                        setShowDropdown(false)
+                                                    }
+                                                >
                                                     <Link
                                                         href="/user/setup/pin"
                                                         className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
@@ -186,7 +203,11 @@ export default function TopBar() {
                                                     </Link>
                                                 </li>
 
-                                                <li>
+                                                <li
+                                                    onClick={() =>
+                                                        setShowDropdown(false)
+                                                    }
+                                                >
                                                     <Link
                                                         href="/user/security/google/2fa"
                                                         className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"

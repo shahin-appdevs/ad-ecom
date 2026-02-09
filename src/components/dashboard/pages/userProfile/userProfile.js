@@ -20,6 +20,7 @@ import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
 
 // Images
 import user from "@public/images/user/userProfile.png";
+import { Trash2 } from "lucide-react";
 
 export default function UserProfileSection() {
     const [currentPassword, setCurrentPassword] = useState("");
@@ -666,32 +667,8 @@ export default function UserProfileSection() {
                 <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-7">
                     <div className="flex flex-col md:flex-row lg:flex-col xl:flex-row gap-3 md:gap-0 items-center justify-between lg:items-start xl:items-center mb-5 md:mb-4">
                         <h5 className="flex-grow mb-2">Profile Settings</h5>
-                        <div className="flex items-center flex-wrap  gap-2 flex-grow ">
-                            <Button
-                                title="Delete Account"
-                                variant="primary"
-                                size="s"
-                                className="!bg-red-600 text-xs 2xl:text-sm flex-grow"
-                                onClick={() => setIsLogoutModalOpen(true)}
-                            />
-                            <Button
-                                href="/user/setup/pin"
-                                title="Setup PIN"
-                                variant="primary"
-                                size="s"
-                                className={"text-xs 2xl:text-sm flex-grow"}
-                            />
-                            {canReselling && (
-                                <Button
-                                    href="/user/apply-for-reseller"
-                                    title="Apply for Reseller"
-                                    variant="primary"
-                                    size="s"
-                                    className={"text-xs  2xl:text-sm flex-grow"}
-                                />
-                            )}
-                        </div>
                     </div>
+
                     <form className="space-y-5" onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="flex items-center col-span-1 md:col-span-2 gap-4">
@@ -979,60 +956,111 @@ export default function UserProfileSection() {
                         />
                     </form>
                 </div>
-                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
-                    <div className="flex items-center justify-between mb-4">
-                        <h5>Change Password</h5>
+                <div className=" flex flex-col gap-4 col-span-12 lg:col-span-5">
+                    <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 ">
+                        <div className="flex items-center justify-between mb-4">
+                            <h5>Change Password</h5>
+                        </div>
+                        <form
+                            className="space-y-5"
+                            onSubmit={handlePasswordUpdate}
+                        >
+                            <div>
+                                <label className="block text-sm font-medium mb-2">
+                                    Current Password
+                                </label>
+                                <input
+                                    type="password"
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                    placeholder="Enter Password..."
+                                    value={currentPassword}
+                                    onChange={(e) =>
+                                        setCurrentPassword(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-2">
+                                    New Password
+                                </label>
+                                <input
+                                    type="password"
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                    placeholder="Enter Password..."
+                                    value={newPassword}
+                                    onChange={(e) =>
+                                        setNewPassword(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-2">
+                                    Confirm Password
+                                </label>
+                                <input
+                                    type="password"
+                                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                    placeholder="Enter Password..."
+                                    value={passwordConfirmation}
+                                    onChange={(e) =>
+                                        setPasswordConfirmation(e.target.value)
+                                    }
+                                />
+                            </div>
+                            <Button
+                                type="submit"
+                                title={isChanging ? "Changing..." : "Change"}
+                                variant="primary"
+                                size="md"
+                                className="w-full"
+                                disabled={isChanging}
+                            />
+                        </form>
                     </div>
-                    <form className="space-y-5" onSubmit={handlePasswordUpdate}>
-                        <div>
-                            <label className="block text-sm font-medium mb-2">
-                                Current Password
-                            </label>
-                            <input
-                                type="password"
-                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                placeholder="Enter Password..."
-                                value={currentPassword}
-                                onChange={(e) =>
-                                    setCurrentPassword(e.target.value)
-                                }
-                            />
+
+                    <div className="bg-white h-full  rounded-[12px] p-5 sm:p-6 md:p-7 ">
+                        <div className="flex items-center justify-between mb-4">
+                            <h5>My Profile Manage</h5>
                         </div>
-                        <div>
-                            <label className="block text-sm font-medium mb-2">
-                                New Password
-                            </label>
-                            <input
-                                type="password"
-                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                placeholder="Enter Password..."
-                                value={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
+
+                        <div className="flex  items-center flex-wrap gap-2 flex-grow ">
+                            <div className="group relative flex-grow">
+                                <Button
+                                    // title={
+                                    //     <Trash2
+                                    //         className="text-red-600"
+                                    //         size={18}
+                                    //     />
+                                    // }
+                                    title={"Delete Account"}
+                                    variant="primary"
+                                    size="s"
+                                    className=" text-white bg-red-500 hover:!bg-red-600 text-xs px-2 w-full"
+                                    onClick={() => setIsLogoutModalOpen(true)}
+                                />
+                                {/* <div className="absolute !inline z-10 px-4 py-2  -top-full text-nowrap right-0  h-full bg-red-50 border-red-500 border text-red-500 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity">
+                                    Delete Account
+                                </div> */}
+                            </div>
+
+                            <Button
+                                href="/user/setup/pin"
+                                title="Setup PIN"
+                                variant="primary"
+                                size="s"
+                                className={"text-xs 2xl:text-sm flex-grow"}
                             />
+                            {canReselling && (
+                                <Button
+                                    href="/user/apply-for-reseller"
+                                    title="Apply for Reseller"
+                                    variant="primary"
+                                    size="s"
+                                    className={"text-xs  2xl:text-sm flex-grow"}
+                                />
+                            )}
                         </div>
-                        <div>
-                            <label className="block text-sm font-medium mb-2">
-                                Confirm Password
-                            </label>
-                            <input
-                                type="password"
-                                className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                placeholder="Enter Password..."
-                                value={passwordConfirmation}
-                                onChange={(e) =>
-                                    setPasswordConfirmation(e.target.value)
-                                }
-                            />
-                        </div>
-                        <Button
-                            type="submit"
-                            title={isChanging ? "Changing..." : "Change"}
-                            variant="primary"
-                            size="md"
-                            className="w-full"
-                            disabled={isChanging}
-                        />
-                    </form>
+                    </div>
                 </div>
                 <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12">
                     <div className="flex flex-col md:flex-row gap-2 md:gap-0 items-center justify-between mb-4">

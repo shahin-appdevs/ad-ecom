@@ -103,6 +103,12 @@ export default function TwoFactorSection() {
                         </div>
                     )}
 
+                    {!loading && (
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-lg font-semibold">Setup 2FA</h2>
+                        </div>
+                    )}
+
                     <form
                         className={
                             loading ? "opacity-0 pointer-events-none" : ""
@@ -138,7 +144,7 @@ export default function TwoFactorSection() {
                         </div>
 
                         <div className="flex justify-center bg-white p-4 shadow-primary__shadow my-6">
-                            {/* ✅ Full otpauth URL is used here */}
+                            {/*  Full otpauth URL is used here */}
                             <QRCode value={qrCode} size={140} />
                         </div>
 

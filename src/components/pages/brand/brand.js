@@ -10,7 +10,7 @@ const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 const BrandSkeleton = () => {
     return (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
             {Array.from({ length: 12 }).map((_, index) => (
                 <div
                     key={index}
@@ -71,7 +71,7 @@ export default function Brand() {
                             {loading ? (
                                 <BrandSkeleton />
                             ) : (
-                                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
                                     {brandData?.brands?.data?.map(
                                         (brand, index) => (
                                             <Link

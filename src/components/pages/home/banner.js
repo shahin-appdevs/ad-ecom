@@ -15,13 +15,20 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { ArrowDownIcon, ChevronDownIcon, List } from "lucide-react";
+import { ChevronDownIcon, List } from "lucide-react";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 const SkeletonCategoryMenu = () => (
-    <div className="w-full md:w-[240px] h-full md:min-h-[380px] bg-white border relative rounded-md p-2.5">
-        <ul className="md:max-h-[360px] md:overflow-y-auto">
+    <div className="w-full md:w-[240px] h-full md:min-h-[380px] bg-white border relative rounded-md ">
+        <div className=" gap-2 bg-primary__color rounded-t-md py-2 text-white px-2 justify-between font-semibold flex items-center">
+            <span className="flex items-center gap-2 ">
+                <List size={18} />
+                <span>Browse Category</span>
+            </span>
+            <ChevronDownIcon size={18} />
+        </div>
+        <ul className="md:max-h-[360px] md:overflow-y-auto p-2.5">
             {[...Array(10)].map((_, i) => (
                 <li
                     key={i}

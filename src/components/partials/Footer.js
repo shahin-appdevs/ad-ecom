@@ -105,34 +105,34 @@ export default function Footer() {
                         <ul className="space-y-2">
                             <li>
                                 <Link
-                                    href="/categories"
+                                    href="/product/flash"
                                     className="font-medium hover:text-primary__color"
                                 >
-                                    Smart Gadget
+                                    Flash Sale
                                 </Link>
                             </li>
                             <li>
                                 <Link
-                                    href="/categories"
+                                    href="/brands"
                                     className="font-medium hover:text-primary__color"
                                 >
-                                    Electronics Device
+                                    Brands
                                 </Link>
                             </li>
                             <li>
                                 <Link
-                                    href="/categories"
+                                    href="/campaigns"
                                     className="font-medium hover:text-primary__color"
                                 >
-                                    Home & Kitchen
+                                    Campaigns
                                 </Link>
                             </li>
                             <li>
                                 <Link
-                                    href="/categories"
+                                    href="/collections"
                                     className="font-medium hover:text-primary__color"
                                 >
-                                    Wholesale
+                                    Collections
                                 </Link>
                             </li>
                         </ul>

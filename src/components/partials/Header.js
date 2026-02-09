@@ -808,7 +808,7 @@ export default function Header() {
                                     <li key={href} className="relative">
                                         <Link
                                             href={href}
-                                            className={`${label === "Categories" ? "md:hidden" : ""} flex items-center gap-1 py-3.5 px-4  after:absolute after:bottom-[-1px] after:left-0  after:h-[1px] after:w-full after:z-10 border border-white rounded-t-md  ${isActive ? "bg-white text-primary__color !border-primary__color !border-b-white after:!bg-white  px-3 " : ""}`}
+                                            className={`${label === "Categories" ? "md:hidden" : ""} flex items-center gap-1 py-2 2xl:py-3.5 px-4  after:absolute after:bottom-[-1px] after:left-0  after:h-[1px] after:w-full after:z-10 border border-white rounded-t-md  ${isActive ? "bg-white text-primary__color !border-primary__color !border-b-white after:!bg-white  px-3 " : ""}`}
                                         >
                                             {icon}
                                             {label}
