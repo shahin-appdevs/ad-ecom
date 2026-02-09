@@ -20,7 +20,7 @@ import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
 
 // Images
 import user from "@public/images/user/userProfile.png";
-import { Trash2 } from "lucide-react";
+import { Eye, EyeOff, Trash2 } from "lucide-react";
 
 export default function UserProfileSection() {
     const [currentPassword, setCurrentPassword] = useState("");
@@ -44,6 +44,11 @@ export default function UserProfileSection() {
     const [divisions, setDivisions] = useState([]);
     const [districts, setDistricts] = useState([]);
     const [upazillas, setUpazillas] = useState([]);
+    const [showPassword, setShowPassword] = useState({
+        currentPassword: false,
+        newPassword: false,
+        passwordConfirmation: false,
+    });
     const [userData, setUserData] = useState({
         firstname: "",
         lastname: "",
@@ -959,67 +964,6 @@ export default function UserProfileSection() {
                 <div className=" flex flex-col gap-4 col-span-12 lg:col-span-5">
                     <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 ">
                         <div className="flex items-center justify-between mb-4">
-                            <h5>Change Password</h5>
-                        </div>
-                        <form
-                            className="space-y-5"
-                            onSubmit={handlePasswordUpdate}
-                        >
-                            <div>
-                                <label className="block text-sm font-medium mb-2">
-                                    Current Password
-                                </label>
-                                <input
-                                    type="password"
-                                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                    placeholder="Enter Password..."
-                                    value={currentPassword}
-                                    onChange={(e) =>
-                                        setCurrentPassword(e.target.value)
-                                    }
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">
-                                    New Password
-                                </label>
-                                <input
-                                    type="password"
-                                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                    placeholder="Enter Password..."
-                                    value={newPassword}
-                                    onChange={(e) =>
-                                        setNewPassword(e.target.value)
-                                    }
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-medium mb-2">
-                                    Confirm Password
-                                </label>
-                                <input
-                                    type="password"
-                                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                    placeholder="Enter Password..."
-                                    value={passwordConfirmation}
-                                    onChange={(e) =>
-                                        setPasswordConfirmation(e.target.value)
-                                    }
-                                />
-                            </div>
-                            <Button
-                                type="submit"
-                                title={isChanging ? "Changing..." : "Change"}
-                                variant="primary"
-                                size="md"
-                                className="w-full"
-                                disabled={isChanging}
-                            />
-                        </form>
-                    </div>
-
-                    <div className="bg-white h-full  rounded-[12px] p-5 sm:p-6 md:p-7 ">
-                        <div className="flex items-center justify-between mb-4">
                             <h5>My Profile Manage</h5>
                         </div>
 
@@ -1060,6 +1004,138 @@ export default function UserProfileSection() {
                                 />
                             )}
                         </div>
+                    </div>
+                    <div className="bg-white h-full rounded-[12px] p-5 sm:p-6 md:p-7 ">
+                        <div className="flex items-center justify-between mb-4">
+                            <h5>Change Password</h5>
+                        </div>
+                        <form
+                            className="space-y-5"
+                            onSubmit={handlePasswordUpdate}
+                        >
+                            <div>
+                                <label className="block text-sm font-medium mb-2">
+                                    Current Password
+                                </label>
+
+                                <div className="relative">
+                                    <input
+                                        type={
+                                            showPassword.currentPassword
+                                                ? "text"
+                                                : "password"
+                                        }
+                                        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                        placeholder="Enter Password..."
+                                        value={currentPassword}
+                                        onChange={(e) =>
+                                            setCurrentPassword(e.target.value)
+                                        }
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setShowPassword({
+                                                ...showPassword,
+                                                currentPassword:
+                                                    !showPassword.currentPassword,
+                                            })
+                                        }
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
+                                    >
+                                        {showPassword?.currentPassword ? (
+                                            <EyeOff />
+                                        ) : (
+                                            <Eye />
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-2">
+                                    New Password
+                                </label>
+                                <div className="relative">
+                                    <input
+                                        type={
+                                            showPassword.newPassword
+                                                ? "text"
+                                                : "password"
+                                        }
+                                        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                        placeholder="Enter Password..."
+                                        value={newPassword}
+                                        onChange={(e) =>
+                                            setNewPassword(e.target.value)
+                                        }
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setShowPassword({
+                                                ...showPassword,
+                                                newPassword:
+                                                    !showPassword.newPassword,
+                                            })
+                                        }
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
+                                    >
+                                        {showPassword?.newPassword ? (
+                                            <EyeOff />
+                                        ) : (
+                                            <Eye />
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-sm font-medium mb-2">
+                                    Confirm Password
+                                </label>
+                                <div className="relative">
+                                    <input
+                                        type={
+                                            showPassword.passwordConfirmation
+                                                ? "text"
+                                                : "password"
+                                        }
+                                        className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                        placeholder="Enter Password..."
+                                        value={passwordConfirmation}
+                                        onChange={(e) =>
+                                            setPasswordConfirmation(
+                                                e.target.value,
+                                            )
+                                        }
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setShowPassword({
+                                                ...showPassword,
+                                                passwordConfirmation:
+                                                    !showPassword.passwordConfirmation,
+                                            })
+                                        }
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
+                                    >
+                                        {showPassword?.passwordConfirmation ? (
+                                            <EyeOff />
+                                        ) : (
+                                            <Eye />
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
+                            <Button
+                                type="submit"
+                                title={isChanging ? "Changing..." : "Change"}
+                                variant="primary"
+                                size="md"
+                                className="w-full"
+                                disabled={isChanging}
+                            />
+                        </form>
                     </div>
                 </div>
                 <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12">

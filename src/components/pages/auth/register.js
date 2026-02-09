@@ -11,6 +11,8 @@ import { toast } from "react-hot-toast";
 
 import logo from "@public/images/logo/favicon.jpeg";
 import { LoaderCircle } from "lucide-react";
+import ReCAPTCHA from "react-google-recaptcha";
+import useGoogleRecaptcha from "@/hooks/useGoogleRecaptcha";
 
 function RegisterComp() {
     useAuthRedirect();
@@ -25,6 +27,8 @@ function RegisterComp() {
     const [showReferralInput, setShowReferralInput] = useState(false);
     const [agree, setAgree] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const { recaptcha, recaptchaRef, recaptchaChange, loginBasicData } =
+        useGoogleRecaptcha();
 
     const searchParam = useSearchParams();
 
@@ -40,6 +44,11 @@ function RegisterComp() {
     const submitRegister = async (e) => {
         e.preventDefault();
 
+        if (loginBasicData?.google_recaptcha && !recaptcha) {
+            toast.error("Please verify reCAPTCHA");
+            return;
+        }
+
         if (!agree) {
             toast.error("You must agree to the terms and conditions");
             return;
@@ -54,6 +63,7 @@ function RegisterComp() {
             formData.append("email", email);
             formData.append("password", password);
             formData.append("agree", agree.toString());
+            formData.append("g-recaptcha-response", recaptcha);
 
             if (showReferralInput && referralCode) {
                 formData.append("referral_code", referralCode.trim());
@@ -351,6 +361,16 @@ function RegisterComp() {
                                 </a>
                             </label>
                         </div>
+
+                        {loginBasicData?.google_recaptcha && (
+                            <ReCAPTCHA
+                                ref={recaptchaRef}
+                                sitekey={
+                                    loginBasicData?.google_recaptcha_site_key
+                                }
+                                onChange={recaptchaChange}
+                            />
+                        )}
 
                         <Button
                             type="submit"

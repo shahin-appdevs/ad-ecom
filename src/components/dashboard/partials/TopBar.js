@@ -150,7 +150,26 @@ export default function TopBar() {
                                                             <div className="h-3 w-24 bg-gray-200 rounded animate-pulse" />
                                                         </div>
                                                     ) : (
-                                                        <div className="flex flex-col items-center justify-center gap-1">
+                                                        <div className="flex flex-col items-center justify-center gap-2">
+                                                            <Image
+                                                                src={
+                                                                    userData.userImage ||
+                                                                    userProfile
+                                                                }
+                                                                width={42}
+                                                                height={42}
+                                                                priority
+                                                                quality={50}
+                                                                className="h-[42px] w-[42px] bg-[#F5F7FF] rounded-full object-cover cursor-pointer"
+                                                                alt="User"
+                                                                onError={(
+                                                                    e,
+                                                                ) => {
+                                                                    e.target.src =
+                                                                        userProfile.src;
+                                                                }}
+                                                            />
+
                                                             <h5 className="text-[14px] md:text-[16px] lg:text-[18px]  font-semibold flex gap-2 items-start leading-[15px]">
                                                                 {
                                                                     userData.username
