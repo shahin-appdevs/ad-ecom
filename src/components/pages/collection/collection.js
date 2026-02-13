@@ -138,14 +138,14 @@ export default function Collection() {
                                                 </h3>
 
                                                 {/* Description: Visible on sm/md, Hover on lg+ */}
-                                                <div className="max-w-[90%] overflow-hidden">
+                                                {/* <div className="max-w-[90%] overflow-hidden">
                                                     <div
                                                         className="text-white/90 text-xs md:text-sm line-clamp-2 font-medium leading-relaxed transition-all duration-700 delay-100 opacity-100 lg:opacity-0 lg:group-hover:opacity-100"
                                                         dangerouslySetInnerHTML={{
                                                             __html: collection.description,
                                                         }}
                                                     />
-                                                </div>
+                                                </div> */}
                                             </div>
                                         </div>
 

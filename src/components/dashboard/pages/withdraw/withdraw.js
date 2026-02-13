@@ -104,7 +104,7 @@ export default function WithdrawSection() {
                 const attribute = getRemainingFields?.attribute;
                 const senderAmount = amount || "0";
                 const currencyCode = selectedCurrency?.currency_code;
-                const chargeId = selectedCurrency?.id;
+                const chargeId = wallet?.selectedCurrency?.code;
                 const result = await walletCardRemainingLimitsGetAPI(
                     transactionType,
                     attribute,
@@ -123,7 +123,7 @@ export default function WithdrawSection() {
                 setRemainingLoading(false);
             }
         })();
-    }, [amount, apiData, selectedCurrency]);
+    }, [amount, apiData, selectedCurrency, wallet?.selectedCurrency]);
 
     const formattedCharges = useMemo(() => {
         if (!selectedCurrency) {

@@ -121,14 +121,18 @@ export default function Campaign() {
                                                     {campaign.title}
                                                 </h3>
 
-                                                <div className="max-w-[90%] overflow-hidden">
-                                                    <div
-                                                        className="text-white/90 text-xs md:text-sm line-clamp-2 font-medium leading-relaxed transition-all duration-700 delay-100 opacity-100 lg:opacity-0 lg:group-hover:opacity-100"
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: campaign.description,
-                                                        }}
-                                                    />
-                                                </div>
+                                                {/* <div className="max-w-[90%] overflow-hidden">
+                                                    <div className="text-white/90 text-xs flex items-center md:text-sm line-clamp-2 font-medium leading-relaxed transition-all duration-700 delay-100 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
+                                                        <div
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: campaign.description.slice(
+                                                                    0,
+                                                                    15,
+                                                                ),
+                                                            }}
+                                                        ></div>
+                                                    </div>
+                                                </div> */}
                                             </div>
                                         </div>
 

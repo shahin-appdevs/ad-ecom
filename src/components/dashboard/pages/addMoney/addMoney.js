@@ -101,7 +101,7 @@ export default function AddMoneySection() {
                 const transactionType = getRemainingFields?.transaction_type;
                 const attribute = getRemainingFields?.attribute;
                 const senderAmount = amount || "0";
-                const currencyCode = selectedCurrency?.currency_code;
+                const currencyCode = wallet?.selectedCurrency?.code;
                 const chargeId = selectedCurrency?.id;
                 const result = await walletCardRemainingLimitsGetAPI(
                     transactionType,

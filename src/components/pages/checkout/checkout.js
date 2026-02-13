@@ -71,6 +71,7 @@ function Checkout() {
     const [deliveryOptions, setDeliveryOptions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [allDistricts, setAllDistricts] = useState([]);
     const [deliveryCharge, setDeliveryCharge] = useState(0);
     const [baseCurrency, setBaseCurrency] = useState({
         symbol: "৳",
@@ -311,6 +312,7 @@ function Checkout() {
                 const response = await divisionDataGetAPI();
                 if (response.data.message.success) {
                     setDivisions(response.data.data.divisions);
+                    setAllDistricts(response.data.data.districts);
                 }
             } catch (error) {
                 console.error("Error fetching divisions:", error);
@@ -321,24 +323,37 @@ function Checkout() {
 
     // Fetch districts when division is selected
     const fetchDistricts = async (divisionId) => {
-        try {
-            const response = await divisionDataGetAPI();
-            if (response.data.message.success) {
-                const filteredDistricts = response.data.data.districts.filter(
-                    (district) =>
-                        district.division_id === divisionId.toString(),
-                );
-                setDistricts(filteredDistricts);
-                setFormData((prev) => ({
-                    ...prev,
-                    district: "",
-                    upazilla: "",
-                }));
-                setUpazillas([]);
-            }
-        } catch (error) {
-            console.error("Error fetching districts:", error);
-        }
+        // try {
+        //     const response = await divisionDataGetAPI();
+        //     if (response.data.message.success) {
+        //         const filteredDistricts = response.data.data.districts.filter(
+        //             (district) =>
+        //                 district.division_id === divisionId.toString(),
+        //         );
+        //         setDistricts(filteredDistricts);
+        //         setFormData((prev) => ({
+        //             ...prev,
+        //             district: "",
+        //             upazilla: "",
+        //         }));
+        //         setUpazillas([]);
+        //     }
+        // } catch (error) {
+        //     console.error("Error fetching districts:", error);
+        // }
+        const filteredDistricts = allDistricts.filter(
+            (district) => String(district.division_id) === String(divisionId),
+        );
+
+        console.log(filteredDistricts);
+
+        setDistricts(filteredDistricts);
+
+        setFormData((prev) => ({
+            ...prev,
+            district: "",
+            upazilla: "",
+        }));
     };
 
     // Fetch upazillas when district is selected
@@ -818,8 +833,8 @@ function Checkout() {
                                                     </div>
                                                     {selectedGateway && (
                                                         <p className="mt-2 text-sm text-gray-500">
-                                                            You'll be redirected
-                                                            to{" "}
+                                                            You&apos;ll be
+                                                            redirected to{" "}
                                                             {selectedGateway
                                                                 .replace(
                                                                     "-",

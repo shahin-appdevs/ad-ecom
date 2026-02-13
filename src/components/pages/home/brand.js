@@ -106,12 +106,12 @@ export default function Brand() {
                                                         dangerouslySetInnerHTML={{
                                                             __html: brand?.description?.slice(
                                                                 0,
-                                                                30,
+                                                                25,
                                                             ),
                                                         }}
                                                     ></p>
                                                     {brand?.description
-                                                        ?.length > 30 && (
+                                                        ?.length > 25 && (
                                                         <span>...</span>
                                                     )}
                                                 </div>

@@ -307,11 +307,11 @@ export const navLink = [
                 label: "Point to Cash",
                 icon: CircleStackIcon,
             },
-            {
-                url: "/",
-                label: "Logout",
-                icon: ArrowLeftStartOnRectangleIcon,
-            },
+            // {
+            //     url: "/",
+            //     label: "Logout",
+            //     icon: ArrowLeftStartOnRectangleIcon,
+            // },
         ],
     },
 ];
@@ -419,7 +419,7 @@ export default function SideNav() {
                                 />
                             </Link>
                         </div>
-                        <div className="sidebar-menu overflow-y-auto max-h-[calc(100vh-330px)] space-y-2">
+                        <div className="sidebar-menu overflow-y-auto max-h-[calc(100vh-250px)] space-y-2">
                             {filteredNavLinks[0]?.items.map((item, index) => (
                                 <Link
                                     key={index}
@@ -560,26 +560,35 @@ export default function SideNav() {
                                 })}
                         </div>
                     </div>
-                    <div className="mt-5">
-                        <div className="w-full p-7 rounded-[12px] bg-[#F5F7FF]">
-                            <h4 className="text-[18px] font-bold">
-                                Help Center?
-                            </h4>
-                            <p className="leading-[17px] font-medium mt-2">
-                                How can we help you?
-                            </p>
-                            <Link
-                                href="/support/ticket"
-                                className="mt-4 bg-primary__color text-white__color flex justify-center items-center py-3 px-5 gap-2 font-semibold rounded-[6px] transition hover:bg-secondary__color hover:scale-x-105"
-                            >
-                                <Image
+                    <div className="mt-5 ">
+                        {/* <button
+                            onClick={() => setIsLogoutModalOpen(true)}
+                            className="flex w-full items-center justify-center gap-3 px-4 py-2 text-white bg-red-600 hover:bg-red-700 rounded-md duration-200"
+                        >
+                            <LogOut className="h-4 w-4" />
+                            <span>Logout</span>
+                        </button> */}
+                        <div className="w-full p-4 rounded-2xl bg-gray-100">
+                            <div className="flex items-center gap-2">
+                                {/* <Image
                                     src={rocket}
                                     width={20}
                                     priority={true}
                                     quality={50}
                                     className=""
                                     alt="Icon"
-                                />
+                                /> */}
+                                <h4 className="text-[18px] font-bold text-gray-800">
+                                    Help Center
+                                </h4>
+                            </div>
+                            <p className="leading-[17px] font-medium mt-2  text-gray-800">
+                                How can we help you?
+                            </p>
+                            <Link
+                                href="/support/ticket"
+                                className="mt-4 bg-gray-800 text-white flex justify-center items-center py-2 px-5 gap-2 font-semibold rounded-lg transition hover:bg-primary__color hover:text-white hover:scale-x-105"
+                            >
                                 Get Support
                             </Link>
                         </div>
