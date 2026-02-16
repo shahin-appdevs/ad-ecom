@@ -420,7 +420,7 @@ export default function SendMoneySection({ setRefetch }) {
     if (isLoading) {
         return (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-7 space-y-5">
+                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-7 space-y-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div className="bg-[#F9FAFB] border border-gray-200 p-4 rounded-xl h-[72px]">
                             <Skeleton className="h-4 w-24 mx-auto" />
@@ -458,7 +458,7 @@ export default function SendMoneySection({ setRefetch }) {
 
                     <Skeleton className="h-12 w-full" />
                 </div>
-                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
+                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-5">
                     <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4">
                         <Skeleton className="h-5 w-32" />
                         {[...Array(4)].map((_, i) => (
