@@ -40,7 +40,7 @@ function SkeletonRow() {
     );
 }
 
-export default function ExchangeMoneyHistorySection() {
+export default function ExchangeMoneyHistorySection({ isRefetch }) {
     const [apiLoading, setApiLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -65,7 +65,7 @@ export default function ExchangeMoneyHistorySection() {
         };
 
         fetchExchangeData();
-    }, []);
+    }, [isRefetch]);
 
     const getStatusColor = (status) => {
         switch (status.toLowerCase()) {

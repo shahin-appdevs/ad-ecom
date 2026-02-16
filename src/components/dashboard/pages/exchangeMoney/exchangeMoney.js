@@ -29,7 +29,7 @@ function Skeleton({ className }) {
     );
 }
 
-export default function ExchangeMoneySection() {
+export default function ExchangeMoneySection({ setRefetch }) {
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [receiverCurrency, setReceiverCurrency] = useState(
@@ -322,6 +322,7 @@ export default function ExchangeMoneySection() {
             toast.error(errorMessage);
         } finally {
             setLoading(false);
+            setRefetch((isRefetch) => !isRefetch);
         }
     };
 
@@ -581,7 +582,7 @@ export default function ExchangeMoneySection() {
                         title={loading ? "Exchanging..." : "Exchange Money"}
                         variant="primary"
                         size="md"
-                        className="w-full"
+                        className={`w-full ${loading ? "cursor-not-allowed !bg-gray-400" : ""}`}
                         disabled={loading}
                     />
                 </form>

@@ -356,7 +356,7 @@ export default function WithdrawSection({ setRefetch }) {
             );
         } finally {
             setLoading(false);
-            setRefetch();
+            setRefetch((isRefetch) => !isRefetch);
         }
     };
 
