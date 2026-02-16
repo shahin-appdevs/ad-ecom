@@ -40,7 +40,7 @@ function SkeletonRow() {
     );
 }
 
-export default function MakePaymentHistorySection() {
+export default function MakePaymentHistorySection({ isRefetch }) {
     const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -66,7 +66,7 @@ export default function MakePaymentHistorySection() {
         };
 
         fetchInitialData();
-    }, []);
+    }, [isRefetch]);
 
     const getStatusColor = (status) => {
         switch (status) {
