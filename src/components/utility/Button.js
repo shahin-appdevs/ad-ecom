@@ -1,9 +1,18 @@
 // Packages
 import Link from "next/link";
 
-
 // Button Component
-const Button = ({ title, onClick, href, variant = "primary", className, Icon, size = "base", type = "button", }) => {
+const Button = ({
+    title,
+    onClick,
+    href,
+    variant = "primary",
+    className,
+    Icon,
+    size = "base",
+    type = "button",
+    disabled = false,
+}) => {
     // Base Style
     const baseStyles = `rounded-lg text-center transition-all ${Icon ? "inline-flex items-center justify-center" : ""}`;
     // Icon Base Style
@@ -11,10 +20,13 @@ const Button = ({ title, onClick, href, variant = "primary", className, Icon, si
 
     // All Variants
     const variants = {
-        primary: "bg-primary__color text-white__color hover:bg-secondary__color hover:scale-x-105",
-        secondary: "bg-neutral-200 text-color__text hover:bg-primary__color hover:text-white__color hover:scale-x-105",
+        primary:
+            "bg-primary__color text-white__color hover:bg-secondary__color hover:scale-x-105",
+        secondary:
+            "bg-neutral-200 text-color__text hover:bg-primary__color hover:text-white__color hover:scale-x-105",
         gray: "bg-gray-400/20 text-color__heading hover:bg-primary__color hover:text-white__color hover:scale-x-105",
-        outline: "border-2 border-color__heading text-color__heading hover:bg-primary__color hover:border-primary__color hover:text-white__color",
+        outline:
+            "border-2 border-color__heading text-color__heading hover:bg-primary__color hover:border-primary__color hover:text-white__color",
     };
 
     // All Sizes
@@ -29,22 +41,23 @@ const Button = ({ title, onClick, href, variant = "primary", className, Icon, si
     return (
         <>
             {href ? (
-                <Link href={href} onClick={onClick} className={`${baseStyles} ${variants[variant]} ${className || ""} ${sizes[size]}`}>
+                <Link
+                    href={href}
+                    onClick={onClick}
+                    className={`${baseStyles} ${variants[variant]} ${className || ""} ${sizes[size]}`}
+                >
                     {title}
-                    {Icon && (
-                        <Icon className={iconBaseStyle} />
-                    )}
+                    {Icon && <Icon className={iconBaseStyle} />}
                 </Link>
             ) : (
                 <button
                     type={type}
                     onClick={onClick}
                     className={`${baseStyles} ${variants[variant]} ${className || ""} ${sizes[size]}`}
+                    disabled={disabled}
                 >
                     {title}
-                    {Icon && (
-                        <Icon className={iconBaseStyle} />
-                    )}
+                    {Icon && <Icon className={iconBaseStyle} />}
                 </button>
             )}
         </>

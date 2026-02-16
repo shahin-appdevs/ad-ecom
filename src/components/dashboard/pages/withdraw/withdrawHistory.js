@@ -40,7 +40,7 @@ function SkeletonRow() {
     );
 }
 
-export default function WithdrawHistorySection() {
+export default function WithdrawHistorySection({ isRefetch }) {
     const [loading, setLoading] = useState(false);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -66,7 +66,7 @@ export default function WithdrawHistorySection() {
         };
 
         fetchWithdrawInfo();
-    }, []);
+    }, [isRefetch]);
 
     const getStatusColor = (status) => {
         switch (status) {

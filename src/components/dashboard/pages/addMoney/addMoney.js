@@ -102,7 +102,7 @@ export default function AddMoneySection() {
                 const attribute = getRemainingFields?.attribute;
                 const senderAmount = amount || "0";
                 const currencyCode = wallet?.selectedCurrency?.code;
-                const chargeId = selectedCurrency?.id;
+                const chargeId = selectedCurrency?.id; //selected gateway currency id
                 const result = await walletCardRemainingLimitsGetAPI(
                     transactionType,
                     attribute,
@@ -122,7 +122,7 @@ export default function AddMoneySection() {
                 setRemainingLoading(false);
             }
         })();
-    }, [amount, apiData, selectedCurrency]);
+    }, [amount, apiData, selectedCurrency, wallet?.selectedCurrency]);
 
     const formattedCharges = useMemo(() => {
         if (!selectedCurrency) {
@@ -675,7 +675,7 @@ export default function AddMoneySection() {
                         title={loading ? "Adding..." : "Add Money"}
                         variant="primary"
                         size="md"
-                        className="w-full"
+                        className={`w-full ${loading ? "cursor-not-allowed !bg-gray-400" : ""}`}
                         type="submit"
                         disabled={loading}
                     />

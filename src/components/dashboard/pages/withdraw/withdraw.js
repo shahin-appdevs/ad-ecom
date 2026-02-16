@@ -35,7 +35,7 @@ function Skeleton({ className }) {
     );
 }
 
-export default function WithdrawSection() {
+export default function WithdrawSection({ setRefetch }) {
     const [apiData, setApiData] = useState(null);
     const [apiLoading, setApiLoading] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -104,7 +104,7 @@ export default function WithdrawSection() {
                 const attribute = getRemainingFields?.attribute;
                 const senderAmount = amount || "0";
                 const currencyCode = selectedCurrency?.currency_code;
-                const chargeId = wallet?.selectedCurrency?.code;
+                const chargeId = selectedCurrency?.id;
                 const result = await walletCardRemainingLimitsGetAPI(
                     transactionType,
                     attribute,
@@ -356,6 +356,7 @@ export default function WithdrawSection() {
             );
         } finally {
             setLoading(false);
+            setRefetch();
         }
     };
 
@@ -643,13 +644,13 @@ export default function WithdrawSection() {
                             </div>
                         </div>
                         {selectedGateway?.instructions && (
-                            <div className="border md:col-span-2 border-gray-500/20 p-2 rounded-lg mt-2 space-y-2">
+                            <div className="border md:col-span-2 bg-yellow-100/20  border-yellow-500/50 p-2 rounded-lg mt-2 space-y-2">
                                 <h6
-                                    className="text-gray-500 flex items-center gap-1 text-sm"
+                                    className="text-gray-500  flex items-center gap-1 text-sm"
                                     title="Payment gateway instructions"
                                 >
                                     <span>Instructions </span>
-                                    <QuestionMarkCircleIcon className="w-[18px] text-gray-500" />
+                                    <QuestionMarkCircleIcon className="w-[18px] " />
                                 </h6>
                                 <div
                                     dangerouslySetInnerHTML={{
@@ -707,10 +708,10 @@ export default function WithdrawSection() {
                             ))}
                     </div>
                     <Button
-                        title={loading ? "Withdrawing..." : "Withdraw"}
+                        title={loading ? "Requesting..." : "Confirm"}
                         variant="primary"
                         size="md"
-                        className="w-full"
+                        className={`w-full ${loading ? "cursor-not-allowed !bg-gray-400" : ""}`}
                         type="submit"
                         disabled={loading}
                     />
