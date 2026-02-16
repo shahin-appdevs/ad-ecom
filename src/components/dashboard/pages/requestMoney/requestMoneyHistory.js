@@ -34,7 +34,7 @@ function SkeletonRow() {
     );
 }
 
-export default function RequestMoneyHistorySection() {
+export default function RequestMoneyHistorySection({ isRefetch }) {
     const [isLoading, setIsLoading] = useState(false);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -60,7 +60,7 @@ export default function RequestMoneyHistorySection() {
         };
 
         fetchData();
-    }, []);
+    }, [isRefetch]);
 
     const getStatusColor = (status) => {
         switch (status) {

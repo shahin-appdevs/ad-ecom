@@ -34,7 +34,7 @@ function Skeleton({ className }) {
     );
 }
 
-export default function RequestMoneySection() {
+export default function RequestMoneySection({ setRefetch }) {
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [defaultCurrency, setDefaultCurrency] = useState({
@@ -317,6 +317,7 @@ export default function RequestMoneySection() {
             );
         } finally {
             setIsSubmitting(false);
+            setRefetch((isRefetch) => !isRefetch);
         }
     };
 
@@ -379,7 +380,7 @@ export default function RequestMoneySection() {
     if (isLoading) {
         return (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-7 space-y-5">
+                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-7 space-y-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div className="bg-[#F9FAFB] border border-gray-200 p-4 rounded-xl h-[72px]">
                             <Skeleton className="h-4 w-24 mx-auto" />
@@ -417,7 +418,7 @@ export default function RequestMoneySection() {
 
                     <Skeleton className="h-12 w-full" />
                 </div>
-                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
+                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-5">
                     <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4">
                         <Skeleton className="h-5 w-32" />
                         {[...Array(4)].map((_, i) => (
@@ -451,7 +452,7 @@ export default function RequestMoneySection() {
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-            <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-7">
+            <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-7">
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
@@ -584,7 +585,7 @@ export default function RequestMoneySection() {
                         title={isSubmitting ? "Confirming..." : "Confirm"}
                         variant="primary"
                         size="md"
-                        className="w-full"
+                        className={`w-full ${isSubmitting ? "cursor-not-allowed !bg-gray-400" : ""}`}
                         type="submit"
                         disabled={isSubmitting}
                     />
@@ -602,7 +603,7 @@ export default function RequestMoneySection() {
             >
                 <div className="fixed inset-0 bg-black/75" aria-hidden="true" />
                 <div className="fixed inset-0 flex items-center justify-center p-4">
-                    <Dialog.Panel className="w-full max-w-2xl rounded-xl bg-white p-6 relative">
+                    <Dialog.Panel className="w-full max-w-sm  2xl:max-w-2xl rounded-xl bg-white p-6 relative">
                         <div className="absolute top-4 right-4">
                             <button
                                 onClick={closeCamera}
@@ -647,7 +648,7 @@ export default function RequestMoneySection() {
                     </Dialog.Panel>
                 </div>
             </Dialog>
-            <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
+            <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
                         Preview
