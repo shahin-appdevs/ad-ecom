@@ -22,6 +22,7 @@ import PinVerificationModal from "@/components/dashboard/partials/PinVerificatio
 
 import logo from "@public/images/logo/favicon.jpeg";
 import mockup from "@public/images/payment/mockup.png";
+import getImageUrl from "@/components/utility/getImageUrl";
 
 const CreateLinkSkeleton = () => {
     return (
@@ -65,12 +66,12 @@ const CreateLinkSkeleton = () => {
                     </div>
                     <div className="h-12 bg-gray-200 rounded-md mt-6"></div>
                 </div>
-                <div>
+                <div className="w-full">
                     <div className="flex justify-between items-center mb-6">
                         <div className="h-6 w-1/4 bg-gray-200 rounded"></div>
                         <div className="h-8 w-20 bg-gray-200 rounded-md"></div>
                     </div>
-                    <div className="relative w-full max-w-[300px] h-[500px] sm:h-[600px] mx-auto">
+                    <div className="relative w-full h-[500px] sm:h-[600px]">
                         <div className="absolute inset-0 bg-gray-200 rounded-xl"></div>
                         <div className="absolute z-20 top-[70px] left-[18px] right-[18px] bottom-[100px] bg-gray-100 rounded-xl p-4 space-y-4">
                             <div>
@@ -125,29 +126,29 @@ export default function EditLinkSection() {
     const router = useRouter();
     const [showPinModal, setShowPinModal] = useState(false);
 
-    useEffect(() => {
-        const fetchCurrencies = async () => {
-            try {
-                const response = await paymentLinkListAPI();
-                const currencyData = response.data.data.currency_data;
-                setCurrencies(currencyData);
+    // useEffect(() => {
+    //     const fetchCurrencies = async () => {
+    //         try {
+    //             const response = await paymentLinkListAPI();
+    //             const currencyData = response.data.data.currency_data;
+    //             setCurrencies(currencyData);
 
-                const defaultCurrency =
-                    currencyData.find((c) => c.code === "USD") ||
-                    currencyData[0];
-                if (defaultCurrency) {
-                    setSelectedCurrency(defaultCurrency);
-                }
-            } catch (error) {
-                toast.error("Failed to load currencies");
-                console.error("Error fetching currencies:", error);
-            } finally {
-                setIsInitialLoading(false);
-            }
-        };
+    //             const defaultCurrency =
+    //                 currencyData.find((c) => c.code === "USD") ||
+    //                 currencyData[0];
+    //             if (defaultCurrency) {
+    //                 setSelectedCurrency(defaultCurrency);
+    //             }
+    //         } catch (error) {
+    //             toast.error("Failed to load currencies");
+    //             console.error("Error fetching currencies:", error);
+    //         } finally {
+    //             setIsInitialLoading(false);
+    //         }
+    //     };
 
-        fetchCurrencies();
-    }, []);
+    //     fetchCurrencies();
+    // }, []);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -177,12 +178,13 @@ export default function EditLinkSection() {
             setSelectedPaymentType(paymentType);
 
             // Set currencies if available in response
-            if (response.data.data.currencies) {
-                setCurrencies(response.data.data.currencies);
+            console.log("currency_data", response.data.data);
+            if (response.data.data.currency_data) {
+                setCurrencies(response.data.data.currency_data);
                 const currency =
-                    response.data.data.currencies.find(
+                    response.data.data.currency_data.find(
                         (c) => c.code === linkData.currency,
-                    ) || response.data.data.currencies[0];
+                    ) || response.data.data.currency_data[0];
                 setSelectedCurrency(currency);
             }
 
@@ -198,7 +200,12 @@ export default function EditLinkSection() {
 
             // Set image preview if available
             if (linkData.image) {
-                setPreview(linkData.image_url);
+                setPreview(
+                    getImageUrl(
+                        linkData.image,
+                        response.data.data.image_path,
+                    ) || null,
+                );
             }
         } catch (error) {
             toast.error(
@@ -210,6 +217,7 @@ export default function EditLinkSection() {
             router.push("/user/payment/link");
         } finally {
             setIsLoading(false);
+            setIsInitialLoading(false);
         }
     };
 
@@ -245,7 +253,7 @@ export default function EditLinkSection() {
 
             if (selectedPaymentType.value === "product") {
                 formData.append("sub_currency", selectedCurrency.code);
-                formData.append("sub_title", subTitle);
+                formData.append("sub_title", title);
                 if (price) formData.append("price", price);
                 if (quantity) formData.append("qty", quantity);
             } else {
@@ -355,8 +363,8 @@ export default function EditLinkSection() {
                                 type="text"
                                 placeholder="Product subtitle"
                                 className="w-full border rounded-md p-2 mb-4 text-sm focus:outline-none"
-                                value={subTitle}
-                                onChange={(e) => setSubTitle(e.target.value)}
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
                                 maxLength={180}
                             />
 
@@ -408,7 +416,7 @@ export default function EditLinkSection() {
                             </div>
 
                             <label className="block text-sm font-medium mb-2">
-                                Price (Optional)
+                                Price
                             </label>
                             <input
                                 type="number"
@@ -418,10 +426,11 @@ export default function EditLinkSection() {
                                 onChange={(e) => setPrice(e.target.value)}
                                 min="0"
                                 step="0.01"
+                                required
                             />
 
                             <label className="block text-sm font-medium mb-2">
-                                Quantity (Optional)
+                                Quantity
                             </label>
                             <input
                                 type="number"
@@ -431,6 +440,7 @@ export default function EditLinkSection() {
                                 onChange={(e) => setQuantity(e.target.value)}
                                 min="0"
                                 step="1"
+                                required
                             />
                         </>
                     )}
