@@ -94,7 +94,7 @@ export default function WithdrawSection({ setRefetch }) {
     // fetch remaining limits
     useEffect(() => {
         (async () => {
-            if (!apiData || !selectedCurrency) {
+            if (!apiData || !selectedCurrency || !wallet?.selectedCurrency) {
                 return;
             }
             try {
@@ -103,7 +103,7 @@ export default function WithdrawSection({ setRefetch }) {
                 const transactionType = getRemainingFields?.transaction_type;
                 const attribute = getRemainingFields?.attribute;
                 const senderAmount = amount || "0";
-                const currencyCode = selectedCurrency?.currency_code;
+                const currencyCode = wallet.selectedCurrency?.code;
                 const chargeId = selectedCurrency?.id;
                 const result = await walletCardRemainingLimitsGetAPI(
                     transactionType,
@@ -119,6 +119,12 @@ export default function WithdrawSection({ setRefetch }) {
                 });
             } catch (error) {
                 handleApiError(error, "Failed to fetch remaining limits");
+                const data = error?.response?.data?.data;
+
+                setRemainingLimit({
+                    dailyLimit: data?.remainingDaily || "0.00",
+                    monthlyLimit: data?.remainingMonthly || "0.00",
+                });
             } finally {
                 setRemainingLoading(false);
             }
