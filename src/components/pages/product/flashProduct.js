@@ -8,6 +8,7 @@ import ProductSidebar from "@/components/partials/ProductSidebar";
 import Button from "@/components/utility/Button";
 import {
     flashGetAPI,
+    nextPageGetAPI,
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
@@ -46,10 +47,12 @@ const CountdownSkeleton = () => {
 
 export default function FlashProduct() {
     const [flashData, setFlashData] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [flashProducts, setFlashProducts] = useState([]);
+    const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -62,6 +65,7 @@ export default function FlashProduct() {
             try {
                 const response = await flashGetAPI();
                 setFlashData(response.data.data);
+                setFlashProducts(response.data.data.flash_products?.data || []);
             } catch (error) {
                 toast.error(
                     error.response?.data?.message?.error?.[0] ||
@@ -203,7 +207,7 @@ export default function FlashProduct() {
         if (!flashData?.flash_products) return;
 
         const savedCart = localStorage.getItem("flashSaleCart");
-        const initialStates = flashData.flash_products.map((product) => {
+        const initialStates = flashData.flash_products?.data?.map((product) => {
             if (savedCart) {
                 const parsedCart = JSON.parse(savedCart);
                 const cartItem = parsedCart.find(
@@ -317,6 +321,31 @@ export default function FlashProduct() {
         return () => clearInterval(timer);
     }, [flashData?.flash_sale_end_date]);
 
+    const handleLoadMoreProducts = async () => {
+        setLoadMoreLoading(true);
+        try {
+            const res = await nextPageGetAPI(
+                flashData.flash_products?.next_page_url,
+            );
+            const newProducts = res.data.data.flash_products?.data || [];
+            setFlashProducts((prev) => [...prev, ...newProducts]);
+            setFlashData((prev) => ({
+                ...prev,
+                flash_products: {
+                    ...prev.flash_products,
+                    next_page_url: res.data.data.flash_products?.next_page_url,
+                },
+            }));
+        } catch (error) {
+            toast.error(
+                error.response?.data?.message?.error?.[0] ||
+                    "Failed to fetch flash products",
+            );
+        } finally {
+            setLoadMoreLoading(false);
+        }
+    };
+
     if (loading) {
         return (
             <section className="sm:pt-4">
@@ -364,98 +393,101 @@ export default function FlashProduct() {
                                 </h4>
 
                                 {/* Countdown Timer */}
-                                <div className="flex flex-wrap gap-2 justify-start  lg:justify-end">
-                                    {[
-                                        { label: "Days", value: timeLeft.days },
-                                        {
-                                            label: "Hours",
-                                            value: timeLeft.hours,
-                                        },
-                                        {
-                                            label: "Min",
-                                            value: timeLeft.minutes,
-                                        },
-                                        {
-                                            label: "Sec",
-                                            value: timeLeft.seconds,
-                                        },
-                                    ].map((item, i) => (
-                                        <div
-                                            key={i}
-                                            className="text-center flex flex-col items-center justify-center w-[60px] h-[60px] bg-red-500 text-white px-2 py-2 rounded-md shadow-md"
-                                        >
-                                            <p className="text-lg font-bold leading-none">
-                                                {String(item.value).padStart(
-                                                    2,
-                                                    "0",
-                                                )}
-                                            </p>
-                                            <span className="text-xs font-medium">
-                                                {item.label}
-                                            </span>
-                                        </div>
-                                    ))}
-                                </div>
+                                {flashProducts?.length > 0 && (
+                                    <div className="flex flex-wrap gap-2 justify-start  lg:justify-end">
+                                        {[
+                                            {
+                                                label: "Days",
+                                                value: timeLeft.days,
+                                            },
+                                            {
+                                                label: "Hours",
+                                                value: timeLeft.hours,
+                                            },
+                                            {
+                                                label: "Min",
+                                                value: timeLeft.minutes,
+                                            },
+                                            {
+                                                label: "Sec",
+                                                value: timeLeft.seconds,
+                                            },
+                                        ].map((item, i) => (
+                                            <div
+                                                key={i}
+                                                className="text-center flex flex-col items-center justify-center w-[60px] h-[60px] bg-red-500 text-white px-2 py-2 rounded-md shadow-md"
+                                            >
+                                                <p className="text-lg font-bold leading-none">
+                                                    {String(
+                                                        item.value,
+                                                    ).padStart(2, "0")}
+                                                </p>
+                                                <span className="text-xs font-medium">
+                                                    {item.label}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                                {flashData?.flash_products?.map(
-                                    (product, index) => {
-                                        const {
-                                            discount,
-                                            displayPrice,
-                                            originalPrice,
-                                            hasDiscount,
-                                            isResellerPrice,
-                                            stock,
-                                        } = calculateDiscount(product);
+                                {flashProducts?.map((product, index) => {
+                                    const {
+                                        discount,
+                                        displayPrice,
+                                        originalPrice,
+                                        hasDiscount,
+                                        isResellerPrice,
+                                        stock,
+                                    } = calculateDiscount(product);
 
-                                        return (
-                                            <Link
-                                                href={`/product/details?id=${product.id}`}
-                                                key={index}
-                                                className="group bg-gray-100 rounded-md hover:shadow-md transition-shadow block"
-                                            >
-                                                <div className="relative">
-                                                    <div className="w-full h-[150px] sm:h-[215px] rounded-t-md overflow-hidden">
-                                                        <Image
-                                                            src={
-                                                                product.main_image
-                                                                    ? `${backendBaseURL}/${flashData.product_image_path}/${product.main_image}`
-                                                                    : `${backendBaseURL}/${flashData.default_image_path}`
-                                                            }
-                                                            width={100}
-                                                            height={100}
-                                                            alt={product.title}
-                                                            className="w-full h-full object-cover rounded-t-md group-hover:scale-105 transition-transform duration-200"
-                                                        />
-                                                    </div>
-                                                    {discount && (
-                                                        <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
-                                                            {discount} off
+                                    return (
+                                        <Link
+                                            href={`/product/details?id=${product.id}`}
+                                            key={index}
+                                            className="group bg-gray-100 rounded-md hover:shadow-md transition-shadow block"
+                                        >
+                                            <div className="relative">
+                                                <div className="w-full h-[150px] sm:h-[215px] rounded-t-md overflow-hidden">
+                                                    <Image
+                                                        src={
+                                                            product.main_image
+                                                                ? `${backendBaseURL}/${flashData.product_image_path}/${product.main_image}`
+                                                                : `${backendBaseURL}/${flashData.default_image_path}`
+                                                        }
+                                                        width={100}
+                                                        height={100}
+                                                        alt={product.title}
+                                                        className="w-full h-full object-cover rounded-t-md group-hover:scale-105 transition-transform duration-200"
+                                                    />
+                                                </div>
+                                                {discount && (
+                                                    <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
+                                                        {discount} off
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <div className="p-[10px]">
+                                                <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                                    {product.title}
+                                                </h5>
+                                                <div className="flex items-center gap-1 mb-1">
+                                                    <span className="text-base md:text-lg font-semibold text-primary__color">
+                                                        {formatPrice(
+                                                            displayPrice,
+                                                        )}
+                                                    </span>
+                                                    {(hasDiscount ||
+                                                        isResellerPrice) && (
+                                                        <span className="text-xs text-[#4b5563] line-through">
+                                                            {formatPrice(
+                                                                originalPrice,
+                                                            )}
                                                         </span>
                                                     )}
                                                 </div>
-                                                <div className="p-[10px]">
-                                                    <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
-                                                        {product.title}
-                                                    </h5>
-                                                    <div className="flex items-center gap-1 mb-1">
-                                                        <span className="text-base md:text-lg font-semibold text-primary__color">
-                                                            {formatPrice(
-                                                                displayPrice,
-                                                            )}
-                                                        </span>
-                                                        {(hasDiscount ||
-                                                            isResellerPrice) && (
-                                                            <span className="text-xs text-[#4b5563] line-through">
-                                                                {formatPrice(
-                                                                    originalPrice,
-                                                                )}
-                                                            </span>
-                                                        )}
-                                                    </div>
 
-                                                    {/* <div className="relative">
+                                                {/* <div className="relative">
                                                     {!states[index]
                                                         ?.showQuantity ? (
                                                         <button
@@ -516,23 +548,29 @@ export default function FlashProduct() {
                                                         </div>
                                                     )}
                                                 </div> */}
-                                                </div>
-                                            </Link>
-                                        );
-                                    },
-                                )}
+                                            </div>
+                                        </Link>
+                                    );
+                                })}
                             </div>
-                            <div className="text-center mt-10">
-                                <Button
-                                    title="Load More"
-                                    variant="primary"
-                                    size="md"
-                                    className="!px-8"
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                    }}
-                                />
-                            </div>
+                            {loadMoreLoading && (
+                                <div className=" mt-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                                    {[...Array(5)].map((_, index) => (
+                                        <ProductSkeleton key={index} />
+                                    ))}
+                                </div>
+                            )}
+                            {flashData?.flash_products?.next_page_url && (
+                                <div className="text-center mt-10">
+                                    <Button
+                                        title="Load More"
+                                        variant="primary"
+                                        size="md"
+                                        className="!px-8"
+                                        onClick={handleLoadMoreProducts}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

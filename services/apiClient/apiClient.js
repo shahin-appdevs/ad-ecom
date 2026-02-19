@@ -254,6 +254,11 @@ export const appSettingGetAPI = () => {
     return apiClientFrontend.get("/app-settings?lang=en");
 };
 
+// Pagination next page get API (get) for frontend
+export const nextPageGetAPI = (url) => {
+    return axios.get(url);
+};
+
 // Order Confirm API (post)
 export const orderConfirmAPI = (formData) => {
     const token = getToken();
