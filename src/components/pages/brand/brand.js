@@ -3,7 +3,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ProductSidebar from "@/components/partials/ProductSidebar";
-import { brandGetAPI } from "@root/services/apiClient/apiClient";
+import Button from "@/components/utility/Button";
+import {
+    brandGetAPI,
+    nextPageGetAPI,
+} from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -37,6 +41,8 @@ const BrandSkeleton = () => {
 export default function Brand() {
     const [brandData, setBrandData] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [brands, setBrands] = useState([]);
+    const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
     useEffect(() => {
         const fetchBrandData = async () => {
@@ -44,6 +50,7 @@ export default function Brand() {
             try {
                 const response = await brandGetAPI();
                 setBrandData(response.data.data);
+                setBrands(response.data.data?.brands?.data || []);
             } catch (error) {
                 toast.error(
                     error.response?.data?.message?.error?.[0] ||
@@ -55,6 +62,29 @@ export default function Brand() {
         };
         fetchBrandData();
     }, []);
+
+    const handleLoadMoreProducts = async () => {
+        setLoadMoreLoading(true);
+        try {
+            const res = await nextPageGetAPI(brandData.brands?.next_page_url);
+            const newBrands = res.data.data.brands?.data || [];
+            setBrands((prev) => [...prev, ...newBrands]);
+            setBrandData((prev) => ({
+                ...prev,
+                brands: {
+                    ...prev.brands,
+                    next_page_url: res.data.data.brands?.next_page_url,
+                },
+            }));
+        } catch (error) {
+            toast.error(
+                error.response?.data?.message?.error?.[0] ||
+                    "Failed to fetch brands",
+            );
+        } finally {
+            setLoadMoreLoading(false);
+        }
+    };
 
     return (
         <section className="sm:pt-4">
@@ -72,34 +102,44 @@ export default function Brand() {
                                 <BrandSkeleton />
                             ) : (
                                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4">
-                                    {brandData?.brands?.data?.map(
-                                        (brand, index) => (
-                                            <Link
-                                                href={`/brands/products?id=${brand.id}`}
-                                                key={index}
-                                                className="group/brand bg-gray-100 rounded-md hover:shadow-md transition-shadow"
-                                            >
-                                                <div className="relative p-[10px] text-center h-full flex items-center gap-2">
-                                                    <div className=" p-3 aspect-square bg-white rounded-full flex w-[60px] md:w-[70px] h-[60px] md:h-[70px] items-center justify-center  ">
-                                                        <Image
-                                                            src={
-                                                                brand.image
-                                                                    ? `${backendBaseURL}/${brandData.brand_image_path}/${brand.image}`
-                                                                    : `${backendBaseURL}/${brandData.default_image_path}`
-                                                            }
-                                                            width={100}
-                                                            height={100}
-                                                            alt={brand.title}
-                                                            className="w-full h-full object-contain rounded-md group-hover/brand:scale-105 transition-all duration-200"
-                                                        />
-                                                    </div>
-                                                    <span className="mt-2 text-sm md:text-base lg:text-lg text-neutral-800 font-medium">
-                                                        {brand.title}
-                                                    </span>
+                                    {brands?.map((brand, index) => (
+                                        <Link
+                                            href={`/brands/products?id=${brand.id}`}
+                                            key={index}
+                                            className="group/brand bg-gray-100 rounded-md hover:shadow-md transition-shadow"
+                                        >
+                                            <div className="relative p-[10px] text-center h-full flex items-center gap-2">
+                                                <div className=" p-3 aspect-square bg-white rounded-full flex w-[60px] md:w-[70px] h-[60px] md:h-[70px] items-center justify-center  ">
+                                                    <Image
+                                                        src={
+                                                            brand.image
+                                                                ? `${backendBaseURL}/${brandData.brand_image_path}/${brand.image}`
+                                                                : `${backendBaseURL}/${brandData.default_image_path}`
+                                                        }
+                                                        width={100}
+                                                        height={100}
+                                                        alt={brand.title}
+                                                        className="w-full h-full object-contain rounded-md group-hover/brand:scale-105 transition-all duration-200"
+                                                    />
                                                 </div>
-                                            </Link>
-                                        ),
-                                    )}
+                                                <span className="mt-2 text-sm md:text-base lg:text-lg text-neutral-800 font-medium">
+                                                    {brand.title}
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            )}
+                            {loadMoreLoading && <BrandSkeleton />}
+                            {brandData?.brands?.next_page_url && (
+                                <div className="text-center mt-10">
+                                    <Button
+                                        title="Load More"
+                                        variant="primary"
+                                        size="md"
+                                        className="!px-8"
+                                        onClick={handleLoadMoreProducts}
+                                    />
                                 </div>
                             )}
                         </div>
