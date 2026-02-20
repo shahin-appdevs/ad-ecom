@@ -2,9 +2,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { campaignsGetAPI } from "@root/services/apiClient/apiClient";
+import {
+    campaignsGetAPI,
+    nextPageGetAPI,
+} from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import ProductSidebar from "@/components/partials/ProductSidebar";
+import Button from "@/components/utility/Button";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -21,6 +25,8 @@ const CampaignSkeleton = () => (
 export default function Campaign() {
     const [campaigns, setCampaigns] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [loadMoreLoading, setLoadMoreLoading] = useState(false);
+    const [nextPageUrl, setNextPageUrl] = useState(null);
     const [imagePaths, setImagePaths] = useState({
         main_image_path: "",
         default_image_path: "",
@@ -38,6 +44,9 @@ export default function Campaign() {
                             (campaign) => !campaign.private,
                         );
                     setCampaigns(publicCampaigns);
+                    setNextPageUrl(
+                        response.data.data.all_campaigns.next_page_url || null,
+                    );
 
                     setImagePaths({
                         main_image_path:
@@ -54,6 +63,26 @@ export default function Campaign() {
         };
         fetchCampaigns();
     }, []);
+
+    const handleLoadMoreProducts = async () => {
+        setLoadMoreLoading(true);
+        try {
+            const res = await nextPageGetAPI(nextPageUrl);
+            const newCampaigns =
+                res.data.data.all_campaigns?.data?.filter(
+                    (campaign) => !campaign.private,
+                ) || [];
+            setCampaigns((prev) => [...prev, ...newCampaigns]);
+            setNextPageUrl(res.data.data.all_campaigns?.next_page_url || null);
+        } catch (error) {
+            toast.error(
+                error.response?.data?.message?.error?.[0] ||
+                    "Failed to load more campaigns",
+            );
+        } finally {
+            setLoadMoreLoading(false);
+        }
+    };
 
     return (
         <section className="py-4">
@@ -154,6 +183,24 @@ export default function Campaign() {
                                         </div>
                                     </Link>
                                 ))}
+                            </div>
+                        )}
+                        {loadMoreLoading && (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mt-6">
+                                {[...Array(4)].map((_, index) => (
+                                    <CampaignSkeleton key={index} />
+                                ))}
+                            </div>
+                        )}
+                        {nextPageUrl && (
+                            <div className="text-center mt-10">
+                                <Button
+                                    title="Load More"
+                                    variant="primary"
+                                    size="md"
+                                    className="!px-8"
+                                    onClick={handleLoadMoreProducts}
+                                />
                             </div>
                         )}
                     </div>
