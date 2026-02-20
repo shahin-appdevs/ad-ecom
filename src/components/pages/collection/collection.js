@@ -2,9 +2,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { collectionsGetAPI } from "@root/services/apiClient/apiClient";
+import {
+    collectionsGetAPI,
+    nextPageGetAPI,
+} from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import ProductSidebar from "@/components/partials/ProductSidebar";
+import Button from "@/components/utility/Button";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -21,6 +25,8 @@ const CollectionSkeleton = () => (
 export default function Collection() {
     const [collections, setCollections] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [loadMoreLoading, setLoadMoreLoading] = useState(false);
+    const [nextPageUrl, setNextPageUrl] = useState(null);
     const [imagePaths, setImagePaths] = useState({
         main_image_path: "",
         default_image_path: "",
@@ -38,6 +44,10 @@ export default function Collection() {
                             (collection) => !collection.private,
                         );
                     setCollections(publicCollections);
+                    setNextPageUrl(
+                        response.data.data.all_collections.next_page_url ||
+                            null,
+                    );
 
                     setImagePaths({
                         main_image_path:
@@ -55,6 +65,28 @@ export default function Collection() {
 
         fetchCollections();
     }, []);
+
+    const handleLoadMoreProducts = async () => {
+        setLoadMoreLoading(true);
+        try {
+            const res = await nextPageGetAPI(nextPageUrl);
+            const newCollections =
+                res.data.data.all_collections?.data?.filter(
+                    (collection) => !collection.private,
+                ) || [];
+            setCollections((prev) => [...prev, ...newCollections]);
+            setNextPageUrl(
+                res.data.data.all_collections?.next_page_url || null,
+            );
+        } catch (error) {
+            toast.error(
+                error.response?.data?.message?.error?.[0] ||
+                    "Failed to load more collections",
+            );
+        } finally {
+            setLoadMoreLoading(false);
+        }
+    };
 
     return (
         <section className="py-4">
@@ -167,6 +199,27 @@ export default function Collection() {
                                         </div>
                                     </Link>
                                 ))}
+                            </div>
+                        )}
+                        {loadMoreLoading && (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 mt-6">
+                                {[...Array(4)].map((_, index) => (
+                                    <div
+                                        key={index}
+                                        className="w-full h-[200px] md:h-[250px] lg:h-[240px] xl:h-[270px] bg-gray-200 animate-pulse rounded-3xl"
+                                    />
+                                ))}
+                            </div>
+                        )}
+                        {nextPageUrl && (
+                            <div className="text-center mt-10">
+                                <Button
+                                    title="Load More"
+                                    variant="primary"
+                                    size="md"
+                                    className="!px-8"
+                                    onClick={handleLoadMoreProducts}
+                                />
                             </div>
                         )}
                     </div>

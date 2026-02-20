@@ -385,7 +385,7 @@ function ProductDetails() {
                     setRecentlyViewedProduct(
                         response.data.data.recently_viewed_products,
                     );
-                    console.log(response.data.data.product);
+                    // console.log(response.data.data.product);
                 } else {
                     toast.error(response?.data?.message?.error?.[0]);
                 }
