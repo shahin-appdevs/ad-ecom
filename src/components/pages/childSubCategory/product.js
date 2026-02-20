@@ -11,8 +11,10 @@ import {
     categoryGetAPI,
     childSubCategoryGetAPI,
     productGetAPI,
+    nextPageGetAPI,
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
+import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { useHomeData } from "@/components/context/HomeContext";
 import { ChevronRight } from "lucide-react";
@@ -55,6 +57,7 @@ function ChildSubCategoryProduct() {
     const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loadMoreLoading, setLoadMoreLoading] = useState(false);
     const { homeData, loading: homeLoading } = useHomeData();
     const [categoryLinks, setCategoryLinks] = useState({});
 
@@ -335,6 +338,95 @@ function ChildSubCategoryProduct() {
         fetchCategoryProduct();
     }, [categoryId, childCategoryId, childSubCategoryId]);
 
+    const formatProduct = (product, responseData) => {
+        const listPrice = parseFloat(product.product_prices?.list_price || 0);
+        const salePrice = parseFloat(product.product_prices?.sale_price || 0);
+        const flashPrice = parseFloat(
+            product.product_additional_prices?.flash_price || 0,
+        );
+        const resellPrice = parseFloat(
+            product.product_additional_prices?.resell_price || 0,
+        );
+
+        const displayPrice =
+            isReseller && resellPrice > 0
+                ? resellPrice
+                : flashPrice > 0
+                  ? flashPrice
+                  : salePrice > 0
+                    ? salePrice
+                    : listPrice;
+
+        const discount =
+            isReseller && resellPrice > 0
+                ? Math.round(
+                      (((flashPrice > 0 ? flashPrice : listPrice) -
+                          resellPrice) /
+                          (flashPrice > 0 ? flashPrice : listPrice)) *
+                          100,
+                  )
+                : flashPrice && listPrice
+                  ? Math.round(((listPrice - flashPrice) / listPrice) * 100)
+                  : salePrice && listPrice
+                    ? Math.round(((listPrice - salePrice) / listPrice) * 100)
+                    : 0;
+
+        return {
+            ...product,
+            id: product.id,
+            slug: product.slug,
+            image: product.main_image
+                ? `${backendBaseURL}/${responseData.main_image_path}/${product.main_image}`
+                : `${backendBaseURL}/${responseData.default_image_path}`,
+            title: product.title,
+            discount: discount > 0 ? `${discount}%` : null,
+            displayPrice: displayPrice,
+            originalPrice:
+                flashPrice > 0
+                    ? flashPrice
+                    : salePrice > 0
+                      ? salePrice
+                      : listPrice,
+            listPrice: listPrice,
+            stock: product.product_stock?.product_quantity || 0,
+            hasDiscount: discount > 0,
+            isResellerPrice: isReseller && resellPrice > 0,
+        };
+    };
+
+    const handleLoadMoreProducts = async () => {
+        setLoadMoreLoading(true);
+        try {
+            const res = await nextPageGetAPI(data.products?.next_page_url);
+            const newRaw = res.data.data.products?.data || [];
+            const newFormatted = newRaw.map((p) =>
+                formatProduct(p, res.data.data),
+            );
+            setProducts((prev) => [...prev, ...newFormatted]);
+            setStates((prev) => [
+                ...prev,
+                ...newFormatted.map(() => ({
+                    showQuantity: false,
+                    quantity: 1,
+                })),
+            ]);
+            setData((prev) => ({
+                ...prev,
+                products: {
+                    ...prev.products,
+                    next_page_url: res.data.data.products?.next_page_url,
+                },
+            }));
+        } catch (error) {
+            toast.error(
+                error.response?.data?.message?.error?.[0] ||
+                    "Failed to load more products",
+            );
+        } finally {
+            setLoadMoreLoading(false);
+        }
+    };
+
     const handleToggle = (index) => {
         setStates((prev) =>
             prev.map((item, i) =>
@@ -563,6 +655,28 @@ function ChildSubCategoryProduct() {
                                     ))
                                 )}
                             </div>
+                            {loadMoreLoading && (
+                                <div className="mt-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                                    {Array.from({ length: 5 }).map(
+                                        (_, index) => (
+                                            <ProductSkeleton
+                                                key={`load-more-skeleton-${index}`}
+                                            />
+                                        ),
+                                    )}
+                                </div>
+                            )}
+                            {data?.products?.next_page_url && (
+                                <div className="text-center mt-10">
+                                    <Button
+                                        title="Load More"
+                                        variant="primary"
+                                        size="md"
+                                        className="!px-8"
+                                        onClick={handleLoadMoreProducts}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

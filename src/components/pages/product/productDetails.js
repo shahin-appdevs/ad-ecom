@@ -255,6 +255,7 @@ function ProductDetails() {
         if (userInfo) {
             setIsAffiliate(userInfo?.affiliate_status);
             setReferralCode(userInfo?.referral_code || "");
+            setUserProfile(userInfo);
         }
 
         // fetchUserProfile();
@@ -385,7 +386,20 @@ function ProductDetails() {
                     setRecentlyViewedProduct(
                         response.data.data.recently_viewed_products,
                     );
-                    // console.log(response.data.data.product);
+                    // review
+
+                    const reviewsData =
+                        response.data.data.product_reviews || [];
+                    const formattedReviews = reviewsData?.map((review) => ({
+                        id: review.id,
+                        name: review.review_user,
+                        avatar: chatUserThree,
+                        rating: review.rating,
+                        comment: review.review,
+                        date: review.updated_at.split("T")[0],
+                    }));
+
+                    setReviews(formattedReviews);
                 } else {
                     toast.error(response?.data?.message?.error?.[0]);
                 }
@@ -426,7 +440,7 @@ function ProductDetails() {
                 toast.success(response.data.message.success[0]);
                 const newReview = {
                     id: reviews.length + 1,
-                    name: "You",
+                    name: userProfile?.fullname,
                     avatar: chatUserThree,
                     rating,
                     comment: review,
@@ -435,10 +449,10 @@ function ProductDetails() {
                 const updatedReviews = [...reviews, newReview];
                 setReviews(updatedReviews);
 
-                localStorage.setItem(
-                    `product_reviews_${productId}`,
-                    JSON.stringify(updatedReviews),
-                );
+                // localStorage.setItem(
+                //     `product_reviews_${productId}`,
+                //     JSON.stringify(updatedReviews),
+                // );
 
                 setRating(0);
                 setReview("");
@@ -450,22 +464,22 @@ function ProductDetails() {
         }
     };
 
-    useEffect(() => {
-        if (productId) {
-            const savedReviews = localStorage.getItem(
-                `product_reviews_${productId}`,
-            );
-            if (savedReviews) {
-                try {
-                    const parsedReviews = JSON.parse(savedReviews);
-                    setReviews(parsedReviews);
-                } catch (error) {
-                    console.error("Error parsing saved reviews:", error);
-                    setReviews([]);
-                }
-            }
-        }
-    }, [productId]);
+    // useEffect(() => {
+    //     if (productId) {
+    //         const savedReviews = localStorage.getItem(
+    //             `product_reviews_${productId}`,
+    //         );
+    //         if (savedReviews) {
+    //             try {
+    //                 const parsedReviews = JSON.parse(savedReviews);
+    //                 setReviews(parsedReviews);
+    //             } catch (error) {
+    //                 console.error("Error parsing saved reviews:", error);
+    //                 setReviews([]);
+    //             }
+    //         }
+    //     }
+    // }, [productId]);
 
     const currencySymbol = data?.base_curr_symbol || "৳";
 
@@ -1108,7 +1122,6 @@ function ProductDetails() {
                                                                                     i,
                                                                                 ) =>
                                                                                     i <
-                                                                                    div >
                                                                                     item.rating ? (
                                                                                         <SolidStarIcon
                                                                                             key={
