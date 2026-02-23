@@ -17,13 +17,20 @@ export default function DashboardLayout({ children }) {
     const [dashboardData, setDashboardData] = useState(null);
 
     useEffect(() => {
+        const searchParams = new URLSearchParams(window.location.search);
+
         const fetchData = async () => {
             const token =
                 localStorage.getItem("jwtToken") ||
                 localStorage.getItem("jwtToken");
+            const payLinkToken = searchParams.get("token");
 
             if (!token) {
-                router.push("/user/auth/login");
+                router.push(
+                    payLinkToken
+                        ? `/user/auth/login?pay_link_token=${payLinkToken}`
+                        : "/user/auth/login",
+                );
                 return;
             }
 

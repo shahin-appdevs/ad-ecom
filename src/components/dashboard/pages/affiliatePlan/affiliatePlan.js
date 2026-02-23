@@ -57,7 +57,7 @@ export default function AffiliatePlan() {
     if (loading) {
         return (
             <div className="bg-white rounded-[12px] p-7">
-                <div className="grid md:grid-cols-4 gap-4">
+                <div className="grid md:grid-cols-3 xl:grid-cols-4 gap-4">
                     {[...Array(4)].map((_, i) => (
                         <SkeletonCard key={i} />
                     ))}
@@ -68,7 +68,7 @@ export default function AffiliatePlan() {
 
     return (
         <div className="bg-white rounded-[12px] p-7">
-            <div className="grid md:grid-cols-4 gap-4">
+            <div className="grid md:grid-cols-3 xl:grid-cols-4 gap-4">
                 {plans.map((plan) => {
                     const isActive = activePlan?.id === plan.id;
                     return (
@@ -85,12 +85,16 @@ export default function AffiliatePlan() {
                                     Active
                                 </span>
                             )}
-                            <div className={`px-6 py-4 rounded-xl ${
-                                isActive
-                                    ? "bg-white shadow-sm"
-                                    : "bg-[#f9faff]"
-                                }`}>
-                                <h6 className="font-semibold mb-4">{plan.name}</h6>
+                            <div
+                                className={`px-6 py-4 rounded-xl ${
+                                    isActive
+                                        ? "bg-white shadow-sm"
+                                        : "bg-[#f9faff]"
+                                }`}
+                            >
+                                <h6 className="font-semibold mb-4">
+                                    {plan.name}
+                                </h6>
                                 <div className="text-[22px] font-bold text-color__heading mb-2">
                                     {currency.symbol}
                                     {plan.joining_fee}
@@ -129,7 +133,9 @@ export default function AffiliatePlan() {
                                     disabled={isActive}
                                     onClick={() =>
                                         !isActive &&
-                                        router.push(`/user/affiliate-plan/confirm?planId=${plan.id}&amount=${plan.joining_fee}`)
+                                        router.push(
+                                            `/user/affiliate-plan/confirm?planId=${plan.id}&amount=${plan.joining_fee}`,
+                                        )
                                     }
                                     className={`w-full rounded-[6px] py-3 font-semibold transition ${
                                         isActive
@@ -137,8 +143,10 @@ export default function AffiliatePlan() {
                                             : "bg-primary__color text-white"
                                     }`}
                                 >
-                                    {isActive ? "Current Plan" : `Choose ${plan.name}`}
-                                </button> 
+                                    {isActive
+                                        ? "Current Plan"
+                                        : `Choose ${plan.name}`}
+                                </button>
                             </div>
                         </div>
                     );

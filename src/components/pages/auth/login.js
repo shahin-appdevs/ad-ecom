@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -10,14 +10,14 @@ import {
     sendOtpAPI,
 } from "@root/services/apiClient/apiClient";
 import useAuthRedirect from "@/components/utility/useAuthRedirect";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 import logo from "@public/images/logo/favicon.jpeg";
 import ReCAPTCHA from "react-google-recaptcha";
 import { handleApiError } from "@/components/utility/handleApiError";
 import getImageUrl from "@/components/utility/getImageUrl";
 
-export default function Login() {
+function Login() {
     useAuthRedirect();
     const [credentials, setCredentials] = useState("");
     const [password, setPassword] = useState("");
@@ -27,6 +27,8 @@ export default function Login() {
     const [recaptcha, setRecaptcha] = useState(null);
     const [loginBasicData, setLoginBasicData] = useState(null);
     const [appSettingsData, setAppSettingsData] = useState(null);
+    const searchParams = useSearchParams();
+    const payLinkToken = searchParams.get("pay_link_token");
 
     const recaptchaRef = useRef();
 
@@ -99,7 +101,13 @@ export default function Login() {
                 } else if (userInfo.two_factor_status === 1) {
                     router.push("/user/auth/2fa");
                 } else {
-                    router.replace("/user/dashboard");
+                    if (payLinkToken) {
+                        router.replace(
+                            `/user/payment/link/share/token?token=${payLinkToken}`,
+                        );
+                    } else {
+                        router.replace("/user/dashboard");
+                    }
                 }
 
                 toast.success(successMessage);
@@ -323,5 +331,13 @@ export default function Login() {
                 </div>
             </div>
         </section>
+    );
+}
+
+export default function LoginSection() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <Login />
+        </Suspense>
     );
 }

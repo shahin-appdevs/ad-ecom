@@ -487,22 +487,24 @@ export default function WithdrawSection({ setRefetch }) {
                                 <div className="relative">
                                     <Listbox.Button className="w-full bg-gray-50 border border-gray-300 rounded-md py-2 px-3 text-sm text-left flex justify-between items-center">
                                         <div>
-                                            <Image
-                                                src={
-                                                    selectedGateway?.image
-                                                        ? getImageUrl(
-                                                              selectedGateway.image,
-                                                              imagePath,
-                                                          )
-                                                        : getImageUrl(
-                                                              defaultImage,
-                                                          )
-                                                }
-                                                height={20}
-                                                width={20}
-                                                alt="payment method logo"
-                                                className="inline me-[6px]"
-                                            />
+                                            {selectedCurrency && (
+                                                <Image
+                                                    src={
+                                                        selectedGateway?.image
+                                                            ? getImageUrl(
+                                                                  selectedGateway.image,
+                                                                  imagePath,
+                                                              )
+                                                            : getImageUrl(
+                                                                  defaultImage,
+                                                              )
+                                                    }
+                                                    height={20}
+                                                    width={20}
+                                                    alt="payment method logo"
+                                                    className="inline me-[6px]"
+                                                />
+                                            )}
 
                                             {selectedCurrency
                                                 ? `${selectedGateway.alias.charAt(0).toUpperCase() + selectedGateway.alias.slice(1)} - ${selectedCurrency.currency_code}`
