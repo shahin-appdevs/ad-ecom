@@ -385,7 +385,9 @@ function SubCategoryProduct() {
     const handleLoadMoreProducts = async () => {
         setLoadMoreLoading(true);
         try {
-            const res = await nextPageGetAPI(data.products?.next_page_url);
+            const res = await nextPageGetAPI(
+                `${data.products?.next_page_url}&category_id=${categoryId}&child_category_id=${childCategoryId}`,
+            );
             const newRaw = res.data.data.products?.data || [];
             const newFormatted = newRaw.map((p) =>
                 formatProduct(p, res.data.data),
