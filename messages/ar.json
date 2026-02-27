@@ -106,5 +106,48 @@
             "shareTitle": "مشاركة رابط الإحالة",
             "shareText": "شارك هذا الرابط مع أصدقائك واكسب عمولات:"
         }
+    },
+    "DashboardPage": {
+        "sidenav": {
+            "dashboard": "لوحة القيادة",
+            "wallet": "المحفظة",
+            "addBalance": "إضافة رصيد",
+            "paymentRequest": "طلب الدفع",
+            "rateConverter": "محول السعر",
+            "myQrCode": "رمز الاستجابة السريعة الخاص بي",
+            "p2pTransfer": "تحويل من نظير لنظير",
+            "merchantPay": "دفع التاجر",
+            "cashOut": "صرف النقود",
+            "requestMoney": "طلب مال",
+            "paymentLink": "رابط الدفع",
+            "services": "الخدمات",
+            "utilityPay": "دفع المرافق",
+            "mobileTopUp": "شحن الجوال",
+            "ecommerce": "التجارة الإلكترونية",
+            "orders": "الطلبات",
+            "security": "الأمان",
+            "twoFaSecurity": "أمان 2FA",
+            "setupPin": "إعداد رمز التحقق",
+            "cards": "البطاقات",
+            "virtualCard": "بطاقة افتراضية",
+            "giftCard": "بطاقة هدايا",
+            "transactions": "المعاملات",
+            "allTransactions": "كل المعاملات",
+            "utilityBill": "فاتورة المرافق",
+            "pointConversion": "تحويل النقاط",
+            "referralBonus": "مكافأة الإحالة",
+            "verifyPlan": "التحقق من الخطة",
+            "account": "الحساب",
+            "profile": "الملف الشخصي",
+            "referralStatus": "حالة الإحالة",
+            "pointToCash": "نقطة إلى نقد",
+            "logout": "تسجيل الخروج",
+            "helpCenter": "مركز المساعدة",
+            "howCanWeHelp": "كيف يمكننا مساعدتك؟",
+            "getSupport": "احصل على الدعم",
+            "confirmLogout": "تأكيد تسجيل الخروج",
+            "logoutConfirmText": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+            "cancel": "إلغاء"
+        }
     }
 }

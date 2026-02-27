@@ -106,5 +106,48 @@
             "shareTitle": "রেফারেল লিঙ্ক শেয়ার করুন",
             "shareText": "বন্ধুদের সাথে এই লিঙ্ক শেয়ার করে কমিশন আয় করুন:"
         }
+    },
+    "DashboardPage": {
+        "sidenav": {
+            "dashboard": "ড্যাশবোর্ড",
+            "wallet": "ওয়ালেট",
+            "addBalance": "ব্যালেন্স যোগ করুন",
+            "paymentRequest": "পেমেন্ট অনুরোধ",
+            "rateConverter": "রেট কনভার্টার",
+            "myQrCode": "আমার কিউআর কোড",
+            "p2pTransfer": "পিটুপি ট্রান্সফার",
+            "merchantPay": "মার্চেন্ট পে",
+            "cashOut": "ক্যাশ আউট",
+            "requestMoney": "টাকা অনুরোধ করুন",
+            "paymentLink": "পেমেন্ট লিঙ্ক",
+            "services": "সেবাসমূহ",
+            "utilityPay": "ইউটিলিটি পে",
+            "mobileTopUp": "মোবাইল টপ-আপ",
+            "ecommerce": "ই-কমার্স",
+            "orders": "অর্ডারসমূহ",
+            "security": "নিরাপত্তা",
+            "twoFaSecurity": "টু-এফএ নিরাপত্তা",
+            "setupPin": "পিন সেটআপ",
+            "cards": "কার্ডসমূহ",
+            "virtualCard": "ভার্চুয়াল কার্ড",
+            "giftCard": "গিফট কার্ড",
+            "transactions": "লেনদেনসমূহ",
+            "allTransactions": "সব লেনদেন",
+            "utilityBill": "ইউটিলিটি বিল",
+            "pointConversion": "পয়েন্ট কনভার্সন",
+            "referralBonus": "রেফারেল বোনাস",
+            "verifyPlan": "প্ল্যান যাচাই করুন",
+            "account": "অ্যাকাউন্ট",
+            "profile": "প্রোফাইল",
+            "referralStatus": "রেফারেল স্ট্যাটাস",
+            "pointToCash": "পয়েন্ট থেকে ক্যাশ",
+            "logout": "লগআউট",
+            "helpCenter": "হেল্প সেন্টার",
+            "howCanWeHelp": "আমরা আপনাকে কীভাবে সাহায্য করতে পারি?",
+            "getSupport": "সহায়তা নিন",
+            "confirmLogout": "লগআউট নিশ্চিত করুন",
+            "logoutConfirmText": "আপনি কি নিশ্চিতভাবে লগআউট করতে চান?",
+            "cancel": "বাতিল"
+        }
     }
 }

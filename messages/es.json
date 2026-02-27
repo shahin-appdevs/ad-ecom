@@ -106,5 +106,48 @@
             "shareTitle": "Compartir enlace de referido",
             "shareText": "Comparte este enlace con tus amigos y gana comisiones:"
         }
+    },
+    "DashboardPage": {
+        "sidenav": {
+            "dashboard": "Tablero",
+            "wallet": "Cartera",
+            "addBalance": "Agregar Saldo",
+            "paymentRequest": "Solicitud de Pago",
+            "rateConverter": "Convertidor de Tasa",
+            "myQrCode": "Mi Código QR",
+            "p2pTransfer": "Transferencia P2P",
+            "merchantPay": "Pago Comerciante",
+            "cashOut": "Retirar efectivo",
+            "requestMoney": "Solicitar Dinero",
+            "paymentLink": "Enlace de Pago",
+            "services": "Servicios",
+            "utilityPay": "Pago de Servicios",
+            "mobileTopUp": "Recarga Móvil",
+            "ecommerce": "Comercio Electrónico",
+            "orders": "Pedidos",
+            "security": "Seguridad",
+            "twoFaSecurity": "Seguridad 2FA",
+            "setupPin": "Configurar PIN",
+            "cards": "Tarjetas",
+            "virtualCard": "Tarjeta Virtual",
+            "giftCard": "Tarjeta de Regalo",
+            "transactions": "Transacciones",
+            "allTransactions": "Todas las Transacciones",
+            "utilityBill": "Factura de Servicios",
+            "pointConversion": "Conversión de Puntos",
+            "referralBonus": "Bono de Referido",
+            "verifyPlan": "Verificar Plan",
+            "account": "Cuenta",
+            "profile": "Perfil",
+            "referralStatus": "Estado de Referencia",
+            "pointToCash": "Punto a efectivo",
+            "logout": "Cerrar sesión",
+            "helpCenter": "Centro de Ayuda",
+            "howCanWeHelp": "¿Cómo podemos ayudarte?",
+            "getSupport": "Obtener Soporte",
+            "confirmLogout": "Confirmar Cierre de Sesión",
+            "logoutConfirmText": "¿Estás seguro de que quieres cerrar sesión?",
+            "cancel": "Cancelar"
+        }
     }
 }
