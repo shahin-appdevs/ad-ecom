@@ -1,0 +1,110 @@
+{
+    "HomePage": {
+        "header": {
+            "searchPlaceholder": "Search by name...",
+            "searchButton": {
+                "searchByProduct": "Search By Product",
+                "searchByStall": "Search By Stall"
+            },
+            "login": "Login",
+            "register": "Register",
+            "logout": "Logout",
+            "dashboard": "Dashboard",
+            "sellerDashboard": "Seller Dashboard",
+            "nav": {
+                "home": "Home",
+                "categories": "Categories",
+                "newProduct": "New Product",
+                "flashSale": "Flash Sale",
+                "brand": "Brand",
+                "campaign": "Campaign",
+                "collection": "Collection"
+            },
+            "mobileBottomBar": {
+                "home": "Home",
+                "categories": "Category",
+                "account": "Account",
+                "cart": "Cart"
+            }
+        },
+        "banner": {
+            "categoryTitle": "Browse Category"
+        },
+        "flashSale": {
+            "flashSaleTitle": "Flash Sale",
+            "days": "Days",
+            "hours": "Hours",
+            "min": "Min",
+            "sec": "Sec",
+            "viewMore": "View More",
+            "loadMore": "Load More"
+        },
+        "newArrival": {
+            "newArrivalTitle": "New Arrival",
+            "viewMore": "View More",
+            "loadMore": "Load More"
+        },
+        "shopByBrand": {
+            "title": "Shop by Brand",
+            "viewMore": "View More",
+            "loadMore": "Load More"
+        },
+        "stalls": {
+            "title": "Stalls",
+            "viewMore": "View More"
+        },
+        "categoryProducts": {
+            "viewMore": "View More",
+            "loadMore": "Load More"
+        },
+        "footer": {
+            "options": {
+                "popular": "Popular",
+                "important_links": "Important Links",
+                "address": "Address"
+            },
+            "downloadApp": "Download the App",
+            "downloadAppText": "Download the app for a better shopping experience",
+            "downloadAppButton": "Download App",
+            "copyRightText": "Copyright © 2026 All rights reserved",
+            "powerByText": "Powered by"
+        }
+    },
+    "ProductDetails": {
+        "size": "SIZE",
+        "color": "COLOR",
+        "addToCart": "Add to cart",
+        "buyNow": "Buy Now",
+        "outOfStock": "Out of Stock",
+        "inStock": "In Stock",
+        "category": "Category",
+        "stock": "Stock",
+        "sku": "SKU",
+        "warranty": "Warranty",
+        "days": "days",
+        "share": "Share",
+        "tabs": {
+            "description": "Description",
+            "details": "Details",
+            "reviews": "Customer Review"
+        },
+        "productDescription": "Product Description",
+        "productDetails": "Product Details",
+        "customerReviews": "Customer Reviews",
+        "noReviewsYet": "No reviews yet. Be the first to review this product!",
+        "writeReview": "Write a Review",
+        "yourReview": "Your Review",
+        "submitReview": "Submit Review",
+        "submitting": "Submitting...",
+        "recentViewed": "Recent View",
+        "productNotFound": "Product not found",
+        "reviewPlaceholder": "Share your thoughts about this product...",
+        "noRecentViewed": "No recently viewed products",
+        "shareVia": "Share via",
+        "close": "Close",
+        "referral": {
+            "shareTitle": "Share Referral Link",
+            "shareText": "Share this link with your friends to earn commissions:"
+        }
+    }
+}

@@ -1,10 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { paymentLinkListAPI } from "@root/services/apiClient/apiClient";
 import { ClipboardIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 const ShareLinkSkeleton = () => {
     return (

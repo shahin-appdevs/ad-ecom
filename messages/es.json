@@ -1,0 +1,110 @@
+{
+    "HomePage": {
+        "header": {
+            "searchPlaceholder": "Buscar por nombre...",
+            "searchButton": {
+                "searchByProduct": "Buscar por producto",
+                "searchByStall": "Buscar por puesto"
+            },
+            "login": "Iniciar sesión",
+            "register": "Registrarse",
+            "logout": "Cerrar sesión",
+            "dashboard": "Tablero",
+            "sellerDashboard": "Tablero del vendedor",
+            "nav": {
+                "home": "Inicio",
+                "categories": "Categorías",
+                "newProduct": "Nuevo producto",
+                "flashSale": "Oferta rápida",
+                "brand": "Marca",
+                "campaign": "Campaña",
+                "collection": "Colección"
+            },
+            "mobileBottomBar": {
+                "home": "Inicio",
+                "categories": "Categorías",
+                "account": "Cuenta",
+                "cart": "Carro"
+            }
+        },
+        "banner": {
+            "categoryTitle": "Explorar Categorías"
+        },
+        "flashSale": {
+            "flashSaleTitle": "Oferta relámpago",
+            "days": "Días",
+            "hours": "Horas",
+            "min": "Min",
+            "sec": "Seg",
+            "viewMore": "Ver Más",
+            "loadMore": "Cargar más"
+        },
+        "newArrival": {
+            "newArrivalTitle": "Nueva Llegada",
+            "viewMore": "Ver Más",
+            "loadMore": "Cargar más"
+        },
+        "shopByBrand": {
+            "title": "Comprar por marca",
+            "viewMore": "Ver más",
+            "loadMore": "Cargar más"
+        },
+        "stalls": {
+            "title": "Puestos",
+            "viewMore": "Ver más"
+        },
+        "categoryProducts": {
+            "viewMore": "Ver más",
+            "loadMore": "Cargar más"
+        },
+        "footer": {
+            "options": {
+                "popular": "Popular",
+                "important_links": "Enlaces importantes",
+                "address": "Dirección"
+            },
+            "downloadApp": "Descargar la App",
+            "downloadAppText": "Descarga la app para una mejor experiencia de compra",
+            "downloadAppButton": "Descargar App",
+            "copyRightText": "Copyright © 2026 Todos los derechos reservados",
+            "powerByText": "Desarrollado por"
+        }
+    },
+    "ProductDetails": {
+        "size": "TALLA",
+        "color": "COLOR",
+        "addToCart": "Añadir al carrito",
+        "buyNow": "Comprar ahora",
+        "outOfStock": "Agotado",
+        "inStock": "En stock",
+        "category": "Categoría",
+        "stock": "Existencias",
+        "sku": "SKU",
+        "warranty": "Garantía",
+        "days": "días",
+        "share": "Compartir",
+        "tabs": {
+            "description": "Descripción",
+            "details": "Detalles",
+            "reviews": "Reseñas de clientes"
+        },
+        "productDescription": "Descripción del producto",
+        "productDetails": "Detalles del producto",
+        "customerReviews": "Reseñas de clientes",
+        "noReviewsYet": "Aún no hay reseñas. ¡Sé el primero en opinar!",
+        "writeReview": "Escribe una reseña",
+        "yourReview": "Tu reseña",
+        "submitReview": "Enviar reseña",
+        "submitting": "Enviando...",
+        "recentViewed": "Visto recientemente",
+        "productNotFound": "Producto no encontrado",
+        "reviewPlaceholder": "Comparte tus pensamientos sobre este producto...",
+        "noRecentViewed": "No hay productos vistos recientemente",
+        "shareVia": "Compartir vía",
+        "close": "Cerrar",
+        "referral": {
+            "shareTitle": "Compartir enlace de referido",
+            "shareText": "Comparte este enlace con tus amigos y gana comisiones:"
+        }
+    }
+}

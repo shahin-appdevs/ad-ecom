@@ -1,10 +1,10 @@
 "use client";
-import { useState } from 'react';
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
-import { twoFactorSellerAPI } from '@root/services/apiClient/apiClient';
+import { twoFactorSellerAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
 import logo from "@public/images/logo/favicon.jpeg";
@@ -25,7 +25,7 @@ export default function Otp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const cleanOtp = otp.replace(/ - /g, "");
-        
+
         if (cleanOtp.length !== 6) {
             setError("Please enter a valid 6-digit OTP");
             return;
@@ -35,12 +35,15 @@ export default function Otp() {
         try {
             const response = await twoFactorSellerAPI(cleanOtp);
             if (response?.data?.message?.success) {
-                response.data.message.success.forEach(msg => toast.success(msg));
+                response.data.message.success.forEach((msg) =>
+                    toast.success(msg),
+                );
                 router.push("/seller/dashboard");
             }
         } catch (error) {
-            const errorMsg = error.response?.data?.message?.error?.[0] || 
-                           "Verification failed. Please try again.";
+            const errorMsg =
+                error.response?.data?.message?.error?.[0] ||
+                "Verification failed. Please try again.";
             setError(errorMsg);
             toast.error(errorMsg);
         } finally {
@@ -51,7 +54,9 @@ export default function Otp() {
     return (
         <section className="min-h-[calc(100vh-200px)] py-8 xl:py-0 px-4 md:px-0 flex items-center justify-center">
             <div className="w-full max-w-md border rounded-md bg-white p-6">
-                <h2 className="text-center text-lg font-semibold mb-5 border-b pb-4">2fa Verification</h2>
+                <h2 className="text-center text-lg font-semibold mb-5 border-b pb-4">
+                    2fa Verification
+                </h2>
                 <div className="flex items-center space-x-3 mb-7">
                     <Image
                         src={logo}
@@ -62,10 +67,12 @@ export default function Otp() {
                     />
                     <div>
                         <h6 className="font-semibold">JARA B2B.COM</h6>
-                        <p className="text-sm text-gray-600">Enter the verification code sent to your phone</p>
+                        <p className="text-sm text-gray-600">
+                            Enter the verification code sent to your phone
+                        </p>
                     </div>
                 </div>
-                
+
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="relative">
                         <label
@@ -80,14 +87,14 @@ export default function Otp() {
                             value={otp}
                             onChange={handleOtpChange}
                             maxLength={12}
-                            className={`w-full px-4 pt-3 pb-3 text-sm rounded-md border ${error ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:border-primary__color shadow-sm`}
+                            className={`w-full px-4 pt-3 pb-3 text-sm rounded-md border ${error ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary__color shadow-sm`}
                         />
                         <ExclamationCircleIcon className="w-5 h-5 text-primary__color absolute right-3 top-3" />
                         {error && (
                             <p className="mt-1 text-sm text-red-600">{error}</p>
                         )}
                     </div>
-                    
+
                     <div className="border-t pt-5">
                         <Button
                             type="submit"

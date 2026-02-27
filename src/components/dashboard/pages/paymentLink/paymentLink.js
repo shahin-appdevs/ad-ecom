@@ -1,12 +1,12 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import {
     paymentLinkListAPI,
     paymentLinkStatusAPI,
 } from "@root/services/apiClient/apiClient";
 import { Dialog } from "@headlessui/react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import {
     PlusIcon,
     ClipboardIcon,

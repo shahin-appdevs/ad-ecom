@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,6 +12,7 @@ import { useHomeData } from "@/components/context/HomeContext";
 import { profiledGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { ArrowRightIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -268,6 +269,11 @@ export default function NewArrival() {
         };
     };
 
+    const t = useTranslations("HomePage.newArrival");
+
+    const newArrivalTitle = t("newArrivalTitle");
+    const viewMore = t("viewMore");
+
     // Format price with currency symbol
     const formatPrice = (price) => {
         if (!price) return `${base_curr_symbol}0`;
@@ -287,14 +293,17 @@ export default function NewArrival() {
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
                 <div className="bg-white p-4 sm:rounded-md">
                     <div className="flex items-center justify-between mb-4">
-                        <h6>New Arrival</h6>
+                        <h6>{newArrivalTitle}</h6>
                         <div>
                             <Link
                                 href="/product/new"
-                                className="font-semibold flex items-center gap-1"
+                                className="font-semibold flex items-center gap-1 text-primary__color"
                             >
-                                <span>View More</span>
-                                <ArrowRightIcon size={18} className="w-4 h-4" />
+                                <span>{viewMore}</span>
+                                <ArrowRightIcon
+                                    size={18}
+                                    className="w-4 h-4 rtl:rotate-180"
+                                />
                             </Link>
                         </div>
                     </div>

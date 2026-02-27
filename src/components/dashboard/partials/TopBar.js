@@ -7,10 +7,10 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 // Images
 import userProfile from "@public/images/user/userProfile.png";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { LoaderCircle, Lock, LogOut, ShieldCheck, User } from "lucide-react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 export default function TopBar() {
     const pathname = usePathname();

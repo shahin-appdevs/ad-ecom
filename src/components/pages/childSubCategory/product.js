@@ -2,7 +2,7 @@
 import { Suspense, useCallback } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { useCart } from "@/components/context/CartContext";
@@ -579,8 +579,11 @@ function ChildSubCategoryProduct() {
                                                 )}
                                             </div>
                                             <div className="p-[10px]">
+                                                <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                                    {product.title}
+                                                </h5>
                                                 <div className="flex items-center gap-1 mb-1">
-                                                    <span className="text-base font-semibold text-primary__color">
+                                                    <span className="text-base md:text-lg font-semibold text-primary__color">
                                                         {formatPrice(
                                                             product.displayPrice,
                                                         )}
@@ -596,9 +599,7 @@ function ChildSubCategoryProduct() {
                                                         </span>
                                                     )}
                                                 </div>
-                                                <h5 className="text-sm font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
-                                                    {product.title}
-                                                </h5>
+
                                                 {/* <div className="relative">
                                                     {!states[index]?.showQuantity ? (
                                                         <button

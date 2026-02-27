@@ -2,11 +2,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import { registerSellerAPI } from "@root/services/apiClient/apiClient";
 import useAuthRedirect from "@/components/utility/useAuthSellerRedirect";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { toast } from "react-hot-toast";
 
 import logo from "@public/images/logo/favicon.jpeg";

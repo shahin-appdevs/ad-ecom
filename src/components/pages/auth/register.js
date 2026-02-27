@@ -2,7 +2,7 @@
 import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import { registerAPI, sendOtpAPI } from "@root/services/apiClient/apiClient";
 import useAuthRedirect from "@/components/utility/useAuthRedirect";

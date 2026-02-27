@@ -18,7 +18,7 @@ import {
     WalletIcon,
     Wifi,
 } from "lucide-react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { RHFInput } from "@/components/ui/form/Input";
 import {
     dashboardGetAPI,
@@ -28,7 +28,7 @@ import {
     walletGetAPI,
 } from "@root/services/apiClient/apiClient";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { handleApiError } from "@/components/utility/handleApiError";
 

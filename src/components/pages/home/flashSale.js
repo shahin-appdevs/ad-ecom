@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
-import Link from "next/link";
+
 import Image from "next/image";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,6 +12,8 @@ import { useHomeData } from "@/components/context/HomeContext";
 import { profiledGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { ArrowRightIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -67,6 +69,7 @@ const FlashSaleSkeleton = () => {
 
 export default function FlashSale() {
     const { homeData, loading } = useHomeData();
+
     const {
         flash_products = [],
         flash_sale_end_date,
@@ -325,6 +328,16 @@ export default function FlashSale() {
         return `${base_curr_symbol}${parseFloat(price).toFixed(2)}`;
     };
 
+    const t = useTranslations("HomePage.flashSale");
+
+    const flashSaleTitle = t("flashSaleTitle");
+    const countdownLabels = [
+        { key: "days", value: timeLeft.days },
+        { key: "hours", value: timeLeft.hours },
+        { key: "min", value: timeLeft.minutes },
+        { key: "sec", value: timeLeft.seconds },
+    ];
+
     if (loading) {
         return <FlashSaleSkeleton />;
     }
@@ -341,17 +354,12 @@ export default function FlashSale() {
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 relative">
                         {/* Flash Sale Text */}
                         <h4 className="text-red-500 text-xl font-bold mb-4 lg:mb-0">
-                            Flash Sale
+                            {flashSaleTitle}
                         </h4>
 
                         {/* Countdown Timer */}
                         <div className="flex flex-wrap gap-2 justify-start  lg:justify-end">
-                            {[
-                                { label: "Days", value: timeLeft.days },
-                                { label: "Hours", value: timeLeft.hours },
-                                { label: "Min", value: timeLeft.minutes },
-                                { label: "Sec", value: timeLeft.seconds },
-                            ].map((item, i) => (
+                            {countdownLabels.map((item, i) => (
                                 <div
                                     key={i}
                                     className="text-center flex flex-col items-center justify-center w-[60px] h-[60px] bg-red-500 text-white px-2 py-2 rounded-md shadow-md"
@@ -360,7 +368,7 @@ export default function FlashSale() {
                                         {String(item.value).padStart(2, "0")}
                                     </p>
                                     <span className="text-xs font-medium">
-                                        {item.label}
+                                        {t(item.key)}
                                     </span>
                                 </div>
                             ))}
@@ -447,8 +455,11 @@ export default function FlashSale() {
                             href="/product/flash"
                             className="text-red-500 font-semibold flex items-center gap-2 border border-red-500 rounded-md px-4 py-2 hover:!bg-red-500 hover:!text-white duration-200"
                         >
-                            <span>View More</span>
-                            <ArrowRightIcon size={18} className="w-4 h-4" />
+                            <span>{t("viewMore")}</span>
+                            <ArrowRightIcon
+                                size={18}
+                                className="w-4 h-4 rtl:rotate-180"
+                            />
                         </Link>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 "use client";
 // Packages
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 // Icons
 import {
@@ -26,6 +26,7 @@ import {
     appSettingGetAPI,
     footerInfoGetAPI,
 } from "@root/services/apiClient/apiClient";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
     const [appSettings, setAppSettings] = useState({});
@@ -67,11 +68,31 @@ export default function Footer() {
         appSettingData();
     }, []);
 
+    // ******** translations ***************
+
+    const t = useTranslations("HomePage");
+
+    const navItems = [
+        { href: "/product/flash", key: "flashSale" },
+        { href: "/brands", key: "brand" },
+        { href: "/campaigns", key: "campaign" },
+        { href: "/collections", key: "collection" },
+    ];
+
+    const options = {
+        popular: t("footer.options.popular"),
+        important_links: t("footer.options.important_links"),
+        address: t("footer.options.address"),
+    };
+
+    const powerByText = t("footer.powerByText");
+    const downloadApp = t("footer.downloadApp");
+
     return (
         <section className="bg-white pt-8 sm:pt-16 pb-4 mt-4 sm:mt-16">
             <div className="xl:max-w-[1530px] container mx-auto px-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mb-8">
-                    <div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 lg:gap-12 mb-8 ">
+                    <div className="lg:col-span-2">
                         <Link href="/" className="mb-2">
                             <Image
                                 src={logo}
@@ -84,7 +105,7 @@ export default function Footer() {
                         </p>
                         <p className="font-medium">{footerContent?.details}</p>
                         <p className="text-sm md:text-base font-semibold mt-3">
-                            Download the app
+                            {downloadApp}
                         </p>
                         {appSettings?.app_url?.android_url && (
                             <Link
@@ -101,9 +122,20 @@ export default function Footer() {
                         )}
                     </div>
                     <div>
-                        <h6 className="font-bold mb-4">Popular</h6>
+                        <h6 className="font-bold mb-4">{options.popular}</h6>
                         <ul className="space-y-2">
-                            <li>
+                            {navItems.map((item) => (
+                                <li key={item.key}>
+                                    <Link
+                                        href={item.href}
+                                        className="font-medium hover:text-primary__color"
+                                    >
+                                        {t(`header.nav.${item.key}`)}
+                                    </Link>
+                                </li>
+                            ))}
+
+                            {/* <li>
                                 <Link
                                     href="/product/flash"
                                     className="font-medium hover:text-primary__color"
@@ -134,11 +166,13 @@ export default function Footer() {
                                 >
                                     Collections
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <div>
-                        <h6 className="font-bold mb-4">Important Link</h6>
+                        <h6 className="font-bold mb-4">
+                            {options.important_links}
+                        </h6>
                         <ul className="space-y-2">
                             {usefulLinks?.map((link, idx) => (
                                 <li key={idx}>
@@ -154,7 +188,9 @@ export default function Footer() {
                     </div>
                     <div>
                         <div>
-                            <h6 className="font-bold mb-4">Address</h6>
+                            <h6 className="font-bold mb-4">
+                                {options.address}
+                            </h6>
                             <ul className="space-y-3">
                                 {contactInfo?.location && (
                                     <li className="flex items-center font-medium gap-1">
@@ -207,7 +243,7 @@ export default function Footer() {
 
                         {appSettings && (
                             <p className="font-bold text-primary__color">
-                                POWER BY |{" "}
+                                {powerByText} |{" "}
                                 {
                                     appSettings?.app_settings?.user
                                         ?.basic_settings?.site_name

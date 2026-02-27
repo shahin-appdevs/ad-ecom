@@ -2,7 +2,7 @@
 import { Suspense, useCallback } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Menu } from "@headlessui/react";
 import {
@@ -19,6 +19,7 @@ import {
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -414,6 +415,9 @@ function BrandProduct() {
         saveToLocalStorage(products[index], states[index].quantity - value);
     };
 
+    const t = useTranslations("HomePage.shopByBrand");
+    const loadMore = t("loadMore");
+
     return (
         <section className="sm:pt-4">
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
@@ -587,7 +591,7 @@ function BrandProduct() {
                             {data?.products?.next_page_url && (
                                 <div className="text-center mt-10">
                                     <Button
-                                        title="Load More"
+                                        title={loadMore}
                                         variant="primary"
                                         size="md"
                                         className="!px-8"

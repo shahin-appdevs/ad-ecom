@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import Link from "next/link";
+// import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Listbox } from "@headlessui/react";
 import {
@@ -27,6 +27,9 @@ const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 import logo from "@public/images/logo/logo.webp";
 import { LayoutDashboard } from "lucide-react";
+import { Link, useRouter } from "@/i18n/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const languages = [
     { id: 1, name: "US EN" },
@@ -58,6 +61,7 @@ export default function Header() {
     const data = useHomeData() || {};
     const homeData = data.homeData || null;
     const boxRef = useRef(null);
+    const router = useRouter();
 
     // useEffect(() => {
     //     const fetchUserProfile = async () => {
@@ -191,14 +195,24 @@ export default function Header() {
         },
     ];
 
+    // const navItems = [
+    //     { href: "/", label: "Home" },
+    //     { href: "/categories", label: "Categories" },
+    //     { href: "/product/new", label: "New Product" },
+    //     { href: "/product/flash", label: "Flash Sale" },
+    //     { href: "/brands", label: "Brand" },
+    //     { href: "/campaigns", label: "Campaign" },
+    //     { href: "/collections", label: "Collection" },
+    // ];
+
     const navItems = [
-        { href: "/", label: "Home" },
-        { href: "/categories", label: "Categories" },
-        { href: "/product/new", label: "New Product" },
-        { href: "/product/flash", label: "Flash Sale" },
-        { href: "/brands", label: "Brand" },
-        { href: "/campaigns", label: "Campaign" },
-        { href: "/collections", label: "Collection" },
+        { href: "/", key: "home" },
+        { href: "/categories", key: "categories" },
+        { href: "/product/new", key: "newProduct" },
+        { href: "/product/flash", key: "flashSale" },
+        { href: "/brands", key: "brand" },
+        { href: "/campaigns", key: "campaign" },
+        { href: "/collections", key: "collection" },
     ];
 
     useEffect(() => {
@@ -288,7 +302,7 @@ export default function Header() {
                     ? `/checkout?referCode=${storedReferCode}`
                     : "/checkout",
             );
-            window.location.href = "/user/auth/login";
+            router.push("/user/auth/login");
         }
         const localUrl = storedReferCode
             ? `/checkout?referCode=${storedReferCode}`
@@ -299,8 +313,8 @@ export default function Header() {
     const handleWishlistClick = (e) => {
         if (!isLoggedIn && !isSellerLoggedIn) {
             e.preventDefault();
-            sessionStorage.setItem("redirectAfterLogin", "/checkout");
-            window.location.href = "/user/auth/login";
+            sessionStorage.setItem("redirectAfterLogin", "/wishlist");
+            router.push("/user/auth/login");
         }
         const localUrl = "/wishlist";
         localStorage.setItem("intendedUrl", localUrl);
@@ -317,6 +331,32 @@ export default function Header() {
             document.removeEventListener("mousedown", handleClickOutside);
         };
     }, [isSearchTypeOpen]);
+
+    const t = useTranslations("HomePage");
+    const locale = useLocale();
+
+    // header translations
+    const searchPlaceholder = t("header.searchPlaceholder");
+    const searchButton = {
+        searchByProduct: t("header.searchButton.searchByProduct"),
+        searchByStall: t("header.searchButton.searchByStall"),
+    };
+    const dashboardTxt = {
+        dashboard: t("header.dashboard"),
+        sellerDashboard: t("header.sellerDashboard"),
+    };
+    const authTxt = {
+        login: t("header.login"),
+        register: t("header.register"),
+        logout: t("header.logout"),
+    };
+
+    const mobileBottomBar = {
+        home: t("header.mobileBottomBar.home"),
+        categories: t("header.mobileBottomBar.categories"),
+        account: t("header.mobileBottomBar.account"),
+        cart: t("header.mobileBottomBar.cart"),
+    };
 
     return (
         <>
@@ -356,6 +396,7 @@ export default function Header() {
                             <Link href="/wishlist" className="p-1">
                                 <HeartIcon className="w-5 h-5 text-gray-700" />
                             </Link>
+                            <LanguageSwitcher />
                         </div>
                     </div>
                     {showMobileSearch && (
@@ -435,7 +476,7 @@ export default function Header() {
                         <div className="relative w-full lg:flex-1 mx-0 lg:mx-6">
                             <input
                                 type="text"
-                                placeholder="Search by name..."
+                                placeholder={searchPlaceholder}
                                 className="w-full bg-neutral-100 rounded-full px-4 py-3 pl-10 pr-[180px] text-sm focus:outline-none"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -461,8 +502,8 @@ export default function Header() {
                                         className="h-full px-3 flex items-center justify-center text-sm"
                                     >
                                         {searchType === "product"
-                                            ? "Search By Product"
-                                            : "Search By Stall"}
+                                            ? searchButton.searchByProduct
+                                            : searchButton.searchByStall}
                                         <ChevronUpDownIcon className="w-4 h-4 ml-1" />
                                     </button>
                                     {isSearchTypeOpen && (
@@ -483,7 +524,9 @@ export default function Header() {
                                                         }}
                                                         className={`!w-full text-left px-4 py-2  text-sm ${searchType === "product" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
                                                     >
-                                                        Search By Product
+                                                        {
+                                                            searchButton.searchByProduct
+                                                        }
                                                     </button>
                                                 </li>
                                                 <li className="!w-full">
@@ -498,7 +541,9 @@ export default function Header() {
                                                         }}
                                                         className={`w-full text-left px-4 py-2  text-sm ${searchType === "stall" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
                                                     >
-                                                        Search By Stall
+                                                        {
+                                                            searchButton.searchByStall
+                                                        }
                                                     </button>
                                                 </li>
                                             </ul>
@@ -558,7 +603,7 @@ export default function Header() {
                                     className="flex items-center gap-1 hover:text-primary__color"
                                 >
                                     <UserIcon className="w-5 h-5" />
-                                    <span>Dashboard</span>
+                                    <span>{dashboardTxt.dashboard}</span>
                                 </Link>
                             ) : isSellerLoggedIn ? (
                                 <Link
@@ -566,7 +611,7 @@ export default function Header() {
                                     className="flex items-center gap-1 hover:text-primary__color"
                                 >
                                     <UserIcon className="w-5 h-5" />
-                                    <span>Dashboard</span>
+                                    <span>{dashboardTxt.sellerDashboard}</span>
                                 </Link>
                             ) : (
                                 <>
@@ -575,14 +620,14 @@ export default function Header() {
                                         className="flex items-center gap-1 hover:text-primary__color"
                                     >
                                         <UserIcon className="w-5 h-5" />
-                                        <span>Sign In</span>
+                                        <span>{authTxt.login}</span>
                                     </Link>
                                     <span>|</span>
                                     <Link
                                         href="/user/auth/register"
                                         className="hover:text-primary__color"
                                     >
-                                        Register
+                                        {authTxt.register}
                                     </Link>
                                 </>
                             )}
@@ -757,7 +802,7 @@ export default function Header() {
                                 )}
                             </Link>
                             <div className="relative max-w-[180px]">
-                                <select
+                                {/* <select
                                     value={selectedLanguage?.name || ""}
                                     onChange={(e) => {
                                         const selected = languages.find(
@@ -789,12 +834,13 @@ export default function Header() {
                                             {language.name}
                                         </option>
                                     ))}
-                                </select>
+                                </select> */}
+                                <LanguageSwitcher />
 
                                 {/* Custom arrow icon - pointer-events-none so it doesn't block clicks */}
-                                <div className="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none">
+                                {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none">
                                     <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
@@ -802,7 +848,23 @@ export default function Header() {
                 <nav className="bg-white  text-color__heading text-sm font-semibold">
                     <div className="container xl:max-w-[1530px] px-4 mx-auto">
                         <ul className="hidden lg:flex items-center justify-center px-5  ">
-                            {navItems.map(({ href, label, icon }) => {
+                            {navItems.map(({ href, key, icon }) => {
+                                const isActive =
+                                    pathname ===
+                                    `/${locale}${href === "/" ? "" : href}`;
+
+                                return (
+                                    <li key={href} className="relative">
+                                        <Link
+                                            href={href}
+                                            className={`${key === "categories" ? "md:hidden" : ""} flex items-center gap-1 py-2 2xl:py-3.5 px-4  after:absolute after:bottom-[-1px] after:left-0  after:h-[1px] after:w-full after:z-10 border border-white rounded-t-md  ${isActive ? "bg-white text-primary__color !border-primary__color !border-b-white after:!bg-white  px-3 " : ""}`}
+                                        >
+                                            {t(`header.nav.${key}`)}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                            {/* {navItems.map(({ href, label, icon }) => {
                                 const isActive = pathname === href;
                                 return (
                                     <li key={href} className="relative">
@@ -815,7 +877,7 @@ export default function Header() {
                                         </Link>
                                     </li>
                                 );
-                            })}
+                            })} */}
                         </ul>
                         {isMobileMenuOpen && (
                             <>
@@ -884,10 +946,15 @@ export default function Header() {
                                     </ul>
                                 </div> */}
                                     <ul className="flex flex-col py-4">
-                                        {navItems.map(({ href, label }) => {
-                                            const isActive = pathname === href;
+                                        {navItems.map(({ href, key }) => {
+                                            const isActive =
+                                                pathname ===
+                                                `/${locale}${href === "/" ? "" : href}`;
                                             return (
-                                                <li key={href}>
+                                                <li
+                                                    key={href}
+                                                    className="border-b"
+                                                >
                                                     <Link
                                                         href={href}
                                                         className={`block px-4 py-2.5 rounded text-sm ${
@@ -901,7 +968,7 @@ export default function Header() {
                                                             )
                                                         }
                                                     >
-                                                        {label}
+                                                        {t(`header.nav.${key}`)}
                                                     </Link>
                                                 </li>
                                             );
@@ -909,8 +976,10 @@ export default function Header() {
                                     </ul>
                                 </div>
                                 <ul className="flex flex-col gap-2 py-4 lg:hidden">
-                                    {navItems.map(({ href, label }) => {
-                                        const isActive = pathname === href;
+                                    {navItems.map(({ href, key }) => {
+                                        const isActive =
+                                            pathname ===
+                                            `/${locale}${href === "/" ? "" : href}`;
                                         return (
                                             <li key={href}>
                                                 <Link
@@ -926,7 +995,7 @@ export default function Header() {
                                                         )
                                                     }
                                                 >
-                                                    {label}
+                                                    {t(`header.nav.${key}`)}
                                                 </Link>
                                             </li>
                                         );
@@ -939,15 +1008,19 @@ export default function Header() {
                 <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
                     <div className="flex justify-around items-center py-2">
                         <Link href="/" className="flex flex-col items-center">
-                            {/* <HomeIcon className="w-5 h-5 text-gray-700" /> */}
-                            <span className="text-xs mt-1">Home</span>
+                            <HomeIcon className="w-5 h-5 text-gray-700" />
+                            <span className="text-xs mt-1">
+                                {mobileBottomBar.home}
+                            </span>
                         </Link>
                         <Link
                             href="/categories"
                             className="flex flex-col items-center"
                         >
                             <LayoutDashboard className="w-5 h-5 text-gray-700" />
-                            <span className="text-xs mt-1">Category</span>
+                            <span className="text-xs mt-1">
+                                {mobileBottomBar.categories}
+                            </span>
                         </Link>
                         {isLoggedIn ? (
                             <Link
@@ -955,7 +1028,9 @@ export default function Header() {
                                 className="flex flex-col items-center"
                             >
                                 <UserIcon className="w-5 h-5 text-gray-700" />
-                                <span className="text-xs mt-1">Account</span>
+                                <span className="text-xs mt-1">
+                                    {mobileBottomBar.account}
+                                </span>
                             </Link>
                         ) : isSellerLoggedIn ? (
                             <Link
@@ -963,7 +1038,9 @@ export default function Header() {
                                 className="flex flex-col items-center"
                             >
                                 <UserIcon className="w-5 h-5 text-gray-700" />
-                                <span className="text-xs mt-1">Account</span>
+                                <span className="text-xs mt-1">
+                                    {mobileBottomBar.account}
+                                </span>
                             </Link>
                         ) : (
                             <>
@@ -973,7 +1050,7 @@ export default function Header() {
                                 >
                                     <UserIcon className="w-5 h-5 text-gray-700" />
                                     <span className="text-xs mt-1">
-                                        Account
+                                        {mobileBottomBar.account}
                                     </span>
                                 </Link>
                             </>
@@ -989,7 +1066,9 @@ export default function Header() {
                                     {cartCount}
                                 </span>
                             )}
-                            <span className="text-xs mt-1">Cart</span>
+                            <span className="text-xs mt-1">
+                                {mobileBottomBar.cart}
+                            </span>
                         </Link>
                     </div>
                 </div>

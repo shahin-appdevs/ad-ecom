@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { dashboardGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
 

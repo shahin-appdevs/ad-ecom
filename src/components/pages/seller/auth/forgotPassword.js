@@ -1,11 +1,11 @@
 "use client";
-import { useState } from 'react';
-import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
-import { forgotPasswordSellerAPI } from '@root/services/apiClient/apiClient';
+import { forgotPasswordSellerAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
 import logo from "@public/images/logo/favicon.jpeg";
@@ -27,7 +27,9 @@ export default function ForgotPassword() {
 
             if (successMessage) {
                 toast.success(successMessage);
-                router.push(`/seller/auth/otp?phone=${encodeURIComponent(credentials)}`);
+                router.push(
+                    `/seller/auth/otp?phone=${encodeURIComponent(credentials)}`,
+                );
             } else if (errorMessage) {
                 toast.error(errorMessage);
             } else {
@@ -48,7 +50,9 @@ export default function ForgotPassword() {
     return (
         <section className="min-h-[calc(100vh-200px)] py-8 xl:py-0 px-4 md:px-0 flex items-center justify-center">
             <div className="w-full max-w-md border rounded-md bg-white p-6">
-                <h2 className="text-center text-lg font-semibold mb-5 border-b pb-4">Login with Us</h2>
+                <h2 className="text-center text-lg font-semibold mb-5 border-b pb-4">
+                    Login with Us
+                </h2>
                 <div className="flex items-center space-x-3 mb-7">
                     <Image
                         src={logo}
@@ -59,7 +63,9 @@ export default function ForgotPassword() {
                     />
                     <div>
                         <h6 className="font-semibold">JARA B2B.COM</h6>
-                        <p className="text-sm text-gray-600">এ প্রবেশ করুন ফোন নাম্বার এর মাধ্যমে</p>
+                        <p className="text-sm text-gray-600">
+                            এ প্রবেশ করুন ফোন নাম্বার এর মাধ্যমে
+                        </p>
                     </div>
                 </div>
                 <form className="space-y-5" onSubmit={handleSubmit}>
@@ -92,12 +98,20 @@ export default function ForgotPassword() {
                         />
                     </div>
                 </form>
-                <div className="text-center text-color__heading font-semibold mt-4">Or</div>
+                <div className="text-center text-color__heading font-semibold mt-4">
+                    Or
+                </div>
                 <div className="flex flex-col md:flex-row justify-between gap-2 md:gap-3 mt-4 border-t pt-5">
-                    <Link href="/seller/auth/login" className="bg-[#eef2ff] py-2 px-4 w-full text-center font-medium rounded-md text-primary__color hover:underline">
+                    <Link
+                        href="/seller/auth/login"
+                        className="bg-[#eef2ff] py-2 px-4 w-full text-center font-medium rounded-md text-primary__color hover:underline"
+                    >
                         Log In
                     </Link>
-                    <Link href="/seller/auth/register" className="bg-[#eef2ff] py-2 px-4 w-full text-center font-medium rounded-md text-primary__color hover:underline">
+                    <Link
+                        href="/seller/auth/register"
+                        className="bg-[#eef2ff] py-2 px-4 w-full text-center font-medium rounded-md text-primary__color hover:underline"
+                    >
                         Create Account
                     </Link>
                 </div>

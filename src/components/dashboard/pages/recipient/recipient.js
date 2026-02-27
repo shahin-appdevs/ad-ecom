@@ -1,12 +1,12 @@
 "use client";
 import { Fragment, useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import {
     PlusIcon,
     ComputerDesktopIcon,
     PencilIcon,
-    TrashIcon
+    TrashIcon,
 } from "@heroicons/react/24/outline";
 import { Dialog, Transition } from "@headlessui/react";
 
@@ -82,8 +82,13 @@ export default function RecipientSection() {
         <>
             <div className="bg-white rounded-[12px] p-7">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                    <h2 className="text-[16px] font-semibold">All Recipients</h2>
-                    <Link href="/recipient/add" className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition">
+                    <h2 className="text-[16px] font-semibold">
+                        All Recipients
+                    </h2>
+                    <Link
+                        href="/recipient/add"
+                        className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
+                    >
                         <PlusIcon className="h-5 w-5" />
                         Add recipient
                     </Link>
@@ -92,10 +97,18 @@ export default function RecipientSection() {
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">User</th>
-                                <th className="py-4 px-5 font-semibold">Email</th>
-                                <th className="py-4 px-5 font-semibold">Type</th>
-                                <th className="py-4 px-5 font-semibold">Action</th>
+                                <th className="py-4 px-5 font-semibold">
+                                    User
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Email
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Type
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Action
+                                </th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
@@ -103,16 +116,32 @@ export default function RecipientSection() {
                                 <tr key={index}>
                                     <td className="py-3.5 px-5 whitespace-nowrap">
                                         <div className="flex gap-2 items-center">
-                                            {getUserAvatar(recipient.userAvatar)}
-                                            <div className="text-sm font-medium">{recipient.user}</div>
+                                            {getUserAvatar(
+                                                recipient.userAvatar,
+                                            )}
+                                            <div className="text-sm font-medium">
+                                                {recipient.user}
+                                            </div>
                                         </div>
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">{recipient.email}</td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">{recipient.type}</td>
+                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                        {recipient.email}
+                                    </td>
+                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                        {recipient.type}
+                                    </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium flex gap-4">
-                                        <Link href="/send/remittance"><recipient.sendIcon className="h-5 w-5 text-gray-600 cursor-pointer" /></Link>
-                                        <Link href="/recipient/edit"><recipient.editIcon className="h-5 w-5 text-blue-500 cursor-pointer" /></Link>
-                                        <button onClick={() => openModal(recipient)}><recipient.deleteIcon className="h-5 w-5 text-red-500 cursor-pointer" /></button>
+                                        <Link href="/send/remittance">
+                                            <recipient.sendIcon className="h-5 w-5 text-gray-600 cursor-pointer" />
+                                        </Link>
+                                        <Link href="/recipient/edit">
+                                            <recipient.editIcon className="h-5 w-5 text-blue-500 cursor-pointer" />
+                                        </Link>
+                                        <button
+                                            onClick={() => openModal(recipient)}
+                                        >
+                                            <recipient.deleteIcon className="h-5 w-5 text-red-500 cursor-pointer" />
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -146,13 +175,19 @@ export default function RecipientSection() {
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                                    <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                                    <Dialog.Title
+                                        as="h3"
+                                        className="text-lg font-medium leading-6 text-gray-900"
+                                    >
                                         Delete Recipient
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
                                             Are you sure you want to delete{" "}
-                                            <strong>{selectedRecipient?.user}</strong> from your recipients?
+                                            <strong>
+                                                {selectedRecipient?.user}
+                                            </strong>{" "}
+                                            from your recipients?
                                         </p>
                                     </div>
 

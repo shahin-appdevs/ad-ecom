@@ -1,9 +1,9 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useState, useEffect } from "react";
 import { productOrderGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { ComputerDesktopIcon } from "@heroicons/react/24/outline";
 
 function SkeletonRow() {

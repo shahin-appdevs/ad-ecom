@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { affiliatePlanGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 function SkeletonCard() {
     return (

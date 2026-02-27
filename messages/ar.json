@@ -1,0 +1,110 @@
+{
+    "HomePage": {
+        "header": {
+            "searchPlaceholder": "ابحث بالاسم...",
+            "searchButton": {
+                "searchByProduct": "البحث حسب المنتج",
+                "searchByStall": "البحث حسب الكشك"
+            },
+            "login": "تسجيل الدخول",
+            "register": "تسجيل",
+            "logout": "تسجيل الخروج",
+            "dashboard": "لوحة التحكم",
+            "sellerDashboard": "لوحة التحكم للبائع",
+            "nav": {
+                "home": "الرئيسية",
+                "categories": "الفئات",
+                "newProduct": "منتج جديد",
+                "flashSale": "تخفيضات سريعة",
+                "brand": "العلامة التجارية",
+                "campaign": "حملة",
+                "collection": "مجموعة"
+            },
+            "mobileBottomBar": {
+                "home": "الرئيسية",
+                "categories": "الفئات",
+                "account": "حسابي",
+                "cart": "السلة"
+            }
+        },
+        "banner": {
+            "categoryTitle": "تصفح الفئات"
+        },
+        "flashSale": {
+            "flashSaleTitle": "تخفيضات سريعة",
+            "days": "أيام",
+            "hours": "ساعات",
+            "min": "دقيقة",
+            "sec": "ثانية",
+            "viewMore": "عرض المزيد",
+            "loadMore": "تحميل المزيد"
+        },
+        "newArrival": {
+            "newArrivalTitle": "وصل حديثاً",
+            "viewMore": "عرض المزيد",
+            "loadMore": "تحميل المزيد"
+        },
+        "shopByBrand": {
+            "title": "تسوق حسب العلامة التجارية",
+            "viewMore": "عرض المزيد",
+            "loadMore": "تحميل المزيد"
+        },
+        "stalls": {
+            "title": "الأكشاك",
+            "viewMore": "عرض المزيد"
+        },
+        "categoryProducts": {
+            "viewMore": "عرض المزيد",
+            "loadMore": "تحميل المزيد"
+        },
+        "footer": {
+            "options": {
+                "popular": "شائع",
+                "important_links": "روابط مهمة",
+                "address": "العنوان"
+            },
+            "downloadApp": "تحميل التطبيق",
+            "downloadAppText": "قم بتحميل التطبيق لتجربة تسوق أفضل",
+            "downloadAppButton": "تحميل التطبيق",
+            "copyRightText": "حقوق النشر © 2026 جميع الحقوق محفوظة",
+            "powerByText": "مدعوم من"
+        }
+    },
+    "ProductDetails": {
+        "size": "المقاس",
+        "color": "اللون",
+        "addToCart": "أضف إلى السلة",
+        "buyNow": "اشترِ الآن",
+        "outOfStock": "نفد المخزون",
+        "inStock": "متوفر في المخزون",
+        "category": "الفئة",
+        "stock": "المخزون",
+        "sku": "رمز المنتج",
+        "warranty": "الضمان",
+        "days": "أيام",
+        "share": "مشاركة",
+        "tabs": {
+            "description": "الوصف",
+            "details": "التفاصيل",
+            "reviews": "آراء العملاء"
+        },
+        "productDescription": "وصف المنتج",
+        "productDetails": "تفاصيل المنتج",
+        "customerReviews": "آراء العملاء",
+        "noReviewsYet": "لا توجد تقييمات بعد. كن أول من يقيم المنتج!",
+        "writeReview": "اكتب تقييمًا",
+        "yourReview": "تقييمك",
+        "submitReview": "إرسال التقييم",
+        "submitting": "جاري الإرسال...",
+        "recentViewed": "تمت المشاهدة مؤخرًا",
+        "productNotFound": "المنتج غير موجود",
+        "reviewPlaceholder": "شارك أفكارك حول هذا المنتج...",
+        "noRecentViewed": "لا توجد منتجات تمت مشاهدتها مؤخرًا",
+        "shareVia": "مشاركة عبر",
+        "close": "إغلاق",
+        "referral": {
+            "shareTitle": "مشاركة رابط الإحالة",
+            "shareText": "شارك هذا الرابط مع أصدقائك واكسب عمولات:"
+        }
+    }
+}

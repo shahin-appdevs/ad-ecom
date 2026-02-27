@@ -1,8 +1,6 @@
 "use client";
-import Link from "next/link";
-import {
-    PlusIcon,
-} from "@heroicons/react/24/outline";
+import { Link } from "@/i18n/navigation";
+import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 import { dashboardGetSellerAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
@@ -50,7 +48,8 @@ export default function TransactionHistorySection() {
                 setTransactions(transactions);
             } catch (error) {
                 toast.error(
-                    error?.response?.data?.message?.error?.[0] || "Something went wrong",
+                    error?.response?.data?.message?.error?.[0] ||
+                        "Something went wrong",
                 );
             } finally {
                 setLoading(false);
@@ -80,21 +79,39 @@ export default function TransactionHistorySection() {
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                <h2 className="text-[16px] font-semibold">Transaction History</h2>
+                <h2 className="text-[16px] font-semibold">
+                    Transaction History
+                </h2>
             </div>
             {loading ? (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Transaction ID</th>
-                                <th className="py-4 px-5 font-semibold">Type</th>
-                                <th className="py-4 px-5 font-semibold">Transaction Type</th>
-                                <th className="py-4 px-5 font-semibold">Request Amount</th>
-                                <th className="py-4 px-5 font-semibold">Payable</th>
-                                <th className="py-4 px-5 font-semibold">Remark</th>
-                                <th className="py-4 px-5 font-semibold">Status</th>
-                                <th className="py-4 px-5 font-semibold">Time & Date</th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Transaction ID
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Type
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Transaction Type
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Request Amount
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Payable
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Remark
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Status
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Time & Date
+                                </th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
@@ -111,31 +128,65 @@ export default function TransactionHistorySection() {
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Transaction ID</th>
-                                <th className="py-4 px-5 font-semibold">Type</th>
-                                <th className="py-4 px-5 font-semibold">Transaction Type</th>
-                                <th className="py-4 px-5 font-semibold">Request Amount</th>
-                                <th className="py-4 px-5 font-semibold">Payable</th>
-                                <th className="py-4 px-5 font-semibold">Remark</th>
-                                <th className="py-4 px-5 font-semibold">Status</th>
-                                <th className="py-4 px-5 font-semibold">Time & Date</th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Transaction ID
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Type
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Transaction Type
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Request Amount
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Payable
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Remark
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Status
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    Time & Date
+                                </th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
                             {transactions.map((transaction, index) => (
                                 <tr key={index}>
-                                    <td className="py-4 px-5 whitespace-nowrap text-sm text-primary__color font-medium">{transaction.trx}</td>
-                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">{transaction.type}</td>
-                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">{transaction.transaction_type}</td>
-                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">{transaction.request_amount}</td>
-                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">{transaction.payable}</td>
-                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">{transaction.remark || '-'}</td>
+                                    <td className="py-4 px-5 whitespace-nowrap text-sm text-primary__color font-medium">
+                                        {transaction.trx}
+                                    </td>
+                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">
+                                        {transaction.type}
+                                    </td>
+                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">
+                                        {transaction.transaction_type}
+                                    </td>
+                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">
+                                        {transaction.request_amount}
+                                    </td>
+                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">
+                                        {transaction.payable}
+                                    </td>
+                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">
+                                        {transaction.remark || "-"}
+                                    </td>
                                     <td className="py-4 px-5 whitespace-nowrap">
-                                        <span className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] capitalize ${getStatusColor(transaction.status)}`}>
+                                        <span
+                                            className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] capitalize ${getStatusColor(transaction.status)}`}
+                                        >
                                             {transaction.status}
                                         </span>
                                     </td>
-                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">{new Date(transaction.date_time).toLocaleString()}</td>
+                                    <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">
+                                        {new Date(
+                                            transaction.date_time,
+                                        ).toLocaleString()}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

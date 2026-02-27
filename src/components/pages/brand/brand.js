@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import Button from "@/components/utility/Button";
@@ -9,6 +9,7 @@ import {
     nextPageGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -85,6 +86,10 @@ export default function Brand() {
             setLoadMoreLoading(false);
         }
     };
+    // translation
+    const t = useTranslations("HomePage.shopByBrand");
+    const title = t("title");
+    const loadMore = t("loadMore");
 
     return (
         <section className="sm:pt-4">
@@ -96,7 +101,7 @@ export default function Brand() {
                     <div className="col-span-1 xl:col-span-10">
                         <div className="bg-white p-4 rounded-md">
                             <div className="flex items-center justify-between mb-4">
-                                <h5>Brand</h5>
+                                <h5>{title}</h5>
                             </div>
                             {loading ? (
                                 <BrandSkeleton />
@@ -106,7 +111,7 @@ export default function Brand() {
                                         <Link
                                             href={`/brands/products?id=${brand.id}`}
                                             key={index}
-                                            className="group/brand bg-gray-100 rounded-md hover:shadow-md transition-shadow"
+                                            className="group/brand overflow-hidden bg-gray-100 rounded-md hover:shadow-md transition-shadow"
                                         >
                                             <div className="relative p-[10px] text-center h-full flex items-center gap-2">
                                                 <div className=" p-3 aspect-square bg-white rounded-full flex w-[60px] md:w-[70px] h-[60px] md:h-[70px] items-center justify-center  ">
@@ -134,7 +139,7 @@ export default function Brand() {
                             {brandData?.brands?.next_page_url && (
                                 <div className="text-center mt-10">
                                     <Button
-                                        title="Load More"
+                                        title={loadMore}
                                         variant="primary"
                                         size="md"
                                         className="!px-8"

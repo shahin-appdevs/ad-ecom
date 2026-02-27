@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 // Components
 import SideNav from "@/components/dashboard/partials/SideNav";
@@ -51,11 +51,11 @@ export default function DashboardLayout({ children }) {
 
                 setDashboardData(response.data.data);
                 setIsLoading(false);
-                const intendedUrl = localStorage.getItem("intendedUrl");
-                if (intendedUrl) {
-                    localStorage.removeItem("intendedUrl");
-                    router.push(intendedUrl);
-                }
+                // const intendedUrl = localStorage.getItem("intendedUrl");
+                // if (intendedUrl) {
+                //     localStorage.removeItem("intendedUrl");
+                //     router.push(intendedUrl);
+                // }
             } catch (error) {
                 if (error.response?.status === 400) {
                     const smsVerified = localStorage.getItem("sms_verified");

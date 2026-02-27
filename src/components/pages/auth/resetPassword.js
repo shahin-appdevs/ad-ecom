@@ -3,7 +3,7 @@ import { useState, Suspense, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import { resetPasswordAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";

@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 
@@ -19,16 +19,14 @@ export default function OrderSuccessPage() {
                 <motion.div
                     animate={{ scale: [1, 1.2, 1] }}
                     transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
+                        duration: 1.5,
+                        repeat: Infinity,
+                        ease: "easeInOut",
                     }}
                 >
                     <CheckCircleIcon className="h-16 w-16 text-primary__color mb-6" />
                 </motion.div>
-                <h1 className="text-2xl font-bold mb-3">
-                    Order Confirmed!
-                </h1>
+                <h1 className="text-2xl font-bold mb-3">Order Confirmed!</h1>
                 <p className="text-center mb-6 max-w-md">
                     Thank you for your purchase. Your order has been
                     successfully placed and will be processed shortly.

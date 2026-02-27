@@ -1,6 +1,6 @@
 import Modal from "@/components/ui/Modal";
 import { CheckCircleIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import React from "react";
 
 const PendingModal = ({ open, onClose, title = "", message = "" }) => {

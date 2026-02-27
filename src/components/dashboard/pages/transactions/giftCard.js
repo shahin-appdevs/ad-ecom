@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { allTransactionsGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 function SkeletonRow() {
     return (

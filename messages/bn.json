@@ -1,0 +1,110 @@
+{
+    "HomePage": {
+        "header": {
+            "searchPlaceholder": "নামের মাধ্যমে খুঁজুন...",
+            "searchButton": {
+                "searchByProduct": "পণ্য দ্বারা খুঁজুন",
+                "searchByStall": "স্টল দ্বারা খুঁজুন"
+            },
+            "login": "লগইন",
+            "register": "রেজিস্টার",
+            "logout": "লগআউট",
+            "dashboard": "ড্যাশবোর্ড",
+            "sellerDashboard": "বিক্রেতা ড্যাশবোর্ড",
+            "nav": {
+                "home": "হোম",
+                "categories": "ক্যাটাগরি",
+                "newProduct": "নতুন পণ্য",
+                "flashSale": "ফ্ল্যাশ সেল",
+                "brand": "ব্র্যান্ড",
+                "campaign": "ক্যাম্পেইন",
+                "collection": "কালেকশন"
+            },
+            "mobileBottomBar": {
+                "home": "হোম",
+                "categories": "ক্যাটাগরি",
+                "account": "অ্যাকাউন্ট",
+                "cart": "কার্ট"
+            }
+        },
+        "banner": {
+            "categoryTitle": "ক্যাটাগরি ব্রাউজ করুন"
+        },
+        "flashSale": {
+            "flashSaleTitle": "ফ্ল্যাশ সেল",
+            "days": "দিন",
+            "hours": "ঘণ্টা",
+            "min": "মিনিট",
+            "sec": "সেকেন্ড",
+            "viewMore": "আরও দেখুন",
+            "loadMore": "আরও লোড করুন"
+        },
+        "newArrival": {
+            "newArrivalTitle": "নতুন আগমন",
+            "viewMore": "আরও দেখুন",
+            "loadMore": "আরও লোড করুন"
+        },
+        "shopByBrand": {
+            "title": "ব্র্যান্ড অনুযায়ী কেনাকাটা করুন",
+            "viewMore": "আরও দেখুন",
+            "loadMore": "আরও লোড করুন"
+        },
+        "stalls": {
+            "title": "স্টলসমূহ",
+            "viewMore": "আরও দেখুন"
+        },
+        "categoryProducts": {
+            "viewMore": "আরও দেখুন",
+            "loadMore": "আরও লোড করুন"
+        },
+        "footer": {
+            "options": {
+                "popular": "জনপ্রিয়",
+                "important_links": "গুরুত্বপূর্ণ লিঙ্কসমূহ",
+                "address": "ঠিকানা"
+            },
+            "downloadApp": "অ্যাপ ডাউনলোড করুন",
+            "downloadAppText": "একটি উন্নত শপিং অভিজ্ঞতার জন্য অ্যাপ ডাউনলোড করুন",
+            "downloadAppButton": "অ্যাপ ডাউনলোড",
+            "copyRightText": "কপিরাইট © ২০২৬ সর্বস্বত্ব সংরক্ষিত",
+            "powerByText": "Powered by"
+        }
+    },
+    "ProductDetails": {
+        "size": "সাইজ",
+        "color": "রঙ",
+        "addToCart": "কার্টে যোগ করুন",
+        "buyNow": "এখন কিনুন",
+        "outOfStock": "স্টকে নেই",
+        "inStock": "স্টকে আছে",
+        "category": "ক্যাটাগরি",
+        "stock": "স্টক",
+        "sku": "এসকিউ",
+        "warranty": "ওয়ারেন্টি",
+        "days": "দিন",
+        "share": "শেয়ার",
+        "tabs": {
+            "description": "বিবরণ",
+            "details": "বিস্তারিত",
+            "reviews": "গ্রাহকের রিভিউ"
+        },
+        "productDescription": "পণ্যের বিবরণ",
+        "productDetails": "পণ্যের বিস্তারিত তথ্য",
+        "customerReviews": "গ্রাহকের রিভিউ",
+        "noReviewsYet": "এখনো কোনো রিভিউ নেই। প্রথম রিভিউ দিন!",
+        "writeReview": "রিভিউ লিখুন",
+        "yourReview": "আপনার রিভিউ",
+        "submitReview": "রিভিউ জমা দিন",
+        "submitting": "জমা হচ্ছে...",
+        "recentViewed": "সম্প্রতি দেখা",
+        "productNotFound": "পণ্য পাওয়া যায়নি",
+        "reviewPlaceholder": "এই পণ্য সম্পর্কে আপনার মতামত শেয়ার করুন...",
+        "noRecentViewed": "সম্প্রতি দেখা কোনো পণ্য নেই",
+        "shareVia": "শেয়ার করুন",
+        "close": "বন্ধ করুন",
+        "referral": {
+            "shareTitle": "রেফারেল লিঙ্ক শেয়ার করুন",
+            "shareText": "বন্ধুদের সাথে এই লিঙ্ক শেয়ার করে কমিশন আয় করুন:"
+        }
+    }
+}

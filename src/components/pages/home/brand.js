@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,6 +7,7 @@ import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import { useHomeData } from "@/components/context/HomeContext";
 import { ArrowRightIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -50,6 +51,11 @@ export default function Brand() {
     const { homeData, loading } = useHomeData();
     const { brands = [], brand_image_path } = homeData || {};
 
+    // translation
+    const t = useTranslations("HomePage.shopByBrand");
+    const title = t("title");
+    const viewMore = t("viewMore");
+
     if (loading) {
         return <BrandSkeleton />;
     }
@@ -63,14 +69,17 @@ export default function Brand() {
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
                 <div className="bg-white p-4 sm:rounded-md">
                     <div className="flex items-center justify-between mb-4">
-                        <h6 className="">Shop by Brand</h6>
+                        <h6 className="">{title}</h6>
                         <div>
                             <Link
                                 href="/brands"
-                                className="text-neutral-500 font-semibold flex items-center gap-1"
+                                className="text-neutral-500 font-semibold flex items-center gap-1 text-primary__color"
                             >
-                                <span>View More</span>
-                                <ArrowRightIcon size={18} className="w-4 h-4" />
+                                <span>{viewMore}</span>
+                                <ArrowRightIcon
+                                    size={18}
+                                    className="w-4 h-4 rtl:rotate-180"
+                                />
                             </Link>
                         </div>
                     </div>

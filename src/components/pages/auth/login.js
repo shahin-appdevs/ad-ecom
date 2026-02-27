@@ -2,7 +2,7 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import {
     basicDataGetAPI,
@@ -10,12 +10,13 @@ import {
     sendOtpAPI,
 } from "@root/services/apiClient/apiClient";
 import useAuthRedirect from "@/components/utility/useAuthRedirect";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 import logo from "@public/images/logo/favicon.jpeg";
 import ReCAPTCHA from "react-google-recaptcha";
 import { handleApiError } from "@/components/utility/handleApiError";
 import getImageUrl from "@/components/utility/getImageUrl";
+import { useRouter } from "@/i18n/navigation";
 
 function Login() {
     useAuthRedirect();
@@ -29,6 +30,7 @@ function Login() {
     const [appSettingsData, setAppSettingsData] = useState(null);
     const searchParams = useSearchParams();
     const payLinkToken = searchParams.get("pay_link_token");
+    const [redirectUrl, setRedirectUrl] = useState(null);
 
     const recaptchaRef = useRef();
 
@@ -40,6 +42,10 @@ function Login() {
     useEffect(() => {
         const appSettings = sessionStorage.getItem("appSettings");
         setAppSettingsData(appSettings ? JSON.parse(appSettings) : null);
+
+        // get redirect url from session storage
+        const url = sessionStorage?.getItem("redirectAfterLogin");
+        setRedirectUrl(url);
     }, []);
 
     useEffect(() => {
@@ -101,7 +107,10 @@ function Login() {
                 } else if (userInfo.two_factor_status === 1) {
                     router.push("/user/auth/2fa");
                 } else {
-                    if (payLinkToken) {
+                    if (redirectUrl) {
+                        router.replace(redirectUrl);
+                        sessionStorage.removeItem("redirectAfterLogin");
+                    } else if (payLinkToken) {
                         router.replace(
                             `/user/payment/link/share/token?token=${payLinkToken}`,
                         );

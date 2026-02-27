@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { useCart } from "@/components/context/CartContext";
@@ -12,6 +12,7 @@ import {
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -345,6 +346,16 @@ export default function FlashProduct() {
             setLoadMoreLoading(false);
         }
     };
+    // translation
+    const t = useTranslations("HomePage.flashSale");
+    const flashSaleTitle = t("flashSaleTitle");
+    const countdownLabels = [
+        { key: "days", value: timeLeft.days },
+        { key: "hours", value: timeLeft.hours },
+        { key: "min", value: timeLeft.minutes },
+        { key: "sec", value: timeLeft.seconds },
+    ];
+    const loadMore = t("loadMore");
 
     if (loading) {
         return (
@@ -389,30 +400,13 @@ export default function FlashProduct() {
                             <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4 relative">
                                 {/* Flash Sale Text */}
                                 <h4 className="text-red-500 text-xl font-bold mb-4 lg:mb-0">
-                                    Flash Sale
+                                    {flashSaleTitle}
                                 </h4>
 
                                 {/* Countdown Timer */}
                                 {flashProducts?.length > 0 && (
                                     <div className="flex flex-wrap gap-2 justify-start  lg:justify-end">
-                                        {[
-                                            {
-                                                label: "Days",
-                                                value: timeLeft.days,
-                                            },
-                                            {
-                                                label: "Hours",
-                                                value: timeLeft.hours,
-                                            },
-                                            {
-                                                label: "Min",
-                                                value: timeLeft.minutes,
-                                            },
-                                            {
-                                                label: "Sec",
-                                                value: timeLeft.seconds,
-                                            },
-                                        ].map((item, i) => (
+                                        {countdownLabels.map((item, i) => (
                                             <div
                                                 key={i}
                                                 className="text-center flex flex-col items-center justify-center w-[60px] h-[60px] bg-red-500 text-white px-2 py-2 rounded-md shadow-md"
@@ -423,7 +417,7 @@ export default function FlashProduct() {
                                                     ).padStart(2, "0")}
                                                 </p>
                                                 <span className="text-xs font-medium">
-                                                    {item.label}
+                                                    {t(item.key)}
                                                 </span>
                                             </div>
                                         ))}
@@ -563,7 +557,7 @@ export default function FlashProduct() {
                             {flashData?.flash_products?.next_page_url && (
                                 <div className="text-center mt-10">
                                     <Button
-                                        title="Load More"
+                                        title={loadMore}
                                         variant="primary"
                                         size="md"
                                         className="!px-8"
