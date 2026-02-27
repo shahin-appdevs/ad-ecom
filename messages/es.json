@@ -147,7 +147,20 @@
             "getSupport": "Obtener Soporte",
             "confirmLogout": "Confirmar Cierre de Sesión",
             "logoutConfirmText": "¿Estás seguro de que quieres cerrar sesión?",
-            "cancel": "Cancelar"
+            "cancel": "Cancelar",
+            "walletAccount": "Cuenta de billetera"
+        },
+        "wallet": {
+            "myBalance": "Mi saldo",
+            "myBalanceSubtitle": "Mi saldo para transacciones instantáneas",
+            "shoppingBalance": "Saldo de compras",
+            "shoppingBalanceSubtitle": "Saldo de compras reservado para compras",
+            "rewardPoints": "Puntos de recompensa",
+            "rewardPointsSubtitle": "Puntos de recompensa ganados por comisiones",
+            "points": "Puntos",
+            "default": "Predeterminado",
+            "viewAll": "Ver todo",
+            "failedFetch": "Error al obtener los datos del tablero"
         }
     }
 }

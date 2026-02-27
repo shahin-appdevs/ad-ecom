@@ -147,7 +147,20 @@
             "getSupport": "احصل على الدعم",
             "confirmLogout": "تأكيد تسجيل الخروج",
             "logoutConfirmText": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-            "cancel": "إلغاء"
+            "cancel": "إلغاء",
+            "walletAccount": "حساب المحفظة"
+        },
+        "wallet": {
+            "myBalance": "رصيدي",
+            "myBalanceSubtitle": "رصيدي للمعاملات الفورية",
+            "shoppingBalance": "رصيد التسوق",
+            "shoppingBalanceSubtitle": "رصيد التسوق محجوز للتسوق",
+            "rewardPoints": "نقاط المكافأة",
+            "rewardPointsSubtitle": "نقاط المكافأة المكتسبة من العمولات",
+            "points": "نقاط",
+            "default": "افتراضي",
+            "viewAll": "عرض الكل",
+            "failedFetch": "فشل في جلب بيانات لوحة التحكم"
         }
     }
 }

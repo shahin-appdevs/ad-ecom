@@ -147,7 +147,20 @@
             "getSupport": "Get Support",
             "confirmLogout": "Confirm Logout",
             "logoutConfirmText": "Are you sure you want to logout?",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "walletAccount": "Wallet Account"
+        },
+        "wallet": {
+            "myBalance": "My Balance",
+            "myBalanceSubtitle": "My Balance for instant transactions",
+            "shoppingBalance": "Shopping Balance",
+            "shoppingBalanceSubtitle": "Shopping Balance reserved for shopping",
+            "rewardPoints": "Reward Points",
+            "rewardPointsSubtitle": "Reward Points earned from commissions",
+            "points": "Points",
+            "default": "Default",
+            "viewAll": "View All",
+            "failedFetch": "Failed to fetch dashboard data"
         }
     }
 }

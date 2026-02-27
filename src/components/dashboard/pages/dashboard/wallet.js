@@ -6,12 +6,14 @@ import { toast } from "react-hot-toast";
 import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
+import { useTranslations } from "next-intl";
 
 export default function WalletSection() {
     const [dashboardData, setDashboardData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState("user");
     const { canEarnWallet } = useFeatureAccess();
+    const t = useTranslations("DashboardPage.wallet");
 
     useEffect(() => {
         const fetchDashboardData = async () => {
@@ -19,26 +21,26 @@ export default function WalletSection() {
                 const response = await dashboardGetAPI();
                 setDashboardData(response?.data?.data);
             } catch (error) {
-                toast.error("Failed to fetch dashboard data");
+                toast.error(t("failedFetch"));
             } finally {
                 setLoading(false);
             }
         };
         fetchDashboardData();
-    }, []);
+    }, [t]);
 
     const tabInfo = {
         user: {
-            title: "My Balance",
-            subtitle: "My Balance for instant transactions",
+            title: t("myBalance"),
+            subtitle: t("myBalanceSubtitle"),
         },
         shopping: {
-            title: "Shopping Balance",
-            subtitle: "Shopping Balance reserved for shopping",
+            title: t("shoppingBalance"),
+            subtitle: t("shoppingBalanceSubtitle"),
         },
         earning: {
-            title: "Reward Points",
-            subtitle: "Reward Points earned from commissions",
+            title: t("rewardPoints"),
+            subtitle: t("rewardPointsSubtitle"),
         },
     };
 
@@ -78,7 +80,7 @@ export default function WalletSection() {
                             </div>
                             <h3 className="text-[22px] font-bold mb-1">
                                 {type === "earning"
-                                    ? `${balanceValue} Points`
+                                    ? `${balanceValue} ${t("points")}`
                                     : `${wallet.currency.symbol}${balanceValue}`}
                             </h3>
                             <p className="font-medium">
@@ -89,7 +91,7 @@ export default function WalletSection() {
                             {wallet.currency.default === 1 &&
                                 type !== "earning" && (
                                     <span className="absolute top-2 right-2 bg-[#F5F7FF] text-[10px] px-2 py-1 font-semibold rounded">
-                                        Default
+                                        {t("default")}
                                     </span>
                                 )}
                         </div>
@@ -111,7 +113,7 @@ export default function WalletSection() {
                                 : " text-gray-600"
                         }`}
                     >
-                        My Balance
+                        {t("myBalance")}
                     </button>
                     <button
                         onClick={() => setActiveTab("shopping")}
@@ -121,7 +123,7 @@ export default function WalletSection() {
                                 : " text-gray-600"
                         }`}
                     >
-                        Shopping Balance
+                        {t("shoppingBalance")}
                     </button>
                     {canEarnWallet && (
                         <button
@@ -132,7 +134,7 @@ export default function WalletSection() {
                                     : " text-gray-600"
                             }`}
                         >
-                            Reward Points
+                            {t("rewardPoints")}
                         </button>
                     )}
                 </div>
@@ -149,7 +151,7 @@ export default function WalletSection() {
                             className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
                         >
                             <PlusIcon className="h-5 w-5" />
-                            View All
+                            {t("viewAll")}
                         </Link>
                     )}
                 </div>

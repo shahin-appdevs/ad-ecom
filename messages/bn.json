@@ -147,7 +147,20 @@
             "getSupport": "সহায়তা নিন",
             "confirmLogout": "লগআউট নিশ্চিত করুন",
             "logoutConfirmText": "আপনি কি নিশ্চিতভাবে লগআউট করতে চান?",
-            "cancel": "বাতিল"
+            "cancel": "বাতিল",
+            "walletAccount": "ওয়ালেট অ্যাকাউন্ট"
+        },
+        "wallet": {
+            "myBalance": "আমার ব্যালেন্স",
+            "myBalanceSubtitle": "তাৎক্ষণিক লেনদেনের জন্য আমার ব্যালেন্স",
+            "shoppingBalance": "শপিং ব্যালেন্স",
+            "shoppingBalanceSubtitle": "কেনাকাটার জন্য সংরক্ষিত শপিং ব্যালেন্স",
+            "rewardPoints": "রিওয়ার্ড পয়েন্ট",
+            "rewardPointsSubtitle": "কমিশন থেকে অর্জিত রিওয়ার্ড পয়েন্ট",
+            "points": "পয়েন্ট",
+            "default": "ডিফল্ট",
+            "viewAll": "সব দেখুন",
+            "failedFetch": "ড্যাশবোর্ড তথ্য আনতে ব্যর্থ হয়েছে"
         }
     }
 }
