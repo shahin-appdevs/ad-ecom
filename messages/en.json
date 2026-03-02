@@ -107,7 +107,7 @@
             "shareText": "Share this link with your friends to earn commissions:"
         }
     },
-    "DashboardPage": {
+    "Dashboard": {
         "sidenav": {
             "dashboard": "Dashboard",
             "wallet": "Wallet",
@@ -150,34 +150,50 @@
             "cancel": "Cancel",
             "walletAccount": "Wallet Account"
         },
-        "wallet": {
-            "myBalance": "My Balance",
-            "myBalanceSubtitle": "My Balance for instant transactions",
-            "shoppingBalance": "Shopping Balance",
-            "shoppingBalanceSubtitle": "Shopping Balance reserved for shopping",
-            "rewardPoints": "Reward Points",
-            "rewardPointsSubtitle": "Reward Points earned from commissions",
-            "points": "Points",
-            "default": "Default",
-            "viewAll": "View All",
-            "failedFetch": "Failed to fetch dashboard data"
-        },
-        "widget": {
-            "title": "Widget",
-            "subtitle": "Real-time widget for instant engagement",
-            "totalAddMoney": "Total Add Money",
-            "totalWithdraw": "Total Withdraw",
-            "totalBillPay": "Total Bill Pay",
-            "totalMobileTopUp": "Total Mobile TopUp",
-            "totalTransactions": "Total Transactions",
-            "totalPurchaseAmount": "Total Purchase Amount",
-            "totalPaidAmount": "Total Paid Amount",
-            "processingOrders": "Processing Orders",
-            "cancelOrders": "Cancel Orders",
-            "returnedOrders": "Returned Orders",
-            "deliveredOrders": "Delivered Orders",
-            "totalOrders": "Total Orders",
-            "failedFetch": "Failed to fetch dashboard data"
+        "homepage": {
+            "wallet": {
+                "myBalance": "My Balance",
+                "myBalanceSubtitle": "My Balance for instant transactions",
+                "shoppingBalance": "Shopping Balance",
+                "shoppingBalanceSubtitle": "Shopping Balance reserved for shopping",
+                "rewardPoints": "Reward Points",
+                "rewardPointsSubtitle": "Reward Points earned from commissions",
+                "points": "Points",
+                "default": "Default",
+                "viewAll": "View All",
+                "failedFetch": "Failed to fetch dashboard data"
+            },
+            "widget": {
+                "title": "Widget",
+                "subtitle": "Real-time widget for instant engagement",
+                "totalAddMoney": "Total Add Money",
+                "totalWithdraw": "Total Withdraw",
+                "totalBillPay": "Total Bill Pay",
+                "totalMobileTopUp": "Total Mobile TopUp",
+                "totalTransactions": "Total Transactions",
+                "totalPurchaseAmount": "Total Purchase Amount",
+                "totalPaidAmount": "Total Paid Amount",
+                "processingOrders": "Processing Orders",
+                "cancelOrders": "Cancel Orders",
+                "returnedOrders": "Returned Orders",
+                "deliveredOrders": "Delivered Orders",
+                "totalOrders": "Total Orders",
+                "failedFetch": "Failed to fetch dashboard data"
+            },
+            "transactionHistory": {
+                "title": "Transaction History",
+                "viewAll": "View All",
+                "trxId": "Transaction ID",
+                "type": "Type",
+                "trxType": "Transaction Type",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "remark": "Remark",
+                "status": "Status",
+                "timeAndDate": "Time & Date",
+                "noTransactions": "No transactions found",
+                "somethingWentWrong": "Something went wrong"
+            }
         }
     }
 }

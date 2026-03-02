@@ -13,7 +13,7 @@ export default function WalletSection() {
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState("user");
     const { canEarnWallet } = useFeatureAccess();
-    const t = useTranslations("DashboardPage.wallet");
+    const t = useTranslations("Dashboard.homepage.wallet");
 
     useEffect(() => {
         const fetchDashboardData = async () => {

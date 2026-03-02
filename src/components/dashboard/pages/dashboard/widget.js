@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
 
 export default function WidgetSection() {
-    const t = useTranslations("DashboardPage.widget");
+    const t = useTranslations("Dashboard.homepage.widget");
     const [dashboardData, setDashboardData] = useState(null);
     const [loading, setLoading] = useState(true);
 

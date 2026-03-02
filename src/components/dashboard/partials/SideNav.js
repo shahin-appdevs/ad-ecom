@@ -314,7 +314,7 @@ export const navLink = [
 ];
 
 export default function SideNav() {
-    const t = useTranslations("DashboardPage.sidenav");
+    const t = useTranslations("Dashboard.sidenav");
     const router = useRouter();
     const pathname = usePathname();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);

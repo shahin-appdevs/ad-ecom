@@ -107,7 +107,7 @@
             "shareText": "Comparte este enlace con tus amigos y gana comisiones:"
         }
     },
-    "DashboardPage": {
+    "Dashboard": {
         "sidenav": {
             "dashboard": "Tablero",
             "wallet": "Cartera",
@@ -150,34 +150,50 @@
             "cancel": "Cancelar",
             "walletAccount": "Cuenta de billetera"
         },
-        "wallet": {
-            "myBalance": "Mi saldo",
-            "myBalanceSubtitle": "Mi saldo para transacciones instantáneas",
-            "shoppingBalance": "Saldo de compras",
-            "shoppingBalanceSubtitle": "Saldo de compras reservado para compras",
-            "rewardPoints": "Puntos de recompensa",
-            "rewardPointsSubtitle": "Puntos de recompensa ganados por comisiones",
-            "points": "Puntos",
-            "default": "Predeterminado",
-            "viewAll": "Ver todo",
-            "failedFetch": "Error al obtener los datos del tablero"
-        },
-        "widget": {
-            "title": "Widget",
-            "subtitle": "Widget en tiempo real para interacción instantánea",
-            "totalAddMoney": "Total Add Money",
-            "totalWithdraw": "Total Retiro",
-            "totalBillPay": "Total Pago de Facturas",
-            "totalMobileTopUp": "Total Recarga Móvil",
-            "totalTransactions": "Total Transacciones",
-            "totalPurchaseAmount": "Total Monto de Compra",
-            "totalPaidAmount": "Total Monto Pagado",
-            "processingOrders": "Pedidos en Proceso",
-            "cancelOrders": "Pedidos Cancelados",
-            "returnedOrders": "Pedidos Devueltos",
-            "deliveredOrders": "Pedidos Entregados",
-            "totalOrders": "Total Pedidos",
-            "failedFetch": "Error al obtener los datos del tablero"
+        "homepage": {
+            "wallet": {
+                "myBalance": "Mi saldo",
+                "myBalanceSubtitle": "Mi saldo para transacciones instantáneas",
+                "shoppingBalance": "Saldo de compras",
+                "shoppingBalanceSubtitle": "Saldo de compras reservado para compras",
+                "rewardPoints": "Puntos de recompensa",
+                "rewardPointsSubtitle": "Puntos de recompensa ganados por comisiones",
+                "points": "Puntos",
+                "default": "Predeterminado",
+                "viewAll": "Ver todo",
+                "failedFetch": "Error al obtener los datos del tablero"
+            },
+            "widget": {
+                "title": "Widget",
+                "subtitle": "Widget en tiempo real para interacción instantánea",
+                "totalAddMoney": "Total Add Money",
+                "totalWithdraw": "Total Retiro",
+                "totalBillPay": "Total Pago de Facturas",
+                "totalMobileTopUp": "Total Recarga Móvil",
+                "totalTransactions": "Total Transacciones",
+                "totalPurchaseAmount": "Total Monto de Compra",
+                "totalPaidAmount": "Total Monto Pagado",
+                "processingOrders": "Pedidos en Proceso",
+                "cancelOrders": "Pedidos Cancelados",
+                "returnedOrders": "Pedidos Devueltos",
+                "deliveredOrders": "Pedidos Entregados",
+                "totalOrders": "Total Pedidos",
+                "failedFetch": "Error al obtener los datos del tablero"
+            },
+            "transactionHistory": {
+                "title": "Historial de Transacciones",
+                "viewAll": "Ver todo",
+                "trxId": "ID de transacción",
+                "type": "Tipo",
+                "trxType": "Tipo de transacción",
+                "requestAmount": "Monto solicitado",
+                "payable": "Pagadero",
+                "remark": "Observación",
+                "status": "Estado",
+                "timeAndDate": "Hora y fecha",
+                "noTransactions": "No se encontraron transacciones",
+                "somethingWentWrong": "Algo salió mal"
+            }
         }
     }
 }
