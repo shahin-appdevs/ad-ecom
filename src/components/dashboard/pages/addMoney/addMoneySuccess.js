@@ -2,8 +2,10 @@
 import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import { useTranslations } from "next-intl";
 
 export default function AddMoneySuccessPage() {
+    const t = useTranslations("Dashboard.wallet.addMoney.addMoneySuccess");
     return (
         <section className="flex flex-col items-center justify-center min-h-[80vh] px-4">
             <motion.div
@@ -26,19 +28,14 @@ export default function AddMoneySuccessPage() {
                 >
                     <CheckCircleIcon className="h-16 w-16 text-primary__color mb-6" />
                 </motion.div>
-                <h1 className="text-2xl font-bold mb-3">
-                    Add Money Confirmed!
-                </h1>
-                <p className="text-center mb-6 max-w-md">
-                    Thank you for your transaction. Your transaction has been
-                    successfully confirm and will be processed shortly.
-                </p>
+                <h1 className="text-2xl font-bold mb-3">{t("title")}</h1>
+                <p className="text-center mb-6 max-w-md">{t("message")}</p>
                 <div className="flex gap-4">
                     <Link
                         href="/user/add/money"
                         className="bg-primary__color text-white px-6 py-3 rounded-md font-semibold hover:opacity-90 transition"
                     >
-                        Continue Add Money
+                        {t("continueButton")}
                     </Link>
                 </div>
             </motion.div>

@@ -190,6 +190,16 @@
                     "status": "Status",
                     "time": "Time & Date",
                     "noTransactions": "No add money transactions found"
+                },
+                "addMoneySuccess": {
+                    "title": "Add Money Confirmed!",
+                    "message": "Thank you for your transaction. Your transaction has been successfully confirm and will be processed shortly.",
+                    "continueButton": "Continue Add Money"
+                },
+                "addMoneyCancel": {
+                    "title": "Add Money Canceled!",
+                    "message": "Thank you for your submission. But your transaction has been canceled and will be processed shortly.",
+                    "continueButton": "Continue Add Money"
                 }
             },
             "withdrawMoney": {

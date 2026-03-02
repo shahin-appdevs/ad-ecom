@@ -190,6 +190,16 @@
                     "status": "Estado",
                     "time": "Hora y Fecha",
                     "noTransactions": "No se encontraron transacciones de adición de dinero"
+                },
+                "addMoneySuccess": {
+                    "title": "¡Adición de dinero confirmada!",
+                    "message": "Gracias por su transacción. Su transacción ha sido confirmada con éxito y será procesada en breve.",
+                    "continueButton": "Continuar agregando dinero"
+                },
+                "addMoneyCancel": {
+                    "title": "¡Adición de dinero cancelada!",
+                    "message": "Gracias por su envío. Pero su transacción ha sido cancelada y será procesada en breve.",
+                    "continueButton": "Continuar agregando dinero"
                 }
             },
             "withdrawMoney": {

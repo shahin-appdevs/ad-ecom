@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
     addMoneyGetAPI,
     InsertAddMoneyAPI,
@@ -40,6 +40,7 @@ const DEPOSIT_TYPES = [
 
 export default function AddMoneySection() {
     const t = useTranslations("Dashboard.wallet.addMoney");
+    const locale = useLocale();
     const [gateways, setGateways] = useState([]);
     const [selectedGateway, setSelectedGateway] = useState(null);
     const [selectedCurrency, setSelectedCurrency] = useState(null);
@@ -275,8 +276,8 @@ export default function AddMoneySection() {
                 selectedCurrency.alias,
                 wallet.selectedCurrency.code,
                 "WEB",
-                `${window.location.origin}/user/add/money/success`,
-                `${window.location.origin}/user/add/money/cancel`,
+                `${window.location.origin}/${locale}/user/add/money/success`,
+                `${window.location.origin}/${locale}/user/add/money/cancel`,
             );
 
             if (response.data.data.gateway_type === "AUTOMATIC") {
