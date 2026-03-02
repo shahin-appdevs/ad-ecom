@@ -243,6 +243,15 @@
                     "noTransactions": "لم يتم العثور على معاملات تبادل"
                 }
             },
+            "receiveMoney": {
+                "title": "استلام الأموال",
+                "qrAddress": "عنوان QR",
+                "share": "مشاركة",
+                "shareVia": "مشاركة عبر",
+                "shareOnWhatsApp": "مشاركة على واتساب",
+                "shareMessage": "أرسل الأموال إلى عنوان QR هذا: {code}",
+                "somethingWrong": "حدث خطأ ما"
+            },
             "withdrawMoney": {
                 "title": "سحب الأموال",
                 "exchangeRate": "سعر الصرف",

@@ -243,6 +243,15 @@
                     "noTransactions": "No se encontraron transacciones de cambio"
                 }
             },
+            "receiveMoney": {
+                "title": "Recibir dinero",
+                "qrAddress": "Dirección QR",
+                "share": "Compartir",
+                "shareVia": "Compartir vía",
+                "shareOnWhatsApp": "Compartir en WhatsApp",
+                "shareMessage": "Envía dinero a esta dirección QR: {code}",
+                "somethingWrong": "Algo salió mal"
+            },
             "withdrawMoney": {
                 "title": "Retirar Dinero",
                 "exchangeRate": "Tasa de Cambio",

@@ -243,6 +243,15 @@
                     "noTransactions": "No exchange transactions found"
                 }
             },
+            "receiveMoney": {
+                "title": "Receive Money",
+                "qrAddress": "QR Address",
+                "share": "Share",
+                "shareVia": "Share via",
+                "shareOnWhatsApp": "Share on WhatsApp",
+                "shareMessage": "Send money to this QR Address: {code}",
+                "somethingWrong": "Something went wrong"
+            },
             "withdrawMoney": {
                 "title": "Withdraw Money",
                 "exchangeRate": "Exchange Rate",

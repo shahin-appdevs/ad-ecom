@@ -1,11 +1,11 @@
 "use client";
 import { Fragment, useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { Dialog, Transition } from "@headlessui/react";
 import QRCode from "react-qr-code";
 import {
     ClipboardIcon,
     CheckIcon,
-    CogIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
@@ -13,6 +13,7 @@ import { receiveMoneyGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
 export default function ReceiveMoneySection() {
+    const t = useTranslations("Dashboard.wallet.receiveMoney");
     const [copied, setCopied] = useState(false);
     const [uniqueCode, setUniqueCode] = useState("");
     const [qrCode, setQrCode] = useState("");
@@ -45,7 +46,8 @@ export default function ReceiveMoneySection() {
                 setQrCode(extractedCode);
             } catch (error) {
                 toast.error(
-                    error?.response?.data?.message?.error?.[0] || "Something went wrong",
+                    error?.response?.data?.message?.error?.[0] ||
+                        t("somethingWrong"),
                 );
             } finally {
                 setLoading(false);
@@ -76,7 +78,7 @@ export default function ReceiveMoneySection() {
                 >
                     <div className="mb-4">
                         <label className="font-medium block mb-2">
-                            QR Address
+                            {t("qrAddress")}
                         </label>
                         <div className="relative">
                             <input
@@ -101,7 +103,7 @@ export default function ReceiveMoneySection() {
                         <QRCode value={qrCode} size={140} />
                     </div>
                     <Button
-                        title="Share"
+                        title={t("share")}
                         variant="primary"
                         size="md"
                         className="w-full"
@@ -151,16 +153,16 @@ export default function ReceiveMoneySection() {
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Share via
+                                        {t("shareVia")}
                                     </Dialog.Title>
                                     <div className="mt-4">
                                         <a
-                                            href={`https://wa.me/?text=${encodeURIComponent(`Send money to this QR Address: ${uniqueCode}`)}`}
+                                            href={`https://wa.me/?text=${encodeURIComponent(t("shareMessage", { code: uniqueCode }))}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm inline-block"
                                         >
-                                            Share on WhatsApp
+                                            {t("shareOnWhatsApp")}
                                         </a>
                                     </div>
                                 </Dialog.Panel>

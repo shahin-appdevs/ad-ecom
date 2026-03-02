@@ -243,6 +243,15 @@
                     "noTransactions": "কোন বিনিময়ের লেনদেন পাওয়া যায়নি"
                 }
             },
+            "receiveMoney": {
+                "title": "টাকা গ্রহণ",
+                "qrAddress": "কিউআর ঠিকানা",
+                "share": "শেয়ার করুন",
+                "shareVia": "মাধ্যমে শেয়ার করুন",
+                "shareOnWhatsApp": "হোয়াটসঅ্যাপে শেয়ার করুন",
+                "shareMessage": "এই কিউআর ঠিকানায় টাকা পাঠান: {code}",
+                "somethingWrong": "কিছু ভুল হয়েছে"
+            },
             "withdrawMoney": {
                 "title": "টাকা উত্তোলন",
                 "exchangeRate": "বিনিময় হার",
