@@ -345,8 +345,6 @@ function Checkout() {
             (district) => String(district.division_id) === String(divisionId),
         );
 
-        console.log(filteredDistricts);
-
         setDistricts(filteredDistricts);
 
         setFormData((prev) => ({

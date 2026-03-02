@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { Plus, Wifi } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import {
     myStroWalletCardGetAPI,
     mySudoVirtualCardGetAPI,

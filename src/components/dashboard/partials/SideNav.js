@@ -1,15 +1,16 @@
 "use client";
 // Packages
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { logoutAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
+import { useTranslations } from "next-intl";
 // Icons
 import {
     ChevronRightIcon,
@@ -50,6 +51,7 @@ import logo from "@public/images/logo/logo.webp";
 import rocket from "@public/images/icon/rocket.png";
 import { CreditCardIcon, GiftIcon } from "@heroicons/react/24/outline";
 import { useDashboardData } from "@/components/context/DashboardContext";
+import { ChevronLeftIcon } from "lucide-react";
 
 // Nav Links Data
 export const navLink = [
@@ -57,266 +59,262 @@ export const navLink = [
         items: [
             {
                 url: "/user/dashboard",
-                label: "Dashboard",
+                label: "dashboard",
                 icon: RectangleStackIcon,
             },
         ],
     },
     {
-        heading: "Wallet",
+        heading: "wallet",
         headingIcon: WalletIcon,
         items: [
             {
                 url: "/user/add/money",
-                label: "Add Balance",
+                label: "addBalance",
                 icon: SquaresPlusIcon,
                 featureKey: "add_money",
             },
             {
                 url: "/user/withdraw/money",
-                label: "Payment Request",
+                label: "paymentRequest",
                 icon: ArrowsPointingOutIcon,
                 featureKey: "withdraw_money",
             },
             {
                 url: "/user/money/exchange",
-                label: "Rate Converter",
+                label: "rateConverter",
                 icon: PresentationChartBarIcon,
                 featureKey: "money_exchange",
             },
             {
                 url: "/user/receive-money",
-                label: "My QR Code",
+                label: "myQrCode",
                 icon: ReceiptRefundIcon,
                 featureKey: "receive_money",
             },
             {
                 url: "/user/send-money",
-                label: "P2P Transfer",
+                label: "p2pTransfer",
                 icon: PaperAirplaneIcon,
                 featureKey: "send_money",
             },
             {
                 url: "/user/make/payment",
-                label: "Merchant Pay",
+                label: "merchantPay",
                 icon: BanknotesIcon,
                 featureKey: "make_payment",
             },
             {
                 url: "/user/money/out",
-                label: "Cash Out",
+                label: "cashOut",
                 icon: ArrowUpOnSquareIcon,
                 featureKey: "money_out",
             },
             {
                 url: "/user/money/request",
-                label: "Request Money",
+                label: "requestMoney",
                 icon: DocumentMinusIcon,
                 featureKey: "request_money",
             },
             {
                 url: "/user/payment/link",
-                label: "Payment Link",
+                label: "paymentLink",
                 icon: LinkIcon,
                 featureKey: "pay_link",
             },
         ],
     },
     {
-        heading: "Services",
+        heading: "services",
         headingIcon: ServerIcon,
         items: [
             {
                 url: "/user/bill/pay",
-                label: "Utility Pay",
+                label: "utilityPay",
                 icon: TicketIcon,
                 featureKey: "bill_pay",
             },
             {
                 url: "/user/mobile/topup",
-                label: "Mobile TopUp",
+                label: "mobileTopUp",
                 icon: DevicePhoneMobileIcon,
                 featureKey: "mobile_top_up",
             },
         ],
     },
     {
-        heading: "Ecommerce",
+        heading: "ecommerce",
         headingIcon: ShoppingBagIcon,
         items: [
             {
                 url: "/user/order",
-                label: "Orders",
+                label: "orders",
                 icon: ArrowDownOnSquareStackIcon,
             },
         ],
     },
     {
-        heading: "Security",
+        heading: "security",
         headingIcon: LockOpenIcon,
         items: [
             {
                 url: "/user/security/google/2fa",
-                label: "2FA Security",
+                label: "twoFaSecurity",
                 icon: LockClosedIcon,
             },
             {
                 url: "/user/setup/pin",
-                label: "Setup Pin",
+                label: "setupPin",
                 icon: EllipsisHorizontalIcon,
             },
         ],
     },
     {
-        heading: "Cards",
+        heading: "cards",
         headingIcon: CreditCardIcon,
         items: [
             {
                 url: "/user/cards/virtual-card",
-                label: "Virtual Card",
+                label: "virtualCard",
                 icon: CreditCardIcon,
                 featureKey: "virtual_card",
             },
             {
                 url: "/user/cards/gift-card",
-                label: "Gift Card",
+                label: "giftCard",
                 icon: GiftIcon,
                 featureKey: "gift_cards",
             },
         ],
     },
     {
-        heading: "Transactions",
+        heading: "transactions",
         headingIcon: MapIcon,
         items: [
             {
                 url: "/user/transactions/all",
-                label: "All Transactions",
+                label: "allTransactions",
                 icon: ChartBarSquareIcon,
             },
             {
                 url: "/user/transactions/add-money",
-                label: "Add Balance",
+                label: "addBalance",
                 icon: SquaresPlusIcon,
                 featureKey: "add_money",
             },
             {
                 url: "/user/transactions/withdraw",
-                label: "Payment Request",
+                label: "paymentRequest",
                 icon: ArrowsPointingOutIcon,
                 featureKey: "withdraw_money",
             },
             {
                 url: "/user/transactions/money-exchange",
-                label: "Rate Converter",
+                label: "rateConverter",
                 icon: PresentationChartBarIcon,
                 featureKey: "money_exchange",
             },
             {
                 url: "/user/transactions/send-money",
-                label: "P2P Transfer",
+                label: "p2pTransfer",
                 icon: WalletIcon,
                 featureKey: "send_money",
             },
             {
                 url: "/user/transactions/make-payment",
-                label: "Merchant Pay",
+                label: "merchantPay",
                 icon: BanknotesIcon,
                 featureKey: "make_payment",
             },
             {
                 url: "/user/transactions/money-out",
-                label: "Cash Out",
+                label: "cashOut",
                 icon: ArrowUpOnSquareIcon,
                 featureKey: "money_out",
             },
             {
                 url: "/user/transactions/request-money",
-                label: "Request Money",
+                label: "requestMoney",
                 icon: DocumentMinusIcon,
                 featureKey: "request_money",
             },
             {
                 url: "/user/transactions/payment-link",
-                label: "Payment Link",
+                label: "paymentLink",
                 icon: LinkIcon,
                 featureKey: "pay_link",
             },
             {
                 url: "/user/transactions/bill-pay",
-                label: "Utility Bill",
+                label: "utilityBill",
                 icon: TicketIcon,
                 featureKey: "bill_pay",
             },
             {
                 url: "/user/transactions/mobile-topup",
-                label: "Mobile TopUp",
+                label: "mobileTopUp",
                 icon: DevicePhoneMobileIcon,
                 featureKey: "mobile_top_up",
             },
             {
                 url: "/user/transactions/point-conversion",
-                label: "Point Conversion",
+                label: "pointConversion",
                 icon: CurrencyPoundIcon,
             },
             {
                 url: "/user/transactions/referral-bonus",
-                label: "Referral Bonus",
+                label: "referralBonus",
                 icon: TrophyIcon,
             },
             {
                 url: "/user/transactions/affiliate-plan",
-                label: "Verify Plan",
+                label: "verifyPlan",
                 icon: SignalIcon,
             },
             {
                 url: "/user/transactions/virtual-card",
-                label: "Virtual Card",
+                label: "virtualCard",
                 icon: CreditCardIcon,
                 featureKey: "virtual_card",
             },
             {
                 url: "/user/transactions/gift-card",
-                label: "Gift Card",
+                label: "giftCard",
                 icon: GiftIcon,
                 featureKey: "gift_cards",
             },
         ],
     },
     {
-        heading: "Account",
+        heading: "account",
         headingIcon: PuzzlePieceIcon,
         items: [
             {
                 url: "/user/user/profile",
-                label: "Profile",
+                label: "profile",
                 icon: UserIcon,
             },
             {
                 url: "/user/refer/level",
-                label: "Referral Status",
+                label: "referralStatus",
                 icon: CheckBadgeIcon,
             },
             {
                 url: "/user/affiliate-plan",
-                label: "Verify Plan",
+                label: "verifyPlan",
                 icon: ReceiptPercentIcon,
             },
             {
                 url: "/user/point",
-                label: "Point to Cash",
+                label: "pointToCash",
                 icon: CircleStackIcon,
             },
-            // {
-            //     url: "/",
-            //     label: "Logout",
-            //     icon: ArrowLeftStartOnRectangleIcon,
-            // },
         ],
     },
 ];
 
 export default function SideNav() {
+    const t = useTranslations("Dashboard.sidenav");
     const router = useRouter();
     const pathname = usePathname();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -383,7 +381,7 @@ export default function SideNav() {
 
     return (
         <>
-            <div className="lg:hidden fixed top-[50%] transform translate-y-[-50%] left-[-10px] z-50">
+            <div className="lg:hidden fixed top-[50%] transform translate-y-[-50%] left-[-10px]  z-50">
                 <button
                     onClick={() => setIsSidebarOpen(true)}
                     className="py-1 px-2 bg-primary__color shadow-md rounded-md"
@@ -400,7 +398,7 @@ export default function SideNav() {
             )}
 
             <section
-                className={`w-[250px] h-[calc(100vh)] my-4 lg:my-0 rounded-lg lg:rounded-none fixed top-0 z-[9998] lg:z-10 lg:left-0  px-3 py-6 bg-white transition-all overflow-hidden ${isSidebarOpen ? "left-4" : "-left-full"}`}
+                className={`w-[250px] h-[calc(100vh)] my-4 lg:my-0 rounded-lg lg:rounded-none fixed top-0 z-[9998] lg:z-10 lg:left-0 rtl:right-0 rtl:left-auto px-3 py-6 bg-white transition-all overflow-hidden ${isSidebarOpen ? "left-4" : "-left-full"}`}
             >
                 <div className="flex flex-col justify-between h-full">
                     <div className="space-y-5">
@@ -431,7 +429,9 @@ export default function SideNav() {
                                             className={`size-5 transition-all ${pathname === item.url ? "fill-primary__color" : "fill-color__paragraph"}`}
                                         />
                                     </div>
-                                    <span className="ms-2">{item.label}</span>
+                                    <span className="ms-2">
+                                        {t(item.label)}
+                                    </span>
                                 </Link>
                             ))}
                             {filteredNavLinks
@@ -460,11 +460,14 @@ export default function SideNav() {
                                                         <section.headingIcon className="size-5 transition-all fill-color__paragraph" />
                                                     )}
                                                     <span className="flex items-center text-sm font-medium rounded-[10px] transition-all hover:text-primary__color ms-2">
-                                                        {section.heading}
+                                                        {t(section.heading)}
                                                     </span>
                                                 </div>
                                                 <ChevronRightIcon
-                                                    className={`h-3 w-3 transition-transform ${isOpen ? "rotate-90" : ""}`}
+                                                    className={`h-3 w-3 rtl:hidden transition-transform ${isOpen ? "rotate-90" : ""}`}
+                                                />
+                                                <ChevronLeftIcon
+                                                    className={`h-3 w-3 ltr:hidden transition-transform ${isOpen ? "-rotate-90" : ""}`}
                                                 />
                                             </button>
                                             <Transition
@@ -476,7 +479,7 @@ export default function SideNav() {
                                                 leaveFrom="opacity-100 max-h-[500px]"
                                                 leaveTo="opacity-0 max-h-0"
                                             >
-                                                <div className="pl-5">
+                                                <div className="ltr:pl-5 rtl:pr-5">
                                                     <ul className="space-y-1">
                                                         {section.items.map(
                                                             (
@@ -485,13 +488,13 @@ export default function SideNav() {
                                                             ) => {
                                                                 if (
                                                                     item.label ===
-                                                                        "Withdraw" &&
+                                                                        "paymentRequest" &&
                                                                     !canWithdraw
                                                                 )
                                                                     return null;
                                                                 if (
                                                                     item.label ===
-                                                                        "Referral Status" &&
+                                                                        "referralStatus" &&
                                                                     !canRefer
                                                                 )
                                                                     return null;
@@ -514,9 +517,9 @@ export default function SideNav() {
                                                                             >
                                                                                 <item.icon className="size-4 fill-color__paragraph" />
                                                                                 <span className="ms-2">
-                                                                                    {
-                                                                                        item.label
-                                                                                    }
+                                                                                    {t(
+                                                                                        item.label,
+                                                                                    )}
                                                                                 </span>
                                                                             </button>
                                                                         ) : (
@@ -542,9 +545,9 @@ export default function SideNav() {
                                                                                     />
                                                                                 </div>
                                                                                 <span className="ms-2">
-                                                                                    {
-                                                                                        item.label
-                                                                                    }
+                                                                                    {t(
+                                                                                        item.label,
+                                                                                    )}
                                                                                 </span>
                                                                             </Link>
                                                                         )}
@@ -579,17 +582,17 @@ export default function SideNav() {
                                     alt="Icon"
                                 /> */}
                                 <h4 className="text-[18px] font-bold text-gray-800">
-                                    Help Center
+                                    {t("helpCenter")}
                                 </h4>
                             </div>
                             <p className="leading-[17px] font-medium mt-2  text-gray-800">
-                                How can we help you?
+                                {t("howCanWeHelp")}
                             </p>
                             <Link
                                 href="/support/ticket"
                                 className="mt-4 bg-gray-800 text-white flex justify-center items-center py-2 px-5 gap-2 font-semibold rounded-lg transition hover:bg-primary__color hover:text-white hover:scale-x-105"
                             >
-                                Get Support
+                                {t("getSupport")}
                             </Link>
                         </div>
                     </div>
@@ -629,11 +632,11 @@ export default function SideNav() {
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Confirm Logout
+                                        {t("confirmLogout")}
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            Are you sure you want to logout?
+                                            {t("logoutConfirmText")}
                                         </p>
                                     </div>
                                     <div className="mt-4 flex justify-end gap-3">
@@ -644,14 +647,14 @@ export default function SideNav() {
                                                 setIsLogoutModalOpen(false)
                                             }
                                         >
-                                            Cancel
+                                            {t("cancel")}
                                         </button>
                                         <button
                                             type="button"
                                             className="inline-flex justify-center rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
                                             onClick={onLogout}
                                         >
-                                            Logout
+                                            {t("logout")}
                                         </button>
                                     </div>
                                 </Dialog.Panel>

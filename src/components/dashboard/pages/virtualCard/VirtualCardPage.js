@@ -6,7 +6,7 @@ import { Suspense, useEffect, useState } from "react";
 import { Plus, Wifi } from "lucide-react";
 import VirtualCardTransaction from "./VirtualCardTransaction";
 import VirtualCardDetailsModal from "./VirtualCardDetailsModal";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import {
     myStroWalletCardGetAPI,
     stroWalletPageInfoGetApi,

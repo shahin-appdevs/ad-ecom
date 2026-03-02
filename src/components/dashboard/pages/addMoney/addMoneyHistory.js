@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { addMoneyGetAPI } from "@root/services/apiClient/apiClient";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 function SkeletonRow() {
     return (
@@ -41,6 +42,7 @@ function SkeletonRow() {
 }
 
 export default function AddMoneyHistorySection() {
+    const t = useTranslations("Dashboard.wallet.addMoney.addMoneyLog");
     const [apiData, setApiData] = useState(null);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -98,13 +100,13 @@ export default function AddMoneyHistorySection() {
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                <h2 className="text-[16px] font-semibold">Add Money Logs</h2>
+                <h2 className="text-[16px] font-semibold">{t("title")}</h2>
                 <Link
                     href="/user/transactions/add-money"
                     className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
                 >
                     <PlusIcon className="h-5 w-5" />
-                    View All
+                    {t("viewAll")}
                 </Link>
             </div>
 
@@ -113,30 +115,32 @@ export default function AddMoneyHistorySection() {
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Trx</th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Gateway
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("trx")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Request Amount
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("gateway")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Payable
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("amount")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Exchange Rate
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("payable")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Fees & Charges
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("rate")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Current Balance
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("fees")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Status
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("balance")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("status")}
+                                </th>
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("time")}
                                 </th>
                             </tr>
                         </thead>
@@ -148,38 +152,38 @@ export default function AddMoneyHistorySection() {
                     </table>
                 </div>
             ) : transactions.length === 0 ? (
-                <div className="text-center py-5">
-                    No add money transactions found
-                </div>
+                <div className="text-center py-5">{t("noTransactions")}</div>
             ) : (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Trx</th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Gateway
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("trx")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Request Amount
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("gateway")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Payable
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("amount")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Exchange Rate
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("payable")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Fees & Charges
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("rate")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Current Balance
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("fees")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    status
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("balance")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("status")}
+                                </th>
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("time")}
                                 </th>
                             </tr>
                         </thead>

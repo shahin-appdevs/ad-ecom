@@ -2,7 +2,7 @@
 import { Suspense, useCallback } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { useCart } from "@/components/context/CartContext";
@@ -334,25 +334,25 @@ function StallDetails() {
                             ) : (
                                 <>
                                     {stall && (
-                                        <div className="w-full sm:h-[175px] relative group mb-4">
+                                        <div className="w-full relative h-[200px] lg:h-[300px] group mb-4 rounded-md overflow-hidden">
                                             <div className="w-full h-full bg-gray-100 rounded-md overflow-hidden">
                                                 <Image
                                                     src={stall.image}
                                                     alt={stall.title}
-                                                    className="w-full h-full object-cover"
+                                                    className="w-full h-full object-cover transition-transform duration-500 "
                                                     width={1470}
                                                     height={300}
                                                 />
-                                                <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                    <h3 className="text-white text-lg font-medium text-center px-2">
+
+                                                {/* Full gradient overlay */}
+                                                <div className="absolute bottom-0 left-0 right-0 h-full bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300" />
+
+                                                {/* Bottom content */}
+                                                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                                                    <h3 className="text-xl md:text-2xl font-medium truncate text-white">
                                                         {stall.title}
                                                     </h3>
-                                                </div>
-                                                <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black to-transparent">
-                                                    <h3 className="text-white text-sm font-medium truncate">
-                                                        {stall.title}
-                                                    </h3>
-                                                    <p className="text-white text-xs truncate">
+                                                    <p className="text-sm md:text-base line-clamp-2 text-white">
                                                         {stall.description}
                                                     </p>
                                                 </div>
@@ -370,22 +370,26 @@ function StallDetails() {
                                                     key={`${product.id}-${index}`}
                                                     className="bg-gray-100 rounded-md hover:shadow-md transition-shadow"
                                                 >
-                                                    <div className="relative p-[10px]">
-                                                        <div className="w-full h-[150px] sm:h-[215px] relative">
-                                                            <Image
-                                                                src={
-                                                                    product.image
-                                                                }
-                                                                fill
-                                                                alt={
-                                                                    product.title
-                                                                }
-                                                                className="object-cover rounded-md"
-                                                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                                            />
+                                                    <div className="relative">
+                                                        <div className="w-full h-[150px] sm:h-[215px] relative overflow-hidden rounded-t-md">
+                                                            <Link
+                                                                href={`/product/details?id=${product.id}`}
+                                                            >
+                                                                <Image
+                                                                    src={
+                                                                        product.image
+                                                                    }
+                                                                    fill
+                                                                    alt={
+                                                                        product.title
+                                                                    }
+                                                                    className="object-cover rounded-t-md hover:scale-105 transition-transform duration-300"
+                                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                                />
+                                                            </Link>
                                                         </div>
                                                         {product.hasDiscount && (
-                                                            <span className="absolute top-[8px] right-[8px] text-xs bg-primary__color text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
+                                                            <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
                                                                 {
                                                                     product.discount
                                                                 }{" "}
@@ -394,6 +398,13 @@ function StallDetails() {
                                                         )}
                                                     </div>
                                                     <div className="p-[10px] pt-[5px]">
+                                                        <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                                            <Link
+                                                                href={`/product/details?id=${product.id}`}
+                                                            >
+                                                                {product.title}
+                                                            </Link>
+                                                        </h5>
                                                         <div className="flex items-center gap-1 mb-1">
                                                             <span className="text-base font-semibold text-primary__color">
                                                                 {formatPrice(
@@ -411,13 +422,7 @@ function StallDetails() {
                                                                 </span>
                                                             )}
                                                         </div>
-                                                        <h5 className="text-sm font-normal text-[#4b5563] mb-2 sm:whitespace-normal truncate whitespace-nowrap overflow-hidden text-ellipsis">
-                                                            <Link
-                                                                href={`/product/details?id=${product.id}`}
-                                                            >
-                                                                {product.title}
-                                                            </Link>
-                                                        </h5>
+
                                                         {/* <div className="relative">
                                                             {!states[index]?.showQuantity ? (
                                                                 <button

@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import Button from "@/components/utility/Button";
 import { twoFactorAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import logo from "@public/images/logo/favicon.jpeg";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import getImageUrl from "@/components/utility/getImageUrl";
 
 export default function Otp() {

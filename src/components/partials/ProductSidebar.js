@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import {
     ChevronRightIcon,
     Bars3Icon,
@@ -94,7 +94,7 @@ export default function ProductSidebar() {
                     <ChevronDownIcon size={18} />
                 </div>
                 <div className="relative">
-                    <ul className="max-h-[65vh] overflow-y-auto">
+                    <ul className="max-h-[65vh] 2xl:max-h-[80vh]  overflow-y-auto">
                         {categories.map((category, index) => (
                             <li
                                 key={index}
@@ -117,12 +117,12 @@ export default function ProductSidebar() {
                                         <span>{category?.name}</span>
                                     </div>
                                     {category?.subcategories?.length > 0 && (
-                                        <ChevronRightIcon className="h-4 w-4 text-primary__color group-hover:translate-x-1 duration-200" />
+                                        <ChevronRightIcon className="h-4 w-4 text-primary__color group-hover:translate-x-1 duration-200 rtl:-rotate-180 rtl:group-hover:-translate-x-1" />
                                     )}
                                 </Link>
                                 {category?.subcategories?.length > 0 && (
                                     <div
-                                        className="absolute hidden md:block left-full ml-[-5px] top-0 w-[250px] h-full bg-white rounded-md  p-2.5 z-50 shadow-2xl
+                                        className="absolute hidden md:block left-full rtl:right-full ml-[-5px] top-0 w-[250px] h-full bg-white rounded-md  p-2.5 z-50 shadow-2xl
                                                 invisible opacity-0 -translate-x-4
                                                 group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
                                                 transition-all duration-300"
@@ -169,7 +169,7 @@ export default function ProductSidebar() {
                                                             </div>
                                                             {subcategory.brands
                                                                 .length > 0 && (
-                                                                <ChevronRightIcon className="h-4 w-4 text-primary__color" />
+                                                                <ChevronRightIcon className="h-4 w-4 text-primary__color rtl:-rotate-180 " />
                                                             )}
                                                         </Link>
                                                         {hoveredSubcategory ===
@@ -177,7 +177,7 @@ export default function ProductSidebar() {
                                                             subcategory.brands
                                                                 ?.length >
                                                                 0 && (
-                                                                <div className="absolute left-full ml-[-10px] top-0 w-[240px] h-full bg-white rounded-md shadow-xl p-2 z-20">
+                                                                <div className="absolute left-full rtl:-left-full  ml-[-10px] rtl:-ml-[-20px] top-0 w-[240px] h-full bg-white  rounded-md shadow-xl p-2 z-20">
                                                                     <ul>
                                                                         {subcategory.brands.map(
                                                                             (

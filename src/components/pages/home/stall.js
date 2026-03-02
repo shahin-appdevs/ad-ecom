@@ -1,12 +1,13 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import { useHomeData } from "@/components/context/HomeContext";
 import { ArrowRightIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -63,6 +64,11 @@ export default function Stall() {
     const { homeData, loading } = useHomeData();
     const { stalls = [], stall_image_path } = homeData || {};
 
+    const t = useTranslations("HomePage.stalls");
+
+    const newArrivalTitle = t("title");
+    const viewMore = t("viewMore");
+
     if (loading) {
         return <StallSkeleton />;
     }
@@ -76,13 +82,16 @@ export default function Stall() {
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
                 <div className="bg-white p-4 sm:rounded-md">
                     <div className="flex items-center justify-between mb-4">
-                        <h6>Stalls</h6>
+                        <h6>{newArrivalTitle}</h6>
                         <Link
                             href="/stalls"
-                            className="font-semibold flex items-center gap-1"
+                            className="font-semibold flex items-center gap-1 text-primary__color"
                         >
-                            <span>View More</span>
-                            <ArrowRightIcon size={18} className="w-4 h-4" />
+                            <span>{viewMore}</span>
+                            <ArrowRightIcon
+                                size={18}
+                                className="w-4 h-4 rtl:rotate-180"
+                            />
                         </Link>
                     </div>
 

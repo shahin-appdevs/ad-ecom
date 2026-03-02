@@ -3,8 +3,10 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
+import { useTranslations } from "next-intl";
 
 export default function WithdrawSuccessModal({ isOpen, onClose }) {
+    const t = useTranslations("Dashboard.wallet.withdrawMoney");
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-50" onClose={onClose}>
@@ -40,17 +42,12 @@ export default function WithdrawSuccessModal({ isOpen, onClose }) {
 
                             {/* Title */}
                             <Dialog.Title className="mt-4 text-center text-lg font-semibold text-gray-900">
-                                Withdrawal Submitted
+                                {t("successTitle")}
                             </Dialog.Title>
 
                             {/* Message */}
                             <p className="mt-2 text-center text-sm text-gray-600">
-                                Your withdrawal request has been submitted
-                                successfully. Please wait for{" "}
-                                <span className="font-medium">
-                                    admin approval
-                                </span>
-                                .
+                                {t("successMessage")}
                             </p>
 
                             {/* Button */}
@@ -59,7 +56,7 @@ export default function WithdrawSuccessModal({ isOpen, onClose }) {
                                     onClick={onClose}
                                     className="w-full rounded-xl bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                                 >
-                                    Okay
+                                    {t("okay")}
                                 </button>
                             </div>
                         </Dialog.Panel>

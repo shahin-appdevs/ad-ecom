@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { useCart } from "@/components/context/CartContext";
@@ -8,6 +8,7 @@ import { useHomeData } from "@/components/context/HomeContext";
 import { profiledGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { ArrowRightIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -267,6 +268,10 @@ export default function CategoryProducts() {
         return `${base_curr_symbol}${parseFloat(price).toFixed(2)}`;
     };
 
+    const t = useTranslations("HomePage.categoryProducts");
+
+    const viewMore = t("viewMore");
+
     if (loading) {
         return (
             <section className="sm:pt-4">
@@ -292,12 +297,12 @@ export default function CategoryProducts() {
                             <div>
                                 <Link
                                     href={`/categories/products?id=${category.id}`}
-                                    className="text-[#4b5563] font-semibold flex items-center gap-1"
+                                    className="text-[#4b5563] font-semibold flex items-center gap-1 text-primary__color"
                                 >
-                                    <span>View More</span>
+                                    <span>{viewMore}</span>
                                     <ArrowRightIcon
                                         size={18}
-                                        className="w-4 h-4"
+                                        className="w-4 h-4 rtl:rotate-180"
                                     />
                                 </Link>
                             </div>

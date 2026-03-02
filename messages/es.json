@@ -1,0 +1,298 @@
+{
+    "HomePage": {
+        "header": {
+            "searchPlaceholder": "Buscar por nombre...",
+            "searchButton": {
+                "searchByProduct": "Buscar por producto",
+                "searchByStall": "Buscar por puesto"
+            },
+            "login": "Iniciar sesión",
+            "register": "Registrarse",
+            "logout": "Cerrar sesión",
+            "dashboard": "Tablero",
+            "sellerDashboard": "Tablero del vendedor",
+            "nav": {
+                "home": "Inicio",
+                "categories": "Categorías",
+                "newProduct": "Nuevo producto",
+                "flashSale": "Oferta rápida",
+                "brand": "Marca",
+                "campaign": "Campaña",
+                "collection": "Colección"
+            },
+            "mobileBottomBar": {
+                "home": "Inicio",
+                "categories": "Categorías",
+                "account": "Cuenta",
+                "cart": "Carro"
+            }
+        },
+        "banner": {
+            "categoryTitle": "Explorar Categorías"
+        },
+        "flashSale": {
+            "flashSaleTitle": "Oferta relámpago",
+            "days": "Días",
+            "hours": "Horas",
+            "min": "Min",
+            "sec": "Seg",
+            "viewMore": "Ver Más",
+            "loadMore": "Cargar más"
+        },
+        "newArrival": {
+            "newArrivalTitle": "Nueva Llegada",
+            "viewMore": "Ver Más",
+            "loadMore": "Cargar más"
+        },
+        "shopByBrand": {
+            "title": "Comprar por marca",
+            "viewMore": "Ver más",
+            "loadMore": "Cargar más"
+        },
+        "stalls": {
+            "title": "Puestos",
+            "viewMore": "Ver más"
+        },
+        "categoryProducts": {
+            "viewMore": "Ver más",
+            "loadMore": "Cargar más"
+        },
+        "footer": {
+            "options": {
+                "popular": "Popular",
+                "important_links": "Enlaces importantes",
+                "address": "Dirección"
+            },
+            "downloadApp": "Descargar la App",
+            "downloadAppText": "Descarga la app para una mejor experiencia de compra",
+            "downloadAppButton": "Descargar App",
+            "copyRightText": "Copyright © 2026 Todos los derechos reservados",
+            "powerByText": "Desarrollado por"
+        }
+    },
+    "ProductDetails": {
+        "size": "TALLA",
+        "color": "COLOR",
+        "addToCart": "Añadir al carrito",
+        "buyNow": "Comprar ahora",
+        "outOfStock": "Agotado",
+        "inStock": "En stock",
+        "category": "Categoría",
+        "stock": "Existencias",
+        "sku": "SKU",
+        "warranty": "Garantía",
+        "days": "días",
+        "share": "Compartir",
+        "tabs": {
+            "description": "Descripción",
+            "details": "Detalles",
+            "reviews": "Reseñas de clientes"
+        },
+        "productDescription": "Descripción del producto",
+        "productDetails": "Detalles del producto",
+        "customerReviews": "Reseñas de clientes",
+        "noReviewsYet": "Aún no hay reseñas. ¡Sé el primero en opinar!",
+        "writeReview": "Escribe una reseña",
+        "yourReview": "Tu reseña",
+        "submitReview": "Enviar reseña",
+        "submitting": "Enviando...",
+        "recentViewed": "Visto recientemente",
+        "productNotFound": "Producto no encontrado",
+        "reviewPlaceholder": "Comparte tus pensamientos sobre este producto...",
+        "noRecentViewed": "No hay productos vistos recientemente",
+        "shareVia": "Compartir vía",
+        "close": "Cerrar",
+        "referral": {
+            "shareTitle": "Compartir enlace de referido",
+            "shareText": "Comparte este enlace con tus amigos y gana comisiones:"
+        }
+    },
+    "Dashboard": {
+        "sidenav": {
+            "dashboard": "Tablero",
+            "wallet": "Cartera",
+            "addBalance": "Agregar Saldo",
+            "paymentRequest": "Solicitud de Pago",
+            "rateConverter": "Convertidor de Tasa",
+            "myQrCode": "Mi Código QR",
+            "p2pTransfer": "Transferencia P2P",
+            "merchantPay": "Pago Comerciante",
+            "cashOut": "Retirar efectivo",
+            "requestMoney": "Solicitar Dinero",
+            "paymentLink": "Enlace de Pago",
+            "services": "Servicios",
+            "utilityPay": "Pago de Servicios",
+            "mobileTopUp": "Recarga Móvil",
+            "ecommerce": "Comercio Electrónico",
+            "orders": "Pedidos",
+            "security": "Seguridad",
+            "twoFaSecurity": "Seguridad 2FA",
+            "setupPin": "Configurar PIN",
+            "cards": "Tarjetas",
+            "virtualCard": "Tarjeta Virtual",
+            "giftCard": "Tarjeta de Regalo",
+            "transactions": "Transacciones",
+            "allTransactions": "Todas las Transacciones",
+            "utilityBill": "Factura de Servicios",
+            "pointConversion": "Conversión de Puntos",
+            "referralBonus": "Bono de Referido",
+            "verifyPlan": "Verificar Plan",
+            "account": "Cuenta",
+            "profile": "Perfil",
+            "referralStatus": "Estado de Referencia",
+            "pointToCash": "Punto a efectivo",
+            "logout": "Cerrar sesión",
+            "helpCenter": "Centro de Ayuda",
+            "howCanWeHelp": "¿Cómo podemos ayudarte?",
+            "getSupport": "Obtener Soporte",
+            "confirmLogout": "Confirmar Cierre de Sesión",
+            "logoutConfirmText": "¿Estás seguro de que quieres cerrar sesión?",
+            "cancel": "Cancelar",
+            "walletAccount": "Cuenta de billetera"
+        },
+        "wallet": {
+            "addMoney": {
+                "title": "Agregar Dinero",
+                "exchangeRate": "Tasa de Cambio",
+                "availableBalance": "Saldo Disponible",
+                "charge": "Cargo",
+                "depositType": "Tipo de Depósito",
+                "mainWallet": "Billetera Principal",
+                "shoppingWallet": "Billetera de Compras",
+                "selectGateway": "Seleccionar Pasarela de Pago",
+                "selectMethod": "Seleccionar Método de Pago",
+                "enterAmount": "Ingrese el Monto",
+                "amountPlaceholder": "Ingrese el Monto ({min} - {max})",
+                "adding": "Agregando...",
+                "preview": "Vista Previa",
+                "enteredAmount": "Monto Ingresado",
+                "feesAndCharges": "Tarifas y Cargos",
+                "youWillGet": "Obtendrá",
+                "totalPayable": "Total a Pagar",
+                "limitInfo": "Información de Límite",
+                "transactionLimit": "Límite de Transacción",
+                "dailyLimit": "Límite Diario",
+                "monthlyLimit": "Límite Mensual",
+                "dailyRemaining": "Límite Restante Diario",
+                "monthlyRemaining": "Límite Restante Mensual",
+                "notAvailable": "N/A",
+                "failedFetchLimits": "Error al obtener los límites restantes",
+                "addMoneyLog": {
+                    "title": "Registros de Adición de Dinero",
+                    "viewAll": "Ver Todo",
+                    "trx": "Trx",
+                    "gateway": "Pasarela",
+                    "amount": "Monto Solicitado",
+                    "payable": "Pagadero",
+                    "rate": "Tasa de Cambio",
+                    "fees": "Tarifas y Cargos",
+                    "balance": "Saldo Actual",
+                    "status": "Estado",
+                    "time": "Hora y Fecha",
+                    "noTransactions": "No se encontraron transacciones de adición de dinero"
+                },
+                "addMoneySuccess": {
+                    "title": "¡Adición de dinero confirmada!",
+                    "message": "Gracias por su transacción. Su transacción ha sido confirmada con éxito y será procesada en breve.",
+                    "continueButton": "Continuar agregando dinero"
+                },
+                "addMoneyCancel": {
+                    "title": "¡Adición de dinero cancelada!",
+                    "message": "Gracias por su envío. Pero su transacción ha sido cancelada y será procesada en breve.",
+                    "continueButton": "Continuar agregando dinero"
+                }
+            },
+            "withdrawMoney": {
+                "title": "Retirar Dinero",
+                "exchangeRate": "Tasa de Cambio",
+                "availableBalance": "Saldo Disponible",
+                "charge": "Cargo",
+                "selectGateway": "Seleccionar Pasarela de Pago",
+                "selectMethod": "Seleccionar Método de Pago",
+                "enterAmount": "Ingrese el Monto",
+                "amountPlaceholder": "Ingrese el Monto ({min} - {max})",
+                "instructions": "Instrucciones",
+                "enterField": "Ingrese {label}",
+                "requesting": "Solicitando...",
+                "confirm": "Confirmar",
+                "preview": "Vista Previa",
+                "enteredAmount": "Monto Ingresado",
+                "conversionAmount": "Monto de Conversión",
+                "feesAndCharges": "Tarifas y Cargos",
+                "youWillGet": "Obtendrá",
+                "totalPayable": "Total a Pagar",
+                "limitInfo": "Información de Límite",
+                "transactionLimit": "Límite de Transacción",
+                "dailyLimit": "Límite Diario",
+                "monthlyLimit": "Límite Mensual",
+                "dailyRemaining": "Límite Restante Diario",
+                "monthlyRemaining": "Límite Restante Mensual",
+                "notAvailable": "N/A",
+                "failedFetchLimits": "Error al obtener los límites restantes",
+                "withdrawFailed": "Retiro fallido",
+                "successTitle": "Retiro Enviado",
+                "successMessage": "Su solicitud de retiro ha sido enviada con éxito. Por favor, espere la aprobación del administrador.",
+                "okay": "De acuerdo",
+                "withdrawLogs": {
+                    "title": "Registros de Retiro",
+                    "viewAll": "Ver Todo",
+                    "trx": "Trx",
+                    "gateway": "Pasarela",
+                    "amount": "Monto Solicitado",
+                    "payable": "Pagadero",
+                    "rate": "Tasa de Cambio",
+                    "fees": "Tarifas y Cargos",
+                    "balance": "Saldo Actual",
+                    "status": "Estado",
+                    "time": "Hora y Fecha",
+                    "noTransactions": "No se encontraron transacciones de retiro"
+                }
+            }
+        },
+        "homepage": {
+            "wallet": {
+                "myBalance": "Mi saldo",
+                "myBalanceSubtitle": "Mi saldo para transacciones instantáneas",
+                "shoppingBalance": "Saldo de compras",
+                "shoppingBalanceSubtitle": "Saldo de compras reservado para compras",
+                "rewardPoints": "Puntos de recompensa",
+                "rewardPointsSubtitle": "Puntos de recompensa ganados por comisiones",
+                "points": "Puntos",
+                "default": "Predeterminado",
+                "viewAll": "Ver todo",
+                "failedFetch": "Error al obtener los datos del tablero"
+            },
+            "widget": {
+                "title": "Widget",
+                "subtitle": "Widget en tiempo real para interacción instantánea",
+                "totalAddMoney": "Total Add Money",
+                "totalWithdraw": "Total Retiro",
+                "totalBillPay": "Total Pago de Facturas",
+                "totalMobileTopUp": "Total Recarga Móvil",
+                "totalTransactions": "Total Transacciones",
+                "totalPurchaseAmount": "Total Monto de Compra",
+                "totalPaidAmount": "Total Monto Pagado",
+                "processingOrders": "Pedidos en Proceso",
+                "cancelOrders": "Pedidos Cancelados",
+                "returnedOrders": "Pedidos Devueltos",
+                "deliveredOrders": "Pedidos Entregados",
+                "totalOrders": "Total Pedidos",
+                "failedFetch": "Error al obtener los datos del tablero"
+            },
+            "transactionHistory": {
+                "title": "Historial de Transacciones",
+                "viewAll": "Ver todo",
+                "trxId": "ID de transacción",
+                "type": "Tipo",
+                "trxType": "Tipo de transacción",
+                "requestAmount": "Monto solicitado",
+                "payable": "Pagadero",
+                "remark": "Observación",
+                "status": "Estado",
+                "timeAndDate": "Hora y fecha",
+                "noTransactions": "No se encontraron transacciones",
+                "somethingWentWrong": "Algo salió mal"
+            }
+        }
+    }
+}

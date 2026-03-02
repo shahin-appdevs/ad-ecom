@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import {
     ChevronRightIcon,
@@ -16,15 +16,16 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { ChevronDownIcon, List } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
-const SkeletonCategoryMenu = () => (
-    <div className="w-full md:w-[240px] h-full md:min-h-[380px] bg-white border relative rounded-md ">
+const SkeletonCategoryMenu = ({ categoryTitle }) => (
+    <div className="w-full md:w-[240px] h-full md:min-h-[380px] bg-white border relative rounded-md hidden lg:block">
         <div className=" gap-2 bg-primary__color rounded-t-md py-2 text-white px-2 justify-between font-semibold flex items-center">
             <span className="flex items-center gap-2 ">
                 <List size={18} />
-                <span>Browse Category</span>
+                <span>{categoryTitle}</span>
             </span>
             <ChevronDownIcon size={18} />
         </div>
@@ -101,12 +102,16 @@ export default function Banner() {
                 })) || [],
         })) || [];
 
+    const t = useTranslations("HomePage.banner");
+
+    const categoryTitle = t("categoryTitle");
+
     if (loading) {
         return (
             <section className="sm:pt-4">
                 <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
                     <div className="flex flex-col md:flex-row sm:gap-4 relative">
-                        <SkeletonCategoryMenu />
+                        <SkeletonCategoryMenu categoryTitle={categoryTitle} />
                         <SkeletonBanner />
                     </div>
                 </div>
@@ -128,7 +133,7 @@ export default function Banner() {
                             <div className=" gap-2 bg-primary__color rounded-t-md py-2 text-white px-2 justify-between font-semibold flex items-center">
                                 <span className="flex items-center gap-2 ">
                                     <List size={18} />
-                                    <span>Browse Category</span>
+                                    <span>{categoryTitle}</span>
                                 </span>
                                 <ChevronDownIcon size={18} />
                             </div>
@@ -163,19 +168,19 @@ export default function Banner() {
                                                 </div>
                                                 {category.subcategories.length >
                                                     0 && (
-                                                    <ChevronRightIcon className="h-4 group-hover:translate-x-1 duration-200 w-4 text-primary__color" />
+                                                    <ChevronRightIcon className="h-4 group-hover:translate-x-1 duration-200 w-4 text-primary__color rtl:rotate-180 rtl:group-hover:-translate-x-1" />
                                                 )}
                                             </Link>
                                             {category.subcategories.length >
                                                 0 && (
                                                 <div
-                                                    className={`absolute hidden md:block left-full ml-[-15px] top-0 w-[250px] h-full bg-white rounded-md  p-2.5 z-50 shadow-2xl
+                                                    className={`absolute hidden md:block left-full rtl:-left-full ml-[-5px] rtl:mr-[-15px] top-0 w-[250px] h-full bg-white rounded-md   z-50 shadow-2xl
                                                 invisible opacity-0 -translate-x-4
                                                 group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
                                                 transition-all duration-300
                                                 `}
                                                 >
-                                                    <ul className="">
+                                                    <ul className="py-2">
                                                         {category.subcategories.map(
                                                             (
                                                                 subcategory,
@@ -186,7 +191,7 @@ export default function Banner() {
                                                                         subcategory.id ||
                                                                         subIndex
                                                                     }
-                                                                    className="flex items-center justify-between transition-all  text-neutral-600 hover:text-primary__color py-2.5 px-2 rounded"
+                                                                    className="flex items-center  justify-between transition-all  text-neutral-600 hover:text-primary__color py-2.5 px-4 rounded"
                                                                     onMouseEnter={() =>
                                                                         setHoveredSubcategory(
                                                                             `${index}-${subIndex}`,
@@ -226,7 +231,7 @@ export default function Banner() {
                                                                             .brands
                                                                             .length >
                                                                             0 && (
-                                                                            <ChevronRightIcon className="h-4 w-4 text-primary__color" />
+                                                                            <ChevronRightIcon className="h-4 w-4 text-primary__color rtl:rotate-180" />
                                                                         )}
                                                                     </Link>
                                                                     {hoveredSubcategory ===
@@ -235,7 +240,7 @@ export default function Banner() {
                                                                             .brands
                                                                             ?.length >
                                                                             0 && (
-                                                                            <div className="absolute left-full ml-[-10px] top-0 w-[240px] h-full bg-white rounded-md shadow-2xl p-2 z-20 ">
+                                                                            <div className="absolute left-full rtl:right-full ml-[0px] rtr:-ml-[-20px] top-0 w-[240px] h-full bg-white rounded-md shadow-2xl p-2 z-20 ">
                                                                                 <ul>
                                                                                     {subcategory.brands.map(
                                                                                         (

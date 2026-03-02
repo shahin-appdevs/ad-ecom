@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { LoaderCircle } from "lucide-react";

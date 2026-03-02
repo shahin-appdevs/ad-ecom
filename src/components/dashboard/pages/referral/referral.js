@@ -58,10 +58,10 @@ export default function ReferralSection() {
     if (loading) {
         return (
             <div className="bg-white rounded-[12px] p-7 animate-pulse space-y-6">
-                <div className="flex items-center gap-4">
+                {/* <div className="flex items-center gap-4">
                     <div className="w-[60px] h-[60px] rounded-full bg-gray-200" />
                     <div className="h-5 w-32 bg-gray-200 rounded" />
-                </div>
+                </div> */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                     {Array.from({ length: 4 }).map((_, idx) => (
                         <div

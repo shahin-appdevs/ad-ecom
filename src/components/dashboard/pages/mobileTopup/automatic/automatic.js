@@ -101,6 +101,12 @@ export default function MobileTopupAutomaticSection() {
                 });
             } catch (error) {
                 handleApiError(error, "Failed to fetch remaining limits");
+                const data = error?.response?.data?.data;
+
+                setRemainingLimit({
+                    dailyLimit: data?.remainingDaily || "0.00",
+                    monthlyLimit: data?.remainingMonthly || "0.00",
+                });
             } finally {
                 setRemainingLoading(false);
             }
@@ -365,8 +371,8 @@ export default function MobileTopupAutomaticSection() {
 
     if (apiLoading) {
         return (
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-7 space-y-5">
+            <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
+                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-7 space-y-5">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                         <div className="bg-[#F9FAFB] border border-gray-200 p-4 rounded-xl h-[72px]">
                             <Skeleton className="h-4 w-24 mx-auto" />
@@ -404,7 +410,7 @@ export default function MobileTopupAutomaticSection() {
 
                     <Skeleton className="h-12 w-full" />
                 </div>
-                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
+                <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-5">
                     <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4">
                         <Skeleton className="h-5 w-32" />
                         {[...Array(4)].map((_, i) => (
@@ -437,8 +443,8 @@ export default function MobileTopupAutomaticSection() {
     }
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-            <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-7">
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-4">
+            <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-7">
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
@@ -622,7 +628,7 @@ export default function MobileTopupAutomaticSection() {
                 onClose={() => setShowPinModal(false)}
                 onVerify={handleMobileTopup}
             />
-            <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
+            <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
                         Preview

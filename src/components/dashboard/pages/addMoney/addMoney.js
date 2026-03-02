@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import {
     addMoneyGetAPI,
     InsertAddMoneyAPI,
@@ -38,6 +39,8 @@ const DEPOSIT_TYPES = [
 ];
 
 export default function AddMoneySection() {
+    const t = useTranslations("Dashboard.wallet.addMoney");
+    const locale = useLocale();
     const [gateways, setGateways] = useState([]);
     const [selectedGateway, setSelectedGateway] = useState(null);
     const [selectedCurrency, setSelectedCurrency] = useState(null);
@@ -92,7 +95,7 @@ export default function AddMoneySection() {
     // fetch remaining limits
     useEffect(() => {
         (async () => {
-            if (!apiData || !selectedCurrency) {
+            if (!apiData || !selectedCurrency || !wallet?.selectedCurrency) {
                 return;
             }
             try {
@@ -117,12 +120,18 @@ export default function AddMoneySection() {
                     monthlyLimit: data?.remainingMonthly,
                 });
             } catch (error) {
-                handleApiError(error, "Failed to fetch remaining limits");
+                handleApiError(error, t("failedFetchLimits"));
+                const data = error?.response?.data?.data;
+
+                setRemainingLimit({
+                    dailyLimit: data?.remainingDaily || "0.00",
+                    monthlyLimit: data?.remainingMonthly || "0.00",
+                });
             } finally {
                 setRemainingLoading(false);
             }
         })();
-    }, [amount, apiData, selectedCurrency, wallet?.selectedCurrency]);
+    }, [amount, apiData, selectedCurrency, wallet?.selectedCurrency, t]);
 
     const formattedCharges = useMemo(() => {
         if (!selectedCurrency) {
@@ -152,8 +161,8 @@ export default function AddMoneySection() {
                 return `1 ${wallet.selectedCurrency.code} = ${rate.toFixed(4)} ${selectedCurrency.currency_code}`;
             }
         }
-        return "N/A";
-    }, [selectedCurrency, wallet?.selectedCurrency]);
+        return t("notAvailable");
+    }, [selectedCurrency, wallet?.selectedCurrency, t]);
 
     // Calculate transaction limits
     const limitText = useMemo(() => {
@@ -267,8 +276,8 @@ export default function AddMoneySection() {
                 selectedCurrency.alias,
                 wallet.selectedCurrency.code,
                 "WEB",
-                `${window.location.origin}/user/add/money/success`,
-                `${window.location.origin}/user/add/money/cancel`,
+                `${window.location.origin}/${locale}/user/add/money/success`,
+                `${window.location.origin}/${locale}/user/add/money/cancel`,
             );
 
             if (response.data.data.gateway_type === "AUTOMATIC") {
@@ -423,21 +432,21 @@ export default function AddMoneySection() {
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Exchange Rate</p>
+                            <p className="">{t("exchangeRate")}</p>
                             <h6 className="font-medium mt-1">
                                 {exchangeRateText}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Available Balance</p>
+                            <p className="">{t("availableBalance")}</p>
                             <h6 className="font-medium text-emerald-600 mt-1">
                                 {wallet.balance} {wallet.selectedCurrency?.code}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Charge</p>
+                            <p className="">{t("charge")}</p>
                             <h6 className="font-medium mt-1">
                                 {formattedCharges.fixed_charge}{" "}
                                 {selectedCurrency?.currency_code} +{" "}
@@ -448,7 +457,7 @@ export default function AddMoneySection() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="md:col-span-2">
                             <label className="block text-sm font-medium mb-2">
-                                Deposit Type
+                                {t("depositType")}
                             </label>
                             <Listbox
                                 value={selectedDepositType}
@@ -456,7 +465,12 @@ export default function AddMoneySection() {
                             >
                                 <div className="relative">
                                     <Listbox.Button className="w-full bg-gray-50 border border-gray-300 rounded-md py-2 px-3 text-sm text-left flex justify-between items-center">
-                                        <span>{selectedDepositType.name}</span>
+                                        <span>
+                                            {selectedDepositType.value ===
+                                            "MAIN_WALLET"
+                                                ? t("mainWallet")
+                                                : t("shoppingWallet")}
+                                        </span>
                                         <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
                                     </Listbox.Button>
                                     <Listbox.Options className="absolute mt-1 w-full bg-white shadow-lg rounded-md py-1 z-10">
@@ -481,7 +495,14 @@ export default function AddMoneySection() {
                                                                     : "font-normal"
                                                             }`}
                                                         >
-                                                            {type.name}
+                                                            {type.value ===
+                                                            "MAIN_WALLET"
+                                                                ? t(
+                                                                      "mainWallet",
+                                                                  )
+                                                                : t(
+                                                                      "shoppingWallet",
+                                                                  )}
                                                         </span>
                                                         {selected ? (
                                                             <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-indigo-600">
@@ -498,7 +519,7 @@ export default function AddMoneySection() {
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-2">
-                                Select Payment Gateway
+                                {t("selectGateway")}
                             </label>
                             <Listbox
                                 value={selectedCurrency}
@@ -526,7 +547,7 @@ export default function AddMoneySection() {
 
                                             {selectedCurrency
                                                 ? `${selectedGateway.alias.charAt(0).toUpperCase() + selectedGateway.alias.slice(1)} - ${selectedCurrency.currency_code}`
-                                                : "Select Payment Method"}
+                                                : t("selectMethod")}
                                         </div>
                                         <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
                                     </Listbox.Button>
@@ -606,17 +627,20 @@ export default function AddMoneySection() {
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-2">
-                                Enter Amount
+                                {t("enterAmount")}
                             </label>
                             <div className="relative">
                                 <input
                                     type="number"
                                     className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                     value={amount}
-                                    placeholder={`Enter Amount (${limitsCalculation.minLimit} - ${limitsCalculation.maxLimit})`}
+                                    placeholder={t("amountPlaceholder", {
+                                        min: limitsCalculation.minLimit,
+                                        max: limitsCalculation.maxLimit,
+                                    })}
                                     onChange={(e) => setAmount(e.target.value)}
                                 />
-                                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-20">
+                                <div className="absolute ltr:right-2 rtl:left-2 top-1/2 transform -translate-y-1/2 w-20">
                                     <Listbox
                                         value={wallet.selectedCurrency}
                                         onChange={updateSelectedCurrency}
@@ -672,7 +696,7 @@ export default function AddMoneySection() {
                         </div>
                     </div>
                     <Button
-                        title={loading ? "Adding..." : "Add Money"}
+                        title={loading ? t("adding") : t("title")}
                         variant="primary"
                         size="md"
                         className={`w-full ${loading ? "cursor-not-allowed !bg-gray-400" : ""}`}
@@ -689,21 +713,21 @@ export default function AddMoneySection() {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
-                        Preview
+                        {t("preview")}
                     </h5>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Entered Amount</span>
+                            <span>{t("enteredAmount")}</span>
                         </div>
                         <span className="font-medium text-gray-800">
                             {amount || "0.00"} {wallet?.selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
-                            <span>Fees & Charges</span>
+                            <span>{t("feesAndCharges")}</span>
                         </div>
                         <span className="text-gray-800">
                             {feesCalculation.totalFees}{" "}
@@ -711,9 +735,9 @@ export default function AddMoneySection() {
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <BanknotesIcon className="w-5 h-5 text-emerald-500" />
-                            <span>You Will Get</span>
+                            <span>{t("youWillGet")}</span>
                         </div>
                         <span className="text-gray-800">
                             {feesCalculation.willGet}{" "}
@@ -721,9 +745,9 @@ export default function AddMoneySection() {
                         </span>
                     </div>
                     <div className="flex items-center justify-between border-t pt-3 font-semibold text-gray-800">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-2">
                             <WalletIcon className="w-5 h-5 text-indigo-600" />
-                            <span>Total Payable</span>
+                            <span>{t("totalPayable")}</span>
                         </div>
                         <span>
                             {feesCalculation.totalPayable}{" "}
@@ -735,21 +759,21 @@ export default function AddMoneySection() {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12">
                 <div className="bg-[#F9FAFB] p-5 rounded-xl border border-gray-200 space-y-4 text-sm shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
-                        Limit Information
+                        {t("limitInfo")}
                     </h5>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowsUpDownIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Transaction Limit</span>
+                            <span>{t("transactionLimit")}</span>
                         </div>
                         <span className="font-medium text-gray-800">
                             {limitText}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CalendarDaysIcon className="w-5 h-5 text-blue-500" />
-                            <span>Daily Limit</span>
+                            <span>{t("dailyLimit")}</span>
                         </div>
                         <span className="text-gray-800">
                             {limitsCalculation.dailyLimit}{" "}
@@ -757,9 +781,9 @@ export default function AddMoneySection() {
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-violet-500" />
-                            <span>Monthly Limit</span>
+                            <span>{t("monthlyLimit")}</span>
                         </div>
                         <span className="text-gray-800">
                             {limitsCalculation.monthlyLimit}{" "}
@@ -767,9 +791,9 @@ export default function AddMoneySection() {
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CalendarDaysIcon className="w-5 h-5 text-yellow-500" />
-                            <span>Daily Remaining Limit</span>
+                            <span>{t("dailyRemaining")}</span>
                         </div>
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
@@ -781,9 +805,9 @@ export default function AddMoneySection() {
                         )}
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-yellow-500" />
-                            <span>Monthly Remaining Limit</span>
+                            <span>{t("monthlyRemaining")}</span>
                         </div>
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />

@@ -2,7 +2,7 @@
 import { Suspense, useCallback } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Menu } from "@headlessui/react";
 import {
@@ -12,11 +12,14 @@ import {
 } from "@heroicons/react/24/outline";
 import { useCart } from "@/components/context/CartContext";
 import ProductSidebar from "@/components/partials/ProductSidebar";
+import Button from "@/components/utility/Button";
 import {
     brandProductGetAPI,
+    nextPageGetAPI,
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -58,6 +61,7 @@ function BrandProduct() {
     const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -274,6 +278,97 @@ function BrandProduct() {
         fetchBrandProduct();
     }, [brandId]);
 
+    const formatProduct = (product, responseData) => {
+        const listPrice = parseFloat(product.product_prices?.list_price || 0);
+        const salePrice = parseFloat(product.product_prices?.sale_price || 0);
+        const flashPrice = parseFloat(
+            product.product_additional_prices?.flash_price || 0,
+        );
+        const resellPrice = parseFloat(
+            product.product_additional_prices?.resell_price || 0,
+        );
+
+        const displayPrice =
+            isReseller && resellPrice > 0
+                ? resellPrice
+                : flashPrice > 0
+                  ? flashPrice
+                  : salePrice > 0
+                    ? salePrice
+                    : listPrice;
+
+        const discount =
+            isReseller && resellPrice > 0
+                ? Math.round(
+                      (((flashPrice > 0 ? flashPrice : listPrice) -
+                          resellPrice) /
+                          (flashPrice > 0 ? flashPrice : listPrice)) *
+                          100,
+                  )
+                : flashPrice && listPrice
+                  ? Math.round(((listPrice - flashPrice) / listPrice) * 100)
+                  : salePrice && listPrice
+                    ? Math.round(((listPrice - salePrice) / listPrice) * 100)
+                    : 0;
+
+        return {
+            ...product,
+            id: product.id,
+            slug: product.slug,
+            image: product.main_image
+                ? `${backendBaseURL}/${responseData.main_image_path}/${product.main_image}`
+                : `${backendBaseURL}/${responseData.default_image_path}`,
+            title: product.title,
+            discount: discount > 0 ? `${discount}%` : null,
+            displayPrice: displayPrice,
+            originalPrice:
+                flashPrice > 0
+                    ? flashPrice
+                    : salePrice > 0
+                      ? salePrice
+                      : listPrice,
+            listPrice: listPrice,
+            stock: product.product_stock?.product_quantity || 0,
+            hasDiscount: discount > 0,
+            isResellerPrice: isReseller && resellPrice > 0,
+        };
+    };
+
+    const handleLoadMoreProducts = async () => {
+        setLoadMoreLoading(true);
+        try {
+            const res = await nextPageGetAPI(
+                `${data.products?.next_page_url}&brand_id=${brandId}`,
+            );
+            const newRaw = res.data.data.products?.data || [];
+            const newFormatted = newRaw.map((p) =>
+                formatProduct(p, res.data.data),
+            );
+            setProducts((prev) => [...prev, ...newFormatted]);
+            setStates((prev) => [
+                ...prev,
+                ...newFormatted.map(() => ({
+                    showQuantity: false,
+                    quantity: 1,
+                })),
+            ]);
+            setData((prev) => ({
+                ...prev,
+                products: {
+                    ...prev.products,
+                    next_page_url: res.data.data.products?.next_page_url,
+                },
+            }));
+        } catch (error) {
+            toast.error(
+                error.response?.data?.message?.error?.[0] ||
+                    "Failed to load more products",
+            );
+        } finally {
+            setLoadMoreLoading(false);
+        }
+    };
+
     const handleToggle = (index) => {
         setStates((prev) =>
             prev.map((item, i) =>
@@ -319,6 +414,9 @@ function BrandProduct() {
         decrementCart();
         saveToLocalStorage(products[index], states[index].quantity - value);
     };
+
+    const t = useTranslations("HomePage.shopByBrand");
+    const loadMore = t("loadMore");
 
     return (
         <section className="sm:pt-4">
@@ -479,6 +577,28 @@ function BrandProduct() {
                                     ))
                                 )}
                             </div>
+                            {loadMoreLoading && (
+                                <div className="mt-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                                    {Array.from({ length: 5 }).map(
+                                        (_, index) => (
+                                            <ProductSkeleton
+                                                key={`load-more-skeleton-${index}`}
+                                            />
+                                        ),
+                                    )}
+                                </div>
+                            )}
+                            {data?.products?.next_page_url && (
+                                <div className="text-center mt-10">
+                                    <Button
+                                        title={loadMore}
+                                        variant="primary"
+                                        size="md"
+                                        className="!px-8"
+                                        onClick={handleLoadMoreProducts}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

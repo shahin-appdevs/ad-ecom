@@ -1,11 +1,14 @@
 "use client";
-import { useState, useEffect } from 'react';
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { LoaderCircle } from 'lucide-react';
+import { LoaderCircle } from "lucide-react";
 import Button from "@/components/utility/Button";
-import { resendAuthorizationCodeSellerAPI, authorizationCodeSellerAPI } from '@root/services/apiClient/apiClient';
+import {
+    resendAuthorizationCodeSellerAPI,
+    authorizationCodeSellerAPI,
+} from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
 import logo from "@public/images/logo/favicon.jpeg";
@@ -38,7 +41,7 @@ export default function Authorization() {
         let timer;
         if (countdown > 0 && !canResend) {
             timer = setInterval(() => {
-                setCountdown(prev => {
+                setCountdown((prev) => {
                     const newCount = prev - 1;
                     localStorage.setItem("otpCountdown", newCount.toString());
                     return newCount;
@@ -60,16 +63,19 @@ export default function Authorization() {
 
     const handleResend = async () => {
         if (!canResend || loadingResend) return;
-        
+
         setLoadingResend(true);
         setError("");
-        
+
         try {
             const response = await resendAuthorizationCodeSellerAPI();
-            
+
             if (response?.data?.message?.success) {
                 // Success case
-                toast.success(response.data.message.success[0] || "Verification code resent successfully");
+                toast.success(
+                    response.data.message.success[0] ||
+                        "Verification code resent successfully",
+                );
                 setCountdown(59);
                 setCanResend(false);
                 localStorage.setItem("otpCountdown", "59");
@@ -79,12 +85,13 @@ export default function Authorization() {
             }
         } catch (error) {
             // Handle different error formats
-            const errorMessage = error.response?.data?.message?.error?.[0] || 
-                            error.response?.data?.message ||
-                            "Failed to resend verification code. Please try again later.";
-            
+            const errorMessage =
+                error.response?.data?.message?.error?.[0] ||
+                error.response?.data?.message ||
+                "Failed to resend verification code. Please try again later.";
+
             toast.error(errorMessage);
-            
+
             // If it's an authentication error, redirect to login
             if (error.response?.status === 401) {
                 router.push("/seller/auth/login");
@@ -97,7 +104,7 @@ export default function Authorization() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const cleanOtp = otp.replace(/ - /g, "");
-        
+
         if (cleanOtp.length !== 6) {
             setError("Please enter a valid 6-digit OTP");
             return;
@@ -107,13 +114,16 @@ export default function Authorization() {
         try {
             const response = await authorizationCodeSellerAPI(cleanOtp);
             if (response?.data?.message?.success) {
-                response.data.message.success.forEach(msg => toast.success(msg));
+                response.data.message.success.forEach((msg) =>
+                    toast.success(msg),
+                );
                 localStorage.removeItem("otpCountdown");
                 router.push("/seller/dashboard");
             }
         } catch (error) {
-            const errorMsg = error.response?.data?.message?.error?.[0] || 
-                           "Verification failed. Please try again.";
+            const errorMsg =
+                error.response?.data?.message?.error?.[0] ||
+                "Verification failed. Please try again.";
             setError(errorMsg);
             toast.error(errorMsg);
         } finally {
@@ -124,7 +134,9 @@ export default function Authorization() {
     return (
         <section className="min-h-[calc(100vh-200px)] py-8 xl:py-0 px-4 md:px-0 flex items-center justify-center">
             <div className="w-full max-w-md border rounded-md bg-white p-6">
-                <h2 className="text-center text-lg font-semibold mb-5 border-b pb-4">OTP Verification</h2>
+                <h2 className="text-center text-lg font-semibold mb-5 border-b pb-4">
+                    OTP Verification
+                </h2>
                 <div className="flex items-center space-x-3 mb-7">
                     <Image
                         src={logo}
@@ -135,10 +147,12 @@ export default function Authorization() {
                     />
                     <div>
                         <h6 className="font-semibold">JARA B2B.COM</h6>
-                        <p className="text-sm text-gray-600">Enter the verification code sent to your phone</p>
+                        <p className="text-sm text-gray-600">
+                            Enter the verification code sent to your phone
+                        </p>
                     </div>
                 </div>
-                
+
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="relative">
                         <label
@@ -153,18 +167,18 @@ export default function Authorization() {
                             value={otp}
                             onChange={handleOtpChange}
                             maxLength={12} // Accounts for the " - " separators
-                            className={`w-full px-4 pt-3 pb-3 text-sm rounded-md border ${error ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:border-primary__color shadow-sm`}
+                            className={`w-full px-4 pt-3 pb-3 text-sm rounded-md border ${error ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-primary__color shadow-sm`}
                         />
                         <ExclamationCircleIcon className="w-5 h-5 text-primary__color absolute right-3 top-3" />
                         {error && (
                             <p className="mt-1 text-sm text-red-600">{error}</p>
                         )}
                     </div>
-                    
+
                     <div className="text-sm">
                         {canResend ? (
                             <p>
-                                Didn't receive code?{' '}
+                                Didn't receive code?{" "}
                                 <button
                                     type="button"
                                     onClick={handleResend}
@@ -177,20 +191,20 @@ export default function Authorization() {
                                             Sending...
                                         </span>
                                     ) : (
-                                        'Resend Code'
+                                        "Resend Code"
                                     )}
                                 </button>
                             </p>
                         ) : (
                             <p>
-                                Resend code in{' '}
+                                Resend code in{" "}
                                 <span className="font-semibold text-primary__color">
                                     {countdown}s
                                 </span>
                             </p>
                         )}
                     </div>
-                    
+
                     <div className="border-t pt-5">
                         <Button
                             type="submit"

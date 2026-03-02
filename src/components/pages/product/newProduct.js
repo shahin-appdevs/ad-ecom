@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { useCart } from "@/components/context/CartContext";
@@ -8,9 +8,11 @@ import ProductSidebar from "@/components/partials/ProductSidebar";
 import Button from "@/components/utility/Button";
 import {
     newArrivalGetAPI,
+    nextPageGetAPI,
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -37,6 +39,8 @@ export default function NewProduct() {
     const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [newArrivalProducts, setNewArrivalProducts] = useState([]);
+    const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -49,6 +53,9 @@ export default function NewProduct() {
             try {
                 const response = await newArrivalGetAPI();
                 setNewArrivalData(response.data.data);
+                setNewArrivalProducts(
+                    response.data.data?.new_arrival_products?.data || [],
+                );
             } catch (error) {
                 toast.error(
                     error.response?.data?.message?.error?.[0] ||
@@ -263,6 +270,37 @@ export default function NewProduct() {
         );
     };
 
+    const handleLoadMoreProducts = async () => {
+        setLoadMoreLoading(true);
+        try {
+            const res = await nextPageGetAPI(
+                newArrivalData.new_arrival_products?.next_page_url,
+            );
+            const newProducts = res.data.data.new_arrival_products?.data || [];
+            setNewArrivalProducts((prev) => [...prev, ...newProducts]);
+            setNewArrivalData((prev) => ({
+                ...prev,
+                new_arrival_products: {
+                    ...prev.new_arrival_products,
+                    next_page_url:
+                        res.data.data.new_arrival_products?.next_page_url,
+                },
+            }));
+        } catch (error) {
+            toast.error(
+                error.response?.data?.message?.error?.[0] ||
+                    "Failed to fetch new arrival products",
+            );
+        } finally {
+            setLoadMoreLoading(false);
+        }
+    };
+
+    const t = useTranslations("HomePage.newArrival");
+
+    const newArrivalTitle = t("newArrivalTitle");
+    const loadMore = t("loadMore");
+
     if (loading) {
         return (
             <section className="sm:pt-4">
@@ -302,66 +340,66 @@ export default function NewProduct() {
                     <div className="col-span-1 xl:col-span-10">
                         <div className="bg-white p-4 rounded-md">
                             <div className="flex items-center justify-between mb-4">
-                                <h6>New Arrival</h6>
+                                <h6>{newArrivalTitle}</h6>
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                                {newArrivalData?.new_arrival_products?.data?.map(
-                                    (product, index) => {
-                                        const {
-                                            discount,
-                                            displayPrice,
-                                            originalPrice,
-                                            hasDiscount,
-                                            isResellerPrice,
-                                            stock,
-                                        } = calculateDiscount(product);
+                                {newArrivalProducts?.map((product, index) => {
+                                    const {
+                                        discount,
+                                        displayPrice,
+                                        originalPrice,
+                                        hasDiscount,
+                                        isResellerPrice,
+                                        stock,
+                                    } = calculateDiscount(product);
 
-                                        return (
-                                            <Link
-                                                href={`/product/details?id=${product.id}`}
-                                                key={index}
-                                                className="group bg-gray-100 rounded-md hover:shadow-md transition-shadow block"
-                                            >
-                                                <div className="relative ">
-                                                    <div className="w-full h-[150px] sm:h-[215px] rounded-t-md overflow-hidden">
-                                                        <Image
-                                                            src={
-                                                                product.main_image
-                                                                    ? `${backendBaseURL}/${newArrivalData.product_image_path}/${product.main_image}`
-                                                                    : `${backendBaseURL}/${newArrivalData.default_image_path}`
-                                                            }
-                                                            width={100}
-                                                            height={100}
-                                                            alt={product.title}
-                                                            className="w-full h-full object-cover rounded-t-md group-hover:scale-105 transition-transform duration-200"
-                                                        />
-                                                    </div>
-                                                    {discount && (
-                                                        <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
-                                                            {discount} off
+                                    return (
+                                        <Link
+                                            href={`/product/details?id=${product.id}`}
+                                            key={index}
+                                            className="group bg-gray-100 rounded-md hover:shadow-md transition-shadow block"
+                                        >
+                                            <div className="relative ">
+                                                <div className="w-full h-[150px] sm:h-[215px] rounded-t-md overflow-hidden">
+                                                    <Image
+                                                        src={
+                                                            product.main_image
+                                                                ? `${backendBaseURL}/${newArrivalData.product_image_path}/${product.main_image}`
+                                                                : `${backendBaseURL}/${newArrivalData.default_image_path}`
+                                                        }
+                                                        width={100}
+                                                        height={100}
+                                                        alt={product.title}
+                                                        className="w-full h-full object-cover rounded-t-md group-hover:scale-105 transition-transform duration-200"
+                                                    />
+                                                </div>
+                                                {discount && (
+                                                    <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
+                                                        {discount} off
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <div className="p-[10px]">
+                                                <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 truncate whitespace-nowrap overflow-hidden text-ellipsis">
+                                                    {product.title}
+                                                </h5>
+                                                <div className="flex items-center gap-1 mb-1">
+                                                    <span className="text-base md:text-lg font-semibold text-primary__color">
+                                                        {formatPrice(
+                                                            displayPrice,
+                                                        )}
+                                                    </span>
+                                                    {(hasDiscount ||
+                                                        isResellerPrice) && (
+                                                        <span className="text-xs text-[#4b5563] line-through">
+                                                            {formatPrice(
+                                                                originalPrice,
+                                                            )}
                                                         </span>
                                                     )}
                                                 </div>
-                                                <div className="p-[10px]">
-                                                    <div className="flex items-center gap-1 mb-1">
-                                                        <span className="text-base font-semibold text-primary__color">
-                                                            {formatPrice(
-                                                                displayPrice,
-                                                            )}
-                                                        </span>
-                                                        {(hasDiscount ||
-                                                            isResellerPrice) && (
-                                                            <span className="text-xs text-[#4b5563] line-through">
-                                                                {formatPrice(
-                                                                    originalPrice,
-                                                                )}
-                                                            </span>
-                                                        )}
-                                                    </div>
-                                                    <h5 className="text-sm font-normal text-[#4b5563] mb-2 truncate whitespace-nowrap overflow-hidden text-ellipsis">
-                                                        {product.title}
-                                                    </h5>
-                                                    {/* <div className="relative">
+
+                                                {/* <div className="relative">
                                                     {!states[index]
                                                         ?.showQuantity ? (
                                                         <button
@@ -422,12 +460,30 @@ export default function NewProduct() {
                                                         </div>
                                                     )}
                                                 </div> */}
-                                                </div>
-                                            </Link>
-                                        );
-                                    },
-                                )}
+                                            </div>
+                                        </Link>
+                                    );
+                                })}
                             </div>
+                            {loadMoreLoading && (
+                                <div className="mt-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                                    {[...Array(5)].map((_, index) => (
+                                        <ProductSkeleton key={index} />
+                                    ))}
+                                </div>
+                            )}
+                            {newArrivalData?.new_arrival_products
+                                ?.next_page_url && (
+                                <div className="text-center mt-10">
+                                    <Button
+                                        title={loadMore}
+                                        variant="primary"
+                                        size="md"
+                                        className="!px-8"
+                                        onClick={handleLoadMoreProducts}
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

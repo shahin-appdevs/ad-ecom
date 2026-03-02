@@ -4,10 +4,10 @@ import {
     billPayGetAPI,
     myGiftCardGetAPI,
 } from "@root/services/apiClient/apiClient";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 
 function SkeletonRow() {

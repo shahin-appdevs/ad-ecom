@@ -1,17 +1,21 @@
 "use client";
 import { useState, useCallback, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import {
     PlusIcon,
     ChevronUpDownIcon,
     CheckIcon,
-    TrashIcon
+    TrashIcon,
 } from "@heroicons/react/24/outline";
 import { Listbox } from "@headlessui/react";
 import { toast } from "react-hot-toast";
 import BarcodePreview from "@/components/dashboard/partials/seller/BarcodePreview";
-import { productGetSellerAPI, UpdateProductSellerAPI, editProductSellerAPI } from "@root/services/apiClient/apiClient";
+import {
+    productGetSellerAPI,
+    UpdateProductSellerAPI,
+    editProductSellerAPI,
+} from "@root/services/apiClient/apiClient";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -26,19 +30,20 @@ export default function ProductEditSection() {
     const [activeTab, setActiveTab] = useState("Overview");
     const [selectedProductType, setSelectedProductType] = useState(null);
     const [selectedFileType, setSelectedFileType] = useState(fileTypes[0]);
-    const [productId, setProductId] = useState('');
-    const [productTitle, setProductTitle] = useState('');
-    const [translation, setTranslation] = useState('');
-    const [metaTitle, setMetaTitle] = useState('');
-    const [metaDescription, setMetaDescription] = useState('');
-    const [review, setReview] = useState('');
-    const [fileUrl, setFileUrl] = useState('');
+    const [productId, setProductId] = useState("");
+    const [productTitle, setProductTitle] = useState("");
+    const [translation, setTranslation] = useState("");
+    const [metaTitle, setMetaTitle] = useState("");
+    const [metaDescription, setMetaDescription] = useState("");
+    const [review, setReview] = useState("");
+    const [fileUrl, setFileUrl] = useState("");
     const [keywords, setKeywords] = useState(["New"]);
     const [currentKeyword, setCurrentKeyword] = useState("");
     const [videoFile, setVideoFile] = useState(null);
     const [imageFile, setImageFile] = useState(null);
     const [selectedCategories, setSelectedCategories] = useState([]);
-    const [selectedSubChildCategory, setSelectedSubChildCategory] = useState(null);
+    const [selectedSubChildCategory, setSelectedSubChildCategory] =
+        useState(null);
     const [selectedCampaign, setSelectedCampaign] = useState(null);
     const [selectedSupplier, setSelectedSupplier] = useState(null);
     const [selectedAuthor, setSelectedAuthor] = useState(null);
@@ -54,23 +59,25 @@ export default function ProductEditSection() {
     const [vat, setVat] = useState(0);
     const [quantity, setQuantity] = useState(10);
     const [minOrder, setMinOrder] = useState(1);
-    const [sku, setSku] = useState('e07z4');
+    const [sku, setSku] = useState("e07z4");
     const [unit, setUnit] = useState(1);
     const [weight, setWeight] = useState(1);
     const [priority, setPriority] = useState(1);
     const [maxOrder, setMaxOrder] = useState(100);
-    const [barcode, setBarcode] = useState('1372745');
-    const [question, setQuestion] = useState('');
+    const [barcode, setBarcode] = useState("1372745");
+    const [question, setQuestion] = useState("");
     const [faqList, setFaqList] = useState([]);
-    const [variantSize, setVariantSize] = useState('');
+    const [variantSize, setVariantSize] = useState("");
     const [variantList, setVariantList] = useState([]);
-    const [variantTitle, setVariantTitle] = useState('');
-    const [variantCost, setVariantCost] = useState('');
-    const [variantPrice, setVariantPrice] = useState('');
-    const [variantStock, setVariantStock] = useState('');
-    const [variantMrp, setVariantMrp] = useState('');
-    const [variantResell, setVariantResell] = useState('');
-    const [featureInputs, setFeatureInputs] = useState([{ title: "", value: "" }]);
+    const [variantTitle, setVariantTitle] = useState("");
+    const [variantCost, setVariantCost] = useState("");
+    const [variantPrice, setVariantPrice] = useState("");
+    const [variantStock, setVariantStock] = useState("");
+    const [variantMrp, setVariantMrp] = useState("");
+    const [variantResell, setVariantResell] = useState("");
+    const [featureInputs, setFeatureInputs] = useState([
+        { title: "", value: "" },
+    ]);
     const [productTypes, setProductTypes] = useState([]);
     const [categories, setCategories] = useState([]);
     const [childCategories, setChildCategories] = useState([]);
@@ -83,22 +90,25 @@ export default function ProductEditSection() {
     const [unitTypes, setUnitTypes] = useState([]);
     const [loading, setLoading] = useState(false);
     const [apiLoading, setApiLoading] = useState(true);
-    const searchParams = useSearchParams()
-    const product_id = searchParams.get('product_id')
+    const searchParams = useSearchParams();
+    const product_id = searchParams.get("product_id");
 
     useEffect(() => {
         if (product_id) {
-        setProductId(product_id)
-        fetchProductData(product_id)
+            setProductId(product_id);
+            fetchProductData(product_id);
         }
-    }, [product_id])
+    }, [product_id]);
 
     const fetchProductData = async (productId) => {
         try {
-        setLoading(true);
-        const response = await editProductSellerAPI(productId);
+            setLoading(true);
+            const response = await editProductSellerAPI(productId);
         } catch (error) {
-            toast.error(error.response?.data?.message?.error?.[0] || "Failed to load product");
+            toast.error(
+                error.response?.data?.message?.error?.[0] ||
+                    "Failed to load product",
+            );
         } finally {
             setLoading(false);
         }
@@ -114,14 +124,18 @@ export default function ProductEditSection() {
             review: review,
             meta_title: metaTitle,
             meta_description: metaDescription,
-            description: editor?.getHTML() || '',
-            tab_description: editor?.getHTML() || '',
+            description: editor?.getHTML() || "",
+            tab_description: editor?.getHTML() || "",
             main_image: imageFile,
             product_video: videoFile,
             product_keywords: keywords,
-            categories: selectedCategories.map(cat => cat.id),
-            child_categories: selectedChildCategory ? [selectedChildCategory.id] : [],
-            child_sub_categories: selectedSubChildCategory ? [selectedSubChildCategory.id] : [],
+            categories: selectedCategories.map((cat) => cat.id),
+            child_categories: selectedChildCategory
+                ? [selectedChildCategory.id]
+                : [],
+            child_sub_categories: selectedSubChildCategory
+                ? [selectedSubChildCategory.id]
+                : [],
             brands: selectedBrand ? [selectedBrand.id] : [],
             campaigns: selectedCampaign ? [selectedCampaign.id] : [],
             collections: selectedCollection ? [selectedCollection.id] : [],
@@ -143,22 +157,25 @@ export default function ProductEditSection() {
             product_weight: weight,
             product_unit: unit,
             product_unit_type: selectedUnitType.id,
-            feature_title: featureInputs.map(f => f.title),
-            feature_value: featureInputs.map(f => f.value),
-            variant_data: variantList.map(v => ({
-            type: v.type,
-            size: v.size,
-            title: v.title,
-            cost: v.cost,
-            price: v.price,
-            stock: v.stock,
-            mrp: v.mrp,
-            resell: v.resell
+            feature_title: featureInputs.map((f) => f.title),
+            feature_value: featureInputs.map((f) => f.value),
+            variant_data: variantList.map((v) => ({
+                type: v.type,
+                size: v.size,
+                title: v.title,
+                cost: v.cost,
+                price: v.price,
+                stock: v.stock,
+                mrp: v.mrp,
+                resell: v.resell,
             })),
-            question: faqList.map(faq => faq.question),
-            answer: faqList.map(faq => faq.answer),
-            meta_title: document.querySelector('[name="meta_title"]')?.value || '',
-            meta_description: document.querySelector('[name="meta_description"]')?.value || '',
+            question: faqList.map((faq) => faq.question),
+            answer: faqList.map((faq) => faq.answer),
+            meta_title:
+                document.querySelector('[name="meta_title"]')?.value || "",
+            meta_description:
+                document.querySelector('[name="meta_description"]')?.value ||
+                "",
             image_1: imageFile,
         };
     };
@@ -169,7 +186,7 @@ export default function ProductEditSection() {
                 setApiLoading(true);
                 const response = await productGetSellerAPI();
                 const data = response.data.data;
-                
+
                 setProductTypes(data.product_types);
                 setCategories(data.categories);
                 setChildCategories(data.child_categories);
@@ -180,7 +197,7 @@ export default function ProductEditSection() {
                 setSuppliers(data.suppliers);
                 setVariantTypes(data.product_variants);
                 setUnitTypes(data.product_units_type);
-                
+
                 if (data.product_types.length > 0) {
                     setSelectedProductType(data.product_types[0]);
                 }
@@ -193,9 +210,11 @@ export default function ProductEditSection() {
                 if (data.suppliers.length > 0) {
                     setSelectedSupplier(data.suppliers[0]);
                 }
-                
             } catch (error) {
-                toast.error(error.response?.data?.message?.error?.[0] || "Failed to fetch product data");
+                toast.error(
+                    error.response?.data?.message?.error?.[0] ||
+                        "Failed to fetch product data",
+                );
             } finally {
                 setApiLoading(false);
             }
@@ -204,14 +223,19 @@ export default function ProductEditSection() {
         fetchProducts();
     }, []);
 
-    const filteredChildCategories = (selectedCategories && selectedCategories.length > 0) 
-    ? childCategories.filter(childCat => 
-        selectedCategories.some(cat => cat.id === childCat.category_id))
-    : childCategories;
+    const filteredChildCategories =
+        selectedCategories && selectedCategories.length > 0
+            ? childCategories.filter((childCat) =>
+                  selectedCategories.some(
+                      (cat) => cat.id === childCat.category_id,
+                  ),
+              )
+            : childCategories;
 
     const filteredSubChildCategories = selectedChildCategory
-        ? subChildCategories.filter(subCat => 
-            subCat.child_category_id === selectedChildCategory.id)
+        ? subChildCategories.filter(
+              (subCat) => subCat.child_category_id === selectedChildCategory.id,
+          )
         : subChildCategories;
 
     const handleSubmit = async (e) => {
@@ -220,9 +244,9 @@ export default function ProductEditSection() {
         try {
             const productData = prepareProductData();
             const formData = new FormData();
-            Object.keys(productData).forEach(key => {
+            Object.keys(productData).forEach((key) => {
                 if (Array.isArray(productData[key])) {
-                    productData[key].forEach(item => {
+                    productData[key].forEach((item) => {
                         formData.append(`${key}[]`, item);
                     });
                 } else {
@@ -230,10 +254,10 @@ export default function ProductEditSection() {
                 }
             });
             if (imageFile) {
-                formData.append('main_image', imageFile);
+                formData.append("main_image", imageFile);
             }
             if (videoFile) {
-                formData.append('product_video', videoFile);
+                formData.append("product_video", videoFile);
             }
             const response = await UpdateProductSellerAPI(formData);
             console.log(response);
@@ -263,7 +287,7 @@ export default function ProductEditSection() {
         setFaqList([...faqList, newFaq]);
 
         // Optional: Reset inputs
-        setQuestion('');
+        setQuestion("");
         editor?.commands.clearContent();
     };
 
@@ -419,14 +443,13 @@ export default function ProductEditSection() {
         {
             id: 2,
             name: "Pre Order",
-            description:
-                "If pre order, need to set pre order delivery date.",
+            description: "If pre order, need to set pre order delivery date.",
             checked: false,
         },
         {
             id: 3,
             name: "EMI",
-            description: 'Do you offer EMI for this product?',
+            description: "Do you offer EMI for this product?",
             checked: false,
         },
         {
@@ -439,14 +462,13 @@ export default function ProductEditSection() {
         {
             id: 5,
             name: "Wholesale",
-            description: 'Do you offer wholesale rate for business?',
+            description: "Do you offer wholesale rate for business?",
             checked: false,
         },
         {
             id: 6,
             name: "Affiliate",
-            description:
-                "Do you offer affiliate commission for this product?",
+            description: "Do you offer affiliate commission for this product?",
             checked: false,
         },
         {
@@ -534,11 +556,12 @@ export default function ProductEditSection() {
                     <span className="truncate">
                         {multiple
                             ? value.length > 0
-                                ? value.map((v) => v.name).join(', ') || value.map((v) => v.title).join(', ')
+                                ? value.map((v) => v.name).join(", ") ||
+                                  value.map((v) => v.title).join(", ")
                                 : placeholder
                             : value
-                                ? value.name || value.title
-                                : placeholder}
+                              ? value.name || value.title
+                              : placeholder}
                     </span>
                     <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
                 </Listbox.Button>
@@ -604,19 +627,23 @@ export default function ProductEditSection() {
                 </div>
             </div>
             {activeTab === "Overview" && (
-                <form className="pt-4 grid grid-cols-1 gap-4" onSubmit={handleSubmit}>
+                <form
+                    className="pt-4 grid grid-cols-1 gap-4"
+                    onSubmit={handleSubmit}
+                >
                     <div className="grid grid-cols-12 gap-4">
                         <div className="col-span-12 sm:col-span-6 md:col-span-2">
                             <label className="block text-xs font-medium text-gray-700 mb-2">
                                 Product Type
                             </label>
-                             <Listbox
+                            <Listbox
                                 value={selectedProductType}
                                 onChange={setSelectedProductType}
                             >
                                 <div className="relative">
                                     <Listbox.Button className="w-full bg-white border border-gray-300 rounded-md py-2 px-3 text-sm text-left flex justify-between items-center">
-                                        {selectedProductType?.name || "Select a product type"}
+                                        {selectedProductType?.name ||
+                                            "Select a product type"}
                                         <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
                                     </Listbox.Button>
                                     <Listbox.Options className="absolute mt-1 w-full bg-white shadow-md rounded-md z-10 max-h-60 overflow-auto">
@@ -650,7 +677,9 @@ export default function ProductEditSection() {
                                 type="text"
                                 name="title"
                                 value={productTitle}
-                                onChange={(e) => setProductTitle(e.target.value)}
+                                onChange={(e) =>
+                                    setProductTitle(e.target.value)
+                                }
                                 className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                 placeholder="Enter title..."
                             />
@@ -1013,17 +1042,17 @@ export default function ProductEditSection() {
                                 </div>
                             ) : (
                                 <div className="p-4 flex items-center justify-center gap-5">
-                                    <svg 
-                                        className="h-12 w-12 text-gray-400" 
-                                        fill="none" 
-                                        viewBox="0 0 24 24" 
+                                    <svg
+                                        className="h-12 w-12 text-gray-400"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
                                         stroke="currentColor"
-                                        >
-                                        <path 
-                                            strokeLinecap="round" 
-                                            strokeLinejoin="round" 
-                                            strokeWidth={1} 
-                                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" 
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={1}
+                                            d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
                                         />
                                     </svg>
                                     <div>
@@ -1309,7 +1338,9 @@ export default function ProductEditSection() {
                                             </h4>
                                             <div className="flex flex-wrap gap-1">
                                                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                                    {selectedChildCategory.title}
+                                                    {
+                                                        selectedChildCategory.title
+                                                    }
                                                 </span>
                                             </div>
                                         </div>
@@ -1402,11 +1433,15 @@ export default function ProductEditSection() {
                             Features
                         </h3>
                         <p className="text-sm text-gray-500 mb-4">
-                            This information will be displayed publicly so be careful what you share.
+                            This information will be displayed publicly so be
+                            careful what you share.
                         </p>
                     </div>
                     {featureInputs.map((input, index) => (
-                        <div key={index} className="grid grid-cols-12 items-end gap-4">
+                        <div
+                            key={index}
+                            className="grid grid-cols-12 items-end gap-4"
+                        >
                             <div className="col-span-12 md:col-span-5 mb-4">
                                 <label className="block text-xs font-medium text-gray-700 mb-2">
                                     Title
@@ -1414,7 +1449,13 @@ export default function ProductEditSection() {
                                 <input
                                     type="text"
                                     value={input.title}
-                                    onChange={(e) => handleInputChange(index, "title", e.target.value)}
+                                    onChange={(e) =>
+                                        handleInputChange(
+                                            index,
+                                            "title",
+                                            e.target.value,
+                                        )
+                                    }
                                     className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                     placeholder="Enter title..."
                                 />
@@ -1426,7 +1467,13 @@ export default function ProductEditSection() {
                                 <input
                                     type="text"
                                     value={input.value}
-                                    onChange={(e) => handleInputChange(index, "value", e.target.value)}
+                                    onChange={(e) =>
+                                        handleInputChange(
+                                            index,
+                                            "value",
+                                            e.target.value,
+                                        )
+                                    }
                                     className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                     placeholder="Enter title..."
                                 />
@@ -1473,17 +1520,25 @@ export default function ProductEditSection() {
                                     </label>
                                     <div className="relative rounded-md shadow-sm">
                                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <span className="text-gray-500 sm:text-sm">৳</span>
+                                            <span className="text-gray-500 sm:text-sm">
+                                                ৳
+                                            </span>
                                         </div>
                                         <input
                                             type="number"
                                             className="w-full border border-gray-300 rounded-md px-8 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                             placeholder="0.00"
                                             value={purchasePrice}
-                                            onChange={(e) => setPurchasePrice(Number(e.target.value))}
+                                            onChange={(e) =>
+                                                setPurchasePrice(
+                                                    Number(e.target.value),
+                                                )
+                                            }
                                         />
                                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                            <span className="text-gray-500 sm:text-sm">BDT</span>
+                                            <span className="text-gray-500 sm:text-sm">
+                                                BDT
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1493,17 +1548,25 @@ export default function ProductEditSection() {
                                     </label>
                                     <div className="relative rounded-md shadow-sm">
                                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <span className="text-gray-500 sm:text-sm">৳</span>
+                                            <span className="text-gray-500 sm:text-sm">
+                                                ৳
+                                            </span>
                                         </div>
                                         <input
                                             type="number"
                                             className="w-full border border-gray-300 rounded-md px-8 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                             placeholder="0.00"
                                             value={retailPrice}
-                                            onChange={(e) => setRetailPrice(Number(e.target.value))}
+                                            onChange={(e) =>
+                                                setRetailPrice(
+                                                    Number(e.target.value),
+                                                )
+                                            }
                                         />
                                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                            <span className="text-gray-500 sm:text-sm">BDT</span>
+                                            <span className="text-gray-500 sm:text-sm">
+                                                BDT
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1513,17 +1576,25 @@ export default function ProductEditSection() {
                                     </label>
                                     <div className="relative rounded-md shadow-sm">
                                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <span className="text-gray-500 sm:text-sm">৳</span>
+                                            <span className="text-gray-500 sm:text-sm">
+                                                ৳
+                                            </span>
                                         </div>
                                         <input
                                             type="number"
                                             className="w-full border border-gray-300 rounded-md px-8 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                             placeholder="0.00"
                                             value={regularPrice}
-                                            onChange={(e) => setRegularPrice(Number(e.target.value))}
+                                            onChange={(e) =>
+                                                setRegularPrice(
+                                                    Number(e.target.value),
+                                                )
+                                            }
                                         />
                                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                            <span className="text-gray-500 sm:text-sm">BDT</span>
+                                            <span className="text-gray-500 sm:text-sm">
+                                                BDT
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1533,17 +1604,23 @@ export default function ProductEditSection() {
                                     </label>
                                     <div className="relative rounded-md shadow-sm">
                                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                            <span className="text-gray-500 sm:text-sm">৳</span>
+                                            <span className="text-gray-500 sm:text-sm">
+                                                ৳
+                                            </span>
                                         </div>
                                         <input
                                             type="number"
                                             className="w-full border border-gray-300 rounded-md px-8 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                             placeholder="0.00"
                                             value={vat}
-                                            onChange={(e) => setVat(Number(e.target.value))}
+                                            onChange={(e) =>
+                                                setVat(Number(e.target.value))
+                                            }
                                         />
                                         <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                            <span className="text-gray-500 sm:text-sm">BDT</span>
+                                            <span className="text-gray-500 sm:text-sm">
+                                                BDT
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -1553,13 +1630,19 @@ export default function ProductEditSection() {
                             <div className="bg-[#F5F7FF] py-6 px-8 rounded-md">
                                 <div className="space-y-3">
                                     <div>
-                                        <p className="text-sm text-gray-600">Margin</p>
-                                        <p className={`text-sm font-medium ${calculateMargin() < 0 ? 'text-red-600' : 'text-green-600'}`}>
+                                        <p className="text-sm text-gray-600">
+                                            Margin
+                                        </p>
+                                        <p
+                                            className={`text-sm font-medium ${calculateMargin() < 0 ? "text-red-600" : "text-green-600"}`}
+                                        >
                                             {calculateMargin().toFixed(2)}%
                                         </p>
                                     </div>
                                     <div>
-                                        <p className="text-sm text-gray-600">Discount</p>
+                                        <p className="text-sm text-gray-600">
+                                            Discount
+                                        </p>
                                         <p className="text-sm font-medium text-gray-800">
                                             {calculateDiscount().toFixed(2)}%
                                         </p>
@@ -1589,7 +1672,9 @@ export default function ProductEditSection() {
                                             type="checkbox"
                                             checked={option.checked}
                                             onChange={() =>
-                                                togglePriceStatusOption(option.id)
+                                                togglePriceStatusOption(
+                                                    option.id,
+                                                )
                                             }
                                             className="focus:ring-primary__color h-4 w-4 text-primary__color border-gray-300 rounded"
                                         />
@@ -1640,7 +1725,9 @@ export default function ProductEditSection() {
                                         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                         placeholder="0.00"
                                         value={quantity}
-                                        onChange={(e) => setQuantity(e.target.value)}
+                                        onChange={(e) =>
+                                            setQuantity(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div>
@@ -1652,7 +1739,9 @@ export default function ProductEditSection() {
                                         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                         placeholder="1"
                                         value={priority}
-                                        onChange={(e) => setPriority(e.target.value)}
+                                        onChange={(e) =>
+                                            setPriority(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div>
@@ -1664,7 +1753,9 @@ export default function ProductEditSection() {
                                         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                         placeholder="1"
                                         value={minOrder}
-                                        onChange={(e) => setMinOrder(e.target.value)}
+                                        onChange={(e) =>
+                                            setMinOrder(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div>
@@ -1676,7 +1767,9 @@ export default function ProductEditSection() {
                                         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                         placeholder="100"
                                         value={maxOrder}
-                                        onChange={(e) => setMaxOrder(e.target.value)}
+                                        onChange={(e) =>
+                                            setMaxOrder(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div>
@@ -1700,13 +1793,20 @@ export default function ProductEditSection() {
                                         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                         placeholder="Enter title..."
                                         value={barcode}
-                                        onChange={(e) => setBarcode(e.target.value)}
+                                        onChange={(e) =>
+                                            setBarcode(e.target.value)
+                                        }
                                     />
                                 </div>
                             </div>
                             <div className="my-5">
-                                <h2 className="text-[16px] font-semibold mb-2">Unit & weight</h2>
-                                <p>The details used to identify your product type around the web.</p>
+                                <h2 className="text-[16px] font-semibold mb-2">
+                                    Unit & weight
+                                </h2>
+                                <p>
+                                    The details used to identify your product
+                                    type around the web.
+                                </p>
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
@@ -1718,7 +1818,9 @@ export default function ProductEditSection() {
                                         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                         placeholder="1"
                                         value={weight}
-                                        onChange={(e) => setWeight(e.target.value)}
+                                        onChange={(e) =>
+                                            setWeight(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div>
@@ -1730,7 +1832,9 @@ export default function ProductEditSection() {
                                         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                         placeholder="1"
                                         value={unit}
-                                        onChange={(e) => setUnit(e.target.value)}
+                                        onChange={(e) =>
+                                            setUnit(e.target.value)
+                                        }
                                     />
                                 </div>
                                 <div>
@@ -1751,7 +1855,9 @@ export default function ProductEditSection() {
                                                     <Listbox.Option
                                                         key={unit.id}
                                                         value={unit}
-                                                        className={({ active }) =>
+                                                        className={({
+                                                            active,
+                                                        }) =>
                                                             `cursor-pointer select-none px-4 py-2 text-sm ${active ? "bg-indigo-100" : ""}`
                                                         }
                                                     >
@@ -1775,22 +1881,38 @@ export default function ProductEditSection() {
                             <div className="bg-[#F5F7FF] py-6 px-8 rounded-md">
                                 <div className="space-y-4">
                                     <div>
-                                        <p className="text-sm text-gray-600">Quantity</p>
-                                        <p className="text-gray-600 text-sm font-medium">{quantity || '10'}</p>
+                                        <p className="text-sm text-gray-600">
+                                            Quantity
+                                        </p>
+                                        <p className="text-gray-600 text-sm font-medium">
+                                            {quantity || "10"}
+                                        </p>
                                     </div>
                                     <div>
-                                        <p className="text-sm text-gray-600">SKU</p>
-                                        <p className="text-gray-600 text-sm font-medium">{sku || 'e07z4'}</p>
+                                        <p className="text-sm text-gray-600">
+                                            SKU
+                                        </p>
+                                        <p className="text-gray-600 text-sm font-medium">
+                                            {sku || "e07z4"}
+                                        </p>
                                     </div>
                                     <div>
-                                        <p className="text-sm text-gray-600">Barcode</p>
-                                        <BarcodePreview value={barcode || '1372745'} />
+                                        <p className="text-sm text-gray-600">
+                                            Barcode
+                                        </p>
+                                        <BarcodePreview
+                                            value={barcode || "1372745"}
+                                        />
                                     </div>
                                     <div className="pt-4 border-t border-gray-200 space-y-2">
-                                        <p className="text-sm text-gray-600">Unit & weight</p>
+                                        <p className="text-sm text-gray-600">
+                                            Unit & weight
+                                        </p>
                                         <p className="text-sm">
-                                            Weight - {weight || '1'} kg<br />
-                                            Unit - {unit || '1'} {selectedUnitType.name.toLowerCase()}
+                                            Weight - {weight || "1"} kg
+                                            <br />
+                                            Unit - {unit || "1"}{" "}
+                                            {selectedUnitType.name.toLowerCase()}
                                         </p>
                                     </div>
                                 </div>
@@ -2883,15 +3005,61 @@ export default function ProductEditSection() {
                         </div>
                     </div>
                     <div className="bg-white shadow-md rounded-[12px] p-7 mt-3">
-                        <h2 className="text-[16px] font-semibold mb-2">Add Variant</h2>
+                        <h2 className="text-[16px] font-semibold mb-2">
+                            Add Variant
+                        </h2>
                         <p className="mb-4 text-sm">Enter variant details:</p>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                            <input type="text" placeholder="Title" className="input-style" value={variantTitle} onChange={(e) => setVariantTitle(e.target.value)} />
-                            <input type="text" placeholder="Cost" className="input-style" value={variantCost} onChange={(e) => setVariantCost(e.target.value)} />
-                            <input type="text" placeholder="Price" className="input-style" value={variantPrice} onChange={(e) => setVariantPrice(e.target.value)} />
-                            <input type="text" placeholder="Stock" className="input-style" value={variantStock} onChange={(e) => setVariantStock(e.target.value)} />
-                            <input type="text" placeholder="MRP" className="input-style" value={variantMrp} onChange={(e) => setVariantMrp(e.target.value)} />
-                            <input type="text" placeholder="Resell Status" className="input-style" value={variantResell} onChange={(e) => setVariantResell(e.target.value)} />
+                            <input
+                                type="text"
+                                placeholder="Title"
+                                className="input-style"
+                                value={variantTitle}
+                                onChange={(e) =>
+                                    setVariantTitle(e.target.value)
+                                }
+                            />
+                            <input
+                                type="text"
+                                placeholder="Cost"
+                                className="input-style"
+                                value={variantCost}
+                                onChange={(e) => setVariantCost(e.target.value)}
+                            />
+                            <input
+                                type="text"
+                                placeholder="Price"
+                                className="input-style"
+                                value={variantPrice}
+                                onChange={(e) =>
+                                    setVariantPrice(e.target.value)
+                                }
+                            />
+                            <input
+                                type="text"
+                                placeholder="Stock"
+                                className="input-style"
+                                value={variantStock}
+                                onChange={(e) =>
+                                    setVariantStock(e.target.value)
+                                }
+                            />
+                            <input
+                                type="text"
+                                placeholder="MRP"
+                                className="input-style"
+                                value={variantMrp}
+                                onChange={(e) => setVariantMrp(e.target.value)}
+                            />
+                            <input
+                                type="text"
+                                placeholder="Resell Status"
+                                className="input-style"
+                                value={variantResell}
+                                onChange={(e) =>
+                                    setVariantResell(e.target.value)
+                                }
+                            />
                         </div>
                         <button
                             type="button"
@@ -2905,18 +3073,18 @@ export default function ProductEditSection() {
                                     mrp: variantMrp,
                                     resell: variantResell,
                                     size: variantSize,
-                                    type: selectedVariantType?.name || '',
+                                    type: selectedVariantType?.name || "",
                                     id: Date.now(),
                                     action: TrashIcon,
                                 };
                                 setVariantList((prev) => [...prev, newVariant]);
-                                setVariantTitle('');
-                                setVariantCost('');
-                                setVariantPrice('');
-                                setVariantStock('');
-                                setVariantMrp('');
-                                setVariantResell('');
-                                setVariantSize('');
+                                setVariantTitle("");
+                                setVariantCost("");
+                                setVariantPrice("");
+                                setVariantStock("");
+                                setVariantMrp("");
+                                setVariantResell("");
+                                setVariantSize("");
                             }}
                         >
                             Add Variant
@@ -2932,13 +3100,27 @@ export default function ProductEditSection() {
                                             className="h-4 w-4 rounded border-gray-300 text-primary__color focus:ring-primary__color relative top-[3px]"
                                         />
                                     </th>
-                                    <th className="py-4 px-5 font-semibold">Title</th>
-                                    <th className="py-4 px-5 font-semibold">Stock</th>
-                                    <th className="py-4 px-5 font-semibold">Cost</th>
-                                    <th className="py-4 px-5 font-semibold">Price</th>
-                                    <th className="py-4 px-5 font-semibold">Resell</th>
-                                    <th className="py-4 px-5 font-semibold">MRP</th>
-                                    <th className="py-4 px-5 font-semibold">Action</th>
+                                    <th className="py-4 px-5 font-semibold">
+                                        Title
+                                    </th>
+                                    <th className="py-4 px-5 font-semibold">
+                                        Stock
+                                    </th>
+                                    <th className="py-4 px-5 font-semibold">
+                                        Cost
+                                    </th>
+                                    <th className="py-4 px-5 font-semibold">
+                                        Price
+                                    </th>
+                                    <th className="py-4 px-5 font-semibold">
+                                        Resell
+                                    </th>
+                                    <th className="py-4 px-5 font-semibold">
+                                        MRP
+                                    </th>
+                                    <th className="py-4 px-5 font-semibold">
+                                        Action
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-[#F5F7FF]">
@@ -2950,23 +3132,41 @@ export default function ProductEditSection() {
                                                 className="h-4 w-4 rounded border-gray-300 text-primary__color focus:ring-primary__color relative top-[3px]"
                                             />
                                         </td>
-                                        <td className="py-3.5 px-5">{variant.title}</td>
-                                        <td className="py-3.5 px-5">{variant.stock}</td>
-                                        <td className="py-3.5 px-5">৳{variant.cost}</td>
-                                        <td className="py-3.5 px-5">৳{variant.price}</td>
                                         <td className="py-3.5 px-5">
-                                        <span className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getResellColor(variant.resell)}`}>
-                                            {variant.resell}
-                                        </span>
+                                            {variant.title}
                                         </td>
-                                        <td className="py-3.5 px-5">৳{variant.mrp}</td>
                                         <td className="py-3.5 px-5">
-                                        <TrashIcon
-                                            className="h-5 w-5 text-red-500 cursor-pointer inline-block"
-                                            onClick={() =>
-                                            setVariantList(variantList.filter((v) => v.id !== variant.id))
-                                            }
-                                        />
+                                            {variant.stock}
+                                        </td>
+                                        <td className="py-3.5 px-5">
+                                            ৳{variant.cost}
+                                        </td>
+                                        <td className="py-3.5 px-5">
+                                            ৳{variant.price}
+                                        </td>
+                                        <td className="py-3.5 px-5">
+                                            <span
+                                                className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getResellColor(variant.resell)}`}
+                                            >
+                                                {variant.resell}
+                                            </span>
+                                        </td>
+                                        <td className="py-3.5 px-5">
+                                            ৳{variant.mrp}
+                                        </td>
+                                        <td className="py-3.5 px-5">
+                                            <TrashIcon
+                                                className="h-5 w-5 text-red-500 cursor-pointer inline-block"
+                                                onClick={() =>
+                                                    setVariantList(
+                                                        variantList.filter(
+                                                            (v) =>
+                                                                v.id !==
+                                                                variant.id,
+                                                        ),
+                                                    )
+                                                }
+                                            />
                                         </td>
                                     </tr>
                                 ))}
@@ -3178,13 +3378,18 @@ export default function ProductEditSection() {
                     <div className="bg-white shadow-md rounded-[12px] p-7 mt-3">
                         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                             <div className="">
-                                <h2 className="text-[16px] font-semibold mb-2">Add Faq</h2>
-                                <p>Enter Faq details (e.g., Question, Answare, etc.):</p>
+                                <h2 className="text-[16px] font-semibold mb-2">
+                                    Add Faq
+                                </h2>
+                                <p>
+                                    Enter Faq details (e.g., Question, Answare,
+                                    etc.):
+                                </p>
                             </div>
                             <div className="flex items-center gap-3">
                                 <button
-                                type="button"
-                                onClick={handleAddFaq}
+                                    type="button"
+                                    onClick={handleAddFaq}
                                     className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
                                 >
                                     <PlusIcon className="h-5 w-5" />
@@ -3306,8 +3511,13 @@ export default function ProductEditSection() {
                 <div className="bg-white shadow-md rounded-[12px] p-7">
                     <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div className="">
-                            <h2 className="text-[16px] font-semibold mb-2">Landing Page</h2>
-                            <p>Create Landing Page for this product and boost sell.</p>
+                            <h2 className="text-[16px] font-semibold mb-2">
+                                Landing Page
+                            </h2>
+                            <p>
+                                Create Landing Page for this product and boost
+                                sell.
+                            </p>
                         </div>
                         <div className="flex items-center gap-3">
                             <Link

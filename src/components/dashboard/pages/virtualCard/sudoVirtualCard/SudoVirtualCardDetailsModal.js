@@ -16,7 +16,7 @@ import {
     stroWalletCardMakeDefaultOrRemove,
     stroWalletCardUnfreezeAPI,
 } from "@root/services/apiClient/apiClient";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import { handleApiError } from "@/components/utility/handleApiError";

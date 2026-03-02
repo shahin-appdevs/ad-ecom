@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 import {
     paymentLinkListAPI,
     paymentLinkStoreAPI,
@@ -69,7 +69,7 @@ const CreateLinkSkeleton = () => {
                         <div className="h-6 w-1/4 bg-gray-200 rounded"></div>
                         <div className="h-8 w-20 bg-gray-200 rounded-md"></div>
                     </div>
-                    <div className="relative w-full max-w-[300px] h-[500px] sm:h-[600px] mx-auto">
+                    <div className="relative w-full h-[500px] sm:h-[600px]">
                         <div className="absolute inset-0 bg-gray-200 rounded-xl"></div>
                         <div className="absolute z-20 top-[70px] left-[18px] right-[18px] bottom-[100px] bg-gray-100 rounded-xl p-4 space-y-4">
                             <div>

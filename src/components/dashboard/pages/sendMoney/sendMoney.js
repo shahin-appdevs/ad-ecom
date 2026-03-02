@@ -119,6 +119,12 @@ export default function SendMoneySection({ setRefetch }) {
                 });
             } catch (error) {
                 handleApiError(error, "Failed to fetch remaining limits");
+                const data = error?.response?.data?.data;
+
+                setRemainingLimit({
+                    dailyLimit: data?.remainingDaily || "0.00",
+                    monthlyLimit: data?.remainingMonthly || "0.00",
+                });
             } finally {
                 setRemainingLoading(false);
             }
@@ -296,7 +302,7 @@ export default function SendMoneySection({ setRefetch }) {
             } catch (error) {
                 toast.error(
                     error.response?.data?.message?.error?.[0] ||
-                        "Failed to load send money information",
+                        "Failed to load transfer money information",
                 );
                 setIsLoading(false);
             }
@@ -391,7 +397,7 @@ export default function SendMoneySection({ setRefetch }) {
         } catch (error) {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
-                    "Failed to send money",
+                    "Failed to transfer money",
             );
         } finally {
             setIsSubmitting(false);
@@ -725,7 +731,9 @@ export default function SendMoneySection({ setRefetch }) {
                         </div>
                     </div>
                     <Button
-                        title={isSubmitting ? "Sending..." : "Send Money"}
+                        title={
+                            isSubmitting ? "Transferring..." : "Transfer Money"
+                        }
                         variant="primary"
                         size="md"
                         className={`w-full ${isSubmitting ? "cursor-not-allowed !bg-gray-400" : ""}`}

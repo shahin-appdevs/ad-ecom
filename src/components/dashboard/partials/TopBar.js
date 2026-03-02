@@ -7,10 +7,10 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 // Images
 import userProfile from "@public/images/user/userProfile.png";
-import Link from "next/link";
+import { useRouter, Link } from "@/i18n/navigation";
 import { LoaderCircle, Lock, LogOut, ShieldCheck, User } from "lucide-react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useRouter } from "next/navigation";
+import LanguageSwitcher from "@/components/partials/LanguageSwitcher";
 
 export default function TopBar() {
     const pathname = usePathname();
@@ -110,30 +110,35 @@ export default function TopBar() {
                                     {loading ? (
                                         <div className="h-[42px] w-[42px] rounded-full bg-gray-200 animate-pulse" />
                                     ) : (
-                                        <button
-                                            onClick={() =>
-                                                setShowDropdown(!showDropdown)
-                                            }
-                                            type="button"
-                                            className="outline-none"
-                                        >
-                                            <Image
-                                                src={
-                                                    userData.userImage ||
-                                                    userProfile
+                                        <div className="flex items-center gap-3">
+                                            <LanguageSwitcher />
+                                            <button
+                                                onClick={() =>
+                                                    setShowDropdown(
+                                                        !showDropdown,
+                                                    )
                                                 }
-                                                width={42}
-                                                height={42}
-                                                priority
-                                                quality={50}
-                                                className="h-[42px] w-[42px] bg-[#F5F7FF] rounded-full object-cover cursor-pointer"
-                                                alt="User"
-                                                onError={(e) => {
-                                                    e.target.src =
-                                                        userProfile.src;
-                                                }}
-                                            />
-                                        </button>
+                                                type="button"
+                                                className="outline-none"
+                                            >
+                                                <Image
+                                                    src={
+                                                        userData.userImage ||
+                                                        userProfile
+                                                    }
+                                                    width={42}
+                                                    height={42}
+                                                    priority
+                                                    quality={50}
+                                                    className="h-[42px] w-[42px] bg-[#F5F7FF] rounded-full object-cover cursor-pointer"
+                                                    alt="User"
+                                                    onError={(e) => {
+                                                        e.target.src =
+                                                            userProfile.src;
+                                                    }}
+                                                />
+                                            </button>
+                                        </div>
                                     )}
 
                                     {/* Dropdown Menu */}

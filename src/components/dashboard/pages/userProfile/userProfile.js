@@ -137,6 +137,12 @@ export default function UserProfileSection() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (status !== "Verified") {
+            toast.error("You are not verified");
+            return;
+        }
+
         setIsUpdating(true);
         setErrors({});
 

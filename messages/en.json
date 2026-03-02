@@ -1,0 +1,298 @@
+{
+    "HomePage": {
+        "header": {
+            "searchPlaceholder": "Search by name...",
+            "searchButton": {
+                "searchByProduct": "Search By Product",
+                "searchByStall": "Search By Stall"
+            },
+            "login": "Login",
+            "register": "Register",
+            "logout": "Logout",
+            "dashboard": "Dashboard",
+            "sellerDashboard": "Seller Dashboard",
+            "nav": {
+                "home": "Home",
+                "categories": "Categories",
+                "newProduct": "New Product",
+                "flashSale": "Flash Sale",
+                "brand": "Brand",
+                "campaign": "Campaign",
+                "collection": "Collection"
+            },
+            "mobileBottomBar": {
+                "home": "Home",
+                "categories": "Category",
+                "account": "Account",
+                "cart": "Cart"
+            }
+        },
+        "banner": {
+            "categoryTitle": "Browse Category"
+        },
+        "flashSale": {
+            "flashSaleTitle": "Flash Sale",
+            "days": "Days",
+            "hours": "Hours",
+            "min": "Min",
+            "sec": "Sec",
+            "viewMore": "View More",
+            "loadMore": "Load More"
+        },
+        "newArrival": {
+            "newArrivalTitle": "New Arrival",
+            "viewMore": "View More",
+            "loadMore": "Load More"
+        },
+        "shopByBrand": {
+            "title": "Shop by Brand",
+            "viewMore": "View More",
+            "loadMore": "Load More"
+        },
+        "stalls": {
+            "title": "Stalls",
+            "viewMore": "View More"
+        },
+        "categoryProducts": {
+            "viewMore": "View More",
+            "loadMore": "Load More"
+        },
+        "footer": {
+            "options": {
+                "popular": "Popular",
+                "important_links": "Important Links",
+                "address": "Address"
+            },
+            "downloadApp": "Download the App",
+            "downloadAppText": "Download the app for a better shopping experience",
+            "downloadAppButton": "Download App",
+            "copyRightText": "Copyright © 2026 All rights reserved",
+            "powerByText": "Powered by"
+        }
+    },
+    "ProductDetails": {
+        "size": "SIZE",
+        "color": "COLOR",
+        "addToCart": "Add to cart",
+        "buyNow": "Buy Now",
+        "outOfStock": "Out of Stock",
+        "inStock": "In Stock",
+        "category": "Category",
+        "stock": "Stock",
+        "sku": "SKU",
+        "warranty": "Warranty",
+        "days": "days",
+        "share": "Share",
+        "tabs": {
+            "description": "Description",
+            "details": "Details",
+            "reviews": "Customer Review"
+        },
+        "productDescription": "Product Description",
+        "productDetails": "Product Details",
+        "customerReviews": "Customer Reviews",
+        "noReviewsYet": "No reviews yet. Be the first to review this product!",
+        "writeReview": "Write a Review",
+        "yourReview": "Your Review",
+        "submitReview": "Submit Review",
+        "submitting": "Submitting...",
+        "recentViewed": "Recent View",
+        "productNotFound": "Product not found",
+        "reviewPlaceholder": "Share your thoughts about this product...",
+        "noRecentViewed": "No recently viewed products",
+        "shareVia": "Share via",
+        "close": "Close",
+        "referral": {
+            "shareTitle": "Share Referral Link",
+            "shareText": "Share this link with your friends to earn commissions:"
+        }
+    },
+    "Dashboard": {
+        "sidenav": {
+            "dashboard": "Dashboard",
+            "wallet": "Wallet",
+            "addBalance": "Add Balance",
+            "paymentRequest": "Payment Request",
+            "rateConverter": "Rate Converter",
+            "myQrCode": "My QR Code",
+            "p2pTransfer": "P2P Transfer",
+            "merchantPay": "Merchant Pay",
+            "cashOut": "Cash Out",
+            "requestMoney": "Request Money",
+            "paymentLink": "Payment Link",
+            "services": "Services",
+            "utilityPay": "Utility Pay",
+            "mobileTopUp": "Mobile TopUp",
+            "ecommerce": "Ecommerce",
+            "orders": "Orders",
+            "security": "Security",
+            "twoFaSecurity": "2FA Security",
+            "setupPin": "Setup Pin",
+            "cards": "Cards",
+            "virtualCard": "Virtual Card",
+            "giftCard": "Gift Card",
+            "transactions": "Transactions",
+            "allTransactions": "All Transactions",
+            "utilityBill": "Utility Bill",
+            "pointConversion": "Point Conversion",
+            "referralBonus": "Referral Bonus",
+            "verifyPlan": "Verify Plan",
+            "account": "Account",
+            "profile": "Profile",
+            "referralStatus": "Referral Status",
+            "pointToCash": "Point to Cash",
+            "logout": "Logout",
+            "helpCenter": "Help Center",
+            "howCanWeHelp": "How can we help you?",
+            "getSupport": "Get Support",
+            "confirmLogout": "Confirm Logout",
+            "logoutConfirmText": "Are you sure you want to logout?",
+            "cancel": "Cancel",
+            "walletAccount": "Wallet Account"
+        },
+        "wallet": {
+            "addMoney": {
+                "title": "Add Money",
+                "exchangeRate": "Exchange Rate",
+                "availableBalance": "Available Balance",
+                "charge": "Charge",
+                "depositType": "Deposit Type",
+                "mainWallet": "Main Wallet",
+                "shoppingWallet": "Shopping Wallet",
+                "selectGateway": "Select Payment Gateway",
+                "selectMethod": "Select Payment Method",
+                "enterAmount": "Enter Amount",
+                "amountPlaceholder": "Enter Amount ({min} - {max})",
+                "adding": "Adding...",
+                "preview": "Preview",
+                "enteredAmount": "Entered Amount",
+                "feesAndCharges": "Fees & Charges",
+                "youWillGet": "You Will Get",
+                "totalPayable": "Total Payable",
+                "limitInfo": "Limit Information",
+                "transactionLimit": "Transaction Limit",
+                "dailyLimit": "Daily Limit",
+                "monthlyLimit": "Monthly Limit",
+                "dailyRemaining": "Daily Remaining Limit",
+                "monthlyRemaining": "Monthly Remaining Limit",
+                "notAvailable": "N/A",
+                "failedFetchLimits": "Failed to fetch remaining limits",
+                "addMoneyLog": {
+                    "title": "Add Money Logs",
+                    "viewAll": "View All",
+                    "trx": "Trx",
+                    "gateway": "Gateway",
+                    "amount": "Request Amount",
+                    "payable": "Payable",
+                    "rate": "Exchange Rate",
+                    "fees": "Fees & Charges",
+                    "balance": "Current Balance",
+                    "status": "Status",
+                    "time": "Time & Date",
+                    "noTransactions": "No add money transactions found"
+                },
+                "addMoneySuccess": {
+                    "title": "Add Money Confirmed!",
+                    "message": "Thank you for your transaction. Your transaction has been successfully confirm and will be processed shortly.",
+                    "continueButton": "Continue Add Money"
+                },
+                "addMoneyCancel": {
+                    "title": "Add Money Canceled!",
+                    "message": "Thank you for your submission. But your transaction has been canceled and will be processed shortly.",
+                    "continueButton": "Continue Add Money"
+                }
+            },
+            "withdrawMoney": {
+                "title": "Withdraw Money",
+                "exchangeRate": "Exchange Rate",
+                "availableBalance": "Available Balance",
+                "charge": "Charge",
+                "selectGateway": "Select Payment Gateway",
+                "selectMethod": "Select Payment Method",
+                "enterAmount": "Enter Amount",
+                "amountPlaceholder": "Enter Amount ({min} - {max})",
+                "instructions": "Instructions",
+                "enterField": "Enter {label}",
+                "requesting": "Requesting...",
+                "confirm": "Confirm",
+                "preview": "Preview",
+                "enteredAmount": "Entered Amount",
+                "conversionAmount": "Conversion Amount",
+                "feesAndCharges": "Fees & Charges",
+                "youWillGet": "You Will Get",
+                "totalPayable": "Total Payable",
+                "limitInfo": "Limit Information",
+                "transactionLimit": "Transaction Limit",
+                "dailyLimit": "Daily Limit",
+                "monthlyLimit": "Monthly Limit",
+                "dailyRemaining": "Remaining Daily Limit",
+                "monthlyRemaining": "Remaining Monthly Limit",
+                "notAvailable": "N/A",
+                "failedFetchLimits": "Failed to fetch remaining limits",
+                "withdrawFailed": "Withdraw failed",
+                "successTitle": "Withdrawal Submitted",
+                "successMessage": "Your withdrawal request has been submitted successfully. Please wait for admin approval.",
+                "okay": "Okay",
+                "withdrawLogs": {
+                    "title": "Withdraw Logs",
+                    "viewAll": "View All",
+                    "trx": "Trx",
+                    "gateway": "Gateway",
+                    "amount": "Request Amount",
+                    "payable": "Payable",
+                    "rate": "Exchange Rate",
+                    "fees": "Fees & Charges",
+                    "balance": "Current Balance",
+                    "status": "Status",
+                    "time": "Time & Date",
+                    "noTransactions": "No withdraw transactions found"
+                }
+            }
+        },
+        "homepage": {
+            "wallet": {
+                "myBalance": "My Balance",
+                "myBalanceSubtitle": "My Balance for instant transactions",
+                "shoppingBalance": "Shopping Balance",
+                "shoppingBalanceSubtitle": "Shopping Balance reserved for shopping",
+                "rewardPoints": "Reward Points",
+                "rewardPointsSubtitle": "Reward Points earned from commissions",
+                "points": "Points",
+                "default": "Default",
+                "viewAll": "View All",
+                "failedFetch": "Failed to fetch dashboard data"
+            },
+            "widget": {
+                "title": "Widget",
+                "subtitle": "Real-time widget for instant engagement",
+                "totalAddMoney": "Total Add Money",
+                "totalWithdraw": "Total Withdraw",
+                "totalBillPay": "Total Bill Pay",
+                "totalMobileTopUp": "Total Mobile TopUp",
+                "totalTransactions": "Total Transactions",
+                "totalPurchaseAmount": "Total Purchase Amount",
+                "totalPaidAmount": "Total Paid Amount",
+                "processingOrders": "Processing Orders",
+                "cancelOrders": "Cancel Orders",
+                "returnedOrders": "Returned Orders",
+                "deliveredOrders": "Delivered Orders",
+                "totalOrders": "Total Orders",
+                "failedFetch": "Failed to fetch dashboard data"
+            },
+            "transactionHistory": {
+                "title": "Transaction History",
+                "viewAll": "View All",
+                "trxId": "Transaction ID",
+                "type": "Type",
+                "trxType": "Transaction Type",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "remark": "Remark",
+                "status": "Status",
+                "timeAndDate": "Time & Date",
+                "noTransactions": "No transactions found",
+                "somethingWentWrong": "Something went wrong"
+            }
+        }
+    }
+}

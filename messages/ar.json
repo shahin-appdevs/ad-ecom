@@ -1,0 +1,298 @@
+{
+    "HomePage": {
+        "header": {
+            "searchPlaceholder": "ابحث بالاسم...",
+            "searchButton": {
+                "searchByProduct": "البحث حسب المنتج",
+                "searchByStall": "البحث حسب الكشك"
+            },
+            "login": "تسجيل الدخول",
+            "register": "تسجيل",
+            "logout": "تسجيل الخروج",
+            "dashboard": "لوحة التحكم",
+            "sellerDashboard": "لوحة التحكم للبائع",
+            "nav": {
+                "home": "الرئيسية",
+                "categories": "الفئات",
+                "newProduct": "منتج جديد",
+                "flashSale": "تخفيضات سريعة",
+                "brand": "العلامة التجارية",
+                "campaign": "حملة",
+                "collection": "مجموعة"
+            },
+            "mobileBottomBar": {
+                "home": "الرئيسية",
+                "categories": "الفئات",
+                "account": "حسابي",
+                "cart": "السلة"
+            }
+        },
+        "banner": {
+            "categoryTitle": "تصفح الفئات"
+        },
+        "flashSale": {
+            "flashSaleTitle": "تخفيضات سريعة",
+            "days": "أيام",
+            "hours": "ساعات",
+            "min": "دقيقة",
+            "sec": "ثانية",
+            "viewMore": "عرض المزيد",
+            "loadMore": "تحميل المزيد"
+        },
+        "newArrival": {
+            "newArrivalTitle": "وصل حديثاً",
+            "viewMore": "عرض المزيد",
+            "loadMore": "تحميل المزيد"
+        },
+        "shopByBrand": {
+            "title": "تسوق حسب العلامة التجارية",
+            "viewMore": "عرض المزيد",
+            "loadMore": "تحميل المزيد"
+        },
+        "stalls": {
+            "title": "الأكشاك",
+            "viewMore": "عرض المزيد"
+        },
+        "categoryProducts": {
+            "viewMore": "عرض المزيد",
+            "loadMore": "تحميل المزيد"
+        },
+        "footer": {
+            "options": {
+                "popular": "شائع",
+                "important_links": "روابط مهمة",
+                "address": "العنوان"
+            },
+            "downloadApp": "تحميل التطبيق",
+            "downloadAppText": "قم بتحميل التطبيق لتجربة تسوق أفضل",
+            "downloadAppButton": "تحميل التطبيق",
+            "copyRightText": "حقوق النشر © 2026 جميع الحقوق محفوظة",
+            "powerByText": "مدعوم من"
+        }
+    },
+    "ProductDetails": {
+        "size": "المقاس",
+        "color": "اللون",
+        "addToCart": "أضف إلى السلة",
+        "buyNow": "اشترِ الآن",
+        "outOfStock": "نفد المخزون",
+        "inStock": "متوفر في المخزون",
+        "category": "الفئة",
+        "stock": "المخزون",
+        "sku": "رمز المنتج",
+        "warranty": "الضمان",
+        "days": "أيام",
+        "share": "مشاركة",
+        "tabs": {
+            "description": "الوصف",
+            "details": "التفاصيل",
+            "reviews": "آراء العملاء"
+        },
+        "productDescription": "وصف المنتج",
+        "productDetails": "تفاصيل المنتج",
+        "customerReviews": "آراء العملاء",
+        "noReviewsYet": "لا توجد تقييمات بعد. كن أول من يقيم المنتج!",
+        "writeReview": "اكتب تقييمًا",
+        "yourReview": "تقييمك",
+        "submitReview": "إرسال التقييم",
+        "submitting": "جاري الإرسال...",
+        "recentViewed": "تمت المشاهدة مؤخرًا",
+        "productNotFound": "المنتج غير موجود",
+        "reviewPlaceholder": "شارك أفكارك حول هذا المنتج...",
+        "noRecentViewed": "لا توجد منتجات تمت مشاهدتها مؤخرًا",
+        "shareVia": "مشاركة عبر",
+        "close": "إغلاق",
+        "referral": {
+            "shareTitle": "مشاركة رابط الإحالة",
+            "shareText": "شارك هذا الرابط مع أصدقائك واكسب عمولات:"
+        }
+    },
+    "Dashboard": {
+        "sidenav": {
+            "dashboard": "لوحة القيادة",
+            "wallet": "المحفظة",
+            "addBalance": "إضافة رصيد",
+            "paymentRequest": "طلب الدفع",
+            "rateConverter": "محول السعر",
+            "myQrCode": "رمز الاستجابة السريعة الخاص بي",
+            "p2pTransfer": "تحويل من نظير لنظير",
+            "merchantPay": "دفع التاجر",
+            "cashOut": "صرف النقود",
+            "requestMoney": "طلب مال",
+            "paymentLink": "رابط الدفع",
+            "services": "الخدمات",
+            "utilityPay": "دفع المرافق",
+            "mobileTopUp": "شحن الجوال",
+            "ecommerce": "التجارة الإلكترونية",
+            "orders": "الطلبات",
+            "security": "الأمان",
+            "twoFaSecurity": "أمان 2FA",
+            "setupPin": "إعداد رمز التحقق",
+            "cards": "البطاقات",
+            "virtualCard": "بطاقة افتراضية",
+            "giftCard": "بطاقة هدايا",
+            "transactions": "المعاملات",
+            "allTransactions": "كل المعاملات",
+            "utilityBill": "فاتورة المرافق",
+            "pointConversion": "تحويل النقاط",
+            "referralBonus": "مكافأة الإحالة",
+            "verifyPlan": "التحقق من الخطة",
+            "account": "الحساب",
+            "profile": "الملف الشخصي",
+            "referralStatus": "حالة الإحالة",
+            "pointToCash": "نقطة إلى نقد",
+            "logout": "تسجيل الخروج",
+            "helpCenter": "مركز المساعدة",
+            "howCanWeHelp": "كيف يمكننا مساعدتك؟",
+            "getSupport": "احصل على الدعم",
+            "confirmLogout": "تأكيد تسجيل الخروج",
+            "logoutConfirmText": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+            "cancel": "إلغاء",
+            "walletAccount": "حساب المحفظة"
+        },
+        "wallet": {
+            "addMoney": {
+                "title": "إضافة الأموال",
+                "exchangeRate": "سعر الصرف",
+                "availableBalance": "الرصيد المتاح",
+                "charge": "رسوم",
+                "depositType": "نوع الإيداع",
+                "mainWallet": "المحفظة الرئيسية",
+                "shoppingWallet": "محفظة التسوق",
+                "selectGateway": "حدد بوابة الدفع",
+                "selectMethod": "حدد طريقة الدفع",
+                "enterAmount": "أدخل المبلغ",
+                "amountPlaceholder": "أدخل المبلغ ({min} - {max})",
+                "adding": "جاري الإضافة...",
+                "preview": "معاينة",
+                "enteredAmount": "المبلغ المدخل",
+                "feesAndCharges": "الرسوم والمصاريف",
+                "youWillGet": "سوف تحصل على",
+                "totalPayable": "إجمالي المستحق",
+                "limitInfo": "معلومات الحد",
+                "transactionLimit": "حد المعاملة",
+                "dailyLimit": "الحد اليومي",
+                "monthlyLimit": "الحد الشهري",
+                "dailyRemaining": "الحد اليومي المتبقي",
+                "monthlyRemaining": "الحد الشهري المتبقي",
+                "notAvailable": "غير متاح",
+                "failedFetchLimits": "فشل في جلب الحدود المتبقية",
+                "addMoneyLog": {
+                    "title": "سجلات إضافة الأموال",
+                    "viewAll": "عرض الكل",
+                    "trx": "رقم المعاملة",
+                    "gateway": "البوابة",
+                    "amount": "المبلغ المطلوب",
+                    "payable": "المبلغ المستحق",
+                    "rate": "سعر الصرف",
+                    "fees": "الرسوم والمصاريف",
+                    "balance": "الرصيد الحالي",
+                    "status": "الحالة",
+                    "time": "الوقت والتاريخ",
+                    "noTransactions": "لم يتم العثور على معاملات إضافة أموال"
+                },
+                "addMoneySuccess": {
+                    "title": "تم تأكيد إضافة الأموال!",
+                    "message": "شكراً لك على معاملتك. تم تأكيد معاملتك بنجاح وسيتم إكمال معالجتها قريباً.",
+                    "continueButton": "متابعة إضافة الأموال"
+                },
+                "addMoneyCancel": {
+                    "title": "تم إلغاء إضافة الأموال!",
+                    "message": "شكراً لك على تقديمك. ولكن تم إلغاء معاملتك وسيتم معالجتها قريباً.",
+                    "continueButton": "متابعة إضافة الأموال"
+                }
+            },
+            "withdrawMoney": {
+                "title": "سحب الأموال",
+                "exchangeRate": "سعر الصرف",
+                "availableBalance": "الرصيد المتاح",
+                "charge": "رسوم",
+                "selectGateway": "حدد بوابة الدفع",
+                "selectMethod": "حدد طريقة الدفع",
+                "enterAmount": "أدخل المبلغ",
+                "amountPlaceholder": "أدخل المبلغ ({min} - {max})",
+                "instructions": "تعليمات",
+                "enterField": "أدخل {label}",
+                "requesting": "جاري الطلب...",
+                "confirm": "تأكيد",
+                "preview": "معاينة",
+                "enteredAmount": "المبلغ المدخل",
+                "conversionAmount": "مبلغ التحويل",
+                "feesAndCharges": "الرسوم والمصاريف",
+                "youWillGet": "سوف تحصل على",
+                "totalPayable": "إجمالي المستحق",
+                "limitInfo": "معلومات الحد",
+                "transactionLimit": "حد المعاملة",
+                "dailyLimit": "الحد اليومي",
+                "monthlyLimit": "الحد الشهري",
+                "dailyRemaining": "الحد اليومي المتبقي",
+                "monthlyRemaining": "الحد الشهري المتبقي",
+                "notAvailable": "غير متاح",
+                "failedFetchLimits": "فشل في جلب الحدود المتبقية",
+                "withdrawFailed": "فشل السحب",
+                "successTitle": "تم تقديم السحب",
+                "successMessage": "تم تقديم طلب السحب الخاص بك بنجاح. يرجى انتظار موافقة المسؤول.",
+                "okay": "حسناً",
+                "withdrawLogs": {
+                    "title": "سجلات السحب",
+                    "viewAll": "عرض الكل",
+                    "trx": "رقم المعاملة",
+                    "gateway": "البوابة",
+                    "amount": "المبلغ المطلوب",
+                    "payable": "المبلغ المستحق",
+                    "rate": "سعر الصرف",
+                    "fees": "الرسوم والمصاريف",
+                    "balance": "الرصيد الحالي",
+                    "status": "الحالة",
+                    "time": "الوقت والتاريخ",
+                    "noTransactions": "لم يتم العثور على معاملات سحب"
+                }
+            }
+        },
+        "homepage": {
+            "wallet": {
+                "myBalance": "رصيدي",
+                "myBalanceSubtitle": "رصيدي للمعاملات الفورية",
+                "shoppingBalance": "رصيد التسوق",
+                "shoppingBalanceSubtitle": "رصيد التسوق محجوز للتسوق",
+                "rewardPoints": "نقاط المكافأة",
+                "rewardPointsSubtitle": "نقاط المكافأة المكتسبة من العمولات",
+                "points": "نقاط",
+                "default": "افتراضي",
+                "viewAll": "عرض الكل",
+                "failedFetch": "فشل في جلب بيانات لوحة التحكم"
+            },
+            "widget": {
+                "title": "القطعة",
+                "subtitle": "قطعة في الوقت الحقيقي للمشاركة الفورية",
+                "totalAddMoney": "إجمالي إضافة الأموال",
+                "totalWithdraw": "إجمالي السحب",
+                "totalBillPay": "إجمالي دفع الفواتير",
+                "totalMobileTopUp": "إجمالي شحن الجوال",
+                "totalTransactions": "إجمالي المعاملات",
+                "totalPurchaseAmount": "إجمالي مبلغ الشراء",
+                "totalPaidAmount": "إجمالي المبلغ المدفوع",
+                "processingOrders": "طلبات قيد المعالجة",
+                "cancelOrders": "طلبات ملغاة",
+                "returnedOrders": "طلبات مرتجعة",
+                "deliveredOrders": "طلبات تم تسليمها",
+                "totalOrders": "إجمالي الطلبات",
+                "failedFetch": "فشل في جلب بيانات لوحة التحكم"
+            },
+            "transactionHistory": {
+                "title": "سجل المعاملات",
+                "viewAll": "عرض الكل",
+                "trxId": "معرف المعاملة",
+                "type": "النوع",
+                "trxType": "نوع المعاملة",
+                "requestAmount": "مبلغ الطلب",
+                "payable": "مستحق الدفع",
+                "remark": "ملاحظة",
+                "status": "الحالة",
+                "timeAndDate": "الوقت والتاريخ",
+                "noTransactions": "لم يتم العثور على معاملات",
+                "somethingWentWrong": "حدث خطأ ما"
+            }
+        }
+    }
+}

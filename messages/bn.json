@@ -1,0 +1,298 @@
+{
+    "HomePage": {
+        "header": {
+            "searchPlaceholder": "নামের মাধ্যমে খুঁজুন...",
+            "searchButton": {
+                "searchByProduct": "পণ্য দ্বারা খুঁজুন",
+                "searchByStall": "স্টল দ্বারা খুঁজুন"
+            },
+            "login": "লগইন",
+            "register": "রেজিস্টার",
+            "logout": "লগআউট",
+            "dashboard": "ড্যাশবোর্ড",
+            "sellerDashboard": "বিক্রেতা ড্যাশবোর্ড",
+            "nav": {
+                "home": "হোম",
+                "categories": "ক্যাটাগরি",
+                "newProduct": "নতুন পণ্য",
+                "flashSale": "ফ্ল্যাশ সেল",
+                "brand": "ব্র্যান্ড",
+                "campaign": "ক্যাম্পেইন",
+                "collection": "কালেকশন"
+            },
+            "mobileBottomBar": {
+                "home": "হোম",
+                "categories": "ক্যাটাগরি",
+                "account": "অ্যাকাউন্ট",
+                "cart": "কার্ট"
+            }
+        },
+        "banner": {
+            "categoryTitle": "ক্যাটাগরি ব্রাউজ করুন"
+        },
+        "flashSale": {
+            "flashSaleTitle": "ফ্ল্যাশ সেল",
+            "days": "দিন",
+            "hours": "ঘণ্টা",
+            "min": "মিনিট",
+            "sec": "সেকেন্ড",
+            "viewMore": "আরও দেখুন",
+            "loadMore": "আরও লোড করুন"
+        },
+        "newArrival": {
+            "newArrivalTitle": "নতুন আগমন",
+            "viewMore": "আরও দেখুন",
+            "loadMore": "আরও লোড করুন"
+        },
+        "shopByBrand": {
+            "title": "ব্র্যান্ড অনুযায়ী কেনাকাটা করুন",
+            "viewMore": "আরও দেখুন",
+            "loadMore": "আরও লোড করুন"
+        },
+        "stalls": {
+            "title": "স্টলসমূহ",
+            "viewMore": "আরও দেখুন"
+        },
+        "categoryProducts": {
+            "viewMore": "আরও দেখুন",
+            "loadMore": "আরও লোড করুন"
+        },
+        "footer": {
+            "options": {
+                "popular": "জনপ্রিয়",
+                "important_links": "গুরুত্বপূর্ণ লিঙ্কসমূহ",
+                "address": "ঠিকানা"
+            },
+            "downloadApp": "অ্যাপ ডাউনলোড করুন",
+            "downloadAppText": "একটি উন্নত শপিং অভিজ্ঞতার জন্য অ্যাপ ডাউনলোড করুন",
+            "downloadAppButton": "অ্যাপ ডাউনলোড",
+            "copyRightText": "কপিরাইট © ২০২৬ সর্বস্বত্ব সংরক্ষিত",
+            "powerByText": "Powered by"
+        }
+    },
+    "ProductDetails": {
+        "size": "সাইজ",
+        "color": "রঙ",
+        "addToCart": "কার্টে যোগ করুন",
+        "buyNow": "এখন কিনুন",
+        "outOfStock": "স্টকে নেই",
+        "inStock": "স্টকে আছে",
+        "category": "ক্যাটাগরি",
+        "stock": "স্টক",
+        "sku": "এসকিউ",
+        "warranty": "ওয়ারেন্টি",
+        "days": "দিন",
+        "share": "শেয়ার",
+        "tabs": {
+            "description": "বিবরণ",
+            "details": "বিস্তারিত",
+            "reviews": "গ্রাহকের রিভিউ"
+        },
+        "productDescription": "পণ্যের বিবরণ",
+        "productDetails": "পণ্যের বিস্তারিত তথ্য",
+        "customerReviews": "গ্রাহকের রিভিউ",
+        "noReviewsYet": "এখনো কোনো রিভিউ নেই। প্রথম রিভিউ দিন!",
+        "writeReview": "রিভিউ লিখুন",
+        "yourReview": "আপনার রিভিউ",
+        "submitReview": "রিভিউ জমা দিন",
+        "submitting": "জমা হচ্ছে...",
+        "recentViewed": "সম্প্রতি দেখা",
+        "productNotFound": "পণ্য পাওয়া যায়নি",
+        "reviewPlaceholder": "এই পণ্য সম্পর্কে আপনার মতামত শেয়ার করুন...",
+        "noRecentViewed": "সম্প্রতি দেখা কোনো পণ্য নেই",
+        "shareVia": "শেয়ার করুন",
+        "close": "বন্ধ করুন",
+        "referral": {
+            "shareTitle": "রেফারেল লিঙ্ক শেয়ার করুন",
+            "shareText": "বন্ধুদের সাথে এই লিঙ্ক শেয়ার করে কমিশন আয় করুন:"
+        }
+    },
+    "Dashboard": {
+        "sidenav": {
+            "dashboard": "ড্যাশবোর্ড",
+            "wallet": "ওয়ালেট",
+            "addBalance": "ব্যালেন্স যোগ করুন",
+            "paymentRequest": "পেমেন্ট অনুরোধ",
+            "rateConverter": "রেট কনভার্টার",
+            "myQrCode": "আমার কিউআর কোড",
+            "p2pTransfer": "পিটুপি ট্রান্সফার",
+            "merchantPay": "মার্চেন্ট পে",
+            "cashOut": "ক্যাশ আউট",
+            "requestMoney": "টাকা অনুরোধ করুন",
+            "paymentLink": "পেমেন্ট লিঙ্ক",
+            "services": "সেবাসমূহ",
+            "utilityPay": "ইউটিলিটি পে",
+            "mobileTopUp": "মোবাইল টপ-আপ",
+            "ecommerce": "ই-কমার্স",
+            "orders": "অর্ডারসমূহ",
+            "security": "নিরাপত্তা",
+            "twoFaSecurity": "টু-এফএ নিরাপত্তা",
+            "setupPin": "পিন সেটআপ",
+            "cards": "কার্ডসমূহ",
+            "virtualCard": "ভার্চুয়াল কার্ড",
+            "giftCard": "গিফট কার্ড",
+            "transactions": "লেনদেনসমূহ",
+            "allTransactions": "সব লেনদেন",
+            "utilityBill": "ইউটিলিটি বিল",
+            "pointConversion": "পয়েন্ট কনভার্সন",
+            "referralBonus": "রেফারেল বোনাস",
+            "verifyPlan": "প্ল্যান যাচাই করুন",
+            "account": "অ্যাকাউন্ট",
+            "profile": "প্রোফাইল",
+            "referralStatus": "রেফারেল স্ট্যাটাস",
+            "pointToCash": "পয়েন্ট থেকে ক্যাশ",
+            "logout": "লগআউট",
+            "helpCenter": "হেল্প সেন্টার",
+            "howCanWeHelp": "আমরা আপনাকে কীভাবে সাহায্য করতে পারি?",
+            "getSupport": "সহায়তা নিন",
+            "confirmLogout": "লগআউট নিশ্চিত করুন",
+            "logoutConfirmText": "আপনি কি নিশ্চিতভাবে লগআউট করতে চান?",
+            "cancel": "বাতিল",
+            "walletAccount": "ওয়ালেট অ্যাকাউন্ট"
+        },
+        "wallet": {
+            "addMoney": {
+                "title": "অ্যাড মানি",
+                "exchangeRate": "বিনিময় হার",
+                "availableBalance": "উপলব্ধ ব্যালেন্স",
+                "charge": "চার্জ",
+                "depositType": "ডিপোজিট ধরণ",
+                "mainWallet": "প্রধান ওয়ালেট",
+                "shoppingWallet": "শপিং ওয়ালেট",
+                "selectGateway": "পেমেন্ট গেটওয়ে নির্বাচন করুন",
+                "selectMethod": "পেমেন্ট পদ্ধতি নির্বাচন করুন",
+                "enterAmount": "পরিমাণ লিখুন",
+                "amountPlaceholder": "পরিমাণ লিখুন ({min} - {max})",
+                "adding": "যোগ করা হচ্ছে...",
+                "preview": "প্রিভিউ",
+                "enteredAmount": "লিখা পরিমাণ",
+                "feesAndCharges": "ফি এবং চার্জ",
+                "youWillGet": "আপনি পাবেন",
+                "totalPayable": "মোট প্রদেয়",
+                "limitInfo": "সীমা তথ্য",
+                "transactionLimit": "লেনদেনের সীমা",
+                "dailyLimit": "দৈনিক সীমা",
+                "monthlyLimit": "মাসিক সীমা",
+                "dailyRemaining": "দৈনিক অবশিষ্ট সীমা",
+                "monthlyRemaining": "মাসিক অবশিষ্ট সীমা",
+                "notAvailable": "প্রযোজ্য নয়",
+                "failedFetchLimits": "অবশিষ্ট সীমা আনতে ব্যর্থ হয়েছে",
+                "addMoneyLog": {
+                    "title": "অ্যাড মানি লগ",
+                    "viewAll": "সব দেখুন",
+                    "trx": "টিআরএক্স",
+                    "gateway": "গেটওয়ে",
+                    "amount": "অনুরোধ করা পরিমাণ",
+                    "payable": "প্রদেয়",
+                    "rate": "বিনিময় হার",
+                    "fees": "ফি এবং চার্জ",
+                    "balance": "বর্তমান ব্যালেন্স",
+                    "status": "স্ট্যাটাস",
+                    "time": "সময় এবং তারিখ",
+                    "noTransactions": "কোন অ্যাড মানি লেনদেন পাওয়া যায়নি"
+                },
+                "addMoneySuccess": {
+                    "title": "অ্যাড মানি নিশ্চিত করা হয়েছে!",
+                    "message": "আপনার লেনদেনের জন্য ধন্যবাদ। আপনার লেনদেনেটি সফলভাবে নিশ্চিত করা হয়েছে এবং শীঘ্রই এটি প্রক্রিয়া সম্পন্ন করা হবে।",
+                    "continueButton": "অ্যাড মানি চালিয়ে যান"
+                },
+                "addMoneyCancel": {
+                    "title": "অ্যাড মানি বাতিল করা হয়েছে!",
+                    "message": "আপনার আবেদনের জন্য ধন্যবাদ। কিন্তু আপনার লেনদেনটি বাতিল করা হয়েছে এবং শীঘ্রই এটি প্রক্রিয়া করা হবে।",
+                    "continueButton": "অ্যাড মানি চালিয়ে যান"
+                }
+            },
+            "withdrawMoney": {
+                "title": "টাকা উত্তোলন",
+                "exchangeRate": "বিনিময় হার",
+                "availableBalance": "উপলব্ধ ব্যালেন্স",
+                "charge": "চার্জ",
+                "selectGateway": "পেমেন্ট গেটওয়ে নির্বাচন করুন",
+                "selectMethod": "পেমেন্ট পদ্ধতি নির্বাচন করুন",
+                "enterAmount": "পরিমাণ লিখুন",
+                "amountPlaceholder": "পরিমাণ লিখুন ({min} - {max})",
+                "instructions": "নির্দেশনা",
+                "enterField": "{label} লিখুন",
+                "requesting": "অনুরোধ করা হচ্ছে...",
+                "confirm": "নিশ্চিত করুন",
+                "preview": "প্রিভিউ",
+                "enteredAmount": "লিখা পরিমাণ",
+                "conversionAmount": "রূপান্তরিত পরিমাণ",
+                "feesAndCharges": "ফি এবং চার্জ",
+                "youWillGet": "আপনি পাবেন",
+                "totalPayable": "মোট প্রদেয়",
+                "limitInfo": "সীমা তথ্য",
+                "transactionLimit": "লেনদেনের সীমা",
+                "dailyLimit": "দৈনিক সীমা",
+                "monthlyLimit": "মাসিক সীমা",
+                "dailyRemaining": "অবশিষ্ট দৈনিক সীমা",
+                "monthlyRemaining": "অবশিষ্ট মাসিক সীমা",
+                "notAvailable": "প্রযোজ্য নয়",
+                "failedFetchLimits": "অবশিষ্ট সীমা আনতে ব্যর্থ হয়েছে",
+                "withdrawFailed": "উত্তোলন ব্যর্থ হয়েছে",
+                "successTitle": "উত্তোলন জমা দেওয়া হয়েছে",
+                "successMessage": "আপনার উত্তোলনের অনুরোধটি সফলভাবে জমা দেওয়া হয়েছে। দয়া করে প্রশাসকের অননুমোদনের জন্য অপেক্ষা করুন।",
+                "okay": "ঠিক আছে",
+                "withdrawLogs": {
+                    "title": "উত্তোলন লগ",
+                    "viewAll": "সব দেখুন",
+                    "trx": "টিআরএক্স",
+                    "gateway": "গেটওয়ে",
+                    "amount": "অনুরোধ করা পরিমাণ",
+                    "payable": "প্রদেয়",
+                    "rate": "বিনিময় হার",
+                    "fees": "ফি এবং চার্জ",
+                    "balance": "বর্তমান ব্যালেন্স",
+                    "status": "অবস্থা",
+                    "time": "সময় এবং তারিখ",
+                    "noTransactions": "কোন উত্তোলন লেনদেন পাওয়া যায়নি"
+                }
+            }
+        },
+        "homepage": {
+            "wallet": {
+                "myBalance": "আমার ব্যালেন্স",
+                "myBalanceSubtitle": "তাৎক্ষণিক লেনদেনের জন্য আমার ব্যালেন্স",
+                "shoppingBalance": "শপিং ব্যালেন্স",
+                "shoppingBalanceSubtitle": "কেনাকাটার জন্য সংরক্ষিত শপিং ব্যালেন্স",
+                "rewardPoints": "রিওয়ার্ড পয়েন্ট",
+                "rewardPointsSubtitle": "কমিশন থেকে অর্জিত রিওয়ার্ড পয়েন্ট",
+                "points": "পয়েন্ট",
+                "default": "ডিফল্ট",
+                "viewAll": "সব দেখুন",
+                "failedFetch": "ড্যাশবোর্ড তথ্য আনতে ব্যর্থ হয়েছে"
+            },
+            "widget": {
+                "title": "উইজেট",
+                "subtitle": "তাত্ক্ষণিক ব্যস্ততার জন্য রিয়েল-টাইম উইজেট",
+                "totalAddMoney": "মোট অ্যাড মানি",
+                "totalWithdraw": "মোট উত্তোলন",
+                "totalBillPay": "মোট বিল পে",
+                "totalMobileTopUp": "মোট মোবাইল টপআপ",
+                "totalTransactions": "মোট লেনদেন",
+                "totalPurchaseAmount": "মোট ক্রয়ের পরিমাণ",
+                "totalPaidAmount": "মোট পরিশোধিত পরিমাণ",
+                "processingOrders": "প্রসেসিং অর্ডার",
+                "cancelOrders": "বাতিল অর্ডার",
+                "returnedOrders": "ফেরত দেওয়া অর্ডার",
+                "deliveredOrders": "ডেলিভারি করা অর্ডার",
+                "totalOrders": "মোট অর্ডার",
+                "failedFetch": "ড্যাশবোর্ড ডেটা আনতে ব্যর্থ হয়েছে"
+            },
+            "transactionHistory": {
+                "title": "লেনদেনের ইতিহাস",
+                "viewAll": "সব দেখুন",
+                "trxId": "লেনদেন আইডি",
+                "type": "ধরণ",
+                "trxType": "লেনদেনের ধরণ",
+                "requestAmount": "অনুরোধকৃত পরিমাণ",
+                "payable": "প্রদেয়",
+                "remark": "মন্তব্য",
+                "status": "অবস্থা",
+                "timeAndDate": "সময় এবং তারিখ",
+                "noTransactions": "কোন লেনদেন পাওয়া যায়নি",
+                "somethingWentWrong": "কিছু ভুল হয়েছে"
+            }
+        }
+    }
+}
