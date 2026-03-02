@@ -161,6 +161,23 @@
             "default": "افتراضي",
             "viewAll": "عرض الكل",
             "failedFetch": "فشل في جلب بيانات لوحة التحكم"
+        },
+        "widget": {
+            "title": "القطعة",
+            "subtitle": "قطعة في الوقت الحقيقي للمشاركة الفورية",
+            "totalAddMoney": "إجمالي إضافة الأموال",
+            "totalWithdraw": "إجمالي السحب",
+            "totalBillPay": "إجمالي دفع الفواتير",
+            "totalMobileTopUp": "إجمالي شحن الجوال",
+            "totalTransactions": "إجمالي المعاملات",
+            "totalPurchaseAmount": "إجمالي مبلغ الشراء",
+            "totalPaidAmount": "إجمالي المبلغ المدفوع",
+            "processingOrders": "طلبات قيد المعالجة",
+            "cancelOrders": "طلبات ملغاة",
+            "returnedOrders": "طلبات مرتجعة",
+            "deliveredOrders": "طلبات تم تسليمها",
+            "totalOrders": "إجمالي الطلبات",
+            "failedFetch": "فشل في جلب بيانات لوحة التحكم"
         }
     }
 }

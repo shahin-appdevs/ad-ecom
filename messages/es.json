@@ -161,6 +161,23 @@
             "default": "Predeterminado",
             "viewAll": "Ver todo",
             "failedFetch": "Error al obtener los datos del tablero"
+        },
+        "widget": {
+            "title": "Widget",
+            "subtitle": "Widget en tiempo real para interacción instantánea",
+            "totalAddMoney": "Total Add Money",
+            "totalWithdraw": "Total Retiro",
+            "totalBillPay": "Total Pago de Facturas",
+            "totalMobileTopUp": "Total Recarga Móvil",
+            "totalTransactions": "Total Transacciones",
+            "totalPurchaseAmount": "Total Monto de Compra",
+            "totalPaidAmount": "Total Monto Pagado",
+            "processingOrders": "Pedidos en Proceso",
+            "cancelOrders": "Pedidos Cancelados",
+            "returnedOrders": "Pedidos Devueltos",
+            "deliveredOrders": "Pedidos Entregados",
+            "totalOrders": "Total Pedidos",
+            "failedFetch": "Error al obtener los datos del tablero"
         }
     }
 }

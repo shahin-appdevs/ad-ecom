@@ -161,6 +161,23 @@
             "default": "Default",
             "viewAll": "View All",
             "failedFetch": "Failed to fetch dashboard data"
+        },
+        "widget": {
+            "title": "Widget",
+            "subtitle": "Real-time widget for instant engagement",
+            "totalAddMoney": "Total Add Money",
+            "totalWithdraw": "Total Withdraw",
+            "totalBillPay": "Total Bill Pay",
+            "totalMobileTopUp": "Total Mobile TopUp",
+            "totalTransactions": "Total Transactions",
+            "totalPurchaseAmount": "Total Purchase Amount",
+            "totalPaidAmount": "Total Paid Amount",
+            "processingOrders": "Processing Orders",
+            "cancelOrders": "Cancel Orders",
+            "returnedOrders": "Returned Orders",
+            "deliveredOrders": "Delivered Orders",
+            "totalOrders": "Total Orders",
+            "failedFetch": "Failed to fetch dashboard data"
         }
     }
 }

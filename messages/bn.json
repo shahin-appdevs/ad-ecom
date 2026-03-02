@@ -161,6 +161,23 @@
             "default": "ডিফল্ট",
             "viewAll": "সব দেখুন",
             "failedFetch": "ড্যাশবোর্ড তথ্য আনতে ব্যর্থ হয়েছে"
+        },
+        "widget": {
+            "title": "উইজেট",
+            "subtitle": "তাত্ক্ষণিক ব্যস্ততার জন্য রিয়েল-টাইম উইজেট",
+            "totalAddMoney": "মোট অ্যাড মানি",
+            "totalWithdraw": "মোট উত্তোলন",
+            "totalBillPay": "মোট বিল পে",
+            "totalMobileTopUp": "মোট মোবাইল টপআপ",
+            "totalTransactions": "মোট লেনদেন",
+            "totalPurchaseAmount": "মোট ক্রয়ের পরিমাণ",
+            "totalPaidAmount": "মোট পরিশোধিত পরিমাণ",
+            "processingOrders": "প্রসেসিং অর্ডার",
+            "cancelOrders": "বাতিল অর্ডার",
+            "returnedOrders": "ফেরত দেওয়া অর্ডার",
+            "deliveredOrders": "ডেলিভারি করা অর্ডার",
+            "totalOrders": "মোট অর্ডার",
+            "failedFetch": "ড্যাশবোর্ড ডেটা আনতে ব্যর্থ হয়েছে"
         }
     }
 }
