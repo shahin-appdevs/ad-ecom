@@ -150,6 +150,49 @@
             "cancel": "বাতিল",
             "walletAccount": "ওয়ালেট অ্যাকাউন্ট"
         },
+        "wallet": {
+            "addMoney": {
+                "title": "অ্যাড মানি",
+                "exchangeRate": "বিনিময় হার",
+                "availableBalance": "উপলব্ধ ব্যালেন্স",
+                "charge": "চার্জ",
+                "depositType": "ডিপোজিট ধরণ",
+                "mainWallet": "প্রধান ওয়ালেট",
+                "shoppingWallet": "শপিং ওয়ালেট",
+                "selectGateway": "পেমেন্ট গেটওয়ে নির্বাচন করুন",
+                "selectMethod": "পেমেন্ট পদ্ধতি নির্বাচন করুন",
+                "enterAmount": "পরিমাণ লিখুন",
+                "amountPlaceholder": "পরিমাণ লিখুন ({min} - {max})",
+                "adding": "যোগ করা হচ্ছে...",
+                "preview": "প্রিভিউ",
+                "enteredAmount": "লিখা পরিমাণ",
+                "feesAndCharges": "ফি এবং চার্জ",
+                "youWillGet": "আপনি পাবেন",
+                "totalPayable": "মোট প্রদেয়",
+                "limitInfo": "সীমা তথ্য",
+                "transactionLimit": "লেনদেনের সীমা",
+                "dailyLimit": "দৈনিক সীমা",
+                "monthlyLimit": "মাসিক সীমা",
+                "dailyRemaining": "দৈনিক অবশিষ্ট সীমা",
+                "monthlyRemaining": "মাসিক অবশিষ্ট সীমা",
+                "notAvailable": "প্রযোজ্য নয়",
+                "failedFetchLimits": "অবশিষ্ট সীমা আনতে ব্যর্থ হয়েছে",
+                "addMoneyLog": {
+                    "title": "অ্যাড মানি লগ",
+                    "viewAll": "সব দেখুন",
+                    "trx": "টিআরএক্স",
+                    "gateway": "গেটওয়ে",
+                    "amount": "অনুরোধ করা পরিমাণ",
+                    "payable": "প্রদেয়",
+                    "rate": "বিনিময় হার",
+                    "fees": "ফি এবং চার্জ",
+                    "balance": "বর্তমান ব্যালেন্স",
+                    "status": "স্ট্যাটাস",
+                    "time": "সময় এবং তারিখ",
+                    "noTransactions": "কোন অ্যাড মানি লেনদেন পাওয়া যায়নি"
+                }
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "আমার ব্যালেন্স",

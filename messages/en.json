@@ -150,6 +150,49 @@
             "cancel": "Cancel",
             "walletAccount": "Wallet Account"
         },
+        "wallet": {
+            "addMoney": {
+                "title": "Add Money",
+                "exchangeRate": "Exchange Rate",
+                "availableBalance": "Available Balance",
+                "charge": "Charge",
+                "depositType": "Deposit Type",
+                "mainWallet": "Main Wallet",
+                "shoppingWallet": "Shopping Wallet",
+                "selectGateway": "Select Payment Gateway",
+                "selectMethod": "Select Payment Method",
+                "enterAmount": "Enter Amount",
+                "amountPlaceholder": "Enter Amount ({min} - {max})",
+                "adding": "Adding...",
+                "preview": "Preview",
+                "enteredAmount": "Entered Amount",
+                "feesAndCharges": "Fees & Charges",
+                "youWillGet": "You Will Get",
+                "totalPayable": "Total Payable",
+                "limitInfo": "Limit Information",
+                "transactionLimit": "Transaction Limit",
+                "dailyLimit": "Daily Limit",
+                "monthlyLimit": "Monthly Limit",
+                "dailyRemaining": "Daily Remaining Limit",
+                "monthlyRemaining": "Monthly Remaining Limit",
+                "notAvailable": "N/A",
+                "failedFetchLimits": "Failed to fetch remaining limits",
+                "addMoneyLog": {
+                    "title": "Add Money Logs",
+                    "viewAll": "View All",
+                    "trx": "Trx",
+                    "gateway": "Gateway",
+                    "amount": "Request Amount",
+                    "payable": "Payable",
+                    "rate": "Exchange Rate",
+                    "fees": "Fees & Charges",
+                    "balance": "Current Balance",
+                    "status": "Status",
+                    "time": "Time & Date",
+                    "noTransactions": "No add money transactions found"
+                }
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "My Balance",

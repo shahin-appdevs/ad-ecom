@@ -150,6 +150,49 @@
             "cancel": "Cancelar",
             "walletAccount": "Cuenta de billetera"
         },
+        "wallet": {
+            "addMoney": {
+                "title": "Agregar Dinero",
+                "exchangeRate": "Tasa de Cambio",
+                "availableBalance": "Saldo Disponible",
+                "charge": "Cargo",
+                "depositType": "Tipo de Depósito",
+                "mainWallet": "Billetera Principal",
+                "shoppingWallet": "Billetera de Compras",
+                "selectGateway": "Seleccionar Pasarela de Pago",
+                "selectMethod": "Seleccionar Método de Pago",
+                "enterAmount": "Ingrese el Monto",
+                "amountPlaceholder": "Ingrese el Monto ({min} - {max})",
+                "adding": "Agregando...",
+                "preview": "Vista Previa",
+                "enteredAmount": "Monto Ingresado",
+                "feesAndCharges": "Tarifas y Cargos",
+                "youWillGet": "Obtendrá",
+                "totalPayable": "Total a Pagar",
+                "limitInfo": "Información de Límite",
+                "transactionLimit": "Límite de Transacción",
+                "dailyLimit": "Límite Diario",
+                "monthlyLimit": "Límite Mensual",
+                "dailyRemaining": "Límite Restante Diario",
+                "monthlyRemaining": "Límite Restante Mensual",
+                "notAvailable": "N/A",
+                "failedFetchLimits": "Error al obtener los límites restantes",
+                "addMoneyLog": {
+                    "title": "Registros de Adición de Dinero",
+                    "viewAll": "Ver Todo",
+                    "trx": "Trx",
+                    "gateway": "Pasarela",
+                    "amount": "Monto Solicitado",
+                    "payable": "Pagadero",
+                    "rate": "Tasa de Cambio",
+                    "fees": "Tarifas y Cargos",
+                    "balance": "Saldo Actual",
+                    "status": "Estado",
+                    "time": "Hora y Fecha",
+                    "noTransactions": "No se encontraron transacciones de adición de dinero"
+                }
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "Mi saldo",

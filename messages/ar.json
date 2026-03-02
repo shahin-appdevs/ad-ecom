@@ -150,6 +150,49 @@
             "cancel": "إلغاء",
             "walletAccount": "حساب المحفظة"
         },
+        "wallet": {
+            "addMoney": {
+                "title": "إضافة الأموال",
+                "exchangeRate": "سعر الصرف",
+                "availableBalance": "الرصيد المتاح",
+                "charge": "رسوم",
+                "depositType": "نوع الإيداع",
+                "mainWallet": "المحفظة الرئيسية",
+                "shoppingWallet": "محفظة التسوق",
+                "selectGateway": "حدد بوابة الدفع",
+                "selectMethod": "حدد طريقة الدفع",
+                "enterAmount": "أدخل المبلغ",
+                "amountPlaceholder": "أدخل المبلغ ({min} - {max})",
+                "adding": "جاري الإضافة...",
+                "preview": "معاينة",
+                "enteredAmount": "المبلغ المدخل",
+                "feesAndCharges": "الرسوم والمصاريف",
+                "youWillGet": "سوف تحصل على",
+                "totalPayable": "إجمالي المستحق",
+                "limitInfo": "معلومات الحد",
+                "transactionLimit": "حد المعاملة",
+                "dailyLimit": "الحد اليومي",
+                "monthlyLimit": "الحد الشهري",
+                "dailyRemaining": "الحد اليومي المتبقي",
+                "monthlyRemaining": "الحد الشهري المتبقي",
+                "notAvailable": "غير متاح",
+                "failedFetchLimits": "فشل في جلب الحدود المتبقية",
+                "addMoneyLog": {
+                    "title": "سجلات إضافة الأموال",
+                    "viewAll": "عرض الكل",
+                    "trx": "رقم المعاملة",
+                    "gateway": "البوابة",
+                    "amount": "المبلغ المطلوب",
+                    "payable": "المبلغ المستحق",
+                    "rate": "سعر الصرف",
+                    "fees": "الرسوم والمصاريف",
+                    "balance": "الرصيد الحالي",
+                    "status": "الحالة",
+                    "time": "الوقت والتاريخ",
+                    "noTransactions": "لم يتم العثور على معاملات إضافة أموال"
+                }
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "رصيدي",
