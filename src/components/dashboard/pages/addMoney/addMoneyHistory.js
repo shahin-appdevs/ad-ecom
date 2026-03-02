@@ -115,31 +115,31 @@ export default function AddMoneyHistorySection() {
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("trx")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("gateway")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("amount")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("payable")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("rate")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("fees")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("balance")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("status")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("time")}
                                 </th>
                             </tr>
@@ -158,32 +158,32 @@ export default function AddMoneyHistorySection() {
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("trx")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("gateway")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("amount")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("payable")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("rate")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("fees")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("balance")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("status")}
                                 </th>
-                                <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
+                                    {t("time")}
                                 </th>
                             </tr>
                         </thead>
