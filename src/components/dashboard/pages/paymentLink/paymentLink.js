@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import {
     paymentLinkListAPI,
@@ -40,6 +41,8 @@ function SkeletonRow() {
 }
 
 export default function PaymentLinksSection() {
+    const t = useTranslations("Dashboard.wallet.paymentLink");
+    const locale = useLocale();
     const [dropdownIndex, setDropdownIndex] = useState(null);
     const [paymentLinks, setPaymentLinks] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -52,6 +55,17 @@ export default function PaymentLinksSection() {
     const toggleDropdown = (index) => {
         setDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
     };
+    // action dropdown close when click outside
+    useEffect(() => {
+        const handleClickOutside = () => {
+            if (dropdownIndex >= 0) {
+                setDropdownIndex(null);
+            }
+        };
+
+        document.addEventListener("click", handleClickOutside);
+        return () => document.removeEventListener("click", handleClickOutside);
+    }, [dropdownIndex]);
 
     useEffect(() => {
         const fetchPaymentLinks = async () => {
@@ -112,18 +126,18 @@ export default function PaymentLinksSection() {
             if (link.min_amount && link.max_amount) {
                 return `${link.min_amount} - ${link.max_amount} ${link.currency}`;
             } else if (link.min_amount) {
-                return `Min ${link.min_amount} ${link.currency}`;
+                return `${t("min")} ${link.min_amount} ${link.currency}`;
             } else if (link.max_amount) {
-                return `Max ${link.max_amount} ${link.currency}`;
+                return `${t("max")} ${link.max_amount} ${link.currency}`;
             }
-            return `Unlimited ${link.currency}`;
+            return `${t("unlimited")} ${link.currency}`;
         }
         return `${link.price} ${link.currency}`;
     };
 
     const copyToClipboard = (text) => {
         navigator.clipboard.writeText(text);
-        toast.success("Copied to clipboard");
+        toast.success(t("copied"));
     };
 
     const handleEditClick = (linkId) => {
@@ -167,7 +181,9 @@ export default function PaymentLinksSection() {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
                     error.response?.data?.message ||
-                    `Failed to ${modalAction} payment link`,
+                    (modalAction === "activate"
+                        ? t("failedActivate")
+                        : t("failedClose")),
             );
         } finally {
             setIsModalOpen(false);
@@ -184,39 +200,37 @@ export default function PaymentLinksSection() {
         <>
             <div className="bg-white rounded-[12px] p-7">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                    <h2 className="text-[16px] font-semibold">
-                        Payment Links Logs
-                    </h2>
+                    <h2 className="text-[16px] font-semibold">{t("title")}</h2>
                     <Link
                         href="/user/payment/link/create"
                         className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
                     >
                         <PlusIcon className="h-5 w-5" />
-                        Create Link
+                        {t("createLink")}
                     </Link>
                 </div>
                 {loading ? (
                     <div className="table-wrapper overflow-x-auto">
                         <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                             <thead>
-                                <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
+                                <tr className="bg-[#F5F7FF] text-left rtl:text-right text-sm text-color__paragraph">
                                     <th className="py-4 px-5 font-semibold">
-                                        Title
+                                        {t("tableTitle")}
                                     </th>
                                     <th className="py-4 px-5 font-semibold">
-                                        Type
+                                        {t("tableType")}
                                     </th>
                                     <th className="py-4 px-5 font-semibold">
-                                        Amount
+                                        {t("tableAmount")}
                                     </th>
                                     <th className="py-4 px-5 font-semibold">
-                                        Status
+                                        {t("tableStatus")}
                                     </th>
                                     <th className="py-4 px-5 font-semibold">
-                                        Created At
+                                        {t("tableCreatedAt")}
                                     </th>
                                     <th className="py-4 px-5 font-semibold">
-                                        Action
+                                        {t("tableAction")}
                                     </th>
                                 </tr>
                             </thead>
@@ -228,31 +242,29 @@ export default function PaymentLinksSection() {
                         </table>
                     </div>
                 ) : paymentLinks.length === 0 ? (
-                    <div className="text-center py-5">
-                        No payment link found
-                    </div>
+                    <div className="text-center py-5">{t("noLinks")}</div>
                 ) : (
                     <div className="table-wrapper overflow-x-auto">
                         <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                             <thead>
-                                <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
+                                <tr className="bg-[#F5F7FF] text-left rtl:text-right text-sm text-color__paragraph">
                                     <th className="py-4 px-5 font-semibold">
-                                        Title
+                                        {t("tableTitle")}
                                     </th>
                                     <th className="py-4 px-5 font-semibold">
-                                        Type
+                                        {t("tableType")}
                                     </th>
                                     <th className="py-4 px-5 font-semibold">
-                                        Amount
+                                        {t("tableAmount")}
                                     </th>
                                     <th className="py-4 px-5 font-semibold">
-                                        Status
+                                        {t("tableStatus")}
                                     </th>
                                     <th className="py-4 px-5 font-semibold">
-                                        Created At
+                                        {t("tableCreatedAt")}
                                     </th>
                                     <th className="py-4 px-5 font-semibold">
-                                        Action
+                                        {t("tableAction")}
                                     </th>
                                 </tr>
                             </thead>
@@ -264,20 +276,26 @@ export default function PaymentLinksSection() {
                                         </td>
                                         <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
                                             {link.type === "pay"
-                                                ? "Customers choose what to pay"
-                                                : "Products Or Subscriptions"}
+                                                ? t("typePay")
+                                                : t("typeProducts")}
                                         </td>
-                                        <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                        <td
+                                            dir="ltr"
+                                            className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium"
+                                        >
                                             {getAmountDisplay(link)}
                                         </td>
                                         <td className="py-3.5 px-5 whitespace-nowrap">
                                             <span
-                                                className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(link.string_status)}`}
+                                                className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] capitalize ${getStatusColor(link.string_status)}`}
                                             >
                                                 {link.string_status}
                                             </span>
                                         </td>
-                                        <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                        <td
+                                            dir="ltr"
+                                            className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium"
+                                        >
                                             {formatDate(link.created_at)}
                                         </td>
                                         <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
@@ -288,7 +306,7 @@ export default function PaymentLinksSection() {
                                                 <button
                                                     onClick={() =>
                                                         copyToClipboard(
-                                                            `${window.location.origin}/user/payment/link/share/token?token=${link?.token}`,
+                                                            `${window.location.origin}/${locale}/user/payment/link/share/token?token=${link?.token}`,
                                                         )
                                                     }
                                                 >
@@ -311,7 +329,7 @@ export default function PaymentLinksSection() {
                                                             }
                                                             className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                                                         >
-                                                            Edit
+                                                            {t("edit")}
                                                         </button>
                                                         {link.string_status ===
                                                         "Closed" ? (
@@ -323,7 +341,7 @@ export default function PaymentLinksSection() {
                                                                 }
                                                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                                                             >
-                                                                Activate
+                                                                {t("activate")}
                                                             </button>
                                                         ) : (
                                                             <button
@@ -334,7 +352,7 @@ export default function PaymentLinksSection() {
                                                                 }
                                                                 className="block w-full text-left px-4 py-2 hover:bg-gray-100"
                                                             >
-                                                                Close
+                                                                {t("close")}
                                                             </button>
                                                         )}
                                                     </div>
@@ -361,12 +379,12 @@ export default function PaymentLinksSection() {
                     <div className="fixed inset-0 flex items-center justify-center p-4">
                         <Dialog.Panel className="w-full max-w-sm rounded bg-white p-6">
                             <Dialog.Title className="text-lg font-medium mb-4">
-                                Confirm Status Change
+                                {t("modalConfirmTitle")}
                             </Dialog.Title>
                             <Dialog.Description className="mb-6">
                                 {modalAction === "activate"
-                                    ? "Are you sure you want to activate this payment link?"
-                                    : "Are you sure you want to close this payment link?"}
+                                    ? t("modalActivateDesc")
+                                    : t("modalCloseDesc")}
                             </Dialog.Description>
 
                             <div className="flex justify-end gap-3">
@@ -374,7 +392,7 @@ export default function PaymentLinksSection() {
                                     onClick={handleCancelAction}
                                     className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
                                 >
-                                    Cancel
+                                    {t("cancel")}
                                 </button>
                                 <button
                                     onClick={handleConfirmAction}
@@ -385,8 +403,8 @@ export default function PaymentLinksSection() {
                                     }`}
                                 >
                                     {modalAction === "activate"
-                                        ? "Activate"
-                                        : "Close Link"}
+                                        ? t("modalActivateBtn")
+                                        : t("modalCloseBtn")}
                                 </button>
                             </div>
                         </Dialog.Panel>

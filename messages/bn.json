@@ -347,6 +347,147 @@
                     "noTransactions": "কোন টাকা অনুরোধের লেনদেন পাওয়া যায়নি"
                 }
             },
+            "paymentLink": {
+                "title": "পেমেন্ট লিংক লগ",
+                "createLink": "লিংক তৈরি করুন",
+                "tableTitle": "শিরোনাম",
+                "tableType": "ধরন",
+                "tableAmount": "পরিমাণ",
+                "tableStatus": "স্ট্যাটাস",
+                "tableCreatedAt": "তৈরির তারিখ",
+                "tableAction": "অ্যাকশন",
+                "noLinks": "কোন পেমেন্ট লিংক পাওয়া যায়নি",
+                "typePay": "গ্রাহক নিজেই পেমেন্টের পরিমাণ নির্ধারণ করবেন",
+                "typeProducts": "পণ্য বা সাবস্ক্রিপশন",
+                "edit": "এডিট করুন",
+                "activate": "সক্রিয় করুন",
+                "close": "বন্ধ করুন",
+                "copied": "ক্লিপবোর্ডে কপি করা হয়েছে",
+                "failedActivate": "পেমেন্ট লিংক সক্রিয় করতে ব্যর্থ হয়েছে",
+                "failedClose": "পেমেন্ট লিংক বন্ধ করতে ব্যর্থ হয়েছে",
+                "modalConfirmTitle": "স্ট্যাটাস পরিবর্তন নিশ্চিত করুন",
+                "modalActivateDesc": "আপনি কি নিশ্চিত যে আপনি এই পেমেন্ট লিংকটি সক্রিয় করতে চান?",
+                "modalCloseDesc": "আপনি কি নিশ্চিত যে আপনি এই পেমেন্ট লিংকটি বন্ধ করতে চান?",
+                "cancel": "বাতিল",
+                "modalActivateBtn": "সক্রিয় করুন",
+                "modalCloseBtn": "লিংক বন্ধ করুন",
+                "min": "নূন্যতম",
+                "max": "সর্বোচ্চ",
+                "unlimited": "সীমাহীন",
+                "createPaymentLink": {
+                    "selectType": "টাইপ নির্বাচন করুন",
+                    "paymentPage": "পেমেন্ট পেজ",
+                    "subTitle": "সাব-টাইটেল*",
+                    "subTitlePlaceholder": "পণ্যের সাব-টাইটেল",
+                    "currency": "কারেন্সি",
+                    "price": "মূল্য*",
+                    "pricePlaceholder": "০.০০",
+                    "quantity": "পরিমাণ*",
+                    "quantityPlaceholder": "০",
+                    "title": "শিরোনাম",
+                    "titlePlaceholder": "কারন বা পরিষেবার নাম",
+                    "description": "বিবরণ (ঐচ্ছিক)",
+                    "descriptionPlaceholder": "গ্রাহকদের তারা কিসের জন্য অর্থ প্রদান করছে সে সম্পর্কে আরও বিস্তারিত জানান।",
+                    "image": "ছবি",
+                    "dropFile": "ফাইলটি এখানে ছাড়ুন...",
+                    "dropFileOr": "আপনার ফাইল এখানে ছাড়ুন অথবা ...",
+                    "setLimits": "সীমা নির্ধারণ করুন",
+                    "minimumAmount": "সর্বনিম্ন পরিমাণ",
+                    "maximumAmount": "সর্বোচ্চ পরিমাণ",
+                    "createNewLink": "নতুন লিঙ্ক তৈরি করুন",
+                    "creating": "তৈরি হচ্ছে...",
+                    "updateLink": "লিঙ্ক আপডেট করুন",
+                    "updating": "আপডেট হচ্ছে...",
+                    "preview": "প্রিভিউ",
+                    "amount": "পরিমাণ",
+                    "payWithCard": "ডেবিট এবং ক্রেডিট কার্ড দিয়ে পেমেন্ট করুন",
+                    "email": "ইমেইল",
+                    "nameOnCard": "কার্ডে থাকা নাম",
+                    "card": "কার্ড",
+                    "mmyycvc": "মাস / বছর / সিভিসি",
+                    "secureSave": "১-ক্লিক চেকআউটের জন্য আমার তথ্য নিরাপদে সংরক্ষণ করুন",
+                    "payFaster": "লিঙ্ক গ্রহণ করা হয় এমন সব জায়গায় দ্রুত পেমেন্ট করুন",
+                    "pay": "পেমেন্ট করুন",
+                    "types": {
+                        "pay": "গ্রাহক নিজেই পেমেন্টের পরিমাণ নির্ধারণ করবেন",
+                        "product": "পণ্য বা সাবস্ক্রিপশন"
+                    }
+                },
+                "shareLinkPage": {
+                    "title": "পেমেন্ট লিঙ্ক শেয়ার করুন",
+                    "label": "লিঙ্ক কপি করুন",
+                    "btnCreate": "আরেকটি লিঙ্ক তৈরি করুন",
+                    "btnEdit": "লিঙ্ক এডিট করুন",
+                    "toastCopy": "লিঙ্ক ক্লিপবোর্ডে কপি করা হয়েছে!",
+                    "errorNotFound": "পেমেন্ট লিঙ্কটি পাওয়া যায়নি",
+                    "errorFetch": "পেমেন্ট লিঙ্ক আনতে ব্যর্থ হয়েছে"
+                },
+                "paymentLinkShare": {
+                    "errorTitle": "ত্রুটি",
+                    "errors": {
+                        "invalidLink": "অকার্যকর পেমেন্ট লিঙ্ক",
+                        "loadFailed": "পেমেন্ট লিঙ্ক লোড করতে ব্যর্থ হয়েছে",
+                        "requiredFields": "অনুগ্রহ করে প্রয়োজনীয় সব তথ্য পূরণ করুন",
+                        "cardNameRequired": "কার্ডের নাম লিখুন",
+                        "amountRequired": "টাকার পরিমাণ লিখুন",
+                        "stripeNotLoaded": "স্ট্রাইপ (Stripe) সঠিকভাবে লোড হয়নি",
+                        "cardNotFound": "কার্ডের তথ্য পাওয়া যায়নি",
+                        "cardProcessingFailed": "কার্ডের তথ্য প্রসেস করতে ব্যর্থ হয়েছে",
+                        "paymentFailed": "পেমেন্ট ব্যর্থ হয়েছে"
+                    },
+                    "success": {
+                        "paymentSubmitted": "পেমেন্ট সফলভাবে সম্পন্ন হয়েছে!"
+                    },
+                    "labels": {
+                        "type": "ধরণ",
+                        "amount": "পরিমাণ",
+                        "currency": "কারেন্সি",
+                        "limit": "সীমা",
+                        "payments": "পেমেন্টসমূহ",
+                        "fullName": "পূর্ণ নাম",
+                        "email": "ইমেল",
+                        "phone": "ফোন নম্বর",
+                        "paymentMethod": "পেমেন্ট পদ্ধতি",
+                        "selectGateway": "গেটওয়ে নির্বাচন করুন",
+                        "selectWalletCurrency": "ওয়ালেট কারেন্সি নির্বাচন করুন",
+                        "amountWithSymbol": "পরিমাণ ({symbol})"
+                    },
+                    "placeholders": {
+                        "amount": "পরিমাণ",
+                        "fullName": "পূর্ণ নাম",
+                        "email": "ইমেল",
+                        "phone": "ফোন নম্বর",
+                        "selectGateway": "একটি গেটওয়ে নির্বাচন করুন",
+                        "selectCurrency": "একটি কারেন্সি নির্বাচন করুন"
+                    },
+                    "paymentMethods": {
+                        "gateway": "পেমেন্ট গেটওয়ে",
+                        "card": "কার্ড",
+                        "wallet": "ওয়ালেট"
+                    },
+                    "secureSave": {
+                        "title": "১-ক্লিক চেকআউটের জন্য আমার তথ্য সুরক্ষিতভাবে সংরক্ষণ করুন",
+                        "description": "এভরিহোয়্যার লিঙ্কে (Link) দ্রুত পেমেন্ট করুন"
+                    },
+                    "buttons": {
+                        "processing": "প্রসেসিং হচ্ছে...",
+                        "pay": "পেমেন্ট করুন",
+                        "goHome": "হোমে ফিরে যান"
+                    },
+                    "stripeForm": {
+                        "cardNameLabel": "কার্ডের নাম",
+                        "cardNamePlaceholder": "কার্ডে থাকা নাম",
+                        "cardDetailsLabel": "কার্ডের তথ্য"
+                    },
+                    "successPage": {
+                        "title": "পেমেন্ট সফল হয়েছে!",
+                        "message": "আপনার পেমেন্টের জন্য ধন্যবাদ। আপনার পেমেন্টটি সফলভাবে প্রসেস করা হয়েছে এবং শীঘ্রই এটি সম্পন্ন হবে।",
+                        "button": {
+                            "anotherPayment": "আরেকটি পেমেন্ট করুন"
+                        }
+                    }
+                }
+            },
             "moneyOut": {
                 "title": "টাকা বের করুন",
                 "exchangeRate": "বিনিময় হার",

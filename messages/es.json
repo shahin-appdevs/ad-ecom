@@ -347,6 +347,147 @@
                     "noTransactions": "No se encontraron transacciones de solicitud de dinero"
                 }
             },
+            "paymentLink": {
+                "title": "Registros de enlaces de pago",
+                "createLink": "Crear enlace",
+                "tableTitle": "Título",
+                "tableType": "Tipo",
+                "tableAmount": "Monto",
+                "tableStatus": "Estado",
+                "tableCreatedAt": "Creado el",
+                "tableAction": "Acción",
+                "noLinks": "No se encontró ningún enlace de pago",
+                "typePay": "Los clientes eligen qué pagar",
+                "typeProducts": "Productos o suscripciones",
+                "edit": "Editar",
+                "activate": "Activar",
+                "close": "Cerrar",
+                "copied": "Copiado al portapapeles",
+                "failedActivate": "Error al activar el enlace de pago",
+                "failedClose": "Error al cerrar el enlace de pago",
+                "modalConfirmTitle": "Confirmar cambio de estado",
+                "modalActivateDesc": "¿Está seguro de que desea activar este enlace de pago?",
+                "modalCloseDesc": "¿Está seguro de que desea cerrar este enlace de pago?",
+                "cancel": "Cancelar",
+                "modalActivateBtn": "Activar",
+                "modalCloseBtn": "Cerrar enlace",
+                "min": "Mín.",
+                "max": "Máx.",
+                "unlimited": "Ilimitado",
+                "createPaymentLink": {
+                    "selectType": "Seleccionar tipo",
+                    "paymentPage": "Página de pago",
+                    "subTitle": "Subtítulo*",
+                    "subTitlePlaceholder": "Subtítulo del producto",
+                    "currency": "Moneda",
+                    "price": "Precio*",
+                    "pricePlaceholder": "0.00",
+                    "quantity": "Cantidad*",
+                    "quantityPlaceholder": "0",
+                    "title": "Título",
+                    "titlePlaceholder": "Nombre de la causa o servicio",
+                    "description": "Descripción (Opcional)",
+                    "descriptionPlaceholder": "Brinde a los clientes más detalles sobre lo que están pagando.",
+                    "image": "Imagen",
+                    "dropFile": "Suelte el archivo...",
+                    "dropFileOr": "Suelte su archivo o ...",
+                    "setLimits": "Establecer límites",
+                    "minimumAmount": "Monto mínimo",
+                    "maximumAmount": "Monto máximo",
+                    "createNewLink": "Crear nuevo enlace",
+                    "creating": "Creando...",
+                    "updateLink": "Actualizar enlace",
+                    "updating": "Actualizando...",
+                    "preview": "Vista previa",
+                    "amount": "Monto",
+                    "payWithCard": "Pagar con tarjeta de débito y crédito",
+                    "email": "Correo electrónico",
+                    "nameOnCard": "Nombre en la tarjeta",
+                    "card": "Tarjeta",
+                    "mmyycvc": "MM / AA / CVC",
+                    "secureSave": "Guarde mi información de forma segura para pagar con un solo clic",
+                    "payFaster": "Pague más rápido en todos los lugares donde se acepte Link",
+                    "pay": "Pagar",
+                    "types": {
+                        "pay": "Los clientes eligen qué pagar",
+                        "product": "Productos o suscripciones"
+                    }
+                },
+                "shareLinkPage": {
+                    "title": "Compartir enlace de pago",
+                    "label": "Copiar enlace",
+                    "btnCreate": "Crear otro enlace",
+                    "btnEdit": "Editar enlace",
+                    "toastCopy": "¡Enlace copiado al portapapeles!",
+                    "errorNotFound": "Enlace de pago no encontrado",
+                    "errorFetch": "Error al obtener el enlace de pago"
+                },
+                "paymentLinkShare": {
+                    "errorTitle": "Error",
+                    "errors": {
+                        "invalidLink": "Enlace de pago no válido",
+                        "loadFailed": "Error al cargar el enlace de pago",
+                        "requiredFields": "Por favor, complete todos los campos obligatorios",
+                        "cardNameRequired": "Por favor, ingrese el nombre en la tarjeta",
+                        "amountRequired": "Por favor, ingrese el monto",
+                        "stripeNotLoaded": "Stripe no se cargó correctamente",
+                        "cardNotFound": "No se encontraron los detalles de la tarjeta",
+                        "cardProcessingFailed": "Error al procesar los detalles de la tarjeta",
+                        "paymentFailed": "El pago ha fallado"
+                    },
+                    "success": {
+                        "paymentSubmitted": "¡Pago enviado con éxito!"
+                    },
+                    "labels": {
+                        "type": "Tipo",
+                        "amount": "Monto",
+                        "currency": "Moneda",
+                        "limit": "Límite",
+                        "payments": "pagos",
+                        "fullName": "Nombre completo",
+                        "email": "Correo electrónico",
+                        "phone": "Teléfono",
+                        "paymentMethod": "Método de pago",
+                        "selectGateway": "Seleccionar pasarela",
+                        "selectWalletCurrency": "Seleccionar moneda de billetera",
+                        "amountWithSymbol": "Monto ({symbol})"
+                    },
+                    "placeholders": {
+                        "amount": "Monto",
+                        "fullName": "Nombre completo",
+                        "email": "Correo electrónico",
+                        "phone": "Teléfono",
+                        "selectGateway": "Seleccione una pasarela",
+                        "selectCurrency": "Seleccione una moneda"
+                    },
+                    "paymentMethods": {
+                        "gateway": "Pasarela de pago",
+                        "card": "Tarjeta",
+                        "wallet": "Billetera"
+                    },
+                    "secureSave": {
+                        "title": "Guardar mi información de forma segura para pagar con un clic",
+                        "description": "Pague más rápido aquí y en cualquier lugar donde se acepte Link"
+                    },
+                    "buttons": {
+                        "processing": "Procesando...",
+                        "pay": "Pagar",
+                        "goHome": "Ir al Inicio"
+                    },
+                    "stripeForm": {
+                        "cardNameLabel": "Nombre en la tarjeta",
+                        "cardNamePlaceholder": "Nombre como aparece en la tarjeta",
+                        "cardDetailsLabel": "Detalles de la tarjeta"
+                    },
+                    "successPage": {
+                        "title": "Pago Exitoso!",
+                        "message": "Gracias por su pago. Su transacción ha sido procesada con éxito y se completará en breve.",
+                        "button": {
+                            "anotherPayment": "Realizar otro pago"
+                        }
+                    }
+                }
+            },
             "moneyOut": {
                 "title": "Sacar Dinero",
                 "exchangeRate": "Tipo de cambio",

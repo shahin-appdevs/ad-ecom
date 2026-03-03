@@ -347,6 +347,147 @@
                     "noTransactions": "No request money transactions found"
                 }
             },
+            "paymentLink": {
+                "title": "Payment Links Logs",
+                "createLink": "Create Link",
+                "tableTitle": "Title",
+                "tableType": "Type",
+                "tableAmount": "Amount",
+                "tableStatus": "Status",
+                "tableCreatedAt": "Created At",
+                "tableAction": "Action",
+                "noLinks": "No payment link found",
+                "typePay": "Customers choose what to pay",
+                "typeProducts": "Products Or Subscriptions",
+                "edit": "Edit",
+                "activate": "Activate",
+                "close": "Close",
+                "copied": "Copied to clipboard",
+                "failedActivate": "Failed to activate payment link",
+                "failedClose": "Failed to close payment link",
+                "modalConfirmTitle": "Confirm Status Change",
+                "modalActivateDesc": "Are you sure you want to activate this payment link?",
+                "modalCloseDesc": "Are you sure you want to close this payment link?",
+                "cancel": "Cancel",
+                "modalActivateBtn": "Activate",
+                "modalCloseBtn": "Close Link",
+                "min": "Min",
+                "max": "Max",
+                "unlimited": "Unlimited",
+                "createPaymentLink": {
+                    "selectType": "Select Type",
+                    "paymentPage": "Payment Page",
+                    "subTitle": "Sub Title*",
+                    "subTitlePlaceholder": "Product subtitle",
+                    "currency": "Currency",
+                    "price": "Price*",
+                    "pricePlaceholder": "0.00",
+                    "quantity": "Quantity*",
+                    "quantityPlaceholder": "0",
+                    "title": "Title",
+                    "titlePlaceholder": "Name of cause or service",
+                    "description": "Description (Optional)",
+                    "descriptionPlaceholder": "Give customers more detail about what they're paying for.",
+                    "image": "Image",
+                    "dropFile": "Drop the file...",
+                    "dropFileOr": "Drop your file Or ...",
+                    "setLimits": "Set limits",
+                    "minimumAmount": "Minimum Amount",
+                    "maximumAmount": "Maximum Amount",
+                    "createNewLink": "Create New Link",
+                    "updateLink": "Update Link",
+                    "creating": "Creating...",
+                    "updating": "Updating...",
+                    "preview": "Preview",
+                    "amount": "Amount",
+                    "payWithCard": "Pay with Debit & Credit Card",
+                    "email": "Email",
+                    "nameOnCard": "Name on card",
+                    "card": "Card",
+                    "mmyycvc": "MM / YY / CVC",
+                    "secureSave": "Securely save my information for 1-click checkout",
+                    "payFaster": "Pay faster on and everywhere Link is accepted",
+                    "pay": "Pay",
+                    "types": {
+                        "pay": "Customers Choose What To Pay",
+                        "product": "Products Or Subscriptions"
+                    }
+                },
+                "shareLinkPage": {
+                    "title": "Share Payment Link",
+                    "label": "Copy Link",
+                    "btnCreate": "Create Another Link",
+                    "btnEdit": "Edit Link",
+                    "toastCopy": "Link copied to clipboard!",
+                    "errorNotFound": "Payment link not found",
+                    "errorFetch": "Failed to fetch payment link"
+                },
+                "paymentLinkShare": {
+                    "errorTitle": "Error",
+                    "errors": {
+                        "invalidLink": "Invalid payment link",
+                        "loadFailed": "Failed to load payment link",
+                        "requiredFields": "Please fill in all required fields",
+                        "cardNameRequired": "Please enter card name",
+                        "amountRequired": "Please enter amount",
+                        "stripeNotLoaded": "Stripe not loaded properly",
+                        "cardNotFound": "Card details not found",
+                        "cardProcessingFailed": "Failed to process card details",
+                        "paymentFailed": "Payment failed"
+                    },
+                    "success": {
+                        "paymentSubmitted": "Payment submitted successfully!"
+                    },
+                    "labels": {
+                        "type": "Type",
+                        "amount": "Amount",
+                        "currency": "Currency",
+                        "limit": "Limit",
+                        "payments": "payments",
+                        "fullName": "Full Name",
+                        "email": "Email",
+                        "phone": "Phone",
+                        "paymentMethod": "Payment Method",
+                        "selectGateway": "Select Gateway",
+                        "selectWalletCurrency": "Select Wallet Currency",
+                        "amountWithSymbol": "Amount ({symbol})"
+                    },
+                    "placeholders": {
+                        "amount": "Amount",
+                        "fullName": "Full Name",
+                        "email": "Email",
+                        "phone": "Phone",
+                        "selectGateway": "Select a gateway",
+                        "selectCurrency": "Select a currency"
+                    },
+                    "paymentMethods": {
+                        "gateway": "Payment Gateway",
+                        "card": "Card",
+                        "wallet": "Wallet"
+                    },
+                    "secureSave": {
+                        "title": "Securely save my information for 1-click checkout",
+                        "description": "Pay faster on and everywhere Link is accepted"
+                    },
+                    "buttons": {
+                        "processing": "Processing...",
+                        "pay": "Pay",
+                        "goHome": "Go to Home"
+                    },
+                    "stripeForm": {
+                        "cardNameLabel": "Card Name",
+                        "cardNamePlaceholder": "Name on card",
+                        "cardDetailsLabel": "Card Details"
+                    },
+                    "successPage": {
+                        "title": "Payment Successful!",
+                        "message": "Thank you for your payment. Your payment has been successfully processed and will be completed shortly.",
+                        "button": {
+                            "anotherPayment": "Make Another Payment"
+                        }
+                    }
+                }
+            },
             "moneyOut": {
                 "title": "Money Out",
                 "exchangeRate": "Exchange Rate",

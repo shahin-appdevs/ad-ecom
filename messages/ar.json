@@ -347,6 +347,147 @@
                     "noTransactions": "لم يتم العثور على معاملات طلب أموال"
                 }
             },
+            "paymentLink": {
+                "title": "سجلات روابط الدفع",
+                "createLink": "إنشاء رابط",
+                "tableTitle": "العنوان",
+                "tableType": "النوع",
+                "tableAmount": "المبلغ",
+                "tableStatus": "الحالة",
+                "tableCreatedAt": "تاريخ الإنشاء",
+                "tableAction": "إجراء",
+                "noLinks": "لم يتم العثور على رابط دفع",
+                "typePay": "العملاء يختارون ما يدفعونه",
+                "typeProducts": "المنتجات أو الاشتراكات",
+                "edit": "تعديل",
+                "activate": "تفعيل",
+                "close": "إغلاق",
+                "copied": "تم النسخ إلى الحافظة",
+                "failedActivate": "فشل تفعيل رابط الدفع",
+                "failedClose": "فشل إغلاق رابط الدفع",
+                "modalConfirmTitle": "تأكيد تغيير الحالة",
+                "modalActivateDesc": "هل أنت متأكد أنك تريد تفعيل رابط الدفع هذا؟",
+                "modalCloseDesc": "هل أنت متأكد أنك تريد إغلاق رابط الدفع هذا؟",
+                "cancel": "إلغاء",
+                "modalActivateBtn": "تفعيل",
+                "modalCloseBtn": "إغلاق الرابط",
+                "min": "أدنى",
+                "max": "أقصى",
+                "unlimited": "غير محدود",
+                "createPaymentLink": {
+                    "selectType": "اختر النوع",
+                    "paymentPage": "صفحة الدفع",
+                    "subTitle": "العنوان الفرعي*",
+                    "subTitlePlaceholder": "العنوان الفرعي للمنتج",
+                    "currency": "العملة",
+                    "price": "السعر*",
+                    "pricePlaceholder": "0.00",
+                    "quantity": "الكمية*",
+                    "quantityPlaceholder": "0",
+                    "title": "العنوان",
+                    "titlePlaceholder": "اسم السبب أو الخدمة",
+                    "description": "الوصف (اختياري)",
+                    "descriptionPlaceholder": "قدم للعملاء مزيداً من التفاصيل حول ما يدفعون مقابله.",
+                    "image": "الصورة",
+                    "dropFile": "أفلت الملف...",
+                    "dropFileOr": "أفلت ملفك أو ...",
+                    "setLimits": "وضع الحدود",
+                    "minimumAmount": "الحد الأدنى للمبلغ",
+                    "maximumAmount": "الحد الأقصى للمبلغ",
+                    "createNewLink": "إنشاء رابط جديد",
+                    "creating": "جاري الإنشاء...",
+                    "updateLink": "تحديث الرابط",
+                    "updating": "جاري التحديث...",
+                    "preview": "معاينة",
+                    "amount": "المبلغ",
+                    "payWithCard": "الدفع باستخدام بطاقة الخصم والائتمان",
+                    "email": "البريد الإلكتروني",
+                    "nameOnCard": "الاسم على البطاقة",
+                    "card": "البطاقة",
+                    "mmyycvc": "شهر / سنة / CVC",
+                    "secureSave": "حفظ بياناتي بأمان للدفع بنقرة واحدة",
+                    "payFaster": "ادفع بشكل أسرع في كل مكان يُقبل فيه الرابط",
+                    "pay": "دفع",
+                    "types": {
+                        "pay": "العملاء يختارون ما يدفعونه",
+                        "product": "المنتجات أو الاشتراكات"
+                    }
+                },
+                "shareLinkPage": {
+                    "title": "مشاركة رابط الدفع",
+                    "label": "نسخ الرابط",
+                    "btnCreate": "إنشاء رابط آخر",
+                    "btnEdit": "تعديل الرابط",
+                    "toastCopy": "تم نسخ الرابط إلى الحافظة!",
+                    "errorNotFound": "رابط الدفع غير موجود",
+                    "errorFetch": "فشل في جلب رابط الدفع"
+                },
+                "paymentLinkShare": {
+                    "errorTitle": "خطأ",
+                    "errors": {
+                        "invalidLink": "رابط دفع غير صالح",
+                        "loadFailed": "فشل تحميل رابط الدفع",
+                        "requiredFields": "يرجى ملء جميع الحقول المطلوبة",
+                        "cardNameRequired": "يرجى إدخال الاسم الموجود على البطاقة",
+                        "amountRequired": "يرجى إدخال المبلغ",
+                        "stripeNotLoaded": "لم يتم تحميل نظام Stripe بشكل صحيح",
+                        "cardNotFound": "تفاصيل البطاقة غير موجودة",
+                        "cardProcessingFailed": "فشل في معالجة تفاصيل البطاقة",
+                        "paymentFailed": "عملية الدفع فشلت"
+                    },
+                    "success": {
+                        "paymentSubmitted": "تم إرسال الدفعة بنجاح!"
+                    },
+                    "labels": {
+                        "type": "النوع",
+                        "amount": "المبلغ",
+                        "currency": "العملة",
+                        "limit": "الحد",
+                        "payments": "المدفوعات",
+                        "fullName": "الاسم الكامل",
+                        "email": "البريد الإلكتروني",
+                        "phone": "الهاتف",
+                        "paymentMethod": "طريقة الدفع",
+                        "selectGateway": "اختر بوابة الدفع",
+                        "selectWalletCurrency": "اختر عملة المحفظة",
+                        "amountWithSymbol": "المبلغ ({symbol})"
+                    },
+                    "placeholders": {
+                        "amount": "المبلغ",
+                        "fullName": "الاسم الكامل",
+                        "email": "البريد الإلكتروني",
+                        "phone": "الهاتف",
+                        "selectGateway": "اختر بوابة دفع",
+                        "selectCurrency": "اختر العملة"
+                    },
+                    "paymentMethods": {
+                        "gateway": "بوابة الدفع",
+                        "card": "بطاقة",
+                        "wallet": "محفظة"
+                    },
+                    "secureSave": {
+                        "title": "احفظ معلوماتي بأمان لإتمام الشراء بنقرة واحدة",
+                        "description": "ادفع بشكل أسرع في كل مكان يقبل رابط Link"
+                    },
+                    "buttons": {
+                        "processing": "جاري المعالجة...",
+                        "pay": "ادفع الآن",
+                        "goHome": "الذهاب للرئيسية"
+                    },
+                    "stripeForm": {
+                        "cardNameLabel": "الاسم على البطاقة",
+                        "cardNamePlaceholder": "الاسم المكتوب على البطاقة",
+                        "cardDetailsLabel": "تفاصيل البطاقة"
+                    },
+                    "successPage": {
+                        "title": "تمت عملية الدفع بنجاح!",
+                        "message": "شكراً لك على الدفع. تمت معالجة دفعتك بنجاح وسيتم اكتمالها خلال لحظات.",
+                        "button": {
+                            "anotherPayment": "إجراء دفع آخر"
+                        }
+                    }
+                }
+            },
             "moneyOut": {
                 "title": "سحب الأموال",
                 "exchangeRate": "سعر الصرف",

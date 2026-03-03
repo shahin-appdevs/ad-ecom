@@ -1,6 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
+
 import {
     paymentLinkListAPI,
     paymentLinkStoreAPI,
@@ -96,15 +98,9 @@ const CreateLinkSkeleton = () => {
     );
 };
 
-const paymentTypes = [
-    { id: 1, name: "Customers Choose What To Pay", value: "pay" },
-    { id: 2, name: "Products Or Subscriptions", value: "product" },
-];
+// paymentTypes moved inside CreateLinkSection to use translations
 
 export default function CreateLinkSection() {
-    const [selectedPaymentType, setSelectedPaymentType] = useState(
-        paymentTypes[0],
-    );
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [preview, setPreview] = useState(null);
     const [showLimits, setShowLimits] = useState(false);
@@ -122,6 +118,24 @@ export default function CreateLinkSection() {
     const [isInitialLoading, setIsInitialLoading] = useState(true);
     const router = useRouter();
     const [showPinModal, setShowPinModal] = useState(false);
+    const t = useTranslations("Dashboard.wallet.paymentLink.createPaymentLink");
+
+    const paymentTypes = [
+        {
+            id: 1,
+            name: t("types.pay"),
+            value: "pay",
+        },
+        {
+            id: 2,
+            name: t("types.product"),
+            value: "product",
+        },
+    ];
+
+    const [selectedPaymentType, setSelectedPaymentType] = useState(
+        paymentTypes[0],
+    );
 
     useEffect(() => {
         const fetchCurrencies = async () => {
@@ -138,7 +152,6 @@ export default function CreateLinkSection() {
                 }
             } catch (error) {
                 toast.error("Failed to load currencies");
-                console.error("Error fetching currencies:", error);
             } finally {
                 setIsInitialLoading(false);
             }
@@ -236,7 +249,8 @@ export default function CreateLinkSection() {
         <div className="bg-white rounded-[12px] p-4 sm:p-6 lg:p-7">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10">
                 <form onSubmit={handleSubmit}>
-                    <h5 className="font-semibold mb-4">Select Type</h5>
+                    <h5 className="font-semibold mb-4">{t("selectType")}</h5>
+
                     <div className="mb-4">
                         <Listbox
                             value={selectedPaymentType}
@@ -272,17 +286,17 @@ export default function CreateLinkSection() {
                     </div>
                     <div className="border-b border-gray-200 mb-4">
                         <button className="text-primary__color border-b-2 border-primary__color px-2 pb-2 text-sm font-semibold">
-                            Payment Page
+                            {t("paymentPage")}
                         </button>
                     </div>
                     {selectedPaymentType.value === "product" && (
                         <>
                             <label className="block text-sm font-medium mb-2">
-                                Sub Title*
+                                {t("subTitle")}
                             </label>
                             <input
                                 type="text"
-                                placeholder="Product subtitle"
+                                placeholder={t("subTitlePlaceholder")}
                                 className="w-full border rounded-md p-2 mb-4 text-sm focus:outline-none"
                                 value={subTitle}
                                 onChange={(e) => setSubTitle(e.target.value)}
@@ -290,8 +304,9 @@ export default function CreateLinkSection() {
                             />
 
                             <label className="block text-sm font-medium mb-2">
-                                Currency
+                                {t("currency")}
                             </label>
+
                             <div className="mb-4">
                                 {selectedCurrency && (
                                     <Listbox
@@ -337,11 +352,11 @@ export default function CreateLinkSection() {
                             </div>
 
                             <label className="block text-sm font-medium mb-2">
-                                Price*
+                                {t("price")}
                             </label>
                             <input
                                 type="number"
-                                placeholder="0.00"
+                                placeholder={t("pricePlaceholder")}
                                 className="w-full border rounded-md p-2 mb-4 text-sm focus:outline-none"
                                 value={price}
                                 onChange={(e) => setPrice(e.target.value)}
@@ -351,11 +366,11 @@ export default function CreateLinkSection() {
                             />
 
                             <label className="block text-sm font-medium mb-2">
-                                Quantity*
+                                {t("quantity")}
                             </label>
                             <input
                                 type="number"
-                                placeholder="0"
+                                placeholder={t("quantityPlaceholder")}
                                 className="w-full border rounded-md p-2 mb-4 text-sm focus:outline-none"
                                 value={quantity}
                                 onChange={(e) => setQuantity(e.target.value)}
@@ -368,29 +383,30 @@ export default function CreateLinkSection() {
                     {selectedPaymentType.value === "pay" && (
                         <>
                             <label className="block text-sm font-medium mb-2">
-                                Title
+                                {t("title")}
                             </label>
                             <input
                                 type="text"
-                                placeholder="Name of cause or service"
+                                placeholder={t("titlePlaceholder")}
                                 className="w-full border rounded-md p-2 mb-4 text-sm focus:outline-none"
                                 value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                                 maxLength={180}
                             />
                             <label className="block text-sm font-medium mb-2">
-                                Description (Optional)
+                                {t("description")}
                             </label>
                             <textarea
-                                placeholder="Give customers more detail about what they're paying for."
+                                placeholder={t("descriptionPlaceholder")}
                                 rows={4}
                                 className="w-full border rounded-md p-2 mb-2 text-sm focus:outline-none resize-none"
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             />
                             <label className="block text-sm font-medium mb-2">
-                                Image
+                                {t("image")}
                             </label>
+
                             <div
                                 {...getRootProps()}
                                 className="border-dashed border border-gray-300 rounded-md h-36 flex items-center justify-center cursor-pointer text-center text-gray-500 text-sm p-3 mb-4"
@@ -409,15 +425,16 @@ export default function CreateLinkSection() {
                                         <DocumentArrowUpIcon className="w-6 h-6 text-gray-400" />
                                         <p>
                                             {isDragActive
-                                                ? "Drop the file..."
-                                                : "Drop your file Or ..."}
+                                                ? t("dropFile")
+                                                : t("dropFileOr")}
                                         </p>
                                     </div>
                                 )}
                             </div>
                             <label className="block text-sm font-medium mb-2">
-                                Currency
+                                {t("currency")}
                             </label>
+
                             <div className="mb-4">
                                 {selectedCurrency && (
                                     <Listbox
@@ -472,15 +489,16 @@ export default function CreateLinkSection() {
                                     }
                                 />
                                 <label htmlFor="limits" className="text-sm">
-                                    Set limits
+                                    {t("setLimits")}
                                 </label>
                             </div>
                             {showLimits && (
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                                     <div>
                                         <label className="block text-sm font-medium mb-1">
-                                            Minimum Amount
+                                            {t("minimumAmount")}
                                         </label>
+
                                         <input
                                             type="number"
                                             placeholder="0.00"
@@ -495,8 +513,9 @@ export default function CreateLinkSection() {
                                     </div>
                                     <div>
                                         <label className="block text-sm font-medium mb-1">
-                                            Maximum Amount
+                                            {t("maximumAmount")}
                                         </label>
+
                                         <input
                                             type="number"
                                             placeholder="0.00"
@@ -515,7 +534,7 @@ export default function CreateLinkSection() {
                     )}
                     <Button
                         type="submit"
-                        title={isLoading ? "Creating..." : "Create New Link"}
+                        title={isLoading ? t("creating") : t("createNewLink")}
                         variant="primary"
                         size="md"
                         className="w-full"
@@ -529,7 +548,8 @@ export default function CreateLinkSection() {
                 />
                 <div>
                     <div className="flex items-center justify-between">
-                        <h5 className="font-semibold mb-4">Preview</h5>
+                        <h5 className="font-semibold mb-4">{t("preview")}</h5>
+
                         <div className="flex justify-end bg-white shadow-md p-[7px] rounded-md mb-4">
                             <button
                                 onClick={() => setPreviewMode("mobile")}
@@ -565,8 +585,9 @@ export default function CreateLinkSection() {
                             <div className="absolute z-20 top-[70px] left-[18px] right-[18px] bottom-[100px] overflow-auto bg-white rounded-xl shadow-inner p-4 text-sm">
                                 <div>
                                     <label className="block text-sm font-medium mb-1">
-                                        Amount
+                                        {t("amount")}
                                     </label>
+
                                     <div className="flex items-center border rounded-md px-2">
                                         <span className="text-sm mr-1 text-gray-500">
                                             $
@@ -604,30 +625,34 @@ export default function CreateLinkSection() {
                                 </div>
                                 <div className="space-y-3">
                                     <p className="text-sm font-medium">
-                                        Pay with Debit & Credit Card
+                                        {t("payWithCard")}
                                     </p>
+
                                     <input
                                         type="email"
-                                        value="Email"
+                                        value={t("email")}
                                         readOnly
                                         className="w-full border rounded-md p-2 text-sm focus:outline-none"
                                     />
+
                                     <input
                                         type="text"
-                                        value="Name on card"
+                                        value={t("nameOnCard")}
                                         readOnly
                                         className="w-full border rounded-md p-2 text-sm focus:outline-none"
                                     />
+
                                     <div className="flex flex-col md:flex-row gap-2">
                                         <input
                                             type="text"
-                                            value="Card"
+                                            value={t("card")}
                                             readOnly
                                             className="w-full md:w-1/2 border rounded-md p-2 text-sm focus:outline-none"
                                         />
+
                                         <input
                                             type="text"
-                                            value="MM / YY / CVC"
+                                            value={t("mmyycvc")}
                                             readOnly
                                             className="w-full md:w-1/2 border rounded-md p-2 text-sm focus:outline-none"
                                         />
@@ -635,17 +660,13 @@ export default function CreateLinkSection() {
                                     <div className="border rounded-md p-3 bg-gray-50 text-xs text-gray-600 flex items-center gap-2">
                                         <span className="text-lg">💯</span>
                                         <span>
-                                            <strong>
-                                                Securely save my information for
-                                                1-click checkout
-                                            </strong>
+                                            <strong>{t("secureSave")}</strong>
                                             <br />
-                                            Pay faster on and everywhere Link is
-                                            accepted
+                                            {t("payFaster")}
                                         </span>
                                     </div>
                                     <Button
-                                        title="Pay"
+                                        title={t("pay")}
                                         variant="primary"
                                         size="md"
                                         className="w-full opacity-80 cursor-not-allowed"
@@ -657,8 +678,9 @@ export default function CreateLinkSection() {
                         <div className="border rounded-lg p-6 space-y-4 shadow-sm">
                             <div>
                                 <label className="block text-sm font-medium mb-1">
-                                    Amount
+                                    {t("amount")}
                                 </label>
+
                                 <div className="flex items-center border rounded-md px-2">
                                     <span className="text-sm mr-1 text-gray-500">
                                         $
@@ -696,30 +718,34 @@ export default function CreateLinkSection() {
                             </div>
                             <div className="space-y-3">
                                 <p className="text-sm font-medium">
-                                    Pay with Debit & Credit Card
+                                    {t("payWithCard")}
                                 </p>
+
                                 <input
                                     type="email"
-                                    value="Email"
+                                    value={t("email")}
                                     readOnly
                                     className="w-full border rounded-md p-2 text-sm focus:outline-none"
                                 />
+
                                 <input
                                     type="text"
-                                    value="Name on card"
+                                    value={t("nameOnCard")}
                                     readOnly
                                     className="w-full border rounded-md p-2 text-sm focus:outline-none"
                                 />
+
                                 <div className="flex flex-col md:flex-row gap-2">
                                     <input
                                         type="text"
-                                        value="Card"
+                                        value={t("card")}
                                         readOnly
                                         className="w-full md:w-1/2 border rounded-md p-2 text-sm focus:outline-none"
                                     />
+
                                     <input
                                         type="text"
-                                        value="MM / YY / CVC"
+                                        value={t("mmyycvc")}
                                         readOnly
                                         className="w-full md:w-1/2 border rounded-md p-2 text-sm focus:outline-none"
                                     />
@@ -727,17 +753,13 @@ export default function CreateLinkSection() {
                                 <div className="border rounded-md p-3 bg-gray-50 text-xs text-gray-600 flex items-center gap-2">
                                     <span className="text-lg">💯</span>
                                     <span>
-                                        <strong>
-                                            Securely save my information for
-                                            1-click checkout
-                                        </strong>
+                                        <strong>{t("secureSave")}</strong>
                                         <br />
-                                        Pay faster on and everywhere Link is
-                                        accepted
+                                        {t("payFaster")}
                                     </span>
                                 </div>
                                 <Button
-                                    title="Pay"
+                                    title={t("pay")}
                                     variant="primary"
                                     size="md"
                                     className="w-full opacity-80 cursor-not-allowed"
