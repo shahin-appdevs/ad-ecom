@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import {
     moneyOutGetAPI,
     SubmitMoneyOutAPI,
@@ -35,6 +36,7 @@ function Skeleton({ className }) {
 }
 
 export default function MoneyOutSection({ setRefetch }) {
+    const t = useTranslations("Dashboard.wallet.moneyOut");
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [receiverCurrency, setReceiverCurrency] = useState(
@@ -293,7 +295,7 @@ export default function MoneyOutSection({ setRefetch }) {
             } catch (error) {
                 toast.error(
                     error.response?.data?.message?.error?.[0] ||
-                        "Failed to load money out information",
+                        t("failedLoad"),
                 );
                 setIsLoading(false);
             }
@@ -310,7 +312,7 @@ export default function MoneyOutSection({ setRefetch }) {
                 } catch (error) {
                     toast.error(
                         error.response?.data?.message?.error?.[0] ||
-                            "User not found",
+                            t("userNotFound"),
                     );
                 }
             }
@@ -339,9 +341,7 @@ export default function MoneyOutSection({ setRefetch }) {
                 videoRef.current.srcObject = stream;
             }
         } catch (err) {
-            toast.error(
-                "Could not access the camera. Please make sure you've granted camera permissions.",
-            );
+            toast.error(t("cameraError"));
             setIsCameraOpen(false);
         }
     };
@@ -361,8 +361,7 @@ export default function MoneyOutSection({ setRefetch }) {
             toast.success(response?.data?.message?.success?.[0]);
         } catch (error) {
             toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to scan QR code",
+                error.response?.data?.message?.error?.[0] || t("failedScan"),
             );
         }
     };
@@ -387,7 +386,7 @@ export default function MoneyOutSection({ setRefetch }) {
         } catch (error) {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
-                    "Failed to money out",
+                    t("failedMoneyOut"),
             );
         } finally {
             setIsSubmitting(false);
@@ -494,22 +493,25 @@ export default function MoneyOutSection({ setRefetch }) {
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Exchange Rate</p>
-                            <h6 className="font-medium mt-1">
+                            <p className="">{t("exchangeRate")}</p>
+                            <h6 className="font-medium mt-1" dir="ltr">
                                 {exchangeRateText}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Available Balance</p>
-                            <h6 className="font-medium text-emerald-600 mt-1">
+                            <p className="">{t("availableBalance")}</p>
+                            <h6
+                                className="font-medium text-emerald-600 mt-1"
+                                dir="ltr"
+                            >
                                 {wallet.balance} {wallet.selectedCurrency?.code}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Charge</p>
-                            <h6 className="font-medium mt-1">
+                            <p className="">{t("charge")}</p>
+                            <h6 className="font-medium mt-1" dir="ltr">
                                 {moneyOutData.moneyOutCharge.fixed_charge}{" "}
                                 {selectedCurrency?.currency_code} +{" "}
                                 {moneyOutData.moneyOutCharge.percent_charge}%
@@ -519,13 +521,13 @@ export default function MoneyOutSection({ setRefetch }) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="col-span-1 md:col-span-2">
                             <label className="block text-sm font-medium mb-2">
-                                Phone/Email (Agent)
+                                {t("phoneAgent")}
                             </label>
                             <div className="flex space-x-2">
                                 <input
                                     type="text"
                                     className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                    placeholder="Enter Email/Phone..."
+                                    placeholder={t("enterEmailPhone")}
                                     value={credentials}
                                     onChange={(e) =>
                                         setCredentials(e.target.value)
@@ -542,7 +544,7 @@ export default function MoneyOutSection({ setRefetch }) {
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-2">
-                                Sender Amount
+                                {t("senderAmount")}
                             </label>
                             <div className="relative">
                                 <input
@@ -550,10 +552,10 @@ export default function MoneyOutSection({ setRefetch }) {
                                     min="0"
                                     className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                     value={amount}
-                                    placeholder="Enter Amount..."
+                                    placeholder={t("enterAmount")}
                                     onChange={(e) => setAmount(e.target.value)}
                                 />
-                                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-20 z-20">
+                                <div className="absolute ltr:right-2 rtl:left-2 top-1/2 transform -translate-y-1/2 w-20 z-20">
                                     <Listbox
                                         value={selectedCurrency}
                                         onChange={handleSenderCurrencyChange}
@@ -601,7 +603,7 @@ export default function MoneyOutSection({ setRefetch }) {
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-2">
-                                Receiver Amount
+                                {t("receiverAmount")}
                             </label>
                             <div className="relative">
                                 <input
@@ -610,10 +612,10 @@ export default function MoneyOutSection({ setRefetch }) {
                                     step="any"
                                     className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                     value={receiverAmount}
-                                    placeholder="Enter Amount..."
+                                    placeholder={t("enterAmount")}
                                     onChange={handleReceiverAmountChange}
                                 />
-                                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-20">
+                                <div className="absolute ltr:right-2 rtl:left-2 top-1/2 transform -translate-y-1/2 w-20">
                                     <Listbox
                                         value={receiverCurrency}
                                         onChange={handleReceiverCurrencyChange}
@@ -661,19 +663,19 @@ export default function MoneyOutSection({ setRefetch }) {
                         </div>
                         <div className="col-span-1 md:col-span-2">
                             <label className="block text-sm font-medium mb-2">
-                                Note (Optional)
+                                {t("note")}
                             </label>
                             <textarea
                                 rows={3}
                                 className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 resize-none"
-                                placeholder="Write a note about this transaction..."
+                                placeholder={t("notePlaceholder")}
                                 value={remark}
                                 onChange={(e) => setRemark(e.target.value)}
                             />
                         </div>
                     </div>
                     <Button
-                        title={isSubmitting ? "Confirming..." : "Confirm"}
+                        title={isSubmitting ? t("confirming") : t("confirm")}
                         variant="primary"
                         size="md"
                         className={`w-full ${isSubmitting ? "cursor-not-allowed !bg-gray-400" : ""}`}
@@ -705,7 +707,7 @@ export default function MoneyOutSection({ setRefetch }) {
                         </div>
 
                         <Dialog.Title className="text-xl font-semibold mb-4">
-                            Scan QR Code
+                            {t("scanQrCode")}
                         </Dialog.Title>
 
                         <div className="relative aspect-square w-full bg-black rounded-lg overflow-hidden">
@@ -722,7 +724,7 @@ export default function MoneyOutSection({ setRefetch }) {
                         </div>
 
                         <div className="mt-4 text-center text-sm text-gray-600">
-                            Point your camera at a QR code to scan
+                            {t("pointCamera")}
                         </div>
 
                         <div className="mt-6 flex justify-center">
@@ -733,7 +735,7 @@ export default function MoneyOutSection({ setRefetch }) {
                                     handleScanSuccess("MOCK_QR_CODE")
                                 }
                             >
-                                Scan QR Code
+                                {t("scanQrCode")}
                             </button>
                         </div>
                     </Dialog.Panel>
@@ -742,41 +744,41 @@ export default function MoneyOutSection({ setRefetch }) {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
-                        Preview
+                        {t("preview")}
                     </h5>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Entered Amount</span>
+                            <span>{t("enteredAmount")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span className="font-medium text-gray-800" dir="ltr">
                             {amount || "0.00"} {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
-                            <span>Fees & Charges</span>
+                            <span>{t("feesAndCharges")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span className="text-gray-800" dir="ltr">
                             {feesCalculation.totalFees} {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <BanknotesIcon className="w-5 h-5 text-emerald-500" />
-                            <span>Recipient Received</span>
+                            <span>{t("recipientReceived")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span className="text-gray-800" dir="ltr">
                             {feesCalculation.willGet} {receiverCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between border-t pt-3 font-semibold text-gray-800">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-2">
                             <WalletIcon className="w-5 h-5 text-indigo-600" />
-                            <span>Total Payable</span>
+                            <span>{t("totalPayable")}</span>
                         </div>
-                        <span>
+                        <span dir="ltr">
                             {feesCalculation.totalPayable}{" "}
                             {selectedCurrency?.code}
                         </span>
@@ -786,60 +788,60 @@ export default function MoneyOutSection({ setRefetch }) {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12">
                 <div className="bg-[#F9FAFB] p-5 rounded-xl border border-gray-200 space-y-4 text-sm shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
-                        Limit Information
+                        {t("limitInfo")}
                     </h5>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowsUpDownIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Transaction Limit</span>
+                            <span>{t("transactionLimit")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span className="font-medium text-gray-800" dir="ltr">
                             {limitText}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CalendarDaysIcon className="w-5 h-5 text-blue-500" />
-                            <span>Daily Limit</span>
+                            <span>{t("dailyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span className="text-gray-800" dir="ltr">
                             {limitsCalculation.dailyLimit}{" "}
                             {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-violet-500" />
-                            <span>Monthly Limit</span>
+                            <span>{t("monthlyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span className="text-gray-800" dir="ltr">
                             {limitsCalculation.monthlyLimit}{" "}
                             {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CalendarDaysIcon className="w-5 h-5 text-yellow-500" />
-                            <span>Daily Remaining Limit</span>
+                            <span>{t("dailyRemaining")}</span>
                         </div>
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span className="text-gray-800" dir="ltr">
                                 {limitsCalculation?.remainingDailyLimit}{" "}
                                 {selectedCurrency?.code}
                             </span>
                         )}
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-yellow-500" />
-                            <span>Monthly Remaining Limit</span>
+                            <span>{t("monthlyRemaining")}</span>
                         </div>
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span className="text-gray-800" dir="ltr">
                                 {limitsCalculation?.remainingMonthlyLimit}{" "}
                                 {selectedCurrency?.code}
                             </span>
