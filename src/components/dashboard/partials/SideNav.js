@@ -338,7 +338,7 @@ export default function SideNav() {
         ?.map((section) => ({
             ...section,
             items: section.items?.filter(
-                (item) => !item.featureKey || featureFlags[item.featureKey],
+                (item) => !item?.featureKey || featureFlags[item?.featureKey],
             ),
         }))
         ?.filter((section) => section.items?.length > 0);

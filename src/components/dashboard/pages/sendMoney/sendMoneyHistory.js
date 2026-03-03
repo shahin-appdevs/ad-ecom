@@ -192,25 +192,25 @@ export default function SendMoneyHistorySection({ isRefetch }) {
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
                             {transactions.map((transaction, index) => (
                                 <tr key={index}>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
+                                    <td className="[direction:ltr] rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
                                         #{transaction.trx || "N/A"}
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td className="[direction:ltr] rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium">
                                         {transaction.request_amount}
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td className="[direction:ltr] rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium">
                                         {transaction.payable}
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td className="[direction:ltr] rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium">
                                         {transaction.exchange_rate}
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td className="[direction:ltr] rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium">
                                         {transaction.total_charge}
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td className="[direction:ltr] rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium">
                                         {transaction.recipient_received}
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td className="[direction:ltr] rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium">
                                         {transaction.current_balance}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap">
@@ -220,7 +220,7 @@ export default function SendMoneyHistorySection({ isRefetch }) {
                                             {transaction.status}
                                         </span>
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td className="[direction:ltr] rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium">
                                         {formatDate(transaction.date_time)}
                                     </td>
                                 </tr>

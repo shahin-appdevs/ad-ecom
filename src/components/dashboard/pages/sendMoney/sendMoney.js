@@ -500,23 +500,23 @@ export default function SendMoneySection({ setRefetch }) {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-7">
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                        <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
+                        <div className="bg-[#F9FAFB] border  border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
                             <p className="">{t("exchangeRate")}</p>
-                            <h6 className="font-medium mt-1">
+                            <h6 className="font-medium mt-1 [direction:ltr]">
                                 {exchangeRateText}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
                             <p className="">{t("availableBalance")}</p>
-                            <h6 className="font-medium text-emerald-600 mt-1">
+                            <h6 className="font-medium text-emerald-600 mt-1 [direction:ltr]">
                                 {wallet.balance} {wallet.selectedCurrency?.code}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
                             <p className="">{t("charge")}</p>
-                            <h6 className="font-medium mt-1">
+                            <h6 className="font-medium mt-1 [direction:ltr]">
                                 {sendMoneyData.sendMoneyCharge.fixed_charge}{" "}
                                 {selectedCurrency?.currency_code} +{" "}
                                 {sendMoneyData.sendMoneyCharge.percent_charge}%
@@ -804,11 +804,11 @@ export default function SendMoneySection({ setRefetch }) {
                         {t("preview")}
                     </h5>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 text-gray-600">
+                        <div className="flex items-center  gap-2 text-gray-600">
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
                             <span>{t("enteredAmount")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span className="font-medium text-gray-800 [direction:ltr]">
                             {amount || "0.00"} {selectedCurrency?.code}
                         </span>
                     </div>
@@ -817,7 +817,7 @@ export default function SendMoneySection({ setRefetch }) {
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
                             <span>{t("feesAndCharges")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span className="text-gray-800 [direction:ltr]">
                             {feesCalculation.totalFees} {selectedCurrency?.code}
                         </span>
                     </div>
@@ -826,7 +826,7 @@ export default function SendMoneySection({ setRefetch }) {
                             <BanknotesIcon className="w-5 h-5 text-emerald-500" />
                             <span>{t("recipientReceived")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span className="text-gray-800 [direction:ltr]">
                             {feesCalculation.willGet} {receiverCurrency?.code}
                         </span>
                     </div>
@@ -835,7 +835,7 @@ export default function SendMoneySection({ setRefetch }) {
                             <WalletIcon className="w-5 h-5 text-indigo-600" />
                             <span>{t("totalPayable")}</span>
                         </div>
-                        <span>
+                        <span className="[direction:ltr]">
                             {feesCalculation.totalPayable}{" "}
                             {selectedCurrency?.code}
                         </span>
@@ -852,7 +852,7 @@ export default function SendMoneySection({ setRefetch }) {
                             <ArrowsUpDownIcon className="w-5 h-5 text-indigo-500" />
                             <span>{t("transactionLimit")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span className="font-medium text-gray-800 [direction:ltr]">
                             {limitText}
                         </span>
                     </div>
@@ -861,7 +861,7 @@ export default function SendMoneySection({ setRefetch }) {
                             <CalendarDaysIcon className="w-5 h-5 text-blue-500" />
                             <span>{t("dailyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span className="text-gray-800 [direction:ltr]">
                             {limitsCalculation.dailyLimit}{" "}
                             {selectedCurrency?.code}
                         </span>
@@ -871,7 +871,7 @@ export default function SendMoneySection({ setRefetch }) {
                             <ChartBarIcon className="w-5 h-5 text-violet-500" />
                             <span>{t("monthlyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span className="text-gray-800 [direction:ltr]">
                             {limitsCalculation.monthlyLimit}{" "}
                             {selectedCurrency?.code}
                         </span>
@@ -884,7 +884,7 @@ export default function SendMoneySection({ setRefetch }) {
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span className="text-gray-800 [direction:ltr]">
                                 {limitsCalculation?.remainingDailyLimit}{" "}
                                 {selectedCurrency?.code}
                             </span>
@@ -898,7 +898,7 @@ export default function SendMoneySection({ setRefetch }) {
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span className="text-gray-800 [direction:ltr]">
                                 {limitsCalculation?.remainingMonthlyLimit}{" "}
                                 {selectedCurrency?.code}
                             </span>
