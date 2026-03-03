@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import { requestMoneyGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
@@ -35,6 +36,7 @@ function SkeletonRow() {
 }
 
 export default function RequestMoneyHistorySection({ isRefetch }) {
+    const t = useTranslations("Dashboard.wallet.requestMoney.requestMoneyLog");
     const [isLoading, setIsLoading] = useState(false);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -94,15 +96,13 @@ export default function RequestMoneyHistorySection({ isRefetch }) {
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                <h2 className="text-[16px] font-semibold">
-                    Request Money Logs
-                </h2>
+                <h2 className="text-[16px] font-semibold">{t("title")}</h2>
                 <Link
                     href="/user/transactions/request-money"
                     className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
                 >
                     <PlusIcon className="h-5 w-5" />
-                    View All
+                    {t("viewAll")}
                 </Link>
             </div>
 
@@ -110,25 +110,27 @@ export default function RequestMoneyHistorySection({ isRefetch }) {
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
-                            <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Trx</th>
+                            <tr className="bg-[#F5F7FF] text-left rtl:text-right text-sm text-color__paragraph">
                                 <th className="py-4 px-5 font-semibold">
-                                    Request Amount
+                                    {t("trx")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payable
+                                    {t("requestAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Fees & Charges
+                                    {t("payable")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Will Get
+                                    {t("fees")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    status
+                                    {t("willGet")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                    {t("status")}
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("time")}
                                 </th>
                             </tr>
                         </thead>
@@ -140,53 +142,68 @@ export default function RequestMoneyHistorySection({ isRefetch }) {
                     </table>
                 </div>
             ) : transactions.length === 0 ? (
-                <div className="text-center py-5">
-                    No request money transactions found
-                </div>
+                <div className="text-center py-5">{t("noTransactions")}</div>
             ) : (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
-                            <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Trx</th>
+                            <tr className="bg-[#F5F7FF] text-left rtl:text-right text-sm text-color__paragraph">
                                 <th className="py-4 px-5 font-semibold">
-                                    Request Amount
+                                    {t("trx")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payable
+                                    {t("requestAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Fees & Charges
+                                    {t("payable")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Will Get
+                                    {t("fees")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    status
+                                    {t("willGet")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                    {t("status")}
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("time")}
                                 </th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
                             {transactions.map((transaction, index) => (
                                 <tr key={index}>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
+                                    <td
+                                        dir="ltr"
+                                        className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color"
+                                    >
                                         #{transaction.trx || "N/A"}
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td
+                                        dir="ltr"
+                                        className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium"
+                                    >
                                         {transaction.request_amount ||
                                             "0.00 USD"}
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td
+                                        dir="ltr"
+                                        className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium"
+                                    >
                                         {transaction.payable_amount ||
                                             "0.00 USD"}
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td
+                                        dir="ltr"
+                                        className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium"
+                                    >
                                         {transaction.total_charge || "0.00 USD"}
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td
+                                        dir="ltr"
+                                        className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium"
+                                    >
                                         {transaction.will_get || "0.00 USD"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap">
@@ -196,7 +213,10 @@ export default function RequestMoneyHistorySection({ isRefetch }) {
                                             {transaction.status}
                                         </span>
                                     </td>
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                    <td
+                                        dir="ltr"
+                                        className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium"
+                                    >
                                         {formatDate(transaction.created_at)}
                                     </td>
                                 </tr>
