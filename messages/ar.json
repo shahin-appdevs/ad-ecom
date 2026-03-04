@@ -673,6 +673,26 @@
                 "status": "الحالة",
                 "timeAndDate": "الوقت والتاريخ",
                 "noTransactions": "لم يتم العثور على معاملات دفع الفواتير"
+            },
+            "topup": {
+                "topUpType": "نوع الشحن",
+                "bdTopUp": "شحن BD",
+                "global": "عالمي",
+                "continue": "متابعة",
+                "topupLog": "سجلات شحن الجوال",
+                "viewAll": "عرض الكل",
+                "trx": "المعاملة",
+                "requestAmount": "المبلغ المطلوب",
+                "payable": "المبلغ المستحق",
+                "willGet": "سوف تحصل على",
+                "topupTypeHistory": "نوع الشحن",
+                "mobileNumber": "رقم الجوال",
+                "exchangeRate": "سعر الصرف",
+                "feesAndCharges": "الرسوم والمصاريف",
+                "currentBalance": "الرصيد الحالي",
+                "status": "الحالة",
+                "timeAndDate": "الوقت والتاريخ",
+                "noTransactions": "لم يتم العثور على معاملات شحن الجوال"
             }
         },
         "homepage": {

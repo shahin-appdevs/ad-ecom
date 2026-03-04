@@ -673,6 +673,26 @@
                 "status": "status",
                 "timeAndDate": "Time & Date",
                 "noTransactions": "No bill pay transactions found"
+            },
+            "topup": {
+                "topUpType": "Top Up Type",
+                "bdTopUp": "BD TopUp",
+                "global": "Global",
+                "continue": "Continue",
+                "topupLog": "Mobile Topup Logs",
+                "viewAll": "View All",
+                "trx": "Trx",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "willGet": "Will Get",
+                "topupTypeHistory": "Topup Type",
+                "mobileNumber": "Mobile Number",
+                "exchangeRate": "Exchange Rate",
+                "feesAndCharges": "Fees & Charges",
+                "currentBalance": "Current Balance",
+                "status": "status",
+                "timeAndDate": "Time & Date",
+                "noTransactions": "No mobile topup transactions found"
             }
         },
         "homepage": {

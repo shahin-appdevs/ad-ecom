@@ -673,6 +673,26 @@
                 "status": "Estado",
                 "timeAndDate": "Hora y fecha",
                 "noTransactions": "No se encontraron transacciones de pago de facturas"
+            },
+            "topup": {
+                "topUpType": "Tipo de recarga",
+                "bdTopUp": "Recarga BD",
+                "global": "Global",
+                "continue": "Continuar",
+                "topupLog": "Registros de recarga móvil",
+                "viewAll": "Ver todo",
+                "trx": "Transacción",
+                "requestAmount": "Monto solicitado",
+                "payable": "A pagar",
+                "willGet": "Obtendrá",
+                "topupTypeHistory": "Tipo de recarga",
+                "mobileNumber": "Número de teléfono",
+                "exchangeRate": "Tipo de cambio",
+                "feesAndCharges": "Tarifas y cargos",
+                "currentBalance": "Saldo actual",
+                "status": "Estado",
+                "timeAndDate": "Hora y fecha",
+                "noTransactions": "No se encontraron transacciones de recarga móvil"
             }
         },
         "homepage": {

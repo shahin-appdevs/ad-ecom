@@ -1,16 +1,17 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { Listbox } from "@headlessui/react";
 import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
 
-const topupTypes = [
-    { id: 1, name: "BD TopUp" },
-    { id: 2, name: "Global" },
-];
-
 export default function MobileTopupSection() {
+    const t = useTranslations("Dashboard.services.topup");
+    const topupTypes = [
+        { id: 1, name: t("bdTopUp") },
+        { id: 2, name: t("global") },
+    ];
     const [selectedTopupType, setSelectedTopupType] = useState(topupTypes[0]);
     const router = useRouter();
 
@@ -29,7 +30,7 @@ export default function MobileTopupSection() {
                 <div className="grid grid-cols-2 gap-4">
                     <div className="col-span-2">
                         <label className="block text-sm font-medium mb-2">
-                            Top Up Type
+                            {t("topUpType")}
                         </label>
                         <Listbox
                             value={selectedTopupType}
@@ -65,7 +66,7 @@ export default function MobileTopupSection() {
                     </div>
                 </div>
                 <Button
-                    title="Continue"
+                    title={t("continue")}
                     variant="primary"
                     size="md"
                     className="w-full"

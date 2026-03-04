@@ -673,6 +673,26 @@
                 "status": "স্ট্যাটাস",
                 "timeAndDate": "সময় এবং তারিখ",
                 "noTransactions": "কোন বিল পে ট্রানজেকশন পাওয়া যায়নি"
+            },
+            "topup": {
+                "topUpType": "টপ আপের ধরন",
+                "bdTopUp": "বিডি টপআপ",
+                "global": "গ্লোবাল",
+                "continue": "চালিয়ে যান",
+                "topupLog": "মোবাইল টপআপ লগ",
+                "viewAll": "সব দেখুন",
+                "trx": "Trx",
+                "requestAmount": "অনুরোধের পরিমাণ",
+                "payable": "প্রদেয় পরিমাণ",
+                "willGet": "আপনি পাবেন",
+                "topupTypeHistory": "টপআপের ধরন",
+                "mobileNumber": "মোবাইল নম্বর",
+                "exchangeRate": "বিনিময় হার",
+                "feesAndCharges": "ফি এবং চার্জ",
+                "currentBalance": "বর্তমান ব্যালেন্স",
+                "status": "স্ট্যাটাস",
+                "timeAndDate": "সময় এবং তারিখ",
+                "noTransactions": "কোন মোবাইল টপআপ ট্রানজেকশন পাওয়া যায়নি"
             }
         },
         "homepage": {
