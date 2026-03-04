@@ -748,6 +748,55 @@
                 }
             }
         },
+        "ecommerce": {
+            "orderLog": {
+                "title": "অর্ডার",
+                "trx": "লেনদেন আইডি",
+                "gateway": "গেটওয়ে",
+                "requestAmount": "অনুরোধের পরিমাণ",
+                "payable": "প্রদেয়",
+                "exchangeRate": "বিনিময় হার",
+                "feesAndCharges": "ফি এবং চার্জ",
+                "currentBalance": "বর্তমান ব্যালেন্স",
+                "status": "স্ট্যাটাস",
+                "timeAndDate": "সময় এবং তারিখ",
+                "orderId": "অর্ডার আইডি",
+                "productTotal": "মোট প্রোডাক্ট",
+                "deliveryFee": "ডেলিভারি ফি",
+                "deliveryMethod": "ডেলিভারি পদ্ধতি",
+                "paymentMethod": "পেমেন্ট পদ্ধতি",
+                "grandTotal": "সর্বমোট",
+                "action": "অ্যাকশন",
+                "noOrders": "কোন আদেশ পাওয়া যায়নি"
+            },
+            "orderDetails": {
+                "orderId": "অর্ডার",
+                "downloadInvoice": "ইনভয়েস ডাউনলোড",
+                "downloading": "ডাউনলোড হচ্ছে...",
+                "orderSummary": "অর্ডার সামারি",
+                "customer": "গ্রাহক:",
+                "phone": "ফোন:",
+                "address": "ঠিকানা:",
+                "productTotal": "মোট প্রোডাক্ট:",
+                "deliveryFee": "ডেলিভারি ফি:",
+                "date": "তারিখ:",
+                "paymentInformation": "পেমেন্ট তথ্য",
+                "grandTotal": "সর্বমোট:",
+                "profit": "লাভ:",
+                "status": "স্ট্যাটাস:",
+                "logisticsInformation": "লজিস্টিক তথ্য",
+                "deliveryMethod": "ডেলিভারি পদ্ধতি:",
+                "transferStatus": "স্থানান্তর স্থিতি:",
+                "transferred": "স্থানান্তরিত",
+                "trackingId": "ট্র্যাকিং আইডি:",
+                "copy": "কপি করুন",
+                "noDetails": "এই অর্ডারের জন্য কোন তথ্য পাওয়া যায়নি।",
+                "failedLoad": "অর্ডারের তথ্য লোড করতে ব্যর্থ হয়েছে।",
+                "failedDownload": "ইনভয়েস ডাউনলোড করতে ব্যর্থ হয়েছে।",
+                "invoiceReady": "ইনভয়েস প্রস্তুত!",
+                "trackingCopied": "ট্র্যাকিং লিঙ্ক কপি করা হয়েছে!"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "আমার ব্যালেন্স",

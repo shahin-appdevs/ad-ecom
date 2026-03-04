@@ -748,6 +748,55 @@
                 }
             }
         },
+        "ecommerce": {
+            "orderLog": {
+                "title": "Pedidos",
+                "trx": "Trx",
+                "gateway": "Pasarela",
+                "requestAmount": "Monto solicitado",
+                "payable": "Pagadero",
+                "exchangeRate": "Tipo de cambio",
+                "feesAndCharges": "Tasas y cargos",
+                "currentBalance": "Saldo actual",
+                "status": "Estado",
+                "timeAndDate": "Hora y fecha",
+                "orderId": "ID de pedido",
+                "productTotal": "Total del producto",
+                "deliveryFee": "Gastos de envío",
+                "deliveryMethod": "Método de entrega",
+                "paymentMethod": "Método de pago",
+                "grandTotal": "Gran total",
+                "action": "Acción",
+                "noOrders": "No se encontraron pedidos"
+            },
+            "orderDetails": {
+                "orderId": "Pedido",
+                "downloadInvoice": "Descargar factura",
+                "downloading": "Descargando...",
+                "orderSummary": "Resumen del pedido",
+                "customer": "Cliente:",
+                "phone": "Teléfono:",
+                "address": "Dirección:",
+                "productTotal": "Total del producto:",
+                "deliveryFee": "Gastos de envío:",
+                "date": "Fecha:",
+                "paymentInformation": "Información de pago",
+                "grandTotal": "Gran total:",
+                "profit": "Ganancia:",
+                "status": "Estado:",
+                "logisticsInformation": "Información logística",
+                "deliveryMethod": "Método de entrega:",
+                "transferStatus": "Estado de transferencia:",
+                "transferred": "Transferido",
+                "trackingId": "ID de seguimiento:",
+                "copy": "Copiar",
+                "noDetails": "No se encontraron detalles para este pedido.",
+                "failedLoad": "Error al cargar los detalles del pedido.",
+                "failedDownload": "Error al descargar la factura.",
+                "invoiceReady": "¡Factura lista!",
+                "trackingCopied": "¡Enlace de seguimiento copiado!"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "Mi saldo",

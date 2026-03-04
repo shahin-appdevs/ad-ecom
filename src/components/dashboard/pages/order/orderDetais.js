@@ -17,6 +17,7 @@ import {
     CloudArrowDownIcon,
 } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
+import { useTranslations } from "next-intl";
 
 const formatAmount = (value) => {
     if (!value) return "0.00";
@@ -63,6 +64,7 @@ export default function OrderDetailsPage() {
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
     const [downloading, setDownloading] = useState(false);
+    const t = useTranslations("Dashboard.ecommerce.orderDetails");
 
     useEffect(() => {
         if (!orderId) return;
@@ -73,7 +75,7 @@ export default function OrderDetailsPage() {
             } catch (error) {
                 const errorMessage =
                     error.response?.data?.message?.error?.[0] ||
-                    "Failed to load order details.";
+                    t("failedLoad");
                 toast.error(errorMessage);
             } finally {
                 setLoading(false);
@@ -88,7 +90,7 @@ export default function OrderDetailsPage() {
         try {
             const res = await productOrderDownloadInvoiceGetAPI(orderId);
             const downloadLink = res.data.data.download_link;
-            toast.success(res.data.message.success?.[0] || "Invoice ready!");
+            toast.success(res.data.message.success?.[0] || t("invoiceReady"));
 
             // Trigger file download
             const a = document.createElement("a");
@@ -101,7 +103,7 @@ export default function OrderDetailsPage() {
         } catch (error) {
             const errorMessage =
                 error.response?.data?.message?.error?.[0] ||
-                "Failed to download invoice.";
+                t("failedDownload");
             toast.error(errorMessage);
         } finally {
             setDownloading(false);
@@ -113,18 +115,23 @@ export default function OrderDetailsPage() {
     }
 
     if (!order) {
-        return <div className="p-6">No details found for this order.</div>;
+        return <div className="p-6">{t("noDetails")}</div>;
     }
 
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex items-center justify-between mb-4 gap-2">
-                <h5 className="font-bold tracking-tight text-sm md:text-lg">
-                    Order #{order?.order_id}
+                <h5 className="font-bold  tracking-tight text-sm md:text-lg flex gap-2">
+                    <span>{t("orderId")}</span>
+                    <span dir="ltr" className="font-bold">
+                        #{order?.order_id}
+                    </span>
                 </h5>
                 <Button
                     Icon={CloudArrowDownIcon}
-                    title={downloading ? "Downloading..." : "Download Invoice"}
+                    title={
+                        downloading ? t("downloading") : t("downloadInvoice")
+                    }
                     size="sm"
                     onClick={handleDownloadInvoice}
                     disabled={downloading}
@@ -135,28 +142,28 @@ export default function OrderDetailsPage() {
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
                     <div className="flex items-center gap-2 mb-4">
                         <CubeIcon className="w-6 h-6 text-indigo-500" />
-                        <h5 className="font-semibold">Order Summary</h5>
+                        <h5 className="font-semibold">{t("orderSummary")}</h5>
                     </div>
                     <div className="grid md:grid-cols-2 gap-6">
                         <div className="space-y-2">
                             <p className="flex items-center gap-2">
                                 <UserIcon className="w-4 h-4" />
                                 <span className="font-semibold">
-                                    Customer:
+                                    {t("customer")}
                                 </span>{" "}
                                 {order?.customer_info?.name}
                             </p>
                             <p className="flex items-center gap-2">
                                 <PhoneIcon className="w-4 h-4" />
                                 <span className="font-semibold">
-                                    Phone:
+                                    {t("phone")}
                                 </span>{" "}
                                 {order?.customer_info?.phone}
                             </p>
                             <p className="flex items-center gap-2">
                                 <MapPinIcon className="w-4 h-4" />
                                 <span className="font-semibold">
-                                    Address:
+                                    {t("address")}
                                 </span>{" "}
                                 {order?.customer_info?.address}
                             </p>
@@ -164,21 +171,27 @@ export default function OrderDetailsPage() {
                         <div className="space-y-2">
                             <p className="flex items-center gap-2">
                                 <BanknotesIcon className="w-4 h-4" />
-                                Product Total:{" "}
+                                <span className="font-semibold">
+                                    {t("productTotal")}{" "}
+                                </span>
                                 <span className="font-semibold">
                                     ৳ {formatAmount(order?.product_total)}
                                 </span>
                             </p>
                             <p className="flex items-center gap-2">
                                 <ArrowUpTrayIcon className="w-4 h-4" />
-                                Delivery Fee:{" "}
+                                <span className="font-semibold">
+                                    {t("deliveryFee")}{" "}
+                                </span>
                                 <span className="font-semibold">
                                     ৳ {formatAmount(order?.delivery_fee)}
                                 </span>
                             </p>
                             <p className="flex items-center gap-2">
                                 <CalendarDaysIcon className="w-4 h-4" />
-                                Date:{" "}
+                                <span className="font-semibold">
+                                    {t("date")}{" "}
+                                </span>
                                 <span>
                                     {new Date(
                                         order?.created_at,
@@ -196,20 +209,26 @@ export default function OrderDetailsPage() {
                     <div className="flex items-center gap-2 mb-4">
                         <BanknotesIcon className="w-6 h-6 text-green-500" />
                         <h2 className="text-lg font-semibold">
-                            Payment Information
+                            {t("paymentInformation")}
                         </h2>
                     </div>
                     <div className="space-y-2">
                         <p>
-                            <span className="font-semibold">Grand Total:</span>{" "}
-                            ৳ {formatAmount(order?.grand_total)}
+                            <span className="font-semibold">
+                                {t("grandTotal")}
+                            </span>{" "}
+                            <span className="font-semibold">
+                                ৳ {formatAmount(order?.grand_total)}
+                            </span>
                         </p>
                         <p>
-                            <span className="font-semibold">Profit:</span> ৳{" "}
-                            {formatAmount(order?.profit_amount)}
+                            <span className="font-semibold">{t("profit")}</span>{" "}
+                            <span className="font-semibold">
+                                ৳ {formatAmount(order?.profit_amount)}
+                            </span>
                         </p>
                         <p>
-                            <span className="font-semibold">Status:</span>
+                            <span className="font-semibold">{t("status")}</span>
                             <span
                                 className={`ml-2 px-3 py-1 text-xs font-medium rounded-md ${
                                     order?.status === "completed"
@@ -228,28 +247,28 @@ export default function OrderDetailsPage() {
                     <div className="flex items-center gap-2 mb-4">
                         <ArrowUpTrayIcon className="w-6 h-6 text-blue-500" />
                         <h2 className="text-lg font-semibold">
-                            Logistics Information
+                            {t("logisticsInformation")}
                         </h2>
                     </div>
                     <div className="space-y-2">
                         <p>
                             <span className="font-semibold">
-                                Delivery Method:
+                                {t("deliveryMethod")}
                             </span>{" "}
                             {order?.delivery_method}
                         </p>
                         <p>
                             <span className="font-semibold">
-                                Transfer Status:
+                                {t("transferStatus")}
                             </span>{" "}
                             {order?.logistics_info?.transfer_status
-                                ? "Transferred"
+                                ? t("transferred")
                                 : order?.logistics_info?.transfer_false_text}
                         </p>
                         {order?.logistics_info?.tracking_id && (
                             <p className="flex items-center gap-2">
                                 <span className="font-semibold">
-                                    Tracking ID:
+                                    {t("trackingId")}
                                 </span>{" "}
                                 <span className="bg-white px-2 py-1 rounded border text-sm">
                                     {order?.logistics_info?.tracking_id}
@@ -258,11 +277,11 @@ export default function OrderDetailsPage() {
                                     onClick={() => {
                                         const copyLink = `https://steadfast.com.bd/t/${order?.logistics_info?.tracking_id}`;
                                         navigator.clipboard.writeText(copyLink);
-                                        toast.success("Tracking link copied!");
+                                        toast.success(t("trackingCopied"));
                                     }}
                                     className="px-2 py-1 text-xs font-medium text-white bg-blue-500 rounded hover:bg-blue-600"
                                 >
-                                    Copy
+                                    {t("copy")}
                                 </button>
                             </p>
                         )}

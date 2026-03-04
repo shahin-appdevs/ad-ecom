@@ -748,6 +748,55 @@
                 }
             }
         },
+        "ecommerce": {
+            "orderLog": {
+                "title": "الطلبات",
+                "trx": "رقم العملية",
+                "gateway": "بوابة الدفع",
+                "requestAmount": "المبلغ المطلوب",
+                "payable": "المستحق للدفع",
+                "exchangeRate": "سعر الصرف",
+                "feesAndCharges": "الرسوم والمصاريف",
+                "currentBalance": "الرصيد الحالي",
+                "status": "الحالة",
+                "timeAndDate": "الوقت والتاريخ",
+                "orderId": "رقم الطلب",
+                "productTotal": "إجمالي المنتج",
+                "deliveryFee": "رسوم التوصيل",
+                "deliveryMethod": "طريقة التوصيل",
+                "paymentMethod": "طريقة الدفع",
+                "grandTotal": "الإجمالي الكلي",
+                "action": "إجراء",
+                "noOrders": "لم يتم العثور على طلبات"
+            },
+            "orderDetails": {
+                "orderId": "الطلب",
+                "downloadInvoice": "تحميل الفاتورة",
+                "downloading": "جاري التحميل...",
+                "orderSummary": "ملخص الطلب",
+                "customer": "العميل : ",
+                "phone": "الهاتف : ",
+                "address": "العنوان : ",
+                "productTotal": "إجمالي المنتج : ",
+                "deliveryFee": "رسوم التوصيل : ",
+                "date": "التاريخ : ",
+                "paymentInformation": "معلومات الدفع",
+                "grandTotal": "الإجمالي الكلي : ",
+                "profit": "الربح : ",
+                "status": "الحالة : ",
+                "logisticsInformation": "المعلومات اللوجستية",
+                "deliveryMethod": "طريقة التوصيل : ",
+                "transferStatus": "حالة النقل : ",
+                "transferred": "تم النقل",
+                "trackingId": "رقم التتبع : ",
+                "copy": "نسخ",
+                "noDetails": "لم يتم العثور على تفاصيل لهذا الطلب.",
+                "failedLoad": "فشل في تحميل تفاصيل الطلب.",
+                "failedDownload": "فشل في تحميل الفاتورة.",
+                "invoiceReady": "الفاتورة جاهزة!",
+                "trackingCopied": "تم نسخ رابط التتبع!"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "رصيدي",

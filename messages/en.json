@@ -748,6 +748,55 @@
                 }
             }
         },
+        "ecommerce": {
+            "orderLog": {
+                "title": "Orders",
+                "trx": "Trx",
+                "gateway": "Gateway",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "exchangeRate": "Exchange Rate",
+                "feesAndCharges": "Fees & Charges",
+                "currentBalance": "Current Balance",
+                "status": "Status",
+                "timeAndDate": "Time & Date",
+                "orderId": "Order ID",
+                "productTotal": "Product Total",
+                "deliveryFee": "Delivery Fee",
+                "deliveryMethod": "Delivery Method",
+                "paymentMethod": "Payment Method",
+                "grandTotal": "Grand Total",
+                "action": "Action",
+                "noOrders": "No orders found"
+            },
+            "orderDetails": {
+                "orderId": "Order",
+                "downloadInvoice": "Download Invoice",
+                "downloading": "Downloading...",
+                "orderSummary": "Order Summary",
+                "customer": "Customer:",
+                "phone": "Phone:",
+                "address": "Address:",
+                "productTotal": "Product Total:",
+                "deliveryFee": "Delivery Fee:",
+                "date": "Date:",
+                "paymentInformation": "Payment Information",
+                "grandTotal": "Grand Total:",
+                "profit": "Profit:",
+                "status": "Status:",
+                "logisticsInformation": "Logistics Information",
+                "deliveryMethod": "Delivery Method:",
+                "transferStatus": "Transfer Status:",
+                "transferred": "Transferred",
+                "trackingId": "Tracking ID:",
+                "copy": "Copy",
+                "noDetails": "No details found for this order.",
+                "failedLoad": "Failed to load order details.",
+                "failedDownload": "Failed to download invoice.",
+                "invoiceReady": "Invoice ready!",
+                "trackingCopied": "Tracking link copied!"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "My Balance",
