@@ -793,5 +793,17 @@
                 "somethingWentWrong": "Something went wrong"
             }
         }
+    },
+    "Checkout": {
+        "orderSuccess": {
+            "orderConfirmed": "Order Confirmed!",
+            "thankYouMessage": "Thank you for your purchase. Your order has been successfully placed and will be processed shortly.",
+            "continueShopping": "Continue Shopping"
+        },
+        "orderCancel": {
+            "orderCanceled": "Order Canceled!",
+            "thankYouMessage": "Thank you for your submission. Your order has been canceled and will be processed shortly.",
+            "continueShopping": "Continue Shopping"
+        }
     }
 }

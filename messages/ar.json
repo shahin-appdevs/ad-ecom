@@ -793,5 +793,17 @@
                 "somethingWentWrong": "حدث خطأ ما"
             }
         }
+    },
+    "Checkout": {
+        "orderSuccess": {
+            "orderConfirmed": "تم تأكيد الطلب!",
+            "thankYouMessage": "شكرا لشرائك. لقد تم تقديم طلبك بنجاح وستتم معالجته قريبا.",
+            "continueShopping": "مواصلة التسوق"
+        },
+        "orderCancel": {
+            "orderCanceled": "تم إلغاء الطلب!",
+            "thankYouMessage": "شكرا لتقديمك. لقد تم إلغاء طلبك وستتم معالجته قريبا.",
+            "continueShopping": "مواصلة التسوق"
+        }
     }
 }
