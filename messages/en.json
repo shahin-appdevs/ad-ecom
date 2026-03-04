@@ -485,6 +485,13 @@
                         "button": {
                             "anotherPayment": "Make Another Payment"
                         }
+                    },
+                    "cancelPage": {
+                        "title": "Payment Canceled",
+                        "message": "Your payment was canceled. No charges were made. You can try again whenever you're ready.",
+                        "button": {
+                            "anotherPayment": "Try Another Payment"
+                        }
                     }
                 }
             },
@@ -535,6 +542,7 @@
                     "noTransactions": "No money out transactions found"
                 }
             },
+
             "makePayment": {
                 "title": "Make Payment",
                 "exchangeRate": "Exchange Rate",
@@ -627,6 +635,44 @@
                     "time": "Time & Date",
                     "noTransactions": "No withdraw transactions found"
                 }
+            }
+        },
+        "services": {
+            "billPay": {
+                "exchangeRate": "Exchange Rate",
+                "availableBalance": "Available Balance",
+                "charge": "Charge",
+                "billType": "Bill Type",
+                "selectBillType": "Select Bill Type",
+                "billMonth": "Bill Month",
+                "selectBillMonth": "Select Bill Month",
+                "billNumber": "Bill Number",
+                "enterNumber": "Enter Number...",
+                "enterAmount": "Enter Amount",
+                "enterAmountPlaceholder": "Enter Amount...",
+                "paying": "Paying...",
+                "payBill": "Pay Bill",
+                "preview": "Preview",
+                "enteredAmount": "Entered Amount",
+                "conversionAmount": "Conversion Amount",
+                "feesAndCharges": "Fees & Charges",
+                "totalPayable": "Total Payable",
+                "limitInformation": "Limit Information",
+                "transactionLimit": "Transaction Limit",
+                "dailyLimit": "Daily Limit",
+                "monthlyLimit": "Monthly Limit",
+                "dailyRemainingLimit": "Daily Remaining Limit",
+                "monthlyRemainingLimit": "Monthly Remaining Limit",
+                "billPayLogs": "Bill Pay Logs",
+                "viewAll": "View All",
+                "trx": "Trx",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "billAmount": "Bill Amount",
+                "currentBalance": "Current Balance",
+                "status": "status",
+                "timeAndDate": "Time & Date",
+                "noTransactions": "No bill pay transactions found"
             }
         },
         "homepage": {

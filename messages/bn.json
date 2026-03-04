@@ -485,6 +485,13 @@
                         "button": {
                             "anotherPayment": "আরেকটি পেমেন্ট করুন"
                         }
+                    },
+                    "cancelPage": {
+                        "title": "পেমেন্ট বাতিল করা হয়েছে",
+                        "message": "আপনার পেমেন্টটি বাতিল করা হয়েছে। কোনো টাকা কাটা হয়নি। আপনি প্রস্তুত থাকলে আবারো চেষ্টা করতে পারেন।",
+                        "button": {
+                            "anotherPayment": "আবারো পেমেন্ট করার চেষ্টা করুন"
+                        }
                     }
                 }
             },
@@ -535,6 +542,7 @@
                     "noTransactions": "কোন মানি আউট লেনদেন পাওয়া যায়নি"
                 }
             },
+
             "makePayment": {
                 "title": "পেমেন্ট করুন",
                 "exchangeRate": "বিনিময় হার",
@@ -627,6 +635,44 @@
                     "time": "সময় এবং তারিখ",
                     "noTransactions": "কোন উত্তোলন লেনদেন পাওয়া যায়নি"
                 }
+            }
+        },
+        "services": {
+            "billPay": {
+                "exchangeRate": "বিনিময় হার",
+                "availableBalance": "বর্তমান ব্যালেন্স",
+                "charge": "চার্জ",
+                "billType": "বিলের ধরন",
+                "selectBillType": "বিলের ধরন নির্বাচন করুন",
+                "billMonth": "বিলের মাস",
+                "selectBillMonth": "বিলের মাস নির্বাচন করুন",
+                "billNumber": "বিল নম্বর",
+                "enterNumber": "নম্বর লিখুন...",
+                "enterAmount": "পরিমাণ লিখুন",
+                "enterAmountPlaceholder": "পরিমাণ লিখুন...",
+                "paying": "পেমেন্ট হচ্ছে...",
+                "payBill": "বিল পে",
+                "preview": "প্রিভিউ",
+                "enteredAmount": "প্রদত্ত পরিমাণ",
+                "conversionAmount": "রূপান্তর পরিমাণ",
+                "feesAndCharges": "ফি এবং চার্জ",
+                "totalPayable": "মোট ব্যবহারযোগ্য",
+                "limitInformation": "সীমা তথ্য",
+                "transactionLimit": "লেনদেনের সীমা",
+                "dailyLimit": "দৈনিক সীমা",
+                "monthlyLimit": "মাসিক সীমা",
+                "dailyRemainingLimit": "দৈনিক অবশিষ্ট সীমা",
+                "monthlyRemainingLimit": "মাসিক অবশিষ্ট সীমা",
+                "billPayLogs": "বিল পেমেন্ট লগ",
+                "viewAll": "সব দেখুন",
+                "trx": "Trx",
+                "requestAmount": "অনুরোধের পরিমাণ",
+                "payable": "প্রদেয় পরিমাণ",
+                "billAmount": "বিলের পরিমাণ",
+                "currentBalance": "বর্তমান ব্যালেন্স",
+                "status": "স্ট্যাটাস",
+                "timeAndDate": "সময় এবং তারিখ",
+                "noTransactions": "কোন বিল পে ট্রানজেকশন পাওয়া যায়নি"
             }
         },
         "homepage": {

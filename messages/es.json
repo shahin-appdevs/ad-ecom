@@ -485,6 +485,13 @@
                         "button": {
                             "anotherPayment": "Realizar otro pago"
                         }
+                    },
+                    "cancelPage": {
+                        "title": "Pago Cancelado",
+                        "message": "Su pago fue cancelado. No se realizó ningún cargo. Puede intentarlo de nuevo cuando esté listo.",
+                        "button": {
+                            "anotherPayment": "Intentar otro pago"
+                        }
                     }
                 }
             },
@@ -535,6 +542,7 @@
                     "noTransactions": "No se encontraron transacciones de retiro"
                 }
             },
+
             "makePayment": {
                 "title": "Realizar pago",
                 "exchangeRate": "Tipo de cambio",
@@ -627,6 +635,44 @@
                     "time": "Hora y Fecha",
                     "noTransactions": "No se encontraron transacciones de retiro"
                 }
+            }
+        },
+        "services": {
+            "billPay": {
+                "exchangeRate": "Tipo de cambio",
+                "availableBalance": "Saldo disponible",
+                "charge": "Carga",
+                "billType": "Tipo de factura",
+                "selectBillType": "Seleccionar tipo de factura",
+                "billMonth": "Mes de facturación",
+                "selectBillMonth": "Seleccionar mes de facturación",
+                "billNumber": "Número de factura",
+                "enterNumber": "Ingresar número...",
+                "enterAmount": "Ingresar monto",
+                "enterAmountPlaceholder": "Ingresar monto...",
+                "paying": "Pagando...",
+                "payBill": "Pagar factura",
+                "preview": "Vista previa",
+                "enteredAmount": "Monto ingresado",
+                "conversionAmount": "Monto de conversión",
+                "feesAndCharges": "Tarifas y cargos",
+                "totalPayable": "Total a pagar",
+                "limitInformation": "Información de límite",
+                "transactionLimit": "Límite de transacción",
+                "dailyLimit": "Límite diario",
+                "monthlyLimit": "Límite mensual",
+                "dailyRemainingLimit": "Límite diario restante",
+                "monthlyRemainingLimit": "Límite mensual restante",
+                "billPayLogs": "Registros de pago de facturas",
+                "viewAll": "Ver todo",
+                "trx": "Transacción",
+                "requestAmount": "Monto solicitado",
+                "payable": "A pagar",
+                "billAmount": "Monto de factura",
+                "currentBalance": "Saldo actual",
+                "status": "Estado",
+                "timeAndDate": "Hora y fecha",
+                "noTransactions": "No se encontraron transacciones de pago de facturas"
             }
         },
         "homepage": {

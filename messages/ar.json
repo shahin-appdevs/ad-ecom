@@ -485,6 +485,13 @@
                         "button": {
                             "anotherPayment": "إجراء دفع آخر"
                         }
+                    },
+                    "cancelPage": {
+                        "title": "تم إلغاء عملية الدفع",
+                        "message": "لقد تم إلغاء عملية الدفع الخاصة بك. لم يتم خصم أي مبالغ. يمكنك المحاولة مرة أخرى متى كنت مستعداً.",
+                        "button": {
+                            "anotherPayment": "محاولة إجراء دفع آخر"
+                        }
                     }
                 }
             },
@@ -535,6 +542,7 @@
                     "noTransactions": "لم يتم العثور على معاملات سحب أموال"
                 }
             },
+
             "makePayment": {
                 "title": "إجراء الدفع",
                 "exchangeRate": "سعر الصرف",
@@ -627,6 +635,44 @@
                     "time": "الوقت والتاريخ",
                     "noTransactions": "لم يتم العثور على معاملات سحب"
                 }
+            }
+        },
+        "services": {
+            "billPay": {
+                "exchangeRate": "سعر الصرف",
+                "availableBalance": "الرصيد المتاح",
+                "charge": "الرسوم",
+                "billType": "نوع الفاتورة",
+                "selectBillType": "حدد نوع الفاتورة",
+                "billMonth": "شهر الفاتورة",
+                "selectBillMonth": "حدد شهر الفاتورة",
+                "billNumber": "رقم الفاتورة",
+                "enterNumber": "أدخل الرقم...",
+                "enterAmount": "أدخل المبلغ",
+                "enterAmountPlaceholder": "أدخل المبلغ...",
+                "paying": "جاري الدفع...",
+                "payBill": "دفع الفاتورة",
+                "preview": "معاينة",
+                "enteredAmount": "المبلغ المدخل",
+                "conversionAmount": "مبلغ التحويل",
+                "feesAndCharges": "الرسوم والمصاريف",
+                "totalPayable": "إجمالي المبلغ المستحق",
+                "limitInformation": "معلومات الحد",
+                "transactionLimit": "حد المعاملة",
+                "dailyLimit": "الحد اليومي",
+                "monthlyLimit": "الحد الشهري",
+                "dailyRemainingLimit": "الحد اليومي المتبقي",
+                "monthlyRemainingLimit": "الحد الشهري المتبقي",
+                "billPayLogs": "سجلات دفع الفواتير",
+                "viewAll": "عرض الكل",
+                "trx": "المعاملة",
+                "requestAmount": "المبلغ المطلوب",
+                "payable": "المبلغ المستحق",
+                "billAmount": "مبلغ الفاتورة",
+                "currentBalance": "الرصيد الحالي",
+                "status": "الحالة",
+                "timeAndDate": "الوقت والتاريخ",
+                "noTransactions": "لم يتم العثور على معاملات دفع الفواتير"
             }
         },
         "homepage": {

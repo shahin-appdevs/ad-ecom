@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { useState, useEffect, useMemo } from "react";
 import { Listbox } from "@headlessui/react";
 import {
@@ -31,6 +32,7 @@ function Skeleton({ className }) {
 }
 
 const BillPaySection = ({ setBillPaySuccess }) => {
+    const t = useTranslations("Dashboard.services.billPay");
     const [selectedBillType, setSelectedBillType] = useState(null);
     const [selectedBillMonth, setSelectedBillMonth] = useState(null);
     const [selectedCurrency, setSelectedCurrency] = useState(null);
@@ -343,22 +345,31 @@ const BillPaySection = ({ setBillPaySuccess }) => {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-7">
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                        <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Exchange Rate</p>
+                        <div
+                            dir="ltr"
+                            className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5"
+                        >
+                            <p className="">{t("exchangeRate")}</p>
                             <h6 className="font-medium mt-1">
                                 {exchangeRateText}
                             </h6>
                         </div>
 
-                        <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Available Balance</p>
+                        <div
+                            dir="ltr"
+                            className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5"
+                        >
+                            <p className="">{t("availableBalance")}</p>
                             <h6 className="font-medium text-emerald-600 mt-1">
                                 {wallet.balance} {wallet.selectedCurrency?.code}
                             </h6>
                         </div>
 
-                        <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Charge</p>
+                        <div
+                            dir="ltr"
+                            className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5"
+                        >
+                            <p className="">{t("charge")}</p>
                             <h6 className="font-medium mt-1">
                                 {billPayData.billPayCharge.fixed_charge}{" "}
                                 {wallet.selectedCurrency?.code} +{" "}
@@ -369,7 +380,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium mb-2">
-                                Bill Type
+                                {t("billType")}
                             </label>
                             <Listbox
                                 value={selectedBillType}
@@ -378,7 +389,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                                 <div className="relative">
                                     <Listbox.Button className="w-full bg-gray-50 border border-gray-300 rounded-md py-2 px-3 text-sm text-left flex justify-between items-center">
                                         {selectedBillType?.name ||
-                                            "Select Bill Type"}
+                                            t("selectBillType")}
                                         <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
                                     </Listbox.Button>
                                     <Listbox.Options className="absolute mt-1 w-full bg-white shadow-md rounded-md z-10 max-h-60 overflow-auto">
@@ -406,7 +417,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-2">
-                                Bill Month
+                                {t("billMonth")}
                             </label>
                             <Listbox
                                 value={selectedBillMonth}
@@ -415,7 +426,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                                 <div className="relative">
                                     <Listbox.Button className="w-full bg-gray-50 border border-gray-300 rounded-md py-2 px-3 text-sm text-left flex justify-between items-center">
                                         {selectedBillMonth?.name ||
-                                            "Select Bill Month"}
+                                            t("selectBillMonth")}
                                         <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
                                     </Listbox.Button>
                                     <Listbox.Options className="absolute mt-1 w-full bg-white shadow-md rounded-md z-10 max-h-60 overflow-auto">
@@ -443,30 +454,30 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-2">
-                                Bill Number
+                                {t("billNumber")}
                             </label>
                             <input
                                 type="number"
                                 min="0"
                                 className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                placeholder="Enter Number..."
+                                placeholder={t("enterNumber")}
                                 value={billNumber}
                                 onChange={(e) => setBillNumber(e.target.value)}
                             />
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-2">
-                                Enter Amount
+                                {t("enterAmount")}
                             </label>
                             <div className="relative">
                                 <input
                                     type="number"
                                     className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                     value={amount}
-                                    placeholder="Enter Amount..."
+                                    placeholder={t("enterAmountPlaceholder")}
                                     onChange={(e) => setAmount(e.target.value)}
                                 />
-                                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-20">
+                                <div className="absolute ltr:right-2 rtl:left-2 top-1/2 transform -translate-y-1/2 w-20">
                                     <Listbox
                                         value={wallet.selectedCurrency}
                                         onChange={updateSelectedCurrency}
@@ -522,7 +533,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                         </div>
                     </div>
                     <Button
-                        title={isSubmitting ? "Paying..." : "Pay Bill"}
+                        title={isSubmitting ? t("paying") : t("payBill")}
                         variant="primary"
                         size="md"
                         className="w-full"
@@ -539,43 +550,43 @@ const BillPaySection = ({ setBillPaySuccess }) => {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
-                        Preview
+                        {t("preview")}
                     </h5>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Entered Amount</span>
+                            <span>{t("enteredAmount")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span dir="ltr" className="font-medium text-gray-800">
                             {amount || "0.00"} {wallet?.selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChatBubbleLeftRightIcon className="w-5 h-5 text-cyan-500" />
-                            <span>Conversion Amount</span>
+                            <span>{t("conversionAmount")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {feesCalculation.conversionAmount}{" "}
                             {selectedBillType?.receiver_currency_code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
-                            <span>Fees & Charges</span>
+                            <span>{t("feesAndCharges")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {feesCalculation.totalFees}{" "}
                             {wallet?.selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between border-t pt-3 font-semibold text-gray-800">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-2">
                             <WalletIcon className="w-5 h-5 text-indigo-600" />
-                            <span>Total Payable</span>
+                            <span>{t("totalPayable")}</span>
                         </div>
-                        <span>
+                        <span dir="ltr">
                             {feesCalculation.totalPayable}{" "}
                             {wallet?.selectedCurrency?.code}
                         </span>
@@ -585,60 +596,60 @@ const BillPaySection = ({ setBillPaySuccess }) => {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12">
                 <div className="bg-[#F9FAFB] p-5 rounded-xl border border-gray-200 space-y-4 text-sm shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
-                        Limit Information
+                        {t("limitInformation")}
                     </h5>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowsUpDownIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Transaction Limit</span>
+                            <span>{t("transactionLimit")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span dir="ltr" className="font-medium text-gray-800">
                             {limitText}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CalendarDaysIcon className="w-5 h-5 text-blue-500" />
-                            <span>Daily Limit</span>
+                            <span>{t("dailyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {limitsCalculation.dailyLimit}{" "}
                             {wallet?.selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-violet-500" />
-                            <span>Monthly Limit</span>
+                            <span>{t("monthlyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {limitsCalculation.monthlyLimit}{" "}
                             {wallet?.selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CalendarDaysIcon className="w-5 h-5 text-yellow-500" />
-                            <span>Daily Remaining Limit</span>
+                            <span>{t("dailyRemainingLimit")}</span>
                         </div>
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span dir="ltr" className="text-gray-800">
                                 {limitsCalculation?.remainingDailyLimit}{" "}
                                 {wallet?.selectedCurrency?.code}
                             </span>
                         )}
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-yellow-500" />
-                            <span>Monthly Remaining Limit</span>
+                            <span>{t("monthlyRemainingLimit")}</span>
                         </div>
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span dir="ltr" className="text-gray-800">
                                 {limitsCalculation?.remainingMonthlyLimit}{" "}
                                 {wallet?.selectedCurrency?.code}
                             </span>
