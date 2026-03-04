@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { useState, useEffect, useMemo } from "react";
 import {
     mobileTopupGetAPI,
@@ -31,6 +32,7 @@ function Skeleton({ className }) {
 }
 
 export default function MobileTopupAutomaticSection() {
+    const t = useTranslations("Dashboard.services.topup.globalTopup");
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [defaultCurrency, setDefaultCurrency] = useState({
@@ -259,11 +261,11 @@ export default function MobileTopupAutomaticSection() {
             setApiLoading(true);
             const response = await mobileTopupGetAPI();
             const data = response.data.data;
-            setMobileTopupData({
+            setMobileTopupData((prevData) => ({
                 ...data,
-                topupCharge: data.topupCharge || mobileTopupData.topupCharge,
+                topupCharge: data.topupCharge || prevData.topupCharge,
                 all_countries: data.all_countries || [],
-            });
+            }));
             setDefaultCurrency({
                 code: data.base_curr,
                 rate: data.base_curr_rate,
@@ -447,22 +449,31 @@ export default function MobileTopupAutomaticSection() {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-7">
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
-                        <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Exchange Rate</p>
+                        <div
+                            dir="ltr"
+                            className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5"
+                        >
+                            <p className="">{t("exchangeRate")}</p>
                             <h6 className="font-medium mt-1">
                                 {exchangeRateText}
                             </h6>
                         </div>
 
-                        <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Available Balance</p>
+                        <div
+                            dir="ltr"
+                            className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5"
+                        >
+                            <p className="">{t("availableBalance")}</p>
                             <h6 className="font-medium text-emerald-600 mt-1">
                                 {wallet.balance} {wallet.selectedCurrency?.code}
                             </h6>
                         </div>
 
-                        <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Charge</p>
+                        <div
+                            dir="ltr"
+                            className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5"
+                        >
+                            <p className="">{t("charge")}</p>
                             <h6 className="font-medium mt-1">
                                 {mobileTopupData.topupCharge.fixed_charge}{" "}
                                 {selectedCurrency?.code} +{" "}
@@ -474,7 +485,7 @@ export default function MobileTopupAutomaticSection() {
                         {mobileTopupData.all_countries.length > 0 && (
                             <div className="col-span-2">
                                 <label className="block text-sm font-medium mb-2">
-                                    Country
+                                    {t("country")}
                                 </label>
                                 <Listbox
                                     value={selectedCountry}
@@ -484,7 +495,7 @@ export default function MobileTopupAutomaticSection() {
                                         <Listbox.Button className="w-full bg-gray-50 border border-gray-300 rounded-md py-2 px-3 text-sm text-left flex justify-between items-center">
                                             {selectedCountry
                                                 ? `${selectedCountry.name} (${selectedCountry.mobile_code})`
-                                                : "Select Country"}
+                                                : t("selectCountry")}
                                             <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
                                         </Listbox.Button>
                                         <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto bg-white shadow-md rounded-md z-10">
@@ -521,19 +532,22 @@ export default function MobileTopupAutomaticSection() {
                         )}
                         <div className="col-span-2">
                             <label className="block text-sm font-medium mb-2">
-                                Mobile Number
+                                {t("mobileNumber")}
                             </label>
                             <div className="relative">
                                 <input
                                     type="tel"
                                     className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100 pl-14"
-                                    placeholder="Enter Number..."
+                                    placeholder={t("enterNumber")}
                                     value={mobileNumber}
                                     onChange={(e) =>
                                         setMobileNumber(e.target.value)
                                     }
                                 />
-                                <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-sm text-gray-500">
+                                <div
+                                    dir="ltr"
+                                    className="absolute left-4 top-1/2 transform -translate-y-1/2 text-sm text-gray-500"
+                                >
                                     {selectedCountry
                                         ? `+${selectedCountry.mobile_code}`
                                         : "+"}
@@ -543,7 +557,7 @@ export default function MobileTopupAutomaticSection() {
                         {operatorInfo && (
                             <div className="col-span-2">
                                 <label className="block text-sm font-medium mb-2">
-                                    Amount
+                                    {t("amount")}
                                 </label>
                                 <div className="relative">
                                     <input
@@ -551,12 +565,12 @@ export default function MobileTopupAutomaticSection() {
                                         min="0"
                                         className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                         value={amount}
-                                        placeholder="Enter Amount..."
+                                        placeholder={t("enterAmount")}
                                         onChange={(e) =>
                                             setAmount(e.target.value)
                                         }
                                     />
-                                    <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-20">
+                                    <div className="absolute ltr:right-2 rtl:left-2 top-1/2 transform -translate-y-1/2 w-20">
                                         <Listbox
                                             value={selectedCurrency}
                                             onChange={
@@ -567,7 +581,7 @@ export default function MobileTopupAutomaticSection() {
                                                 <Listbox.Button className="w-full text-sm text-gray-700 flex justify-between items-center px-3 py-1 bg-white rounded">
                                                     <span>
                                                         {selectedCurrency?.code ||
-                                                            "Select"}
+                                                            t("select")}
                                                     </span>
                                                     <ChevronUpDownIcon className="w-4 h-4 text-gray-400" />
                                                 </Listbox.Button>
@@ -608,13 +622,14 @@ export default function MobileTopupAutomaticSection() {
                                     </div>
                                 </div>
                                 <p className="text-xs text-gray-500 mt-1">
-                                    Limit: {limitText}
+                                    {t("limit")}:{" "}
+                                    <span dir="ltr">{limitText}</span>
                                 </p>
                             </div>
                         )}
                     </div>
                     <Button
-                        title={loading ? "Processing..." : "Recharge Now"}
+                        title={loading ? t("processing") : t("rechargeNow")}
                         variant="primary"
                         size="md"
                         className="w-full"
@@ -631,43 +646,43 @@ export default function MobileTopupAutomaticSection() {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
-                        Preview
+                        {t("preview")}
                     </h5>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Entered Amount</span>
+                            <span>{t("enteredAmount")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span dir="ltr" className="font-medium text-gray-800">
                             {amount || "0.00"} {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
-                            <span>Fees & Charges</span>
+                            <span>{t("feesAndCharges")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {feesCalculation.totalFees} {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <BanknotesIcon className="w-5 h-5 text-emerald-500" />
-                            <span>Will get</span>
+                            <span>{t("willGet")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {feesCalculation.willGet}{" "}
                             {operatorInfo?.destinationCurrencyCode ||
                                 selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between border-t pt-3 font-semibold text-gray-800">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-2">
                             <WalletIcon className="w-5 h-5 text-indigo-600" />
-                            <span>Total Payable</span>
+                            <span>{t("totalPayable")}</span>
                         </div>
-                        <span>
+                        <span dir="ltr">
                             {feesCalculation.totalPayable}{" "}
                             {selectedCurrency?.code}
                         </span>
@@ -677,60 +692,60 @@ export default function MobileTopupAutomaticSection() {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12">
                 <div className="bg-[#F9FAFB] p-5 rounded-xl border border-gray-200 space-y-4 text-sm shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
-                        Limit Information
+                        {t("limitInformation")}
                     </h5>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowsUpDownIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Transaction Limit</span>
+                            <span>{t("transactionLimit")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span dir="ltr" className="font-medium text-gray-800">
                             {limitText}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CalendarDaysIcon className="w-5 h-5 text-blue-500" />
-                            <span>Daily Limit</span>
+                            <span>{t("dailyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {limitsCalculation.dailyLimit}{" "}
                             {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-violet-500" />
-                            <span>Monthly Limit</span>
+                            <span>{t("monthlyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {limitsCalculation.monthlyLimit}{" "}
                             {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CalendarDaysIcon className="w-5 h-5 text-yellow-500" />
-                            <span>Daily Remaining Limit</span>
+                            <span>{t("dailyRemainingLimit")}</span>
                         </div>
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span dir="ltr" className="text-gray-800">
                                 {limitsCalculation?.remainingDailyLimit}{" "}
                                 {selectedCurrency?.code}
                             </span>
                         )}
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-yellow-500" />
-                            <span>Monthly Remaining Limit</span>
+                            <span>{t("monthlyRemainingLimit")}</span>
                         </div>
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span dir="ltr" className="text-gray-800">
                                 {limitsCalculation?.remainingMonthlyLimit}{" "}
                                 {selectedCurrency?.code}
                             </span>

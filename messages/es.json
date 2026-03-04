@@ -719,6 +719,32 @@
                     "monthlyLimit": "Límite mensual",
                     "dailyRemainingLimit": "Límite diario restante",
                     "monthlyRemainingLimit": "Límite mensual restante"
+                },
+                "globalTopup": {
+                    "exchangeRate": "Tipo de cambio",
+                    "availableBalance": "Saldo disponible",
+                    "charge": "Carga",
+                    "country": "País",
+                    "selectCountry": "Seleccionar país",
+                    "mobileNumber": "Número de teléfono",
+                    "enterNumber": "Ingresar número...",
+                    "amount": "Monto",
+                    "enterAmount": "Ingresar monto...",
+                    "select": "Seleccionar",
+                    "limit": "Límite",
+                    "processing": "Procesando...",
+                    "rechargeNow": "Recargar ahora",
+                    "preview": "Vista previa",
+                    "enteredAmount": "Monto ingresado",
+                    "feesAndCharges": "Tarifas y cargos",
+                    "willGet": "Obtendrá",
+                    "totalPayable": "Total a pagar",
+                    "limitInformation": "Información de límite",
+                    "transactionLimit": "Límite de transacción",
+                    "dailyLimit": "Límite diario",
+                    "monthlyLimit": "Límite mensual",
+                    "dailyRemainingLimit": "Límite diario restante",
+                    "monthlyRemainingLimit": "Límite mensual restante"
                 }
             }
         },

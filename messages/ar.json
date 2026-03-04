@@ -719,6 +719,32 @@
                     "monthlyLimit": "الحد الشهري",
                     "dailyRemainingLimit": "الحد اليومي المتبقي",
                     "monthlyRemainingLimit": "الحد الشهري المتبقي"
+                },
+                "globalTopup": {
+                    "exchangeRate": "سعر الصرف",
+                    "availableBalance": "الرصيد المتاح",
+                    "charge": "الرسوم",
+                    "country": "بلد",
+                    "selectCountry": "حدد الدولة",
+                    "mobileNumber": "رقم الجوال",
+                    "enterNumber": "أدخل الرقم...",
+                    "amount": "المبلغ",
+                    "enterAmount": "أدخل المبلغ...",
+                    "select": "تحديد",
+                    "limit": "الحد",
+                    "processing": "جاري المعالجة...",
+                    "rechargeNow": "إعادة الشحن الآن",
+                    "preview": "معاينة",
+                    "enteredAmount": "المبلغ المدخل",
+                    "feesAndCharges": "الرسوم والمصاريف",
+                    "willGet": "سوف تحصل على",
+                    "totalPayable": "إجمالي المستحق",
+                    "limitInformation": "معلومات الحد",
+                    "transactionLimit": "حد المعاملة",
+                    "dailyLimit": "الحد اليومي",
+                    "monthlyLimit": "الحد الشهري",
+                    "dailyRemainingLimit": "الحد اليومي المتبقي",
+                    "monthlyRemainingLimit": "الحد الشهري المتبقي"
                 }
             }
         },

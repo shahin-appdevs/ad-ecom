@@ -719,6 +719,32 @@
                     "monthlyLimit": "মাসিক সীমা",
                     "dailyRemainingLimit": "দৈনিক অবশিষ্ট সীমা",
                     "monthlyRemainingLimit": "মাসিক অবশিষ্ট সীমা"
+                },
+                "globalTopup": {
+                    "exchangeRate": "বিনিময় হার",
+                    "availableBalance": "বর্তমান ব্যালেন্স",
+                    "charge": "চার্জ",
+                    "country": "দেশ",
+                    "selectCountry": "দেশ নির্বাচন করুন",
+                    "mobileNumber": "মোবাইল নম্বর",
+                    "enterNumber": "নম্বর লিখুন...",
+                    "amount": "পরিমাণ",
+                    "enterAmount": "পরিমাণ লিখুন...",
+                    "select": "নির্বাচন করুন",
+                    "limit": "সীমা",
+                    "processing": "প্রক্রিয়াকরণ...",
+                    "rechargeNow": "রিচার্জ করুন",
+                    "preview": "প্রিভিউ",
+                    "enteredAmount": "প্রদত্ত পরিমাণ",
+                    "feesAndCharges": "ফি এবং চার্জ",
+                    "willGet": "আপনি পাবেন",
+                    "totalPayable": "মোট ব্যবহারযোগ্য",
+                    "limitInformation": "সীমা তথ্য",
+                    "transactionLimit": "লেনদেনের সীমা",
+                    "dailyLimit": "দৈনিক সীমা",
+                    "monthlyLimit": "মাসিক সীমা",
+                    "dailyRemainingLimit": "দৈনিক অবশিষ্ট সীমা",
+                    "monthlyRemainingLimit": "মাসিক অবশিষ্ট সীমা"
                 }
             }
         },
