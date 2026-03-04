@@ -797,6 +797,27 @@
                 "trackingCopied": "ট্র্যাকিং লিঙ্ক কপি করা হয়েছে!"
             }
         },
+        "security": {
+            "2faSecurity": {
+                "setupTitle": "2FA সেটআপ করুন",
+                "authenticatorLabel": "টু ফ্যাক্টর অথেন্টিকেটর",
+                "enabled": "সক্রিয়",
+                "disable": "নিষ্ক্রিয় করুন",
+                "enable": "সক্রিয় করুন",
+                "downloadAppTitle": "Google Authenticator অ্যাপ ডাউনলোড করুন",
+                "downloadAppDesc": "Google Authenticator হল Google-এর একটি পণ্য-ভিত্তিক প্রমাণীকরণকারী যা দুই-ধাপ যাচাইকরণ পরিষেবাগুলি কার্যকর করে।",
+                "downloadButton": "অ্যাপ ডাউনলোড করুন",
+                "confirmModalTitle": "টু ফ্যাক্টর নিশ্চিত করুন",
+                "confirmEnableDesc": "আপনি কি নিশ্চিত যে আপনি ২-ফ্যাক্টর প্রমাণীকরণ (Google দ্বারা চালিত) সক্রিয় করতে চান?",
+                "confirmDisableDesc": "আপনি কি নিশ্চিত যে আপনি ২-ফ্যাক্টর প্রমাণীকরণ (Google দ্বারা চালিত) নিষ্ক্রিয় করতে চান?",
+                "cancel": "বাতিল",
+                "enabling": "সক্রিয় করা হচ্ছে...",
+                "disabling": "নিষ্ক্রিয় করা হচ্ছে...",
+                "successEnable": "2FA সফলভাবে সক্রিয় হয়েছে!",
+                "failedEnable": "2FA সক্রিয় করতে ব্যর্থ হয়েছে",
+                "somethingWrong": "কিছু ভুল হয়েছে"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "আমার ব্যালেন্স",

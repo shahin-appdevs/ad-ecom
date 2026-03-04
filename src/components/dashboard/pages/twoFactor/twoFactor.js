@@ -10,6 +10,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { Dialog, Transition } from "@headlessui/react";
+import { useTranslations } from "next-intl";
 
 // Images
 import authenticator from "@public/images/security/authenticator.png";
@@ -22,6 +23,7 @@ export default function TwoFactorSection() {
     const [isGoogle2faModalOpen, setIsGoogle2faModalOpen] = useState(false);
     const [qrStatus, setQrStatus] = useState(0);
     const [isUpdated, setIsUpdated] = useState(false);
+    const t = useTranslations("Dashboard.security.2faSecurity");
 
     const handleCopy = (e) => {
         e.preventDefault();
@@ -54,7 +56,7 @@ export default function TwoFactorSection() {
             } catch (error) {
                 toast.error(
                     error?.response?.data?.message?.error?.[0] ||
-                        "Something went wrong",
+                        t("somethingWrong"),
                 );
             } finally {
                 setLoading(false);
@@ -68,16 +70,16 @@ export default function TwoFactorSection() {
         try {
             const response = await submitGoogle2faAPI();
             if (response?.data) {
-                toast.success("2FA enabled successfully!");
+                toast.success(t("successEnable"));
                 setIsGoogle2faModalOpen(false);
                 setIsUpdated(!isUpdated);
             } else {
-                toast.error(response.data?.message || "Failed to enable 2FA");
+                toast.error(response.data?.message || t("failedEnable"));
             }
         } catch (error) {
             toast.error(
                 error?.response?.data?.message?.error?.[0] ||
-                    "Something went wrong",
+                    t("somethingWrong"),
             );
         } finally {
             setLoading(false);
@@ -105,7 +107,9 @@ export default function TwoFactorSection() {
 
                     {!loading && (
                         <div className="flex items-center justify-between mb-4">
-                            <h2 className="text-lg font-semibold">Setup 2FA</h2>
+                            <h2 className="text-lg font-semibold">
+                                {t("setupTitle")}
+                            </h2>
                         </div>
                     )}
 
@@ -116,10 +120,10 @@ export default function TwoFactorSection() {
                     >
                         <div className="mb-4">
                             <label className="font-medium block mb-2">
-                                Two Factor Authenticator{" "}
+                                {t("authenticatorLabel")}{" "}
                                 {qrStatus === 1 && (
                                     <span className="text-green-500 px-2 inline-block py-[2px] rounded-full bg-green-50 border border-green-500 ms-2 text-xs">
-                                        Enabled
+                                        {t("enabled")}
                                     </span>
                                 )}
                             </label>
@@ -150,7 +154,7 @@ export default function TwoFactorSection() {
 
                         {qrStatus === 1 ? (
                             <Button
-                                title="Disable"
+                                title={t("disable")}
                                 // variant="secondary"
                                 size="md"
                                 className="w-full bg-yellow-500 hover:bg-yellow-400 text-neutral-800"
@@ -158,7 +162,7 @@ export default function TwoFactorSection() {
                             />
                         ) : (
                             <Button
-                                title="Enable"
+                                title={t("enable")}
                                 variant="primary"
                                 size="md"
                                 className="w-full"
@@ -169,11 +173,8 @@ export default function TwoFactorSection() {
                 </div>
 
                 <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-6">
-                    <h5 className="mb-2">Download Google Authenticator App</h5>
-                    <p className="font-medium">
-                        Google Authenticator is a product-based authenticator by
-                        Google that executes two-step verification services.
-                    </p>
+                    <h5 className="mb-2">{t("downloadAppTitle")}</h5>
+                    <p className="font-medium">{t("downloadAppDesc")}</p>
                     <div className="flex justify-center bg-white p-4 shadow-primary__shadow my-6">
                         <Image
                             src={authenticator}
@@ -185,7 +186,7 @@ export default function TwoFactorSection() {
                     </div>
                     <Button
                         href="https://play.google.com/store/apps"
-                        title="Download App"
+                        title={t("downloadButton")}
                         variant="primary"
                         size="md"
                         className="w-full"
@@ -227,20 +228,14 @@ export default function TwoFactorSection() {
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Confirm Two Factor
+                                        {t("confirmModalTitle")}
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         {qrStatus ? (
-                                            <p>
-                                                Are you sure you want to disable
-                                                2-factor authentication (Powered
-                                                by Google)?
-                                            </p>
+                                            <p>{t("confirmDisableDesc")}</p>
                                         ) : (
                                             <p className="text-sm text-gray-500">
-                                                Are you sure you want to enable
-                                                2-factor authentication (Powered
-                                                by Google)?
+                                                {t("confirmEnableDesc")}
                                             </p>
                                         )}
                                     </div>
@@ -252,7 +247,7 @@ export default function TwoFactorSection() {
                                                 setIsGoogle2faModalOpen(false)
                                             }
                                         >
-                                            Cancel
+                                            {t("cancel")}
                                         </button>
                                         {qrStatus ? (
                                             <button
@@ -262,8 +257,8 @@ export default function TwoFactorSection() {
                                                 disabled={loading}
                                             >
                                                 {loading
-                                                    ? "Disabling..."
-                                                    : "Disable"}
+                                                    ? t("disabling")
+                                                    : t("disable")}
                                             </button>
                                         ) : (
                                             <button
@@ -273,8 +268,8 @@ export default function TwoFactorSection() {
                                                 disabled={loading}
                                             >
                                                 {loading
-                                                    ? "Enabling..."
-                                                    : "Enable"}
+                                                    ? t("enabling")
+                                                    : t("enable")}
                                             </button>
                                         )}
                                     </div>

@@ -797,6 +797,27 @@
                 "trackingCopied": "¡Enlace de seguimiento copiado!"
             }
         },
+        "security": {
+            "2faSecurity": {
+                "setupTitle": "Configurar 2FA",
+                "authenticatorLabel": "Autenticador de dos factores",
+                "enabled": "Habilitado",
+                "disable": "Deshabilitar",
+                "enable": "Habilitar",
+                "downloadAppTitle": "Descargar la aplicación Google Authenticator",
+                "downloadAppDesc": "Google Authenticator es un autenticador basado en productos de Google que ejecuta servicios de verificación en dos pasos.",
+                "downloadButton": "Descargar aplicación",
+                "confirmModalTitle": "Confirmar dos factores",
+                "confirmEnableDesc": "¿Está seguro de que desea habilitar la autenticación de 2 factores (con tecnología de Google)?",
+                "confirmDisableDesc": "¿Está seguro de que desea deshabilitar la autenticación de 2 factores (con tecnología de Google)?",
+                "cancel": "Cancelar",
+                "enabling": "Habilitando...",
+                "disabling": "Deshabilitando...",
+                "successEnable": "¡2FA habilitado con éxito!",
+                "failedEnable": "Error al habilitar 2FA",
+                "somethingWrong": "Algo salió mal"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "Mi saldo",

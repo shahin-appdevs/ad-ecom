@@ -797,6 +797,27 @@
                 "trackingCopied": "Tracking link copied!"
             }
         },
+        "security": {
+            "2faSecurity": {
+                "setupTitle": "Setup 2FA",
+                "authenticatorLabel": "Two Factor Authenticator",
+                "enabled": "Enabled",
+                "disable": "Disable",
+                "enable": "Enable",
+                "downloadAppTitle": "Download Google Authenticator App",
+                "downloadAppDesc": "Google Authenticator is a product-based authenticator by Google that executes two-step verification services.",
+                "downloadButton": "Download App",
+                "confirmModalTitle": "Confirm Two Factor",
+                "confirmEnableDesc": "Are you sure you want to enable 2-factor authentication (Powered by Google)?",
+                "confirmDisableDesc": "Are you sure you want to disable 2-factor authentication (Powered by Google)?",
+                "cancel": "Cancel",
+                "enabling": "Enabling...",
+                "disabling": "Disabling...",
+                "successEnable": "2FA enabled successfully!",
+                "failedEnable": "Failed to enable 2FA",
+                "somethingWrong": "Something went wrong"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "My Balance",

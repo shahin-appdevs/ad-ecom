@@ -797,6 +797,27 @@
                 "trackingCopied": "تم نسخ رابط التتبع!"
             }
         },
+        "security": {
+            "2faSecurity": {
+                "setupTitle": "إعداد المصادقة الثنائية",
+                "authenticatorLabel": "المصادقة الثنائية",
+                "enabled": "مفعّل",
+                "disable": "تعطيل",
+                "enable": "تفعيل",
+                "downloadAppTitle": "تحميل تطبيق Google Authenticator",
+                "downloadAppDesc": "Google Authenticator هو تطبيق مصادقة من Google يقوم بتنفيذ خدمات التحقق بخطوتين.",
+                "downloadButton": "تحميل التطبيق",
+                "confirmModalTitle": "تأكيد المصادقة الثنائية",
+                "confirmEnableDesc": "هل أنت متأكد أنك تريد تفعيل المصادقة الثنائية (بدعم من Google)؟",
+                "confirmDisableDesc": "هل أنت متأكد أنك تريد تعطيل المصادقة الثنائية (بدعم من Google)؟",
+                "cancel": "إلغاء",
+                "enabling": "جاري التفعيل...",
+                "disabling": "جاري التعطيل...",
+                "successEnable": "تم تفعيل المصادقة الثنائية بنجاح!",
+                "failedEnable": "فشل في تفعيل المصادقة الثنائية",
+                "somethingWrong": "حدث خطأ ما"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "رصيدي",
