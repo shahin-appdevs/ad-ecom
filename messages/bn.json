@@ -692,7 +692,34 @@
                 "currentBalance": "বর্তমান ব্যালেন্স",
                 "status": "স্ট্যাটাস",
                 "timeAndDate": "সময় এবং তারিখ",
-                "noTransactions": "কোন মোবাইল টপআপ ট্রানজেকশন পাওয়া যায়নি"
+                "noTransactions": "কোন মোবাইল টপআপ ট্রানজেকশন পাওয়া যায়নি",
+                "localTopup": {
+                    "exchangeRate": "বিনিময় হার",
+                    "availableBalance": "বর্তমান ব্যালেন্স",
+                    "charge": "চার্জ",
+                    "operator": "অপারেটর",
+                    "selectOperator": "অপারেটর নির্বাচন করুন",
+                    "type": "ধরন",
+                    "selectType": "অপারেটরের ধরন নির্বাচন করুন",
+                    "mobileNumber": "মোবাইল নম্বর",
+                    "enterMobileNumber": "মোবাইল নম্বর লিখুন...",
+                    "amount": "পরিমাণ",
+                    "enterAmount": "পরিমাণ লিখুন...",
+                    "limit": "সীমা",
+                    "processing": "প্রক্রিয়াকরণ...",
+                    "rechargeNow": "রিচার্জ করুন",
+                    "preview": "প্রিভিউ",
+                    "enteredAmount": "প্রদত্ত পরিমাণ",
+                    "feesAndCharges": "ফি এবং চার্জ",
+                    "willGet": "আপনি পাবেন",
+                    "totalPayable": "মোট ব্যবহারযোগ্য",
+                    "limitInformation": "সীমা তথ্য",
+                    "transactionLimit": "লেনদেনের সীমা",
+                    "dailyLimit": "দৈনিক সীমা",
+                    "monthlyLimit": "মাসিক সীমা",
+                    "dailyRemainingLimit": "দৈনিক অবশিষ্ট সীমা",
+                    "monthlyRemainingLimit": "মাসিক অবশিষ্ট সীমা"
+                }
             }
         },
         "homepage": {

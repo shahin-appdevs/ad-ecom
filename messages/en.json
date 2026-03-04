@@ -692,7 +692,34 @@
                 "currentBalance": "Current Balance",
                 "status": "status",
                 "timeAndDate": "Time & Date",
-                "noTransactions": "No mobile topup transactions found"
+                "noTransactions": "No mobile topup transactions found",
+                "localTopup": {
+                    "exchangeRate": "Exchange Rate",
+                    "availableBalance": "Available Balance",
+                    "charge": "Charge",
+                    "operator": "Operator",
+                    "selectOperator": "Select Operator",
+                    "type": "Type",
+                    "selectType": "Select Operator Type",
+                    "mobileNumber": "Mobile Number",
+                    "enterMobileNumber": "Enter Mobile Number...",
+                    "amount": "Amount",
+                    "enterAmount": "Enter Amount...",
+                    "limit": "Limit",
+                    "processing": "Processing...",
+                    "rechargeNow": "Recharge Now",
+                    "preview": "Preview",
+                    "enteredAmount": "Entered Amount",
+                    "feesAndCharges": "Fees & Charges",
+                    "willGet": "Will get",
+                    "totalPayable": "Total Payable",
+                    "limitInformation": "Limit Information",
+                    "transactionLimit": "Transaction Limit",
+                    "dailyLimit": "Daily Limit",
+                    "monthlyLimit": "Monthly Limit",
+                    "dailyRemainingLimit": "Daily Remaining Limit",
+                    "monthlyRemainingLimit": "Monthly Remaining Limit"
+                }
             }
         },
         "homepage": {

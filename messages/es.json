@@ -692,7 +692,34 @@
                 "currentBalance": "Saldo actual",
                 "status": "Estado",
                 "timeAndDate": "Hora y fecha",
-                "noTransactions": "No se encontraron transacciones de recarga móvil"
+                "noTransactions": "No se encontraron transacciones de recarga móvil",
+                "localTopup": {
+                    "exchangeRate": "Tipo de cambio",
+                    "availableBalance": "Saldo disponible",
+                    "charge": "Carga",
+                    "operator": "Operador",
+                    "selectOperator": "Seleccionar operador",
+                    "type": "Tipo",
+                    "selectType": "Seleccionar tipo de operador",
+                    "mobileNumber": "Número de teléfono",
+                    "enterMobileNumber": "Ingresar número de teléfono...",
+                    "amount": "Monto",
+                    "enterAmount": "Ingresar monto...",
+                    "limit": "Límite",
+                    "processing": "Procesando...",
+                    "rechargeNow": "Recargar ahora",
+                    "preview": "Vista previa",
+                    "enteredAmount": "Monto ingresado",
+                    "feesAndCharges": "Tarifas y cargos",
+                    "willGet": "Obtendrá",
+                    "totalPayable": "Total a pagar",
+                    "limitInformation": "Información de límite",
+                    "transactionLimit": "Límite de transacción",
+                    "dailyLimit": "Límite diario",
+                    "monthlyLimit": "Límite mensual",
+                    "dailyRemainingLimit": "Límite diario restante",
+                    "monthlyRemainingLimit": "Límite mensual restante"
+                }
             }
         },
         "homepage": {

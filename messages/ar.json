@@ -692,7 +692,34 @@
                 "currentBalance": "الرصيد الحالي",
                 "status": "الحالة",
                 "timeAndDate": "الوقت والتاريخ",
-                "noTransactions": "لم يتم العثور على معاملات شحن الجوال"
+                "noTransactions": "لم يتم العثور على معاملات شحن الجوال",
+                "localTopup": {
+                    "exchangeRate": "سعر الصرف",
+                    "availableBalance": "الرصيد المتاح",
+                    "charge": "الرسوم",
+                    "operator": "المشغل",
+                    "selectOperator": "حدد المشغل",
+                    "type": "النوع",
+                    "selectType": "حدد نوع المشغل",
+                    "mobileNumber": "رقم الجوال",
+                    "enterMobileNumber": "أدخل رقم الجوال...",
+                    "amount": "المبلغ",
+                    "enterAmount": "أدخل المبلغ...",
+                    "limit": "الحد",
+                    "processing": "جاري المعالجة...",
+                    "rechargeNow": "إعادة الشحن الآن",
+                    "preview": "معاينة",
+                    "enteredAmount": "المبلغ المدخل",
+                    "feesAndCharges": "الرسوم والمصاريف",
+                    "willGet": "سوف تحصل على",
+                    "totalPayable": "إجمالي المستحق",
+                    "limitInformation": "معلومات الحد",
+                    "transactionLimit": "حد المعاملة",
+                    "dailyLimit": "الحد اليومي",
+                    "monthlyLimit": "الحد الشهري",
+                    "dailyRemainingLimit": "الحد اليومي المتبقي",
+                    "monthlyRemainingLimit": "الحد الشهري المتبقي"
+                }
             }
         },
         "homepage": {
