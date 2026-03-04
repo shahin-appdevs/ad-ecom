@@ -816,6 +816,21 @@
                 "successEnable": "2FA enabled successfully!",
                 "failedEnable": "Failed to enable 2FA",
                 "somethingWrong": "Something went wrong"
+            },
+            "setupPin": {
+                "setupTitle": "Setup PIN",
+                "updateTitle": "Update PIN",
+                "setupLabel": "Setup PIN(Max:4)",
+                "oldPinLabel": "Old PIN",
+                "newPinLabel": "New PIN",
+                "placeholder": "Enter PIN...",
+                "oldPinPlaceholder": "Enter old PIN...",
+                "newPinPlaceholder": "Enter new PIN...",
+                "saving": "Saving...",
+                "saveChange": "Save & Change",
+                "updating": "Updating...",
+                "updateButton": "Update PIN",
+                "somethingWrong": "Something went wrong."
             }
         },
         "homepage": {

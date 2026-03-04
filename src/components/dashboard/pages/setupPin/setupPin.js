@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import {
     profiledGetAPI,
     SetupPinAPI,
@@ -15,6 +16,7 @@ export default function SetupPinSection() {
     const [status, setStatus] = useState("");
     const [apiLoading, setApiLoading] = useState(false);
     const [loading, setLoading] = useState(false);
+    const t = useTranslations("Dashboard.security.setupPin");
 
     useEffect(() => {
         const fetchProfileData = async () => {
@@ -59,7 +61,7 @@ export default function SetupPinSection() {
         } catch (error) {
             const errorMessage =
                 error?.response?.data?.message?.error?.[0] ||
-                "Something went wrong.";
+                t("somethingWrong");
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -85,13 +87,13 @@ export default function SetupPinSection() {
             ) : !status ? (
                 <div>
                     <div className="flex items-center justify-between mb-4">
-                        <h5>Setup PIN</h5>
+                        <h5>{t("setupTitle")}</h5>
                     </div>
                     <form className="space-y-5" onSubmit={handleSetupSubmit}>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="col-span-2">
                                 <label className="block text-sm font-medium mb-2">
-                                    Setup PIN(Max:4)
+                                    {t("setupLabel")}
                                 </label>
                                 <input
                                     type="text"
@@ -100,13 +102,13 @@ export default function SetupPinSection() {
                                         setPinCode(e.target.value.slice(0, 4))
                                     }
                                     className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                    placeholder="Enter PIN..."
+                                    placeholder={t("placeholder")}
                                 />
                             </div>
                         </div>
                         <Button
                             type="submit"
-                            title={loading ? "Saving..." : "Save & Change"}
+                            title={loading ? t("saving") : t("saveChange")}
                             variant="primary"
                             size="md"
                             className="w-full"
@@ -117,13 +119,13 @@ export default function SetupPinSection() {
             ) : (
                 <div>
                     <div className="flex items-center justify-between mb-4">
-                        <h5>Update PIN</h5>
+                        <h5>{t("updateTitle")}</h5>
                     </div>
                     <form className="space-y-5" onSubmit={handleUpdateSubmit}>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="col-span-2">
                                 <label className="block text-sm font-medium mb-2">
-                                    Old PIN
+                                    {t("oldPinLabel")}
                                 </label>
                                 <input
                                     type="text"
@@ -132,13 +134,13 @@ export default function SetupPinSection() {
                                         setOldPin(e.target.value.slice(0, 4))
                                     }
                                     className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                    placeholder="Enter old PIN..."
+                                    placeholder={t("oldPinPlaceholder")}
                                     maxLength={4}
                                 />
                             </div>
                             <div className="col-span-2">
                                 <label className="block text-sm font-medium mb-2">
-                                    New PIN
+                                    {t("newPinLabel")}
                                 </label>
                                 <input
                                     type="text"
@@ -147,14 +149,14 @@ export default function SetupPinSection() {
                                         setNewPin(e.target.value.slice(0, 4))
                                     }
                                     className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                    placeholder="Enter new PIN..."
+                                    placeholder={t("newPinPlaceholder")}
                                     maxLength={4}
                                 />
                             </div>
                         </div>
                         <Button
                             type="submit"
-                            title={loading ? "Updating..." : "Update PIN"}
+                            title={loading ? t("updating") : t("updateButton")}
                             variant="primary"
                             size="md"
                             className="w-full"

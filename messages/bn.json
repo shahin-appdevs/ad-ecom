@@ -816,6 +816,21 @@
                 "successEnable": "2FA সফলভাবে সক্রিয় হয়েছে!",
                 "failedEnable": "2FA সক্রিয় করতে ব্যর্থ হয়েছে",
                 "somethingWrong": "কিছু ভুল হয়েছে"
+            },
+            "setupPin": {
+                "setupTitle": "পিন সেটআপ করুন",
+                "updateTitle": "পিন আপডেট করুন",
+                "setupLabel": "পিন সেটআপ করুন (সর্বোচ্চ: ৪)",
+                "oldPinLabel": "পুরানো পিন",
+                "newPinLabel": "নতুন পিন",
+                "placeholder": "পিন লিখুন...",
+                "oldPinPlaceholder": "পুরানো পিন লিখুন...",
+                "newPinPlaceholder": "নতুন পিন লিখুন...",
+                "saving": "সংরক্ষণ করা হচ্ছে...",
+                "saveChange": "সংরক্ষণ এবং পরিবর্তন",
+                "updating": "আপডেট করা হচ্ছে...",
+                "updateButton": "পিন আপডেট করুন",
+                "somethingWrong": "কিছু ভুল হয়েছে।"
             }
         },
         "homepage": {

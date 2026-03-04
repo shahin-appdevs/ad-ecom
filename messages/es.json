@@ -816,6 +816,21 @@
                 "successEnable": "¡2FA habilitado con éxito!",
                 "failedEnable": "Error al habilitar 2FA",
                 "somethingWrong": "Algo salió mal"
+            },
+            "setupPin": {
+                "setupTitle": "Configurar PIN",
+                "updateTitle": "Actualizar PIN",
+                "setupLabel": "Configurar PIN (Máximo: 4)",
+                "oldPinLabel": "PIN antiguo",
+                "newPinLabel": "Nuevo PIN",
+                "placeholder": "Ingrese el PIN...",
+                "oldPinPlaceholder": "Ingrese el PIN antiguo...",
+                "newPinPlaceholder": "Ingrese el nuevo PIN...",
+                "saving": "Guardando...",
+                "saveChange": "Guardar y cambiar",
+                "updating": "Actualizando...",
+                "updateButton": "Actualizar PIN",
+                "somethingWrong": "Algo salió mal."
             }
         },
         "homepage": {

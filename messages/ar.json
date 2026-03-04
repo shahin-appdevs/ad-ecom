@@ -816,6 +816,21 @@
                 "successEnable": "تم تفعيل المصادقة الثنائية بنجاح!",
                 "failedEnable": "فشل في تفعيل المصادقة الثنائية",
                 "somethingWrong": "حدث خطأ ما"
+            },
+            "setupPin": {
+                "setupTitle": "إعداد رمز PIN",
+                "updateTitle": "تحديث رمز PIN",
+                "setupLabel": "إعداد رمز PIN (الحد الأقصى: 4)",
+                "oldPinLabel": "رمز PIN القديم",
+                "newPinLabel": "رمز PIN الجديد",
+                "placeholder": "أدخل رمز PIN...",
+                "oldPinPlaceholder": "أدخل رمز PIN القديم...",
+                "newPinPlaceholder": "أدخل رمز PIN الجديد...",
+                "saving": "جاري الحفظ...",
+                "saveChange": "حفظ وتغيير",
+                "updating": "جاري التحديث...",
+                "updateButton": "تحديث رمز PIN",
+                "somethingWrong": "حدث خطأ ما."
             }
         },
         "homepage": {
