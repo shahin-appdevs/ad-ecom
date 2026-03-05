@@ -924,6 +924,17 @@
                 "status": "Status",
                 "time": "Time & Date",
                 "noTransactions": "No money out transactions found"
+            },
+            "requestMoneyTransaction": {
+                "title": "Request Money Logs",
+                "trx": "Trx",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "fees": "Fees & Charges",
+                "willGet": "Will Get",
+                "status": "Status",
+                "time": "Time & Date",
+                "noTransactions": "No request money transactions found"
             }
         },
         "homepage": {

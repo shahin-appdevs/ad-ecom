@@ -924,6 +924,17 @@
                 "status": "Estado",
                 "time": "Hora y fecha",
                 "noTransactions": "No se encontraron transacciones de retiro de dinero"
+            },
+            "requestMoneyTransaction": {
+                "title": "Registros de Solicitud de Dinero",
+                "trx": "Trx",
+                "requestAmount": "Monto solicitado",
+                "payable": "Pagadero",
+                "fees": "Tasas y cargos",
+                "willGet": "Recibirá",
+                "status": "Estado",
+                "time": "Hora y fecha",
+                "noTransactions": "No se encontraron transacciones de solicitud de dinero"
             }
         },
         "homepage": {
