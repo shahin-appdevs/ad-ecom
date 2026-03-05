@@ -1029,6 +1029,19 @@
                 "status": "Status",
                 "timeDate": "Time & Date",
                 "noTransactions": "No affiliate plan transactions found"
+            },
+            "virtualCard": {
+                "title": "Virtual Card Logs",
+                "trxId": "Trx Id",
+                "transactionType": "Transaction Type",
+                "exchangeRate": "Exchange Rate",
+                "feeCharge": "Fee/Charge",
+                "cardAmount": "Card Amount",
+                "cardNumber": "Card Number",
+                "cardBalance": "Card Balance",
+                "timeDate": "Time & Date",
+                "status": "Status",
+                "noTransactions": "No transaction found"
             }
         },
         "homepage": {

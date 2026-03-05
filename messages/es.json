@@ -1029,6 +1029,19 @@
                 "status": "Estado",
                 "timeDate": "Fecha y Hora",
                 "noTransactions": "No se encontraron transacciones de plan de afiliados"
+            },
+            "virtualCard": {
+                "title": "Registros de Tarjeta Virtual",
+                "trxId": "ID de Transacción",
+                "transactionType": "Tipo de Transacción",
+                "exchangeRate": "Tasa de Cambio",
+                "feeCharge": "Tarifa/Cargo",
+                "cardAmount": "Monto de la Tarjeta",
+                "cardNumber": "Número de Tarjeta",
+                "cardBalance": "Saldo de la Tarjeta",
+                "timeDate": "Fecha y Hora",
+                "status": "Estado",
+                "noTransactions": "No se encontró ninguna transacción"
             }
         },
         "homepage": {

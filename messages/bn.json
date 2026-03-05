@@ -1029,6 +1029,19 @@
                 "status": "স্ট্যাটাস",
                 "timeDate": "সময় ও তারিখ",
                 "noTransactions": "কোনো অ্যাফিলিয়েট প্ল্যান লেনদেন পাওয়া যায়নি"
+            },
+            "virtualCard": {
+                "title": "ভার্চুয়াল কার্ড লগ",
+                "trxId": "ট্রানজেকশন আইডি",
+                "transactionType": "লেনদেনের ধরন",
+                "exchangeRate": "বিনিময় হার",
+                "feeCharge": "ফি/চার্জ",
+                "cardAmount": "কার্ডের পরিমাণ",
+                "cardNumber": "কার্ড নম্বর",
+                "cardBalance": "কার্ড ব্যালেন্স",
+                "timeDate": "সময় ও তারিখ",
+                "status": "স্ট্যাটাস",
+                "noTransactions": "কোনো লেনদেন পাওয়া যায়নি"
             }
         },
         "homepage": {

@@ -1029,6 +1029,19 @@
                 "status": "الحالة",
                 "timeDate": "التاريخ والوقت",
                 "noTransactions": "لم يتم العثور على معاملات خطة التابعين"
+            },
+            "virtualCard": {
+                "title": "سجلات البطاقة الافتراضية",
+                "trxId": "معرف المعاملة",
+                "transactionType": "نوع المعاملة",
+                "exchangeRate": "سعر الصرف",
+                "feeCharge": "الرسوم/التكاليف",
+                "cardAmount": "مبلغ البطاقة",
+                "cardNumber": "رقم البطاقة",
+                "cardBalance": "رصيد البطاقة",
+                "timeDate": "التاريخ والوقت",
+                "status": "الحالة",
+                "noTransactions": "لم يتم العثور على أي معاملة"
             }
         },
         "homepage": {
