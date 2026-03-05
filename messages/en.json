@@ -885,6 +885,19 @@
                 "status": "Status",
                 "time": "Time & Date",
                 "noTransactions": "No exchange transactions found"
+            },
+            "sendMoneyTransaction": {
+                "title": "Send Money Logs",
+                "trx": "Trx",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "rate": "Exchange Rate",
+                "fees": "Fees & Charges",
+                "recipientReceived": "Recipient Received",
+                "balance": "Current Balance",
+                "status": "Status",
+                "time": "Time & Date",
+                "noTransactions": "No send money transactions found"
             }
         },
         "homepage": {
