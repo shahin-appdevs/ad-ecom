@@ -1017,6 +1017,18 @@
                 "status": "Estado",
                 "timeDate": "Fecha y Hora",
                 "noTransactions": "No se encontraron transacciones de bonos por referidos"
+            },
+            "affiliatePlan": {
+                "title": "Registros de Plan de Afiliados",
+                "trx": "Trx",
+                "transactionType": "Tipo de Transacción",
+                "attribute": "Atributo",
+                "requestAmount": "Monto Solicitado",
+                "payable": "Pagable",
+                "currentBalance": "Saldo Actual",
+                "status": "Estado",
+                "timeDate": "Fecha y Hora",
+                "noTransactions": "No se encontraron transacciones de plan de afiliados"
             }
         },
         "homepage": {

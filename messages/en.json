@@ -1017,6 +1017,18 @@
                 "status": "Status",
                 "timeDate": "Time & Date",
                 "noTransactions": "No referral bonus transactions found"
+            },
+            "affiliatePlan": {
+                "title": "Affiliate Plan Logs",
+                "trx": "Trx",
+                "transactionType": "Transaction Type",
+                "attribute": "Attribute",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "currentBalance": "Current Balance",
+                "status": "Status",
+                "timeDate": "Time & Date",
+                "noTransactions": "No affiliate plan transactions found"
             }
         },
         "homepage": {

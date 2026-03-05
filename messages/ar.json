@@ -1017,6 +1017,18 @@
                 "status": "الحالة",
                 "timeDate": "التاريخ والوقت",
                 "noTransactions": "لم يتم العثور على معاملات مكافآت الإحالة"
+            },
+            "affiliatePlan": {
+                "title": "سجلات خطة التابعين",
+                "trx": "المعاملة",
+                "transactionType": "نوع المعاملة",
+                "attribute": "السمة",
+                "requestAmount": "المبلغ المطلوب",
+                "payable": "المبلغ المستحق",
+                "currentBalance": "الرصيد الحالي",
+                "status": "الحالة",
+                "timeDate": "التاريخ والوقت",
+                "noTransactions": "لم يتم العثور على معاملات خطة التابعين"
             }
         },
         "homepage": {
