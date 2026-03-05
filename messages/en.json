@@ -859,6 +859,19 @@
                 "status": "Status",
                 "dateTime": "Time & Date",
                 "noData": "No add money transactions found"
+            },
+            "withdrawTransaction": {
+                "title": "Withdraw Logs",
+                "trx": "Trx",
+                "gateway": "Gateway",
+                "amount": "Request Amount",
+                "payable": "Payable",
+                "rate": "Exchange Rate",
+                "fees": "Fees & Charges",
+                "balance": "Current Balance",
+                "status": "Status",
+                "dateTime": "Time & Date",
+                "noData": "No withdraw transactions found"
             }
         },
         "homepage": {

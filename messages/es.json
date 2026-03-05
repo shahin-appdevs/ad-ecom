@@ -859,6 +859,19 @@
                 "status": "Estado",
                 "dateTime": "Hora y fecha",
                 "noData": "No se encontraron transacciones de adición de dinero"
+            },
+            "withdrawTransaction": {
+                "title": "Registros de Retiro",
+                "trx": "Trx",
+                "gateway": "Pasarela de Retiro",
+                "amount": "Monto solicitado",
+                "payable": "Pagadero",
+                "rate": "Tipo de cambio",
+                "fees": "Tasas y cargos",
+                "balance": "Saldo actual",
+                "status": "Estado",
+                "dateTime": "Hora y fecha",
+                "noData": "No se encontraron transacciones de retiro"
             }
         },
         "homepage": {
