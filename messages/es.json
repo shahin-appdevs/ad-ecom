@@ -872,6 +872,19 @@
                 "status": "Estado",
                 "dateTime": "Hora y fecha",
                 "noData": "No se encontraron transacciones de retiro"
+            },
+            "moneyExTransaction": {
+                "title": "Registros de Cambio de Moneda",
+                "trx": "Trx",
+                "requestAmount": "Monto solicitado",
+                "payable": "Pagadero",
+                "rate": "Tipo de cambio",
+                "fees": "Tasas y cargos",
+                "exchangeAmount": "Monto de cambio",
+                "balance": "Saldo actual",
+                "status": "Estado",
+                "time": "Hora y fecha",
+                "noTransactions": "No se encontraron transacciones de cambio"
             }
         },
         "homepage": {

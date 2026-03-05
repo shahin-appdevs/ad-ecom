@@ -872,6 +872,19 @@
                 "status": "Status",
                 "dateTime": "Time & Date",
                 "noData": "No withdraw transactions found"
+            },
+            "moneyExTransaction": {
+                "title": "Money Exchange Logs",
+                "trx": "Trx",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "rate": "Exchange Rate",
+                "fees": "Fees & Charges",
+                "exchangeAmount": "Exchange Amount",
+                "balance": "Current Balance",
+                "status": "Status",
+                "time": "Time & Date",
+                "noTransactions": "No exchange transactions found"
             }
         },
         "homepage": {
