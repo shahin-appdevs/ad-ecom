@@ -833,6 +833,21 @@
                 "somethingWrong": "Algo salió mal."
             }
         },
+        "transactions": {
+            "allTransaction": {
+                "title": "Historial de transacciones",
+                "trxId": "ID de transacción",
+                "type": "Tipo",
+                "transactionType": "Tipo de transacción",
+                "amount": "Monto solicitado",
+                "payable": "Pagadero",
+                "remark": "Observación",
+                "status": "Estado",
+                "dateTime": "Hora y fecha",
+                "noData": "No se encontraron transacciones",
+                "somethingWrong": "Algo salió mal"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "Mi saldo",

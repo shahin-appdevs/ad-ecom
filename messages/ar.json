@@ -833,6 +833,21 @@
                 "somethingWrong": "حدث خطأ ما."
             }
         },
+        "transactions": {
+            "allTransaction": {
+                "title": "سجل المعاملات",
+                "trxId": "رقم العملية",
+                "type": "النوع",
+                "transactionType": "نوع العملية",
+                "amount": "المبلغ المطلوب",
+                "payable": "المبلغ المستحق",
+                "remark": "ملاحظة",
+                "status": "الحالة",
+                "dateTime": "الوقت والتاريخ",
+                "noData": "لم يتم العথুর على معاملات",
+                "somethingWrong": "حدث خطأ ما"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "رصيدي",

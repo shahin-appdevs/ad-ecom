@@ -833,6 +833,21 @@
                 "somethingWrong": "Something went wrong."
             }
         },
+        "transactions": {
+            "allTransaction": {
+                "title": "Transaction History",
+                "trxId": "Transaction ID",
+                "type": "Type",
+                "transactionType": "Transaction Type",
+                "amount": "Request Amount",
+                "payable": "Payable",
+                "remark": "Remark",
+                "status": "Status",
+                "dateTime": "Time & Date",
+                "noData": "No transactions found",
+                "somethingWrong": "Something went wrong"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "My Balance",

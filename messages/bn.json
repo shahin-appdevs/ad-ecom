@@ -833,6 +833,21 @@
                 "somethingWrong": "কিছু ভুল হয়েছে।"
             }
         },
+        "transactions": {
+            "allTransaction": {
+                "title": "লেনদেনের ইতিহাস",
+                "trxId": "লেনদেনের আইডি",
+                "type": "ধরন",
+                "transactionType": "লেনদেনের ধরন",
+                "amount": "অনুরোধকৃত পরিমাণ",
+                "payable": "প্রদেয় পরিমাণ",
+                "remark": "মন্তব্য",
+                "status": "অবস্থা",
+                "dateTime": "সময় এবং তারিখ",
+                "noData": "কোন লেনদেন পাওয়া যায়নি",
+                "somethingWrong": "কিছু ভুল হয়েছে"
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "আমার ব্যালেন্স",
