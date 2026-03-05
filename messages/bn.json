@@ -976,6 +976,21 @@
                 "status": "অবস্থা",
                 "time": "সময় এবং তারিখ",
                 "noTransactions": "কোন বিল পে লেনদেন পাওয়া যায়নি"
+            },
+            "mobileTopupTransaction": {
+                "title": "মোবাইল টপআপ লগ",
+                "trx": "ট্রানজেকশন",
+                "requestAmount": "অনুরোধের পরিমাণ",
+                "payable": "প্রদেয়",
+                "willGet": "পাবেন",
+                "topupType": "টপআপের ধরন",
+                "mobileNumber": "মোবাইল নম্বর",
+                "exchangeRate": "বিনিময় হার",
+                "fees": "ফি ও চার্জ",
+                "balance": "বর্তমান ব্যালেন্স",
+                "status": "স্ট্যাটাস",
+                "time": "সময় ও তারিখ",
+                "noTransactions": "কোনো মোবাইল টপআপ লেনদেন পাওয়া যায়নি"
             }
         },
         "homepage": {

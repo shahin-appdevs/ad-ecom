@@ -976,6 +976,21 @@
                 "status": "Status",
                 "time": "Time & Date",
                 "noTransactions": "No bill pay transactions found"
+            },
+            "mobileTopupTransaction": {
+                "title": "Mobile Topup Logs",
+                "trx": "Trx",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "willGet": "Will Get",
+                "topupType": "Topup Type",
+                "mobileNumber": "Mobile Number",
+                "exchangeRate": "Exchange Rate",
+                "fees": "Fees & Charges",
+                "balance": "Current Balance",
+                "status": "Status",
+                "time": "Time & Date",
+                "noTransactions": "No mobile topup transactions found"
             }
         },
         "homepage": {

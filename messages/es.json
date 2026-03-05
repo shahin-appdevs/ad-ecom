@@ -976,6 +976,21 @@
                 "status": "Estado",
                 "time": "Hora y fecha",
                 "noTransactions": "No se encontraron transacciones de pago de facturas"
+            },
+            "mobileTopupTransaction": {
+                "title": "Registros de Recarga Móvil",
+                "trx": "Trx",
+                "requestAmount": "Monto Solicitado",
+                "payable": "Pagable",
+                "willGet": "Recibirá",
+                "topupType": "Tipo de Recarga",
+                "mobileNumber": "Número Móvil",
+                "exchangeRate": "Tasa de Cambio",
+                "fees": "Tarifas y Cargos",
+                "balance": "Saldo Actual",
+                "status": "Estado",
+                "time": "Hora y Fecha",
+                "noTransactions": "No se encontraron transacciones de recarga móvil"
             }
         },
         "homepage": {

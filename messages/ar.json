@@ -976,6 +976,21 @@
                 "status": "الحالة",
                 "time": "الوقت والتاريخ",
                 "noTransactions": "لم يتم العثور على معاملات دفع فواتير"
+            },
+            "mobileTopupTransaction": {
+                "title": "سجلات تعبئة الرصيد المحمول",
+                "trx": "المعاملة",
+                "requestAmount": "المبلغ المطلوب",
+                "payable": "المبلغ المستحق",
+                "willGet": "سيحصل على",
+                "topupType": "نوع التعبئة",
+                "mobileNumber": "رقم الجوال",
+                "exchangeRate": "سعر الصرف",
+                "fees": "الرسوم والتكاليف",
+                "balance": "الرصيد الحالي",
+                "status": "الحالة",
+                "time": "الوقت والتاريخ",
+                "noTransactions": "لم يتم العثور على معاملات تعبئة رصيد محمول"
             }
         },
         "homepage": {
