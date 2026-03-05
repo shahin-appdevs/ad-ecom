@@ -846,6 +846,19 @@
                 "dateTime": "Hora y fecha",
                 "noData": "No se encontraron transacciones",
                 "somethingWrong": "Algo salió mal"
+            },
+            "addMoneyTransaction": {
+                "title": "Registros de adición de dinero",
+                "trx": "Trx",
+                "gateway": "Pasarela",
+                "amount": "Monto solicitado",
+                "payable": "Pagadero",
+                "rate": "Tipo de cambio",
+                "fees": "Tasas y cargos",
+                "balance": "Saldo actual",
+                "status": "Estado",
+                "dateTime": "Hora y fecha",
+                "noData": "No se encontraron transacciones de adición de dinero"
             }
         },
         "homepage": {

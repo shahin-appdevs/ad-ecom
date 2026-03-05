@@ -846,6 +846,19 @@
                 "dateTime": "Time & Date",
                 "noData": "No transactions found",
                 "somethingWrong": "Something went wrong"
+            },
+            "addMoneyTransaction": {
+                "title": "Add Money Logs",
+                "trx": "Trx",
+                "gateway": "Gateway",
+                "amount": "Request Amount",
+                "payable": "Payable",
+                "rate": "Exchange Rate",
+                "fees": "Fees & Charges",
+                "balance": "Current Balance",
+                "status": "Status",
+                "dateTime": "Time & Date",
+                "noData": "No add money transactions found"
             }
         },
         "homepage": {
