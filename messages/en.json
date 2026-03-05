@@ -898,6 +898,19 @@
                 "status": "Status",
                 "time": "Time & Date",
                 "noTransactions": "No send money transactions found"
+            },
+            "makePayTransaction": {
+                "title": "Make Payment Logs",
+                "trx": "Trx",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "rate": "Exchange Rate",
+                "fees": "Fees & Charges",
+                "recipientReceived": "Recipient Received",
+                "balance": "Current Balance",
+                "status": "Status",
+                "time": "Time & Date",
+                "noTransactions": "No make payment transactions found"
             }
         },
         "homepage": {

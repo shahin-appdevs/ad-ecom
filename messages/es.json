@@ -898,6 +898,19 @@
                 "status": "Estado",
                 "time": "Hora y fecha",
                 "noTransactions": "No se encontraron transacciones de envío de dinero"
+            },
+            "makePayTransaction": {
+                "title": "Registros de Realización de Pago",
+                "trx": "Trx",
+                "requestAmount": "Monto solicitado",
+                "payable": "Pagadero",
+                "rate": "Tipo de cambio",
+                "fees": "Tasas y cargos",
+                "recipientReceived": "Destinatario Recibido",
+                "balance": "Saldo actual",
+                "status": "Estado",
+                "time": "Hora y fecha",
+                "noTransactions": "No se encontraron transacciones de realización de pago"
             }
         },
         "homepage": {
