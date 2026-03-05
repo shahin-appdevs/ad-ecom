@@ -960,6 +960,22 @@
                 "cancel": "বাতিল",
                 "closeLink": "লিঙ্ক বন্ধ করুন",
                 "failed": "{action} পেমেন্ট লিঙ্ক করতে ব্যর্থ হয়েছে"
+            },
+            "billPayTransaction": {
+                "title": "বিল পে লগস",
+                "trx": "লেনদেনের আইডি",
+                "requestAmount": "অনুরোধকৃত পরিমাণ",
+                "payable": "প্রদেয় পরিমাণ",
+                "rate": "বিনিময় হার",
+                "billType": "বিলের ধরন",
+                "billMonth": "বিলের মাস",
+                "billNumber": "বিল নম্বর",
+                "billAmount": "বিলের পরিমাণ",
+                "fees": "ফি এবং চার্জ",
+                "balance": "বর্তমান ব্যালেন্স",
+                "status": "অবস্থা",
+                "time": "সময় এবং তারিখ",
+                "noTransactions": "কোন বিল পে লেনদেন পাওয়া যায়নি"
             }
         },
         "homepage": {

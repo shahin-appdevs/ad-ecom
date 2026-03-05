@@ -960,6 +960,22 @@
                 "cancel": "إلغاء",
                 "closeLink": "إغلاق الرابط",
                 "failed": "فشل في {action} رابط الدفع"
+            },
+            "billPayTransaction": {
+                "title": "سجلات دفع الفواتير",
+                "trx": "رقم العملية",
+                "requestAmount": "المبلغ المطلوب",
+                "payable": "مستحق الدفع",
+                "rate": "سعر الصرف",
+                "billType": "نوع الفاتورة",
+                "billMonth": "شهر الفاتورة",
+                "billNumber": "رقم الفاتورة",
+                "billAmount": "مبلغ الفاتورة",
+                "fees": "الرسوم والمصاريف",
+                "balance": "الرصيد الحالي",
+                "status": "الحالة",
+                "time": "الوقت والتاريخ",
+                "noTransactions": "لم يتم العثور على معاملات دفع فواتير"
             }
         },
         "homepage": {

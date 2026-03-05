@@ -960,6 +960,22 @@
                 "cancel": "Cancelar",
                 "closeLink": "Cerrar Enlace",
                 "failed": "Error al {action} el enlace de pago"
+            },
+            "billPayTransaction": {
+                "title": "Registros de Pago de Facturas",
+                "trx": "Trx",
+                "requestAmount": "Monto solicitado",
+                "payable": "Pagadero",
+                "rate": "Tipo de cambio",
+                "billType": "Tipo de factura",
+                "billMonth": "Mes de la factura",
+                "billNumber": "Número de factura",
+                "billAmount": "Monto de la factura",
+                "fees": "Tasas y cargos",
+                "balance": "Saldo actual",
+                "status": "Estado",
+                "time": "Hora y fecha",
+                "noTransactions": "No se encontraron transacciones de pago de facturas"
             }
         },
         "homepage": {

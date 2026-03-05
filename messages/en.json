@@ -960,6 +960,22 @@
                 "cancel": "Cancel",
                 "closeLink": "Close Link",
                 "failed": "Failed to {action} payment link"
+            },
+            "billPayTransaction": {
+                "title": "Bill Pay Logs",
+                "trx": "Trx",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "rate": "Exchange Rate",
+                "billType": "Bill Type",
+                "billMonth": "Bill Month",
+                "billNumber": "Bill Number",
+                "billAmount": "Bill Amount",
+                "fees": "Fees & Charges",
+                "balance": "Current Balance",
+                "status": "Status",
+                "time": "Time & Date",
+                "noTransactions": "No bill pay transactions found"
             }
         },
         "homepage": {
