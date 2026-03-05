@@ -935,6 +935,31 @@
                 "status": "Estado",
                 "time": "Hora y fecha",
                 "noTransactions": "No se encontraron transacciones de solicitud de dinero"
+            },
+            "paymentLinkTransaction": {
+                "title": "Registros de Enlaces de Pago",
+                "tableTitle": "Título",
+                "tableType": "Tipo",
+                "tableAmount": "Monto",
+                "tableStatus": "Estado",
+                "tableCreatedAt": "Creado en",
+                "tableAction": "Acción",
+                "noLinks": "No se encontró ningún enlace de pago",
+                "typePay": "Los clientes eligen qué pagar",
+                "typeProduct": "Productos O Suscripciones",
+                "min": "Mín",
+                "max": "Máx",
+                "unlimited": "Ilimitado",
+                "copied": "Copiado al portapapeles",
+                "edit": "Editar",
+                "activate": "Activar",
+                "close": "Cerrar",
+                "confirmTitle": "Confirmar Cambio de Estado",
+                "confirmActivate": "¿Estás seguro de que quieres activar este enlace de pago?",
+                "confirmClose": "¿Estás seguro de que quieres cerrar este enlace de pago?",
+                "cancel": "Cancelar",
+                "closeLink": "Cerrar Enlace",
+                "failed": "Error al {action} el enlace de pago"
             }
         },
         "homepage": {

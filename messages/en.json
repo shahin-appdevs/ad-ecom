@@ -935,6 +935,31 @@
                 "status": "Status",
                 "time": "Time & Date",
                 "noTransactions": "No request money transactions found"
+            },
+            "paymentLinkTransaction": {
+                "title": "Payment Links Logs",
+                "tableTitle": "Title",
+                "tableType": "Type",
+                "tableAmount": "Amount",
+                "tableStatus": "Status",
+                "tableCreatedAt": "Created At",
+                "tableAction": "Action",
+                "noLinks": "No payment link found",
+                "typePay": "Customers choose what to pay",
+                "typeProduct": "Products Or Subscriptions",
+                "min": "Min",
+                "max": "Max",
+                "unlimited": "Unlimited",
+                "copied": "Copied to clipboard",
+                "edit": "Edit",
+                "activate": "Activate",
+                "close": "Close",
+                "confirmTitle": "Confirm Status Change",
+                "confirmActivate": "Are you sure you want to activate this payment link?",
+                "confirmClose": "Are you sure you want to close this payment link?",
+                "cancel": "Cancel",
+                "closeLink": "Close Link",
+                "failed": "Failed to {action} payment link"
             }
         },
         "homepage": {

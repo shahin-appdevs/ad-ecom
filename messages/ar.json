@@ -935,6 +935,31 @@
                 "status": "الحالة",
                 "time": "الوقت والتاريخ",
                 "noTransactions": "لم يتم العثور على معاملات طلب أموال"
+            },
+            "paymentLinkTransaction": {
+                "title": "سجلات روابط الدفع",
+                "tableTitle": "العنوان",
+                "tableType": "النوع",
+                "tableAmount": "المبلغ",
+                "tableStatus": "الحالة",
+                "tableCreatedAt": "تاريخ الإنشاء",
+                "tableAction": "الإجراء",
+                "noLinks": "لم يتم العثور على رابط دفع",
+                "typePay": "العملاء يختارون ما يدفعون",
+                "typeProduct": "المنتجات أو الاشتراكات",
+                "min": "الحد الأدنى",
+                "max": "الحد الأقصى",
+                "unlimited": "غير محدود",
+                "copied": "تم النسخ إلى الحافظة",
+                "edit": "تعديل",
+                "activate": "تفعيل",
+                "close": "إغلاق",
+                "confirmTitle": "تأكيد تغيير الحالة",
+                "confirmActivate": "هل أنت متأكد أنك تريد تفعيل رابط الدفع هذا؟",
+                "confirmClose": "هل أنت متأكد أنك تريد إغلاق رابط الدفع هذا؟",
+                "cancel": "إلغاء",
+                "closeLink": "إغلاق الرابط",
+                "failed": "فشل في {action} رابط الدفع"
             }
         },
         "homepage": {
