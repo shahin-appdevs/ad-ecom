@@ -1005,6 +1005,18 @@
                 "status": "Status",
                 "timeDate": "Time & Date",
                 "noTransactions": "No point conversion transactions found"
+            },
+            "referralBonus": {
+                "title": "Referral Bonus Logs",
+                "trx": "Trx",
+                "transactionType": "Transaction Type",
+                "attribute": "Attribute",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "currentBalance": "Current Balance",
+                "status": "Status",
+                "timeDate": "Time & Date",
+                "noTransactions": "No referral bonus transactions found"
             }
         },
         "homepage": {

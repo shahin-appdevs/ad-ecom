@@ -1005,6 +1005,18 @@
                 "status": "الحالة",
                 "timeDate": "التاريخ والوقت",
                 "noTransactions": "لم يتم العثور على معاملات تحويل نقاط"
+            },
+            "referralBonus": {
+                "title": "سجلات مكافآت الإحالة",
+                "trx": "المعاملة",
+                "transactionType": "نوع المعاملة",
+                "attribute": "السمة",
+                "requestAmount": "المبلغ المطلوب",
+                "payable": "المبلغ المستحق",
+                "currentBalance": "الرصيد الحالي",
+                "status": "الحالة",
+                "timeDate": "التاريخ والوقت",
+                "noTransactions": "لم يتم العثور على معاملات مكافآت الإحالة"
             }
         },
         "homepage": {

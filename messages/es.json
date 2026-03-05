@@ -1005,6 +1005,18 @@
                 "status": "Estado",
                 "timeDate": "Fecha y Hora",
                 "noTransactions": "No se encontraron transacciones de conversión de puntos"
+            },
+            "referralBonus": {
+                "title": "Registros de Bonos por Referidos",
+                "trx": "Trx",
+                "transactionType": "Tipo de Transacción",
+                "attribute": "Atributo",
+                "requestAmount": "Monto Solicitado",
+                "payable": "Pagable",
+                "currentBalance": "Saldo Actual",
+                "status": "Estado",
+                "timeDate": "Fecha y Hora",
+                "noTransactions": "No se encontraron transacciones de bonos por referidos"
             }
         },
         "homepage": {
