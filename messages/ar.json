@@ -991,6 +991,20 @@
                 "status": "الحالة",
                 "time": "الوقت والتاريخ",
                 "noTransactions": "لم يتم العثور على معاملات تعبئة رصيد محمول"
+            },
+            "pointConversion": {
+                "title": "سجلات تحويل النقاط",
+                "trx": "المعاملة",
+                "transactionType": "نوع المعاملة",
+                "attribute": "السمة",
+                "requestPoint": "النقاط المطلوبة",
+                "requestAmount": "المبلغ المطلوب",
+                "totalCharges": "إجمالي الرسوم",
+                "willGet": "سيحصل على",
+                "currentBalance": "الرصيد الحالي",
+                "status": "الحالة",
+                "timeDate": "التاريخ والوقت",
+                "noTransactions": "لم يتم العثور على معاملات تحويل نقاط"
             }
         },
         "homepage": {

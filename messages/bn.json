@@ -991,6 +991,20 @@
                 "status": "স্ট্যাটাস",
                 "time": "সময় ও তারিখ",
                 "noTransactions": "কোনো মোবাইল টপআপ লেনদেন পাওয়া যায়নি"
+            },
+            "pointConversion": {
+                "title": "পয়েন্ট কনভার্সন লগ",
+                "trx": "ট্রানজেকশন",
+                "transactionType": "লেনদেনের ধরন",
+                "attribute": "অ্যাট্রিবিউট",
+                "requestPoint": "অনুরোধকৃত পয়েন্ট",
+                "requestAmount": "অনুরোধকৃত পরিমাণ",
+                "totalCharges": "মোট চার্জ",
+                "willGet": "পাবেন",
+                "currentBalance": "বর্তমান ব্যালেন্স",
+                "status": "স্ট্যাটাস",
+                "timeDate": "সময় ও তারিখ",
+                "noTransactions": "কোনো পয়েন্ট কনভার্সন লেনদেন পাওয়া যায়নি"
             }
         },
         "homepage": {

@@ -991,6 +991,20 @@
                 "status": "Status",
                 "time": "Time & Date",
                 "noTransactions": "No mobile topup transactions found"
+            },
+            "pointConversion": {
+                "title": "Point Conversion Logs",
+                "trx": "Trx",
+                "transactionType": "Transaction Type",
+                "attribute": "Attribute",
+                "requestPoint": "Request Point",
+                "requestAmount": "Request Amount",
+                "totalCharges": "Total Charges",
+                "willGet": "Will Get",
+                "currentBalance": "Current Balance",
+                "status": "Status",
+                "timeDate": "Time & Date",
+                "noTransactions": "No point conversion transactions found"
             }
         },
         "homepage": {

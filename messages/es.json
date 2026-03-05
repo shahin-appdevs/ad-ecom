@@ -991,6 +991,20 @@
                 "status": "Estado",
                 "time": "Hora y Fecha",
                 "noTransactions": "No se encontraron transacciones de recarga móvil"
+            },
+            "pointConversion": {
+                "title": "Registros de Conversión de Puntos",
+                "trx": "Trx",
+                "transactionType": "Tipo de Transacción",
+                "attribute": "Atributo",
+                "requestPoint": "Puntos Solicitados",
+                "requestAmount": "Monto Solicitado",
+                "totalCharges": "Cargos Totales",
+                "willGet": "Recibirá",
+                "currentBalance": "Saldo Actual",
+                "status": "Estado",
+                "timeDate": "Fecha y Hora",
+                "noTransactions": "No se encontraron transacciones de conversión de puntos"
             }
         },
         "homepage": {
