@@ -911,6 +911,19 @@
                 "status": "Status",
                 "time": "Time & Date",
                 "noTransactions": "No make payment transactions found"
+            },
+            "moneyOutTransaction": {
+                "title": "Money Out Logs",
+                "trx": "Trx",
+                "requestAmount": "Request Amount",
+                "payable": "Payable",
+                "rate": "Exchange Rate",
+                "fees": "Fees & Charges",
+                "recipientReceived": "Recipient Received",
+                "balance": "Current Balance",
+                "status": "Status",
+                "time": "Time & Date",
+                "noTransactions": "No money out transactions found"
             }
         },
         "homepage": {
