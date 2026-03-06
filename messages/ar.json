@@ -1171,6 +1171,30 @@
                 }
             }
         },
+        "cards": {
+            "giftCard": {
+                "myGiftCards": {
+                    "title": "بطاقات الهدايا الخاصة بي",
+                    "addGiftCard": "إضافة بطاقات هدايا",
+                    "noGiftCardFound": "لم يتم العثور على بطاقة هدايا",
+                    "table": {
+                        "trx": "المعاملة",
+                        "cardImage": "صورة البطاقة",
+                        "cardName": "اسم البطاقة",
+                        "receiverEmail": "بريد المستلم",
+                        "receiverPhone": "هاتف المستلم",
+                        "cardUnitPrice": "سعر الوحدة للبطاقة",
+                        "cardQuantity": "كمية البطاقات",
+                        "cardTotalPrice": "السعر الإجمالي للبطاقة",
+                        "exchangeRate": "سعر الصرف",
+                        "payableUnitPrice": "سعر الوحدة المستحق",
+                        "totalCharge": "إجمالي الرسوم",
+                        "payableAmount": "المبلغ المستحق",
+                        "cardImageAlt": "صورة بطاقة الهدية"
+                    }
+                }
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "رصيدي",

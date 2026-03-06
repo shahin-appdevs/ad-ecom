@@ -1171,6 +1171,30 @@
                 }
             }
         },
+        "cards": {
+            "giftCard": {
+                "myGiftCards": {
+                    "title": "My Gift Card",
+                    "addGiftCard": "Add Gift Cards",
+                    "noGiftCardFound": "No gift card found",
+                    "table": {
+                        "trx": "Trx",
+                        "cardImage": "Card Image",
+                        "cardName": "Card Name",
+                        "receiverEmail": "Receiver Email",
+                        "receiverPhone": "Receiver Phone",
+                        "cardUnitPrice": "Card Unit Price",
+                        "cardQuantity": "Card Quantity",
+                        "cardTotalPrice": "Card Total Price",
+                        "exchangeRate": "Exchange Rate",
+                        "payableUnitPrice": "Payable Unit Price",
+                        "totalCharge": "Total Charge",
+                        "payableAmount": "Payable Amount",
+                        "cardImageAlt": "Gift Card Image"
+                    }
+                }
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "My Balance",

@@ -1171,6 +1171,30 @@
                 }
             }
         },
+        "cards": {
+            "giftCard": {
+                "myGiftCards": {
+                    "title": "আমার গিফট কার্ড",
+                    "addGiftCard": "গিফট কার্ড যোগ করুন",
+                    "noGiftCardFound": "কোনো গিফট কার্ড পাওয়া যায়নি",
+                    "table": {
+                        "trx": "ট্রানজেকশন",
+                        "cardImage": "কার্ডের ছবি",
+                        "cardName": "কার্ডের নাম",
+                        "receiverEmail": "প্রাপকের ইমেইল",
+                        "receiverPhone": "প্রাপকের ফোন",
+                        "cardUnitPrice": "কার্ডের একক মূল্য",
+                        "cardQuantity": "কার্ডের সংখ্যা",
+                        "cardTotalPrice": "কার্ডের মোট মূল্য",
+                        "exchangeRate": "বিনিময় হার",
+                        "payableUnitPrice": "প্রদেয় একক মূল্য",
+                        "totalCharge": "মোট চার্জ",
+                        "payableAmount": "প্রদেয় পরিমাণ",
+                        "cardImageAlt": "গিফট কার্ডের ছবি"
+                    }
+                }
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "আমার ব্যালেন্স",

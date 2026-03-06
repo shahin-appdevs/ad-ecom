@@ -1171,6 +1171,30 @@
                 }
             }
         },
+        "cards": {
+            "giftCard": {
+                "myGiftCards": {
+                    "title": "Mis Tarjetas de Regalo",
+                    "addGiftCard": "Agregar Tarjetas de Regalo",
+                    "noGiftCardFound": "No se encontraron tarjetas de regalo",
+                    "table": {
+                        "trx": "Trx",
+                        "cardImage": "Imagen de la Tarjeta",
+                        "cardName": "Nombre de la Tarjeta",
+                        "receiverEmail": "Correo del Receptor",
+                        "receiverPhone": "Teléfono del Receptor",
+                        "cardUnitPrice": "Precio Unitario de la Tarjeta",
+                        "cardQuantity": "Cantidad de Tarjetas",
+                        "cardTotalPrice": "Precio Total de la Tarjeta",
+                        "exchangeRate": "Tasa de Cambio",
+                        "payableUnitPrice": "Precio Unitario a Pagar",
+                        "totalCharge": "Cargo Total",
+                        "payableAmount": "Monto a Pagar",
+                        "cardImageAlt": "Imagen de la Tarjeta de Regalo"
+                    }
+                }
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "Mi saldo",
