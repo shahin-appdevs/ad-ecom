@@ -1060,6 +1060,117 @@
                 "addGiftCard": "إضافة بطاقات هدايا"
             }
         },
+        "account": {
+            "profile": {
+                "sections": {
+                    "profileSettings": "إعدادات الملف الشخصي",
+                    "myProfileManage": "إدارة ملفي الشخصي",
+                    "changePassword": "تغيير كلمة المرور",
+                    "kycInformation": "معلومات التحقق KYC"
+                },
+                "labels": {
+                    "firstName": "الاسم الأول",
+                    "lastName": "الاسم الأخير",
+                    "name": "الاسم",
+                    "email": "البريد الإلكتروني",
+                    "phone": "الهاتف",
+                    "country": "الدولة",
+                    "division": "التقسيم",
+                    "district": "المنطقة",
+                    "upazila": "الأوبازيلا",
+                    "address": "العنوان",
+                    "gender": "الجنس",
+                    "dateOfBirth": "تاريخ الميلاد",
+                    "nidOrBirthId": "رقم الهوية الوطنية أو شهادة الميلاد",
+                    "currentPassword": "كلمة المرور الحالية",
+                    "newPassword": "كلمة المرور الجديدة",
+                    "confirmPassword": "تأكيد كلمة المرور",
+                    "kycStatus": "حالة التحقق KYC"
+                },
+                "placeholders": {
+                    "firstName": "أدخل الاسم الأول...",
+                    "lastName": "أدخل الاسم الأخير...",
+                    "name": "أدخل الاسم الكامل...",
+                    "email": "أدخل البريد الإلكتروني...",
+                    "phone": "أدخل رقم الهاتف...",
+                    "country": "أدخل الدولة...",
+                    "address": "أدخل العنوان التفصيلي...",
+                    "password": "أدخل كلمة المرور...",
+                    "select": "اختر",
+                    "selectGender": "اختر الجنس",
+                    "nidOrBirthId": "أدخل رقم الهوية الوطنية أو شهادة الميلاد..."
+                },
+                "gender": {
+                    "male": "ذكر",
+                    "female": "أنثى",
+                    "other": "آخر"
+                },
+                "buttons": {
+                    "update": "تحديث",
+                    "updating": "جاري التحديث...",
+                    "change": "تغيير",
+                    "changing": "جاري التغيير...",
+                    "setupPin": "إعداد الرقم السري",
+                    "applyForReseller": "التقدم لتصبح بائعًا",
+                    "deleteAccount": "حذف الحساب",
+                    "deleting": "جاري الحذف...",
+                    "cancel": "إلغاء",
+                    "submitVerification": "إرسال التحقق",
+                    "submitting": "جاري الإرسال...",
+                    "remove": "إزالة"
+                },
+                "kyc": {
+                    "unverified": "غير موثق",
+                    "verified": "موثق",
+                    "pending": "قيد الانتظار",
+                    "rejected": "مرفوض",
+                    "unverifiedDesc": "يرجى إكمال التحقق KYC",
+                    "verifiedDesc": "تم التحقق من KYC الخاص بك",
+                    "pendingDesc": "KYC الخاص بك قيد المراجعة",
+                    "rejectedDesc": "تم رفض KYC الخاص بك. يرجى إعادة التقديم.",
+                    "verifiedMessage": "اكتمل التحقق KYC الخاص بك.",
+                    "noActionNeeded": "لا يلزم اتخاذ أي إجراء إضافي في الوقت الحالي.",
+                    "idVerification": "التحقق من الهوية",
+                    "uploadInstruction": "يرجى رفع صور واضحة لكلا جانبي وثيقة الهوية الحكومية. الصيغ المقبولة: JPG، PNG، SVG، WEBP (الحد الأقصى 10 ميجابايت لكل ملف).",
+                    "frontOfId": "الوجه الأمامي للهوية",
+                    "backOfId": "الوجه الخلفي للهوية",
+                    "dragOrClick": "اسحب وأفلت أو انقر للتحميل",
+                    "acceptedFormats": "الصيغ المقبولة: JPG، PNG، SVG، WEBP (الحد الأقصى 10 ميجابايت)",
+                    "errors": {
+                        "frontRequired": "يرجى رفع الوجه الأمامي للهوية",
+                        "backRequired": "يرجى رفع الوجه الخلفي للهوية",
+                        "fileTooLarge": "الملف {name} كبير جدًا (الحد الأقصى 10 ميجابايت)",
+                        "invalidFileType": "نوع الملف غير صالح لـ {name} (يُسمح فقط بـ JPG، PNG، SVG، WEBP)",
+                        "fileRejected": "تم رفض الملف {name}: {message}",
+                        "fixErrors": "يرجى تصحيح الأخطاء في التقديم",
+                        "submitFailed": "فشل تقديم KYC"
+                    },
+                    "successSubmitted": "تم تقديم وثائق KYC بنجاح! سيتم تحديث الحالة قريبًا."
+                },
+                "success": {
+                    "profileUpdated": "تم تحديث الملف الشخصي بنجاح",
+                    "accountDeleted": "تم حذف الملف الشخصي بنجاح"
+                },
+                "errors": {
+                    "notVerified": "أنت غير موثق",
+                    "formErrors": "يرجى تصحيح الأخطاء في النموذج",
+                    "profileFetch": "فشل تحميل بيانات الملف الشخصي",
+                    "profileUpdate": "فشل تحديث الملف الشخصي",
+                    "passwordUpdate": "فشل تحديث كلمة المرور",
+                    "kycFetch": "فشل تحميل معلومات KYC",
+                    "serverError": "لم يستجب الخادم"
+                },
+                "modals": {
+                    "deleteAccount": {
+                        "title": "هل أنت متأكد من حذف الحساب؟",
+                        "description": "إذا لم تكن تنوي استخدام “JARA B2B” مرة أخرى وترغب في حذف حسابك، يمكننا التعامل مع ذلك نيابة عنك. ضع في اعتبارك أنك لن تتمكن من إعادة تفعيل الحساب أو استرجاع أي محتوى أو معلومات أضفتها. إذا كنت لا تزال ترغب في حذف الحساب، انقر على “حذف الحساب”."
+                    }
+                },
+                "alt": {
+                    "userAvatar": "صورة المستخدم"
+                }
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "رصيدي",

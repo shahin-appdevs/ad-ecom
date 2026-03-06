@@ -1060,6 +1060,117 @@
                 "addGiftCard": "Add Gift Cards"
             }
         },
+        "account": {
+            "profile": {
+                "sections": {
+                    "profileSettings": "Profile Settings",
+                    "myProfileManage": "My Profile Manage",
+                    "changePassword": "Change Password",
+                    "kycInformation": "KYC Information"
+                },
+                "labels": {
+                    "firstName": "First Name",
+                    "lastName": "Last Name",
+                    "name": "Name",
+                    "email": "Email",
+                    "phone": "Phone",
+                    "country": "Country",
+                    "division": "Division",
+                    "district": "District",
+                    "upazila": "Upazila",
+                    "address": "Address",
+                    "gender": "Gender",
+                    "dateOfBirth": "Date Of Birth",
+                    "nidOrBirthId": "NID or Birth ID",
+                    "currentPassword": "Current Password",
+                    "newPassword": "New Password",
+                    "confirmPassword": "Confirm Password",
+                    "kycStatus": "KYC Status"
+                },
+                "placeholders": {
+                    "firstName": "Enter Firstname...",
+                    "lastName": "Enter Lastname...",
+                    "name": "Enter Name...",
+                    "email": "Enter Email...",
+                    "phone": "Enter Phone...",
+                    "country": "Enter Country...",
+                    "address": "Enter Address...",
+                    "password": "Enter Password...",
+                    "select": "Select",
+                    "selectGender": "Select Gender",
+                    "nidOrBirthId": "Enter NID or Birth ID..."
+                },
+                "gender": {
+                    "male": "Male",
+                    "female": "Female",
+                    "other": "Other"
+                },
+                "buttons": {
+                    "update": "Update",
+                    "updating": "Updating...",
+                    "change": "Change",
+                    "changing": "Changing...",
+                    "setupPin": "Setup PIN",
+                    "applyForReseller": "Apply for Reseller",
+                    "deleteAccount": "Delete Account",
+                    "deleting": "Deleting...",
+                    "cancel": "Cancel",
+                    "submitVerification": "Submit Verification",
+                    "submitting": "Submitting...",
+                    "remove": "Remove"
+                },
+                "kyc": {
+                    "unverified": "Unverified",
+                    "verified": "Verified",
+                    "pending": "Pending",
+                    "rejected": "Rejected",
+                    "unverifiedDesc": "Please complete KYC verification",
+                    "verifiedDesc": "Your KYC is verified",
+                    "pendingDesc": "Your KYC is under review",
+                    "rejectedDesc": "Your KYC was rejected. Please resubmit.",
+                    "verifiedMessage": "Your KYC verification is complete.",
+                    "noActionNeeded": "No further action is needed at this time.",
+                    "idVerification": "ID Verification",
+                    "uploadInstruction": "Please upload clear images of both sides of your government-issued ID. Accepted formats: JPG, PNG, SVG, WEBP (max 10MB each).",
+                    "frontOfId": "Front of ID",
+                    "backOfId": "Back of ID",
+                    "dragOrClick": "Drag & drop front/back ID image here, or click to select",
+                    "acceptedFormats": "Accepted formats: JPG, PNG, SVG, WEBP (max 10MB)",
+                    "errors": {
+                        "frontRequired": "Please upload front of your ID",
+                        "backRequired": "Please upload back of your ID",
+                        "fileTooLarge": "File {name} is too large (max 10MB)",
+                        "invalidFileType": "File {name} has invalid type (only JPG, PNG, SVG, WEBP allowed)",
+                        "fileRejected": "File {name} was rejected: {message}",
+                        "fixErrors": "Please fix the errors in your submission",
+                        "submitFailed": "KYC submission failed"
+                    },
+                    "successSubmitted": "KYC submitted successfully! Status will update soon."
+                },
+                "success": {
+                    "profileUpdated": "Profile updated successfully",
+                    "accountDeleted": "Profile delete successful"
+                },
+                "errors": {
+                    "notVerified": "You are not verified",
+                    "formErrors": "Please fix the errors in the form",
+                    "profileFetch": "Failed to fetch profile data",
+                    "profileUpdate": "Failed to update profile",
+                    "passwordUpdate": "Failed to update password",
+                    "kycFetch": "Failed to load KYC information",
+                    "serverError": "Server didn't respond"
+                },
+                "modals": {
+                    "deleteAccount": {
+                        "title": "Are you sure to Delete Account?",
+                        "description": "If you do not think you will use “JARA B2B” again and like your account deleted, we can take care of this for you. Keep in mind you will not be able to reactivate your account or retrieve any of the content or information you have added. If you would still like your account deleted, click “Delete Account”."
+                    }
+                },
+                "alt": {
+                    "userAvatar": "User"
+                }
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "My Balance",

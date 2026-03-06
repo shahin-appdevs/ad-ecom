@@ -1060,6 +1060,117 @@
                 "addGiftCard": "Agregar Tarjetas de Regalo"
             }
         },
+        "account": {
+            "profile": {
+                "sections": {
+                    "profileSettings": "Configuración de Perfil",
+                    "myProfileManage": "Gestión de Mi Perfil",
+                    "changePassword": "Cambiar Contraseña",
+                    "kycInformation": "Información KYC"
+                },
+                "labels": {
+                    "firstName": "Nombre",
+                    "lastName": "Apellido",
+                    "name": "Nombre completo",
+                    "email": "Correo electrónico",
+                    "phone": "Teléfono",
+                    "country": "País",
+                    "division": "División",
+                    "district": "Distrito",
+                    "upazila": "Upazila",
+                    "address": "Dirección",
+                    "gender": "Género",
+                    "dateOfBirth": "Fecha de Nacimiento",
+                    "nidOrBirthId": "NID o ID de Nacimiento",
+                    "currentPassword": "Contraseña Actual",
+                    "newPassword": "Nueva Contraseña",
+                    "confirmPassword": "Confirmar Contraseña",
+                    "kycStatus": "Estado KYC"
+                },
+                "placeholders": {
+                    "firstName": "Ingrese su nombre...",
+                    "lastName": "Ingrese su apellido...",
+                    "name": "Ingrese su nombre completo...",
+                    "email": "Ingrese su correo electrónico...",
+                    "phone": "Ingrese su número de teléfono...",
+                    "country": "Ingrese su país...",
+                    "address": "Ingrese su dirección detallada...",
+                    "password": "Ingrese contraseña...",
+                    "select": "Seleccionar",
+                    "selectGender": "Seleccionar género",
+                    "nidOrBirthId": "Ingrese NID o ID de Nacimiento..."
+                },
+                "gender": {
+                    "male": "Masculino",
+                    "female": "Femenino",
+                    "other": "Otro"
+                },
+                "buttons": {
+                    "update": "Actualizar",
+                    "updating": "Actualizando...",
+                    "change": "Cambiar",
+                    "changing": "Cambiando...",
+                    "setupPin": "Configurar PIN",
+                    "applyForReseller": "Solicitar ser Revendedor",
+                    "deleteAccount": "Eliminar Cuenta",
+                    "deleting": "Eliminando...",
+                    "cancel": "Cancelar",
+                    "submitVerification": "Enviar Verificación",
+                    "submitting": "Enviando...",
+                    "remove": "Eliminar"
+                },
+                "kyc": {
+                    "unverified": "No verificado",
+                    "verified": "Verificado",
+                    "pending": "Pendiente",
+                    "rejected": "Rechazado",
+                    "unverifiedDesc": "Por favor complete la verificación KYC",
+                    "verifiedDesc": "Su KYC está verificado",
+                    "pendingDesc": "Su KYC está en revisión",
+                    "rejectedDesc": "Su KYC fue rechazado. Por favor vuelva a enviar.",
+                    "verifiedMessage": "Su verificación KYC está completa.",
+                    "noActionNeeded": "No se requiere ninguna acción adicional en este momento.",
+                    "idVerification": "Verificación de Identidad",
+                    "uploadInstruction": "Por favor suba imágenes claras de ambos lados de su documento de identidad oficial. Formatos aceptados: JPG, PNG, SVG, WEBP (máx. 10 MB cada uno).",
+                    "frontOfId": "Frente del documento",
+                    "backOfId": "Reverso del documento",
+                    "dragOrClick": "Arrastre y suelte o haga clic para seleccionar",
+                    "acceptedFormats": "Formatos aceptados: JPG, PNG, SVG, WEBP (máx. 10 MB)",
+                    "errors": {
+                        "frontRequired": "Por favor suba el frente de su documento",
+                        "backRequired": "Por favor suba el reverso de su documento",
+                        "fileTooLarge": "El archivo {name} es demasiado grande (máx. 10 MB)",
+                        "invalidFileType": "Tipo de archivo inválido para {name} (solo JPG, PNG, SVG, WEBP permitidos)",
+                        "fileRejected": "El archivo {name} fue rechazado: {message}",
+                        "fixErrors": "Por favor corrija los errores en su envío",
+                        "submitFailed": "Fallo al enviar KYC"
+                    },
+                    "successSubmitted": "¡Documentos KYC enviados con éxito! El estado se actualizará pronto."
+                },
+                "success": {
+                    "profileUpdated": "Perfil actualizado con éxito",
+                    "accountDeleted": "Eliminación de perfil exitosa"
+                },
+                "errors": {
+                    "notVerified": "No estás verificado",
+                    "formErrors": "Por favor corrija los errores en el formulario",
+                    "profileFetch": "No se pudo cargar los datos del perfil",
+                    "profileUpdate": "No se pudo actualizar el perfil",
+                    "passwordUpdate": "No se pudo actualizar la contraseña",
+                    "kycFetch": "No se pudo cargar la información KYC",
+                    "serverError": "El servidor no respondió"
+                },
+                "modals": {
+                    "deleteAccount": {
+                        "title": "¿Estás seguro de eliminar tu cuenta?",
+                        "description": "Si ya no planeas usar “JARA B2B” y deseas eliminar tu cuenta, podemos encargarnos de ello. Ten en cuenta que no podrás reactivar tu cuenta ni recuperar ningún contenido o información que hayas agregado. Si aún deseas eliminar tu cuenta, haz clic en “Eliminar Cuenta”."
+                    }
+                },
+                "alt": {
+                    "userAvatar": "Avatar del usuario"
+                }
+            }
+        },
         "homepage": {
             "wallet": {
                 "myBalance": "Mi saldo",
