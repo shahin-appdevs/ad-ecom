@@ -1042,6 +1042,22 @@
                 "timeDate": "Time & Date",
                 "status": "Status",
                 "noTransactions": "No transaction found"
+            },
+            "giftCards": {
+                "title": "Gift Card Logs",
+                "trx": "Trx",
+                "cardName": "Card Name",
+                "receiverEmail": "Receiver Email",
+                "receiverPhone": "Receiver Phone",
+                "cardUnitPrice": "Card Unit Price",
+                "cardQuantity": "Card Quantity",
+                "cardTotalPrice": "Card Total Price",
+                "exchangeRate": "Exchange Rate",
+                "status": "Status",
+                "totalCharge": "Total Charge",
+                "payableAmount": "Payable Amount",
+                "noGiftCards": "No gift card found",
+                "addGiftCard": "Add Gift Cards"
             }
         },
         "homepage": {

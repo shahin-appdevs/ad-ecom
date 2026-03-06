@@ -1042,6 +1042,22 @@
                 "timeDate": "التاريخ والوقت",
                 "status": "الحالة",
                 "noTransactions": "لم يتم العثور على أي معاملة"
+            },
+            "giftCards": {
+                "title": "سجلات بطاقات الهدايا",
+                "trx": "المعاملة",
+                "cardName": "اسم البطاقة",
+                "receiverEmail": "بريد المستلم",
+                "receiverPhone": "هاتف المستلم",
+                "cardUnitPrice": "سعر الوحدة للبطاقة",
+                "cardQuantity": "كمية البطاقات",
+                "cardTotalPrice": "السعر الإجمالي للبطاقة",
+                "exchangeRate": "سعر الصرف",
+                "status": "الحالة",
+                "totalCharge": "إجمالي الرسوم",
+                "payableAmount": "المبلغ المستحق",
+                "noGiftCards": "لم يتم العثور على بطاقة هدايا",
+                "addGiftCard": "إضافة بطاقات هدايا"
             }
         },
         "homepage": {

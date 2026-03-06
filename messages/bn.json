@@ -1042,6 +1042,22 @@
                 "timeDate": "সময় ও তারিখ",
                 "status": "স্ট্যাটাস",
                 "noTransactions": "কোনো লেনদেন পাওয়া যায়নি"
+            },
+            "giftCards": {
+                "title": "গিফট কার্ড লগ",
+                "trx": "ট্রানজেকশন",
+                "cardName": "কার্ডের নাম",
+                "receiverEmail": "প্রাপকের ইমেইল",
+                "receiverPhone": "প্রাপকের ফোন",
+                "cardUnitPrice": "কার্ডের একক মূল্য",
+                "cardQuantity": "কার্ডের পরিমাণ",
+                "cardTotalPrice": "কার্ডের মোট মূল্য",
+                "exchangeRate": "বিনিময় হার",
+                "status": "স্ট্যাটাস",
+                "totalCharge": "মোট চার্জ",
+                "payableAmount": "প্রদেয় পরিমাণ",
+                "noGiftCards": "কোনো গিফট কার্ড পাওয়া যায়নি",
+                "addGiftCard": "গিফট কার্ড যোগ করুন"
             }
         },
         "homepage": {

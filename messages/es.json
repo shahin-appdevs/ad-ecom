@@ -1042,6 +1042,22 @@
                 "timeDate": "Fecha y Hora",
                 "status": "Estado",
                 "noTransactions": "No se encontró ninguna transacción"
+            },
+            "giftCards": {
+                "title": "Registros de Tarjetas de Regalo",
+                "trx": "Trx",
+                "cardName": "Nombre de la Tarjeta",
+                "receiverEmail": "Correo del Receptor",
+                "receiverPhone": "Teléfono del Receptor",
+                "cardUnitPrice": "Precio Unitario de la Tarjeta",
+                "cardQuantity": "Cantidad de Tarjetas",
+                "cardTotalPrice": "Precio Total de la Tarjeta",
+                "exchangeRate": "Tasa de Cambio",
+                "status": "Estado",
+                "totalCharge": "Cargo Total",
+                "payableAmount": "Monto a Pagar",
+                "noGiftCards": "No se encontró ninguna tarjeta de regalo",
+                "addGiftCard": "Agregar Tarjetas de Regalo"
             }
         },
         "homepage": {
