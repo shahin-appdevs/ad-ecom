@@ -1192,6 +1192,16 @@
                         "payableAmount": "Monto a Pagar",
                         "cardImageAlt": "Imagen de la Tarjeta de Regalo"
                     }
+                },
+                "giftCardList": {
+                    "title": "Tarjetas de Regalo",
+                    "noGiftCardsFound": "No se encontraron tarjetas de regalo para el país seleccionado.",
+                    "errors": {
+                        "loadFailed": "No se pudieron cargar las tarjetas de regalo"
+                    },
+                    "table": {
+                        "cardImageAlt": "Imagen de la Tarjeta de Regalo"
+                    }
                 }
             }
         },

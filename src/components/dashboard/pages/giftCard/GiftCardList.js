@@ -5,13 +5,16 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Link } from "@/i18n/navigation";
 import { allGiftCardGetAPI } from "@root/services/apiClient/apiClient";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import toast from "react-hot-toast";
+import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
 export default function GiftCardList() {
+    const t = useTranslations("Dashboard.cards.giftCard.giftCardList");
+
     const [selectedCountry, setSelectedCountry] = useState({});
     const [giftCards, setGiftCards] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -36,12 +39,12 @@ export default function GiftCardList() {
                 );
 
                 setCountries(result?.data?.data?.countries || []);
-                setGiftCards(result?.data?.data?.products?.data);
+                setGiftCards(result?.data?.data?.products?.data || []);
                 setProducts(result?.data?.data?.products || {});
-                setTotalPages(result?.data?.data?.products?.last_page);
+                setTotalPages(result?.data?.data?.products?.last_page || 1);
             } catch (error) {
-                toast.error("Failed to load gift cards");
-                //reset data on error
+                toast.error(t("errors.loadFailed"));
+                // reset data on error
                 setGiftCards([]);
                 setCountries([]);
                 setProducts({});
@@ -54,10 +57,11 @@ export default function GiftCardList() {
 
     return (
         <div className="min-h-screen bg-white rounded-xl py-6 px-4 sm:px-6 lg:px-8">
-            <div className=" mx-auto">
+            <div className="mx-auto">
                 <h1 className="text-3xl font-bold text-gray-900 mb-8">
-                    Gift Cards
+                    {t("title")}
                 </h1>
+
                 {!!selectedCountry?.iso2 || !!countries[0]?.name ? (
                     <Menu
                         as="div"
@@ -114,8 +118,6 @@ export default function GiftCardList() {
                     <div className="h-10 bg-gray-200 rounded-xl w-64 mb-10 animate-pulse" />
                 )}
 
-                {/* Country Selector with Headless UI Menu */}
-
                 {/* Gift Cards Grid */}
                 {loading ? (
                     <GiftCardsGridSkeleton />
@@ -130,7 +132,10 @@ export default function GiftCardList() {
                                 {card?.logoUrls?.length > 0 && (
                                     <img
                                         src={card?.logoUrls[0]}
-                                        alt={card?.productName}
+                                        alt={
+                                            card?.productName ||
+                                            t("table.cardImageAlt")
+                                        }
                                         className="w-full h-40 object-cover"
                                     />
                                 )}
@@ -146,82 +151,85 @@ export default function GiftCardList() {
                 )}
 
                 {giftCards.length === 0 && !loading && (
-                    <p className="text-center text-gray-500 mt-8 bg-primary__color">
-                        No gift cards found for the selected country.
+                    <p className="text-center text-gray-500 mt-8">
+                        {t("noGiftCardsFound")}
                     </p>
                 )}
-            </div>
-            {/* Pagination */}
-            {(products?.data?.length > products?.per_page - 1 ||
-                products?.current_page > 1) && (
-                <div className="mt-10 flex justify-center">
-                    <div className="flex items-center bg-white__color rounded-lg border border-[#E5E7EB]">
-                        {/* Previous button */}
-                        <button
-                            onClick={() =>
-                                currentPage > 1 &&
-                                setCurrentPage(currentPage - 1)
-                            }
-                            disabled={currentPage === 1}
-                            className="border-0 border-e border-[#E5E7EB] h-full flex justify-center items-center sm:px-3 px-2 disabled:cursor-not-allowed group"
-                        >
-                            <ChevronLeftIcon
-                                className={`h-4 text-color__heading transition-all ${currentPage === 1 ? "opacity-40" : "group-hover:text-primary__color"} `}
-                            />
-                        </button>
 
-                        {/* Page Numbers with ellipsis */}
-                        {Array.from(
-                            { length: totalPages },
-                            (_, index) => index + 1,
-                        )
-                            .filter((page) => {
-                                return (
-                                    page === 1 ||
-                                    page === totalPages ||
-                                    (page >= currentPage - 2 &&
-                                        page <= currentPage + 2)
-                                );
-                            })
-                            .map((page, idx, arr) => {
-                                const prevPage = arr[idx - 1];
-                                const showEllipsis =
-                                    prevPage && page - prevPage > 1;
+                {/* Pagination */}
+                {(products?.data?.length > products?.per_page - 1 ||
+                    products?.current_page > 1) && (
+                    <div className="mt-10 flex justify-center">
+                        <div className="flex items-center bg-white__color rounded-lg border border-[#E5E7EB]">
+                            {/* Previous button */}
+                            <button
+                                onClick={() =>
+                                    currentPage > 1 &&
+                                    setCurrentPage(currentPage - 1)
+                                }
+                                disabled={currentPage === 1}
+                                className="border-0 border-e border-[#E5E7EB] h-full flex justify-center items-center sm:px-3 px-2 disabled:cursor-not-allowed group"
+                            >
+                                <ChevronLeftIcon
+                                    className={`h-4 text-color__heading transition-all ${currentPage === 1 ? "opacity-40" : "group-hover:text-primary__color"} `}
+                                />
+                            </button>
 
-                                return (
-                                    <div key={page}>
-                                        {showEllipsis && (
-                                            <span className="font-bold text-color__paragraph py-2 sm:px-4 px-2 border-0 border-e border-[#E5E7EB] transition-all bg-white__color">
-                                                ...
-                                            </span>
-                                        )}
-                                        <button
-                                            onClick={() => setCurrentPage(page)}
-                                            disabled={currentPage === page}
-                                            className={`font-bold text-color__paragraph py-2 sm:px-4 px-2 border-0 border-e border-[#E5E7EB] transition-all ${currentPage === page ? "bg-[#E5E7EB] cursor-not-allowed" : "bg-white__color hover:text-primary__color"}`}
-                                        >
-                                            {page}
-                                        </button>
-                                    </div>
-                                );
-                            })}
+                            {/* Page Numbers with ellipsis */}
+                            {Array.from(
+                                { length: totalPages },
+                                (_, index) => index + 1,
+                            )
+                                .filter((page) => {
+                                    return (
+                                        page === 1 ||
+                                        page === totalPages ||
+                                        (page >= currentPage - 2 &&
+                                            page <= currentPage + 2)
+                                    );
+                                })
+                                .map((page, idx, arr) => {
+                                    const prevPage = arr[idx - 1];
+                                    const showEllipsis =
+                                        prevPage && page - prevPage > 1;
 
-                        {/* Next button */}
-                        <button
-                            onClick={() =>
-                                currentPage < totalPages &&
-                                setCurrentPage(currentPage + 1)
-                            }
-                            disabled={currentPage === totalPages}
-                            className="h-full flex justify-center items-center sm:px-3 px-2 disabled:cursor-not-allowed group"
-                        >
-                            <ChevronRightIcon
-                                className={`h-4 text-color__heading transition-all ${currentPage === totalPages ? "opacity-40" : "group-hover:text-primary__color"} `}
-                            />
-                        </button>
+                                    return (
+                                        <div key={page}>
+                                            {showEllipsis && (
+                                                <span className="font-bold text-color__paragraph py-2 sm:px-4 px-2 border-0 border-e border-[#E5E7EB] transition-all bg-white__color">
+                                                    ...
+                                                </span>
+                                            )}
+                                            <button
+                                                onClick={() =>
+                                                    setCurrentPage(page)
+                                                }
+                                                disabled={currentPage === page}
+                                                className={`font-bold text-color__paragraph py-2 sm:px-4 px-2 border-0 border-e border-[#E5E7EB] transition-all ${currentPage === page ? "bg-[#E5E7EB] cursor-not-allowed" : "bg-white__color hover:text-primary__color"}`}
+                                            >
+                                                {page}
+                                            </button>
+                                        </div>
+                                    );
+                                })}
+
+                            {/* Next button */}
+                            <button
+                                onClick={() =>
+                                    currentPage < totalPages &&
+                                    setCurrentPage(currentPage + 1)
+                                }
+                                disabled={currentPage === totalPages}
+                                className="h-full flex justify-center items-center sm:px-3 px-2 disabled:cursor-not-allowed group"
+                            >
+                                <ChevronRightIcon
+                                    className={`h-4 text-color__heading transition-all ${currentPage === totalPages ? "opacity-40" : "group-hover:text-primary__color"} `}
+                                />
+                            </button>
+                        </div>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }
@@ -229,13 +237,9 @@ export default function GiftCardList() {
 function GiftCardsGridSkeleton() {
     return (
         <div className="min-h-screen bg-gray-50">
-            <div className=" mx-auto">
-                {/* Page Title Skeleton */}
-
-                {/* <div className="h-10 bg-gray-200 rounded-xl w-64 mb-10 animate-pulse" /> */}
-
+            <div className="mx-auto">
                 {/* Grid of Card Skeletons */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                     {[...Array(10)].map((_, i) => (
                         <div
                             key={i}
@@ -253,11 +257,6 @@ function GiftCardsGridSkeleton() {
                             </div>
                         </div>
                     ))}
-                </div>
-
-                {/* Optional: Load More Button Skeleton */}
-                <div className="mt-12 flex justify-center">
-                    <div className="h-12 bg-gray-200 rounded-xl w-48 animate-pulse" />
                 </div>
             </div>
         </div>

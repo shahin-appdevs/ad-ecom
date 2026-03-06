@@ -1192,6 +1192,16 @@
                         "payableAmount": "المبلغ المستحق",
                         "cardImageAlt": "صورة بطاقة الهدية"
                     }
+                },
+                "giftCardList": {
+                    "title": "بطاقات الهدايا",
+                    "noGiftCardsFound": "لم يتم العثور على بطاقات هدايا للدولة المحددة.",
+                    "errors": {
+                        "loadFailed": "فشل تحميل بطاقات الهدايا"
+                    },
+                    "table": {
+                        "cardImageAlt": "صورة بطاقة الهدية"
+                    }
                 }
             }
         },

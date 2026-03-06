@@ -1192,6 +1192,16 @@
                         "payableAmount": "Payable Amount",
                         "cardImageAlt": "Gift Card Image"
                     }
+                },
+                "giftCardList": {
+                    "title": "Gift Cards",
+                    "noGiftCardsFound": "No gift cards found for the selected country.",
+                    "errors": {
+                        "loadFailed": "Failed to load gift cards"
+                    },
+                    "table": {
+                        "cardImageAlt": "Gift Card Image"
+                    }
                 }
             }
         },

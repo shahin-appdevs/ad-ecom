@@ -1192,6 +1192,16 @@
                         "payableAmount": "প্রদেয় পরিমাণ",
                         "cardImageAlt": "গিফট কার্ডের ছবি"
                     }
+                },
+                "giftCardList": {
+                    "title": "গিফট কার্ড",
+                    "noGiftCardsFound": "নির্বাচিত দেশের জন্য কোনো গিফট কার্ড পাওয়া যায়নি।",
+                    "errors": {
+                        "loadFailed": "গিফট কার্ড লোড করতে ব্যর্থ"
+                    },
+                    "table": {
+                        "cardImageAlt": "গিফট কার্ডের ছবি"
+                    }
                 }
             }
         },
