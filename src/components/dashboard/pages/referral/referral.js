@@ -8,8 +8,10 @@ import {
 import { useState, useEffect } from "react";
 import { referralStatusGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 export default function ReferralSection() {
+    const t = useTranslations("Dashboard.account.referral");
     const [loading, setLoading] = useState(true);
     const [referData, setReferData] = useState(null);
     const [copySuccess, setCopySuccess] = useState(false);
@@ -20,7 +22,7 @@ export default function ReferralSection() {
             .writeText(referData?.referral_code || "")
             .then(() => {
                 setCopySuccess(true);
-                toast.success("Copied");
+                toast.success(t("copied"));
                 setTimeout(() => setCopySuccess(false), 2000);
             });
     };
@@ -36,7 +38,7 @@ export default function ReferralSection() {
             )
             .then(() => {
                 setCopyUrlSuccess(true);
-                toast.success("Copied");
+                toast.success(t("copied"));
                 setTimeout(() => setCopyUrlSuccess(false), 2000);
             });
     };
@@ -49,11 +51,11 @@ export default function ReferralSection() {
             .catch((error) => {
                 toast.error(
                     error?.response?.data?.message?.error?.[0] ||
-                        "Something went wrong",
+                        t("somethingWrong"),
                 );
             })
             .finally(() => setLoading(false));
-    }, []);
+    }, [t]);
 
     if (loading) {
         return (
@@ -83,31 +85,35 @@ export default function ReferralSection() {
         <div className="bg-white rounded-[12px] p-7">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                 <div className="bg-white shadow-primary__shadow p-4 rounded-lg text-center">
-                    <p className="text-sm font-medium">Total Refers</p>
+                    <p className="text-sm font-medium">{t("totalRefers")}</p>
                     <h4 className="text-xl font-bold">
                         {referData?.total_refers}
                     </h4>
                 </div>
                 <div className="bg-white shadow-primary__shadow p-4 rounded-lg text-center">
-                    <p className="text-sm font-medium">Active Refers</p>
+                    <p className="text-sm font-medium">{t("activeRefers")}</p>
                     <h4 className="text-xl font-bold">
                         {referData?.active_refers}
                     </h4>
                 </div>
                 <div className="bg-white shadow-primary__shadow p-4 rounded-lg text-center">
-                    <p className="text-sm font-medium">Referral Active Rate</p>
+                    <p className="text-sm font-medium">
+                        {t("referralActiveRate")}
+                    </p>
                     <h4 className="text-xl font-bold">
                         {referData?.referral_active_rate}%
                     </h4>
                 </div>
                 <div className="bg-white shadow-primary__shadow p-4 rounded-lg text-center">
-                    <p className="text-sm font-medium mb-2">Referral Code</p>
+                    <p className="text-sm font-medium mb-2">
+                        {t("referralCode")}
+                    </p>
                     <div className="flex justify-center items-center gap-2">
                         <h4 className="text-lg md:text-xl font-bold">
                             {referData?.referral_code}
                         </h4>
                         <button
-                            title="Copy Referral Code"
+                            title={t("copyReferralCode")}
                             onClick={handleCopy}
                             className="p-2 bg-[#F5F7FF] text-color__heading rounded"
                         >
@@ -118,7 +124,7 @@ export default function ReferralSection() {
                             )}
                         </button>
                         <button
-                            title="Copy Referral Url"
+                            title={t("copyReferralUrl")}
                             onClick={handleCopyReferUrl}
                             className="p-2 bg-[#F5F7FF] text-color__heading rounded"
                         >
@@ -138,10 +144,10 @@ export default function ReferralSection() {
                 <div>
                     <h2 className="text-lg font-semibold text-primary__color">
                         {referData?.active_affiliate_plan?.name ||
-                            "No Plan Active"}
+                            t("noPlanActive")}
                     </h2>
                     <p className="text-sm font-medium">
-                        Joining Fee:{" "}
+                        {t("joiningFee")}:{" "}
                         {referData?.active_affiliate_plan?.joining_fee}{" "}
                         {referData?.base_curr_symbol}
                     </p>
@@ -164,7 +170,7 @@ export default function ReferralSection() {
                                         : "bg-red-100 text-red-600"
                                 }`}
                             >
-                                {feature.value ? "Enabled" : "Disabled"}
+                                {feature.value ? t("enabled") : t("disabled")}
                             </p>
                         </div>
                     ),

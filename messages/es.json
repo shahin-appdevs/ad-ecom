@@ -634,6 +634,37 @@
                     "status": "Estado",
                     "time": "Hora y Fecha",
                     "noTransactions": "No se encontraron transacciones de retiro"
+                },
+                "withdrawAutomatic": {
+                    "selectBank": "Seleccionar Banco",
+                    "selectBranch": "Seleccionar Sucursal (Opcional)",
+                    "noBranchSelected": "Ninguna sucursal seleccionada",
+                    "accountNumber": "Número de Cuenta",
+                    "routingNumber": "Número de Ruta",
+                    "swiftCode": "Código SWIFT",
+                    "beneficiaryCountry": "País del Beneficiario",
+                    "beneficiaryName": "Nombre del Beneficiario",
+                    "beneficiaryAddress": "Dirección del Beneficiario",
+                    "accountNumberPlaceholder": "Ingrese su número de cuenta",
+                    "routingNumberPlaceholder": "Ingrese su número de ruta",
+                    "swiftCodePlaceholder": "Ingrese su código SWIFT/BIC",
+                    "selectCountry": "Seleccionar País",
+                    "accountHolderPlaceholder": "Ingrese el nombre del titular de la cuenta",
+                    "addressPlaceholder": "Ingrese la dirección del beneficiario",
+                    "confirmWithdraw": "Confirmar Retiro",
+                    "confirming": "Confirmando...",
+                    "preview": "Vista Previa",
+                    "transactionId": "ID de Transacción",
+                    "paymentMethod": "Método de Pago",
+                    "amount": "Monto",
+                    "exchangeRate": "Tasa de Cambio",
+                    "payableAmount": "Monto a Pagar",
+                    "loadingBanks": "Cargando bancos...",
+                    "loadingBranches": "Cargando sucursales...",
+                    "invalidData": "Datos de transacción no válidos",
+                    "failedBanks": "Error al cargar los bancos",
+                    "failedBranches": "Error al cargar las sucursales",
+                    "loading": "Cargando..."
                 }
             }
         },
@@ -1169,6 +1200,30 @@
                 "alt": {
                     "userAvatar": "Avatar del usuario"
                 }
+            },
+            "referral": {
+                "title": "Estado de Referencia",
+                "totalRefers": "Total de Referidos",
+                "activeRefers": "Referidos Activos",
+                "referralActiveRate": "Tasa de Referencia Activa",
+                "referralCode": "Código de Referencia",
+                "copyReferralCode": "Copiar Código de Referencia",
+                "copyReferralUrl": "Copiar URL de Referencia",
+                "noPlanActive": "Ningún Plan Activo",
+                "joiningFee": "Cuota de Inscripción",
+                "enabled": "Habilitado",
+                "disabled": "Deshabilitado",
+                "copied": "Copiado",
+                "somethingWrong": "Algo salió mal",
+                "referredUsers": "Usuarios Referidos",
+                "user": "Usuario",
+                "email": "Correo electrónico",
+                "phoneNumber": "Número de teléfono",
+                "referCode": "Código de Referencia",
+                "status": "Estado",
+                "active": "Activo",
+                "inactive": "Inactivo",
+                "noReferredUsers": "No se encontraron usuarios referidos"
             }
         },
         "cards": {

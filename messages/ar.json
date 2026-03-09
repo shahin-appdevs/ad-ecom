@@ -634,6 +634,37 @@
                     "status": "الحالة",
                     "time": "الوقت والتاريخ",
                     "noTransactions": "لم يتم العثور على معاملات سحب"
+                },
+                "withdrawAutomatic": {
+                    "selectBank": "اختيار البنك",
+                    "selectBranch": "اختيار الفرع (اختياري)",
+                    "noBranchSelected": "لم يتم اختيار فرع",
+                    "accountNumber": "رقم الحساب",
+                    "routingNumber": "رقم التوجيه",
+                    "swiftCode": "رمز السويفت",
+                    "beneficiaryCountry": "بلد المستفيد",
+                    "beneficiaryName": "اسم المستفيد",
+                    "beneficiaryAddress": "عنوان المستفيد",
+                    "accountNumberPlaceholder": "أدخل رقم حسابك",
+                    "routingNumberPlaceholder": "أدخل رقم التوجيه الخاص بك",
+                    "swiftCodePlaceholder": "أدخل رمز SWIFT/BIC الخاص بك",
+                    "selectCountry": "اختيار البلد",
+                    "accountHolderPlaceholder": "أدخل اسم صاحب الحساب",
+                    "addressPlaceholder": "أدخل عنوان المستفيد",
+                    "confirmWithdraw": "تأكيد السحب",
+                    "confirming": "جاري التأكيد...",
+                    "preview": "معاينة",
+                    "transactionId": "رقم المعاملة",
+                    "paymentMethod": "طريقة الدفع",
+                    "amount": "المبلغ",
+                    "exchangeRate": "سعر الصرف",
+                    "payableAmount": "المبلغ المستحق",
+                    "loadingBanks": "جاري تحميل البنوك...",
+                    "loadingBranches": "جاري تحميل الفروع...",
+                    "invalidData": "بيانات المعاملة غير صالحة",
+                    "failedBanks": "فشل تحميل البنوك",
+                    "failedBranches": "فشل تحميل الفروع",
+                    "loading": "جاري التحميل..."
                 }
             }
         },
@@ -1169,6 +1200,30 @@
                 "alt": {
                     "userAvatar": "صورة المستخدم"
                 }
+            },
+            "referral": {
+                "title": "حالة الإحالة",
+                "totalRefers": "إجمالي الإحالات",
+                "activeRefers": "الإحالات النشطة",
+                "referralActiveRate": "معدل الإحالة النشط",
+                "referralCode": "كود الإحالة",
+                "copyReferralCode": "نسخ كود الإحالة",
+                "copyReferralUrl": "نسخ رابط الإحالة",
+                "noPlanActive": "لا توجد خطة نشطة",
+                "joiningFee": "رسوم الانضمام",
+                "enabled": "مفعّل",
+                "disabled": "معطّل",
+                "copied": "تم النسخ",
+                "somethingWrong": "هناك خطأ ما",
+                "referredUsers": "المستخدمون المُحالون",
+                "user": "مستخدم",
+                "email": "بريد إلكتروني",
+                "phoneNumber": "رقم الهاتف",
+                "referCode": "كود الإحالة",
+                "status": "الحالة",
+                "active": "نشط",
+                "inactive": "غير نشط",
+                "noReferredUsers": "لم يتم العثور على مستخدمين مُحالين"
             }
         },
         "cards": {

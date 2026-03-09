@@ -634,6 +634,37 @@
                     "status": "অবস্থা",
                     "time": "সময় এবং তারিখ",
                     "noTransactions": "কোন উত্তোলন লেনদেন পাওয়া যায়নি"
+                },
+                "withdrawAutomatic": {
+                    "selectBank": "ব্যাংক নির্বাচন করুন",
+                    "selectBranch": "শাখা নির্বাচন করুন (ঐচ্ছিক)",
+                    "noBranchSelected": "কোন শাখা নির্বাচিত হয়নি",
+                    "accountNumber": "অ্যাকাউন্ট নম্বর",
+                    "routingNumber": "রাউটিং নম্বর",
+                    "swiftCode": "সুইফট কোড",
+                    "beneficiaryCountry": "প্রাপকের দেশ",
+                    "beneficiaryName": "প্রাপকের নাম",
+                    "beneficiaryAddress": "প্রাপকের ঠিকানা",
+                    "accountNumberPlaceholder": "আপনার অ্যাকাউন্ট নম্বর লিখুন",
+                    "routingNumberPlaceholder": "আপনার রাউটিং নম্বর লিখুন",
+                    "swiftCodePlaceholder": "আপনার সুইফট/বিআইসি কোড লিখুন",
+                    "selectCountry": "দেশ নির্বাচন করুন",
+                    "accountHolderPlaceholder": "অ্যাকাউন্টধারীর নাম লিখুন",
+                    "addressPlaceholder": "প্রাপকের ঠিকানা লিখুন",
+                    "confirmWithdraw": "উত্তোলন নিশ্চিত করুন",
+                    "confirming": "নিশ্চিত করা হচ্ছে...",
+                    "preview": "প্রিভিউ",
+                    "transactionId": "লেনদেন আইডি",
+                    "paymentMethod": "পেমেন্ট পদ্ধতি",
+                    "amount": "পরিমাণ",
+                    "exchangeRate": "বিনিময় হার",
+                    "payableAmount": "প্রদেয় পরিমাণ",
+                    "loadingBanks": "ব্যাংক লোড হচ্ছে...",
+                    "loadingBranches": "শাখা লোড হচ্ছে...",
+                    "invalidData": "অকার্যকর লেনদেন তথ্য",
+                    "failedBanks": "ব্যাংক লোড করতে ব্যর্থ হয়েছে",
+                    "failedBranches": "শাখা লোড করতে ব্যর্থ হয়েছে",
+                    "loading": "লোড হচ্ছে..."
                 }
             }
         },
@@ -1169,6 +1200,30 @@
                 "alt": {
                     "userAvatar": "ব্যবহারকারীর ছবি"
                 }
+            },
+            "referral": {
+                "title": "রেফারেল স্ট্যাটাস",
+                "totalRefers": "মোট রেফার",
+                "activeRefers": "সক্রিয় রেফার",
+                "referralActiveRate": "রেফারেল সক্রিয় হার",
+                "referralCode": "রেফারেল কোড",
+                "copyReferralCode": "রেফারেল কোড কপি করুন",
+                "copyReferralUrl": "রেফারেল ইউআরএল কপি করুন",
+                "noPlanActive": "কোনো প্ল্যান সক্রিয় নেই",
+                "joiningFee": "জয়েনিং ফি",
+                "enabled": "সক্রিয়",
+                "disabled": "নিষ্ক্রিয়",
+                "copied": "কপি করা হয়েছে",
+                "somethingWrong": "কিছু ভুল হয়েছে",
+                "referredUsers": "রেফার করা ব্যবহারকারী",
+                "user": "ব্যবহারকারী",
+                "email": "ইমেইল",
+                "phoneNumber": "ফোন নম্বর",
+                "referCode": "রেফার কোড",
+                "status": "স্ট্যাটাস",
+                "active": "সক্রিয়",
+                "inactive": "নিষ্ক্রিয়",
+                "noReferredUsers": "কোনো রেফার করা ব্যবহারকারী পাওয়া যায়নি"
             }
         },
         "cards": {

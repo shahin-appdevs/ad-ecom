@@ -634,6 +634,37 @@
                     "status": "Status",
                     "time": "Time & Date",
                     "noTransactions": "No withdraw transactions found"
+                },
+                "withdrawAutomatic": {
+                    "selectBank": "Select Bank",
+                    "selectBranch": "Select Branch (Optional)",
+                    "noBranchSelected": "No branch selected",
+                    "accountNumber": "Account Number",
+                    "routingNumber": "Routing Number",
+                    "swiftCode": "SWIFT Code",
+                    "beneficiaryCountry": "Beneficiary Country",
+                    "beneficiaryName": "Beneficiary Name",
+                    "beneficiaryAddress": "Beneficiary Address",
+                    "accountNumberPlaceholder": "Enter your Account Number",
+                    "routingNumberPlaceholder": "Enter your Routing Number",
+                    "swiftCodePlaceholder": "Enter your SWIFT/BIC code",
+                    "selectCountry": "Select Country",
+                    "accountHolderPlaceholder": "Enter account holder name",
+                    "addressPlaceholder": "Enter Beneficiary Address",
+                    "confirmWithdraw": "Confirm Withdraw",
+                    "confirming": "Confirming...",
+                    "preview": "Preview",
+                    "transactionId": "Transaction ID",
+                    "paymentMethod": "Payment Method",
+                    "amount": "Amount",
+                    "exchangeRate": "Exchange Rate",
+                    "payableAmount": "Payable Amount",
+                    "loadingBanks": "Loading banks...",
+                    "loadingBranches": "Loading branches...",
+                    "invalidData": "Invalid transaction data",
+                    "failedBanks": "Failed to load banks",
+                    "failedBranches": "Failed to load branches",
+                    "loading": "Loading..."
                 }
             }
         },
@@ -1169,6 +1200,30 @@
                 "alt": {
                     "userAvatar": "User"
                 }
+            },
+            "referral": {
+                "title": "Referral Status",
+                "totalRefers": "Total Refers",
+                "activeRefers": "Active Refers",
+                "referralActiveRate": "Referral Active Rate",
+                "referralCode": "Referral Code",
+                "copyReferralCode": "Copy Referral Code",
+                "copyReferralUrl": "Copy Referral Url",
+                "noPlanActive": "No Plan Active",
+                "joiningFee": "Joining Fee",
+                "enabled": "Enabled",
+                "disabled": "Disabled",
+                "copied": "Copied",
+                "somethingWrong": "Something went wrong",
+                "referredUsers": "Referred Users",
+                "user": "User",
+                "email": "Email",
+                "phoneNumber": "Phone Number",
+                "referCode": "Refer Code",
+                "status": "Status",
+                "active": "Active",
+                "inactive": "Inactive",
+                "noReferredUsers": "No referred users found"
             }
         },
         "cards": {
