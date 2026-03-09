@@ -30,7 +30,7 @@ export default function ReferralSection() {
     const handleCopyReferUrl = () => {
         const basepath = window.location.origin;
 
-        console.log(basepath);
+        // console.log(basepath);
         navigator.clipboard
             .writeText(
                 `${basepath}/user/auth/register?referral_code=${referData?.referral_code}` ||

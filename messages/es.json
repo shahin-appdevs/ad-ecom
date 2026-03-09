@@ -1224,6 +1224,34 @@
                 "active": "Activo",
                 "inactive": "Inactivo",
                 "noReferredUsers": "No se encontraron usuarios referidos"
+            },
+            "affiliatePlan": {
+                "title": "Plan de Afiliados",
+                "failedLoad": "Error al cargar los planes",
+                "active": "Activo",
+                "oneTime": "una vez",
+                "currentPlan": "Plan Actual",
+                "choosePlan": "Elegir {name}",
+                "confirm": {
+                    "title": "Seleccionar pasarela de pago",
+                    "selectCurrency": "Seleccionar moneda de la pasarela",
+                    "confirming": "Confirmando...",
+                    "confirmBtn": "Confirmar",
+                    "preview": "Previsualización",
+                    "requestedAmount": "Monto Solicitado",
+                    "feesAndCharges": "Tarifas y Cargos",
+                    "totalPayable": "Total a Pagar"
+                },
+                "success": {
+                    "title": "¡Compra Confirmada!",
+                    "message": "Gracias por su compra. Su plan ha sido comprado con éxito y será procesado en breve.",
+                    "btnText": "Obtener otro plan"
+                },
+                "cancel": {
+                    "title": "¡Compra Cancelada!",
+                    "message": "Gracias por su envío. Pero la compra de su plan ha sido cancelada y será procesada en breve.",
+                    "btnText": "Obtener otro plan"
+                }
             }
         },
         "cards": {

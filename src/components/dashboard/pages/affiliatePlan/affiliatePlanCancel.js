@@ -2,8 +2,10 @@
 import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
 import { XCircleIcon } from "@heroicons/react/24/outline";
+import { useTranslations } from "next-intl";
 
 export default function AffiliatePlanCancelPage() {
+    const t = useTranslations("Dashboard.account.affiliatePlan.cancel");
     return (
         <section className="flex flex-col items-center justify-center min-h-[80vh] px-4">
             <motion.div
@@ -26,17 +28,14 @@ export default function AffiliatePlanCancelPage() {
                 >
                     <XCircleIcon className="h-16 w-16 text-red-600 mb-6" />
                 </motion.div>
-                <h1 className="text-2xl font-bold mb-3">Purchase Canceled!</h1>
-                <p className="text-center mb-6 max-w-md">
-                    Thank you for your submission. But your plan purchase has
-                    been canceled and will be processed shortly.
-                </p>
+                <h1 className="text-2xl font-bold mb-3">{t("title")}</h1>
+                <p className="text-center mb-6 max-w-md">{t("message")}</p>
                 <div className="flex gap-4">
                     <Link
                         href="/user/affiliate-plan"
                         className="bg-primary__color text-white px-6 py-3 rounded-md font-semibold hover:opacity-90 transition"
                     >
-                        Get Another Plan
+                        {t("btnText")}
                     </Link>
                 </div>
             </motion.div>

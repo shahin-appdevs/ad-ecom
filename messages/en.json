@@ -1224,6 +1224,34 @@
                 "active": "Active",
                 "inactive": "Inactive",
                 "noReferredUsers": "No referred users found"
+            },
+            "affiliatePlan": {
+                "title": "Affiliate Plan",
+                "failedLoad": "Failed to load plans",
+                "active": "Active",
+                "oneTime": "one time",
+                "currentPlan": "Current Plan",
+                "choosePlan": "Choose {name}",
+                "confirm": {
+                    "title": "Select Payment Gateway",
+                    "selectCurrency": "Select Gateway Currency",
+                    "confirming": "Confirming...",
+                    "confirmBtn": "Confirm",
+                    "preview": "Preview",
+                    "requestedAmount": "Requested Amount",
+                    "feesAndCharges": "Fees & Charges",
+                    "totalPayable": "Total Payable"
+                },
+                "success": {
+                    "title": "Purchase Confirmed!",
+                    "message": "Thank you for your purchase. Your plan has been successfully purchase and will be processed shortly.",
+                    "btnText": "Get Another Plan"
+                },
+                "cancel": {
+                    "title": "Purchase Canceled!",
+                    "message": "Thank you for your submission. But your plan purchase has been canceled and will be processed shortly.",
+                    "btnText": "Get Another Plan"
+                }
             }
         },
         "cards": {
