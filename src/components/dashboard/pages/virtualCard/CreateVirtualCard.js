@@ -31,6 +31,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "@/i18n/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { handleApiError } from "@/components/utility/handleApiError";
+import { useTranslations } from "next-intl";
 
 //exchange helper function
 
@@ -42,6 +43,7 @@ const getExchangeRate = (fromRate, toRate) => {
 /* ------------------ Options ------------------ */
 
 export default function CreateVirtualCard() {
+    const t = useTranslations("Dashboard.cards.virtualCard.createVirtualCard");
     const router = useRouter();
     const [wallets, setWallets] = useState([]);
     const [walletLoading, setWalletLoading] = useState(false);
@@ -87,7 +89,7 @@ export default function CreateVirtualCard() {
                 setWallets(userWallets);
                 setValue("from_currency", userWallets[0]?.currency?.code);
             } catch (err) {
-                toast.error("Failed to load wallets data");
+                toast.error(t("walletLoadError"));
             } finally {
                 setWalletLoading(false);
             }
@@ -99,7 +101,7 @@ export default function CreateVirtualCard() {
                 const result = await dashboardGetAPI();
                 setCardCharge(result?.data?.data?.card_create_charge);
             } catch (err) {
-                toast.error("Failed to load fee & charges");
+                toast.error(t("feeLoadError"));
             }
         })();
     }, []);
@@ -147,7 +149,7 @@ export default function CreateVirtualCard() {
                     toast.error(err);
                 });
             } else {
-                toast.error("Something went wrong. Please try again.");
+                toast.error(t("genericError"));
             }
         }
     };
@@ -310,7 +312,7 @@ export default function CreateVirtualCard() {
                     href={"/user/cards/virtual-card/update-customer"}
                     className=" bg-primary__color text-white__color flex justify-center items-center py-3 px-5 gap-2 font-semibold rounded-[6px] transition hover:bg-secondary__color hover:scale-x-105"
                 >
-                    <span>Update Customer</span> <Plus />
+                    <span>{t("updateCustomer")}</span> <Plus />
                 </Link>
             </div>
             <div className=" grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -320,33 +322,33 @@ export default function CreateVirtualCard() {
                         onSubmit={handleSubmit(onSubmit)}
                         className="lg:col-span-2 bg-white rounded-xl shadow p-4  md:p-6 space-y-6"
                     >
-                        <Header title="Create Virtual Card" />
+                        <Header title={t("formTitle")} />
 
                         {/* <DemoCard /> */}
                         {/* Name */}
                         <RHFInput
-                            label="Card Holder's Name*"
+                            label={t("cardHolderName")}
                             name={"name_on_card"}
                             control={control}
-                            rules={{ required: "Name is required" }}
-                            placeholder={"Enter card holder's name"}
+                            rules={{ required: t("nameRequired") }}
+                            placeholder={t("enterCardHolderName")}
                             type="text"
                         />
 
                         {/* Amount */}
                         <RHFInput
-                            label="Amount*"
+                            label={t("amount")}
                             name={"card_amount"}
                             control={control}
-                            rules={{ required: "Amount is required" }}
-                            placeholder={"Enter Amount"}
+                            rules={{ required: t("amountRequired") }}
+                            placeholder={t("enterAmount")}
                             type="number"
                         />
 
                         {/* Card Currency - base currency */}
 
                         <RHFSelect
-                            label="Card Currency*"
+                            label={t("cardCurrency")}
                             name="currency"
                             control={control}
                             options={cardCurrencies?.map(
@@ -358,16 +360,16 @@ export default function CreateVirtualCard() {
                         {/* Wallet - available */}
 
                         <RHFSelect
-                            label="From Wallet*"
+                            label={t("fromWallet")}
                             name="from_currency"
                             control={control}
                             options={formCurrencyOptions}
-                            rules={{ required: "Card Currency is Required" }}
+                            rules={{ required: t("cardCurrencyRequired") }}
                         />
 
                         <div className="flex flex-col md:flex-row justify-between gap-2 items-start">
                             <p className="text-sm  inline-block w-full p-2 md:p-4 bg-gray-50 border border-gray-200 rounded-lg">
-                                Available Balance <br />
+                                {t("availableBalance")} <br />
                                 <span className="font-medium text-lg text-neutral-700">
                                     {fromWallet?.balance?.toFixed(4)}{" "}
                                     {fromWallet?.currency?.code}
@@ -376,7 +378,7 @@ export default function CreateVirtualCard() {
 
                             {exchangeRate && (
                                 <p className="text-sm  inline-block p-2 md:p-4 bg-gray-50 border border-gray-200 rounded-lg w-full">
-                                    Exchange Rate <br />{" "}
+                                    {t("exchangeRate")} <br />{" "}
                                     <span className="font-medium text-lg text-neutral-700">
                                         {exchangeRateDisplay}
                                     </span>
@@ -397,7 +399,7 @@ export default function CreateVirtualCard() {
                             type="submit"
                             className="w-full bg-primary__color text-white__color flex justify-center items-center py-3 px-5 gap-2 font-semibold rounded-[6px] transition hover:bg-secondary__color hover:scale-x-105"
                         >
-                            <span>Buy Card</span>{" "}
+                            <span>{t("buyCard")}</span>{" "}
                             {isSubmitting ? (
                                 <LoaderCircle
                                     size={20}
@@ -432,14 +434,14 @@ export default function CreateVirtualCard() {
 const VirtualCardChargeOverview = ({ amount, calculation }) => {
     return (
         <div className="bg-white  border border-gray-200 p-4 rounded-xl ">
-            <Header title={"Overview"} />
+            <Header title={t("overview")} />
             <div className=" divide-y divide-gray-200 mt-4">
                 {[
                     {
                         label: (
                             <div className="flex items-center space-x-2 text-gray-600">
                                 <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
-                                <span>Card Amount</span>
+                                <span>{t("cardAmount")}</span>
                             </div>
                         ),
                         value: amount ? amount : "00.0000",
@@ -448,7 +450,7 @@ const VirtualCardChargeOverview = ({ amount, calculation }) => {
                         label: (
                             <div className="flex items-center space-x-2 text-gray-600">
                                 <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
-                                <span>Fees & Charges</span>
+                                <span>{t("feesCharges")}</span>
                             </div>
                         ),
                         value: calculation?.totalCharge,
@@ -457,7 +459,7 @@ const VirtualCardChargeOverview = ({ amount, calculation }) => {
                         label: (
                             <div className="flex items-center space-x-2">
                                 <WalletIcon className="w-5 h-5 text-indigo-600" />
-                                <span>Total Payable</span>
+                                <span>{t("totalPayable")}</span>
                             </div>
                         ),
                         value: calculation.totalAmount,
@@ -483,7 +485,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
             <div className="bg-white border-gray-200 border rounded-2xl p-4">
                 {/* Info Rows */}
 
-                <Header title={"Limit Information"} />
+                <Header title={t("limitInformation")} />
                 {remainingLoading ? (
                     <LimitsSkeleton />
                 ) : (
@@ -493,7 +495,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                                 label: (
                                     <div className="flex items-center space-x-2 text-gray-600">
                                         <Minimize2 className="w-5 h-5 text-indigo-500" />
-                                        <span>Min Limit</span>
+                                        <span>{t("minLimit")}</span>
                                     </div>
                                 ),
                                 value: limitsCalculation?.minLimit,
@@ -502,7 +504,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                                 label: (
                                     <div className="flex items-center space-x-2 text-gray-600">
                                         <Maximize2 className="w-5 h-5 text-indigo-500" />
-                                        <span>Max Limit</span>
+                                        <span>{t("maxLimit")}</span>
                                     </div>
                                 ),
                                 value: limitsCalculation?.maxLimit,
@@ -511,7 +513,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                                 label: (
                                     <div className="flex items-center space-x-2">
                                         <Calendar1 className="w-5 h-5 text-emerald-500" />
-                                        <span>Daily Limit</span>
+                                        <span>{t("dailyLimit")}</span>
                                     </div>
                                 ),
                                 value: limitsCalculation?.dailyLimit,
@@ -520,7 +522,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                                 label: (
                                     <div className="flex items-center space-x-2">
                                         <CalendarDays className="w-5 h-5 text-emerald-500" />
-                                        <span>Monthly Limit</span>
+                                        <span>{t("monthlyLimit")}</span>
                                     </div>
                                 ),
                                 value: limitsCalculation?.monthlyLimit,
@@ -529,7 +531,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                                 label: (
                                     <div className="flex items-center space-x-2">
                                         <Calendar1 className="w-5 h-5 text-yellow-500" />
-                                        <span>Remaining Daily Limit</span>
+                                        <span>{t("remainingDailyLimit")}</span>
                                     </div>
                                 ),
                                 value: limitsCalculation?.remainingDailyLimit,
@@ -538,7 +540,9 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                                 label: (
                                     <div className="flex items-center space-x-2">
                                         <CalendarDays className="w-5 h-5 text-yellow-500" />
-                                        <span>Remaining Monthly Limit</span>
+                                        <span>
+                                            {t("remainingMonthlyLimit")}
+                                        </span>
                                     </div>
                                 ),
                                 value: limitsCalculation?.remainingMonthlyLimit,
