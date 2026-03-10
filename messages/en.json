@@ -1298,6 +1298,45 @@
                     "table": {
                         "cardImageAlt": "Gift Card Image"
                     }
+                },
+                "giftCardBuy": {
+                    "title": "Buy Gift Card",
+                    "amount": "Amount",
+                    "amountRequired": "Amount is required",
+                    "enterAmount": "Enter amount",
+                    "receiverEmail": "Receiver Email",
+                    "emailRequired": "Email is required",
+                    "enterReceiverEmail": "Enter Receiver Email Address",
+                    "country": "Country",
+                    "selectCountry": "Select Country",
+                    "countryRequired": "Please select a country",
+                    "phoneNumber": "Phone Number",
+                    "phoneRequired": "Phone number is required",
+                    "enterPhoneNumber": "Enter Phone Number",
+                    "fromName": "From Name",
+                    "nameRequired": "Name is required",
+                    "yourName": "Your Name",
+                    "quantity": "Quantity",
+                    "myWallet": "My Wallet",
+                    "selectWallet": "Select Wallet",
+                    "walletRequired": "Please select a wallet currency",
+                    "availableBalance": "Available Balance:",
+                    "buyNow": "Buy Now",
+                    "confirmModal": {
+                        "title": "Buy Gift Card",
+                        "productId": "Product Id",
+                        "productName": "Product Name",
+                        "receiverEmail": "Receiver Email",
+                        "receiverCountry": "Receiver Country",
+                        "receiverPhoneCode": "Receiver Phone Code",
+                        "receiverPhone": "Receiver Phone",
+                        "fromName": "From Name",
+                        "quantity": "Quantity",
+                        "walletCurrency": "Wallet Currency",
+                        "amount": "Amount",
+                        "confirm": "Confirm",
+                        "confirming": "Confirming..."
+                    }
                 }
             }
         },

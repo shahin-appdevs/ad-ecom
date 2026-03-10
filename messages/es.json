@@ -1298,6 +1298,45 @@
                     "table": {
                         "cardImageAlt": "Imagen de la Tarjeta de Regalo"
                     }
+                },
+                "giftCardBuy": {
+                    "title": "Comprar Tarjeta de Regalo",
+                    "amount": "Monto",
+                    "amountRequired": "El monto es obligatorio",
+                    "enterAmount": "Ingrese el monto",
+                    "receiverEmail": "Correo del Receptor",
+                    "emailRequired": "El correo es obligatorio",
+                    "enterReceiverEmail": "Ingrese el correo del receptor",
+                    "country": "País",
+                    "selectCountry": "Seleccionar País",
+                    "countryRequired": "Por favor seleccione un país",
+                    "phoneNumber": "Número de Teléfono",
+                    "phoneRequired": "El número de teléfono es obligatorio",
+                    "enterPhoneNumber": "Ingrese el número de teléfono",
+                    "fromName": "Nombre del Remitente",
+                    "nameRequired": "El nombre es obligatorio",
+                    "yourName": "Su Nombre",
+                    "quantity": "Cantidad",
+                    "myWallet": "Mi Billetera",
+                    "selectWallet": "Seleccionar Billetera",
+                    "walletRequired": "Por favor seleccione una moneda de billetera",
+                    "availableBalance": "Saldo Disponible:",
+                    "buyNow": "Comprar Ahora",
+                    "confirmModal": {
+                        "title": "Comprar Tarjeta de Regalo",
+                        "productId": "ID del Producto",
+                        "productName": "Nombre del Producto",
+                        "receiverEmail": "Correo del Receptor",
+                        "receiverCountry": "País del Receptor",
+                        "receiverPhoneCode": "Código de Teléfono del Receptor",
+                        "receiverPhone": "Teléfono del Receptor",
+                        "fromName": "Nombre del Remitente",
+                        "quantity": "Cantidad",
+                        "walletCurrency": "Moneda de la Billetera",
+                        "amount": "Monto",
+                        "confirm": "Confirmar",
+                        "confirming": "Confirmando..."
+                    }
                 }
             }
         },

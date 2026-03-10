@@ -1298,6 +1298,45 @@
                     "table": {
                         "cardImageAlt": "গিফট কার্ডের ছবি"
                     }
+                },
+                "giftCardBuy": {
+                    "title": "গিফট কার্ড কিনুন",
+                    "amount": "পরিমাণ",
+                    "amountRequired": "পরিমাণ প্রয়োজন",
+                    "enterAmount": "পরিমাণ লিখুন",
+                    "receiverEmail": "প্রাপকের ইমেল",
+                    "emailRequired": "ইমেল প্রয়োজন",
+                    "enterReceiverEmail": "প্রাপকের ইমেল ঠিকানা লিখুন",
+                    "country": "দেশ",
+                    "selectCountry": "দেশ নির্বাচন করুন",
+                    "countryRequired": "অনুগ্রহ করে একটি দেশ নির্বাচন করুন",
+                    "phoneNumber": "ফোন নম্বর",
+                    "phoneRequired": "ফোন নম্বর প্রয়োজন",
+                    "enterPhoneNumber": "ফোন নম্বর লিখুন",
+                    "fromName": "প্রেরকের নাম",
+                    "nameRequired": "নাম প্রয়োজন",
+                    "yourName": "আপনার নাম",
+                    "quantity": "পরিমাণ",
+                    "myWallet": "আমার ওয়ালেট",
+                    "selectWallet": "ওয়ালেট নির্বাচন করুন",
+                    "walletRequired": "অনুগ্রহ করে একটি ওয়ালেট কারেন্সি নির্বাচন করুন",
+                    "availableBalance": "উপলব্ধ ব্যালেন্স:",
+                    "buyNow": "এখনই কিনুন",
+                    "confirmModal": {
+                        "title": "গিফট কার্ড কিনুন",
+                        "productId": "প্রোডাক্ট আইডি",
+                        "productName": "প্রোডাক্টের নাম",
+                        "receiverEmail": "প্রাপকের ইমেল",
+                        "receiverCountry": "প্রাপকের দেশ",
+                        "receiverPhoneCode": "প্রাপকের ফোন কোড",
+                        "receiverPhone": "প্রাপকের ফোন",
+                        "fromName": "প্রেরকের নাম",
+                        "quantity": "পরিমাণ",
+                        "walletCurrency": "ওয়ালেট কারেন্সি",
+                        "amount": "অর্থ",
+                        "confirm": "নিশ্চিত করুন",
+                        "confirming": "নিশ্চিত করা হচ্ছে..."
+                    }
                 }
             }
         },

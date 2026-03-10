@@ -1298,6 +1298,45 @@
                     "table": {
                         "cardImageAlt": "صورة بطاقة الهدية"
                     }
+                },
+                "giftCardBuy": {
+                    "title": "شراء بطاقة هدايا",
+                    "amount": "المبلغ",
+                    "amountRequired": "المبلغ مطلوب",
+                    "enterAmount": "أدخل المبلغ",
+                    "receiverEmail": "بريد المستلم",
+                    "emailRequired": "البريد الإلكتروني مطلوب",
+                    "enterReceiverEmail": "أدخل عنوان بريد المستلم",
+                    "country": "البلد",
+                    "selectCountry": "اختر البلد",
+                    "countryRequired": "يرجى اختيار بلد",
+                    "phoneNumber": "رقم الهاتف",
+                    "phoneRequired": "رقم الهاتف مطلوب",
+                    "enterPhoneNumber": "أدخل رقم الهاتف",
+                    "fromName": "اسم المرسل",
+                    "nameRequired": "الاسم مطلوب",
+                    "yourName": "اسمك",
+                    "quantity": "الكمية",
+                    "myWallet": "محفظتي",
+                    "selectWallet": "اختر المحفظة",
+                    "walletRequired": "يرجى اختيار عملة المحفظة",
+                    "availableBalance": "الرصيد المتاح:",
+                    "buyNow": "اشترِ الآن",
+                    "confirmModal": {
+                        "title": "شراء بطاقة هدايا",
+                        "productId": "معرف المنتج",
+                        "productName": "اسم المنتج",
+                        "receiverEmail": "بريد المستلم",
+                        "receiverCountry": "بلد المستلم",
+                        "receiverPhoneCode": "رمز هاتف المستلم",
+                        "receiverPhone": "هاتف المستلم",
+                        "fromName": "اسم المرسل",
+                        "quantity": "الكمية",
+                        "walletCurrency": "عملة المحفظة",
+                        "amount": "المبلغ",
+                        "confirm": "تأكيد",
+                        "confirming": "جاري التأكيد..."
+                    }
                 }
             }
         },

@@ -8,6 +8,7 @@ import {
     CreditCardIcon,
 } from "@heroicons/react/24/outline";
 import { submitGiftOrderAPI } from "@root/services/apiClient/apiClient";
+import { useTranslations } from "next-intl";
 import toast from "react-hot-toast";
 
 export default function GiftCardBuyConfirmModal({
@@ -15,6 +16,9 @@ export default function GiftCardBuyConfirmModal({
     closeModal,
     product,
 }) {
+    const t = useTranslations(
+        "Dashboard.cards.giftCard.giftCardBuy.confirmModal",
+    );
     const [loading, setLoading] = useState(false);
     const handleOrderSubmit = async () => {
         // console.log(product);
@@ -75,7 +79,7 @@ export default function GiftCardBuyConfirmModal({
                                 {/* Header */}
                                 <div className="flex justify-between items-center mb-6">
                                     <Dialog.Title className="text-lg font-bold">
-                                        Buy Gift Card
+                                        {t("title")}
                                     </Dialog.Title>
                                     <button
                                         type="button"
@@ -91,61 +95,61 @@ export default function GiftCardBuyConfirmModal({
                                     {/* Reusable row */}
                                     {[
                                         {
-                                            label: "Product Id",
+                                            label: t("productId"),
                                             value: product?.productId,
                                             icon: CreditCardIcon,
                                             valueColor: "text-green-600",
                                         },
                                         {
-                                            label: "Product Name",
+                                            label: t("productName"),
                                             value: product?.productName,
                                             icon: CreditCardIcon,
                                             valueColor: "text-green-600",
                                         },
                                         {
-                                            label: "Receiver Email",
+                                            label: t("receiverEmail"),
                                             value: product?.receiverEmail,
                                             icon: CreditCardIcon,
                                             valueColor: "text-green-600",
                                         },
                                         {
-                                            label: "Receiver Country",
+                                            label: t("receiverCountry"),
                                             value: product?.country,
                                             icon: CreditCardIcon,
                                             valueColor: "text-green-600",
                                         },
                                         {
-                                            label: "Receiver Phone Code",
+                                            label: t("receiverPhoneCode"),
                                             value: product?.phoneCode,
                                             icon: CreditCardIcon,
                                             valueColor: "text-green-600",
                                         },
                                         {
-                                            label: "Receiver Phone",
+                                            label: t("receiverPhone"),
                                             value: product?.phoneNumber,
                                             icon: CreditCardIcon,
                                             valueColor: "text-green-600",
                                         },
                                         {
-                                            label: "From Name",
+                                            label: t("fromName"),
                                             value: product?.fromName,
                                             icon: CreditCardIcon,
                                             valueColor: "text-green-600",
                                         },
                                         {
-                                            label: "Quantity",
+                                            label: t("quantity"),
                                             value: product?.quantity,
                                             icon: CurrencyDollarIcon,
                                             valueColor: "text-green-600",
                                         },
                                         {
-                                            label: "Wallet Currency",
+                                            label: t("walletCurrency"),
                                             value: `${product?.walletCurrency}`,
                                             icon: CurrencyDollarIcon,
                                             valueColor: "text-green-600",
                                         },
                                         {
-                                            label: "Amount",
+                                            label: t("amount"),
                                             value: `${product?.amount}`,
                                             icon: CurrencyDollarIcon,
                                             valueColor: "text-green-600",
@@ -185,8 +189,8 @@ export default function GiftCardBuyConfirmModal({
                                             className="w-full bg-primary__color  text-white font-medium text-base py-2 rounded-xl shadow-lg transform transition hover:scale-105 focus:outline-none focus:ring-4 focus:ring-primary__color/50"
                                         >
                                             {loading
-                                                ? "Confirming..."
-                                                : "Confirm"}
+                                                ? t("confirming")
+                                                : t("confirm")}
                                         </button>
                                     </div>
                                 </div>

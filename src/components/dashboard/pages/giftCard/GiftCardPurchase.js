@@ -2,6 +2,7 @@
 import { useForm, Controller } from "react-hook-form";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { useTranslations } from "next-intl";
 import GiftCardBuyConfirmModal from "./GiftCardBuyConfirmModal";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -12,6 +13,7 @@ function classNames(...classes) {
 }
 
 export default function GiftCardPurchase() {
+    const t = useTranslations("Dashboard.cards.giftCard.giftCardBuy");
     const searchParams = useSearchParams();
 
     const productId = searchParams.get("product_id");
@@ -126,7 +128,7 @@ export default function GiftCardPurchase() {
                                         {/* Amount  */}
                                         <div className="mb-4">
                                             <label className="block text-sm font-semibold text-gray-800 mb-4">
-                                                Amount{" "}
+                                                {t("amount")}{" "}
                                                 <span className="text-red-500">
                                                     *
                                                 </span>
@@ -191,9 +193,11 @@ export default function GiftCardPurchase() {
                                                     type="amount"
                                                     {...register("amount", {
                                                         required:
-                                                            "Amount is required",
+                                                            t("amountRequired"),
                                                     })}
-                                                    placeholder="Enter amount"
+                                                    placeholder={t(
+                                                        "enterAmount",
+                                                    )}
                                                     className="w-full outline-none px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary__color focus:border-transparent transition"
                                                 />
                                             )}
@@ -201,7 +205,7 @@ export default function GiftCardPurchase() {
                                             {errors.amount && (
                                                 <p className="mt-1 text-sm text-red-600">
                                                     {errors.amount.message ||
-                                                        "amount is required"}
+                                                        t("amountRequired")}
                                                 </p>
                                             )}
                                         </div>
@@ -211,7 +215,7 @@ export default function GiftCardPurchase() {
                                             {/* Receiver Email */}
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    Receiver Email{" "}
+                                                    {t("receiverEmail")}{" "}
                                                     <span className="text-red-500">
                                                         *
                                                     </span>
@@ -222,10 +226,14 @@ export default function GiftCardPurchase() {
                                                         "receiverEmail",
                                                         {
                                                             required:
-                                                                "Email is required",
+                                                                t(
+                                                                    "emailRequired",
+                                                                ),
                                                         },
                                                     )}
-                                                    placeholder="Enter Receiver Email Address"
+                                                    placeholder={t(
+                                                        "enterReceiverEmail",
+                                                    )}
                                                     className="w-full outline-none px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary__color focus:border-transparent transition"
                                                 />
                                                 {errors.receiverEmail && (
@@ -241,7 +249,7 @@ export default function GiftCardPurchase() {
                                             {/* Country */}
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    Country{" "}
+                                                    {t("country")}{" "}
                                                     <span className="text-red-500">
                                                         *
                                                     </span>
@@ -258,7 +266,9 @@ export default function GiftCardPurchase() {
                                                             <Menu.Button className="w-full flex justify-between items-center px-4 py-3 border border-gray-300 rounded-lg bg-white text-left focus:ring-2 focus:ring-primary__color focus:border-transparent">
                                                                 <span>
                                                                     {field.value ||
-                                                                        "Select Country"}
+                                                                        t(
+                                                                            "selectCountry",
+                                                                        )}
                                                                 </span>
                                                                 <ChevronDownIcon className="h-5 w-5 text-gray-400" />
                                                             </Menu.Button>
@@ -317,7 +327,9 @@ export default function GiftCardPurchase() {
                                                                     {errors
                                                                         ?.wallet_currency
                                                                         ?.message ||
-                                                                        "Please select a country"}
+                                                                        t(
+                                                                            "countryRequired",
+                                                                        )}
                                                                 </p>
                                                             )}
                                                         </Menu>
@@ -328,12 +340,12 @@ export default function GiftCardPurchase() {
                                             {/* Phone Number */}
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    Phone Number{" "}
+                                                    {t("phoneNumber")}{" "}
                                                     <span className="text-red-500">
                                                         *
                                                     </span>
                                                 </label>
-                                                <div className="flex">
+                                                <div className="flex ltr:flex-row rtl:flex-row-reverse">
                                                     <span className="inline-flex items-center px-4 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-gray-500">
                                                         <span className="text-primary__color font-bold">
                                                             {selectedCountry?.mobile_code
@@ -347,10 +359,14 @@ export default function GiftCardPurchase() {
                                                             "phoneNumber",
                                                             {
                                                                 required:
-                                                                    "Phone number is required",
+                                                                    t(
+                                                                        "phoneRequired",
+                                                                    ),
                                                             },
                                                         )}
-                                                        placeholder="Enter Phone Number"
+                                                        placeholder={t(
+                                                            "enterPhoneNumber",
+                                                        )}
                                                         className="flex-1 outline-none px-4 py-3 border border-gray-300 rounded-r-lg focus:ring-2 focus:ring-primary__color focus:border-transparent"
                                                     />
                                                 </div>
@@ -367,7 +383,7 @@ export default function GiftCardPurchase() {
                                             {/* From Name */}
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    From Name{" "}
+                                                    {t("fromName")}{" "}
                                                     <span className="text-red-500">
                                                         *
                                                     </span>
@@ -376,9 +392,9 @@ export default function GiftCardPurchase() {
                                                     type="text"
                                                     {...register("fromName", {
                                                         required:
-                                                            "Name is required",
+                                                            t("nameRequired"),
                                                     })}
-                                                    placeholder="Your Name"
+                                                    placeholder={t("yourName")}
                                                     className="w-full outline-none px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary__color focus:border-transparent"
                                                 />
                                                 {errors?.fromName && (
@@ -394,7 +410,7 @@ export default function GiftCardPurchase() {
                                             {/* Quantity */}
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                    Quantity{" "}
+                                                    {t("quantity")}{" "}
                                                     <span className="text-red-500">
                                                         *
                                                     </span>
@@ -414,7 +430,7 @@ export default function GiftCardPurchase() {
                                             <div>
                                                 <div>
                                                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                                                        My Wallet
+                                                        {t("myWallet")}
                                                         <span className="text-red-500">
                                                             *
                                                         </span>
@@ -433,7 +449,9 @@ export default function GiftCardPurchase() {
                                                                 <Menu.Button className="w-full flex justify-between items-center px-4 py-3 border border-gray-300 rounded-lg bg-white text-left focus:ring-2 focus:ring-primary__color focus:border-transparent">
                                                                     <span>
                                                                         {field.value ||
-                                                                            "Select Wallet"}
+                                                                            t(
+                                                                                "selectWallet",
+                                                                            )}
                                                                     </span>
                                                                     <ChevronDownIcon className="h-5 w-5 text-gray-400" />
                                                                 </Menu.Button>
@@ -494,7 +512,9 @@ export default function GiftCardPurchase() {
                                                                         {errors
                                                                             ?.wallet_currency
                                                                             ?.message ||
-                                                                            "Please select a wallet currency"}
+                                                                            t(
+                                                                                "walletRequired",
+                                                                            )}
                                                                     </p>
                                                                 )}
                                                             </Menu>
@@ -504,7 +524,7 @@ export default function GiftCardPurchase() {
 
                                                 {selectedWallet?.balance && (
                                                     <div className="text-sm text-gray-500 mt-2">
-                                                        Available Balance:{" "}
+                                                        {t("availableBalance")}{" "}
                                                         <span className="font-bold text-primary__color">
                                                             {
                                                                 selectedWallet?.balance
@@ -520,7 +540,7 @@ export default function GiftCardPurchase() {
                                                 type="submit"
                                                 className="w-full bg-primary__color  text-white font-bold text-base lg:text-lg py-2 rounded-xl shadow-lg transform transition hover:scale-105 focus:outline-none focus:ring-4 focus:ring-primary__color/50"
                                             >
-                                                Buy Now
+                                                {t("buyNow")}
                                             </button>
                                         </div>
                                     </div>
