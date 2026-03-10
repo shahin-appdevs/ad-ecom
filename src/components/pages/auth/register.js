@@ -266,7 +266,7 @@ function RegisterComp() {
                                     onClick={() =>
                                         setShowPassword(!showPassword)
                                     }
-                                    className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
+                                    className="absolute ltr:right-3 rtl:left-3 top-3.5 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
                                 >
                                     {showPassword ? (
                                         <svg
@@ -340,7 +340,7 @@ function RegisterComp() {
                         </div>
 
                         {/* Terms Checkbox */}
-                        <div className="flex items-center space-x-3">
+                        <div className="flex items-center gap-2">
                             <input
                                 id="agree"
                                 type="checkbox"

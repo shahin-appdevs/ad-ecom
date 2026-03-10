@@ -1252,6 +1252,19 @@
                     "message": "Thank you for your submission. But your plan purchase has been canceled and will be processed shortly.",
                     "btnText": "Get Another Plan"
                 }
+            },
+            "pointToCash": {
+                "title": "Point to Cash",
+                "failedLoad": "Failed to load point history.",
+                "conversionFailed": "Conversion failed!",
+                "noHistory": "No point history found.",
+                "points": "Points",
+                "cashAmount": "Cash Amount:",
+                "convertPoints": "Convert Points",
+                "confirmMsg": "Are you sure you want to convert {points} points into {amount}?",
+                "cancel": "Cancel",
+                "confirm": "Confirm",
+                "converting": "Converting..."
             }
         },
         "cards": {
@@ -1417,6 +1430,25 @@
             "agreeTermsError": "You must agree to the terms and conditions",
             "registerSuccess": "Registration successful",
             "registerFailed": "Registration failed. Please try again."
+        },
+        "login": {
+            "welcomeBack": "Welcome Back to Your Space",
+            "welcomeBackDesc": "Access your personalized dashboard, track orders, and manage your business efficiently.",
+            "copyright": "© {year} {siteName}. All rights reserved.",
+            "signIn": "Sign In",
+            "signInViaPhone": "Sign in via phone number",
+            "phoneOrEmail": "Phone or Email",
+            "enterPhoneOrEmail": "Enter Phone or Email",
+            "password": "Password",
+            "enterPassword": "Enter Password",
+            "forgotPassword": "Forgot Password?",
+            "loggingIn": "Logging in...",
+            "login": "Log In",
+            "dontHaveAccount": "Don't have an account?",
+            "registerNow": "Register Now",
+            "verifyRecaptcha": "Please verify reCAPTCHA",
+            "loginSuccess": "Login successful",
+            "loginFailed": "Login failed. Please try again."
         }
     }
 }

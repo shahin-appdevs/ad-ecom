@@ -1252,6 +1252,19 @@
                     "message": "Gracias por su envío. Pero la compra de su plan ha sido cancelada y será procesada en breve.",
                     "btnText": "Obtener otro plan"
                 }
+            },
+            "pointToCash": {
+                "title": "Puntos a Efectivo",
+                "failedLoad": "Error al cargar el historial de puntos.",
+                "conversionFailed": "¡Error en la conversión!",
+                "noHistory": "No se encontró historial de puntos.",
+                "points": "Puntos",
+                "cashAmount": "Monto en Efectivo:",
+                "convertPoints": "Convertir Puntos",
+                "confirmMsg": "¿Está seguro de que desea convertir {points} puntos en {amount}?",
+                "cancel": "Cancelar",
+                "confirm": "Confirmar",
+                "converting": "Convirtiendo..."
             }
         },
         "cards": {
@@ -1417,6 +1430,25 @@
             "agreeTermsError": "Debe estar de acuerdo con los términos y condiciones",
             "registerSuccess": "Registro exitoso",
             "registerFailed": "Registro fallido. Por favor, inténtelo de nuevo."
+        },
+        "login": {
+            "welcomeBack": "Bienvenido de Nuevo a Tu Espacio",
+            "welcomeBackDesc": "Acceda a su panel personalizado, realice un seguimiento de los pedidos y gestione su negocio de forma eficiente.",
+            "copyright": "© {year} {siteName}. Todos los derechos reservados.",
+            "signIn": "Iniciar Sesión",
+            "signInViaPhone": "Iniciar sesión mediante número de teléfono",
+            "phoneOrEmail": "Teléfono o Correo Electrónico",
+            "enterPhoneOrEmail": "Ingrese Teléfono o Correo Electrónico",
+            "password": "Contraseña",
+            "enterPassword": "Ingrese la Contraseña",
+            "forgotPassword": "¿Olvidó su contraseña?",
+            "loggingIn": "Iniciando sesión...",
+            "login": "Iniciar Sesión",
+            "dontHaveAccount": "¿No tiene una cuenta?",
+            "registerNow": "Regístrese Ahora",
+            "verifyRecaptcha": "Por favor verifique reCAPTCHA",
+            "loginSuccess": "Inicio de sesión exitoso",
+            "loginFailed": "Inicio de sesión fallido. Por favor, inténtelo de nuevo."
         }
     }
 }

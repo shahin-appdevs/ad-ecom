@@ -2,7 +2,7 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import {
     basicDataGetAPI,
@@ -16,7 +16,7 @@ import logo from "@public/images/logo/favicon.jpeg";
 import ReCAPTCHA from "react-google-recaptcha";
 import { handleApiError } from "@/components/utility/handleApiError";
 import getImageUrl from "@/components/utility/getImageUrl";
-import { useRouter } from "@/i18n/navigation";
+import { useLocale, useTranslations } from "next-intl";
 
 function Login() {
     useAuthRedirect();
@@ -28,6 +28,8 @@ function Login() {
     const [recaptcha, setRecaptcha] = useState(null);
     const [loginBasicData, setLoginBasicData] = useState(null);
     const [appSettingsData, setAppSettingsData] = useState(null);
+    const locale = useLocale();
+    const t = useTranslations("Auth.login");
     const searchParams = useSearchParams();
     const payLinkToken = searchParams.get("pay_link_token");
     const [redirectUrl, setRedirectUrl] = useState(null);
@@ -63,7 +65,7 @@ function Login() {
         e.preventDefault();
 
         if (loginBasicData?.google_recaptcha && !recaptcha) {
-            toast.error("Please verify reCAPTCHA");
+            toast.error(t("verifyRecaptcha"));
             return;
         }
 
@@ -74,6 +76,7 @@ function Login() {
             formData.append("credentials", credentials.trim());
             formData.append("password", password);
             formData.append("g-recaptcha-response", recaptcha);
+            formData.append("language", locale);
 
             const response = await loginAPI(formData);
 
@@ -81,7 +84,7 @@ function Login() {
                 const token = response.data.data.token;
                 const userInfo = response.data.data.user;
                 const successMessage =
-                    response?.data?.message?.success?.[0] || "Login successful";
+                    response?.data?.message?.success?.[0] || t("loginSuccess");
 
                 setCredentials("");
                 setPassword("");
@@ -127,7 +130,7 @@ function Login() {
             const errorMessage =
                 err.response?.data?.message?.error?.[0] ||
                 err.response?.data?.message ||
-                "Login failed. Please try again.";
+                t("loginFailed");
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -164,17 +167,18 @@ function Login() {
                             </span>
                         </div>
                         <h2 className="text-4xl font-bold text-gray-400 mb-6 leading-tight">
-                            Welcome Back <br /> to Your Space
+                            {t("welcomeBack")}
                         </h2>
                         <p className="text-gray-400 text-lg">
-                            Access your personalized dashboard, track orders,
-                            and manage your business efficiently.
+                            {t("welcomeBackDesc")}
                         </p>
                     </div>
 
                     <div className="relative z-10 text-sm text-blue-200/60">
-                        © {new Date().getFullYear()}{" "}
-                        {appSettingsData?.site_name}. All rights reserved.
+                        {t("copyright", {
+                            year: new Date().getFullYear(),
+                            siteName: appSettingsData?.site_name,
+                        })}
                     </div>
                 </div>
 
@@ -195,10 +199,10 @@ function Login() {
 
                     <div className="text-center md:text-left mb-10">
                         <h2 className="text-3xl font-bold text-gray-900">
-                            Sign In
+                            {t("signIn")}
                         </h2>
                         <p className="mt-2 text-sm text-gray-600">
-                            এ প্রবেশ করুন ফোন নাম্বার এর মাধ্যমে
+                            {t("signInViaPhone")}
                         </p>
                     </div>
 
@@ -209,13 +213,13 @@ function Login() {
                                 htmlFor="phone"
                                 className="block text-sm font-medium text-gray-700 mb-1"
                             >
-                                Phone or Email
+                                {t("phoneOrEmail")}
                             </label>
                             <div className="relative">
                                 <input
                                     id="phone"
                                     type="tel"
-                                    placeholder="Enter Phone or Email"
+                                    placeholder={t("enterPhoneOrEmail")}
                                     value={credentials}
                                     onChange={(e) =>
                                         setCredentials(e.target.value)
@@ -233,14 +237,14 @@ function Login() {
                                     htmlFor="password"
                                     className="block text-sm font-medium text-gray-700"
                                 >
-                                    Password
+                                    {t("password")}
                                 </label>
                             </div>
                             <div className="relative">
                                 <input
                                     id="password"
                                     type={showPassword ? "text" : "password"}
-                                    placeholder="••••••••"
+                                    placeholder={t("enterPassword")}
                                     value={password}
                                     onChange={(e) =>
                                         setPassword(e.target.value)
@@ -253,7 +257,7 @@ function Login() {
                                     onClick={() =>
                                         setShowPassword(!showPassword)
                                     }
-                                    className="absolute right-3 top-3.5 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
+                                    className="absolute ltr:right-3 rtl:left-3 top-3.5 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
                                 >
                                     {showPassword ? (
                                         <svg
@@ -299,7 +303,7 @@ function Login() {
                                     href="/user/auth/password/forgot"
                                     className="text-sm font-medium text-primary__color hover:text-primary__color/80 transition-colors"
                                 >
-                                    Forgot Password?
+                                    {t("forgotPassword")}
                                 </Link>
                             </div>
                         </div>
@@ -317,7 +321,7 @@ function Login() {
                         <div className="pt-2">
                             <Button
                                 type="submit"
-                                title={loading ? "Logging in..." : "Log In"}
+                                title={loading ? t("loggingIn") : t("login")}
                                 variant="primary"
                                 size="md"
                                 className="w-full py-3.5 text-base shadow-lg shadow-primary__color/30 hover:shadow-primary__color/50 transition-all duration-300"
@@ -328,12 +332,12 @@ function Login() {
                     {/* Bottom Register Link - Replaced Divider/Grid */}
                     <div className="mt-8 text-center">
                         <p className="text-sm text-gray-600">
-                            Don&apos;t have an account?{" "}
+                            {t("dontHaveAccount")}{" "}
                             <Link
                                 href="/user/auth/register"
                                 className="font-bold text-primary__color hover:underline transition-all"
                             >
-                                Register Now
+                                {t("registerNow")}
                             </Link>
                         </p>
                     </div>

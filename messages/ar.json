@@ -1252,6 +1252,19 @@
                     "message": "شكراً لك على طلبك. ولكن تم إلغاء شراء خطتك وسيتم معالجتها قريباً.",
                     "btnText": "الحصول على خطة أخرى"
                 }
+            },
+            "pointToCash": {
+                "title": "تحويل النقاط إلى نقود",
+                "failedLoad": "فشل تحميل سجل النقاط.",
+                "conversionFailed": "فشل التحويل!",
+                "noHistory": "لم يتم العثور على سجل نقاط.",
+                "points": "نقاط",
+                "cashAmount": "مبلغ نقدي:",
+                "convertPoints": "تحويل النقاط",
+                "confirmMsg": "هل أنت متأكد أنك تريد تحويل {points} نقطة إلى {amount}؟",
+                "cancel": "إلغاء",
+                "confirm": "تأكيد",
+                "converting": "جاري التحويل..."
             }
         },
         "cards": {
@@ -1417,6 +1430,25 @@
             "agreeTermsError": "يجب أن توافق على الشروط والأحكام",
             "registerSuccess": "تم التسجيل بنجاح",
             "registerFailed": "فشل التسجيل. يرجى المحاولة مرة أخرى."
+        },
+        "login": {
+            "welcomeBack": "مرحباً بعودتك إلى مساحتك",
+            "welcomeBackDesc": "قم بالوصول إلى لوحة التحكم الشخصية الخاصة بك، وتتبع الطلبات، وإدارة عملك بكفاءة.",
+            "copyright": "© {year} {siteName}. جميع الحقوق محفوظة.",
+            "signIn": "تسجيل الدخول",
+            "signInViaPhone": "تسجيل الدخول عبر رقم الهاتف",
+            "phoneOrEmail": "الهاتف أو البريد الإلكتروني",
+            "enterPhoneOrEmail": "أدخل الهاتف أو البريد الإلكتروني",
+            "password": "كلمة المرور",
+            "enterPassword": "أدخل كلمة المرور",
+            "forgotPassword": "هل نسيت كلمة المرور؟",
+            "loggingIn": "جاري تسجيل الدخول...",
+            "login": "تسجيل الدخول",
+            "dontHaveAccount": "ليس لديك حساب؟",
+            "registerNow": "سجل الآن",
+            "verifyRecaptcha": "يرجى التحقق من reCAPTCHA",
+            "loginSuccess": "تم تسجيل الدخول بنجاح",
+            "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى."
         }
     }
 }
