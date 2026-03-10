@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
     withdrawGetAPI,
@@ -58,6 +58,11 @@ export default function WithdrawSection({ setRefetch }) {
         dailyLimit: "0.00",
         monthlyLimit: "0.00",
     });
+    const fileInputRef = useRef(null);
+
+    const handleFileReset = () => {
+        fileInputRef.current.value = "";
+    };
 
     useEffect(() => {
         const fetchWithdrawInfo = async () => {
@@ -308,16 +313,14 @@ export default function WithdrawSection({ setRefetch }) {
                 const manualTransactionData = {
                     trx: response.data.data.payment_information?.trx,
                 };
-                const manualInputsKey = Object.keys(manualInputs);
-
-                manualInputsKey.forEach((item) => {
-                    manualTransactionData[item] = manualInputs[item];
-                });
 
                 const formData = new FormData();
 
-                Object.keys(manualTransactionData).forEach((item) => {
-                    formData.append(item, manualTransactionData[item]);
+                const manualInputsKey = Object.keys(manualInputs);
+                formData.append("trx", manualTransactionData.trx);
+
+                manualInputsKey.forEach((item) => {
+                    formData.append(item, manualInputs[item]);
                 });
 
                 // withdraw manual api call
@@ -330,6 +333,8 @@ export default function WithdrawSection({ setRefetch }) {
                     setOpenWithdrawModal(true);
                     setManualInputs({});
                     setAmount("");
+                    handleFileReset();
+
                     // sessionStorage.removeItem("manualPaymentData");
                 }
 
@@ -602,6 +607,7 @@ export default function WithdrawSection({ setRefetch }) {
                                         max: limitsCalculation.maxLimit,
                                     })}
                                     onChange={(e) => setAmount(e.target.value)}
+                                    required={true}
                                 />
                                 <div className="absolute z-20 ltr:right-2 rtl:left-2 top-1/2 transform -translate-y-1/2 w-20">
                                     <Listbox
@@ -680,7 +686,7 @@ export default function WithdrawSection({ setRefetch }) {
                                     {item.type === "text" && (
                                         <div>
                                             <label className="block text-sm font-medium mb-2">
-                                                {item?.label}
+                                                {`${item?.label}${item?.validation?.required ? "*" : " (optional)"}`}
                                             </label>
                                             <div className="relative">
                                                 <input
@@ -709,12 +715,76 @@ export default function WithdrawSection({ setRefetch }) {
                                                             }),
                                                         );
                                                     }}
-                                                    minLength={
-                                                        item?.validation?.min
+                                                    required={
+                                                        item?.validation
+                                                            ?.required
                                                     }
-                                                    maxLength={
-                                                        item?.validation?.max
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+                                    {item.type === "textarea" && (
+                                        <div>
+                                            <label className="block text-sm font-medium mb-2">
+                                                {`${item?.label}${item?.validation?.required ? "*" : " (optional)"}`}
+                                            </label>
+                                            <div className="relative">
+                                                <textarea
+                                                    value={
+                                                        manualInputs[
+                                                            item?.name
+                                                        ] || ""
                                                     }
+                                                    type={item?.type}
+                                                    name={item?.name}
+                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                                    // value={amount}
+                                                    placeholder={t(
+                                                        "enterField",
+                                                        {
+                                                            label: item?.label,
+                                                        },
+                                                    )}
+                                                    onChange={(e) => {
+                                                        setManualInputs(
+                                                            (prev) => ({
+                                                                ...prev,
+                                                                [item.name]:
+                                                                    e.target
+                                                                        .value,
+                                                            }),
+                                                        );
+                                                    }}
+                                                    required={
+                                                        item?.validation
+                                                            ?.required
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {item.type === "file" && (
+                                        <div>
+                                            <label className="block text-sm font-medium mb-2">
+                                                {`${item?.label}${item?.validation?.required ? "*" : " (optional)"}`}
+                                            </label>
+                                            <div className="relative">
+                                                <input
+                                                    ref={fileInputRef}
+                                                    type={item?.type}
+                                                    name={item?.name}
+                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                                    onChange={(e) => {
+                                                        setManualInputs(
+                                                            (prev) => ({
+                                                                ...prev,
+                                                                [item.name]:
+                                                                    e.target
+                                                                        .files[0],
+                                                            }),
+                                                        );
+                                                    }}
                                                     required={
                                                         item?.validation
                                                             ?.required

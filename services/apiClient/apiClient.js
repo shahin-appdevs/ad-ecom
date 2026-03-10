@@ -919,6 +919,7 @@ export const ManualWithdrawAPI = (formdata) => {
         return apiClient.post("/user/withdraw/manual/confirmed", formdata, {
             headers: {
                 Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data",
             },
         });
     } else {
