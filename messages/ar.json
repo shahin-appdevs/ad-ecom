@@ -1387,5 +1387,36 @@
             "itemRemoved": "تمت إزالة العنصر من سلة التسوق",
             "insideDhaka": "داخل دكا"
         }
+    },
+    "Auth": {
+        "register": {
+            "joinNetwork": "انضم إلى شبكة الجملة لدينا",
+            "joinNetworkDesc": "قم بإنشاء حساب لتصفح التشكيلات الحصرية وأسعار الجملة وإدارة مخزونك.",
+            "copyright": "© {year} QR eCommerce. جميع الحقوق محفوظة.",
+            "createAccount": "إنشاء حساب",
+            "signInViaPhone": "تسجيل الدخول عبر رقم الهاتف",
+            "fullName": "الاسم الكامل",
+            "enterName": "أدخل الاسم",
+            "phone": "رقم الهاتف",
+            "enterPhone": "أدخل الهاتف",
+            "email": "عنوان البريد الإلكتروني",
+            "enterEmail": "أدخل البريد الإلكتروني",
+            "password": "كلمة المرور",
+            "createPassword": "قم بإنشاء كلمة مرور",
+            "cancelReferral": "إلغاء كود الإحالة",
+            "haveReferral": "هل لديك كود إحالة؟",
+            "enterReferral": "أدخل كود الإحالة",
+            "agreeTo": "أنا أوافق على",
+            "terms": "الشروط والأحكام",
+            "creatingAccount": "جاري إنشاء الحساب...",
+            "register": "سجل",
+            "alreadyHaveAccount": "هل لديك حساب بالفعل؟",
+            "login": "تسجيل الدخول",
+            "language": "اللغة",
+            "verifyRecaptcha": "يرجى التحقق من reCAPTCHA",
+            "agreeTermsError": "يجب أن توافق على الشروط والأحكام",
+            "registerSuccess": "تم التسجيل بنجاح",
+            "registerFailed": "فشل التسجيل. يرجى المحاولة مرة أخرى."
+        }
     }
 }

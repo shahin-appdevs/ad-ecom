@@ -13,6 +13,7 @@ import logo from "@public/images/logo/favicon.jpeg";
 import { LoaderCircle } from "lucide-react";
 import ReCAPTCHA from "react-google-recaptcha";
 import useGoogleRecaptcha from "@/hooks/useGoogleRecaptcha";
+import { useLocale, useTranslations } from "next-intl";
 
 function RegisterComp() {
     useAuthRedirect();
@@ -29,6 +30,8 @@ function RegisterComp() {
     const [showPassword, setShowPassword] = useState(false);
     const { recaptcha, recaptchaRef, recaptchaChange, loginBasicData } =
         useGoogleRecaptcha();
+    const locale = useLocale();
+    const t = useTranslations("Auth.register");
 
     const searchParam = useSearchParams();
 
@@ -45,12 +48,12 @@ function RegisterComp() {
         e.preventDefault();
 
         if (loginBasicData?.google_recaptcha && !recaptcha) {
-            toast.error("Please verify reCAPTCHA");
+            toast.error(t("verifyRecaptcha"));
             return;
         }
 
         if (!agree) {
-            toast.error("You must agree to the terms and conditions");
+            toast.error(t("agreeTermsError"));
             return;
         }
 
@@ -64,6 +67,7 @@ function RegisterComp() {
             formData.append("password", password);
             formData.append("agree", agree.toString());
             formData.append("g-recaptcha-response", recaptcha);
+            formData.append("language", locale);
 
             if (showReferralInput && referralCode) {
                 formData.append("referral_code", referralCode.trim());
@@ -74,9 +78,7 @@ function RegisterComp() {
             if (response?.data?.data?.token) {
                 const token = response.data.data.token;
                 const userInfo = response.data.data.user;
-                const successMessage =
-                    response?.data?.message?.success?.[0] ||
-                    "Registration successful";
+                response?.data?.message?.success?.[0] || t("registerSuccess");
 
                 setName("");
                 setPhone("");
@@ -101,6 +103,7 @@ function RegisterComp() {
                     await sendOtpAPI();
                     router.push("/user/auth/email-verify");
                 } else if (userInfo?.sms_verified === 0) {
+                    await resendAuthorizationCodeAPI();
                     router.push("/user/auth/phone-verify");
                 } else {
                     router.push("/user/dashboard");
@@ -114,7 +117,7 @@ function RegisterComp() {
             const errorMessage =
                 err.response?.data?.message?.error?.[0] ||
                 err.response?.data?.message ||
-                "Registration failed. Please try again.";
+                t("registerFailed");
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -147,17 +150,15 @@ function RegisterComp() {
                             </span>
                         </div>
                         <h2 className="text-4xl font-bold text-gray-400 mb-6 leading-tight">
-                            Join Our <br /> Wholesale Network
+                            {t("joinNetwork")}
                         </h2>
                         <p className="text-gray-400 text-lg">
-                            Create an account to browse exclusive collections,
-                            bulk pricing, and manage your inventory.
+                            {t("joinNetworkDesc")}
                         </p>
                     </div>
 
                     <div className="relative z-10 text-sm text-blue-200/60">
-                        © {new Date().getFullYear()} QR eCommerce. All rights
-                        reserved.
+                        {t("copyright", { year: new Date().getFullYear() })}
                     </div>
                 </div>
 
@@ -175,10 +176,10 @@ function RegisterComp() {
 
                     <div className="text-center md:text-left mb-8">
                         <h2 className="text-3xl font-bold text-gray-900">
-                            Create Account
+                            {t("createAccount")}
                         </h2>
                         <p className="mt-2 text-sm text-gray-600">
-                            প্রবেশ করুন ফোন নাম্বার এর মাধ্যমে
+                            {t("signInViaPhone")}
                         </p>
                     </div>
 
@@ -189,12 +190,12 @@ function RegisterComp() {
                                 htmlFor="name"
                                 className="block text-sm font-medium text-gray-700 mb-1"
                             >
-                                Full Name
+                                {t("fullName")}
                             </label>
                             <input
                                 id="name"
                                 type="text"
-                                placeholder="Enter Name"
+                                placeholder={t("enterName")}
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 className="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary__color/50 focus:border-primary__color transition-all duration-200 bg-gray-50 focus:bg-white"
@@ -208,12 +209,12 @@ function RegisterComp() {
                                 htmlFor="phone"
                                 className="block text-sm font-medium text-gray-700 mb-1"
                             >
-                                Phone Number
+                                {t("phone")}
                             </label>
                             <input
                                 id="phone"
                                 type="number"
-                                placeholder="Enter Phone"
+                                placeholder={t("enterPhone")}
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 className="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary__color/50 focus:border-primary__color transition-all duration-200 bg-gray-50 focus:bg-white"
@@ -227,12 +228,12 @@ function RegisterComp() {
                                 htmlFor="email"
                                 className="block text-sm font-medium text-gray-700 mb-1"
                             >
-                                Email Address
+                                {t("email")}
                             </label>
                             <input
                                 id="email"
                                 type="email"
-                                placeholder="Enter Email"
+                                placeholder={t("enterEmail")}
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary__color/50 focus:border-primary__color transition-all duration-200 bg-gray-50 focus:bg-white"
@@ -246,13 +247,13 @@ function RegisterComp() {
                                 htmlFor="password"
                                 className="block text-sm font-medium text-gray-700 mb-1"
                             >
-                                Password
+                                {t("password")}
                             </label>
                             <div className="relative">
                                 <input
                                     id="password"
                                     type={showPassword ? "text" : "password"}
-                                    placeholder="Create a password"
+                                    placeholder={t("createPassword")}
                                     value={password}
                                     onChange={(e) =>
                                         setPassword(e.target.value)
@@ -318,8 +319,8 @@ function RegisterComp() {
                                     className="text-sm font-medium text-primary__color hover:underline focus:outline-none"
                                 >
                                     {showReferralInput
-                                        ? "Cancel Referral Code"
-                                        : "Have a referral code?"}
+                                        ? t("cancelReferral")
+                                        : t("haveReferral")}
                                 </button>
                             </div>
                             {showReferralInput && (
@@ -327,7 +328,7 @@ function RegisterComp() {
                                     <input
                                         id="referral"
                                         type="text"
-                                        placeholder="Enter Referral Code"
+                                        placeholder={t("enterReferral")}
                                         value={referralCode}
                                         onChange={(e) =>
                                             setReferralCode(e.target.value)
@@ -352,13 +353,13 @@ function RegisterComp() {
                                 htmlFor="agree"
                                 className="text-sm text-gray-600 select-none"
                             >
-                                I agree to the{" "}
-                                <a
-                                    href="#"
+                                {t("agreeTo")}{" "}
+                                <Link
+                                    href="/terms"
                                     className="font-medium text-gray-900 hover:underline"
                                 >
-                                    Terms and Conditions
-                                </a>
+                                    {t("terms")}
+                                </Link>
                             </label>
                         </div>
 
@@ -374,7 +375,9 @@ function RegisterComp() {
 
                         <Button
                             type="submit"
-                            title={loading ? "Creating Account..." : "Register"}
+                            title={
+                                loading ? t("creatingAccount") : t("register")
+                            }
                             variant="primary"
                             size="md"
                             className="w-full py-3.5 text-base shadow-lg shadow-primary__color/30 hover:shadow-primary__color/50 transition-all duration-300"
@@ -383,12 +386,12 @@ function RegisterComp() {
 
                     <div className="mt-8 text-center">
                         <p className="text-sm text-gray-600">
-                            Already have an account?{" "}
+                            {t("alreadyHaveAccount")}{" "}
                             <Link
                                 href="/user/auth/login"
                                 className="font-bold text-primary__color hover:underline transition-all"
                             >
-                                Log In
+                                {t("login")}
                             </Link>
                         </p>
                     </div>

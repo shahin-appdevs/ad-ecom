@@ -1387,5 +1387,36 @@
             "itemRemoved": "কার্ট থেকে আইটেম সরানো হয়েছে",
             "insideDhaka": "ঢাকার ভিতরে"
         }
+    },
+    "Auth": {
+        "register": {
+            "joinNetwork": "আমাদের পাইকারি নেটওয়ার্কে যোগ দিন",
+            "joinNetworkDesc": "এক্সক্লুসিভ কালেকশন, পাইকারি মূল্য এবং আপনার ইনভেন্টরি ম্যানেজ করতে একটি অ্যাকাউন্ট তৈরি করুন।",
+            "copyright": "© {year} QR eCommerce। সমস্ত অধিকার সংরক্ষিত।",
+            "createAccount": "অ্যাকাউন্ট তৈরি করুন",
+            "signInViaPhone": "ফোন নম্বর এর মাধ্যমে প্রবেশ করুন",
+            "fullName": "পুরো নাম",
+            "enterName": "নাম লিখুন",
+            "phone": "ফোন নম্বর",
+            "enterPhone": "ফোন নম্বর লিখুন",
+            "email": "ইমেল ঠিকানা",
+            "enterEmail": "ইমেল লিখুন",
+            "password": "পাসওয়ার্ড",
+            "createPassword": "একটি পাসওয়ার্ড তৈরি করুন",
+            "cancelReferral": "রেফারেল কোড বাতিল করুন",
+            "haveReferral": "একটি রেফারেল কোড আছে?",
+            "enterReferral": "রেফারেল কোড লিখুন",
+            "agreeTo": "আমি একমত",
+            "terms": "শর্তাবলীর সাথে",
+            "creatingAccount": "অ্যাকাউন্ট তৈরি করা হচ্ছে...",
+            "register": "নিবন্ধন করুন",
+            "alreadyHaveAccount": "ইতিমধ্যেই একটি অ্যাকাউন্ট আছে?",
+            "login": "লগ ইন করুন",
+            "language": "ভাষা",
+            "verifyRecaptcha": "অনুগ্রহ করে reCAPTCHA যাচাই করুন",
+            "agreeTermsError": "আপনাকে অবশ্যই শর্তাবলীতে একমত হতে হবে",
+            "registerSuccess": "নিবন্ধন সফল হয়েছে",
+            "registerFailed": "নিবন্ধন ব্যর্থ হয়েছে। পুনরায় চেষ্টা করুন।"
+        }
     }
 }

@@ -1387,5 +1387,36 @@
             "itemRemoved": "Item removed from cart",
             "insideDhaka": "Inside Dhaka"
         }
+    },
+    "Auth": {
+        "register": {
+            "joinNetwork": "Join Our Wholesale Network",
+            "joinNetworkDesc": "Create an account to browse exclusive collections, bulk pricing, and manage your inventory.",
+            "copyright": "© {year} QR eCommerce. All rights reserved.",
+            "createAccount": "Create Account",
+            "signInViaPhone": "Sign in via phone number",
+            "fullName": "Full Name",
+            "enterName": "Enter Name",
+            "phone": "Phone Number",
+            "enterPhone": "Enter Phone",
+            "email": "Email Address",
+            "enterEmail": "Enter Email",
+            "password": "Password",
+            "createPassword": "Create a password",
+            "cancelReferral": "Cancel Referral Code",
+            "haveReferral": "Have a referral code?",
+            "enterReferral": "Enter Referral Code",
+            "agreeTo": "I agree to the",
+            "terms": "Terms and Conditions",
+            "creatingAccount": "Creating Account...",
+            "register": "Register",
+            "alreadyHaveAccount": "Already have an account?",
+            "login": "Log In",
+            "language": "Language",
+            "verifyRecaptcha": "Please verify reCAPTCHA",
+            "agreeTermsError": "You must agree to the terms and conditions",
+            "registerSuccess": "Registration successful",
+            "registerFailed": "Registration failed. Please try again."
+        }
     }
 }

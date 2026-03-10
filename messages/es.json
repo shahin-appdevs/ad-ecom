@@ -1387,5 +1387,36 @@
             "itemRemoved": "Artículo eliminado del carrito",
             "insideDhaka": "Dentro de Dhaka"
         }
+    },
+    "Auth": {
+        "register": {
+            "joinNetwork": "Únase a Nuestra Red de Venta al por Mayor",
+            "joinNetworkDesc": "Cree una cuenta para explorar colecciones exclusivas, precios al por mayor y administrar su inventario.",
+            "copyright": "© {year} QR eCommerce. Todos los derechos reservados.",
+            "createAccount": "Crear Cuenta",
+            "signInViaPhone": "Iniciar sesión mediante número de teléfono",
+            "fullName": "Nombre Completo",
+            "enterName": "Ingrese el Nombre",
+            "phone": "Número de Teléfono",
+            "enterPhone": "Ingrese el Teléfono",
+            "email": "Dirección de Correo Electrónico",
+            "enterEmail": "Ingrese el Correo Electrónico",
+            "password": "Contraseña",
+            "createPassword": "Cree una contraseña",
+            "cancelReferral": "Cancelar Código de Referencia",
+            "haveReferral": "¿Tiene un código de referencia?",
+            "enterReferral": "Ingrese el Código de Referencia",
+            "agreeTo": "Estoy de acuerdo con los",
+            "terms": "Términos y Condiciones",
+            "creatingAccount": "Creando Cuenta...",
+            "register": "Registrarse",
+            "alreadyHaveAccount": "¿Ya tiene una cuenta?",
+            "login": "Iniciar Sesión",
+            "language": "Idioma",
+            "verifyRecaptcha": "Por favor verifique reCAPTCHA",
+            "agreeTermsError": "Debe estar de acuerdo con los términos y condiciones",
+            "registerSuccess": "Registro exitoso",
+            "registerFailed": "Registro fallido. Por favor, inténtelo de nuevo."
+        }
     }
 }
