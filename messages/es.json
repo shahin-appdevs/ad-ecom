@@ -1268,6 +1268,41 @@
             }
         },
         "cards": {
+            "virtualCard": {
+                "myVirtualCardTrx": {
+                    "title": "Transacción Reciente",
+                    "viewMore": "Ver Más",
+                    "noTransaction": "No se encontró transacción",
+                    "table": {
+                        "trxId": "ID de Trx",
+                        "trxType": "Tipo de Transacción",
+                        "exchangeRate": "Tasa de Cambio",
+                        "feeCharge": "Tarifa/Cargo",
+                        "cardAmount": "Monto de Tarjeta",
+                        "cardNumber": "Número de Tarjeta",
+                        "cardBalance": "Saldo de Tarjeta",
+                        "timeDate": "Hora y Fecha",
+                        "status": "Estado"
+                    }
+                },
+                "myVirtualCard": {
+                    "title": "Tarjeta Virtual",
+                    "createCard": "Crear Tarjeta",
+                    "noCardAvailable": "No hay tarjeta disponible. Por favor crea una.",
+                    "default": "predeterminado",
+                    "exp": "EXP.",
+                    "fetchError": "Error al obtener la información de la página",
+                    "kycLowError": "KYC es bajo. Por favor actualice la información del cliente",
+                    "pendingModalTitle": "KYC del cliente está pendiente"
+                },
+                "createCustomer": {
+                    "fetchError": "Error al cargar la información de la billetera",
+                    "fieldRequired": "{label} es requerido",
+                    "enterField": "Ingrese {label}",
+                    "submit": "Enviar",
+                    "submitting": "Enviando..."
+                }
+            },
             "giftCard": {
                 "myGiftCards": {
                     "title": "Mis Tarjetas de Regalo",

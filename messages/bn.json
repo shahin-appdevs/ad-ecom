@@ -1268,6 +1268,41 @@
             }
         },
         "cards": {
+            "virtualCard": {
+                "myVirtualCardTrx": {
+                    "title": "সাম্প্রতিক লেনদেন",
+                    "viewMore": "আরও দেখুন",
+                    "noTransaction": "কোনো লেনদেন পাওয়া যায়নি",
+                    "table": {
+                        "trxId": "ট্রানজেকশন আইডি",
+                        "trxType": "লেনদেনের ধরন",
+                        "exchangeRate": "বিনিময় হার",
+                        "feeCharge": "ফি/চার্জ",
+                        "cardAmount": "কার্ডের পরিমাণ",
+                        "cardNumber": "কার্ড নম্বর",
+                        "cardBalance": "কার্ড ব্যালেন্স",
+                        "timeDate": "সময় ও তারিখ",
+                        "status": "অবস্থা"
+                    }
+                },
+                "myVirtualCard": {
+                    "title": "ভার্চুয়াল কার্ড",
+                    "createCard": "কার্ড তৈরি করুন",
+                    "noCardAvailable": "কোনো কার্ড উপলব্ধ নেই। অনুগ্রহ করে একটি তৈরি করুন।",
+                    "default": "ডিফল্ট",
+                    "exp": "মেয়াদ উত্তীর্ণ",
+                    "fetchError": "পৃষ্ঠার তথ্য আনতে ব্যর্থ",
+                    "kycLowError": "KYC নিম্ন। অনুগ্রহ করে গ্রাহকের তথ্য আপডেট করুন",
+                    "pendingModalTitle": "গ্রাহকের KYC অপেক্ষমাণ"
+                },
+                "createCustomer": {
+                    "fetchError": "ওয়ালেটের তথ্য লোড করতে ব্যর্থ",
+                    "fieldRequired": "{label} আবশ্যক",
+                    "enterField": "{label} লিখুন",
+                    "submit": "জমা দিন",
+                    "submitting": "জমা দেওয়া হচ্ছে..."
+                }
+            },
             "giftCard": {
                 "myGiftCards": {
                     "title": "আমার গিফট কার্ড",

@@ -14,8 +14,10 @@ import RHFSelect from "@/components/ui/form/RHFSelect";
 import { RHFFileUpload } from "@/components/ui/form/RHFFileUpload";
 import { RHFTextarea } from "@/components/ui/form/RHFTextarea";
 import toast from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 export default function CreateCustomer() {
+    const t = useTranslations("Dashboard.cards.virtualCard.createCustomer");
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
@@ -52,7 +54,7 @@ export default function CreateCustomer() {
                     }
                 });
             } catch (error) {
-                toast.error("Failed to load wallet information");
+                toast.error(t("fetchError"));
             } finally {
                 setLoading(false);
             }
@@ -98,10 +100,10 @@ export default function CreateCustomer() {
             label: `${field.label_name}  ${field.required ? "<span>*</span>" : ""} ${field.site_label ? `<span class="text-red-500" >(${field.site_label})</span>` : ""}`,
             rules: {
                 required: field.required
-                    ? `${field.label_name} is required`
+                    ? t("fieldRequired", { label: field.label_name })
                     : false,
             },
-            placeholder: `Enter ${field.label_name}` || "",
+            placeholder: t("enterField", { label: field.label_name }) || "",
             readOnly:
                 field.field_name === "customer_email" ||
                 field.field_name === "phone_code"
@@ -126,7 +128,11 @@ export default function CreateCustomer() {
                         name={field.field_name}
                         control={control}
                         label={field.label_name + (field.required ? "*" : "")}
-                        rules={{ required: `${field.label_name} is required` }}
+                        rules={{
+                            required: t("fieldRequired", {
+                                label: field.label_name,
+                            }),
+                        }}
                         error={errors[field.field_name]?.message}
                     />
                 );
@@ -190,7 +196,7 @@ export default function CreateCustomer() {
                     type="submit"
                     className="w-full rounded-lg bg-blue-600 py-3 text-white font-semibold hover:bg-blue-700"
                 >
-                    {isSubmitting ? "Submitting..." : "Submit"}
+                    {isSubmitting ? t("submitting") : t("submit")}
                     {isSubmitting ? (
                         <LoaderCircle className="text-white animate-spin inline ms-2" />
                     ) : (

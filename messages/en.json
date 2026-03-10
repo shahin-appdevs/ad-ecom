@@ -1268,6 +1268,41 @@
             }
         },
         "cards": {
+            "virtualCard": {
+                "myVirtualCardTrx": {
+                    "title": "Recent Transaction",
+                    "viewMore": "View More",
+                    "noTransaction": "No transaction found",
+                    "table": {
+                        "trxId": "Trx Id",
+                        "trxType": "Transaction Type",
+                        "exchangeRate": "Exchange Rate",
+                        "feeCharge": "Fee/Charge",
+                        "cardAmount": "Card Amount",
+                        "cardNumber": "Card Number",
+                        "cardBalance": "Card Balance",
+                        "timeDate": "Time & Date",
+                        "status": "Status"
+                    }
+                },
+                "myVirtualCard": {
+                    "title": "Virtual Card",
+                    "createCard": "Create Card",
+                    "noCardAvailable": "No card available. Please create one.",
+                    "default": "default",
+                    "exp": "EXP.",
+                    "fetchError": "Failed to fetch page info",
+                    "kycLowError": "KYC is Low. Please update customer info",
+                    "pendingModalTitle": "Customer KYC is Pending"
+                },
+                "createCustomer": {
+                    "fetchError": "Failed to load wallet information",
+                    "fieldRequired": "{label} is required",
+                    "enterField": "Enter {label}",
+                    "submit": "Submit",
+                    "submitting": "Submitting..."
+                }
+            },
             "giftCard": {
                 "myGiftCards": {
                     "title": "My Gift Card",

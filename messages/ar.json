@@ -1268,6 +1268,41 @@
             }
         },
         "cards": {
+            "virtualCard": {
+                "myVirtualCardTrx": {
+                    "title": "المعاملات الأخيرة",
+                    "viewMore": "عرض المزيد",
+                    "noTransaction": "لم يتم العثور على معاملة",
+                    "table": {
+                        "trxId": "معرف المعاملة",
+                        "trxType": "نوع المعاملة",
+                        "exchangeRate": "سعر الصرف",
+                        "feeCharge": "الرسوم/التكلفة",
+                        "cardAmount": "مبلغ البطاقة",
+                        "cardNumber": "رقم البطاقة",
+                        "cardBalance": "رصيد البطاقة",
+                        "timeDate": "الوقت والتاريخ",
+                        "status": "الحالة"
+                    }
+                },
+                "myVirtualCard": {
+                    "title": "البطاقة الافتراضية",
+                    "createCard": "إنشاء بطاقة",
+                    "noCardAvailable": "لا تتوفر بطاقة. يرجى إنشاء واحدة.",
+                    "default": "افتراضي",
+                    "exp": "انتهاء الصلاحية",
+                    "fetchError": "فشل في جلب معلومات الصفحة",
+                    "kycLowError": "KYC منخفض. يرجى تحديث معلومات العميل",
+                    "pendingModalTitle": "KYC العميل قيد الانتظار"
+                },
+                "createCustomer": {
+                    "fetchError": "فشل تحميل معلومات المحفظة",
+                    "fieldRequired": "{label} مطلوب",
+                    "enterField": "أدخل {label}",
+                    "submit": "إرسال",
+                    "submitting": "جاري الإرسال..."
+                }
+            },
             "giftCard": {
                 "myGiftCards": {
                     "title": "بطاقات الهدايا الخاصة بي",
