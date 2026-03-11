@@ -1377,6 +1377,54 @@
                     "monthlyLimit": "Monthly Limit",
                     "remainingDailyLimit": "Remaining Daily Limit",
                     "remainingMonthlyLimit": "Remaining Monthly Limit"
+                },
+                "virtualCardDetails": {
+                    "title": "Card Information",
+                    "description": " Move funds within your card, freeze or close it",
+                    "defaultBadge": "default",
+                    "cardDetailsCopied": "Card full details copied",
+                    "cardNumberNotFound": "Card number not found",
+                    "copy": "Copy",
+                    "exp": "EXP.",
+                    "copyExpiryDate": "Copy Expiry Date",
+                    "cvv": "CVV",
+                    "balance": "Balance",
+                    "cardType": "Card Type",
+                    "currency": "Currency",
+                    "cardDetailsHeading": "Card Details",
+                    "billingAddress": "Billing Address",
+                    "noAddressFound": "No Address Found",
+                    "viewTransactions": "View Transactions",
+                    "deposit": "Deposit",
+                    "removeDefault": "Remove Default",
+                    "makingDefault": "Making Default",
+                    "makeDefault": "Make Default",
+                    "unfreeze": "Unfreeze",
+                    "freeze": "Freeze"
+                },
+                "virtualCardWebhookTrx": {
+                    "title": "Webhook Transactions",
+                    "table": {
+                        "trxId": "Trx Id",
+                        "eventType": "Event Type",
+                        "reference": "Reference",
+                        "narrative": "Narrative",
+                        "reason": "Reason",
+                        "amount": "Amount",
+                        "chargeAmount": "Charge Amount",
+                        "balanceBeforeTermination": "Balance Before Termination",
+                        "status": "Status",
+                        "createdAt": "Created At"
+                    },
+                    "noTransaction": "No transaction found"
+                },
+                "updateCustomer": {
+                    "isRequired": "{field} is required",
+                    "enterField": "Enter {field}",
+                    "idCardImage": "ID Card Image",
+                    "yourPhoto": "Your Photo",
+                    "submitting": "Submitting...",
+                    "submit": "Submit"
                 }
             },
             "giftCard": {

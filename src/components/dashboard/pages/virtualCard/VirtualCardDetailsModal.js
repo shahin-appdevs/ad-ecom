@@ -21,6 +21,7 @@ import toast from "react-hot-toast";
 import Image from "next/image";
 import { handleApiError } from "@/components/utility/handleApiError";
 import { handleApiSuccess } from "@/components/utility/handleApiSuccess";
+import { useTranslations } from "next-intl";
 
 export default function VirtualCardDetailsModal({
     open,
@@ -29,6 +30,7 @@ export default function VirtualCardDetailsModal({
     setOpenDepositModal,
     setMyVirtualCard,
 }) {
+    const t = useTranslations("Dashboard.cards.virtualCard.virtualCardDetails");
     const [show, setShow] = useState(false);
     // const [openDepositModal, setOpenDepositModal] = useState(false);
     const [detailsLoading, setDetailsLoading] = useState(false);
@@ -124,18 +126,18 @@ export default function VirtualCardDetailsModal({
     const lastFour = accountNo?.slice(-4);
     const secretNo = accountNo
         ? `${firstSix?.slice(0, 4)} ${firstSix?.slice(4, 6)}*******${lastFour?.slice(0, 2)} ${lastFour?.slice(2)}`
-        : "Card number not found";
+        : t("cardNumberNotFound");
     const formatAcNo = accountNo
         ? `${accountNo?.slice(0, 4)} ${accountNo?.slice(4, 8)} ${accountNo?.slice(8, 12)} ${accountNo?.slice(12, accountNo?.length)}`
-        : "Card number not found";
+        : t("cardNumberNotFound");
 
     return (
         <>
             <Modal
                 open={open}
                 onClose={onClose}
-                title={"Card Information"}
-                description={" Move funds within your card, freeze or close it"}
+                title={t("title")}
+                description={t("description")}
             >
                 {/* Content */}
                 {detailsLoading ? (
@@ -180,7 +182,7 @@ export default function VirtualCardDetailsModal({
                                                     </h3>
                                                     {myCard?.is_default && (
                                                         <span className="font-normal  text-white px-2 py-[2px] rounded-full border border-green-500 text-xs ">
-                                                            default
+                                                            {t("defaultBadge")}
                                                         </span>
                                                     )}
                                                 </div>
@@ -212,7 +214,9 @@ export default function VirtualCardDetailsModal({
                                                     onClick={() =>
                                                         copyToClipboard(
                                                             `${myCard.name}, ${myCard.card_number}, ${myCard?.cvv}, ${myCard?.expiry}`,
-                                                            "Card full details copied",
+                                                            t(
+                                                                "cardDetailsCopied",
+                                                            ),
                                                         )
                                                     }
                                                     className=" w-[28px] h-[24px] cursor-pointer border rounded-md flex items-center justify-center"
@@ -241,7 +245,7 @@ export default function VirtualCardDetailsModal({
                                                         myCard?.card_number,
                                                     )
                                                 }
-                                                title="Copy"
+                                                title={t("copy")}
                                                 className=" w-[28px] h-[24px] cursor-pointer rounded-md flex items-center justify-center"
                                             >
                                                 <Files size={18} />
@@ -257,7 +261,7 @@ export default function VirtualCardDetailsModal({
                                             <div className="flex gap-6 items-center">
                                                 <div>
                                                     <p className="text-xs opacity-90">
-                                                        EXP.
+                                                        {t("exp")}
                                                     </p>
                                                     <div className="text-base md:text-lg font-semibold flex items-center gap-1">
                                                         <span>
@@ -269,7 +273,9 @@ export default function VirtualCardDetailsModal({
                                                                     myCard?.expiry,
                                                                 )
                                                             }
-                                                            title="Copy Expiry Date"
+                                                            title={t(
+                                                                "copyExpiryDate",
+                                                            )}
                                                             className=" w-[28px] h-[24px] cursor-pointer rounded-md flex items-center justify-center"
                                                         >
                                                             <Files size={18} />
@@ -278,7 +284,7 @@ export default function VirtualCardDetailsModal({
                                                 </div>
                                                 <div>
                                                     <p className="text-xs opacity-90">
-                                                        CVV
+                                                        {t("cvv")}
                                                     </p>
                                                     <div className="text-base md:text-lg  font-semibold flex items-center gap-1">
                                                         <span>
@@ -293,7 +299,7 @@ export default function VirtualCardDetailsModal({
                                                                     myCard?.cvv,
                                                                 )
                                                             }
-                                                            title="Copy"
+                                                            title={t("copy")}
                                                             className=" w-[28px] h-[24px]  rounded-md flex items-center justify-center"
                                                         >
                                                             <Files size={18} />
@@ -328,7 +334,7 @@ export default function VirtualCardDetailsModal({
                             <div className="flex flex-col md:flex-row w-full gap-2 items-center">
                                 <div className="w-full flex flex-col items-center border rounded-xl p-4 bg-gray-50">
                                     <p className="text-sm text-gray-500 mb-1">
-                                        Balance
+                                        {t("balance")}
                                     </p>
                                     <p className="text-base font-medium text-gray-900">
                                         {myCard?.amount?.toFixed(2)}{" "}
@@ -337,7 +343,7 @@ export default function VirtualCardDetailsModal({
                                 </div>
                                 <div className="w-full flex flex-col items-center border rounded-xl p-4 bg-gray-50">
                                     <p className="text-sm text-gray-00 mb-1">
-                                        Card Type
+                                        {t("cardType")}
                                     </p>
                                     <p className="text-base font-medium text-gray-900">
                                         {myCard?.card_type}
@@ -345,7 +351,7 @@ export default function VirtualCardDetailsModal({
                                 </div>
                                 <div className="w-full flex flex-col items-center border rounded-xl p-4 bg-gray-50">
                                     <p className="text-sm text-gray-500 mb-1">
-                                        Currency
+                                        {t("currency")}
                                     </p>
                                     <p className="text-base font-medium text-gray-900">
                                         {myCard?.currency}
@@ -354,7 +360,7 @@ export default function VirtualCardDetailsModal({
                             </div>
                             <div className="w-full border rounded-xl p-4 bg-gray-50">
                                 <p className="text-sm text-gray-500 font-semibold mb-1">
-                                    Card Details
+                                    {t("cardDetailsHeading")}
                                 </p>
                                 <div
                                     dangerouslySetInnerHTML={{
@@ -369,10 +375,10 @@ export default function VirtualCardDetailsModal({
                             <div className="border rounded-xl p-4 space-y-2">
                                 <div className="flex items-center justify-between">
                                     <p className="text-sm text-neutral-800 mb-1">
-                                        Billing Address
+                                        {t("billingAddress")}
                                     </p>
                                     <div
-                                        title="Copy"
+                                        title={t("copy")}
                                         onClick={() =>
                                             copyToClipboard(
                                                 cardDetails?.business_address
@@ -396,7 +402,9 @@ export default function VirtualCardDetailsModal({
                                         cardDetails?.business_address?.length <
                                             1 ? (
                                             <div className="flex items-center justify-center ">
-                                                <span>No Address Found</span>
+                                                <span>
+                                                    {t("noAddressFound")}
+                                                </span>
                                             </div>
                                         ) : (
                                             cardDetails?.business_address?.map(
@@ -423,7 +431,7 @@ export default function VirtualCardDetailsModal({
                                 href={`/user/cards/virtual-card/transaction?card_id=${myCard?.card_id}`}
                                 className="w-full flex gap-2 items-center justify-center py-3 rounded-xl border font-medium hover:bg-gray-50"
                             >
-                                <span>View Transactions</span>{" "}
+                                <span>{t("viewTransactions")}</span>{" "}
                                 <ArrowRight size={18} />
                             </Link>
                             <button
@@ -434,7 +442,8 @@ export default function VirtualCardDetailsModal({
                                 }}
                                 className=" flex gap-2 items-center justify-center w-full py-3 rounded-xl bg-emerald-700 text-white font-medium hover:bg-emerald-800"
                             >
-                                <span>Deposit</span> <ArrowDownLeft size={18} />
+                                <span>{t("deposit")}</span>{" "}
+                                <ArrowDownLeft size={18} />
                             </button>
                             <div className="grid grid-cols-2 gap-3">
                                 <button
@@ -442,12 +451,12 @@ export default function VirtualCardDetailsModal({
                                     className={`${myCard?.is_default ? "text-red-500 bg-red-50 hover:bg-red-100 border-red-500" : ""} hover:bg-gray-50 flex duration-200 gap-2 items-center justify-center py-3 rounded-xl border font-medium `}
                                 >
                                     {myCard?.is_default ? (
-                                        <span>Remove Default</span>
+                                        <span>{t("removeDefault")}</span>
                                     ) : (
                                         <span>
                                             {makeDefaultLoading
-                                                ? "Making Default"
-                                                : "Make Default"}
+                                                ? t("makingDefault")
+                                                : t("makeDefault")}
                                         </span>
                                     )}
                                     {makeDefaultLoading ? (
@@ -472,8 +481,8 @@ export default function VirtualCardDetailsModal({
                                 >
                                     <span>
                                         {myCard?.status === false
-                                            ? "Unfreeze"
-                                            : "Freeze"}
+                                            ? t("unfreeze")
+                                            : t("freeze")}
                                     </span>
                                     <Snowflake
                                         size={18}

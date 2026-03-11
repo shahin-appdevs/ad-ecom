@@ -15,8 +15,10 @@ import RHFSelect from "@/components/ui/form/RHFSelect";
 import { RHFFileUpload } from "@/components/ui/form/RHFFileUpload";
 import { RHFTextarea } from "@/components/ui/form/RHFTextarea";
 import toast from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 export default function UpdateCustomer() {
+    const t = useTranslations("Dashboard.cards.virtualCard.updateCustomer");
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
@@ -129,10 +131,10 @@ export default function UpdateCustomer() {
             label: `${field.label_name}  ${field.required ? "<span>*</span>" : ""} ${field.site_label ? `<span class="text-red-500" >(${field.site_label})</span>` : ""}`,
             rules: {
                 required: field.required
-                    ? `${field.label_name} is required`
+                    ? t("isRequired", { field: field.label_name })
                     : false,
             },
-            placeholder: `Enter ${field.label_name}` || "",
+            placeholder: t("enterField", { field: field.label_name }) || "",
             readOnly:
                 field.field_name === "customer_email" ||
                 field.field_name === "phone_code"
@@ -157,7 +159,11 @@ export default function UpdateCustomer() {
                         name={field.field_name}
                         control={control}
                         label={field.label_name + (field.required ? "*" : "")}
-                        rules={{ required: `${field.label_name} is required` }}
+                        rules={{
+                            required: t("isRequired", {
+                                field: field.label_name,
+                            }),
+                        }}
                         error={errors[field.field_name]?.message}
                     />
                 );
@@ -220,7 +226,7 @@ export default function UpdateCustomer() {
                 <div className="flex items-start gap-2">
                     <div>
                         <label className="block mb-1 text-sm font-medium text-gray-700">
-                            ID Card Image
+                            {t("idCardImage")}
                         </label>
                         <img
                             src={customerCardInfo?.idImage}
@@ -232,7 +238,7 @@ export default function UpdateCustomer() {
 
                     <div>
                         <label className="block mb-1 text-sm font-medium text-gray-700">
-                            Your Photo
+                            {t("yourPhoto")}
                         </label>
                         <img
                             src={customerCardInfo?.userPhoto}
@@ -247,7 +253,7 @@ export default function UpdateCustomer() {
                     type="submit"
                     className="w-full rounded-lg bg-blue-600 py-3 text-white font-semibold hover:bg-blue-700"
                 >
-                    {isSubmitting ? "Submitting..." : "Submit"}
+                    {isSubmitting ? t("submitting") : t("submit")}
                     {isSubmitting ? (
                         <LoaderCircle className="text-white animate-spin inline ms-2" />
                     ) : (

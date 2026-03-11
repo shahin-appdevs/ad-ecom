@@ -1377,6 +1377,54 @@
                     "monthlyLimit": "Límite Mensual",
                     "remainingDailyLimit": "Límite Diario Restante",
                     "remainingMonthlyLimit": "Límite Mensual Restante"
+                },
+                "virtualCardDetails": {
+                    "title": "Información de la Tarjeta",
+                    "description": "Mueva fondos dentro de su tarjeta, congélela o ciérrela",
+                    "defaultBadge": "predeterminado",
+                    "cardDetailsCopied": "Detalles completos de la tarjeta copiados",
+                    "cardNumberNotFound": "Número de tarjeta no encontrado",
+                    "copy": "Copiar",
+                    "exp": "EXP.",
+                    "copyExpiryDate": "Copiar Fecha de Vencimiento",
+                    "cvv": "CVV",
+                    "balance": "Saldo",
+                    "cardType": "Tipo de Tarjeta",
+                    "currency": "Moneda",
+                    "cardDetailsHeading": "Detalles de la Tarjeta",
+                    "billingAddress": "Dirección de Facturación",
+                    "noAddressFound": "No se encontró dirección",
+                    "viewTransactions": "Ver Transacciones",
+                    "deposit": "Depositar",
+                    "removeDefault": "Quitar Predeterminado",
+                    "makingDefault": "Estableciendo Predeterminado",
+                    "makeDefault": "Establecer Predeterminado",
+                    "unfreeze": "Descongelar",
+                    "freeze": "Congelar"
+                },
+                "virtualCardWebhookTrx": {
+                    "title": "Transacciones Webhook",
+                    "table": {
+                        "trxId": "ID de Trx",
+                        "eventType": "Tipo de Evento",
+                        "reference": "Referencia",
+                        "narrative": "Narrativa",
+                        "reason": "Razón",
+                        "amount": "Monto",
+                        "chargeAmount": "Monto de Cargo",
+                        "balanceBeforeTermination": "Saldo Antes de Terminación",
+                        "status": "Estado",
+                        "createdAt": "Creado En"
+                    },
+                    "noTransaction": "No se encontró transacción"
+                },
+                "updateCustomer": {
+                    "isRequired": "{field} es obligatorio",
+                    "enterField": "Ingresar {field}",
+                    "idCardImage": "Imagen de Tarjeta de Identificación",
+                    "yourPhoto": "Tu Foto",
+                    "submitting": "Enviando...",
+                    "submit": "Enviar"
                 }
             },
             "giftCard": {

@@ -1377,6 +1377,54 @@
                     "monthlyLimit": "الحد الشهري",
                     "remainingDailyLimit": "الحد اليومي المتبقي",
                     "remainingMonthlyLimit": "الحد الشهري المتبقي"
+                },
+                "virtualCardDetails": {
+                    "title": "معلومات البطاقة",
+                    "description": "نقل الأموال داخل بطاقتك أو تجميدها أو إغلاقها",
+                    "defaultBadge": "افتراضي",
+                    "cardDetailsCopied": "تم نسخ تفاصيل البطاقة بالكامل",
+                    "cardNumberNotFound": "لم يتم العثور على رقم البطاقة",
+                    "copy": "نسخ",
+                    "exp": "انتهاء",
+                    "copyExpiryDate": "نسخ تاريخ الانتهاء",
+                    "cvv": "رمز التحقق",
+                    "balance": "الرصيد",
+                    "cardType": "نوع البطاقة",
+                    "currency": "العملة",
+                    "cardDetailsHeading": "تفاصيل البطاقة",
+                    "billingAddress": "عنوان الدفع",
+                    "noAddressFound": "لم يتم العثور على عنوان",
+                    "viewTransactions": "عرض المعاملات",
+                    "deposit": "إيداع",
+                    "removeDefault": "إزالة الافتراضي",
+                    "makingDefault": "جاري التعيين كافتراضي",
+                    "makeDefault": "تعيين كافتراضي",
+                    "unfreeze": "إلغاء التجميد",
+                    "freeze": "تجميد"
+                },
+                "virtualCardWebhookTrx": {
+                    "title": "معاملات الويب هوك",
+                    "table": {
+                        "trxId": "معرف المعاملة",
+                        "eventType": "نوع الحدث",
+                        "reference": "المرجع",
+                        "narrative": "السرد",
+                        "reason": "السبب",
+                        "amount": "المبلغ",
+                        "chargeAmount": "مبلغ الرسوم",
+                        "balanceBeforeTermination": "الرصيد قبل الإنهاء",
+                        "status": "الحالة",
+                        "createdAt": "تاريخ الإنشاء"
+                    },
+                    "noTransaction": "لم يتم العثور على معاملة"
+                },
+                "updateCustomer": {
+                    "isRequired": "{field} مطلوب",
+                    "enterField": "أدخل {field}",
+                    "idCardImage": "صورة بطاقة الهوية",
+                    "yourPhoto": "صورتك",
+                    "submitting": "جاري التقديم...",
+                    "submit": "تقديم"
                 }
             },
             "giftCard": {

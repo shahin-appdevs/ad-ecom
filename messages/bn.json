@@ -1377,6 +1377,54 @@
                     "monthlyLimit": "মাসিক সীমা",
                     "remainingDailyLimit": "অবশিষ্ট দৈনিক সীমা",
                     "remainingMonthlyLimit": "অবশিষ্ট মাসিক সীমা"
+                },
+                "virtualCardDetails": {
+                    "title": "কার্ডের তথ্য",
+                    "description": "আপনার কার্ডের মধ্যে তহবিল স্থানান্তর করুন, এটি ফ্রিজ বা বন্ধ করুন",
+                    "defaultBadge": "ডিফল্ট",
+                    "cardDetailsCopied": "কার্ডের সম্পূর্ণ বিবরণ কপি করা হয়েছে",
+                    "cardNumberNotFound": "কার্ড নম্বর পাওয়া যায়নি",
+                    "copy": "কপি করুন",
+                    "exp": "মেয়াদ",
+                    "copyExpiryDate": "মেয়াদোত্তীর্ণের তারিখ কপি করুন",
+                    "cvv": "সিভিভি",
+                    "balance": "ব্যালেন্স",
+                    "cardType": "কার্ডের ধরন",
+                    "currency": "মুদ্রা",
+                    "cardDetailsHeading": "কার্ডের বিবরণ",
+                    "billingAddress": "বিলের ঠিকানা",
+                    "noAddressFound": "কোনো ঠিকানা পাওয়া যায়নি",
+                    "viewTransactions": "লেনদেন দেখুন",
+                    "deposit": "ডিপোজিট করুন",
+                    "removeDefault": "ডিফল্ট সরিয়ে দিন",
+                    "makingDefault": "ডিফল্ট করা হচ্ছে",
+                    "makeDefault": "ডিফল্ট করুন",
+                    "unfreeze": "আনফ্রিজ করুন",
+                    "freeze": "ফ্রিজ করুন"
+                },
+                "virtualCardWebhookTrx": {
+                    "title": "ওয়েবহুক লেনদেন",
+                    "table": {
+                        "trxId": "লেনদেন আইডি",
+                        "eventType": "ইভেন্ট টাইপ",
+                        "reference": "রেফারেন্স",
+                        "narrative": "বিবরণ",
+                        "reason": "কারণ",
+                        "amount": "পরিমাণ",
+                        "chargeAmount": "চার্জের পরিমাণ",
+                        "balanceBeforeTermination": "বাতিলের আগে ব্যালেন্স",
+                        "status": "স্ট্যাটাস",
+                        "createdAt": "তৈরির তারিখ"
+                    },
+                    "noTransaction": "কোনো লেনদেন পাওয়া যায়নি"
+                },
+                "updateCustomer": {
+                    "isRequired": "{field} আবশ্যক",
+                    "enterField": "{field} লিখুন",
+                    "idCardImage": "আইডি কার্ডের ছবি",
+                    "yourPhoto": "আপনার ছবি",
+                    "submitting": "জমা দেওয়া হচ্ছে...",
+                    "submit": "জমা দিন"
                 }
             },
             "giftCard": {
