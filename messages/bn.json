@@ -1331,6 +1331,52 @@
                     "monthlyLimit": "মাসিক সীমা",
                     "remainingDailyLimit": "অবশিষ্ট দৈনিক সীমা",
                     "remainingMonthlyLimit": "অবশিষ্ট মাসিক সীমা"
+                },
+                "singleCardTrx": {
+                    "recentTransaction": "সাম্প্রতিক লেনদেন",
+                    "webhookTransaction": "ওয়েবহুক লেনদেন",
+                    "table": {
+                        "trxId": "ট্রানজেকশন আইডি",
+                        "type": "ধরণ",
+                        "cardId": "কার্ড আইডি",
+                        "amount": "পরিমাণ",
+                        "centAmount": "সেন্ট পরিমাণ",
+                        "method": "পদ্ধতি",
+                        "narrative": "বিবরণ",
+                        "currency": "মুদ্রা",
+                        "status": "অবস্থা",
+                        "reference": "রেফারেন্স"
+                    },
+                    "noTransaction": "কোনো লেনদেন পাওয়া যায়নি"
+                },
+                "virtualCardDeposit": {
+                    "depositSuccessful": "ডিপোজিট সফল হয়েছে!",
+                    "failedToDeposit": "ডিপোজিট ব্যর্থ হয়েছে",
+                    "title": "কার্ডে ডিপোজিট করুন",
+                    "description": "আপনার কার্ডের মধ্যে তহবিল স্থানান্তর করুন, এটি ফ্রিজ করুন বা বন্ধ করুন",
+                    "depositAmountLabel": "ডিপোজিটের পরিমাণ *",
+                    "amountRequired": "পরিমাণ আবশ্যক",
+                    "negativeAmountError": "নেতিবাচক পরিমাণ অনুমোদিত নয়",
+                    "cardCurrencyLabel": "কার্ডের মুদ্রা *",
+                    "fromWalletLabel": "ওয়ালেট থেকে *",
+                    "cardCurrencyRequired": "কার্ডের মুদ্রা আবশ্যক",
+                    "overview": "ওভারভিউ",
+                    "depositAmount": "ডিপোজিটের পরিমাণ",
+                    "feesAndCharges": "ফি ও চার্জ",
+                    "totalPayable": "মোট প্রদেয়",
+                    "accountFunds": "অ্যাকাউন্ট ফান্ড",
+                    "balance": "ব্যালেন্স: ",
+                    "cancel": "বাতিল করুন",
+                    "processing": "প্রক্রিয়াজাত করা হচ্ছে...",
+                    "deposit": "ডিপোজিট",
+                    "exchangeRate": "বিনিময় হার",
+                    "limitInformation": "সীমা তথ্য",
+                    "minLimit": "সর্বনিম্ন সীমা",
+                    "maxLimit": "সর্বোচ্চ সীমা",
+                    "dailyLimit": "দৈনিক সীমা",
+                    "monthlyLimit": "মাসিক সীমা",
+                    "remainingDailyLimit": "অবশিষ্ট দৈনিক সীমা",
+                    "remainingMonthlyLimit": "অবশিষ্ট মাসিক সীমা"
                 }
             },
             "giftCard": {

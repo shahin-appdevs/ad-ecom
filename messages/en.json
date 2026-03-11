@@ -1331,6 +1331,52 @@
                     "monthlyLimit": "Monthly Limit",
                     "remainingDailyLimit": "Remaining Daily Limit",
                     "remainingMonthlyLimit": "Remaining Monthly Limit"
+                },
+                "singleCardTrx": {
+                    "recentTransaction": "Recent Transaction",
+                    "webhookTransaction": "Webhook Transaction",
+                    "table": {
+                        "trxId": "Trx Id",
+                        "type": "Type",
+                        "cardId": "Card Id",
+                        "amount": "Amount",
+                        "centAmount": "Cent Amount",
+                        "method": "Method",
+                        "narrative": "Narrative",
+                        "currency": "Currency",
+                        "status": "Status",
+                        "reference": "Reference"
+                    },
+                    "noTransaction": "No Transaction found"
+                },
+                "virtualCardDeposit": {
+                    "depositSuccessful": "Deposit successful!",
+                    "failedToDeposit": "Failed to deposit",
+                    "title": "Deposit to Card",
+                    "description": "Move funds within your card, freeze or close it",
+                    "depositAmountLabel": "Deposit Amount *",
+                    "amountRequired": "Amount is required",
+                    "negativeAmountError": "Negative amount is not allowed",
+                    "cardCurrencyLabel": "Card Currency *",
+                    "fromWalletLabel": "From Wallet*",
+                    "cardCurrencyRequired": "Card Currency is Required",
+                    "overview": "Overview",
+                    "depositAmount": "Deposit Amount",
+                    "feesAndCharges": "Fees & Charges",
+                    "totalPayable": "Total Payable",
+                    "accountFunds": "Account Funds",
+                    "balance": "Balance: ",
+                    "cancel": "Cancel",
+                    "processing": "Processing...",
+                    "deposit": "Deposit",
+                    "exchangeRate": "Exchange Rate",
+                    "limitInformation": "Limit Information",
+                    "minLimit": "Min Limit",
+                    "maxLimit": "Max Limit",
+                    "dailyLimit": "Daily Limit",
+                    "monthlyLimit": "Monthly Limit",
+                    "remainingDailyLimit": "Remaining Daily Limit",
+                    "remainingMonthlyLimit": "Remaining Monthly Limit"
                 }
             },
             "giftCard": {

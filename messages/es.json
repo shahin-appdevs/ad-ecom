@@ -1331,6 +1331,52 @@
                     "monthlyLimit": "Límite Mensual",
                     "remainingDailyLimit": "Límite Diario Restante",
                     "remainingMonthlyLimit": "Límite Mensual Restante"
+                },
+                "singleCardTrx": {
+                    "recentTransaction": "Transacción Reciente",
+                    "webhookTransaction": "Transacción de Webhook",
+                    "table": {
+                        "trxId": "ID de Trx",
+                        "type": "Tipo",
+                        "cardId": "ID de Tarjeta",
+                        "amount": "Monto",
+                        "centAmount": "Monto en Centavos",
+                        "method": "Método",
+                        "narrative": "Narrativa",
+                        "currency": "Moneda",
+                        "status": "Estado",
+                        "reference": "Referencia"
+                    },
+                    "noTransaction": "No se encontró transacción"
+                },
+                "virtualCardDeposit": {
+                    "depositSuccessful": "¡Depósito exitoso!",
+                    "failedToDeposit": "Fallo al depositar",
+                    "title": "Depositar en Tarjeta",
+                    "description": "Mueva fondos dentro de su tarjeta, congélela o ciérrela",
+                    "depositAmountLabel": "Monto de Depósito *",
+                    "amountRequired": "El monto es obligatorio",
+                    "negativeAmountError": "No se permite un monto negativo",
+                    "cardCurrencyLabel": "Moneda de Tarjeta *",
+                    "fromWalletLabel": "Desde Billetera*",
+                    "cardCurrencyRequired": "La Moneda de la Tarjeta es Obligatoria",
+                    "overview": "Resumen",
+                    "depositAmount": "Monto de Depósito",
+                    "feesAndCharges": "Tarifas y Cargos",
+                    "totalPayable": "Total a Pagar",
+                    "accountFunds": "Fondos de la Cuenta",
+                    "balance": "Saldo: ",
+                    "cancel": "Cancelar",
+                    "processing": "Procesando...",
+                    "deposit": "Depositar",
+                    "exchangeRate": "Tasa de Cambio",
+                    "limitInformation": "Información de Límite",
+                    "minLimit": "Límite Mínimo",
+                    "maxLimit": "Límite Máximo",
+                    "dailyLimit": "Límite Diario",
+                    "monthlyLimit": "Límite Mensual",
+                    "remainingDailyLimit": "Límite Diario Restante",
+                    "remainingMonthlyLimit": "Límite Mensual Restante"
                 }
             },
             "giftCard": {

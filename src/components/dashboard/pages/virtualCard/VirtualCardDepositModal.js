@@ -27,6 +27,7 @@ import { useRouter } from "@/i18n/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 //exchange helper function
 
@@ -42,6 +43,7 @@ const VirtualCardDepositModal = ({
     getRemainingFields,
     myVirtualCard,
 }) => {
+    const t = useTranslations("Dashboard.cards.virtualCard.virtualCardDeposit");
     const router = useRouter();
     const [calculation, setCalculation] = useState({
         totalCharge: "0.00",
@@ -251,12 +253,12 @@ const VirtualCardDepositModal = ({
         try {
             const result = await stroWalletCardFundAPI(formData);
 
-            handleApiSuccess(result, "Deposit successful!");
+            handleApiSuccess(result, t("depositSuccessful"));
             reset(); // clear form
             onClose();
             router.refresh();
         } catch (error) {
-            handleApiError(error, "Failed to deposit");
+            handleApiError(error, t("failedToDeposit"));
         }
     };
 
@@ -265,8 +267,8 @@ const VirtualCardDepositModal = ({
             className={"!max-w-7xl"}
             open={open}
             onClose={onClose}
-            title={"Deposit to Card"}
-            description={"Move funds within your card, freeze or close it"}
+            title={t("title")}
+            description={t("description")}
         >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <div className=" w-full space-y-4">
@@ -281,20 +283,19 @@ const VirtualCardDepositModal = ({
                             <RHFInput
                                 control={control}
                                 name="fund_amount"
-                                label="Deposit Amount *"
+                                label={t("depositAmountLabel")}
                                 placeholder="0.00"
                                 type="number"
                                 rules={{
-                                    required: "Amount is required",
+                                    required: t("amountRequired"),
                                     min: {
                                         value: 0,
-                                        message:
-                                            "Negative amount is not allowed",
+                                        message: t("negativeAmountError"),
                                     },
                                 }}
                             />
                             <RHFSelect
-                                label="Card Currency *"
+                                label={t("cardCurrencyLabel")}
                                 name="currency"
                                 control={control}
                                 options={cardCurrencies?.map(
@@ -304,18 +305,18 @@ const VirtualCardDepositModal = ({
                             />
                         </div>
                         <RHFSelect
-                            label="From Wallet*"
+                            label={t("fromWalletLabel")}
                             name="from_currency"
                             control={control}
                             options={formCurrencyOptions}
                             rules={{
-                                required: "Card Currency is Required",
+                                required: t("cardCurrencyRequired"),
                             }}
                         />
                         {/* Overview */}
                         <div className="bg-gray-50 border border-gray-200 p-4 rounded-xl">
                             <label className="block mb-1 text-sm font-medium text-gray-700">
-                                <span>Overview</span>
+                                <span>{t("overview")}</span>
                             </label>
                             <div className=" divide-y divide-gray-200">
                                 {[
@@ -323,7 +324,9 @@ const VirtualCardDepositModal = ({
                                         label: (
                                             <div className="flex items-center space-x-2 text-gray-600">
                                                 <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
-                                                <span>Deposit Amount</span>
+                                                <span>
+                                                    {t("depositAmount")}
+                                                </span>
                                             </div>
                                         ),
                                         value: amount
@@ -334,7 +337,9 @@ const VirtualCardDepositModal = ({
                                         label: (
                                             <div className="flex items-center space-x-2 text-gray-600">
                                                 <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
-                                                <span>Fees & Charges</span>
+                                                <span>
+                                                    {t("feesAndCharges")}
+                                                </span>
                                             </div>
                                         ),
                                         value: calculation?.totalCharge
@@ -345,7 +350,7 @@ const VirtualCardDepositModal = ({
                                         label: (
                                             <div className="flex items-center space-x-2">
                                                 <WalletIcon className="w-5 h-5 text-indigo-600" />
-                                                <span>Total Payable</span>
+                                                <span>{t("totalPayable")}</span>
                                             </div>
                                         ),
                                         value: calculation.totalAmount
@@ -378,10 +383,13 @@ const VirtualCardDepositModal = ({
                                     </span>
                                 </div>
                                 <div>
-                                    <p className="font-medium">Account Funds</p>
+                                    <p className="font-medium">
+                                        {t("accountFunds")}
+                                    </p>
 
                                     <p className="text-sm text-gray-600">
-                                        Balance: {availableBalance?.balance}{" "}
+                                        {t("balance")}{" "}
+                                        {availableBalance?.balance}{" "}
                                         {availableBalance?.currency?.code}
                                     </p>
                                 </div>
@@ -440,7 +448,7 @@ const VirtualCardDepositModal = ({
                                             `}
                                         </p>
                                         <p className="text-xs text-gray-500">
-                                            Balance:{" "}
+                                            {t("balance")}{" "}
                                             {Number(
                                                 myVirtualCard?.amount,
                                             ).toFixed(4)}{" "}
@@ -458,7 +466,7 @@ const VirtualCardDepositModal = ({
                                 type="button"
                                 className="flex-1 py-3.5 px-6 border border-gray-300 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition disabled:opacity-50"
                             >
-                                Cancel
+                                {t("cancel")}
                             </button>
 
                             <button
@@ -470,10 +478,10 @@ const VirtualCardDepositModal = ({
                                 {isSubmitting ? (
                                     <>
                                         <span className="animate-spin h-5 w-5 border-2 border-white border-t-transparent rounded-full" />
-                                        Processing...
+                                        {t("processing")}
                                     </>
                                 ) : (
-                                    "Deposit"
+                                    t("deposit")
                                 )}
                             </button>
                         </div>
@@ -487,7 +495,7 @@ const VirtualCardDepositModal = ({
                          bg-gray-50 border border-gray-200 rounded-2xl w-full"
                         >
                             <label className="block mb-1 text-sm font-medium text-gray-700">
-                                <span>Exchange Rate</span>
+                                <span>{t("exchangeRate")}</span>
                             </label>
                             <span className="font-medium text-lg text-neutral-700">
                                 {exchangeRate?.display}
@@ -497,7 +505,7 @@ const VirtualCardDepositModal = ({
                     <div className="bg-gray-50 border-gray-200 border rounded-2xl p-4">
                         {/* Info Rows */}
                         <label className="block mb-1 text-sm font-medium text-gray-700">
-                            <span>Limit Information</span>
+                            <span>{t("limitInformation")}</span>
                         </label>
                         {remainingLoading ? (
                             <LimitsSkeleton />
@@ -508,7 +516,7 @@ const VirtualCardDepositModal = ({
                                         label: (
                                             <div className="flex items-center space-x-2 text-gray-600">
                                                 <Minimize2 className="w-5 h-5 text-indigo-500" />
-                                                <span>Min Limit</span>
+                                                <span>{t("minLimit")}</span>
                                             </div>
                                         ),
                                         value: limitsCalculation?.minLimit,
@@ -517,7 +525,7 @@ const VirtualCardDepositModal = ({
                                         label: (
                                             <div className="flex items-center space-x-2 text-gray-600">
                                                 <Maximize2 className="w-5 h-5 text-indigo-500" />
-                                                <span>Max Limit</span>
+                                                <span>{t("maxLimit")}</span>
                                             </div>
                                         ),
                                         value: limitsCalculation?.maxLimit,
@@ -526,7 +534,7 @@ const VirtualCardDepositModal = ({
                                         label: (
                                             <div className="flex items-center space-x-2">
                                                 <Calendar1 className="w-5 h-5 text-emerald-500" />
-                                                <span>Daily Limit</span>
+                                                <span>{t("dailyLimit")}</span>
                                             </div>
                                         ),
                                         value: limitsCalculation.dailyLimit,
@@ -535,7 +543,7 @@ const VirtualCardDepositModal = ({
                                         label: (
                                             <div className="flex items-center space-x-2">
                                                 <CalendarDays className="w-5 h-5 text-emerald-500" />
-                                                <span>Monthly Limit</span>
+                                                <span>{t("monthlyLimit")}</span>
                                             </div>
                                         ),
                                         value: limitsCalculation.monthlyLimit,
@@ -545,7 +553,7 @@ const VirtualCardDepositModal = ({
                                             <div className="flex items-center space-x-2">
                                                 <Calendar1 className="w-5 h-5 text-yellow-500" />
                                                 <span>
-                                                    Remaining Daily Limit
+                                                    {t("remainingDailyLimit")}
                                                 </span>
                                             </div>
                                         ),
@@ -556,7 +564,7 @@ const VirtualCardDepositModal = ({
                                             <div className="flex items-center space-x-2">
                                                 <CalendarDays className="w-5 h-5 text-yellow-500" />
                                                 <span>
-                                                    Remaining Monthly Limit
+                                                    {t("remainingMonthlyLimit")}
                                                 </span>
                                             </div>
                                         ),

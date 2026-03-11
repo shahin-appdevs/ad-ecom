@@ -1331,6 +1331,52 @@
                     "monthlyLimit": "الحد الشهري",
                     "remainingDailyLimit": "الحد اليومي المتبقي",
                     "remainingMonthlyLimit": "الحد الشهري المتبقي"
+                },
+                "singleCardTrx": {
+                    "recentTransaction": "المعاملات الأخيرة",
+                    "webhookTransaction": "معاملة الويب هوك",
+                    "table": {
+                        "trxId": "معرف المعاملة",
+                        "type": "النوع",
+                        "cardId": "معرف البطاقة",
+                        "amount": "المبلغ",
+                        "centAmount": "مبلغ السنت",
+                        "method": "الطريقة",
+                        "narrative": "البيان",
+                        "currency": "العملة",
+                        "status": "الحالة",
+                        "reference": "المرجع"
+                    },
+                    "noTransaction": "لم يتم العثور على معاملة"
+                },
+                "virtualCardDeposit": {
+                    "depositSuccessful": "تم الإيداع بنجاح!",
+                    "failedToDeposit": "فشل الإيداع",
+                    "title": "إيداع في البطاقة",
+                    "description": "نقل الأموال داخل بطاقتك أو تجميدها أو إغلاقها",
+                    "depositAmountLabel": "مبلغ الإيداع *",
+                    "amountRequired": "المبلغ مطلوب",
+                    "negativeAmountError": "المبلغ السالب غير مسموح به",
+                    "cardCurrencyLabel": "عملة البطاقة *",
+                    "fromWalletLabel": "من المحفظة*",
+                    "cardCurrencyRequired": "عملة البطاقة مطلوبة",
+                    "overview": "نظرة عامة",
+                    "depositAmount": "مبلغ الإيداع",
+                    "feesAndCharges": "الرسوم والمصاريف",
+                    "totalPayable": "إجمالي المستحق",
+                    "accountFunds": "أموال الحساب",
+                    "balance": "الرصيد: ",
+                    "cancel": "إلغاء",
+                    "processing": "جاري المعالجة...",
+                    "deposit": "إيداع",
+                    "exchangeRate": "سعر الصرف",
+                    "limitInformation": "معلومات الحد",
+                    "minLimit": "الحد الأدنى",
+                    "maxLimit": "الحد الأقصى",
+                    "dailyLimit": "الحد اليومي",
+                    "monthlyLimit": "الحد الشهري",
+                    "remainingDailyLimit": "الحد اليومي المتبقي",
+                    "remainingMonthlyLimit": "الحد الشهري المتبقي"
                 }
             },
             "giftCard": {

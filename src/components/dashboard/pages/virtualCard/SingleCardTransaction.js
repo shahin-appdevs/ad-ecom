@@ -9,11 +9,13 @@ import { toast } from "react-hot-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { handleApiError } from "@/components/utility/handleApiError";
+import { useTranslations } from "next-intl";
 
 export default function VirtualCardTransaction() {
+    const t = useTranslations("Dashboard.cards.virtualCard.singleCardTrx");
     const [isLoading, setIsLoading] = useState(true);
     const [myCardTransaction, setMyCardTransaction] = useState([]);
-    const router = useRouter();
+    // const router = useRouter();
     const params = useSearchParams();
 
     // console.log(params.get("card_id"));
@@ -59,13 +61,13 @@ export default function VirtualCardTransaction() {
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
                 <h2 className="text-[16px] font-semibold">
-                    Recent Transaction
+                    {t("recentTransaction")}
                 </h2>
                 <Link
                     href={`/user/cards/virtual-card/web-hook-transaction?card_id=${cardId}`}
                     className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
                 >
-                    Webhook Transaction
+                    {t("webhookTransaction")}
                 </Link>
             </div>
 
@@ -73,36 +75,36 @@ export default function VirtualCardTransaction() {
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
-                            <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
+                            <tr className="bg-[#F5F7FF] ltr:text-left rtl:text-right text-sm text-color__paragraph">
                                 <th className="py-4 px-5 font-semibold">
-                                    Trx Id
+                                    {t("table.trxId")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Type
+                                    {t("table.type")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Id
+                                    {t("table.cardId")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Amount
+                                    {t("table.amount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Cent Amount
+                                    {t("table.centAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Method
+                                    {t("table.method")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Narrative
+                                    {t("table.narrative")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Currency
+                                    {t("table.currency")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Status
+                                    {t("table.status")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Reference
+                                    {t("table.reference")}
                                 </th>
                             </tr>
                         </thead>
@@ -114,47 +116,51 @@ export default function VirtualCardTransaction() {
                     </table>
                 </div>
             ) : myCardTransaction?.length === 0 ? (
-                <div className="text-center py-5">No Transaction found</div>
+                <div className="text-center py-5">{t("noTransaction")}</div>
             ) : (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
-                            <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
+                            <tr className="bg-[#F5F7FF] text-left rtl:text-right text-sm text-color__paragraph">
                                 <th className="py-4 px-5 font-semibold">
-                                    Trx Id
+                                    {t("table.trxId")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Type
+                                    {t("table.type")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Id
+                                    {t("table.cardId")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Amount
+                                    {t("table.amount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Cent Amount
+                                    {t("table.centAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Method
+                                    {t("table.method")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Narrative
+                                    {t("table.narrative")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Currency
+                                    {t("table.currency")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Status
+                                    {t("table.status")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Reference
+                                    {t("table.reference")}
                                 </th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
                             {myCardTransaction?.map((transaction, index) => (
-                                <tr key={index}>
+                                <tr
+                                    key={index}
+                                    dir="ltr"
+                                    className="text-right"
+                                >
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
                                         #{transaction?.id || "N/A"}
                                     </td>
