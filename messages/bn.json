@@ -1543,6 +1543,28 @@
                 "noTransactions": "কোন লেনদেন পাওয়া যায়নি",
                 "somethingWentWrong": "কিছু ভুল হয়েছে"
             }
+        },
+        "pinVerificationModal": {
+            "title": "পিন যাচাই করুন",
+            "description": "আপনার পরিচয় যাচাই করতে ৪ সংখ্যার পিন লিখুন",
+            "labels": {
+                "enterPin": "আপনার ৪ সংখ্যার পিন লিখুন"
+            },
+            "placeholders": {
+                "pin": "••••"
+            },
+            "srOnly": {
+                "pinHelp": "চার সংখ্যার সংখ্যাসূচক পিন"
+            },
+            "buttons": {
+                "cancel": "বাতিল",
+                "verify": "যাচাই করুন",
+                "verifying": "যাচাই হচ্ছে..."
+            },
+            "errors": {
+                "invalidPin": "ভুল পিন",
+                "verificationFailed": "পিন যাচাই ব্যর্থ হয়েছে"
+            }
         }
     },
     "Checkout": {

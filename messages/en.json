@@ -1543,6 +1543,28 @@
                 "noTransactions": "No transactions found",
                 "somethingWentWrong": "Something went wrong"
             }
+        },
+        "pinVerificationModal": {
+            "title": "Verify PIN",
+            "description": "Enter your 4-digit PIN to verify your identity",
+            "labels": {
+                "enterPin": "Enter your 4-digit PIN"
+            },
+            "placeholders": {
+                "pin": "••••"
+            },
+            "srOnly": {
+                "pinHelp": "Four digit numeric PIN"
+            },
+            "buttons": {
+                "cancel": "Cancel",
+                "verify": "Verify",
+                "verifying": "Verifying..."
+            },
+            "errors": {
+                "invalidPin": "Invalid PIN",
+                "verificationFailed": "PIN verification failed"
+            }
         }
     },
     "Checkout": {

@@ -1543,6 +1543,28 @@
                 "noTransactions": "لم يتم العثور على معاملات",
                 "somethingWentWrong": "حدث خطأ ما"
             }
+        },
+        "pinVerificationModal": {
+            "title": "التحقق من الرقم السري",
+            "description": "أدخل الرقم السري المكون من 4 أرقام للتحقق من هويتك",
+            "labels": {
+                "enterPin": "أدخل الرقم السري المكون من 4 أرقام"
+            },
+            "placeholders": {
+                "pin": "••••"
+            },
+            "srOnly": {
+                "pinHelp": "رقم سري رقمي مكون من أربعة أرقام"
+            },
+            "buttons": {
+                "cancel": "إلغاء",
+                "verify": "التحقق",
+                "verifying": "جاري التحقق..."
+            },
+            "errors": {
+                "invalidPin": "رقم سري غير صحيح",
+                "verificationFailed": "فشل التحقق من الرقم السري"
+            }
         }
     },
     "Checkout": {
