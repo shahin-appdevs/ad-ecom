@@ -92,7 +92,7 @@ export default function WidgetSection() {
 
     return (
         <div className="bg-white rounded-[12px] p-4 sm:p-7">
-            <div className="">
+            <div>
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 pb-6 mb-6 border-b-[1.5px] border-[#F5F7FF]">
                     <div>
                         <h2 className="text-[16px] font-semibold mb-1">
@@ -120,7 +120,10 @@ export default function WidgetSection() {
                                 key={index}
                                 className="py-8 px-5 xl:px-8 relative border-[1.5px] border-[#F5F7FF] shadow-primary__shadow rounded-md text-center"
                             >
-                                <h3 className="text-[26px] xl:text-[32px] font-semibold text-primary__color mb-1">
+                                <h3
+                                    dir="ltr"
+                                    className="text-[26px] xl:text-[32px] font-semibold text-primary__color mb-1"
+                                >
                                     {item.value}{" "}
                                     <span className="text-[17px] xl:text-[20px] font-bold">
                                         {item.currency}
