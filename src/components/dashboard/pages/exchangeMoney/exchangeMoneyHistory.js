@@ -198,7 +198,7 @@ export default function ExchangeMoneyHistorySection({ isRefetch }) {
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
                             {transactions.map((transaction, index) => (
-                                <tr key={index}>
+                                <tr dir="ltr" key={index}>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
                                         #{transaction.trx || "N/A"}
                                     </td>
