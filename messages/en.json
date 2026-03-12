@@ -1111,6 +1111,55 @@
             }
         },
         "account": {
+            "applyReseller": {
+                "title": "Apply for Reseller",
+                "resellerMode": "Reseller Mode:",
+                "enabled": "Enabled",
+                "disabled": "Disabled",
+                "resellerStatus": "Reseller Status:",
+                "statusMap": {
+                    "unverified": "Unverified",
+                    "verified": "Verified",
+                    "pending": "Pending",
+                    "rejected": "Rejected",
+                    "unverifiedDesc": "Please complete Reseller verification",
+                    "verifiedDesc": "Your Reseller is verified",
+                    "pendingDesc": "Your Reseller is under review",
+                    "rejectedDesc": "Your Reseller was rejected. Please resubmit."
+                },
+                "verifiedMessage": "Your Reseller verification is complete.",
+                "noActionNeeded": "No further action is needed at this time.",
+                "submittedInfo": "Submitted Information",
+                "rejectionReason": "Reason:",
+                "reviewDocuments": "Please review and resubmit your documents.",
+                "idType": "ID Type *",
+                "selectIdType": "Select ID Type",
+                "idVerification": "ID Verification *",
+                "uploadInstruction": "Please upload clear images of both sides of your government-issued ID. Accepted formats: JPG, PNG, SVG, WEBP (max 10MB each).",
+                "frontOfId": "Front of ID *",
+                "backOfId": "Back of ID *",
+                "dragOrClick": "Drag & drop front/back ID image here, or click to select",
+                "acceptedFormats": "Accepted formats: JPG, PNG, SVG, WEBP (max 10MB)",
+                "remove": "Remove",
+                "submitting": "Submitting...",
+                "submitVerification": "Submit Verification",
+                "errors": {
+                    "frontRequired": "Please upload front of your ID",
+                    "backRequired": "Please upload back of your ID",
+                    "fileTooLarge": "{side} image is too large (max 10MB)",
+                    "invalidFileType": "{side} image has invalid type (only JPG, PNG, SVG, WEBP allowed)",
+                    "fileRejected": "{side} image was rejected: {message}",
+                    "fixErrors": "Please fix the errors in your submission",
+                    "submitFailed": "Reseller submission failed",
+                    "fetchFailed": "Failed to fetch reseller info",
+                    "switchFailed": "Failed to switch reseller status"
+                },
+                "messages": {
+                    "submitting": "Submitting Reseller documents...",
+                    "success": "Reseller submitted successfully! Status will update soon.",
+                    "switchSuccess": "Reseller {status} successfully"
+                }
+            },
             "profile": {
                 "sections": {
                     "profileSettings": "Profile Settings",

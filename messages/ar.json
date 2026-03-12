@@ -1111,6 +1111,55 @@
             }
         },
         "account": {
+            "applyReseller": {
+                "title": "التقدم لتصبح بائعًا",
+                "resellerMode": "وضع البائع:",
+                "enabled": "مفعّل",
+                "disabled": "معطّل",
+                "resellerStatus": "حالة البائع:",
+                "statusMap": {
+                    "unverified": "غير موثق",
+                    "verified": "موثق",
+                    "pending": "قيد الانتظار",
+                    "rejected": "مرفوض",
+                    "unverifiedDesc": "يرجى إكمال التحقق كنظام بائع",
+                    "verifiedDesc": "تم التحقق من نظام البائع الخاص بك",
+                    "pendingDesc": "نظام البائع الخاص بك قيد المراجعة",
+                    "rejectedDesc": "تم رفض نظام البائع الخاص بك. يرجى إعادة التقديم."
+                },
+                "verifiedMessage": "اكتمل التحقق كنظام بائع الخاص بك.",
+                "noActionNeeded": "لا يلزم اتخاذ أي إجراء إضافي في الوقت الحالي.",
+                "submittedInfo": "المعلومات المقدمة",
+                "rejectionReason": "السبب:",
+                "reviewDocuments": "يرجى مراجعة وإعادة تقديم المستندات الخاصة بك.",
+                "idType": "نوع الهوية *",
+                "selectIdType": "اختر نوع الهوية",
+                "idVerification": "التحقق من الهوية *",
+                "uploadInstruction": "يرجى رفع صور واضحة لكلا جانبي وثيقة الهوية الحكومية. الصيغ المقبولة: JPG، PNG، SVG، WEBP (الحد الأقصى 10 ميجابايت لكل ملف).",
+                "frontOfId": "الوجه الأمامي للهوية *",
+                "backOfId": "الوجه الخلفي للهوية *",
+                "dragOrClick": "اسحب وأفلت أو انقر للتحميل",
+                "acceptedFormats": "الصيغ المقبولة: JPG، PNG، SVG، WEBP (الحد الأقصى 10 ميجابايت)",
+                "remove": "إزالة",
+                "submitting": "جاري الإرسال...",
+                "submitVerification": "إرسال التحقق",
+                "errors": {
+                    "frontRequired": "يرجى رفع الوجه الأمامي للهوية",
+                    "backRequired": "يرجى رفع الوجه الخلفي للهوية",
+                    "fileTooLarge": "صورة {side} كبيرة جدًا (الحد الأقصى 10 ميجابايت)",
+                    "invalidFileType": "نوع ملف صورة {side} غير صالح (يُسمح فقط بـ JPG، PNG، SVG، WEBP)",
+                    "fileRejected": "تم رفض صورة {side}: {message}",
+                    "fixErrors": "يرجى تصحيح الأخطاء في التقديم الخاص بك",
+                    "submitFailed": "فشل تقديم طلب البائع",
+                    "fetchFailed": "فشل في جلب معلومات البائع",
+                    "switchFailed": "فشل في تغيير حالة البائع"
+                },
+                "messages": {
+                    "submitting": "جاري إرسال مستندات البائع...",
+                    "success": "تم تقديم طلب البائع بنجاح! سيتم تحديث الحالة قريبًا.",
+                    "switchSuccess": "تم {status} وضع البائع بنجاح"
+                }
+            },
             "profile": {
                 "sections": {
                     "profileSettings": "إعدادات الملف الشخصي",

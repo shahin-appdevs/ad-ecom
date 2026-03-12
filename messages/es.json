@@ -1111,6 +1111,55 @@
             }
         },
         "account": {
+            "applyReseller": {
+                "title": "Solicitar ser Revendedor",
+                "resellerMode": "Modo Revendedor:",
+                "enabled": "Habilitado",
+                "disabled": "Deshabilitado",
+                "resellerStatus": "Estado del Revendedor:",
+                "statusMap": {
+                    "unverified": "No verificado",
+                    "verified": "Verificado",
+                    "pending": "Pendiente",
+                    "rejected": "Rechazado",
+                    "unverifiedDesc": "Por favor complete la verificación de Revendedor",
+                    "verifiedDesc": "Su Revendedor está verificado",
+                    "pendingDesc": "Su Revendedor está en revisión",
+                    "rejectedDesc": "Su Revendedor fue rechazado. Por favor vuelva a enviar."
+                },
+                "verifiedMessage": "Su verificación de Revendedor está completa.",
+                "noActionNeeded": "No se requiere ninguna acción adicional en este momento.",
+                "submittedInfo": "Información Enviada",
+                "rejectionReason": "Razón:",
+                "reviewDocuments": "Por favor revise y vuelva a enviar sus documentos.",
+                "idType": "Tipo de ID *",
+                "selectIdType": "Seleccionar tipo de ID",
+                "idVerification": "Verificación de ID *",
+                "uploadInstruction": "Por favor suba imágenes claras de ambos lados de su documento de identidad oficial. Formatos aceptados: JPG, PNG, SVG, WEBP (máx. 10 MB cada uno).",
+                "frontOfId": "Frente del documento *",
+                "backOfId": "Reverso del documento *",
+                "dragOrClick": "Arrastre y suelte o haga clic para seleccionar",
+                "acceptedFormats": "Formatos aceptados: JPG, PNG, SVG, WEBP (máx. 10 MB)",
+                "remove": "Eliminar",
+                "submitting": "Enviando...",
+                "submitVerification": "Enviar Verificación",
+                "errors": {
+                    "frontRequired": "Por favor suba el frente de su ID",
+                    "backRequired": "Por favor suba el reverso de su ID",
+                    "fileTooLarge": "La imagen de {side} es demasiado grande (máx. 10 MB)",
+                    "invalidFileType": "La imagen de {side} tiene un tipo inválido (solo JPG, PNG, SVG, WEBP permitidos)",
+                    "fileRejected": "La imagen de {side} fue rechazada: {message}",
+                    "fixErrors": "Por favor corrija los errores en su envío",
+                    "submitFailed": "Fallo al enviar solicitud de Revendedor",
+                    "fetchFailed": "Fallo al obtener información del revendedor",
+                    "switchFailed": "Fallo al cambiar el estado del revendedor"
+                },
+                "messages": {
+                    "submitting": "Enviando documentos de Revendedor...",
+                    "success": "¡Solicitud de Revendedor enviada con éxito! El estado se actualizará pronto.",
+                    "switchSuccess": "Revendedor {status} con éxito"
+                }
+            },
             "profile": {
                 "sections": {
                     "profileSettings": "Configuración de Perfil",
