@@ -316,7 +316,8 @@ export const navLink = [
 export default function SideNav() {
     const t = useTranslations("Dashboard.sidenav");
     const router = useRouter();
-    const pathname = usePathname();
+    const pathname = usePathname().slice(3);
+
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const { canRefer, canWithdraw } = useFeatureAccess();
@@ -422,7 +423,7 @@ export default function SideNav() {
                                 <Link
                                     key={index}
                                     href={item.url}
-                                    className={`flex items-center text-sm font-medium rounded-[10px] px-5 py-2 transition-all hover:text-primary__color ${pathname === item.url ? "text-primary__color bg-[#F5F7FF] py-3" : "text-color__paragraph"}`}
+                                    className={`flex items-center  text-sm font-medium rounded-[10px] px-5 py-2 transition-all hover:text-primary__color ${pathname === item.url ? "text-primary__color bg-[#F5F7FF] py-3" : "text-color__paragraph"}`}
                                 >
                                     <div className="">
                                         <item.icon
