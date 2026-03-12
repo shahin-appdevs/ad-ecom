@@ -4,8 +4,10 @@ import Image from "next/image";
 import { walletGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
+import { useTranslations } from "next-intl";
 
 export default function WalletSection() {
+    const t = useTranslations("Dashboard.homepage.wallet");
     const [walletData, setWalletData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState("user");
@@ -17,26 +19,26 @@ export default function WalletSection() {
                 const response = await walletGetAPI();
                 setWalletData(response?.data?.data);
             } catch (error) {
-                toast.error("Failed to fetch wallet data");
+                toast.error(t("failedFetch"));
             } finally {
                 setLoading(false);
             }
         };
         fetchWalletData();
-    }, []);
+    }, [t]);
 
     const tabInfo = {
         user: {
-            title: "User Balance",
-            subtitle: "Payment wallet for instant transactions",
+            title: t("myBalance"),
+            subtitle: t("myBalanceSubtitle"),
         },
         shopping: {
-            title: "Shopping Balance",
-            subtitle: "Wallet balance reserved for shopping",
+            title: t("shoppingBalance"),
+            subtitle: t("shoppingBalanceSubtitle"),
         },
         earning: {
-            title: "Reward Points",
-            subtitle: "Wallet balance earned from commissions",
+            title: t("rewardPoints"),
+            subtitle: t("rewardPointsSubtitle"),
         },
     };
 
@@ -76,7 +78,7 @@ export default function WalletSection() {
                             </p>
                             {wallet.currency.default === 1 && (
                                 <span className="absolute top-2 right-2 bg-[#F5F7FF] text-[10px] px-2 py-1 font-semibold rounded">
-                                    Default
+                                    {t("default")}
                                 </span>
                             )}
                         </div>
@@ -98,7 +100,7 @@ export default function WalletSection() {
                                 : "bg-gray-100 text-gray-600"
                         }`}
                     >
-                        User Balance
+                        {t("myBalance")}
                     </button>
                     <button
                         onClick={() => setActiveTab("shopping")}
@@ -108,7 +110,7 @@ export default function WalletSection() {
                                 : "bg-gray-100 text-gray-600"
                         }`}
                     >
-                        Shopping Balance
+                        {t("shoppingBalance")}
                     </button>
                     {canEarnWallet && (
                         <button
@@ -119,7 +121,7 @@ export default function WalletSection() {
                                     : "bg-gray-100 text-gray-600"
                             }`}
                         >
-                            Reward Points
+                            {t("rewardPoints")}
                         </button>
                     )}
                 </div>

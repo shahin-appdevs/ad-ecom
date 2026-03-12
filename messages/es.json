@@ -67,6 +67,15 @@
             "viewMore": "Ver más",
             "loadMore": "Cargar más"
         },
+        "wishlist": {
+            "title": "Mi lista de deseos",
+            "items": "artículos",
+            "removeSuccess": "Elemento eliminado de la lista de deseos",
+            "moveSuccess": "Elemento movido al carrito",
+            "emptyMsg": "Tu lista de deseos está vacía",
+            "emptySubtitle": "Guarda tus artículos favoritos aquí para más tarde",
+            "continueShopping": "Continuar comprando"
+        },
         "footer": {
             "options": {
                 "popular": "Popular",

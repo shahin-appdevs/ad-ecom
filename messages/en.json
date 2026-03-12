@@ -67,6 +67,15 @@
             "viewMore": "View More",
             "loadMore": "Load More"
         },
+        "wishlist": {
+            "title": "My Wishlist",
+            "items": "items",
+            "removeSuccess": "Item removed from wishlist",
+            "moveSuccess": "Item moved to cart",
+            "emptyMsg": "Your wishlist is empty",
+            "emptySubtitle": "Save your favorite items here for later",
+            "continueShopping": "Continue Shopping"
+        },
         "footer": {
             "options": {
                 "popular": "Popular",

@@ -67,6 +67,15 @@
             "viewMore": "عرض المزيد",
             "loadMore": "تحميل المزيد"
         },
+        "wishlist": {
+            "title": "قائمة رغباتي",
+            "items": "عناصر",
+            "removeSuccess": "تمت إزالة العنصر من قائمة الرغبات",
+            "moveSuccess": "تم نقل العنصر إلى السلة",
+            "emptyMsg": "قائمة الرغبات فارغة",
+            "emptySubtitle": "احفظ عناصرك المفضلة هنا لوقت لاحق",
+            "continueShopping": "استمرار التسوق"
+        },
         "footer": {
             "options": {
                 "popular": "شائع",
