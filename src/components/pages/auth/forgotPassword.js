@@ -10,8 +10,10 @@ import { toast } from "react-hot-toast";
 
 import logo from "@public/images/logo/favicon.jpeg";
 import getImageUrl from "@/components/utility/getImageUrl";
+import { useTranslations } from "next-intl";
 
 export default function ForgotPassword() {
+    const t = useTranslations("Auth.forgotPassword");
     const [credentials, setCredentials] = useState("");
     const router = useRouter();
     const [loading, setLoading] = useState(false);
@@ -35,14 +37,14 @@ export default function ForgotPassword() {
             } else if (errorMessage) {
                 toast.error(errorMessage);
             } else {
-                toast.error("Something went wrong.");
+                toast.error(t("errorWrong"));
             }
         } catch (err) {
             const errorMessage =
                 err.response?.data?.message?.error?.[0] ||
                 err.response?.data?.message ||
                 err.message ||
-                "Request failed.";
+                t("errorFailed");
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -63,11 +65,11 @@ export default function ForgotPassword() {
                     {/* Mobile Logo */}
                     {/* Header Section */}
                     <h2 className="text-center text-xl font-bold text-gray-900 mb-6 border-b pb-4">
-                        Reset Password
+                        {t("title")}
                     </h2>
 
                     {/* Logo Section */}
-                    <div className="flex items-center space-x-4 mb-8">
+                    <div className="flex items-center gap-4 mb-8">
                         <div className="bg-gray-100 p-1.5 rounded-full shadow-sm w-[50px] h-[50px] flex items-center justify-center">
                             <Image
                                 src={getImageUrl(
@@ -80,12 +82,12 @@ export default function ForgotPassword() {
                                 className="rounded-full !bg-white"
                             />
                         </div>
-                        <div>
+                        <div className="space-y-2">
                             <h6 className="font-bold text-gray-900 tracking-tight">
                                 {appSettingsData?.site_name}
                             </h6>
                             <p className="text-sm text-gray-500 leading-tight">
-                                এ প্রবেশ করুন ফোন নাম্বার এর মাধ্যমে
+                                {t("subtitle")}
                             </p>
                         </div>
                     </div>
@@ -97,13 +99,13 @@ export default function ForgotPassword() {
                                 htmlFor="phone"
                                 className="block text-sm font-medium text-gray-700 mb-1"
                             >
-                                Phone Number
+                                {t("label")}
                             </label>
                             <div className="relative">
                                 <input
                                     id="phone"
                                     type="number"
-                                    placeholder="Enter Phone"
+                                    placeholder={t("placeholder")}
                                     value={credentials}
                                     onChange={(e) =>
                                         setCredentials(e.target.value)
@@ -118,7 +120,7 @@ export default function ForgotPassword() {
                             <Button
                                 type="submit"
                                 title={
-                                    loading ? "Reseting..." : "Reset Password"
+                                    loading ? t("btnReseting") : t("btnReset")
                                 }
                                 variant="primary"
                                 size="md"
@@ -132,19 +134,19 @@ export default function ForgotPassword() {
                     <div className="mt-10 pt-6 border-t border-gray-100">
                         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                             <p className="text-sm text-gray-600">
-                                Remember your password?{" "}
+                                {t("rememberPassword")}{" "}
                                 <Link
                                     href="/user/auth/login"
                                     className="font-bold text-primary__color hover:underline"
                                 >
-                                    Log In
+                                    {t("login")}
                                 </Link>
                             </p>
                             <Link
                                 href="/user/auth/register"
                                 className="text-sm font-bold text-gray-500 hover:text-primary__color transition-colors"
                             >
-                                Create Account
+                                {t("createAccount")}
                             </Link>
                         </div>
                     </div>
