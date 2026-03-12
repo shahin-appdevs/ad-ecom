@@ -66,7 +66,7 @@ export default function LanguageSwitcher() {
 
             {/* Dropdown Menu */}
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-40 origin-top-right bg-white rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 z-[100] overflow-hidden animate-in fade-in zoom-in duration-150">
+                <div className="absolute ltr:right-0 rtl:left-0 mt-2 w-40 origin-top-right bg-white rounded-xl shadow-xl ring-1 ring-black ring-opacity-5 z-[100] overflow-hidden animate-in fade-in zoom-in duration-150">
                     <div className="py-1">
                         {languages.map((lang) => (
                             <button

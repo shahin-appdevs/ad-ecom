@@ -11,6 +11,16 @@
             "logout": "Logout",
             "dashboard": "Dashboard",
             "sellerDashboard": "Seller Dashboard",
+            "cart": {
+                "title": "Cart",
+                "checkout": "Checkout",
+                "emptyMsg": "Your cart is empty"
+            },
+            "wishlist": {
+                "title": "Wishlist",
+                "emptyMsg": "Your wishlist is empty",
+                "view": "View Wishlist"
+            },
             "nav": {
                 "home": "Home",
                 "categories": "Categories",

@@ -11,6 +11,16 @@
             "logout": "Cerrar sesión",
             "dashboard": "Tablero",
             "sellerDashboard": "Tablero del vendedor",
+            "cart": {
+                "title": "Carro",
+                "checkout": "Finalizar compra",
+                "emptyMsg": "Tu carrito esta vacío"
+            },
+            "wishlist": {
+                "title": "Lista de deseos",
+                "emptyMsg": "Tu lista de deseos está vacía",
+                "view": "Ver lista de deseos"
+            },
             "nav": {
                 "home": "Inicio",
                 "categories": "Categorías",

@@ -11,6 +11,16 @@
             "logout": "লগআউট",
             "dashboard": "ড্যাশবোর্ড",
             "sellerDashboard": "বিক্রেতা ড্যাশবোর্ড",
+            "cart": {
+                "title": "কার্ট",
+                "checkout": "চেকআউট",
+                "emptyMsg": "আপনার কার্ট খালি"
+            },
+            "wishlist": {
+                "title": "উইশলিস্ট",
+                "emptyMsg": "আপনার উইশলিস্ট খালি",
+                "view": "উইশলিস্ট দেখুন"
+            },
             "nav": {
                 "home": "হোম",
                 "categories": "ক্যাটাগরি",
