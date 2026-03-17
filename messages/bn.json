@@ -469,7 +469,10 @@
                         "paymentMethod": "পেমেন্ট পদ্ধতি",
                         "selectGateway": "গেটওয়ে নির্বাচন করুন",
                         "selectWalletCurrency": "ওয়ালেট কারেন্সি নির্বাচন করুন",
-                        "amountWithSymbol": "পরিমাণ ({symbol})"
+                        "amountWithSymbol": "পরিমাণ ({symbol})",
+                        "minimum": "ন্যূনতম",
+                        "maximum": "সর্বোচ্চ",
+                        "unlimited": "সীমাহীন"
                     },
                     "placeholders": {
                         "amount": "পরিমাণ",

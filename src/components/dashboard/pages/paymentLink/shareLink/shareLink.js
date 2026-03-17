@@ -53,7 +53,7 @@ export default function ShareLinkPage() {
                 if (foundLink) {
                     setLink(foundLink);
                     // Include the locale in the shared URL so the recipient sees the right language
-                    const localUrl = `${window.location.origin}/${locale}/user/payment/link/share/token?token=${token}`;
+                    const localUrl = `${window.location.origin}/${locale}/payment-link?token=${token}`;
                     setLocalShareLink(localUrl);
                     localStorage.setItem("intendedUrl", localUrl);
                 } else {

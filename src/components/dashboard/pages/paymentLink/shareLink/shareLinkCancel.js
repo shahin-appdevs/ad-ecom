@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 import { useTranslations } from "next-intl";
 
-export default function ShareLinkCancelPage() {
+export default function ShareLinkCancelSection() {
     const t = useTranslations(
         "Dashboard.wallet.paymentLink.paymentLinkShare.cancelPage",
     );

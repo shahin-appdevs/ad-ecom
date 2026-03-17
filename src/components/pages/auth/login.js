@@ -114,9 +114,7 @@ function Login() {
                         router.replace(redirectUrl);
                         sessionStorage.removeItem("redirectAfterLogin");
                     } else if (payLinkToken) {
-                        router.replace(
-                            `/user/payment/link/share/token?token=${payLinkToken}`,
-                        );
+                        router.replace(`/payment-link?token=${payLinkToken}`);
                     } else {
                         router.replace("/user/dashboard");
                     }

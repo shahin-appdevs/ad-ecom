@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // Components
 import Header from "@/components/partials/Header";
 import Footer from "@/components/partials/Footer";

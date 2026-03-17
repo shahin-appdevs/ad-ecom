@@ -473,10 +473,4 @@ function StallDetails() {
     );
 }
 
-export default function StallDetailsPage() {
-    return (
-        <Suspense fallback={<div>Loading...</div>}>
-            <StallDetails />
-        </Suspense>
-    );
-}
+export default StallDetails;

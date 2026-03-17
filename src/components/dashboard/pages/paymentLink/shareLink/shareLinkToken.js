@@ -18,6 +18,9 @@ import {
     useStripe,
     useElements,
 } from "@stripe/react-stripe-js";
+import getJwtToken from "@/components/utility/getJwtToken";
+import Image from "next/image";
+import getImageUrl from "@/components/utility/getImageUrl";
 
 // Stripe Card Form Component
 const StripeCardForm = ({
@@ -26,7 +29,9 @@ const StripeCardForm = ({
     publicKey,
     onCardDetailsChange,
 }) => {
-    const t = useTranslations("PaymentLinkShare.stripeForm");
+    const t = useTranslations(
+        "Dashboard.wallet.paymentLink.paymentLinkShare.stripeForm",
+    );
 
     const stripe = useStripe();
     const elements = useElements();
@@ -159,6 +164,8 @@ function PaymentLinkShareContent({
     const router = useRouter();
     const stripe = useStripe();
     const elements = useElements();
+    const searchParams = useSearchParams();
+    const token = searchParams.get("token");
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -262,8 +269,8 @@ function PaymentLinkShareContent({
                 last4Card || formData.last4Card,
                 formData.paymentGateway,
                 "WEB",
-                `${window.location.origin}/user/payment/link/share/success`,
-                `${window.location.origin}/user/payment/link/share/cancel`,
+                `${window.location.origin}/payment-link/sharelink-success`,
+                `${window.location.origin}/payment-link/sharelink-cancel`,
             );
 
             toast.success(t("success.paymentSubmitted"));
@@ -275,7 +282,7 @@ function PaymentLinkShareContent({
             ) {
                 // For card and wallet payments that process immediately
                 setTimeout(() => {
-                    window.location.href = `${window.location.origin}/user/payment/link/share/success`;
+                    window.location.href = `${window.location.origin}/payment-link/sharelink-success`;
                 }, 1500);
             }
         } catch (error) {
@@ -286,6 +293,16 @@ function PaymentLinkShareContent({
         } finally {
             setApiLoading(false);
         }
+    };
+
+    const handlePaymentTypeChange = (paymentType) => {
+        const userToken = getJwtToken();
+
+        if (paymentType === "wallet_payment") {
+            if (!userToken)
+                router.push(`/user/auth/login?pay_link_token=${token}`);
+        }
+        setPaymentType(paymentType);
     };
 
     const paymentLink = data.payment_link;
@@ -376,6 +393,20 @@ function PaymentLinkShareContent({
                             </div>
                         )}
                     </div>
+                    {paymentLink.image && (
+                        <div className="mt-6">
+                            <Image
+                                src={getImageUrl(
+                                    paymentLink.image,
+                                    data.payment_link_image_path,
+                                )}
+                                alt={paymentLink.title}
+                                width={200}
+                                height={200}
+                                className="rounded-md"
+                            />
+                        </div>
+                    )}
                 </div>
 
                 {/* Right Column - Payment Form */}
@@ -428,7 +459,7 @@ function PaymentLinkShareContent({
                             <div className="space-y-1">
                                 <Listbox
                                     value={paymentType}
-                                    onChange={setPaymentType}
+                                    onChange={handlePaymentTypeChange}
                                 >
                                     <Listbox.Label className="block text-sm font-medium">
                                         {t("labels.paymentMethod")} *
@@ -832,7 +863,7 @@ function PaymentLinkShareContent({
 
 // Main Page Component
 export default function PaymentLinkSharePage() {
-    const t = useTranslations("PaymentLinkShare");
+    const t = useTranslations("Dashboard.wallet.paymentLink.paymentLinkShare");
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -897,8 +928,10 @@ export default function PaymentLinkSharePage() {
                     }));
                 }
             } catch (err) {
-                setError(err.message || t("errors.loadFailed"));
-                toast.error(err.message || t("errors.loadFailed"));
+                const errorMessage = err.response?.data?.message?.error[0];
+
+                setError(errorMessage || t("errors.loadFailed"));
+                toast.error(errorMessage || t("errors.loadFailed"));
             } finally {
                 setIsLoading(false);
             }

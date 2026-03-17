@@ -2245,6 +2245,11 @@ export const sudoVirtualCardFundAPI = (formData) => {
     }
 };
 
+// app download link get api
+export const appDownloadLinkGetAPI = () => {
+    return apiClient.get(`/download/app`);
+};
+
 //**************** Seller Panel ****************/
 // Register API (post)
 export const registerSellerAPI = (formData) => {

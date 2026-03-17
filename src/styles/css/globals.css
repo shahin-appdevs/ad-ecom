@@ -63,3 +63,18 @@
     background-position: var(--zoomX) var(--zoomY);
     @apply absolute top-0 left-0 w-full md:aspect-square h-full z-20;
 }
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.animate-marquee {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 25s linear infinite;
+}

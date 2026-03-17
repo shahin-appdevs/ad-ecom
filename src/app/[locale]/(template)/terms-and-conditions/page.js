@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // Components
 import TermsSection from "@/components/pages/terms/terms";
 import { footerInfoGetAPI } from "@root/services/apiClient/apiClient";

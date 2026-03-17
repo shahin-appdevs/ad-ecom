@@ -13,6 +13,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
+export const dynamic = "force-dynamic";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 

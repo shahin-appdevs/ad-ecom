@@ -469,7 +469,10 @@
                         "paymentMethod": "Payment Method",
                         "selectGateway": "Select Gateway",
                         "selectWalletCurrency": "Select Wallet Currency",
-                        "amountWithSymbol": "Amount ({symbol})"
+                        "amountWithSymbol": "Amount ({symbol})",
+                        "minimum": "Minimum",
+                        "maximum": "Maximum",
+                        "unlimited": "Unlimited"
                     },
                     "placeholders": {
                         "amount": "Amount",

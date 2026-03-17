@@ -306,7 +306,7 @@ export default function PaymentLinksSection() {
                                                 <button
                                                     onClick={() =>
                                                         copyToClipboard(
-                                                            `${window.location.origin}/${locale}/user/payment/link/share/token?token=${link?.token}`,
+                                                            `${window.location.origin}/${locale}/payment-link?token=${link?.token}`,
                                                         )
                                                     }
                                                 >
@@ -320,7 +320,7 @@ export default function PaymentLinksSection() {
                                                     <EllipsisVerticalIcon className="h-5 w-5 text-gray-600 cursor-pointer" />
                                                 </button>
                                                 {dropdownIndex === index && (
-                                                    <div className="absolute right-0 top-[-52px] z-10 mt-1 w-32 bg-white border border-gray-200 rounded-md shadow-md text-sm">
+                                                    <div className="absolute ltr:right-0 rtl:left-0 top-[-52px] z-10 mt-1 w-32 bg-white border border-gray-200 rounded-md shadow-md text-sm">
                                                         <button
                                                             onClick={() =>
                                                                 handleEditClick(

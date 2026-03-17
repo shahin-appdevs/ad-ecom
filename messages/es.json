@@ -469,7 +469,10 @@
                         "paymentMethod": "Método de pago",
                         "selectGateway": "Seleccionar pasarela",
                         "selectWalletCurrency": "Seleccionar moneda de billetera",
-                        "amountWithSymbol": "Monto ({symbol})"
+                        "amountWithSymbol": "Monto ({symbol})",
+                        "minimum": "Mínimo",
+                        "maximum": "Máximo",
+                        "unlimited": "Ilimitado"
                     },
                     "placeholders": {
                         "amount": "Monto",

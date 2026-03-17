@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // Components
 import CheckoutSection from "@/components/pages/checkout/checkout";
 

@@ -469,7 +469,10 @@
                         "paymentMethod": "طريقة الدفع",
                         "selectGateway": "اختر بوابة الدفع",
                         "selectWalletCurrency": "اختر عملة المحفظة",
-                        "amountWithSymbol": "المبلغ ({symbol})"
+                        "amountWithSymbol": "المبلغ ({symbol})",
+                        "minimum": "الحد الأدنى",
+                        "maximum": "الحد الأقصى",
+                        "unlimited": "غير محدود"
                     },
                     "placeholders": {
                         "amount": "المبلغ",
