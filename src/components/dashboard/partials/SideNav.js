@@ -590,7 +590,7 @@ export default function SideNav() {
                                 {t("howCanWeHelp")}
                             </p>
                             <Link
-                                href="/support/ticket"
+                                href="/user/support/ticket"
                                 className="mt-4 bg-gray-800 text-white flex justify-center items-center py-2 px-5 gap-2 font-semibold rounded-lg transition hover:bg-primary__color hover:text-white hover:scale-x-105"
                             >
                                 {t("getSupport")}

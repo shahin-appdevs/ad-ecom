@@ -690,6 +690,39 @@
                 }
             }
         },
+        "supportTicket": {
+            "title": "সাপোর্ট টিকিট সমূহ",
+            "addNew": "নতুন যোগ করুন",
+            "ticketId": "টিকিট আইডি",
+            "fullName": "পূর্ণ নাম",
+            "email": "ইমেইল",
+            "subject": "বিষয়",
+            "status": "স্ট্যাটাস",
+            "lastReplied": "সর্বশেষ উত্তর",
+            "details": "বিস্তারিত",
+            "createSupportTicket": {
+                "subject": "বিষয়",
+                "subjectPlaceholder": "বিষয় লিখুন...",
+                "message": "বার্তা",
+                "messagePlaceholder": "এখানে লিখুন...",
+                "attachments": "সংযুক্তি",
+                "dropFilesHere": "ফাইলগুলো এখানে ছাড়ুন...",
+                "dragDropFiles": "ফাইলগুলো এখানে টেনে আনুন এবং ছাড়ুন, বা নির্বাচন করতে ক্লিক করুন",
+                "addButton": "নতুন যোগ করুন"
+            },
+            "conversationSupportTicket": {
+                "ticketId": "টিকিট আইডি",
+                "open": "উন্মুক্ত",
+                "hideSupportDetails": "সাপোর্ট বিস্তারিত লুকান",
+                "showSupportDetails": "সাপোর্ট বিস্তারিত দেখান",
+                "supportDetails": "সাপোর্টের বিস্তারিত",
+                "subject": "বিষয়:",
+                "description": "বিবরণ:",
+                "typeYourMessage": "আপনার বার্তা লিখুন...",
+                "send": "পাঠান"
+            }
+        },
+
         "services": {
             "billPay": {
                 "exchangeRate": "বিনিময় হার",

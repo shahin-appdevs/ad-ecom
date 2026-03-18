@@ -690,6 +690,39 @@
                 }
             }
         },
+        "supportTicket": {
+            "title": "Tickets de Soporte",
+            "addNew": "Agregar Nuevo",
+            "ticketId": "ID del Ticket",
+            "fullName": "Nombre Completo",
+            "email": "Correo Electrónico",
+            "subject": "Asunto",
+            "status": "estado",
+            "lastReplied": "Última Respuesta",
+            "details": "Detalles",
+            "createSupportTicket": {
+                "subject": "Asunto",
+                "subjectPlaceholder": "Ingrese el asunto...",
+                "message": "Mensaje",
+                "messagePlaceholder": "Escriba aquí...",
+                "attachments": "Adjuntos",
+                "dropFilesHere": "Suelte los archivos aquí...",
+                "dragDropFiles": "Arrastre y suelte los archivos aquí, o haga clic para seleccionar",
+                "addButton": "Agregar Nuevo"
+            },
+            "conversationSupportTicket": {
+                "ticketId": "ID del Ticket",
+                "open": "Abierto",
+                "hideSupportDetails": "Ocultar Detalles de Soporte",
+                "showSupportDetails": "Mostrar Detalles de Soporte",
+                "supportDetails": "Detalles de Soporte",
+                "subject": "Asunto:",
+                "description": "Descripción:",
+                "typeYourMessage": "Escriba su mensaje...",
+                "send": "Enviar"
+            }
+        },
+
         "services": {
             "billPay": {
                 "exchangeRate": "Tipo de cambio",

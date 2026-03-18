@@ -690,6 +690,39 @@
                 }
             }
         },
+        "supportTicket": {
+            "title": "Support Tickets",
+            "addNew": "Add New",
+            "ticketId": "Ticket ID",
+            "fullName": "Full Name",
+            "email": "Email",
+            "subject": "Subject",
+            "status": "status",
+            "lastReplied": "Last Replied",
+            "details": "Details",
+            "createSupportTicket": {
+                "subject": "Subject",
+                "subjectPlaceholder": "Enter Subject...",
+                "message": "Message",
+                "messagePlaceholder": "Write here...",
+                "attachments": "Attachments",
+                "dropFilesHere": "Drop the files here...",
+                "dragDropFiles": "Drag & drop files here, or click to select",
+                "addButton": "Add New"
+            },
+            "conversationSupportTicket": {
+                "ticketId": "Ticket ID",
+                "open": "Open",
+                "hideSupportDetails": "Hide Support Details",
+                "showSupportDetails": "Show Support Details",
+                "supportDetails": "Support Details",
+                "subject": "Subject:",
+                "description": "Description:",
+                "typeYourMessage": "Type your message...",
+                "send": "Send"
+            }
+        },
+
         "services": {
             "billPay": {
                 "exchangeRate": "Exchange Rate",

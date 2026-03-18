@@ -690,6 +690,39 @@
                 }
             }
         },
+        "supportTicket": {
+            "title": "تذاكر الدعم",
+            "addNew": "إضافة جديد",
+            "ticketId": "معرف التذكرة",
+            "fullName": "الاسم الكامل",
+            "email": "البريد الإلكتروني",
+            "subject": "الموضوع",
+            "status": "الحالة",
+            "lastReplied": "آخر رد",
+            "details": "التفاصيل",
+            "createSupportTicket": {
+                "subject": "الموضوع",
+                "subjectPlaceholder": "أدخل الموضوع...",
+                "message": "رسالة",
+                "messagePlaceholder": "اكتب هنا...",
+                "attachments": "المرفقات",
+                "dropFilesHere": "أفلت الملفات هنا...",
+                "dragDropFiles": "قم بسحب وإسقاط الملفات هنا، أو انقر للتحديد",
+                "addButton": "إضافة جديد"
+            },
+            "conversationSupportTicket": {
+                "ticketId": "معرف التذكرة",
+                "open": "مفتوح",
+                "hideSupportDetails": "إخفاء تفاصيل الدعم",
+                "showSupportDetails": "إظهار تفاصيل الدعم",
+                "supportDetails": "تفاصيل الدعم",
+                "subject": "الموضوع:",
+                "description": "الوصف:",
+                "typeYourMessage": "اكتب رسالتك...",
+                "send": "إرسال"
+            }
+        },
+
         "services": {
             "billPay": {
                 "exchangeRate": "سعر الصرف",
