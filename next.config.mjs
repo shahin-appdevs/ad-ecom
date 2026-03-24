@@ -1,10 +1,14 @@
+// next.config.mjs
 import createNextIntlPlugin from "next-intl/plugin";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 
 const withNextIntl = createNextIntlPlugin();
 
-/** @type {import('next').NextConfig} */
+// if (process.env.NODE_ENV === "development") {
+//     initOpenNextCloudflareForDev(); // ✅ safe here
+// }
+
 const nextConfig = {
-    // output: "export",
     images: { unoptimized: true },
 };
 

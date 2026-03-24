@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
 import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 function SkeletonRow() {
@@ -54,6 +55,8 @@ function SkeletonRow() {
 }
 
 export default function MyGiftCards() {
+    const t = useTranslations("Dashboard.cards.giftCard.myGiftCards");
+
     const [isLoading, setIsLoading] = useState(true);
     const [myGiftCards, setMyGiftCards] = useState([]);
     const router = useRouter();
@@ -82,14 +85,14 @@ export default function MyGiftCards() {
     }, []);
 
     const getStatusColor = (status) => {
-        switch (status) {
+        switch (status?.toLowerCase()) {
             case "success":
                 return "bg-green-100 text-green-800";
-            case "Rejected":
+            case "rejected":
                 return "bg-red-100 text-red-800";
             case "pending":
                 return "bg-yellow-100 text-yellow-800";
-            case "Active":
+            case "active":
                 return "bg-blue-100 text-blue-800";
             default:
                 return "bg-gray-100 text-gray-800";
@@ -113,13 +116,13 @@ export default function MyGiftCards() {
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                <h2 className="text-[16px] font-semibold">My Gift Card</h2>
+                <h2 className="text-[16px] font-semibold">{t("title")}</h2>
                 <Link
                     href="/user/cards/gift-card/gift-card-list"
                     className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
                 >
                     <PlusIcon className="h-5 w-5" />
-                    Add Gift Cards
+                    {t("addGiftCard")}
                 </Link>
             </div>
 
@@ -128,43 +131,42 @@ export default function MyGiftCards() {
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Trx</th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Image
+                                    {t("table.trx")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Name
+                                    {t("table.cardImage")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Receiver Email
+                                    {t("table.cardName")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Receiver Phone
+                                    {t("table.receiverEmail")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Unit Price
+                                    {t("table.receiverPhone")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Quantity
+                                    {t("table.cardUnitPrice")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Total Price
+                                    {t("table.cardQuantity")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Exchange Rate
+                                    {t("table.cardTotalPrice")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payable Unit Price
+                                    {t("table.exchangeRate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Total Charge
+                                    {t("table.payableUnitPrice")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payable Amount
+                                    {t("table.totalCharge")}
                                 </th>
-                                {/* <th className="py-4 px-5 font-semibold">
-                                    Status
-                                </th> */}
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("table.payableAmount")}
+                                </th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
@@ -175,49 +177,50 @@ export default function MyGiftCards() {
                     </table>
                 </div>
             ) : myGiftCards.length === 0 ? (
-                <div className="text-center py-5">No gift card found</div>
+                <div className="text-center py-5 text-gray-500">
+                    {t("noGiftCardFound")}
+                </div>
             ) : (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Trx</th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Image
+                                    {t("table.trx")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Name
+                                    {t("table.cardImage")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Receiver Email
+                                    {t("table.cardName")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Receiver Phone
+                                    {t("table.receiverEmail")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Unit Price
+                                    {t("table.receiverPhone")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Quantity
+                                    {t("table.cardUnitPrice")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Total Price
+                                    {t("table.cardQuantity")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Exchange Rate
+                                    {t("table.cardTotalPrice")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payable Unit Price
+                                    {t("table.exchangeRate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Total Charge
+                                    {t("table.payableUnitPrice")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payable Amount
+                                    {t("table.totalCharge")}
                                 </th>
-                                {/* <th className="py-4 px-5 font-semibold">
-                                    Status
-                                </th> */}
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("table.payableAmount")}
+                                </th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
@@ -229,44 +232,45 @@ export default function MyGiftCards() {
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
                                         <Image
                                             src={transaction?.card_image}
-                                            alt={transaction?.card_name}
+                                            alt={
+                                                transaction?.card_name ||
+                                                t("table.cardImageAlt")
+                                            }
                                             height={50}
                                             width={50}
+                                            className="rounded-md object-cover"
                                         />
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {transaction?.card_name}
+                                        {transaction?.card_name || "—"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {transaction.receiver_email}
+                                        {transaction.receiver_email || "—"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {transaction.receiver_phone}
+                                        {transaction.receiver_phone || "—"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {transaction.card_init_price}
+                                        {transaction.card_init_price || "—"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {transaction.quantity}
+                                        {transaction.quantity || "—"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {transaction.card_total_price}
+                                        {transaction.card_total_price || "—"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {transaction.wallet_currency_rate}
+                                        {transaction.wallet_currency_rate ||
+                                            "—"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {transaction.payable_unit_price}
+                                        {transaction.payable_unit_price || "—"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {transaction?.payable_charge}
-                                    </td>
-
-                                    <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {transaction?.total_payable}
+                                        {transaction?.payable_charge || "—"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {/* {transaction?.total_payable} */}
+                                        {transaction?.total_payable || "—"}
                                     </td>
                                 </tr>
                             ))}

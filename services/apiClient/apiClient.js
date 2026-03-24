@@ -919,6 +919,7 @@ export const ManualWithdrawAPI = (formdata) => {
         return apiClient.post("/user/withdraw/manual/confirmed", formdata, {
             headers: {
                 Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data",
             },
         });
     } else {
@@ -2242,6 +2243,11 @@ export const sudoVirtualCardFundAPI = (formData) => {
     } else {
         throw new Error("No token found. Please log in.");
     }
+};
+
+// app download link get api
+export const appDownloadLinkGetAPI = () => {
+    return apiClient.get(`/download/app`);
 };
 
 //**************** Seller Panel ****************/

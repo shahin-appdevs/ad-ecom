@@ -8,8 +8,11 @@ import { toast } from "react-hot-toast";
 import logo from "@public/images/logo/favicon.jpeg";
 import { Link } from "@/i18n/navigation";
 import getImageUrl from "@/components/utility/getImageUrl";
+import { useTranslations } from "next-intl";
+import { ArrowLeft } from "lucide-react";
 
 export default function Otp() {
+    const t = useTranslations("Auth.2fa");
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -27,7 +30,7 @@ export default function Otp() {
         const cleanOtp = otp.replace(/ - /g, "");
 
         if (cleanOtp.length !== 6) {
-            setError("Please enter a valid 6-digit OTP");
+            setError(t("errorInvalid"));
             return;
         }
 
@@ -43,8 +46,7 @@ export default function Otp() {
             }
         } catch (error) {
             const errorMsg =
-                error.response?.data?.message?.error?.[0] ||
-                "Verification failed. Please try again.";
+                error.response?.data?.message?.error?.[0] || t("errorFailed");
             setError(errorMsg);
             toast.error(errorMsg);
         } finally {
@@ -62,10 +64,10 @@ export default function Otp() {
             <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 sm:p-10 overflow-hidden">
                 {/* Header Section */}
                 <h2 className="text-center text-xl font-bold text-gray-900 mb-6 border-b pb-4">
-                    2FA Verification
+                    {t("title")}
                 </h2>
 
-                <div className="flex items-center space-x-4 mb-8">
+                <div className="flex items-center gap-4 mb-8">
                     <div className="bg-gray-100 p-1.5 rounded-full shadow-sm w-[50px] h-[50px] flex items-center justify-center ">
                         <Image
                             src={getImageUrl(
@@ -78,12 +80,12 @@ export default function Otp() {
                             className="rounded-full !bg-white"
                         />
                     </div>
-                    <div>
+                    <div className="space-y-2">
                         <h6 className="font-bold text-gray-900 tracking-tight">
                             {appSettingsData?.site_name}
                         </h6>
                         <p className="text-sm text-gray-500 leading-tight">
-                            Enter the verification code sent to your phone
+                            {t("subtitle")}
                         </p>
                     </div>
                 </div>
@@ -95,13 +97,13 @@ export default function Otp() {
                             htmlFor="otp"
                             className=" block left-4 bg-white  px-1.5 text-sm mb-1 font-medium  z-10"
                         >
-                            Verification Code
+                            {t("label")}
                         </label>
                         <div className="relative">
                             <input
                                 id="otp"
                                 type="text"
-                                placeholder="Enter 6-digit code"
+                                placeholder={t("placeholder")}
                                 value={otp}
                                 onChange={handleOtpChange}
                                 maxLength={12}
@@ -124,7 +126,7 @@ export default function Otp() {
                     <div className="pt-4 border-t border-gray-100">
                         <Button
                             type="submit"
-                            title={loading ? "Verifying..." : "Verify Code"}
+                            title={loading ? t("btnVerifying") : t("btnVerify")}
                             variant="primary"
                             size="md"
                             className="w-full py-3.5 text-base font-bold shadow-lg shadow-primary__color/30 hover:shadow-primary__color/50 transition-all duration-300"
@@ -136,10 +138,11 @@ export default function Otp() {
                 {/* Footer Link */}
                 <div className="mt-8 text-center">
                     <Link
+                        dir="ltr"
                         href="/user/auth/login"
-                        className="text-sm font-semibold text-gray-400 hover:text-primary__color transition-colors uppercase tracking-widest"
+                        className="text-sm rtl:text-left flex items-center justify-center gap-2 font-semibold text-gray-400 hover:text-primary__color transition-colors uppercase tracking-widest"
                     >
-                        ← Back to Login
+                        <ArrowLeft /> <span>{t("backToLogin")}</span>
                     </Link>
                 </div>
             </div>

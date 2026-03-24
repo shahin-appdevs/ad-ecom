@@ -4,8 +4,11 @@ import { Dialog } from "@headlessui/react";
 import { VerifyPinAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import Button from "@/components/utility/Button";
+import { useTranslations } from "next-intl";
 
 export default function PinVerificationModal({ isOpen, onClose, onVerify }) {
+    const t = useTranslations("Dashboard.pinVerificationModal");
+
     const [pin, setPin] = useState("");
     const [loading, setLoading] = useState(false);
 
@@ -25,13 +28,14 @@ export default function PinVerificationModal({ isOpen, onClose, onVerify }) {
                 onClose();
             } else {
                 toast.error(
-                    response?.data?.message?.error?.[0] || "Invalid PIN",
+                    response?.data?.message?.error?.[0] ||
+                        t("errors.invalidPin"),
                 );
             }
         } catch (error) {
             const errorMessage =
                 error?.response?.data?.message?.error?.[0] ||
-                "PIN verification failed";
+                t("errors.verificationFailed");
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -50,11 +54,11 @@ export default function PinVerificationModal({ isOpen, onClose, onVerify }) {
 
                 <div className="relative bg-white rounded-lg max-w-md w-full mx-4 p-6">
                     <Dialog.Title className="text-lg font-medium mb-4">
-                        Verify PIN
+                        {t("title")}
                     </Dialog.Title>
 
                     <Dialog.Description className="sr-only">
-                        Enter your 4-digit PIN to verify your identity
+                        {t("description")}
                     </Dialog.Description>
 
                     <div className="mb-4">
@@ -62,7 +66,7 @@ export default function PinVerificationModal({ isOpen, onClose, onVerify }) {
                             htmlFor="pin-input"
                             className="block text-sm font-medium mb-2"
                         >
-                            Enter your 4-digit PIN
+                            {t("labels.enterPin")}
                         </label>
                         <input
                             id="pin-input"
@@ -70,20 +74,20 @@ export default function PinVerificationModal({ isOpen, onClose, onVerify }) {
                             value={pin}
                             onChange={(e) => setPin(e.target.value.slice(0, 4))}
                             className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                            placeholder="••••"
+                            placeholder={t("placeholders.pin")}
                             maxLength={4}
                             autoFocus
                             aria-describedby="pin-help"
                         />
                         <p id="pin-help" className="sr-only">
-                            Four digit numeric PIN
+                            {t("srOnly.pinHelp")}
                         </p>
                     </div>
 
                     <div className="flex justify-end space-x-3">
                         <Button
                             type="button"
-                            title="Cancel"
+                            title={t("buttons.cancel")}
                             variant="secondary"
                             size="md"
                             onClick={onClose}
@@ -92,7 +96,11 @@ export default function PinVerificationModal({ isOpen, onClose, onVerify }) {
                         />
                         <Button
                             type="button"
-                            title={loading ? "Verifying..." : "Verify"}
+                            title={
+                                loading
+                                    ? t("buttons.verifying")
+                                    : t("buttons.verify")
+                            }
                             variant="primary"
                             size="md"
                             onClick={handleVerify}

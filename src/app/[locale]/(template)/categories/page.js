@@ -1,10 +1,11 @@
+export const dynamic = "force-dynamic";
 // Components
-import AllProductSection from "@/components/pages/category/category";
+import AllCategories from "@/components/pages/category/category";
 
 export default function CategoryPage() {
     return (
         <>
-            <AllProductSection />
+            <AllCategories />
         </>
     );
 }

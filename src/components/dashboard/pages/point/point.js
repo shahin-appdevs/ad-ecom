@@ -1,13 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
-import { pointToCashGetAPI, pointConvertAPI } from "@root/services/apiClient/apiClient";
+import { useTranslations } from "next-intl";
+import {
+    pointToCashGetAPI,
+    pointConvertAPI,
+} from "@root/services/apiClient/apiClient";
 import { Dialog } from "@headlessui/react";
 import { toast } from "react-hot-toast";
 import {
     GiftIcon,
     BanknotesIcon,
     CircleStackIcon,
-    ArrowRightCircleIcon
+    ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
 
 const formatAmount = (value) => {
@@ -32,6 +36,7 @@ export default function PointsPage() {
     const [selectedPoint, setSelectedPoint] = useState(null);
     const [converting, setConverting] = useState(false);
     const [loading, setLoading] = useState(true);
+    const t = useTranslations("Dashboard.account.pointToCash");
 
     useEffect(() => {
         const fetchPoints = async () => {
@@ -42,24 +47,30 @@ export default function PointsPage() {
             } catch (error) {
                 const errorMessage =
                     error.response?.data?.message?.error?.[0] ||
-                    "Failed to load point history.";
+                    t("failedLoad");
                 toast.error(errorMessage);
             } finally {
                 setLoading(false);
             }
         };
         fetchPoints();
-    }, []);
+    }, [t]);
 
     const handleConvert = async () => {
         if (!selectedPoint) return;
         try {
             setConverting(true);
-            const response = await pointConvertAPI(selectedPoint.id, selectedPoint.point_amount);
+            const response = await pointConvertAPI(
+                selectedPoint.id,
+                selectedPoint.point_amount,
+            );
             setIsOpen(false);
             toast.success(response?.data?.message?.success[0]);
         } catch (error) {
-            toast.error(error.response?.data?.message?.error?.[0] || "Conversion failed!");
+            toast.error(
+                error.response?.data?.message?.error?.[0] ||
+                    t("conversionFailed"),
+            );
         } finally {
             setConverting(false);
         }
@@ -68,9 +79,7 @@ export default function PointsPage() {
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex items-center justify-between mb-4">
-                <h5 className="font-bold tracking-tight">
-                    Point to Cash
-                </h5>
+                <h5 className="font-bold tracking-tight">{t("title")}</h5>
             </div>
             {loading ? (
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -82,7 +91,7 @@ export default function PointsPage() {
                     <SkeletonCard />
                 </div>
             ) : !points.length ? (
-                <div className="p-6">No point history found.</div>
+                <div className="p-6">{t("noHistory")}</div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     {points.map((item) => (
@@ -94,7 +103,8 @@ export default function PointsPage() {
                                 <div className="flex items-center gap-2">
                                     <GiftIcon className="w-6 h-6 text-indigo-500" />
                                     <h5 className="font-semibold">
-                                        {item.point_amount} Points → {currencySymbol}{" "}
+                                        {item.point_amount} {t("points")} →{" "}
+                                        {currencySymbol}{" "}
                                         {formatAmount(item.cash_amount)}
                                     </h5>
                                 </div>
@@ -112,14 +122,16 @@ export default function PointsPage() {
                                 <p className="flex items-center gap-2">
                                     <BanknotesIcon className="w-4 h-4 text-green-500" />
                                     <span className="font-semibold">
-                                        Cash Amount:
+                                        {t("cashAmount")}
                                     </span>{" "}
                                     {currencySymbol}{" "}
                                     {formatAmount(item.cash_amount)}
                                 </p>
                                 <p className="flex items-center gap-2">
                                     <CircleStackIcon className="w-4 h-4 text-amber-500" />
-                                    <span className="font-semibold">Points:</span>{" "}
+                                    <span className="font-semibold">
+                                        {t("points")}:
+                                    </span>{" "}
                                     {item.point_amount}
                                 </p>
                             </div>
@@ -136,16 +148,22 @@ export default function PointsPage() {
                 <div className="fixed inset-0 flex items-center justify-center p-4">
                     <Dialog.Panel className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
                         <Dialog.Title className="text-lg font-semibold text-gray-800">
-                            Convert Points
+                            {t("convertPoints")}
                         </Dialog.Title>
                         <Dialog.Description className="mt-2 text-gray-600">
-                            Are you sure you want to convert{" "}
-                            <b>{selectedPoint?.point_amount}</b> points into{" "}
-                            <b>
-                                {currencySymbol}{" "}
-                                {formatAmount(selectedPoint?.cash_amount)}
-                            </b>
-                            ?
+                            {t.rich("confirmMsg", {
+                                points: (chunks) => (
+                                    <b>{selectedPoint?.point_amount}</b>
+                                ),
+                                amount: (chunks) => (
+                                    <b>
+                                        {currencySymbol}{" "}
+                                        {formatAmount(
+                                            selectedPoint?.cash_amount,
+                                        )}
+                                    </b>
+                                ),
+                            })}
                         </Dialog.Description>
 
                         <div className="mt-6 flex justify-end gap-3">
@@ -153,14 +171,14 @@ export default function PointsPage() {
                                 className="px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200"
                                 onClick={() => setIsOpen(false)}
                             >
-                                Cancel
+                                {t("cancel")}
                             </button>
                             <button
                                 onClick={handleConvert}
                                 disabled={converting}
                                 className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-50"
                             >
-                                {converting ? "Converting..." : "Confirm"}
+                                {converting ? t("converting") : t("confirm")}
                             </button>
                         </div>
                     </Dialog.Panel>

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { Menu } from "@headlessui/react";
@@ -129,7 +129,7 @@ const products = [
     },
 ];
 
-export default function AllProduct() {
+function AllProduct() {
     const [selectedSort, setSelectedSort] = useState("Default");
     const { incrementCart, decrementCart } = useCart();
     const [states, setStates] = useState(
@@ -300,5 +300,15 @@ export default function AllProduct() {
                 </div>
             </div>
         </section>
+    );
+}
+
+export default function AllProductSection() {
+    return (
+        <>
+            <Suspense fallback={<div>Loading...</div>}>
+                <AllProduct />
+            </Suspense>
+        </>
     );
 }

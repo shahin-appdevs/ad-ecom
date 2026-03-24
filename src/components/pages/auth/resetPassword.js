@@ -10,8 +10,10 @@ import { toast } from "react-hot-toast";
 
 import logo from "@public/images/logo/favicon.jpeg";
 import getImageUrl from "@/components/utility/getImageUrl";
+import { useTranslations } from "next-intl";
 
 function ResetPasswordForm() {
+    const t = useTranslations("Auth.resetPassword");
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [loading, setLoading] = useState(false);
@@ -48,7 +50,7 @@ function ResetPasswordForm() {
                     toast.error(msg);
                 });
             } else {
-                toast.error("Failed to reset password.");
+                toast.error(t("errorFailed"));
             }
         } finally {
             setLoading(false);
@@ -66,10 +68,10 @@ function ResetPasswordForm() {
                 <div className="w-full p-4 md:p-8 flex flex-col justify-center">
                     {/* Header Section */}
                     <h2 className="text-center text-xl font-bold text-gray-900 mb-6 border-b pb-4">
-                        Reset Password
+                        {t("title")}
                     </h2>
                     {/* Logo Section */}
-                    <div className="flex items-center space-x-4 mb-8">
+                    <div className="flex items-center gap-2 mb-8">
                         <div className="bg-gray-100 p-1.5 rounded-full shadow-sm w-[50px] h-[50px] flex items-center justify-center">
                             <Image
                                 src={getImageUrl(
@@ -82,12 +84,12 @@ function ResetPasswordForm() {
                                 className="rounded-full !bg-white"
                             />
                         </div>
-                        <div>
+                        <div className="space-y-2">
                             <h6 className="font-bold text-gray-900 tracking-tight">
                                 {appSettingsData?.site_name}
                             </h6>
                             <p className="text-sm text-gray-500 leading-tight">
-                                এ প্রবেশ করুন ফোন নাম্বার এর মাধ্যমে
+                                {t("subtitle")}
                             </p>
                         </div>
                     </div>
@@ -99,7 +101,7 @@ function ResetPasswordForm() {
                                 htmlFor="password"
                                 className="block text-sm font-medium text-gray-700 mb-1"
                             >
-                                New Password
+                                {t("newPassword")}
                             </label>
                             <div className="relative">
                                 <input
@@ -109,7 +111,7 @@ function ResetPasswordForm() {
                                     onChange={(e) =>
                                         setPassword(e.target.value)
                                     }
-                                    placeholder="Enter Password"
+                                    placeholder={t("placeholder")}
                                     className="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary__color/50 focus:border-primary__color transition-all duration-200 bg-gray-50 focus:bg-white pr-10"
                                     required
                                 />
@@ -166,7 +168,7 @@ function ResetPasswordForm() {
                                 htmlFor="confirm-password"
                                 className="block text-sm font-medium text-gray-700 mb-1"
                             >
-                                Confirm Password
+                                {t("confirmPassword")}
                             </label>
                             <div className="relative">
                                 <input
@@ -180,7 +182,7 @@ function ResetPasswordForm() {
                                     onChange={(e) =>
                                         setPasswordConfirmation(e.target.value)
                                     }
-                                    placeholder="Enter Password"
+                                    placeholder={t("placeholder")}
                                     className="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary__color/50 focus:border-primary__color transition-all duration-200 bg-gray-50 focus:bg-white pr-10"
                                     required
                                 />
@@ -236,7 +238,11 @@ function ResetPasswordForm() {
                         <div className="pt-2">
                             <Button
                                 type="submit"
-                                title={loading ? "Confirming..." : "Confirm"}
+                                title={
+                                    loading
+                                        ? t("btnConfirming")
+                                        : t("btnConfirm")
+                                }
                                 variant="primary"
                                 size="md"
                                 className="w-full py-3.5 text-base font-bold shadow-lg shadow-primary__color/30 hover:shadow-primary__color/50 transition-all duration-300"
@@ -245,23 +251,22 @@ function ResetPasswordForm() {
                         </div>
                     </form>
 
-                    {/* Navigation Links */}
                     <div className="mt-10 pt-6 border-t border-gray-100">
                         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                             <p className="text-sm text-gray-600">
-                                Remember your password?{" "}
+                                {t("rememberPassword")}{" "}
                                 <Link
                                     href="/user/auth/login"
                                     className="font-bold text-primary__color hover:underline"
                                 >
-                                    Log In
+                                    {t("login")}
                                 </Link>
                             </p>
                             <Link
                                 href="/user/auth/register"
                                 className="text-sm font-bold text-gray-500 hover:text-primary__color transition-colors"
                             >
-                                Create Account
+                                {t("createAccount")}
                             </Link>
                         </div>
                     </div>

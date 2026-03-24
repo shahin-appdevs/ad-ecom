@@ -1,9 +1,11 @@
 "use client";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { XCircleIcon } from "@heroicons/react/24/outline";
 
 export default function OrderCancelPage() {
+    const t = useTranslations("Checkout.orderCancel");
     return (
         <section className="flex flex-col items-center justify-center min-h-[80vh] px-4">
             <motion.div
@@ -26,17 +28,18 @@ export default function OrderCancelPage() {
                 >
                     <XCircleIcon className="h-16 w-16 text-red-600 mb-6" />
                 </motion.div>
-                <h1 className="text-2xl font-bold mb-3">Order Canceled!</h1>
+                <h1 className="text-2xl font-bold mb-3">
+                    {t("orderCanceled")}
+                </h1>
                 <p className="text-center mb-6 max-w-md">
-                    Thank you for your submission. Your order has been canceled
-                    and will be processed shortly.
+                    {t("thankYouMessage")}
                 </p>
                 <div className="flex gap-4">
                     <Link
                         href="/"
                         className="bg-primary__color text-white px-6 py-3 rounded-md font-semibold hover:opacity-90 transition"
                     >
-                        Continue Shopping
+                        {t("continueShopping")}
                     </Link>
                 </div>
             </motion.div>

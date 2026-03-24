@@ -4,7 +4,7 @@ import MyGiftCards from "@/components/dashboard/pages/giftCard/MyGiftCards";
 const GiftCardPage = () => {
     return (
         <div>
-            <GiftCardSection />
+            {/* <GiftCardSection /> */}
             <MyGiftCards />
         </div>
     );

@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import { billPayGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
@@ -50,6 +51,7 @@ function SkeletonRow() {
 }
 
 export default function BillPayHistorySection({ billPaySuccess }) {
+    const t = useTranslations("Dashboard.services.billPay");
     const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -75,7 +77,7 @@ export default function BillPayHistorySection({ billPaySuccess }) {
         };
 
         fetchBillPayData();
-    }, [billPaySuccess]);
+    }, [billPaySuccess, router]);
 
     const getStatusColor = (status) => {
         switch (status) {
@@ -109,13 +111,15 @@ export default function BillPayHistorySection({ billPaySuccess }) {
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                <h2 className="text-[16px] font-semibold">Bill Pay Logs</h2>
+                <h2 className="text-[16px] font-semibold">
+                    {t("billPayLogs")}
+                </h2>
                 <Link
                     href="/user/transactions/bill-pay"
                     className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
                 >
                     <PlusIcon className="h-5 w-5" />
-                    View All
+                    {t("viewAll")}
                 </Link>
             </div>
 
@@ -124,39 +128,41 @@ export default function BillPayHistorySection({ billPaySuccess }) {
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Trx</th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Request Amount
+                                    {t("trx")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payable
+                                    {t("requestAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Exchange Rate
+                                    {t("payable")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Bill Type
+                                    {t("exchangeRate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Bill Month
+                                    {t("billType")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Bill Number
+                                    {t("billMonth")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Bill Amount
+                                    {t("billNumber")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Fees & Charges
+                                    {t("billAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Current Balance
+                                    {t("feesAndCharges")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    status
+                                    {t("currentBalance")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                    {t("status")}
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("timeAndDate")}
                                 </th>
                             </tr>
                         </thead>
@@ -168,47 +174,47 @@ export default function BillPayHistorySection({ billPaySuccess }) {
                     </table>
                 </div>
             ) : transactions.length === 0 ? (
-                <div className="text-center py-5">
-                    No bill pay transactions found
-                </div>
+                <div className="text-center py-5">{t("noTransactions")}</div>
             ) : (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Trx</th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Request Amount
+                                    {t("trx")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payable
+                                    {t("requestAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Exchange Rate
+                                    {t("payable")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Bill Type
+                                    {t("exchangeRate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Bill Month
+                                    {t("billType")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Bill Number
+                                    {t("billMonth")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Bill Amount
+                                    {t("billNumber")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Fees & Charges
+                                    {t("billAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Current Balance
+                                    {t("feesAndCharges")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    status
+                                    {t("currentBalance")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                    {t("status")}
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("timeAndDate")}
                                 </th>
                             </tr>
                         </thead>

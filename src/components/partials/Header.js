@@ -351,6 +351,17 @@ export default function Header() {
         logout: t("header.logout"),
     };
 
+    const cartTxt = {
+        title: t("header.cart.title"),
+        checkout: t("header.cart.checkout"),
+        emptyMsg: t("header.cart.emptyMsg"),
+    };
+    const wishlistTxt = {
+        title: t("header.wishlist.title"),
+        emptyMsg: t("header.wishlist.emptyMsg"),
+        view: t("header.wishlist.view"),
+    };
+
     const mobileBottomBar = {
         home: t("header.mobileBottomBar.home"),
         categories: t("header.mobileBottomBar.categories"),
@@ -661,7 +672,7 @@ export default function Header() {
                                     >
                                         <div className="p-4 border-b">
                                             <h3 className="font-semibold text-base">
-                                                Cart
+                                                {cartTxt.title}
                                             </h3>
                                         </div>
 
@@ -707,7 +718,7 @@ export default function Header() {
                                                 ))
                                             ) : (
                                                 <div className="p-4 text-center text-gray-500">
-                                                    Your cart is empty
+                                                    {cartTxt.emptyMsg}
                                                 </div>
                                             )}
                                         </div>
@@ -715,7 +726,7 @@ export default function Header() {
                                             <div className="p-4 bg-gray-50">
                                                 <div className="flex justify-between items-center">
                                                     <span className="font-semibold">
-                                                        Checkout
+                                                        {cartTxt.checkout}
                                                     </span>
                                                     <span className="text-lg font-bold text-primary__color">
                                                         {cartTotal}
@@ -751,7 +762,7 @@ export default function Header() {
                                     >
                                         <div className="p-4 border-b">
                                             <h3 className="font-semibold text-base">
-                                                Wishlist
+                                                {wishlistTxt.title}
                                             </h3>
                                         </div>
 
@@ -787,14 +798,14 @@ export default function Header() {
                                                 ))
                                             ) : (
                                                 <div className="p-4 text-center text-gray-500">
-                                                    Your wishlist is empty
+                                                    {wishlistTxt.emptyMsg}
                                                 </div>
                                             )}
                                         </div>
                                         {wishlistItems.length > 0 && (
                                             <div className="p-4 bg-gray-50">
                                                 <div className="block w-full text-center bg-primary__color text-white py-2 rounded hover:bg-opacity-90 transition">
-                                                    View Wishlist
+                                                    {wishlistTxt.view}
                                                 </div>
                                             </div>
                                         )}

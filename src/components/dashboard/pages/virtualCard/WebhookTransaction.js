@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import { format } from "date-fns";
 import { handleApiError } from "@/components/utility/handleApiError";
+import { useTranslations } from "next-intl";
 
 function SkeletonRow() {
     return (
@@ -50,6 +51,9 @@ function SkeletonRow() {
 }
 
 export default function VirtualCardWebHookTransaction() {
+    const t = useTranslations(
+        "Dashboard.cards.virtualCard.virtualCardWebhookTrx",
+    );
     const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -99,9 +103,7 @@ export default function VirtualCardWebHookTransaction() {
     return (
         <div className="bg-white rounded-[12px] p-8">
             <div className="flex flex-col md:flex-row md:items-center  md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                <h2 className="text-base  font-semibold">
-                    Webhook Transactions
-                </h2>
+                <h2 className="text-base  font-semibold">{t("title")}</h2>
             </div>
 
             {isLoading ? (
@@ -110,35 +112,35 @@ export default function VirtualCardWebHookTransaction() {
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
                                 <th className="py-4 px-5 font-semibold">
-                                    Trx Id
+                                    {t("table.trxId")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Event Type
+                                    {t("table.eventType")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Reference
+                                    {t("table.reference")}
                                 </th>
 
                                 <th className="py-4 px-5 font-semibold">
-                                    Narrative
+                                    {t("table.narrative")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Reason
+                                    {t("table.reason")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Amount
+                                    {t("table.amount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Charge Amount
+                                    {t("table.chargeAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Balance Before Termination
+                                    {t("table.balanceBeforeTermination")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Status
+                                    {t("table.status")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Created At
+                                    {t("table.createdAt")}
                                 </th>
                             </tr>
                         </thead>
@@ -150,48 +152,52 @@ export default function VirtualCardWebHookTransaction() {
                     </table>
                 </div>
             ) : !Array.isArray(transactions) || transactions?.length < 1 ? (
-                <div className="text-center py-5">No transaction found</div>
+                <div className="text-center py-5">{t("noTransaction")}</div>
             ) : (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
                                 <th className="py-4 px-5 font-semibold">
-                                    Trx Id
+                                    {t("table.trxId")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Event Type
+                                    {t("table.eventType")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Reference
+                                    {t("table.reference")}
                                 </th>
 
                                 <th className="py-4 px-5 font-semibold">
-                                    Narrative
+                                    {t("table.narrative")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Reason
+                                    {t("table.reason")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Amount
+                                    {t("table.amount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Charge Amount
+                                    {t("table.chargeAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Balance Before Termination
+                                    {t("table.balanceBeforeTermination")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Status
+                                    {t("table.status")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Created At
+                                    {t("table.createdAt")}
                                 </th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
                             {transactions?.map((transaction, index) => (
-                                <tr key={index}>
+                                <tr
+                                    key={index}
+                                    dir="ltr"
+                                    className="rtl:text-right"
+                                >
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
                                         #{transaction?.transition_id || "N/A"}
                                     </td>

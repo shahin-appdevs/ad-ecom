@@ -4,6 +4,7 @@ import { affiliatePlanGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 function SkeletonCard() {
     return (
@@ -28,6 +29,7 @@ function SkeletonCard() {
 }
 
 export default function AffiliatePlan() {
+    const t = useTranslations("Dashboard.account.affiliatePlan");
     const [loading, setLoading] = useState(true);
     const [plans, setPlans] = useState([]);
     const [activePlan, setActivePlan] = useState(null);
@@ -46,7 +48,7 @@ export default function AffiliatePlan() {
                     symbol: data?.base_curr_symbol,
                 });
             } catch (err) {
-                toast.error("Failed to load plans");
+                toast.error(t("failedLoad"));
             } finally {
                 setLoading(false);
             }
@@ -82,7 +84,7 @@ export default function AffiliatePlan() {
                         >
                             {isActive && (
                                 <span className="absolute top-4 right-4 bg-blue-100 text-primary__color text-xs font-medium px-2 py-1 rounded-full">
-                                    Active
+                                    {t("active")}
                                 </span>
                             )}
                             <div
@@ -99,7 +101,7 @@ export default function AffiliatePlan() {
                                     {currency.symbol}
                                     {plan.joining_fee}
                                     <span className="text-sm font-medium text-gray-500 ml-1">
-                                        one time
+                                        {t("oneTime")}
                                     </span>
                                 </div>
                             </div>
@@ -144,8 +146,8 @@ export default function AffiliatePlan() {
                                     }`}
                                 >
                                     {isActive
-                                        ? "Current Plan"
-                                        : `Choose ${plan.name}`}
+                                        ? t("currentPlan")
+                                        : t("choosePlan", { name: plan.name })}
                                 </button>
                             </div>
                         </div>

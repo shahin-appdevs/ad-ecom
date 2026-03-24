@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+
 import {
     paymentLinkShareAPI,
     paymentLinkShareSubmitAPI,
@@ -16,6 +18,9 @@ import {
     useStripe,
     useElements,
 } from "@stripe/react-stripe-js";
+import getJwtToken from "@/components/utility/getJwtToken";
+import Image from "next/image";
+import getImageUrl from "@/components/utility/getImageUrl";
 
 // Stripe Card Form Component
 const StripeCardForm = ({
@@ -24,6 +29,10 @@ const StripeCardForm = ({
     publicKey,
     onCardDetailsChange,
 }) => {
+    const t = useTranslations(
+        "Dashboard.wallet.paymentLink.paymentLinkShare.stripeForm",
+    );
+
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState("");
@@ -41,21 +50,21 @@ const StripeCardForm = ({
         <div className="grid grid-cols-1 gap-4">
             <div>
                 <label className="block text-sm font-medium mb-1">
-                    Card Name
+                    {t("cardNameLabel")}
                 </label>
                 <input
                     type="text"
                     name="cardName"
                     value={formData.cardName}
                     onChange={onFormDataChange}
-                    placeholder="Name on card"
+                    placeholder={t("cardNamePlaceholder")}
                     className="w-full border rounded-md p-2 text-sm focus:outline-none"
                     required
                 />
             </div>
             <div>
                 <label className="block text-sm font-medium mb-1">
-                    Card Details
+                    {t("cardDetailsLabel")}
                 </label>
                 <div className="border rounded-md p-3 bg-white">
                     <CardElement
@@ -150,9 +159,13 @@ function PaymentLinkShareContent({
     apiLoading,
     setApiLoading,
 }) {
+    const t = useTranslations("Dashboard.wallet.paymentLink.paymentLinkShare");
+
     const router = useRouter();
     const stripe = useStripe();
     const elements = useElements();
+    const searchParams = useSearchParams();
+    const token = searchParams.get("token");
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -164,14 +177,14 @@ function PaymentLinkShareContent({
 
     const processStripePayment = async () => {
         if (!stripe || !elements) {
-            toast.error("Stripe not loaded properly");
+            toast.error(t("errors.stripeNotLoaded"));
             return null;
         }
 
         const cardElement = elements.getElement(CardElement);
 
         if (!cardElement) {
-            toast.error("Card details not found");
+            toast.error(t("errors.cardNotFound"));
             return null;
         }
 
@@ -188,7 +201,7 @@ function PaymentLinkShareContent({
                 last4: token.card.last4,
             };
         } catch (err) {
-            toast.error("Failed to process card details");
+            toast.error(t("errors.cardProcessingFailed"));
             return null;
         }
     };
@@ -200,21 +213,21 @@ function PaymentLinkShareContent({
 
         // Basic validation
         if (!formData.fullName || !formData.email || !formData.phone) {
-            toast.error("Please fill in all required fields");
+            toast.error(t("errors.requiredFields"));
             return;
         }
 
         if (paymentType === "card_payment" && !formData.cardName) {
-            toast.error("Please enter card name");
+            toast.error(t("errors.cardNameRequired"));
             return;
         }
 
         if (
-            paymentLink.type === "pay" &&
-            !paymentLink.price &&
+            data.payment_link.type === "pay" &&
+            !data.payment_link.price &&
             !formData.amount
         ) {
-            toast.error("Please enter amount");
+            toast.error(t("errors.amountRequired"));
             return;
         }
 
@@ -256,11 +269,11 @@ function PaymentLinkShareContent({
                 last4Card || formData.last4Card,
                 formData.paymentGateway,
                 "WEB",
-                `${window.location.origin}/user/payment/link/share/success`,
-                `${window.location.origin}/user/payment/link/share/cancel`,
+                `${window.location.origin}/payment-link/sharelink-success`,
+                `${window.location.origin}/payment-link/sharelink-cancel`,
             );
 
-            toast.success("Payment submitted successfully!");
+            toast.success(t("success.paymentSubmitted"));
             if (response.data.data.redirect_url) {
                 window.location.href = response.data.data.redirect_url;
             } else if (
@@ -268,18 +281,28 @@ function PaymentLinkShareContent({
                 paymentType === "wallet_payment"
             ) {
                 // For card and wallet payments that process immediately
-                // Redirect to success page after a short delay to show success message
                 setTimeout(() => {
-                    window.location.href = `${window.location.origin}/user/payment/link/share/success`;
+                    window.location.href = `${window.location.origin}/payment-link/sharelink-success`;
                 }, 1500);
             }
         } catch (error) {
             toast.error(
-                error.response?.data?.message?.error?.[0] || "Payment failed",
+                error.response?.data?.message?.error?.[0] ||
+                    t("errors.paymentFailed"),
             );
         } finally {
             setApiLoading(false);
         }
+    };
+
+    const handlePaymentTypeChange = (paymentType) => {
+        const userToken = getJwtToken();
+
+        if (paymentType === "wallet_payment") {
+            if (!userToken)
+                router.push(`/user/auth/login?pay_link_token=${token}`);
+        }
+        setPaymentType(paymentType);
     };
 
     const paymentLink = data.payment_link;
@@ -302,24 +325,32 @@ function PaymentLinkShareContent({
                     )}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-3">
-                        <div>
+                        <div className="space-y-4">
                             <p className="mb-1">
-                                <span className="font-medium">Type:</span>{" "}
+                                <span className="font-medium">
+                                    {t("labels.type")}:
+                                </span>{" "}
                                 {paymentLink.linkType}
                             </p>
                             <p className="mb-1">
-                                <span className="font-medium">Amount:</span>{" "}
+                                <span className="font-medium">
+                                    {t("labels.amount")}:
+                                </span>{" "}
                                 {paymentLink.amountCalculation}
                             </p>
                             <p className="mb-1">
-                                <span className="font-medium">Currency:</span>{" "}
+                                <span className="font-medium">
+                                    {t("labels.currency")}:
+                                </span>{" "}
                                 {paymentLink.currency} (
                                 {paymentLink.currency_symbol})
                             </p>
                             {paymentLink.limit && (
                                 <p className="mb-1">
-                                    <span className="font-medium">Limit:</span>{" "}
-                                    {paymentLink.limit} payments
+                                    <span className="font-medium">
+                                        {t("labels.limit")}:
+                                    </span>{" "}
+                                    {paymentLink.limit} {t("labels.payments")}
                                 </p>
                             )}
                         </div>
@@ -329,7 +360,9 @@ function PaymentLinkShareContent({
                         {paymentLink.type === "pay" && !paymentLink.price && (
                             <div>
                                 <label className="block text-sm font-medium mb-1">
-                                    Amount ({paymentLink.currency_symbol})
+                                    {t("labels.amountWithSymbol", {
+                                        symbol: paymentLink.currency_symbol,
+                                    })}
                                 </label>
                                 <input
                                     type="number"
@@ -339,25 +372,41 @@ function PaymentLinkShareContent({
                                     min={paymentLink.min_amount || 0}
                                     max={paymentLink.max_amount || ""}
                                     step="0.01"
-                                    placeholder="Amount"
+                                    placeholder={t("placeholders.amount")}
                                     className="w-full border rounded-md p-2 text-sm focus:outline-none"
                                     required
                                 />
                                 {paymentLink.min_amount && (
                                     <p className="text-xs text-gray-500 mt-1">
-                                        Minimum: {paymentLink.min_amount}{" "}
+                                        {t("labels.minimum")}:{" "}
+                                        {paymentLink.min_amount}{" "}
                                         {paymentLink.currency}
                                     </p>
                                 )}
                                 {paymentLink.max_amount && (
                                     <p className="text-xs text-gray-500 mt-1">
-                                        Maximum: {paymentLink.max_amount}{" "}
+                                        {t("labels.maximum")}:{" "}
+                                        {paymentLink.max_amount}{" "}
                                         {paymentLink.currency}
                                     </p>
                                 )}
                             </div>
                         )}
                     </div>
+                    {paymentLink.image && (
+                        <div className="mt-6">
+                            <Image
+                                src={getImageUrl(
+                                    paymentLink.image,
+                                    data.payment_link_image_path,
+                                )}
+                                alt={paymentLink.title}
+                                width={200}
+                                height={200}
+                                className="rounded-md"
+                            />
+                        </div>
+                    )}
                 </div>
 
                 {/* Right Column - Payment Form */}
@@ -366,42 +415,42 @@ function PaymentLinkShareContent({
                         <div className="space-y-4">
                             <div className="">
                                 <label className="block text-sm font-medium mb-1">
-                                    Full Name *
+                                    {t("labels.fullName")} *
                                 </label>
                                 <input
                                     type="text"
                                     name="fullName"
                                     value={formData.fullName}
                                     onChange={handleInputChange}
-                                    placeholder="Full Name"
+                                    placeholder={t("placeholders.fullName")}
                                     className="w-full border rounded-md p-2 text-sm focus:outline-none"
                                     required
                                 />
                             </div>
                             <div className="">
                                 <label className="block text-sm font-medium mb-1">
-                                    Email *
+                                    {t("labels.email")} *
                                 </label>
                                 <input
                                     type="email"
                                     name="email"
                                     value={formData.email}
                                     onChange={handleInputChange}
-                                    placeholder="Email"
+                                    placeholder={t("placeholders.email")}
                                     className="w-full border rounded-md p-2 text-sm focus:outline-none"
                                     required
                                 />
                             </div>
                             <div className="">
                                 <label className="block text-sm font-medium mb-1">
-                                    Phone *
+                                    {t("labels.phone")} *
                                 </label>
                                 <input
                                     type="number"
                                     name="phone"
                                     value={formData.phone}
                                     onChange={handleInputChange}
-                                    placeholder="Phone"
+                                    placeholder={t("placeholders.phone")}
                                     className="w-full border rounded-md p-2 text-sm focus:outline-none"
                                     required
                                 />
@@ -410,22 +459,23 @@ function PaymentLinkShareContent({
                             <div className="space-y-1">
                                 <Listbox
                                     value={paymentType}
-                                    onChange={setPaymentType}
+                                    onChange={handlePaymentTypeChange}
                                 >
                                     <Listbox.Label className="block text-sm font-medium">
-                                        Payment Method *
+                                        {t("labels.paymentMethod")} *
                                     </Listbox.Label>
                                     <div className="relative">
                                         <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                                             <span className="block truncate">
                                                 {paymentType ===
                                                     "payment_gateway" &&
-                                                    "Payment Gateway"}
+                                                    t("paymentMethods.gateway")}
                                                 {paymentType ===
-                                                    "card_payment" && "Card"}
+                                                    "card_payment" &&
+                                                    t("paymentMethods.card")}
                                                 {paymentType ===
                                                     "wallet_payment" &&
-                                                    "Wallet"}
+                                                    t("paymentMethods.wallet")}
                                             </span>
                                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                                 <ChevronUpDownIcon
@@ -453,7 +503,9 @@ function PaymentLinkShareContent({
                                                             <span
                                                                 className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
                                                             >
-                                                                Payment Gateway
+                                                                {t(
+                                                                    "paymentMethods.gateway",
+                                                                )}
                                                             </span>
                                                             {selected ? (
                                                                 <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-indigo-600">
@@ -485,7 +537,9 @@ function PaymentLinkShareContent({
                                                             <span
                                                                 className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
                                                             >
-                                                                Card
+                                                                {t(
+                                                                    "paymentMethods.card",
+                                                                )}
                                                             </span>
                                                             {selected ? (
                                                                 <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-indigo-600">
@@ -517,7 +571,9 @@ function PaymentLinkShareContent({
                                                             <span
                                                                 className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
                                                             >
-                                                                Wallet
+                                                                {t(
+                                                                    "paymentMethods.wallet",
+                                                                )}
                                                             </span>
                                                             {selected ? (
                                                                 <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-indigo-600">
@@ -551,7 +607,7 @@ function PaymentLinkShareContent({
                                         }
                                     >
                                         <Listbox.Label className="block text-sm font-medium mb-1">
-                                            Select Gateway *
+                                            {t("labels.selectGateway")} *
                                         </Listbox.Label>
                                         <div className="relative mt-1">
                                             <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
@@ -562,7 +618,9 @@ function PaymentLinkShareContent({
                                                                   g.alias ===
                                                                   formData.paymentGateway,
                                                           )?.name
-                                                        : "Select a gateway"}
+                                                        : t(
+                                                              "placeholders.selectGateway",
+                                                          )}
                                                 </span>
                                                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                                     <ChevronUpDownIcon
@@ -588,7 +646,9 @@ function PaymentLinkShareContent({
                                                             <span
                                                                 className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
                                                             >
-                                                                Select a gateway
+                                                                {t(
+                                                                    "placeholders.selectGateway",
+                                                                )}
                                                             </span>
                                                             {selected ? (
                                                                 <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-indigo-600">
@@ -672,14 +732,16 @@ function PaymentLinkShareContent({
                                         }
                                     >
                                         <Listbox.Label className="block text-sm font-medium mb-1">
-                                            Select Wallet Currency *
+                                            {t("labels.selectWalletCurrency")} *
                                         </Listbox.Label>
                                         <div className="relative mt-1">
                                             <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
                                                 <span className="block truncate">
                                                     {formData.walletCurrency
                                                         ? `${data.active_currencies.find((c) => c.code === formData.walletCurrency)?.name} (${data.active_currencies.find((c) => c.code === formData.walletCurrency)?.symbol})`
-                                                        : "Select a currency"}
+                                                        : t(
+                                                              "placeholders.selectCurrency",
+                                                          )}
                                                 </span>
                                                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                                     <ChevronUpDownIcon
@@ -705,8 +767,9 @@ function PaymentLinkShareContent({
                                                             <span
                                                                 className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
                                                             >
-                                                                Select a
-                                                                currency
+                                                                {t(
+                                                                    "placeholders.selectCurrency",
+                                                                )}
                                                             </span>
                                                             {selected ? (
                                                                 <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-indigo-600">
@@ -772,19 +835,19 @@ function PaymentLinkShareContent({
                             <div className="border rounded-md p-3 bg-gray-50 text-xs text-gray-600 flex items-center gap-2">
                                 <span className="text-lg">💯</span>
                                 <span>
-                                    <strong>
-                                        Securely save my information for 1-click
-                                        checkout
-                                    </strong>
+                                    <strong>{t("secureSave.title")}</strong>
                                     <br />
-                                    Pay faster on and everywhere Link is
-                                    accepted
+                                    {t("secureSave.description")}
                                 </span>
                             </div>
 
                             <Button
                                 type="submit"
-                                title={apiLoading ? "Processing..." : "Pay"}
+                                title={
+                                    apiLoading
+                                        ? t("buttons.processing")
+                                        : t("buttons.pay")
+                                }
                                 variant="primary"
                                 size="md"
                                 className="w-full"
@@ -800,6 +863,8 @@ function PaymentLinkShareContent({
 
 // Main Page Component
 export default function PaymentLinkSharePage() {
+    const t = useTranslations("Dashboard.wallet.paymentLink.paymentLinkShare");
+
     const router = useRouter();
     const searchParams = useSearchParams();
     const [data, setData] = useState(null);
@@ -827,7 +892,7 @@ export default function PaymentLinkSharePage() {
             const linkToken = searchParams.get("token");
 
             if (!linkToken) {
-                setError("Invalid payment link");
+                setError(t("errors.invalidLink"));
                 setIsLoading(false);
                 return;
             }
@@ -863,8 +928,10 @@ export default function PaymentLinkSharePage() {
                     }));
                 }
             } catch (err) {
-                setError(err.message || "Failed to load payment link");
-                toast.error(err.message || "Failed to load payment link");
+                const errorMessage = err.response?.data?.message?.error[0];
+
+                setError(errorMessage || t("errors.loadFailed"));
+                toast.error(errorMessage || t("errors.loadFailed"));
             } finally {
                 setIsLoading(false);
             }
@@ -880,13 +947,15 @@ export default function PaymentLinkSharePage() {
     if (error) {
         return (
             <div className="bg-white rounded-[12px] p-7 max-w-2xl mx-auto text-center">
-                <h3 className="text-xl font-semibold mb-4">Error</h3>
+                <h3 className="text-xl font-semibold mb-4">
+                    {t("errorTitle")}
+                </h3>
                 <p className="text-red-500 mb-6">{error}</p>
                 <button
                     onClick={() => router.push("/")}
                     className="px-4 py-2 bg-primary__color text-white rounded-md hover:bg-blue-600 transition"
                 >
-                    Go to Home
+                    {t("buttons.goHome")}
                 </button>
             </div>
         );

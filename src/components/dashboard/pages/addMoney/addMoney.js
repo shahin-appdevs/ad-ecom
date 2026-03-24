@@ -433,21 +433,24 @@ export default function AddMoneySection() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
                             <p className="">{t("exchangeRate")}</p>
-                            <h6 className="font-medium mt-1">
+                            <h6 dir="ltr" className="font-medium mt-1">
                                 {exchangeRateText}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
                             <p className="">{t("availableBalance")}</p>
-                            <h6 className="font-medium text-emerald-600 mt-1">
+                            <h6
+                                dir="ltr"
+                                className="font-medium text-emerald-600 mt-1"
+                            >
                                 {wallet.balance} {wallet.selectedCurrency?.code}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
                             <p className="">{t("charge")}</p>
-                            <h6 className="font-medium mt-1">
+                            <h6 dir="ltr" className="font-medium mt-1">
                                 {formattedCharges.fixed_charge}{" "}
                                 {selectedCurrency?.currency_code} +{" "}
                                 {formattedCharges.percent_charge}%
@@ -720,7 +723,7 @@ export default function AddMoneySection() {
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
                             <span>{t("enteredAmount")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span dir="ltr" className="font-medium text-gray-800">
                             {amount || "0.00"} {wallet?.selectedCurrency?.code}
                         </span>
                     </div>
@@ -729,7 +732,7 @@ export default function AddMoneySection() {
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
                             <span>{t("feesAndCharges")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {feesCalculation.totalFees}{" "}
                             {selectedCurrency?.currency_code}
                         </span>
@@ -739,7 +742,7 @@ export default function AddMoneySection() {
                             <BanknotesIcon className="w-5 h-5 text-emerald-500" />
                             <span>{t("youWillGet")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {feesCalculation.willGet}{" "}
                             {wallet?.selectedCurrency?.code}
                         </span>
@@ -749,7 +752,7 @@ export default function AddMoneySection() {
                             <WalletIcon className="w-5 h-5 text-indigo-600" />
                             <span>{t("totalPayable")}</span>
                         </div>
-                        <span>
+                        <span dir="ltr">
                             {feesCalculation.totalPayable}{" "}
                             {selectedCurrency?.currency_code}
                         </span>
@@ -766,7 +769,7 @@ export default function AddMoneySection() {
                             <ArrowsUpDownIcon className="w-5 h-5 text-indigo-500" />
                             <span>{t("transactionLimit")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span dir="ltr" className="font-medium text-gray-800 ">
                             {limitText}
                         </span>
                     </div>
@@ -775,7 +778,7 @@ export default function AddMoneySection() {
                             <CalendarDaysIcon className="w-5 h-5 text-blue-500" />
                             <span>{t("dailyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {limitsCalculation.dailyLimit}{" "}
                             {wallet?.selectedCurrency?.code}
                         </span>
@@ -785,7 +788,7 @@ export default function AddMoneySection() {
                             <ChartBarIcon className="w-5 h-5 text-violet-500" />
                             <span>{t("monthlyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {limitsCalculation.monthlyLimit}{" "}
                             {wallet?.selectedCurrency?.code}
                         </span>
@@ -798,7 +801,7 @@ export default function AddMoneySection() {
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span dir="ltr" className="text-gray-800">
                                 {limitsCalculation?.remainingDailyLimit}{" "}
                                 {wallet?.selectedCurrency?.code}
                             </span>
@@ -812,7 +815,7 @@ export default function AddMoneySection() {
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span dir="ltr" className="text-gray-800">
                                 {limitsCalculation?.remainingMonthlyLimit}{" "}
                                 {wallet?.selectedCurrency?.code}
                             </span>

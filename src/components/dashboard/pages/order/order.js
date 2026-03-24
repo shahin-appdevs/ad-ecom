@@ -5,6 +5,7 @@ import { productOrderGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useRouter } from "@/i18n/navigation";
 import { ComputerDesktopIcon } from "@heroicons/react/24/outline";
+import { useTranslations } from "next-intl";
 
 function SkeletonRow() {
     return (
@@ -44,6 +45,7 @@ export default function OrderSection() {
     const [apiData, setApiData] = useState(null);
     const [orders, setOrders] = useState([]);
     const router = useRouter();
+    const t = useTranslations("Dashboard.ecommerce.orderLog");
 
     useEffect(() => {
         const fetchData = async () => {
@@ -98,38 +100,43 @@ export default function OrderSection() {
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                <h2 className="text-[16px] font-semibold">Orders</h2>
+                <h2 className="text-[16px] font-semibold">{t("title")}</h2>
             </div>
 
             {!apiData ? (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
-                            <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Trx</th>
+                            <tr
+                                dir="ltr"
+                                className="bg-[#F5F7FF] text-left text-sm text-color__paragraph"
+                            >
                                 <th className="py-4 px-5 font-semibold">
-                                    Gateway
+                                    {t("trx")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Request Amount
+                                    {t("gateway")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payable
+                                    {t("requestAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Exchange Rate
+                                    {t("payable")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Fees & Charges
+                                    {t("exchangeRate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Current Balance
+                                    {t("feesAndCharges")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Status
+                                    {t("currentBalance")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                    {t("status")}
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("timeAndDate")}
                                 </th>
                             </tr>
                         </thead>
@@ -141,45 +148,49 @@ export default function OrderSection() {
                     </table>
                 </div>
             ) : orders.length === 0 ? (
-                <div className="text-center py-5">No orders found</div>
+                <div className="text-center py-5">{t("noOrders")}</div>
             ) : (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
-                            <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
+                            <tr className="bg-[#F5F7FF] text-left rtl:text-right text-sm text-color__paragraph">
                                 <th className="py-4 px-5 font-semibold">
-                                    Order ID
+                                    {t("orderId")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Product Total
+                                    {t("productTotal")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Delivery Fee
+                                    {t("deliveryFee")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Delivery Method
+                                    {t("deliveryMethod")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payment Method
+                                    {t("paymentMethod")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Grand Total
+                                    {t("grandTotal")}
                                 </th>
                                 {/* <th className="py-4 px-5 font-semibold">Profit Amount</th> */}
                                 <th className="py-4 px-5 font-semibold">
-                                    status
+                                    {t("status")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                    {t("timeAndDate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Action
+                                    {t("action")}
                                 </th>
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
                             {orders.map((order, index) => (
-                                <tr key={index}>
+                                <tr
+                                    dir="ltr"
+                                    className="rtl:text-right"
+                                    key={index}
+                                >
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
                                         #{order.order_id || "N/A"}
                                     </td>

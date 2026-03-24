@@ -23,6 +23,7 @@ import { useEffect, useState } from "react";
 import { handleApiError } from "../utility/handleApiError";
 
 import {
+    appDownloadLinkGetAPI,
     appSettingGetAPI,
     footerInfoGetAPI,
 } from "@root/services/apiClient/apiClient";
@@ -31,6 +32,7 @@ import { useTranslations } from "next-intl";
 export default function Footer() {
     const [appSettings, setAppSettings] = useState({});
     const [footerInfo, setFooterInfo] = useState({});
+    const [appDownloadLink, setAppDownloadLink] = useState({});
 
     const footerContent = footerInfo?.footer_content?.language?.en;
     const contactInfo = footerInfo?.contact_section?.language?.en;
@@ -63,9 +65,19 @@ export default function Footer() {
         }
     };
 
+    // const fetchAppDownloadLink = async () => {
+    //     try {
+    //         const result = await appDownloadLinkGetAPI();
+    //         setAppDownloadLink(result?.data?.data);
+    //     } catch (error) {
+    //         handleApiError(error);
+    //     }
+    // };
+
     useEffect(() => {
         footerInfoDataFetch();
         appSettingData();
+        // fetchAppDownloadLink();
     }, []);
 
     // ******** translations ***************

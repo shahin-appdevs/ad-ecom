@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback, Suspense } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { PlusIcon, MinusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
@@ -65,6 +66,7 @@ const SummarySkeleton = () => (
 );
 
 function Checkout() {
+    const t = useTranslations("Checkout.orderCheckout");
     const [cartItems, setCartItems] = useState([]);
     const [isCheckout, setIsCheckout] = useState(false);
     const [isPayment, setIsPayment] = useState(false);
@@ -401,9 +403,9 @@ function Checkout() {
         (uniqueId, source) => {
             removeItemFromAllCarts(uniqueId);
             loadCartItems();
-            toast.success("Item removed from cart");
+            toast.success(t("itemRemoved"));
         },
-        [loadCartItems, removeItemFromAllCarts],
+        [loadCartItems, removeItemFromAllCarts, t],
     );
 
     const total = cartItems.reduce(
@@ -431,7 +433,7 @@ function Checkout() {
                         >
                             <span className="block truncate">
                                 {options.find((opt) => opt.value === value)
-                                    ?.label || "Select"}
+                                    ?.label || t("select")}
                             </span>
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                 <svg
@@ -501,7 +503,7 @@ function Checkout() {
                 {loading ? (
                     <div className="h-6 bg-gray-200 rounded w-1/4 animate-pulse"></div>
                 ) : (
-                    `Shopping Bag (${cartItems.length} items)`
+                    `${t("shoppingBag")} (${cartItems.length} ${t("items")})`
                 )}
             </h2>
             {loading ? (
@@ -564,15 +566,20 @@ function Checkout() {
                                                                             {
                                                                                 item.discount
                                                                             }{" "}
-                                                                            ছাড়)
+                                                                            {t(
+                                                                                "discount",
+                                                                            )}
+                                                                            )
                                                                         </span>
                                                                     </div>
                                                                 )}
                                                             </div>
                                                             {item.oldPrice && (
                                                                 <p className="text-green-600">
-                                                                    আপনি সেভ
-                                                                    করছেন ৳
+                                                                    {t(
+                                                                        "youAreSaving",
+                                                                    )}{" "}
+                                                                    ৳
                                                                     {item.oldPrice -
                                                                         item.price}
                                                                 </p>
@@ -585,7 +592,9 @@ function Checkout() {
                                                                     {item.size && (
                                                                         <div className="flex items-center gap-2">
                                                                             <span className="font-medium">
-                                                                                Size:
+                                                                                {t(
+                                                                                    "size",
+                                                                                )}
                                                                             </span>
                                                                             <span className="bg-gray-100 px-2 py-1 rounded">
                                                                                 {
@@ -597,7 +606,9 @@ function Checkout() {
                                                                     {item.color && (
                                                                         <div className="flex items-center gap-2">
                                                                             <span className="font-medium">
-                                                                                Color:
+                                                                                {t(
+                                                                                    "color",
+                                                                                )}
                                                                             </span>
                                                                             <span className="bg-gray-100 px-2 py-1 rounded">
                                                                                 {
@@ -620,7 +631,7 @@ function Checkout() {
                                                         )
                                                     }
                                                     className="text-gray-500 hover:text-red-600"
-                                                    aria-label="Remove item"
+                                                    aria-label={t("removeItem")}
                                                 >
                                                     <XMarkIcon className="h-5 w-5" />
                                                 </button>
@@ -662,7 +673,7 @@ function Checkout() {
                             ) : (
                                 <div className="py-10">
                                     <p className="text-lg font-bold text-color__heading">
-                                        Your cart is empty
+                                        {t("yourCartIsEmpty")}
                                     </p>
                                 </div>
                             )
@@ -671,7 +682,7 @@ function Checkout() {
                                 <div className="space-y-5">
                                     <div className="">
                                         <h6 className="text-base font-medium mb-3">
-                                            Pay
+                                            {t("pay")}
                                         </h6>
                                         <div className="space-y-3">
                                             <label
@@ -706,11 +717,10 @@ function Checkout() {
                                                 </div>
                                                 <div className="">
                                                     <span className="text-base font-semibold text-color__heading">
-                                                        Cash on Delivery
+                                                        {t("cashOnDelivery")}
                                                     </span>
                                                     <span className="block text-xs font-medium">
-                                                        Pay when you receive the
-                                                        product
+                                                        {t("payWhenYouReceive")}
                                                     </span>
                                                 </div>
                                             </label>
@@ -745,11 +755,10 @@ function Checkout() {
                                                 </div>
                                                 <div className="">
                                                     <span className="text-base font-semibold text-color__heading">
-                                                        Online Payment
+                                                        {t("onlinePayment")}
                                                     </span>
                                                     <span className="block text-xs font-medium">
-                                                        Pay securely with
-                                                        payment gateway
+                                                        {t("paySecurely")}
                                                     </span>
                                                 </div>
                                             </label>
@@ -757,7 +766,9 @@ function Checkout() {
                                                 "online_payment" && (
                                                 <div className="ml-8 mt-4">
                                                     <h6 className="text-sm font-medium mb-3">
-                                                        Select Payment Method
+                                                        {t(
+                                                            "selectPaymentMethod",
+                                                        )}
                                                     </h6>
                                                     <div className="grid grid-cols-2 gap-3">
                                                         {paymentGateways.map(
@@ -831,15 +842,16 @@ function Checkout() {
                                                     </div>
                                                     {selectedGateway && (
                                                         <p className="mt-2 text-sm text-gray-500">
-                                                            You&apos;ll be
-                                                            redirected to{" "}
+                                                            {t("redirectedTo")}{" "}
                                                             {selectedGateway
                                                                 .replace(
                                                                     "-",
                                                                     " ",
                                                                 )
                                                                 .toUpperCase()}{" "}
-                                                            for secure payment
+                                                            {t(
+                                                                "forSecurePayment",
+                                                            )}
                                                         </p>
                                                     )}
                                                 </div>
@@ -856,12 +868,14 @@ function Checkout() {
                                     <div className="space-y-5">
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                                                Enter phone
+                                                {t("enterPhone")}
                                             </label>
                                             <input
                                                 type="tel"
                                                 name="phone"
-                                                placeholder="Enter Phone"
+                                                placeholder={t(
+                                                    "enterPhonePlaceholder",
+                                                )}
                                                 value={formData.phone}
                                                 onChange={handleInputChange}
                                                 className="w-full border-b border-gray-300 py-2 px-1 focus:outline-none focus:border-primary__color bg-gray-50"
@@ -869,12 +883,14 @@ function Checkout() {
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                                                Enter name
+                                                {t("enterName")}
                                             </label>
                                             <input
                                                 type="text"
                                                 name="name"
-                                                placeholder="Enter Name"
+                                                placeholder={t(
+                                                    "enterNamePlaceholder",
+                                                )}
                                                 value={formData.name}
                                                 onChange={handleInputChange}
                                                 className="w-full border-b border-gray-300 py-2 px-1 focus:outline-none focus:border-primary__color bg-gray-50"
@@ -882,12 +898,14 @@ function Checkout() {
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                                                Billing address
+                                                {t("billingAddress")}
                                             </label>
                                             <input
                                                 type="text"
                                                 name="address"
-                                                placeholder="Enter Billing Address"
+                                                placeholder={t(
+                                                    "enterBillingAddress",
+                                                )}
                                                 value={formData.address}
                                                 onChange={handleInputChange}
                                                 className="w-full border-b border-gray-300 py-2 px-1 focus:outline-none focus:border-primary__color bg-gray-50"
@@ -896,12 +914,14 @@ function Checkout() {
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-gray-700 mb-1">
-                                                Shipping address
+                                                {t("shippingAddress")}
                                             </label>
                                             <input
                                                 type="text"
                                                 name="shipping_address"
-                                                placeholder="Enter Shipping Address"
+                                                placeholder={t(
+                                                    "enterShippingAddress",
+                                                )}
                                                 value={
                                                     formData.shipping_address
                                                 }
@@ -911,7 +931,7 @@ function Checkout() {
                                             />
                                         </div>
                                         <CustomListbox
-                                            label="Enter Division"
+                                            label={t("enterDivision")}
                                             value={formData.division}
                                             onChange={(value) =>
                                                 handleInputChange({
@@ -929,7 +949,7 @@ function Checkout() {
                                             )}
                                         />
                                         <CustomListbox
-                                            label="Enter District"
+                                            label={t("enterDistrict")}
                                             value={formData.district}
                                             onChange={(value) =>
                                                 handleInputChange({
@@ -959,7 +979,7 @@ function Checkout() {
                                         /> */}
                                         <div className="pt-2">
                                             <p className="text-sm font-medium text-gray-700 mb-3">
-                                                Delivery option
+                                                {t("deliveryOption")}
                                             </p>
                                             <div className="space-y-3">
                                                 {deliveryOptions.map(
@@ -999,8 +1019,7 @@ function Checkout() {
                                                                     }
                                                                 </span>
                                                                 <span className="block text-xs font-medium">
-                                                                    Delivery
-                                                                    fee:{" "}
+                                                                    {t("deliveryFee")}:{" "}
                                                                     {formatCurrency(
                                                                         option.charge,
                                                                     )}
@@ -1021,30 +1040,30 @@ function Checkout() {
                             {isPayment ? (
                                 <>
                                     <h3 className="text-lg font-bold mb-4">
-                                        Order Summary
+                                        {t("orderSummary")}
                                     </h3>
                                     <div className="flex justify-between text-base font-semibold mb-4">
-                                        <span>Total product</span>
+                                        <span>{t("totalProduct")}</span>
                                         <span>{formatCurrency(total)}</span>
                                     </div>
                                     <p className="flex justify-between mb-2">
-                                        <span>Delivery Fee:</span>
+                                        <span>{t("deliveryFee")}:</span>
                                         <span className="font-medium">
                                             {formatCurrency(deliveryCharge)}
                                         </span>
                                     </p>
                                     <p className="flex justify-between mb-4">
-                                        <span>Delivery Method:</span>
+                                        <span>{t("deliveryMethod")}:</span>
                                         <span className="font-medium">
                                             {deliveryOptions.find(
                                                 (opt) =>
                                                     opt.slug ===
                                                     formData.deliveryOption,
-                                            )?.name || "Inside Dhaka"}
+                                            )?.name || t("insideDhaka")}
                                         </span>
                                     </p>
                                     <p className="flex justify-between text-base text-primary__color font-bold">
-                                        <span>Grand Total:</span>
+                                        <span>{t("grandTotal")}:</span>
                                         <span>
                                             {formatCurrency(
                                                 total +
@@ -1053,12 +1072,12 @@ function Checkout() {
                                         </span>
                                     </p>
                                     <p className="flex justify-between text-primary__color font-bold mb-4">
-                                        <span>Inclusive of all taxes</span>
+                                        <span>{t("inclusiveOfAllTaxes")}</span>
                                     </p>
                                     <div className="flex gap-2">
                                         <Button
                                             type="button"
-                                            title="Back"
+                                            title={t("back")}
                                             variant="primary"
                                             size="md"
                                             className="w-full !bg-[#f5f5f5] !text-color__heading"
@@ -1073,40 +1092,40 @@ function Checkout() {
                                             className="rounded-lg text-center transition-all  bg-primary__color text-white__color hover:bg-secondary__color hover:scale-x-105 w-full !disabled:opacity-50 !disabled:cursor-not-allowed px-4 py-3 text-small__font font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
                                         >
                                             {isSubmitting
-                                                ? "Confirming..."
-                                                : "Confirm"}
+                                                ? t("confirming")
+                                                : t("confirm")}
                                         </button>
                                     </div>
                                 </>
                             ) : isCheckout ? (
                                 <>
                                     <h3 className="text-lg font-bold mb-4">
-                                        Order Summary
+                                        {t("orderSummary")}
                                     </h3>
                                     <div className="flex justify-between text-base font-semibold mb-4">
-                                        <span>Total product</span>
+                                        <span>{t("totalProduct")}</span>
                                         <span>{formatCurrency(total)}</span>
                                     </div>
                                     <p className="flex justify-between mb-2">
-                                        <span>Delivery Fee:</span>
+                                        <span>{t("deliveryFee")}:</span>
                                         <span className="font-medium">
                                             {formatCurrency(deliveryCharge)}
                                         </span>
                                     </p>
                                     <p className="flex justify-between mb-4">
-                                        <span>Delivery Method:</span>
+                                        <span>{t("deliveryMethod")}:</span>
                                         <span className="font-medium">
                                             {deliveryOptions.find(
                                                 (opt) =>
                                                     opt.slug ===
                                                     formData.deliveryOption,
-                                            )?.name || "Inside Dhaka"}
+                                            )?.name || t("insideDhaka")}
                                         </span>
                                     </p>
                                     <div className="flex gap-2">
                                         <Button
                                             type="button"
-                                            title="Back"
+                                            title={t("back")}
                                             variant="primary"
                                             size="md"
                                             className="w-full !bg-[#f5f5f5] !text-color__heading"
@@ -1117,7 +1136,7 @@ function Checkout() {
                                         />
                                         <Button
                                             type="button"
-                                            title="Continue"
+                                            title={t("continue")}
                                             variant="primary"
                                             size="md"
                                             className="w-full"
@@ -1131,12 +1150,12 @@ function Checkout() {
                             ) : (
                                 <>
                                     <div className="flex justify-between text-base font-semibold mb-4">
-                                        <span>Total product</span>
+                                        <span>{t("totalProduct")}</span>
                                         <span>{formatCurrency(total)}</span>
                                     </div>
                                     <Button
                                         type="button"
-                                        title="Continue"
+                                        title={t("continue")}
                                         variant="primary"
                                         size="md"
                                         className="w-full"

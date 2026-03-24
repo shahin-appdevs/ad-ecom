@@ -191,7 +191,11 @@ export default function WithdrawHistorySection({ isRefetch }) {
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
                             {transactions.map((transaction, index) => (
-                                <tr key={index}>
+                                <tr
+                                    key={index}
+                                    dir="ltr"
+                                    className="ltr:text-left rtl:text-right"
+                                >
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
                                         #{transaction.trx || "N/A"}
                                     </td>

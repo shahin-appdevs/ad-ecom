@@ -157,7 +157,7 @@ export default function AddMoneyHistorySection() {
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
-                            <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
+                            <tr className="bg-[#F5F7FF] text-left rtl:text-right text-sm text-color__paragraph">
                                 <th className="py-4 px-5 rtl:text-right ltr:text-left font-semibold">
                                     {t("trx")}
                                 </th>
@@ -189,7 +189,11 @@ export default function AddMoneyHistorySection() {
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
                             {transactions.map((transaction, index) => (
-                                <tr key={index}>
+                                <tr
+                                    key={index}
+                                    dir="ltr"
+                                    className="rtl:text-right ltr:text-left"
+                                >
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
                                         #{transaction.trx || "N/A"}
                                     </td>

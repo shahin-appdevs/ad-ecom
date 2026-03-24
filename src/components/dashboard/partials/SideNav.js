@@ -316,7 +316,8 @@ export const navLink = [
 export default function SideNav() {
     const t = useTranslations("Dashboard.sidenav");
     const router = useRouter();
-    const pathname = usePathname();
+    const pathname = usePathname().slice(3);
+
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const { canRefer, canWithdraw } = useFeatureAccess();
@@ -338,7 +339,7 @@ export default function SideNav() {
         ?.map((section) => ({
             ...section,
             items: section.items?.filter(
-                (item) => !item.featureKey || featureFlags[item.featureKey],
+                (item) => !item?.featureKey || featureFlags[item?.featureKey],
             ),
         }))
         ?.filter((section) => section.items?.length > 0);
@@ -422,7 +423,7 @@ export default function SideNav() {
                                 <Link
                                     key={index}
                                     href={item.url}
-                                    className={`flex items-center text-sm font-medium rounded-[10px] px-5 py-2 transition-all hover:text-primary__color ${pathname === item.url ? "text-primary__color bg-[#F5F7FF] py-3" : "text-color__paragraph"}`}
+                                    className={`flex items-center  text-sm font-medium rounded-[10px] px-5 py-2 transition-all hover:text-primary__color ${pathname === item.url ? "text-primary__color bg-[#F5F7FF] py-3" : "text-color__paragraph"}`}
                                 >
                                     <div className="">
                                         <item.icon
@@ -589,7 +590,7 @@ export default function SideNav() {
                                 {t("howCanWeHelp")}
                             </p>
                             <Link
-                                href="/support/ticket"
+                                href="/user/support/ticket"
                                 className="mt-4 bg-gray-800 text-white flex justify-center items-center py-2 px-5 gap-2 font-semibold rounded-lg transition hover:bg-primary__color hover:text-white hover:scale-x-105"
                             >
                                 {t("getSupport")}

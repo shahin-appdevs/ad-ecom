@@ -15,8 +15,10 @@ import PendingModal from "../../partials/PendingModal";
 import toast from "react-hot-toast";
 import VirtualCardDepositModal from "./VirtualCardDepositModal";
 import { handleApiError } from "@/components/utility/handleApiError";
+import { useTranslations } from "next-intl";
 
 function VirtualCardSection() {
+    const t = useTranslations("Dashboard.cards.virtualCard.myVirtualCard");
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [stroWalletPageInfo, setStroWalletPageInfo] = useState({});
@@ -50,14 +52,14 @@ function VirtualCardSection() {
                 const result = await stroWalletPageInfoGetApi();
                 setStroWalletPageInfo(result?.data?.data || {});
             } catch (error) {
-                toast.error("Failed to fetch page info");
+                toast.error(t("fetchError"));
             } finally {
                 setPageInfoLoading(false);
             }
         })();
         // fetch wallet cards
         myWalletCardsFetch();
-    }, []);
+    }, [t]);
 
     const handleCreateCard = () => {
         const isCustomerExist = stroWalletPageInfo?.customer_exist_status;
@@ -69,7 +71,7 @@ function VirtualCardSection() {
             // handle show pending modal
             setOpenPendingModal(true);
         } else if (isKycHigh === "low kyc") {
-            toast.error("KYC is Low. Please update customer info");
+            toast.error(t("kycLowError"));
             router.push("/user/cards/virtual-card/update-customer");
         } else if (isCustomerExist && isKycHigh === "high kyc") {
             router.push("/user/cards/virtual-card/create-virtual-card");
@@ -106,18 +108,18 @@ function VirtualCardSection() {
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-lg md:text-xl font-bold text-gray-900">
-                    Virtual Card
+                    {t("title")}
                 </h1>
                 {pageInfoLoading ? (
                     <button className="bg-gray-200 flex gap-2 items-center animate-pulse text-gray-200 font-medium px-4 md:px-6 py-2 md:py-3 rounded-lg transition">
-                        <span>Create Card</span> <Plus size={18} />
+                        <span>{t("createCard")}</span> <Plus size={18} />
                     </button>
                 ) : (
                     <button
                         onClick={handleCreateCard}
                         className="flex items-center gap-2 bg-blue-600  hover:bg-blue-700 text-white font-medium px-4 md:px-6 py-2 md:py-3 rounded-lg transition"
                     >
-                        <span>Create Card</span> <Plus size={18} />
+                        <span>{t("createCard")}</span> <Plus size={18} />
                     </button>
                 )}
             </div>
@@ -127,7 +129,7 @@ function VirtualCardSection() {
                 (myWalletCards?.myCards?.length < 1 && (
                     <div className="h-[70vh] flex items-center justify-center">
                         <span className="text-base md:text-xl lg:text-2xl">
-                            No card available. Please create one.
+                            {t("noCardAvailable")}
                         </span>
                     </div>
                 ))}
@@ -179,7 +181,7 @@ function VirtualCardSection() {
                                                 </h3>
                                                 {card?.is_default && (
                                                     <span className="font-normal  text-white px-2 py-[2px] rounded-full border border-green-500 text-xs ">
-                                                        default
+                                                        {t("default")}
                                                     </span>
                                                 )}
                                             </div>
@@ -243,7 +245,7 @@ function VirtualCardSection() {
                                         {card?.expiry && (
                                             <div className="flex gap-1 items-center ">
                                                 <p className="text-xs opacity-90">
-                                                    EXP.
+                                                    {t("exp")}
                                                 </p>
                                                 <p className="text-base md:text-lg 2xl:text-xl font-semibold">
                                                     {card?.expiry}
@@ -290,7 +292,7 @@ function VirtualCardSection() {
                 <PendingModal
                     open={openPendingModal}
                     onClose={() => setOpenPendingModal(false)}
-                    title={"Customer KYC is Pending"}
+                    title={t("pendingModalTitle")}
                     message={stroWalletPageInfo?.customer_low_kyc_text}
                 />
             )}

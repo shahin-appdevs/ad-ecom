@@ -3,6 +3,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 import { referralStatusGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 function SkeletonRow() {
     return (
@@ -27,6 +28,7 @@ function SkeletonRow() {
 }
 
 export default function TransactionHistorySection() {
+    const t = useTranslations("Dashboard.account.referral");
     const [loading, setLoading] = useState(true);
     const [referralUsers, setReferralUsers] = useState([]);
 
@@ -38,7 +40,8 @@ export default function TransactionHistorySection() {
                 setReferralUsers(users);
             } catch (error) {
                 toast.error(
-                    error?.response?.data?.message?.error?.[0] || "Something went wrong",
+                    error?.response?.data?.message?.error?.[0] ||
+                        t("somethingWrong"),
                 );
             } finally {
                 setLoading(false);
@@ -46,25 +49,31 @@ export default function TransactionHistorySection() {
         };
 
         fetchReferralData();
-    }, []);
+    }, [t]);
 
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                <h2 className="text-[16px] font-semibold">Referred Users</h2>
+                <h2 className="text-[16px] font-semibold">
+                    {t("referredUsers")}
+                </h2>
             </div>
             {loading ? (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">User</th>
-                                <th className="py-4 px-5 font-semibold">Email</th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Phone Number
+                                    {t("user")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Refer Code
+                                    {t("email")}
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("phoneNumber")}
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("referCode")}
                                 </th>
                             </tr>
                         </thead>
@@ -76,19 +85,23 @@ export default function TransactionHistorySection() {
                     </table>
                 </div>
             ) : referralUsers.length === 0 ? (
-                <div className="text-center py-5">No referred users found</div>
+                <div className="text-center py-5">{t("noReferredUsers")}</div>
             ) : (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">User</th>
-                                <th className="py-4 px-5 font-semibold">Email</th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Phone Number
+                                    {t("user")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Status
+                                    {t("email")}
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("phoneNumber")}
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("status")}
                                 </th>
                             </tr>
                         </thead>
@@ -116,7 +129,9 @@ export default function TransactionHistorySection() {
                                                     : "bg-red-100 text-red-600"
                                             }`}
                                         >
-                                            {user.status === true ? "Active" : "Inactive"}
+                                            {user.status === true
+                                                ? t("active")
+                                                : t("inactive")}
                                         </span>
                                     </td>
                                 </tr>

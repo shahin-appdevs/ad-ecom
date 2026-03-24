@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // Components
 import BrandProductSection from "@/components/pages/brand/product";
 

@@ -1,4 +1,6 @@
 "use client";
+// export const dynamic = "force-dynamic"; // Components
+
 import { useRouter } from "@/i18n/navigation";
 import { useEffect, useState } from "react";
 // Components

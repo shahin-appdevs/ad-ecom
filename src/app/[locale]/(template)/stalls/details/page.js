@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 // Components
 import StallDetailsSection from "@/components/pages/stall/stallDetails";
 

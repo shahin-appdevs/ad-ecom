@@ -12,8 +12,10 @@ import {
 import { toast } from "react-hot-toast";
 import logo from "@public/images/logo/favicon.jpeg";
 import getImageUrl from "@/components/utility/getImageUrl";
+import { useTranslations } from "next-intl";
 
 export default function SmsVerify() {
+    const t = useTranslations("Auth.smsVerify");
     const [otp, setOtp] = useState("");
     const [countdown, setCountdown] = useState(59);
     const [canResend, setCanResend] = useState(false);
@@ -80,22 +82,21 @@ export default function SmsVerify() {
             if (response?.data?.message?.success) {
                 // Success case
                 toast.success(
-                    response.data.message.success[0] ||
-                        "Verification code resent successfully",
+                    response.data.message.success[0] || t("resendSuccess"),
                 );
                 setCountdown(59);
                 setCanResend(false);
                 localStorage.setItem("otpCountdown", "59");
             } else {
                 // Handle unexpected response format
-                toast.error("Failed to resend code. Please try again.");
+                toast.error(t("resendFailed"));
             }
         } catch (error) {
             // Handle different error formats
             const errorMessage =
                 error.response?.data?.message?.error?.[0] ||
                 error.response?.data?.message ||
-                "Failed to resend verification code. Please try again later.";
+                t("resendFailedLater");
 
             toast.error(errorMessage);
 
@@ -113,7 +114,7 @@ export default function SmsVerify() {
         const cleanOtp = otp.replace(/ - /g, "");
 
         if (cleanOtp.length !== 6) {
-            setError("Please enter a valid 6-digit OTP");
+            setError(t("errorInvalid"));
             return;
         }
 
@@ -137,8 +138,7 @@ export default function SmsVerify() {
             }
         } catch (error) {
             const errorMsg =
-                error.response?.data?.message?.error?.[0] ||
-                "Verification failed. Please try again.";
+                error.response?.data?.message?.error?.[0] || t("errorFailed");
             setError(errorMsg);
             toast.error(errorMsg);
         } finally {
@@ -151,11 +151,11 @@ export default function SmsVerify() {
             <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 sm:p-10 overflow-hidden">
                 {/* Header Section */}
                 <h2 className="text-center text-xl font-bold text-gray-900 mb-6 border-b pb-4">
-                    SMS Verification
+                    {t("title")}
                 </h2>
 
                 {/* Logo Section */}
-                <div className="flex items-center space-x-4 mb-8">
+                <div className="flex items-center gap-2 mb-8">
                     <div className="bg-gray-100 p-1.5 rounded-full shadow-sm w-[50px] h-[50px] flex items-center justify-center">
                         <Image
                             src={getImageUrl(
@@ -168,12 +168,12 @@ export default function SmsVerify() {
                             className="rounded-full !bg-white"
                         />
                     </div>
-                    <div>
+                    <div className="space-y-2">
                         <h6 className="font-bold text-gray-900 tracking-tight">
                             {appSettingsData?.site_name}
                         </h6>
                         <p className="text-sm text-gray-500 leading-tight">
-                            Enter the verification code sent to your phone
+                            {t("subtitle")}
                         </p>
                     </div>
                 </div>
@@ -185,13 +185,13 @@ export default function SmsVerify() {
                             htmlFor="otp"
                             className="block left-4 bg-white px-1.5 text-sm mb-1 font-medium z-10"
                         >
-                            Verification Code
+                            {t("label")}
                         </label>
                         <div className="relative">
                             <input
                                 id="otp"
                                 type="text"
-                                placeholder="Enter 6-digit code"
+                                placeholder={t("placeholder")}
                                 value={otp}
                                 onChange={handleOtpChange}
                                 maxLength={12} // Accounts for " - " separators if needed
@@ -219,7 +219,7 @@ export default function SmsVerify() {
                     <div className="text-sm text-center">
                         {canResend ? (
                             <p className="text-gray-600">
-                                Didn&apos;t receive code?{" "}
+                                {t("noCode")}{" "}
                                 <button
                                     type="button"
                                     onClick={handleResend}
@@ -229,16 +229,16 @@ export default function SmsVerify() {
                                     {loadingResend ? (
                                         <span className="inline-flex items-center">
                                             <LoaderCircle className="w-4 h-4 mr-1 animate-spin" />
-                                            Sending...
+                                            {t("sending")}
                                         </span>
                                     ) : (
-                                        "Resend Code"
+                                        t("resendCode")
                                     )}
                                 </button>
                             </p>
                         ) : (
                             <p className="text-gray-500">
-                                Resend code in{" "}
+                                {t("resendIn")}{" "}
                                 <span className="font-bold text-primary__color">
                                     {countdown}s
                                 </span>
@@ -250,7 +250,7 @@ export default function SmsVerify() {
                     <div className="pt-4 border-t border-gray-100">
                         <Button
                             type="submit"
-                            title={loading ? "Verifying..." : "Verify"}
+                            title={loading ? t("btnVerifying") : t("btnVerify")}
                             variant="primary"
                             size="md"
                             className="w-full py-3.5 text-base font-bold shadow-lg shadow-primary__color/30 hover:shadow-primary__color/50 transition-all duration-300"

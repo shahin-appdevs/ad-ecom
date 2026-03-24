@@ -1,7 +1,9 @@
 import { Link } from "@/i18n/navigation";
 import { PlusIcon, ComputerDesktopIcon } from "@heroicons/react/24/outline";
+import { useTranslations } from "next-intl";
 
 export default function SupportTicketSection() {
+    const t = useTranslations("Dashboard.supportTicket");
     const supportTicket = [
         {
             ticketId: "#AM11979613",
@@ -32,13 +34,13 @@ export default function SupportTicketSection() {
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                <h2 className="text-[16px] font-semibold">Support Tickets</h2>
+                <h2 className="text-[16px] font-semibold">{t("title")}</h2>
                 <Link
-                    href="/support/ticket/create"
+                    href="/user/support/ticket/create"
                     className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
                 >
                     <PlusIcon className="h-5 w-5" />
-                    Add New
+                    {t("addNew")}
                 </Link>
             </div>
             <div className="table-wrapper overflow-x-auto">
@@ -46,18 +48,18 @@ export default function SupportTicketSection() {
                     <thead>
                         <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
                             <th className="py-4 px-5 font-semibold">
-                                Ticket ID
+                                {t("ticketId")}
                             </th>
                             <th className="py-4 px-5 font-semibold">
-                                Full Name
+                                {t("fullName")}
                             </th>
-                            <th className="py-4 px-5 font-semibold">Email</th>
-                            <th className="py-4 px-5 font-semibold">Subject</th>
-                            <th className="py-4 px-5 font-semibold">status</th>
+                            <th className="py-4 px-5 font-semibold">{t("email")}</th>
+                            <th className="py-4 px-5 font-semibold">{t("subject")}</th>
+                            <th className="py-4 px-5 font-semibold">{t("status")}</th>
                             <th className="py-4 px-5 font-semibold">
-                                Last Replied
+                                {t("lastReplied")}
                             </th>
-                            <th className="py-4 px-5 font-semibold">Details</th>
+                            <th className="py-4 px-5 font-semibold">{t("details")}</th>
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-[#F5F7FF]">
@@ -86,7 +88,7 @@ export default function SupportTicketSection() {
                                     {supportTicket.time}
                                 </td>
                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium flex gap-4">
-                                    <Link href="/support/ticket/conversation">
+                                    <Link href="/user/support/ticket/conversation">
                                         <supportTicket.action className="h-5 w-5 text-gray-600 cursor-pointer" />
                                     </Link>
                                 </td>

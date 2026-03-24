@@ -1,10 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
-import { myGiftCardGetAPI } from "@root/services/apiClient/apiClient";
+
 import { Link } from "@/i18n/navigation";
-import { toast } from "react-hot-toast";
-import { useRouter } from "@/i18n/navigation";
-import { format, compareAsc } from "date-fns";
+import { format } from "date-fns";
+import { useTranslations } from "next-intl";
 
 function SkeletonRow() {
     return (
@@ -41,6 +39,7 @@ function SkeletonRow() {
 }
 
 export default function VirtualCardTransaction({ transactions, isLoading }) {
+    const t = useTranslations("Dashboard.cards.virtualCard.myVirtualCardTrx");
     const getStatusColor = (status) => {
         switch (status) {
             case "success":
@@ -60,13 +59,13 @@ export default function VirtualCardTransaction({ transactions, isLoading }) {
         <div className="bg-white rounded-[12px] py-8">
             <div className="flex flex-col md:flex-row md:items-center  md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
                 <h2 className="text-lg md:text-xl font-semibold">
-                    Recent Transaction
+                    {t("title")}
                 </h2>
                 <Link
                     href="/user/transactions/virtual-card"
                     className="flex justify-center items-center gap-1 px-4 py-2 bg-primary__color text-white text-xs rounded-[8px] hover:bg-[#5851e3] transition"
                 >
-                    View More
+                    {t("viewMore")}
                 </Link>
             </div>
 
@@ -76,32 +75,32 @@ export default function VirtualCardTransaction({ transactions, isLoading }) {
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
                                 <th className="py-4 px-5 font-semibold">
-                                    Trx Id
+                                    {t("table.trxId")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Transaction Type
+                                    {t("table.trxType")}
                                 </th>
 
                                 <th className="py-4 px-5 font-semibold">
-                                    Exchange Rate
+                                    {t("table.exchangeRate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Fee/Charge
+                                    {t("table.feeCharge")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Amount
+                                    {t("table.cardAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Number
+                                    {t("table.cardNumber")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Balance
+                                    {t("table.cardBalance")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                    {t("table.timeDate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Status
+                                    {t("table.status")}
                                 </th>
                             </tr>
                         </thead>
@@ -113,39 +112,39 @@ export default function VirtualCardTransaction({ transactions, isLoading }) {
                     </table>
                 </div>
             ) : !Array.isArray(transactions) || transactions?.length < 1 ? (
-                <div className="text-center py-5">No transaction found</div>
+                <div className="text-center py-5">{t("noTransaction")}</div>
             ) : (
                 <div className="table-wrapper overflow-x-auto">
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
                                 <th className="py-4 px-5 font-semibold">
-                                    Trx Id
+                                    {t("table.trxId")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Transaction Type
+                                    {t("table.trxType")}
                                 </th>
 
                                 <th className="py-4 px-5 font-semibold">
-                                    Exchange Rate
+                                    {t("table.exchangeRate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Fee/Charge
+                                    {t("table.feeCharge")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Amount
+                                    {t("table.cardAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Number
+                                    {t("table.cardNumber")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Card Balance
+                                    {t("table.cardBalance")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                    {t("table.timeDate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Status
+                                    {t("table.status")}
                                 </th>
                             </tr>
                         </thead>

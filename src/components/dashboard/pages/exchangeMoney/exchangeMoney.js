@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
+import { useTranslations } from "next-intl";
 import {
     exchangeGetAPI,
     SubmitExchangeAPI,
@@ -30,6 +31,8 @@ function Skeleton({ className }) {
 }
 
 export default function ExchangeMoneySection({ setRefetch }) {
+    const t = useTranslations("Dashboard.wallet.exchangeMoney");
+
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [receiverCurrency, setReceiverCurrency] = useState(
@@ -122,8 +125,8 @@ export default function ExchangeMoneySection({ setRefetch }) {
         if (selectedCurrency && receiverCurrency) {
             return `1 ${selectedCurrency.code} = ${exchangeRate.toFixed(6)} ${receiverCurrency.code}`;
         }
-        return "N/A";
-    }, [exchangeRate, selectedCurrency, receiverCurrency]);
+        return t("notAvailable") || "N/A";
+    }, [exchangeRate, selectedCurrency, receiverCurrency, t]);
 
     // Calculate transaction limits
     const limitText = useMemo(() => {
@@ -136,7 +139,7 @@ export default function ExchangeMoneySection({ setRefetch }) {
                 parseFloat(selectedCurrency.rate || 0);
             return `${minLimit.toFixed(4)} - ${maxLimit.toFixed(4)} ${selectedCurrency.code}`;
         }
-        return "0.00 - 0.00";
+        return t("notAvailable") || "0.00 - 0.00";
     }, [selectedCurrency, exchangeData.charges]);
 
     // Calculate fees and charges
@@ -299,7 +302,10 @@ export default function ExchangeMoneySection({ setRefetch }) {
                 });
                 setApiLoading(false);
             } catch (error) {
-                toast.error(error.response?.data?.message?.error?.[0]);
+                const errorMessage =
+                    error.response?.data?.message?.error?.[0] ||
+                    t("somethingWrong");
+                toast.error(errorMessage);
                 setApiLoading(false);
             }
         };
@@ -324,7 +330,7 @@ export default function ExchangeMoneySection({ setRefetch }) {
         } catch (error) {
             const errorMessage =
                 error?.response?.data?.message?.error?.[0] ||
-                "Something went wrong.";
+                t("somethingWrong");
             toast.error(errorMessage);
         } finally {
             setLoading(false);
@@ -337,12 +343,12 @@ export default function ExchangeMoneySection({ setRefetch }) {
 
         // Validate amount before submitting
         if (!amount || parseFloat(amount) <= 0) {
-            toast.error("Please enter a valid amount");
+            toast.error(t("invalidAmount"));
             return;
         }
 
         if (!selectedCurrency || !receiverCurrency) {
-            toast.error("Please select both currencies");
+            toast.error(t("selectBoth"));
             return;
         }
 
@@ -441,22 +447,25 @@ export default function ExchangeMoneySection({ setRefetch }) {
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Exchange Rate</p>
-                            <h6 className="font-medium mt-1">
+                            <p className="">{t("exchangeRate")}</p>
+                            <h6 dir="ltr" className="font-medium mt-1">
                                 {exchangeRateText}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Available Balance</p>
-                            <h6 className="font-medium text-emerald-600 mt-1">
+                            <p className="">{t("availableBalance")}</p>
+                            <h6
+                                dir="ltr"
+                                className="font-medium text-emerald-600 mt-1"
+                            >
                                 {wallet.balance} {wallet.selectedCurrency?.code}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
-                            <p className="">Charge</p>
-                            <h6 className="font-medium mt-1">
+                            <p className="">{t("charge")}</p>
+                            <h6 dir="ltr" className="font-medium mt-1">
                                 {exchangeData.charges.fixed_charge}{" "}
                                 {selectedCurrency?.currency_code} +{" "}
                                 {exchangeData.charges.percent_charge}%
@@ -466,18 +475,17 @@ export default function ExchangeMoneySection({ setRefetch }) {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium mb-2">
-                                Exchange From
+                                {t("exchangeFrom")}
                             </label>
                             <div className="relative">
                                 <input
                                     type="text"
-                                    inputMode="decimal"
                                     className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                     value={amount}
-                                    placeholder="Enter Amount..."
+                                    placeholder={t("enterAmount")}
                                     onChange={handleAmountChange}
                                 />
-                                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-20">
+                                <div className="absolute rtl:left-2 ltr:right-2 top-1/2 transform -translate-y-1/2 w-20">
                                     <Listbox
                                         value={selectedCurrency}
                                         onChange={handleSenderCurrencyChange}
@@ -486,11 +494,13 @@ export default function ExchangeMoneySection({ setRefetch }) {
                                             <Listbox.Button className="w-full text-sm text-gray-700 flex justify-between items-center px-3 py-1 bg-white rounded">
                                                 <span>
                                                     {selectedCurrency?.code ||
-                                                        "Select"}
+                                                        t("select")}
                                                 </span>
                                                 <ChevronUpDownIcon className="w-4 h-4 text-gray-400" />
                                             </Listbox.Button>
-                                            <Listbox.Options className="absolute right-0 mt-1 w-full bg-white border border-gray-200 rounded shadow-md z-20 max-h-60 overflow-auto">
+                                            <Listbox.Options
+                                                className={`absolute left-0 rtl:right-0 mt-1 w-full bg-white border border-gray-200 rounded shadow-md z-20 max-h-60 overflow-auto`}
+                                            >
                                                 {wallet.currencies.map(
                                                     (currency) => (
                                                         <Listbox.Option
@@ -525,18 +535,17 @@ export default function ExchangeMoneySection({ setRefetch }) {
                         </div>
                         <div>
                             <label className="block text-sm font-medium mb-2">
-                                Exchange To
+                                {t("exchangeTo")}
                             </label>
                             <div className="relative">
                                 <input
                                     type="text"
-                                    inputMode="decimal"
                                     className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
                                     value={receiverAmount}
-                                    placeholder="Enter Amount..."
+                                    placeholder={t("enterAmount")}
                                     onChange={handleReceiverAmountInputChange}
                                 />
-                                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-20">
+                                <div className="absolute rtl:left-2 ltr:right-2 top-1/2 transform -translate-y-1/2 w-20">
                                     <Listbox
                                         value={receiverCurrency}
                                         onChange={handleReceiverCurrencyChange}
@@ -545,11 +554,13 @@ export default function ExchangeMoneySection({ setRefetch }) {
                                             <Listbox.Button className="w-full text-sm text-gray-700 flex justify-between items-center px-3 py-1 bg-white rounded">
                                                 <span>
                                                     {receiverCurrency?.code ||
-                                                        "Select"}
+                                                        t("select")}
                                                 </span>
                                                 <ChevronUpDownIcon className="w-4 h-4 text-gray-400" />
                                             </Listbox.Button>
-                                            <Listbox.Options className="absolute right-0 mt-1 w-full bg-white border border-gray-200 rounded shadow-md z-20 max-h-60 overflow-auto">
+                                            <Listbox.Options
+                                                className={`absolute right-0 rtl:left-0 mt-1 w-full bg-white border border-gray-200 rounded shadow-md z-20 max-h-60 overflow-auto`}
+                                            >
                                                 {wallet.currencies.map(
                                                     (currency) => (
                                                         <Listbox.Option
@@ -585,7 +596,7 @@ export default function ExchangeMoneySection({ setRefetch }) {
                     </div>
                     <Button
                         type="submit"
-                        title={loading ? "Exchanging..." : "Exchange Money"}
+                        title={loading ? t("exchanging") : t("submitButton")}
                         variant="primary"
                         size="md"
                         className={`w-full ${loading ? "cursor-not-allowed !bg-gray-400" : ""}`}
@@ -601,41 +612,41 @@ export default function ExchangeMoneySection({ setRefetch }) {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
-                        Preview
+                        {t("preview")}
                     </h5>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Entered Amount</span>
+                            <span>{t("enteredAmount")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span dir="ltr" className="font-medium text-gray-800">
                             {amount || "0.00"} {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
-                            <span>Fees & Charges</span>
+                            <span>{t("feesAndCharges")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {feesCalculation.totalFees} {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <BanknotesIcon className="w-5 h-5 text-emerald-500" />
-                            <span>Converted Amount</span>
+                            <span>{t("convertedAmount")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {feesCalculation.willGet} {receiverCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between border-t pt-3 font-semibold text-gray-800">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-2">
                             <WalletIcon className="w-5 h-5 text-indigo-600" />
-                            <span>Total Payable</span>
+                            <span>{t("totalPayable")}</span>
                         </div>
-                        <span>
+                        <span dir="ltr">
                             {feesCalculation.totalPayable}{" "}
                             {selectedCurrency?.code}
                         </span>
@@ -645,60 +656,60 @@ export default function ExchangeMoneySection({ setRefetch }) {
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12">
                 <div className="bg-[#F9FAFB] p-5 rounded-xl border border-gray-200 space-y-4 text-sm shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
-                        Limit Information
+                        {t("limitInfo")}
                     </h5>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowsUpDownIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Transaction Limit</span>
+                            <span>{t("transactionLimit")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span dir="ltr" className="font-medium text-gray-800">
                             {limitText}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CalendarDaysIcon className="w-5 h-5 text-blue-500" />
-                            <span>Daily Limit</span>
+                            <span>{t("dailyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {limitsCalculation.dailyLimit}{" "}
                             {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-violet-500" />
-                            <span>Monthly Limit</span>
+                            <span>{t("monthlyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {limitsCalculation.monthlyLimit}{" "}
                             {selectedCurrency?.code}
                         </span>
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CalendarDaysIcon className="w-5 h-5 text-yellow-500" />
-                            <span>Daily Remaining Limit</span>
+                            <span>{t("dailyRemaining")}</span>
                         </div>
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span dir="ltr" className="text-gray-800">
                                 {limitsCalculation?.remainingDailyLimit}{" "}
                                 {selectedCurrency?.code}
                             </span>
                         )}
                     </div>
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-yellow-500" />
-                            <span>Monthly Remaining Limit</span>
+                            <span>{t("monthlyRemaining")}</span>
                         </div>
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span dir="ltr" className="text-gray-800">
                                 {limitsCalculation?.remainingMonthlyLimit}{" "}
                                 {selectedCurrency?.code}
                             </span>

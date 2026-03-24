@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import {
     withdrawGetAPI,
@@ -58,6 +58,11 @@ export default function WithdrawSection({ setRefetch }) {
         dailyLimit: "0.00",
         monthlyLimit: "0.00",
     });
+    const fileInputRef = useRef(null);
+
+    const handleFileReset = () => {
+        fileInputRef.current.value = "";
+    };
 
     useEffect(() => {
         const fetchWithdrawInfo = async () => {
@@ -308,16 +313,14 @@ export default function WithdrawSection({ setRefetch }) {
                 const manualTransactionData = {
                     trx: response.data.data.payment_information?.trx,
                 };
-                const manualInputsKey = Object.keys(manualInputs);
-
-                manualInputsKey.forEach((item) => {
-                    manualTransactionData[item] = manualInputs[item];
-                });
 
                 const formData = new FormData();
 
-                Object.keys(manualTransactionData).forEach((item) => {
-                    formData.append(item, manualTransactionData[item]);
+                const manualInputsKey = Object.keys(manualInputs);
+                formData.append("trx", manualTransactionData.trx);
+
+                manualInputsKey.forEach((item) => {
+                    formData.append(item, manualInputs[item]);
                 });
 
                 // withdraw manual api call
@@ -330,6 +333,8 @@ export default function WithdrawSection({ setRefetch }) {
                     setOpenWithdrawModal(true);
                     setManualInputs({});
                     setAmount("");
+                    handleFileReset();
+
                     // sessionStorage.removeItem("manualPaymentData");
                 }
 
@@ -454,21 +459,24 @@ export default function WithdrawSection({ setRefetch }) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm">
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
                             <p className="">{t("exchangeRate")}</p>
-                            <h6 className="font-medium mt-1">
+                            <h6 dir="ltr" className="font-medium mt-1">
                                 {exchangeRateText}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
                             <p className="">{t("availableBalance")}</p>
-                            <h6 className="font-medium text-emerald-600 mt-1">
+                            <h6
+                                dir="ltr"
+                                className="font-medium text-emerald-600 mt-1"
+                            >
                                 {wallet.balance} {wallet.selectedCurrency?.code}
                             </h6>
                         </div>
 
                         <div className="bg-[#F9FAFB] border border-gray-200 shadow-sm p-4 rounded-xl text-center space-y-1.5">
                             <p className="">{t("charge")}</p>
-                            <h6 className="font-medium mt-1">
+                            <h6 dir="ltr" className="font-medium mt-1">
                                 {formattedCharges.fixed_charge}{" "}
                                 {selectedCurrency?.currency_code} +{" "}
                                 {formattedCharges.percent_charge}%
@@ -602,6 +610,7 @@ export default function WithdrawSection({ setRefetch }) {
                                         max: limitsCalculation.maxLimit,
                                     })}
                                     onChange={(e) => setAmount(e.target.value)}
+                                    required={true}
                                 />
                                 <div className="absolute z-20 ltr:right-2 rtl:left-2 top-1/2 transform -translate-y-1/2 w-20">
                                     <Listbox
@@ -680,7 +689,7 @@ export default function WithdrawSection({ setRefetch }) {
                                     {item.type === "text" && (
                                         <div>
                                             <label className="block text-sm font-medium mb-2">
-                                                {item?.label}
+                                                {`${item?.label}${item?.validation?.required ? "*" : " (optional)"}`}
                                             </label>
                                             <div className="relative">
                                                 <input
@@ -709,12 +718,76 @@ export default function WithdrawSection({ setRefetch }) {
                                                             }),
                                                         );
                                                     }}
-                                                    minLength={
-                                                        item?.validation?.min
+                                                    required={
+                                                        item?.validation
+                                                            ?.required
                                                     }
-                                                    maxLength={
-                                                        item?.validation?.max
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+                                    {item.type === "textarea" && (
+                                        <div>
+                                            <label className="block text-sm font-medium mb-2">
+                                                {`${item?.label}${item?.validation?.required ? "*" : " (optional)"}`}
+                                            </label>
+                                            <div className="relative">
+                                                <textarea
+                                                    value={
+                                                        manualInputs[
+                                                            item?.name
+                                                        ] || ""
                                                     }
+                                                    type={item?.type}
+                                                    name={item?.name}
+                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                                    // value={amount}
+                                                    placeholder={t(
+                                                        "enterField",
+                                                        {
+                                                            label: item?.label,
+                                                        },
+                                                    )}
+                                                    onChange={(e) => {
+                                                        setManualInputs(
+                                                            (prev) => ({
+                                                                ...prev,
+                                                                [item.name]:
+                                                                    e.target
+                                                                        .value,
+                                                            }),
+                                                        );
+                                                    }}
+                                                    required={
+                                                        item?.validation
+                                                            ?.required
+                                                    }
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {item.type === "file" && (
+                                        <div>
+                                            <label className="block text-sm font-medium mb-2">
+                                                {`${item?.label}${item?.validation?.required ? "*" : " (optional)"}`}
+                                            </label>
+                                            <div className="relative">
+                                                <input
+                                                    ref={fileInputRef}
+                                                    type={item?.type}
+                                                    name={item?.name}
+                                                    className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
+                                                    onChange={(e) => {
+                                                        setManualInputs(
+                                                            (prev) => ({
+                                                                ...prev,
+                                                                [item.name]:
+                                                                    e.target
+                                                                        .files[0],
+                                                            }),
+                                                        );
+                                                    }}
                                                     required={
                                                         item?.validation
                                                             ?.required
@@ -751,7 +824,7 @@ export default function WithdrawSection({ setRefetch }) {
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
                             <span>{t("enteredAmount")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span dir="ltr" className="font-medium text-gray-800">
                             {amount || "0.00"} {wallet?.selectedCurrency?.code}
                         </span>
                     </div>
@@ -760,7 +833,7 @@ export default function WithdrawSection({ setRefetch }) {
                             <ChatBubbleLeftRightIcon className="w-5 h-5 text-cyan-500" />
                             <span>{t("conversionAmount")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {feesCalculation.conversionAmount}{" "}
                             {selectedCurrency?.currency_code}
                         </span>
@@ -770,7 +843,7 @@ export default function WithdrawSection({ setRefetch }) {
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
                             <span>{t("feesAndCharges")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {feesCalculation.totalFees}{" "}
                             {wallet?.selectedCurrency?.code}
                         </span>
@@ -780,7 +853,7 @@ export default function WithdrawSection({ setRefetch }) {
                             <BanknotesIcon className="w-5 h-5 text-emerald-500" />
                             <span>{t("youWillGet")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {feesCalculation.willGet}{" "}
                             {selectedCurrency?.currency_code}
                         </span>
@@ -790,7 +863,7 @@ export default function WithdrawSection({ setRefetch }) {
                             <WalletIcon className="w-5 h-5 text-indigo-600" />
                             <span>{t("totalPayable")}</span>
                         </div>
-                        <span>
+                        <span dir="ltr">
                             {feesCalculation.totalPayable}{" "}
                             {wallet?.selectedCurrency?.code}
                         </span>
@@ -807,7 +880,7 @@ export default function WithdrawSection({ setRefetch }) {
                             <ArrowsUpDownIcon className="w-5 h-5 text-indigo-500" />
                             <span>{t("transactionLimit")}</span>
                         </div>
-                        <span className="font-medium text-gray-800">
+                        <span dir="ltr" className="font-medium text-gray-800">
                             {limitText}
                         </span>
                     </div>
@@ -816,7 +889,7 @@ export default function WithdrawSection({ setRefetch }) {
                             <CalendarDaysIcon className="w-5 h-5 text-blue-500" />
                             <span>{t("dailyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {limitsCalculation.dailyLimit}{" "}
                             {wallet?.selectedCurrency?.code}
                         </span>
@@ -826,7 +899,7 @@ export default function WithdrawSection({ setRefetch }) {
                             <ChartBarIcon className="w-5 h-5 text-violet-500" />
                             <span>{t("monthlyLimit")}</span>
                         </div>
-                        <span className="text-gray-800">
+                        <span dir="ltr" className="text-gray-800">
                             {limitsCalculation.monthlyLimit}{" "}
                             {wallet?.selectedCurrency?.code}
                         </span>
@@ -839,7 +912,7 @@ export default function WithdrawSection({ setRefetch }) {
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span dir="ltr" className="text-gray-800">
                                 {limitsCalculation?.remainingDailyLimit}{" "}
                                 {wallet?.selectedCurrency?.code}
                             </span>
@@ -853,7 +926,7 @@ export default function WithdrawSection({ setRefetch }) {
                         {remainingLoading ? (
                             <Skeleton className="h-4 w-36" />
                         ) : (
-                            <span className="text-gray-800">
+                            <span dir="ltr" className="text-gray-800">
                                 {limitsCalculation?.remainingMonthlyLimit}{" "}
                                 {wallet?.selectedCurrency?.code}
                             </span>

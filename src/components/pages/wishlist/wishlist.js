@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import {
     HeartIcon as SolidHeartIcon,
@@ -21,6 +22,7 @@ const ProductSkeleton = () => (
 );
 
 export default function Wishlist() {
+    const t = useTranslations("HomePage.wishlist");
     const { wishlistItems, wishlistCount, updateWishlist } = useWishlist();
     const [loading, setLoading] = useState(true);
     const { addToCart } = useCart();
@@ -33,7 +35,7 @@ export default function Wishlist() {
     const removeFromWishlist = (id) => {
         const updatedWishlist = wishlistItems.filter((item) => item.id !== id);
         updateWishlist(updatedWishlist);
-        toast.success("Item removed from wishlist");
+        toast.success(t("removeSuccess"));
     };
 
     const moveToCart = (item) => {
@@ -46,7 +48,7 @@ export default function Wishlist() {
             base_curr_symbol: item.base_curr_symbol || "৳",
         });
         removeFromWishlist(item.id);
-        toast.success("Item moved to cart");
+        toast.success(t("moveSuccess"));
     };
 
     return (
@@ -55,7 +57,7 @@ export default function Wishlist() {
                 {loading ? (
                     <div className="h-6 bg-gray-200 rounded w-1/4 animate-pulse"></div>
                 ) : (
-                    `My Wishlist (${wishlistCount} items)`
+                    `${t("title")} (${wishlistCount} ${t("items")})`
                 )}
             </h2>
 
@@ -134,14 +136,14 @@ export default function Wishlist() {
                                 <SolidHeartIcon className="h-12 w-12 text-gray-300" />
                             </div>
                             <p className="text-lg font-bold text-color__heading">
-                                Your wishlist is empty
+                                {t("emptyMsg")}
                             </p>
                             <p className="text-gray-600 mt-2">
-                                Save your favorite items here for later
+                                {t("emptySubtitle")}
                             </p>
                             <Button
                                 href="/"
-                                title="Continue Shopping"
+                                title={t("continueShopping")}
                                 variant="primary"
                                 size="md"
                                 className="mt-4 mx-auto"

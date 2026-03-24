@@ -162,9 +162,13 @@ export default function TransactionHistorySection() {
                         </thead>
                         <tbody className="bg-white divide-y divide-[#F5F7FF]">
                             {transactions?.map((transaction, index) => (
-                                <tr key={index}>
+                                <tr
+                                    key={index}
+                                    dir="ltr"
+                                    className="rtl:text-right "
+                                >
                                     <td className="py-4 px-5 whitespace-nowrap text-sm text-primary__color font-medium ">
-                                        {transaction?.trx}
+                                        #{transaction?.trx}
                                     </td>
                                     <td className="py-4 px-5 whitespace-nowrap text-sm font-medium">
                                         {transaction?.type}
