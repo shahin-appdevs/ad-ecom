@@ -78,9 +78,9 @@
         },
         "footer": {
             "options": {
-                "popular": "Popular",
-                "important_links": "Important Links",
-                "address": "Address"
+                "footer_menu": "Footer Menu",
+                "useful_links": "Useful Links",
+                "social": "Social"
             },
             "downloadApp": "Download the App",
             "downloadAppText": "Download the app for a better shopping experience",

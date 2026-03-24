@@ -78,9 +78,9 @@
         },
         "footer": {
             "options": {
-                "popular": "Popular",
-                "important_links": "Enlaces importantes",
-                "address": "Dirección"
+                "footer_menu": "Menú de pie de página",
+                "useful_links": "Enlaces útiles",
+                "social": "Redes sociales"
             },
             "downloadApp": "Descargar la App",
             "downloadAppText": "Descarga la app para una mejor experiencia de compra",

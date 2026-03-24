@@ -78,9 +78,9 @@
         },
         "footer": {
             "options": {
-                "popular": "شائع",
-                "important_links": "روابط مهمة",
-                "address": "العنوان"
+                "footer_menu": "قائمة التذييل",
+                "useful_links": "روابط مفيدة",
+                "social": "وسائل التواصل الاجتماعي"
             },
             "downloadApp": "تحميل التطبيق",
             "downloadAppText": "قم بتحميل التطبيق لتجربة تسوق أفضل",

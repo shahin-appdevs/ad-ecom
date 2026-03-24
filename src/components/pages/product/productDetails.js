@@ -399,6 +399,7 @@ function ProductDetails() {
                 if (response.data.data && response.data.data.product) {
                     setData(response.data.data);
                     setProduct(response.data.data.product);
+
                     setRecentlyViewedProduct(
                         response.data.data.recently_viewed_products,
                     );
