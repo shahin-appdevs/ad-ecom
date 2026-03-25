@@ -90,85 +90,57 @@ const ProductDetailsSkeleton = () => (
     <section className="sm:pt-8">
         <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
             <div className="bg-white rounded-md p-6 md:p-10">
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8">
-                    <div className="md:col-span-4">
-                        <ProductImageSkeleton />
-                        <div className="flex flex-wrap justify-center gap-2 mt-4">
-                            {[...Array(4)].map((_, i) => (
-                                <ThumbnailSkeleton key={i} />
-                            ))}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-pulse">
+                    {/* LEFT SIDE */}
+                    <div className="flex gap-4">
+                        {/* Thumbnails */}
+                        <div className="flex flex-col gap-3">
+                            <div className="w-16 h-16 bg-gray-200 rounded-lg" />
+                            <div className="w-16 h-16 bg-gray-200 rounded-lg" />
+                            <div className="w-16 h-16 bg-gray-200 rounded-lg" />
                         </div>
+
+                        {/* Main Image */}
+                        <div className="flex-1 h-[400px] bg-gray-200 rounded-xl" />
                     </div>
-                    <div className="md:col-span-8">
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 sm:gap-12">
-                            <div className="lg:col-span-7 space-y-4">
-                                <TextSkeleton width="w-3/4" height="h-8" />
-                                <TextSkeleton width="w-1/4" height="h-6" />
-                                <div className="space-y-2">
-                                    <TextSkeleton width="w-1/6" height="h-5" />
-                                    <div className="flex gap-2">
-                                        {[...Array(3)].map((_, i) => (
-                                            <div
-                                                key={i}
-                                                className="w-16 h-10 bg-gray-200 rounded animate-pulse"
-                                            ></div>
-                                        ))}
-                                    </div>
-                                </div>
-                                <div className="flex gap-4">
-                                    <ButtonSkeleton />
-                                    <ButtonSkeleton />
-                                </div>
-                                <div className="space-y-2">
-                                    {[...Array(3)].map((_, i) => (
-                                        <TextSkeleton
-                                            key={i}
-                                            width="w-full"
-                                            height="h-4"
-                                        />
-                                    ))}
-                                </div>
-                                <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-0">
-                                    <div className="flex items-center gap-2">
-                                        <div className="w-5 h-5 bg-gray-200 rounded animate-pulse"></div>
-                                        <TextSkeleton
-                                            width="w-32"
-                                            height="h-4"
-                                        />
-                                    </div>
-                                    <div className="flex items-center gap-4">
-                                        <TextSkeleton
-                                            width="w-12"
-                                            height="h-4"
-                                        />
-                                        <div className="flex gap-3">
-                                            {[...Array(5)].map((_, i) => (
-                                                <div
-                                                    key={i}
-                                                    className="w-5 h-5 bg-gray-200 rounded-full animate-pulse"
-                                                ></div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="lg:col-span-5 mt-8 lg:mt-0 flex flex-col gap-2">
-                                <TextSkeleton width="w-24" height="h-6" />
-                                <div className="border rounded-md p-4 flex flex-col md:flex-row md:items-center gap-4">
-                                    <div className="w-[47px] h-[60px] bg-gray-200 animate-pulse rounded-md"></div>
-                                    <div className="md:w-[calc(100%-65px)] space-y-2">
-                                        <TextSkeleton
-                                            width="w-3/4"
-                                            height="h-5"
-                                        />
-                                        <TextSkeleton
-                                            width="w-1/3"
-                                            height="h-4"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
+
+                    {/* RIGHT SIDE */}
+                    <div className="space-y-4">
+                        {/* Title */}
+                        <div className="h-6 w-2/3 bg-gray-200 rounded" />
+
+                        {/* Price */}
+                        <div className="h-5 w-1/3 bg-gray-200 rounded" />
+
+                        {/* Size Label */}
+                        <div className="h-4 w-20 bg-gray-200 rounded mt-4" />
+
+                        {/* Size Options */}
+                        <div className="flex gap-2">
+                            <div className="w-10 h-10 bg-gray-200 rounded-full" />
+                            <div className="w-10 h-10 bg-gray-200 rounded-full" />
+                            <div className="w-10 h-10 bg-gray-200 rounded-full" />
+                            <div className="w-10 h-10 bg-gray-200 rounded-full" />
                         </div>
+
+                        {/* Color Label */}
+                        <div className="h-4 w-20 bg-gray-200 rounded mt-4" />
+
+                        {/* Color Options */}
+                        <div className="flex gap-2">
+                            <div className="w-16 h-8 bg-gray-200 rounded-full" />
+                            <div className="w-16 h-8 bg-gray-200 rounded-full" />
+                            <div className="w-16 h-8 bg-gray-200 rounded-full" />
+                        </div>
+
+                        {/* Buttons */}
+                        <div className="flex gap-4 mt-6">
+                            <div className="h-12 w-40 bg-gray-200 rounded-full" />
+                            <div className="h-12 w-40 bg-gray-200 rounded-full" />
+                        </div>
+
+                        {/* Meta Info */}
+                        <div className="h-24 w-full bg-gray-200 rounded-lg mt-6" />
                     </div>
                 </div>
                 <div className="mt-8 sm:mt-16 space-y-4">
@@ -321,10 +293,11 @@ function ProductDetails() {
             const referCode =
                 referCodeFromUrl || localStorage.getItem("product_refer_code");
             // Build a stable key from all selected variant values
-            const variantKey = Object.entries(selectedVariants)
-                .sort(([a], [b]) => a.localeCompare(b))
-                .map(([k, v]) => `${k}:${v}`)
-                .join("||") || "no-variants";
+            const variantKey =
+                Object.entries(selectedVariants)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([k, v]) => `${k}:${v}`)
+                    .join("||") || "no-variants";
             const itemUniqueId = `${product.id}-${variantKey}`;
             const existingIndex = cartItems.findIndex(
                 (item) => item.uniqueId === itemUniqueId,
@@ -365,10 +338,11 @@ function ProductDetails() {
         const savedCart = localStorage.getItem("productDetailsCart");
         if (savedCart) {
             const parsedCart = JSON.parse(savedCart);
-            const variantKey = Object.entries(selectedVariants)
-                .sort(([a], [b]) => a.localeCompare(b))
-                .map(([k, v]) => `${k}:${v}`)
-                .join("||") || "no-variants";
+            const variantKey =
+                Object.entries(selectedVariants)
+                    .sort(([a], [b]) => a.localeCompare(b))
+                    .map(([k, v]) => `${k}:${v}`)
+                    .join("||") || "no-variants";
             const currentUniqueId = `${data.product.id}-${variantKey}`;
             const cartItem = parsedCart.find(
                 (item) => item.uniqueId === currentUniqueId,
@@ -705,39 +679,46 @@ function ProductDetails() {
                                     </div>
                                     {productData.variants?.map((variant) =>
                                         variant.values?.length > 0 ? (
-                                            <div key={variant.title} className="mb-4">
+                                            <div
+                                                key={variant.title}
+                                                className="mb-4"
+                                            >
                                                 <p className="font-semibold mb-2">
                                                     {variant.title}
                                                 </p>
                                                 <div className="flex flex-wrap gap-2">
-                                                    {variant.values.map((value) => (
-                                                        <button
-                                                            key={value}
-                                                            onClick={() =>
-                                                                handleVariantSelect(
-                                                                    variant.title,
-                                                                    value,
-                                                                )
-                                                            }
-                                                            className={`relative px-4 py-2 border rounded-full font-semibold transition-all ${
-                                                                selectedVariants[
-                                                                    variant.title
-                                                                ] === value
-                                                                    ? "bg-primary__color text-white border-primary__color"
-                                                                    : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
-                                                            }`}
-                                                        >
-                                                            {value}
-                                                            {selectedVariants[
-                                                                variant.title
-                                                            ] === value && (
-                                                                <CheckIcon className="w-4 h-4 absolute -top-1 -right-1 bg-white text-primary__color rounded-full" />
-                                                            )}
-                                                        </button>
-                                                    ))}
+                                                    {variant.values.map(
+                                                        (value) => (
+                                                            <button
+                                                                key={value}
+                                                                onClick={() =>
+                                                                    handleVariantSelect(
+                                                                        variant.title,
+                                                                        value,
+                                                                    )
+                                                                }
+                                                                className={`relative px-4 py-2 border rounded-full font-semibold transition-all ${
+                                                                    selectedVariants[
+                                                                        variant
+                                                                            .title
+                                                                    ] === value
+                                                                        ? "bg-primary__color text-white border-primary__color"
+                                                                        : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
+                                                                }`}
+                                                            >
+                                                                {value}
+                                                                {selectedVariants[
+                                                                    variant
+                                                                        .title
+                                                                ] === value && (
+                                                                    <CheckIcon className="w-4 h-4 absolute -top-1 -right-1 bg-white text-primary__color rounded-full" />
+                                                                )}
+                                                            </button>
+                                                        ),
+                                                    )}
                                                 </div>
                                             </div>
-                                        ) : null
+                                        ) : null,
                                     )}
                                     <div className="mb-6">
                                         {isOutOfStock ? (

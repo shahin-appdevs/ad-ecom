@@ -14,11 +14,12 @@ import HomeKitchenSection from "@/components/pages/home/homeKitchen";
 import ComputerSection from "@/components/pages/home/computer";
 import RealEstateSection from "@/components/pages/home/realEstate";
 import { Suspense } from "react";
+import { SkeletonBanner } from "@/components/pages/home/banner";
 
 export default function HomePage() {
     return (
         <>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<SkeletonBanner />}>
                 <BannerSection />
             </Suspense>
             <Suspense fallback={<div>Loading...</div>}>

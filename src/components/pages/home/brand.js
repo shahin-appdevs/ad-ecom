@@ -93,7 +93,7 @@ export default function Brand() {
                                 >
                                     <div className="relative ">
                                         <div className="w-full h-[100px] px-4 flex items-center justify-center rounded-md  bg-gray-100">
-                                            <div className="bg-white p-2  rounded-full w-[60px] h-[60px] shrink-0 flex items-center justify-center">
+                                            <div className="bg-white  rounded-full w-[60px] h-[60px] shrink-0 flex items-center justify-center">
                                                 <Image
                                                     src={
                                                         brand.image
