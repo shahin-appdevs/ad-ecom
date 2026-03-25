@@ -208,6 +208,15 @@ function Checkout() {
                 formDataToSend.append(`product_id[]`, item.id);
                 formDataToSend.append(`product_price[]`, item.price);
                 formDataToSend.append(`product_quantity[]`, item.quantity);
+                // Variants logic
+                if (item.variants && typeof item.variants === "object") {
+                    const variantString = Object.values(item.variants).join(
+                        "/",
+                    );
+                    formDataToSend.append("product_variants[]", variantString);
+                } else {
+                    formDataToSend.append("product_variants[]", "");
+                }
                 if (storedReferralCode && item.product_refer_code) {
                     formDataToSend.append(
                         "product_refer_code[]",
