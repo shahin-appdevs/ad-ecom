@@ -78,9 +78,9 @@
         },
         "footer": {
             "options": {
-                "popular": "জনপ্রিয়",
-                "important_links": "গুরুত্বপূর্ণ লিঙ্কসমূহ",
-                "address": "ঠিকানা"
+                "footer_menu": "ফুটার মেনু",
+                "useful_links": "গুরুত্বপূর্ণ লিংক",
+                "social": "সামাজিক মাধ্যম"
             },
             "downloadApp": "অ্যাপ ডাউনলোড করুন",
             "downloadAppText": "একটি উন্নত শপিং অভিজ্ঞতার জন্য অ্যাপ ডাউনলোড করুন",

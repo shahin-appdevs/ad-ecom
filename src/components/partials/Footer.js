@@ -27,16 +27,17 @@ import {
     appSettingGetAPI,
     footerInfoGetAPI,
 } from "@root/services/apiClient/apiClient";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function Footer() {
     const [appSettings, setAppSettings] = useState({});
     const [footerInfo, setFooterInfo] = useState({});
     const [appDownloadLink, setAppDownloadLink] = useState({});
+    const lang = useLocale();
 
-    const footerContent = footerInfo?.footer_content?.language?.en;
-    const contactInfo = footerInfo?.contact_section?.language?.en;
-    const socialLinks = footerInfo?.social_icons?.map((item) => item.en);
+    const footerContent = footerInfo?.footer_content?.language[lang];
+    const contactInfo = footerInfo?.contact_section?.language[lang];
+    const socialLinks = footerInfo?.social_icons?.map((item) => item[lang]);
     const usefulLinks = footerInfo?.useful_links;
 
     const footerInfoDataFetch = async () => {
@@ -85,6 +86,7 @@ export default function Footer() {
     const t = useTranslations("HomePage");
 
     const navItems = [
+        { href: "/product/new", key: "newProduct" },
         { href: "/product/flash", key: "flashSale" },
         { href: "/brands", key: "brand" },
         { href: "/campaigns", key: "campaign" },
@@ -92,9 +94,9 @@ export default function Footer() {
     ];
 
     const options = {
-        popular: t("footer.options.popular"),
-        important_links: t("footer.options.important_links"),
-        address: t("footer.options.address"),
+        popular: t("footer.options.footer_menu"),
+        important_links: t("footer.options.useful_links"),
+        address: t("footer.options.social"),
     };
 
     const powerByText = t("footer.powerByText");
@@ -112,14 +114,34 @@ export default function Footer() {
                                 className="h-6 lg:h-10 w-auto"
                             />
                         </Link>
-                        <p className="text-sm md:text-base text-primary__color font-semibold">
-                            {footerContent?.app_text}
-                        </p>
+
                         <p className="font-medium">{footerContent?.details}</p>
-                        <p className="text-sm md:text-base font-semibold mt-3">
-                            {downloadApp}
-                        </p>
-                        {appSettings?.app_url?.android_url && (
+
+                        <div className="mt-4">
+                            <ul className="space-y-1">
+                                {contactInfo?.location && (
+                                    <li className="flex items-center font-medium gap-1">
+                                        <MapPinIcon className="w-4 h-4 shrink-0" />{" "}
+                                        {contactInfo?.location}
+                                    </li>
+                                )}
+                                {contactInfo?.mobile && (
+                                    <li className="flex items-center font-medium gap-1">
+                                        <PhoneIcon className="w-4 h-4 shrink-0" />{" "}
+                                        {contactInfo?.mobile}
+                                    </li>
+                                )}
+
+                                {contactInfo?.email && (
+                                    <li className="flex items-center font-medium gap-1">
+                                        <EnvelopeIcon className="w-4 h-4 shrink-0" />{" "}
+                                        {contactInfo?.email}
+                                    </li>
+                                )}
+                            </ul>
+                        </div>
+
+                        {/* {appSettings?.app_url?.android_url && (
                             <Link
                                 href={appSettings?.app_url?.android_url}
                                 target="_blank"
@@ -131,7 +153,7 @@ export default function Footer() {
                                     className="h-6 lg:h-10 w-auto"
                                 />
                             </Link>
-                        )}
+                        )} */}
                     </div>
                     <div>
                         <h6 className="font-bold mb-4">{options.popular}</h6>
@@ -192,14 +214,14 @@ export default function Footer() {
                                         href={`/important-link?link=${link?.slug}`}
                                         className="font-medium hover:text-primary__color"
                                     >
-                                        {link?.title?.language?.en?.title}
+                                        {link?.title?.language[lang]?.title}
                                     </Link>
                                 </li>
                             ))}
                         </ul>
                     </div>
                     <div>
-                        <div>
+                        {/* <div>
                             <h6 className="font-bold mb-4">
                                 {options.address}
                             </h6>
@@ -224,28 +246,50 @@ export default function Footer() {
                                     </li>
                                 )}
                             </ul>
-                        </div>
-                        <div>
-                            {/* social links  */}
-                            <ul className="flex gap-3 mt-5">
-                                {socialLinks?.map((link, idx) => (
-                                    <li key={idx}>
-                                        <Link
-                                            href={link?.link}
-                                            className="hover:text-primary__color"
-                                            target="_blank"
-                                        >
-                                            <i
-                                                className={`text-xl ${link?.social_icon}`}
-                                            ></i>
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
+                        </div> */}
+                        <h6 className="font-bold mb-4">{options.address}</h6>
+
+                        {/* social links  */}
+                        <ul className="flex gap-3 mt-5">
+                            {socialLinks?.map((link, idx) => (
+                                <li
+                                    key={idx}
+                                    className="group p-1 bg-gray-50 border border-gray-500/50 hover:border-primary__color rounded-full w-9 h-9 flex items-center justify-center"
+                                >
+                                    <Link
+                                        href={link?.link}
+                                        className="group-hover:text-primary__color"
+                                        target="_blank"
+                                    >
+                                        <i
+                                            className={` ${link?.social_icon}`}
+                                        ></i>
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+
+                        <div className="mt-6">
+                            <h6 className="text-sm md:text-base font-semibold">
+                                {footerContent?.app_text}
+                            </h6>
+                            {appSettings?.app_url?.android_url && (
+                                <Link
+                                    href={appSettings?.app_url?.android_url}
+                                    target="_blank"
+                                    className="mt-3"
+                                >
+                                    <Image
+                                        src={googlePlay}
+                                        alt="Footer"
+                                        className="h-10 lg:h-10 w-auto"
+                                    />
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>
-                <div className="border-t pt-6 text-center md:text-left">
+                <div className="border-t pt-4 text-center md:text-left">
                     <div className="flex flex-col md:flex-row justify-between items-center">
                         {footerContent?.footer_text && (
                             <p className="mb-2 md:mb-0 font-medium">

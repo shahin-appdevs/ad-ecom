@@ -26,7 +26,7 @@ import {
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 import logo from "@public/images/logo/logo.webp";
-import { LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, ShoppingCart } from "lucide-react";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -62,6 +62,7 @@ export default function Header() {
     const homeData = data.homeData || null;
     const boxRef = useRef(null);
     const router = useRouter();
+    const [mounted, setMounted] = useState(false);
 
     // useEffect(() => {
     //     const fetchUserProfile = async () => {
@@ -79,6 +80,7 @@ export default function Header() {
     // }, [isLoggedIn]);
 
     useEffect(() => {
+        setMounted(true);
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
         if (userInfo) {
@@ -608,40 +610,6 @@ export default function Header() {
                             )}
                         </div>
                         <div className="flex flex-wrap justify-center lg:justify-end items-center gap-2 lg:gap-4 text-sm text-gray-700">
-                            {isLoggedIn ? (
-                                <Link
-                                    href="/user/dashboard"
-                                    className="flex items-center gap-1 hover:text-primary__color"
-                                >
-                                    <UserIcon className="w-5 h-5" />
-                                    <span>{dashboardTxt.dashboard}</span>
-                                </Link>
-                            ) : isSellerLoggedIn ? (
-                                <Link
-                                    href="/seller/dashboard"
-                                    className="flex items-center gap-1 hover:text-primary__color"
-                                >
-                                    <UserIcon className="w-5 h-5" />
-                                    <span>{dashboardTxt.sellerDashboard}</span>
-                                </Link>
-                            ) : (
-                                <>
-                                    <Link
-                                        href="/user/auth/login"
-                                        className="flex items-center gap-1 hover:text-primary__color"
-                                    >
-                                        <UserIcon className="w-5 h-5" />
-                                        <span>{authTxt.login}</span>
-                                    </Link>
-                                    <span>|</span>
-                                    <Link
-                                        href="/user/auth/register"
-                                        className="hover:text-primary__color"
-                                    >
-                                        {authTxt.register}
-                                    </Link>
-                                </>
-                            )}
                             <Link
                                 href={
                                     referralCode
@@ -649,20 +617,20 @@ export default function Header() {
                                         : `/checkout?referCode=${storedReferCode}`
                                 }
                                 onClick={handleCheckoutClick}
-                                className="relative"
+                                className="group relative  p-2 bg-gray-50 rounded-full border-gray-500/20 border hover:border-primary__color duration-300"
                                 onMouseEnter={() => setIsCartHovered(true)}
                                 onMouseLeave={() => setIsCartHovered(false)}
                             >
-                                <ShoppingBagIcon className="w-5 h-5 cursor-pointer hover:text-primary__color" />
+                                <ShoppingCart className="w-5 h-5 cursor-pointer group-hover:text-primary__color" />
 
-                                {cartCount > 0 && (
+                                {mounted && cartCount > 0 && (
                                     <span className="absolute -top-2 -right-2 bg-primary__color text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                                         {cartCount}
                                     </span>
                                 )}
                                 {isCartHovered && (
                                     <div
-                                        className="absolute right-0 w-80 bg-white rounded-md shadow-md overflow-hidden z-50"
+                                        className="absolute right-0 top-[95%] w-80 bg-white rounded-md shadow-md overflow-hidden z-50"
                                         onMouseEnter={() =>
                                             setIsCartHovered(true)
                                         }
@@ -740,19 +708,19 @@ export default function Header() {
                             <Link
                                 href="/wishlist"
                                 onClick={handleWishlistClick}
-                                className="relative"
+                                className="group relative block p-2 bg-gray-50 rounded-full border-gray-500/20 border hover:border-primary__color duration-300"
                                 onMouseEnter={() => setIsWishlistHovered(true)}
                                 onMouseLeave={() => setIsWishlistHovered(false)}
                             >
-                                <HeartIcon className="w-5 h-5 cursor-pointer hover:text-primary__color" />
-                                {wishlistItems.length > 0 && (
+                                <HeartIcon className="w-5 h-5  group-hover:text-primary__color" />
+                                {mounted && wishlistItems.length > 0 && (
                                     <span className="absolute -top-2 -right-2 bg-primary__color text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                                         {wishlistItems.length}
                                     </span>
                                 )}
                                 {isWishlistHovered && (
                                     <div
-                                        className="absolute right-0 w-80 bg-white rounded-md shadow-md overflow-hidden z-50"
+                                        className="absolute right-0 w-80 top-[95%] bg-white rounded-md shadow-md overflow-hidden z-50"
                                         onMouseEnter={() =>
                                             setIsWishlistHovered(true)
                                         }
@@ -812,6 +780,40 @@ export default function Header() {
                                     </div>
                                 )}
                             </Link>
+                            {isLoggedIn ? (
+                                <Link
+                                    href="/user/dashboard"
+                                    className="flex items-center gap-1 hover:text-primary__color"
+                                >
+                                    <UserIcon className="w-5 h-5" />
+                                    <span>{dashboardTxt.dashboard}</span>
+                                </Link>
+                            ) : isSellerLoggedIn ? (
+                                <Link
+                                    href="/seller/dashboard"
+                                    className="flex items-center gap-1 hover:text-primary__color"
+                                >
+                                    <UserIcon className="w-5 h-5" />
+                                    <span>{dashboardTxt.sellerDashboard}</span>
+                                </Link>
+                            ) : (
+                                <div className="flex items-center uppercase font-medium">
+                                    <Link
+                                        href="/user/auth/login"
+                                        className="flex items-center gap-1 hover:text-primary__color"
+                                    >
+                                        {/* <UserIcon className="w-5 h-5" /> */}
+                                        <span>{authTxt.login}</span>
+                                    </Link>
+                                    <span>/</span>
+                                    <Link
+                                        href="/user/auth/register"
+                                        className="hover:text-primary__color"
+                                    >
+                                        {authTxt.register}
+                                    </Link>
+                                </div>
+                            )}
                             <div className="relative max-w-[180px]">
                                 {/* <select
                                     value={selectedLanguage?.name || ""}
@@ -1072,7 +1074,7 @@ export default function Header() {
                             className="flex flex-col items-center relative"
                         >
                             <ShoppingBagIcon className="w-5 h-5 text-gray-700" />
-                            {cartCount > 0 && (
+                            {mounted && cartCount > 0 && (
                                 <span className="absolute -top-1 -right-2 bg-primary__color text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                                     {cartCount}
                                 </span>

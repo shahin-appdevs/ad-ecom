@@ -186,8 +186,6 @@ function ProductDetails() {
     const t = useTranslations("ProductDetails");
 
     // Translation variables (makes JSX much cleaner)
-    const tSize = t("size");
-    const tColor = t("color");
     const tAddToCart = t("addToCart");
     const tBuyNow = t("buyNow");
     const tOutOfStock = t("outOfStock");
@@ -236,8 +234,7 @@ function ProductDetails() {
     const { wishlistItems, updateWishlist } = useWishlist();
     const [isInWishlist, setIsInWishlist] = useState(true);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [selectedSize, setSelectedSize] = useState(null);
-    const [selectedColor, setSelectedColor] = useState(null);
+    const [selectedVariants, setSelectedVariants] = useState({});
     const [userProfile, setUserProfile] = useState(null);
     const [isAffiliate, setIsAffiliate] = useState(false);
     const [referralCode, setReferralCode] = useState("");
@@ -323,22 +320,24 @@ function ProductDetails() {
             let cartItems = savedCart ? JSON.parse(savedCart) : [];
             const referCode =
                 referCodeFromUrl || localStorage.getItem("product_refer_code");
-            // Create a unique identifier that includes product ID, color, and size
-            const itemUniqueId = `${product.id}-${selectedColor || "no-color"}-${selectedSize || "no-size"}`;
+            // Build a stable key from all selected variant values
+            const variantKey = Object.entries(selectedVariants)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([k, v]) => `${k}:${v}`)
+                .join("||") || "no-variants";
+            const itemUniqueId = `${product.id}-${variantKey}`;
             const existingIndex = cartItems.findIndex(
                 (item) => item.uniqueId === itemUniqueId,
             );
             if (existingIndex >= 0) {
-                // Update existing item with same product ID, color, and size
                 cartItems[existingIndex].quantity = quantity;
                 if (referCode) {
                     cartItems[existingIndex].product_refer_code = referCode;
                 }
             } else {
-                // Add new item with unique combination
                 cartItems.push({
                     id: product.id,
-                    uniqueId: itemUniqueId, // Add unique identifier
+                    uniqueId: itemUniqueId,
                     title: product.title,
                     price: product.sale_price || product.list_price,
                     quantity: quantity,
@@ -347,8 +346,7 @@ function ProductDetails() {
                         : `${backendBaseURL}/${data.default_image_path}`,
                     base_curr_symbol: data.base_curr_symbol,
                     product_refer_code: referCode || "",
-                    color: selectedColor || null,
-                    size: selectedSize || null,
+                    variants: { ...selectedVariants },
                     source: "productDetails",
                 });
             }
@@ -359,7 +357,7 @@ function ProductDetails() {
             );
             console.log("Saved cart items:", cartItems);
         },
-        [data, referCodeFromUrl, selectedColor, selectedSize],
+        [data, referCodeFromUrl, selectedVariants],
     );
 
     useEffect(() => {
@@ -367,8 +365,11 @@ function ProductDetails() {
         const savedCart = localStorage.getItem("productDetailsCart");
         if (savedCart) {
             const parsedCart = JSON.parse(savedCart);
-            // Check if current product with current color/size is in cart
-            const currentUniqueId = `${data.product.id}-${selectedColor || "no-color"}-${selectedSize || "no-size"}`;
+            const variantKey = Object.entries(selectedVariants)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([k, v]) => `${k}:${v}`)
+                .join("||") || "no-variants";
+            const currentUniqueId = `${data.product.id}-${variantKey}`;
             const cartItem = parsedCart.find(
                 (item) => item.uniqueId === currentUniqueId,
             );
@@ -380,7 +381,7 @@ function ProductDetails() {
                 setQuantity(1);
             }
         }
-    }, [data, selectedColor, selectedSize]);
+    }, [data, selectedVariants]);
 
     const handleAddToCart = () => {
         if (!showQuantity) {
@@ -399,6 +400,7 @@ function ProductDetails() {
                 if (response.data.data && response.data.data.product) {
                     setData(response.data.data);
                     setProduct(response.data.data.product);
+
                     setRecentlyViewedProduct(
                         response.data.data.recently_viewed_products,
                     );
@@ -521,12 +523,16 @@ function ProductDetails() {
         setSelectedImage(imageUrl);
     };
 
-    const handleSizeSelect = (size) => {
-        setSelectedSize(size === selectedSize ? null : size);
-    };
-
-    const handleColorSelect = (color) => {
-        setSelectedColor(color === selectedColor ? null : color);
+    const handleVariantSelect = (title, value) => {
+        setSelectedVariants((prev) => {
+            if (prev[title] === value) {
+                // toggle off
+                const next = { ...prev };
+                delete next[title];
+                return next;
+            }
+            return { ...prev, [title]: value };
+        });
     };
 
     if (loading) {
@@ -578,11 +584,6 @@ function ProductDetails() {
                 ? `${backendBaseURL}/${data.images_path}/${product.image_7}`
                 : null,
         ].filter(Boolean),
-        sizes:
-            product.variant_items.find((v) => v.title === "Size")?.values || [],
-        colors:
-            product.variant_items.find((v) => v.title === "Color")?.values ||
-            [],
         features: product.features,
         variants: product.variant_items,
         warranty_status: product.warranty_status,
@@ -702,67 +703,41 @@ function ProductDetails() {
                                             </span>
                                         )}
                                     </div>
-                                    {productData.sizes.length > 0 && (
-                                        <div className="mb-4">
-                                            <p className="font-semibold mb-2">
-                                                {tSize}
-                                            </p>
-                                            <div className="flex gap-2">
-                                                {productData.sizes.map(
-                                                    (size) => (
+                                    {productData.variants?.map((variant) =>
+                                        variant.values?.length > 0 ? (
+                                            <div key={variant.title} className="mb-4">
+                                                <p className="font-semibold mb-2">
+                                                    {variant.title}
+                                                </p>
+                                                <div className="flex flex-wrap gap-2">
+                                                    {variant.values.map((value) => (
                                                         <button
-                                                            key={size}
+                                                            key={value}
                                                             onClick={() =>
-                                                                handleSizeSelect(
-                                                                    size,
-                                                                )
-                                                            }
-                                                            className={`relative px-4 py-2 w-[60px] h-[40px] border rounded-full font-semibold transition-all ${
-                                                                selectedSize ===
-                                                                size
-                                                                    ? "bg-primary__color text-white border-primary__color"
-                                                                    : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
-                                                            }`}
-                                                        >
-                                                            {size}
-                                                        </button>
-                                                    ),
-                                                )}
-                                            </div>
-                                        </div>
-                                    )}
-                                    {productData.colors.length > 0 && (
-                                        <div className="mb-4">
-                                            <p className="font-semibold mb-2">
-                                                {tColor}
-                                            </p>
-                                            <div className="flex gap-2">
-                                                {productData.colors.map(
-                                                    (color) => (
-                                                        <button
-                                                            key={color}
-                                                            onClick={() =>
-                                                                handleColorSelect(
-                                                                    color,
+                                                                handleVariantSelect(
+                                                                    variant.title,
+                                                                    value,
                                                                 )
                                                             }
                                                             className={`relative px-4 py-2 border rounded-full font-semibold transition-all ${
-                                                                selectedColor ===
-                                                                color
+                                                                selectedVariants[
+                                                                    variant.title
+                                                                ] === value
                                                                     ? "bg-primary__color text-white border-primary__color"
                                                                     : "bg-white text-gray-800 border-gray-300 hover:bg-gray-100"
                                                             }`}
                                                         >
-                                                            {color}
-                                                            {selectedColor ===
-                                                                color && (
+                                                            {value}
+                                                            {selectedVariants[
+                                                                variant.title
+                                                            ] === value && (
                                                                 <CheckIcon className="w-4 h-4 absolute -top-1 -right-1 bg-white text-primary__color rounded-full" />
                                                             )}
                                                         </button>
-                                                    ),
-                                                )}
+                                                    ))}
+                                                </div>
                                             </div>
-                                        </div>
+                                        ) : null
                                     )}
                                     <div className="mb-6">
                                         {isOutOfStock ? (

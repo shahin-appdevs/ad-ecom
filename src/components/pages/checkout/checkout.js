@@ -208,6 +208,15 @@ function Checkout() {
                 formDataToSend.append(`product_id[]`, item.id);
                 formDataToSend.append(`product_price[]`, item.price);
                 formDataToSend.append(`product_quantity[]`, item.quantity);
+                // Variants logic
+                if (item.variants && typeof item.variants === "object") {
+                    const variantString = Object.values(item.variants).join(
+                        "/",
+                    );
+                    formDataToSend.append("product_variants[]", variantString);
+                } else {
+                    formDataToSend.append("product_variants[]", "");
+                }
                 if (storedReferralCode && item.product_refer_code) {
                     formDataToSend.append(
                         "product_refer_code[]",
@@ -535,6 +544,7 @@ function Checkout() {
                                             height={80}
                                             className="object-cover rounded h-[80px]"
                                         />
+
                                         <div className="flex-1">
                                             <div className="flex justify-between items-start">
                                                 <div>
@@ -585,41 +595,43 @@ function Checkout() {
                                                                 </p>
                                                             )}
                                                         </div>
-                                                        <div className="">
-                                                            {(item.size ||
-                                                                item.color) && (
-                                                                <div className="text-sm font-semibold flex gap-2">
-                                                                    {item.size && (
-                                                                        <div className="flex items-center gap-2">
-                                                                            <span className="font-medium">
-                                                                                {t(
-                                                                                    "size",
-                                                                                )}
-                                                                            </span>
-                                                                            <span className="bg-gray-100 px-2 py-1 rounded">
-                                                                                {
-                                                                                    item.size
+                                                    </div>
+                                                    <div>
+                                                        {item.variants &&
+                                                            Object.keys(
+                                                                item.variants,
+                                                            ).length > 0 && (
+                                                                <div className="text-sm font-semibold flex flex-wrap gap-2 mt-1">
+                                                                    {Object.entries(
+                                                                        item.variants,
+                                                                    ).map(
+                                                                        ([
+                                                                            key,
+                                                                            value,
+                                                                        ]) => (
+                                                                            <div
+                                                                                key={
+                                                                                    key
                                                                                 }
-                                                                            </span>
-                                                                        </div>
-                                                                    )}
-                                                                    {item.color && (
-                                                                        <div className="flex items-center gap-2">
-                                                                            <span className="font-medium">
-                                                                                {t(
-                                                                                    "color",
-                                                                                )}
-                                                                            </span>
-                                                                            <span className="bg-gray-100 px-2 py-1 rounded">
-                                                                                {
-                                                                                    item.color
-                                                                                }
-                                                                            </span>
-                                                                        </div>
+                                                                                className="flex items-center gap-1"
+                                                                            >
+                                                                                <span className="font-medium text-gray-600">
+                                                                                    {
+                                                                                        key
+                                                                                    }
+
+                                                                                    :
+                                                                                </span>
+                                                                                <span className="bg-gray-100 px-2 py-0.5 rounded text-gray-800">
+                                                                                    {
+                                                                                        value
+                                                                                    }
+                                                                                </span>
+                                                                            </div>
+                                                                        ),
                                                                     )}
                                                                 </div>
                                                             )}
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <button
@@ -1019,7 +1031,10 @@ function Checkout() {
                                                                     }
                                                                 </span>
                                                                 <span className="block text-xs font-medium">
-                                                                    {t("deliveryFee")}:{" "}
+                                                                    {t(
+                                                                        "deliveryFee",
+                                                                    )}
+                                                                    :{" "}
                                                                     {formatCurrency(
                                                                         option.charge,
                                                                     )}
