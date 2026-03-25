@@ -35,8 +35,6 @@ export default function Footer() {
     const [appDownloadLink, setAppDownloadLink] = useState({});
     const lang = useLocale();
 
-    console.log(footerInfo);
-
     const footerContent = footerInfo?.footer_content?.language[lang];
     const contactInfo = footerInfo?.contact_section?.language[lang];
     const socialLinks = footerInfo?.social_icons?.map((item) => item[lang]);
@@ -216,7 +214,7 @@ export default function Footer() {
                                         href={`/important-link?link=${link?.slug}`}
                                         className="font-medium hover:text-primary__color"
                                     >
-                                        {link?.title?.language?.en?.title}
+                                        {link?.title?.language[lang]?.title}
                                     </Link>
                                 </li>
                             ))}

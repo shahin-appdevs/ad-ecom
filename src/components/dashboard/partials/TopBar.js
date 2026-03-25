@@ -144,7 +144,7 @@ export default function TopBar() {
                                     {/* Dropdown Menu */}
                                     {!loading && (
                                         <div
-                                            className={`absolute right-0 mt-0 w-52 rounded-md bg-white shadow-lg ring-1 ring-black/5 ${showDropdown ? "opacity-100 visible" : "opacity-0 invisible"} transition-all duration-150 z-20`}
+                                            className={`absolute ltr:right-0 rtl:left-0 mt-0 w-52 rounded-md bg-white shadow-lg ring-1 ring-black/5 ${showDropdown ? "opacity-100 visible" : "opacity-0 invisible"} transition-all duration-150 z-20`}
                                         >
                                             <div className="px-4 py-3 border-b border-gray-100">
                                                 {/* User Info (moved here, unchanged) */}
