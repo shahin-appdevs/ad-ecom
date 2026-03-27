@@ -1845,5 +1845,27 @@
             "loginSuccess": "Inicio de sesión exitoso",
             "loginFailed": "Inicio de sesión fallido. Por favor, inténtelo de nuevo."
         }
+    },
+    "Category": {
+        "category": {
+            "subCategories": "Subcategorías",
+            "products": "Productos",
+            "noProductsFound": "No se encontraron productos",
+            "off": "descuento",
+            "loadMore": "Cargar más"
+        },
+        "subCategory": {
+            "moreCategories": "Más Categorías",
+            "products": "Productos",
+            "noProductsFound": "No se encontraron productos",
+            "off": "descuento",
+            "loadMore": "Cargar más"
+        },
+        "subChildCategory": {
+            "products": "Productos",
+            "noProductsFound": "No se encontraron productos",
+            "off": "descuento",
+            "loadMore": "Cargar más"
+        }
     }
 }

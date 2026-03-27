@@ -1845,5 +1845,27 @@
             "loginSuccess": "Login successful",
             "loginFailed": "Login failed. Please try again."
         }
+    },
+    "Category": {
+        "category": {
+            "products": "Products",
+            "subCategories": "Sub Categories",
+            "noProductsFound": "No products found",
+            "off": "Off",
+            "loadMore": "Load More"
+        },
+        "subCategory": {
+            "moreCategories": "More Categories",
+            "products": "Products",
+            "noProductsFound": "No products found",
+            "off": "off",
+            "loadMore": "Load More"
+        },
+        "subChildCategory": {
+            "products": "Products",
+            "noProductsFound": "No products found",
+            "off": "off",
+            "loadMore": "Load More"
+        }
     }
 }

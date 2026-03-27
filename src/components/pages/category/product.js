@@ -1,11 +1,9 @@
 "use client";
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
-import { useCart } from "@/components/context/CartContext";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import {
     categoryGetAPI,
@@ -15,9 +13,9 @@ import {
 } from "@root/services/apiClient/apiClient";
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
-import getImageUrl from "@/components/utility/getImageUrl";
 import { Menu } from "@headlessui/react";
 import { ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -37,19 +35,17 @@ const ProductSkeleton = () => (
 );
 
 function CategoryProduct() {
+    const t = useTranslations("Category.category"); // ← Added: category namespace
+
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { incrementCart, decrementCart } = useCart();
     const searchParams = useSearchParams();
     const idParam = searchParams.get("id");
     const [categoryId, setCategoryId] = useState(null);
     const [childCategoryId, setChildCategoryId] = useState(null);
     const [childSubCategoryId, setSubChildCategoryId] = useState(null);
-    const [states, setStates] = useState([]);
-    const [categories, setCategories] = useState([]);
     const [currentCategory, setCurrentCategory] = useState(null);
-    const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
@@ -65,7 +61,6 @@ function CategoryProduct() {
 
             try {
                 const response = await profiledGetAPI();
-                setUserProfile(response.data.data);
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );
@@ -92,76 +87,11 @@ function CategoryProduct() {
         return `৳${numericValue.toFixed(2)}`;
     };
 
-    const saveToLocalStorage = useCallback(
-        (product, quantity) => {
-            if (!data?.products?.data) return;
-
-            const savedCart = localStorage.getItem("categoryCart");
-            let cartItems = savedCart ? JSON.parse(savedCart) : [];
-
-            const existingIndex = cartItems.findIndex(
-                (item) => item.id === product.id,
-            );
-
-            const price =
-                isReseller && product.product_additional_prices?.resell_price
-                    ? product.product_additional_prices.resell_price
-                    : product.product_additional_prices?.flash_price ||
-                      product.product_prices?.sale_price ||
-                      product.product_prices?.list_price;
-
-            if (existingIndex >= 0) {
-                cartItems[existingIndex].quantity = quantity;
-                cartItems[existingIndex].price = price;
-            } else {
-                cartItems.push({
-                    id: product.id,
-                    title: product.title,
-                    price: price,
-                    quantity: quantity,
-                    image: product.main_image
-                        ? `${backendBaseURL}/${data.main_image_path}/${product.main_image}`
-                        : `${backendBaseURL}/${data.default_image_path}`,
-                    base_curr_symbol: data.base_curr_symbol,
-                });
-            }
-
-            cartItems = cartItems.filter((item) => item.quantity > 0);
-            localStorage.setItem("categoryCart", JSON.stringify(cartItems));
-        },
-        [data, isReseller],
-    );
-
-    useEffect(() => {
-        if (!data?.products?.data) return;
-
-        const savedCart = localStorage.getItem("categoryCart");
-        const initialStates = data.products.data.map((product) => {
-            if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                const cartItem = parsedCart.find(
-                    (item) => item.id === product.id,
-                );
-                return {
-                    showQuantity: !!cartItem,
-                    quantity: cartItem?.quantity || 1,
-                };
-            }
-            return {
-                showQuantity: false,
-                quantity: 1,
-            };
-        });
-
-        setStates(initialStates);
-    }, [data]);
-
     useEffect(() => {
         const fetchCategories = async () => {
             try {
                 const response = await categoryGetAPI();
                 if (response?.data?.data?.all_categories) {
-                    setCategories(response.data.data.all_categories);
                     if (idParam) {
                         const foundCategory =
                             response.data.data.all_categories.find(
@@ -268,12 +198,6 @@ function CategoryProduct() {
                         });
 
                     setProducts(formattedProducts);
-                    setStates(
-                        formattedProducts.map(() => ({
-                            showQuantity: false,
-                            quantity: 1,
-                        })),
-                    );
                 }
             } catch (error) {
                 toast.error(error.response?.data?.message?.error?.[0]);
@@ -352,13 +276,7 @@ function CategoryProduct() {
                 formatProduct(p, res.data.data),
             );
             setProducts((prev) => [...prev, ...newFormatted]);
-            setStates((prev) => [
-                ...prev,
-                ...newFormatted.map(() => ({
-                    showQuantity: false,
-                    quantity: 1,
-                })),
-            ]);
+
             setData((prev) => ({
                 ...prev,
                 products: {
@@ -374,52 +292,6 @@ function CategoryProduct() {
         } finally {
             setLoadMoreLoading(false);
         }
-    };
-
-    const handleToggle = (index) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index ? { ...item, showQuantity: true } : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], 1);
-    };
-
-    const increaseQuantity = (index, value) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: Math.max(1, item.quantity + value),
-                      }
-                    : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], states[index].quantity + value);
-    };
-
-    const decreaseQuantity = (index, value) => {
-        const currentQty = states[index].quantity;
-
-        if (currentQty <= 1) {
-            return;
-        }
-
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: item.quantity - value,
-                      }
-                    : item,
-            ),
-        );
-        decrementCart();
-        saveToLocalStorage(products[index], states[index].quantity - value);
     };
 
     return (
@@ -447,7 +319,10 @@ function CategoryProduct() {
                                             </span>
                                             {currentCategory.child_categories
                                                 ?.length > 0 && (
-                                                <ChevronRight size={18} />
+                                                <ChevronRight
+                                                    size={18}
+                                                    className="rtl:rotate-180"
+                                                />
                                             )}
                                         </h5>
                                     </div>
@@ -460,8 +335,12 @@ function CategoryProduct() {
                                         >
                                             {/* Button */}
                                             <Menu.Button className="flex items-center gap-2 text-sm md:text-base bg-white text-primary__color border py-1 px-4 rounded-2xl font-normal">
-                                                Sub Categories
-                                                <ChevronRight size={16} />
+                                                {t("subCategories")}{" "}
+                                                {/* ← Translated */}
+                                                <ChevronRight
+                                                    size={16}
+                                                    className="rtl:-rotate-180"
+                                                />
                                             </Menu.Button>
 
                                             {/* Dropdown */}
@@ -499,7 +378,9 @@ function CategoryProduct() {
                                     <div className="h-6 w-1/4 bg-gray-200 rounded animate-pulse"></div>
                                 ) : (
                                     <h6>
-                                        {currentCategory?.title || "Products"}
+                                        {currentCategory?.title ||
+                                            t("products")}{" "}
+                                        {/* ← Translated fallback */}
                                     </h6>
                                 )}
                             </div>
@@ -514,7 +395,8 @@ function CategoryProduct() {
                                     )
                                 ) : products.length === 0 ? (
                                     <div className="col-span-full text-center py-10">
-                                        <p>No products found</p>
+                                        <p>{t("noProductsFound")}</p>{" "}
+                                        {/* ← Translated */}
                                     </div>
                                 ) : (
                                     products.map((product, index) => (
@@ -535,7 +417,9 @@ function CategoryProduct() {
                                                 </div>
                                                 {product.hasDiscount && (
                                                     <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
-                                                        {product.discount} off
+                                                        {product.discount}{" "}
+                                                        {t("off")}{" "}
+                                                        {/* ← Translated */}
                                                     </span>
                                                 )}
                                             </div>
@@ -559,60 +443,6 @@ function CategoryProduct() {
                                                         </span>
                                                     )}
                                                 </div>
-
-                                                {/* <div className="relative">
-                                                    {!states[index]?.showQuantity ? (
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-                                                                e.stopPropagation();
-                                                                handleToggle(index);
-                                                            }}
-                                                            className="bg-white shadow-sm text-gray-800 text-xs px-4 py-2 rounded-md font-medium flex items-center justify-between w-full"
-                                                            disabled={product.stock <= 0}
-                                                        >
-                                                            <PlusIcon className="h-5 w-5" />
-                                                            {product.stock <= 0 ? (
-                                                                <span>Out of Stock</span>
-                                                            ) : (
-                                                                <span className="flex items-center gap-2">Buy Now <span className="hidden sm:block">→</span></span>
-                                                            )}
-                                                        </button>
-                                                    ) : (
-                                                        <div className="flex items-center justify-between w-full bg-white shadow-sm rounded-md overflow-hidden">
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    decreaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                            >
-                                                                <MinusIcon className="h-4 w-4" />
-                                                            </button>
-                                                            <span className="px-3 py-1 bg-white text-gray-800">
-                                                                {states[index]?.quantity || 1}
-                                                            </span>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    increaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                                disabled={states[index]?.quantity >= product.stock}
-                                                            >
-                                                                <PlusIcon className="h-4 w-4" />
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </div> */}
                                             </div>
                                         </Link>
                                     ))
@@ -632,7 +462,7 @@ function CategoryProduct() {
                             {data?.products?.next_page_url && (
                                 <div className="text-center mt-10">
                                     <Button
-                                        title="Load More"
+                                        title={t("loadMore")}
                                         variant="primary"
                                         size="md"
                                         className="!px-8"

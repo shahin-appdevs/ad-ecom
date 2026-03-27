@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
 import { useCart } from "@/components/context/CartContext";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import {
@@ -18,23 +17,9 @@ import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { Menu } from "@headlessui/react";
 import { ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl"; // ← Added
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
-
-const SubCategoriesNavSkeleton = () => (
-    <div className="border-b pb-4 mb-4">
-        <div className="flex items-center justify-between gap-3 sm:gap-0 mb-4">
-            <div className="h-5 w-1/3 bg-gray-200 rounded"></div>
-        </div>
-        <ul className="flex items-center gap-4 overflow-x-auto pb-2">
-            {[...Array(5)].map((_, i) => (
-                <li key={i}>
-                    <div className="bg-gray-200 h-9 w-24 rounded-[16px] animate-pulse"></div>
-                </li>
-            ))}
-        </ul>
-    </div>
-);
 
 const ProductSkeleton = () => (
     <div className="bg-gray-100 rounded-md animate-pulse">
@@ -52,6 +37,8 @@ const ProductSkeleton = () => (
 );
 
 function SubCategoryProduct() {
+    const t = useTranslations("Category.subCategory"); // ← Added as requested
+
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -60,15 +47,10 @@ function SubCategoryProduct() {
     const idParam = searchParams.get("id");
     const categoryId = searchParams.get("category-id");
     const childCategoryId = searchParams.get("child-id");
-
-    // const [categoryId, setCategoryId] = useState(null);
-    // const [childCategoryId, setChildCategoryId] = useState(null);
     const [childSubCategoryId, setSubChildCategoryId] = useState(null);
     const [states, setStates] = useState([]);
-    const [subCategories, setSubCategories] = useState([]);
     const [childSubCategories, setChildSubCategories] = useState([]);
     const [currentSubCategory, setCurrentSubCategory] = useState(null);
-    const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
@@ -84,7 +66,7 @@ function SubCategoryProduct() {
 
             try {
                 const response = await profiledGetAPI();
-                setUserProfile(response.data.data);
+
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );
@@ -98,8 +80,6 @@ function SubCategoryProduct() {
 
     useEffect(() => {
         if (idParam) {
-            // setCategoryId(parseInt(idParam));
-            // setChildCategoryId(parseInt(idParam));
             setSubChildCategoryId(parseInt(idParam));
         }
     }, [idParam]);
@@ -181,7 +161,6 @@ function SubCategoryProduct() {
                 if (!categoryId) return;
                 const response = await childCategoryGetAPI(categoryId);
                 if (response?.data?.data?.all_child_categories) {
-                    setSubCategories(response.data.data.all_child_categories);
                     if (childCategoryId) {
                         const foundCategory =
                             response.data.data.all_child_categories.find(
@@ -494,7 +473,10 @@ function SubCategoryProduct() {
                                                 }
                                             </Link>
 
-                                            <ChevronRight size={16} />
+                                            <ChevronRight
+                                                size={16}
+                                                className="rtl:rotate-180"
+                                            />
                                             <span className="">
                                                 {currentSubCategory.title}
                                             </span>
@@ -503,21 +485,10 @@ function SubCategoryProduct() {
                                     {childSubCategories?.length > 0 && (
                                         <ChevronRight
                                             size={16}
-                                            className="text-neutral-800"
+                                            className="text-neutral-800 rtl:rotate-180"
                                         />
                                     )}
                                     <ul className="flex items-center gap-4">
-                                        {/* All */}
-                                        {/* <li>
-                                            <Link
-                                                href={`/categories/products?id=${categoryId}`}
-                                                className="bg-[#dcfce7] shadow-md py-2 px-4 rounded-2xl text-color__heading font-medium"
-                                            >
-                                                All
-                                            </Link>
-                                        </li> */}
-
-                                        {/* Dropdown */}
                                         {childSubCategories?.length > 0 && (
                                             <li>
                                                 <Menu
@@ -525,9 +496,11 @@ function SubCategoryProduct() {
                                                     className="relative inline-block text-left"
                                                 >
                                                     <Menu.Button className="flex text-sm md:text-base items-center gap-2 bg-white border py-1 text-primary__color px-4 rounded-2xl  font-medium">
-                                                        More Categories
+                                                        {t("moreCategories")}{" "}
+                                                        {/* Translated */}
                                                         <ChevronRight
                                                             size={16}
+                                                            className="rtl:rotate-180"
                                                         />
                                                     </Menu.Button>
 
@@ -571,7 +544,8 @@ function SubCategoryProduct() {
                                 ) : (
                                     <h6>
                                         {currentSubCategory?.title ||
-                                            "Products"}
+                                            t("products")}{" "}
+                                        {/* Translated */}
                                     </h6>
                                 )}
                             </div>
@@ -586,7 +560,8 @@ function SubCategoryProduct() {
                                     )
                                 ) : products.length === 0 ? (
                                     <div className="col-span-full text-center py-10">
-                                        <p>No products found</p>
+                                        <p>{t("noProductsFound")}</p>{" "}
+                                        {/* Translated */}
                                     </div>
                                 ) : (
                                     products.map((product, index) => (
@@ -607,7 +582,9 @@ function SubCategoryProduct() {
                                                 </div>
                                                 {product.hasDiscount && (
                                                     <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
-                                                        {product.discount} off
+                                                        {product.discount}{" "}
+                                                        {t("off")}{" "}
+                                                        {/* Translated */}
                                                     </span>
                                                 )}
                                             </div>
@@ -632,60 +609,6 @@ function SubCategoryProduct() {
                                                         </span>
                                                     )}
                                                 </div>
-
-                                                {/* <div className="relative">
-                                                    {!states[index]?.showQuantity ? (
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-                                                                e.stopPropagation();
-                                                                handleToggle(index);
-                                                            }}
-                                                            className="bg-white shadow-sm text-gray-800 text-xs px-4 py-2 rounded-md font-medium flex items-center justify-between w-full"
-                                                            disabled={product.stock <= 0}
-                                                        >
-                                                            <PlusIcon className="h-5 w-5" />
-                                                            {product.stock <= 0 ? (
-                                                                <span>Out of Stock</span>
-                                                            ) : (
-                                                                <span className="flex items-center gap-2">Buy Now <span className="hidden sm:block">→</span></span>
-                                                            )}
-                                                        </button>
-                                                    ) : (
-                                                        <div className="flex items-center justify-between w-full bg-white shadow-sm rounded-md overflow-hidden">
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    decreaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                            >
-                                                                <MinusIcon className="h-4 w-4" />
-                                                            </button>
-                                                            <span className="px-3 py-1 bg-white text-gray-800">
-                                                                {states[index]?.quantity || 1}
-                                                            </span>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    increaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                                disabled={states[index]?.quantity >= product.stock}
-                                                            >
-                                                                <PlusIcon className="h-4 w-4" />
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </div> */}
                                             </div>
                                         </Link>
                                     ))
@@ -705,7 +628,7 @@ function SubCategoryProduct() {
                             {data?.products?.next_page_url && (
                                 <div className="text-center mt-10">
                                     <Button
-                                        title="Load More"
+                                        title={t("loadMore")}
                                         variant="primary"
                                         size="md"
                                         className="!px-8"

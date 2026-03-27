@@ -1845,5 +1845,27 @@
             "loginSuccess": "تم تسجيل الدخول بنجاح",
             "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى."
         }
+    },
+    "Category": {
+        "category": {
+            "subCategories": "الفئات الفرعية",
+            "products": "المنتجات",
+            "noProductsFound": "لم يتم العثور على منتجات",
+            "off": "خصم",
+            "loadMore": "تحميل المزيد"
+        },
+        "subCategory": {
+            "moreCategories": "المزيد من الفئات",
+            "products": "المنتجات",
+            "noProductsFound": "لم يتم العثور على منتجات",
+            "off": "خصم",
+            "loadMore": "تحميل المزيد"
+        },
+        "subChildCategory": {
+            "products": "المنتجات",
+            "noProductsFound": "لم يتم العثور على منتجات",
+            "off": "خصم",
+            "loadMore": "تحميل المزيد"
+        }
     }
 }
