@@ -47,17 +47,21 @@
             "min": "Min",
             "sec": "Sec",
             "viewMore": "View More",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "off": "off"
         },
         "newArrival": {
             "newArrivalTitle": "New Arrival",
             "viewMore": "View More",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "off": "off"
         },
         "shopByBrand": {
             "title": "Shop by Brand",
             "viewMore": "View More",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "noProductsFound": "No products found",
+            "off": "off"
         },
         "stalls": {
             "title": "Stalls",
@@ -65,7 +69,8 @@
         },
         "categoryProducts": {
             "viewMore": "View More",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "off": "off"
         },
         "wishlist": {
             "title": "My Wishlist",
@@ -1866,6 +1871,18 @@
             "noProductsFound": "No products found",
             "off": "off",
             "loadMore": "Load More"
+        }
+    },
+    "Campaign": {
+        "campaignProduct": {
+            "endsIn": "Ends in",
+            "noProductsFound": "No products found",
+            "off": "off",
+            "loadMore": "Load More",
+            "days": "days",
+            "hours": "hours",
+            "min": "min",
+            "sec": "sec"
         }
     }
 }

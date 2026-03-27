@@ -103,7 +103,7 @@ export default function FlashProduct() {
         minutes: "00",
         seconds: "00",
     });
-    const { incrementCart, decrementCart } = useCart();
+
     const [states, setStates] = useState([]);
 
     // Add the comprehensive price calculation function
@@ -168,42 +168,6 @@ export default function FlashProduct() {
         return `${flashData.base_curr_symbol}${parseFloat(price).toFixed(2)}`;
     };
 
-    const saveToLocalStorage = useCallback(
-        (product, quantity) => {
-            if (!flashData) return;
-
-            const savedCart = localStorage.getItem("flashSaleCart");
-            let cartItems = savedCart ? JSON.parse(savedCart) : [];
-
-            const existingIndex = cartItems.findIndex(
-                (item) => item.id === product.id,
-            );
-
-            // Use the same price calculation logic for consistency
-            const { displayPrice } = calculateDiscount(product);
-
-            if (existingIndex >= 0) {
-                cartItems[existingIndex].quantity = quantity;
-                cartItems[existingIndex].price = displayPrice;
-            } else {
-                cartItems.push({
-                    id: product.id,
-                    title: product.title,
-                    price: displayPrice,
-                    quantity: quantity,
-                    image: product.main_image
-                        ? `${backendBaseURL}/${flashData.product_image_path}/${product.main_image}`
-                        : `${backendBaseURL}/${flashData.default_image_path}`,
-                    base_curr_symbol: flashData.base_curr_symbol,
-                });
-            }
-
-            cartItems = cartItems.filter((item) => item.quantity > 0);
-            localStorage.setItem("flashSaleCart", JSON.stringify(cartItems));
-        },
-        [flashData, isReseller],
-    );
-
     useEffect(() => {
         if (!flashData?.flash_products) return;
 
@@ -227,62 +191,6 @@ export default function FlashProduct() {
 
         setStates(initialStates);
     }, [flashData]);
-
-    const handleToggle = (index) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index ? { ...item, showQuantity: true } : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(flashData.flash_products[index], 1);
-    };
-
-    const increaseQuantity = (index, value) => {
-        if (!flashData?.flash_products) return;
-
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: Math.max(1, item.quantity + value),
-                      }
-                    : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(
-            flashData.flash_products[index],
-            states[index].quantity + value,
-        );
-    };
-
-    const decreaseQuantity = (index, value) => {
-        if (!flashData?.flash_products) return;
-
-        const currentQty = states[index].quantity;
-
-        if (currentQty <= 1) {
-            return;
-        }
-
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: item.quantity - value,
-                      }
-                    : item,
-            ),
-        );
-        decrementCart();
-        saveToLocalStorage(
-            flashData.flash_products[index],
-            states[index].quantity - value,
-        );
-    };
 
     useEffect(() => {
         if (!flashData?.flash_sale_end_date) return;
@@ -356,6 +264,7 @@ export default function FlashProduct() {
         { key: "sec", value: timeLeft.seconds },
     ];
     const loadMore = t("loadMore");
+    const off = t("off");
 
     if (loading) {
         return (
@@ -457,7 +366,7 @@ export default function FlashProduct() {
                                                 </div>
                                                 {discount && (
                                                     <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
-                                                        {discount} off
+                                                        {discount} {off}
                                                     </span>
                                                 )}
                                             </div>

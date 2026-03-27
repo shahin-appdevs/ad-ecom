@@ -162,52 +162,6 @@ export default function CategoryProducts() {
         }
     }, [products_under_category]);
 
-    const handleToggle = (categoryId, product) => {
-        setStates((prev) => ({
-            ...prev,
-            [`${categoryId}-${product.id}`]: {
-                ...prev[`${categoryId}-${product.id}`],
-                showQuantity: true,
-            },
-        }));
-        incrementCart();
-        saveToLocalStorage(categoryId, product, 1);
-    };
-
-    const increaseQuantity = (categoryId, product, value) => {
-        const newQuantity =
-            (states[`${categoryId}-${product.id}`]?.quantity || 1) + value;
-        setStates((prev) => ({
-            ...prev,
-            [`${categoryId}-${product.id}`]: {
-                ...prev[`${categoryId}-${product.id}`],
-                quantity: Math.max(1, newQuantity),
-            },
-        }));
-        incrementCart();
-        saveToLocalStorage(categoryId, product, newQuantity);
-    };
-
-    const decreaseQuantity = (categoryId, product, value) => {
-        const currentQty = states[`${categoryId}-${product.id}`]?.quantity || 1;
-
-        if (currentQty <= 1) {
-            return;
-        }
-
-        const newQuantity = currentQty - value;
-        setStates((prev) => ({
-            ...prev,
-            [`${categoryId}-${product.id}`]: {
-                ...prev[`${categoryId}-${product.id}`],
-                quantity: newQuantity,
-            },
-        }));
-
-        decrementCart();
-        saveToLocalStorage(categoryId, product, newQuantity);
-    };
-
     const calculateDiscount = (product) => {
         const listPrice = parseFloat(product.product_prices?.list_price || 0);
         const salePrice = parseFloat(product.product_prices?.sale_price || 0);
@@ -271,6 +225,7 @@ export default function CategoryProducts() {
     const t = useTranslations("HomePage.categoryProducts");
 
     const viewMore = t("viewMore");
+    const off = t("off");
 
     if (loading) {
         return (
@@ -347,9 +302,11 @@ export default function CategoryProducts() {
                                                     className="w-full group-hover:scale-105 duration-200 h-full object-cover rounded-t-md"
                                                 />
                                             </div>
-                                            <span className="absolute right-[8px] top-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
-                                                {discount} off
-                                            </span>
+                                            {hasDiscount && (
+                                                <span className="absolute right-[8px] top-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
+                                                    {discount} {off}
+                                                </span>
+                                            )}
                                         </div>
                                         <div className="p-[10px]">
                                             <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2 truncate whitespace-nowrap overflow-hidden text-ellipsis">

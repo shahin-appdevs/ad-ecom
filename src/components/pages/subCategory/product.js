@@ -396,52 +396,6 @@ function SubCategoryProduct() {
         }
     };
 
-    const handleToggle = (index) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index ? { ...item, showQuantity: true } : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], 1);
-    };
-
-    const increaseQuantity = (index, value) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: Math.max(1, item.quantity + value),
-                      }
-                    : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], states[index].quantity + value);
-    };
-
-    const decreaseQuantity = (index, value) => {
-        const currentQty = states[index].quantity;
-
-        if (currentQty <= 1) {
-            return;
-        }
-
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: item.quantity - value,
-                      }
-                    : item,
-            ),
-        );
-        decrementCart();
-        saveToLocalStorage(products[index], states[index].quantity - value);
-    };
-
     return (
         <section className="sm:pt-4">
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">

@@ -13,15 +13,14 @@ import {
 } from "@root/services/apiClient/apiClient";
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl"; // ← Added
 export const dynamic = "force-dynamic";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 const CampaignSkeleton = () => (
     <div className="animate-pulse">
-        {/* Banner skeleton */}
         <div className="w-full relative h-[200px] lg:h-[300px] mb-4 rounded-md overflow-hidden bg-gray-300">
-            {/* Timer skeleton (top-right) */}
             <div className="absolute top-3 right-3 z-10">
                 <div className="flex items-center gap-2 bg-gray-400/80 px-3 py-2 rounded-full">
                     <div className="h-3 w-10 bg-gray-500 rounded"></div>
@@ -35,8 +34,6 @@ const CampaignSkeleton = () => (
                     </div>
                 </div>
             </div>
-
-            {/* Bottom content skeleton */}
             <div className="absolute bottom-0 left-0 right-0 p-3">
                 <div className="h-6 w-1/3 bg-gray-400 rounded mb-2"></div>
                 <div className="h-4 w-2/3 bg-gray-400 rounded"></div>
@@ -61,11 +58,12 @@ const ProductSkeleton = () => (
 );
 
 function CampaignProduct() {
+    const t = useTranslations("Campaign.campaignProduct"); // ← Namespace as requested
+
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
     const [campaign, setCampaign] = useState(null);
     const [loading, setLoading] = useState(true);
-    const { incrementCart, decrementCart } = useCart();
     const searchParams = useSearchParams();
     const idParam = searchParams.get("id");
     const [campaignId, setCampaignId] = useState(null);
@@ -116,46 +114,6 @@ function CampaignProduct() {
             typeof price === "string" ? parseFloat(price) : price;
         return `৳${numericValue.toFixed(2)}`;
     };
-
-    const saveToLocalStorage = useCallback(
-        (product, quantity) => {
-            if (!data?.products?.data) return;
-
-            const savedCart = localStorage.getItem("campaignCart");
-            let cartItems = savedCart ? JSON.parse(savedCart) : [];
-
-            const existingIndex = cartItems.findIndex(
-                (item) => item.id === product.id,
-            );
-
-            const price =
-                isReseller && product.product_additional_prices?.resell_price
-                    ? product.product_additional_prices.resell_price
-                    : product.product_additional_prices?.flash_price ||
-                      product.product_prices?.sale_price ||
-                      product.product_prices?.list_price;
-
-            if (existingIndex >= 0) {
-                cartItems[existingIndex].quantity = quantity;
-                cartItems[existingIndex].price = price;
-            } else {
-                cartItems.push({
-                    id: product.id,
-                    title: product.title,
-                    price: price,
-                    quantity: quantity,
-                    image: product.main_image
-                        ? `${backendBaseURL}/${data.product_image_path}/${product.main_image}`
-                        : `${backendBaseURL}/${data.default_image_path}`,
-                    base_curr_symbol: data.base_curr_symbol,
-                });
-            }
-
-            cartItems = cartItems.filter((item) => item.quantity > 0);
-            localStorage.setItem("campaignCart", JSON.stringify(cartItems));
-        },
-        [data, isReseller],
-    );
 
     useEffect(() => {
         if (!data?.products?.data) return;
@@ -389,52 +347,6 @@ function CampaignProduct() {
         }
     };
 
-    const handleToggle = (index) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index ? { ...item, showQuantity: true } : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], 1);
-    };
-
-    const increaseQuantity = (index, value) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: Math.max(1, item.quantity + value),
-                      }
-                    : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], states[index].quantity + value);
-    };
-
-    const decreaseQuantity = (index, value) => {
-        const currentQty = states[index].quantity;
-
-        if (currentQty <= 1) {
-            return;
-        }
-
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: item.quantity - value,
-                      }
-                    : item,
-            ),
-        );
-        decrementCart();
-        saveToLocalStorage(products[index], states[index].quantity - value);
-    };
-
     useEffect(() => {
         if (!data?.campaign?.ends_at) return;
         const endTime = new Date(data.campaign.ends_at).getTime();
@@ -473,6 +385,13 @@ function CampaignProduct() {
         return () => clearInterval(timer);
     }, [data?.campaign?.ends_at]);
 
+    const countdownLabels = [
+        { key: "days", value: timeLeft.days },
+        { key: "hours", value: timeLeft.hours },
+        { key: "min", value: timeLeft.minutes },
+        { key: "sec", value: timeLeft.seconds },
+    ];
+
     return (
         <section className="sm:pt-4">
             <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
@@ -505,37 +424,38 @@ function CampaignProduct() {
                                                     height={300}
                                                 />
 
-                                                {/* TIMER — absolute top-right (unchanged logic) */}
+                                                {/* Translated & Mapped Timer */}
                                                 <div className="absolute top-3 right-3 z-10">
                                                     <div className="flex items-center gap-2 bg-black/60 backdrop-blur-sm px-3 py-2 rounded-full text-white text-xs sm:text-sm">
                                                         <span className="font-semibold">
-                                                            Ends in
+                                                            {t("endsIn")}
                                                         </span>
                                                         <div className="flex items-center gap-1">
-                                                            <span className="bg-red-500 px-2 py-1 rounded-full">
-                                                                {timeLeft.days}d
-                                                            </span>
-                                                            <span className="bg-red-500 px-2 py-1 rounded-full">
-                                                                {timeLeft.hours}
-                                                                h
-                                                            </span>
-                                                            <span className="bg-red-500 px-2 py-1 rounded-full">
-                                                                {
-                                                                    timeLeft.minutes
-                                                                }
-                                                                m
-                                                            </span>
-                                                            <span className="bg-red-500 px-2 py-1 rounded-full">
-                                                                {
-                                                                    timeLeft.seconds
-                                                                }
-                                                                s
-                                                            </span>
+                                                            {countdownLabels.map(
+                                                                (
+                                                                    item,
+                                                                    index,
+                                                                ) => (
+                                                                    <span
+                                                                        key={
+                                                                            index
+                                                                        }
+                                                                        className="bg-red-500 px-2 py-1 rounded-full font-medium"
+                                                                    >
+                                                                        {
+                                                                            item.value
+                                                                        }{" "}
+                                                                        {t(
+                                                                            item.key,
+                                                                        )}
+                                                                    </span>
+                                                                ),
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                {/* Banner overlay (collection-style) */}
+                                                {/* Banner overlay */}
                                                 <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t h-full from-black/80 via-black/10 to-transparent">
                                                     <div className="absolute bottom-0 left-0 right-0 p-2 text-white">
                                                         <h3 className="text-2xl md:text-3xl font-medium truncate text-white">
@@ -556,7 +476,7 @@ function CampaignProduct() {
                                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
                                         {products.length === 0 ? (
                                             <div className="col-span-full text-center py-10">
-                                                <p>No products found</p>
+                                                <p>{t("noProductsFound")}</p>
                                             </div>
                                         ) : (
                                             products.map((product, index) => (
@@ -585,7 +505,7 @@ function CampaignProduct() {
                                                                 {
                                                                     product.discount
                                                                 }{" "}
-                                                                off
+                                                                {t("off")}
                                                             </span>
                                                         )}
                                                     </div>
@@ -618,6 +538,7 @@ function CampaignProduct() {
                                             ))
                                         )}
                                     </div>
+
                                     {loadMoreLoading && (
                                         <div className="mt-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
                                             {Array.from({ length: 6 }).map(
@@ -629,10 +550,11 @@ function CampaignProduct() {
                                             )}
                                         </div>
                                     )}
+
                                     {data?.products?.next_page_url && (
                                         <div className="text-center mt-10">
                                             <Button
-                                                title="Load More"
+                                                title={t("loadMore")}
                                                 variant="primary"
                                                 size="md"
                                                 className="!px-8"
