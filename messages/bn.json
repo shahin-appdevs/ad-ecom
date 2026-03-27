@@ -132,6 +132,15 @@
         }
     },
     "Dashboard": {
+        "topBar": {
+            "profile": "প্রোফাইল",
+            "setupPin": "পিন সেটআপ করুন",
+            "twoFaVerification": "২এফএ যাচাইকরণ",
+            "logout": "লগআউট",
+            "confirmLogout": "লগআউট নিশ্চিত করুন",
+            "logoutConfirmation": "আপনি কি নিশ্চিত যে লগআউট করতে চান?",
+            "cancel": "বাতিল"
+        },
         "sidenav": {
             "dashboard": "ড্যাশবোর্ড",
             "wallet": "ওয়ালেট",

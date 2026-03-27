@@ -132,6 +132,15 @@
         }
     },
     "Dashboard": {
+        "topBar": {
+            "profile": "Profile",
+            "setupPin": "Setup Pin",
+            "twoFaVerification": "2FA Verification",
+            "logout": "Logout",
+            "confirmLogout": "Confirm Logout",
+            "logoutConfirmation": "Are you sure you want to logout?",
+            "cancel": "Cancel"
+        },
         "sidenav": {
             "dashboard": "Dashboard",
             "wallet": "Wallet",

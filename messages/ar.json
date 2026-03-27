@@ -132,6 +132,15 @@
         }
     },
     "Dashboard": {
+        "topBar": {
+            "profile": "الملف الشخصي",
+            "setupPin": "إعداد PIN",
+            "twoFaVerification": "التحقق بخطوتين",
+            "logout": "تسجيل الخروج",
+            "confirmLogout": "تأكيد تسجيل الخروج",
+            "logoutConfirmation": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+            "cancel": "إلغاء"
+        },
         "sidenav": {
             "dashboard": "لوحة القيادة",
             "wallet": "المحفظة",

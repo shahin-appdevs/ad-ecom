@@ -11,8 +11,11 @@ import { useRouter, Link } from "@/i18n/navigation";
 import { LoaderCircle, Lock, LogOut, ShieldCheck, User } from "lucide-react";
 import { Dialog, Transition } from "@headlessui/react";
 import LanguageSwitcher from "@/components/partials/LanguageSwitcher";
+import { useTranslations } from "next-intl"; // ← Added
 
 export default function TopBar() {
+    const t = useTranslations("Dashboard.topBar"); // ← Added as requested
+
     const pathname = usePathname();
     const [loading, setLoading] = useState(true);
     const [userData, setUserData] = useState([]);
@@ -68,10 +71,10 @@ export default function TopBar() {
                 toast.success(msg);
             });
 
-            setIsLogoutModalOpen(false); // Close the modal
-            router.push("/user/auth/login"); // Redirect to login page
+            setIsLogoutModalOpen(false);
+            router.push("/user/auth/login");
         } catch (err) {
-            setIsLogoutModalOpen(false); // Close the modal on error too
+            setIsLogoutModalOpen(false);
             if (err.response?.data?.message?.error) {
                 const errors = err.response?.data?.message?.error;
                 errors.forEach((msg) => {
@@ -147,7 +150,6 @@ export default function TopBar() {
                                             className={`absolute ltr:right-0 rtl:left-0 mt-0 w-52 rounded-md bg-white shadow-lg ring-1 ring-black/5 ${showDropdown ? "opacity-100 visible" : "opacity-0 invisible"} transition-all duration-150 z-20`}
                                         >
                                             <div className="px-4 py-3 border-b border-gray-100">
-                                                {/* User Info (moved here, unchanged) */}
                                                 <div className="relative top-1">
                                                     {loading ? (
                                                         <div className="space-y-2">
@@ -209,7 +211,10 @@ export default function TopBar() {
                                                         className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
                                                     >
                                                         <User className="h-4 w-4 text-gray-500" />
-                                                        <span>Profile</span>
+                                                        <span>
+                                                            {t("profile")}
+                                                        </span>{" "}
+                                                        {/* Translated */}
                                                     </Link>
                                                 </li>
 
@@ -223,7 +228,10 @@ export default function TopBar() {
                                                         className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
                                                     >
                                                         <ShieldCheck className="h-4 w-4 text-gray-500" />
-                                                        <span>Setup Pin</span>
+                                                        <span>
+                                                            {t("setupPin")}
+                                                        </span>{" "}
+                                                        {/* Translated */}
                                                     </Link>
                                                 </li>
 
@@ -238,8 +246,11 @@ export default function TopBar() {
                                                     >
                                                         <Lock className="h-4 w-4 text-gray-500" />
                                                         <span>
-                                                            2FA Verification
-                                                        </span>
+                                                            {t(
+                                                                "twoFaVerification",
+                                                            )}
+                                                        </span>{" "}
+                                                        {/* Translated */}
                                                     </Link>
                                                 </li>
 
@@ -253,7 +264,10 @@ export default function TopBar() {
                                                         className="flex w-full items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50"
                                                     >
                                                         <LogOut className="h-4 w-4" />
-                                                        <span>Logout</span>
+                                                        <span>
+                                                            {t("logout")}
+                                                        </span>{" "}
+                                                        {/* Translated */}
                                                     </button>
                                                 </li>
                                             </ul>
@@ -291,6 +305,8 @@ export default function TopBar() {
                     </div>
                 </div>
             </div>
+
+            {/* Logout Modal */}
             <Transition appear show={isLogoutModalOpen} as={Fragment}>
                 <Dialog
                     as="div"
@@ -325,11 +341,12 @@ export default function TopBar() {
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        Confirm Logout
+                                        {t("confirmLogout")} {/* Translated */}
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            Are you sure you want to logout?
+                                            {t("logoutConfirmation")}{" "}
+                                            {/* Translated */}
                                         </p>
                                     </div>
                                     <div className="mt-4 flex justify-end gap-3">
@@ -340,7 +357,7 @@ export default function TopBar() {
                                                 setIsLogoutModalOpen(false)
                                             }
                                         >
-                                            Cancel
+                                            {t("cancel")} {/* Translated */}
                                         </button>
                                         <button
                                             type="button"
@@ -351,8 +368,8 @@ export default function TopBar() {
                                                 {logoutLoading && (
                                                     <LoaderCircle className="animate-spin text-white" />
                                                 )}
-
-                                                <span>Logout</span>
+                                                <span>{t("logout")}</span>{" "}
+                                                {/* Translated */}
                                             </span>
                                         </button>
                                     </div>

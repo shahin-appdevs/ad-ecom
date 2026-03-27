@@ -132,6 +132,15 @@
         }
     },
     "Dashboard": {
+        "topBar": {
+            "profile": "Perfil",
+            "setupPin": "Configurar PIN",
+            "twoFaVerification": "Verificación 2FA",
+            "logout": "Cerrar sesión",
+            "confirmLogout": "Confirmar cierre de sesión",
+            "logoutConfirmation": "¿Estás seguro de que quieres cerrar sesión?",
+            "cancel": "Cancelar"
+        },
         "sidenav": {
             "dashboard": "Tablero",
             "wallet": "Cartera",
