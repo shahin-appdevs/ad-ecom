@@ -13,6 +13,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl"; // ← Added
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -38,6 +39,8 @@ const ProductSkeleton = () => (
 );
 
 function CollectionProduct() {
+    const t = useTranslations("Collection.collectionProduct"); // ← Added as requested
+
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
     const [collection, setCollection] = useState(null);
@@ -463,7 +466,8 @@ function CollectionProduct() {
                                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
                                         {products.length === 0 ? (
                                             <div className="col-span-full text-center py-10">
-                                                <p>No products found</p>
+                                                <p>{t("noProductsFound")}</p>{" "}
+                                                {/* Translated */}
                                             </div>
                                         ) : (
                                             products.map((product, index) => (
@@ -491,7 +495,8 @@ function CollectionProduct() {
                                                                 {
                                                                     product.discount
                                                                 }{" "}
-                                                                off
+                                                                {t("off")}{" "}
+                                                                {/* Translated */}
                                                             </span>
                                                         )}
                                                     </div>
@@ -516,60 +521,6 @@ function CollectionProduct() {
                                                                 </span>
                                                             )}
                                                         </div>
-
-                                                        {/* <div className="relative">
-                                                            {!states[index]?.showQuantity ? (
-                                                                <button
-                                                                    onClick={(e) => {
-                                                                        e.preventDefault();
-                                                                        e.stopPropagation();
-                                                                        handleToggle(index);
-                                                                    }}
-                                                                    className="bg-white shadow-sm text-gray-800 text-xs px-4 py-2 rounded-md font-medium flex items-center justify-between w-full"
-                                                                    disabled={product.stock <= 0}
-                                                                >
-                                                                    <PlusIcon className="h-5 w-5" />
-                                                                    {product.stock <= 0 ? (
-                                                                        <span>Out of Stock</span>
-                                                                    ) : (
-                                                                        <span className="flex items-center gap-2">Buy Now <span className="hidden sm:block">→</span></span>
-                                                                    )}
-                                                                </button>
-                                                            ) : (
-                                                                <div className="flex items-center justify-between w-full bg-white shadow-sm rounded-md overflow-hidden">
-                                                                    <button
-                                                                        onClick={(e) => {
-                                                                            e.preventDefault();
-                                                                            e.stopPropagation();
-                                                                            decreaseQuantity(
-                                                                                index,
-                                                                                1,
-                                                                            );
-                                                                        }}
-                                                                        className="text-gray-800 px-4 py-2"
-                                                                    >
-                                                                        <MinusIcon className="h-4 w-4" />
-                                                                    </button>
-                                                                    <span className="px-3 py-1 bg-white text-gray-800">
-                                                                        {states[index]?.quantity || 1}
-                                                                    </span>
-                                                                    <button
-                                                                        onClick={(e) => {
-                                                                            e.preventDefault();
-                                                                            e.stopPropagation();
-                                                                            increaseQuantity(
-                                                                                index,
-                                                                                1,
-                                                                            );
-                                                                        }}
-                                                                        className="text-gray-800 px-4 py-2"
-                                                                        disabled={states[index]?.quantity >= product.stock}
-                                                                    >
-                                                                        <PlusIcon className="h-4 w-4" />
-                                                                    </button>
-                                                                </div>
-                                                            )}
-                                                        </div> */}
                                                     </div>
                                                 </Link>
                                             ))
@@ -589,7 +540,7 @@ function CollectionProduct() {
                                     {data?.products?.next_page_url && (
                                         <div className="text-center mt-10">
                                             <Button
-                                                title="Load More"
+                                                title={t("loadMore")}
                                                 variant="primary"
                                                 size="md"
                                                 className="!px-8"

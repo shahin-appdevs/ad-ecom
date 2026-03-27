@@ -1874,6 +1874,10 @@
         }
     },
     "Campaign": {
+        "explore": "অন্বেষণ করুন",
+        "allCampaigns": "সকল ক্যাম্পেইন",
+        "noCampaignsAvailable": "বর্তমানে কোনো ক্যাম্পেইন উপলব্ধ নেই।",
+        "loadMore": "আরও লোড করুন",
         "campaignProduct": {
             "endsIn": "শেষ হবে",
             "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
@@ -1883,6 +1887,17 @@
             "hours": "ঘণ্টা",
             "min": "মিনিট",
             "sec": "সেকেন্ড"
+        }
+    },
+    "Collection": {
+        "limitedTime": "সীমিত সময়",
+        "allOffers": "সকল অফার",
+        "noCollectionsAvailable": "বর্তমানে কোনো কালেকশন উপলব্ধ নেই।",
+        "loadMore": "আরও লোড করুন",
+        "collectionProduct": {
+            "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
+            "off": "ছাড়",
+            "loadMore": "আরও লোড করুন"
         }
     }
 }

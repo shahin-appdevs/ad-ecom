@@ -1874,6 +1874,10 @@
         }
     },
     "Campaign": {
+        "explore": "استكشف",
+        "allCampaigns": "جميع الحملات",
+        "noCampaignsAvailable": "لا توجد حملات متاحة حالياً.",
+        "loadMore": "تحميل المزيد",
         "campaignProduct": {
             "endsIn": "ينتهي في",
             "noProductsFound": "لم يتم العثور على منتجات",
@@ -1883,6 +1887,17 @@
             "hours": "ساعات",
             "min": "دقيقة",
             "sec": "ثانية"
+        }
+    },
+    "Collection": {
+        "limitedTime": "وقت محدود",
+        "allOffers": "جميع العروض",
+        "noCollectionsAvailable": "لا توجد مجموعات متاحة حالياً.",
+        "loadMore": "تحميل المزيد",
+        "collectionProduct": {
+            "noProductsFound": "لم يتم العثور على منتجات",
+            "off": "خصم",
+            "loadMore": "تحميل المزيد"
         }
     }
 }

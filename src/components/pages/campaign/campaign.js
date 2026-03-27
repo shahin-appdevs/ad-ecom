@@ -9,6 +9,7 @@ import {
 import { toast } from "react-hot-toast";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import Button from "@/components/utility/Button";
+import { useTranslations } from "next-intl"; // ← Added
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -23,6 +24,8 @@ const CampaignSkeleton = () => (
 );
 
 export default function Campaign() {
+    const t = useTranslations("Campaign"); // ← Added as requested
+
     const [campaigns, setCampaigns] = useState([]);
     const [loading, setLoading] = useState(true);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
@@ -98,10 +101,10 @@ export default function Campaign() {
                         {/* Modern Header */}
                         <div className="flex flex-col items-center mb-6 md:mb-8 text-center">
                             <span className="text-primary__color font-bold tracking-[0.2em] text-xs uppercase mb-3">
-                                Explore
+                                {t("explore")} {/* Translated */}
                             </span>
                             <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-                                All Campaigns
+                                {t("allCampaigns")} {/* Translated */}
                             </h2>
                             <div className="w-12 h-1 bg-primary__color mt-4 rounded-full"></div>
                         </div>
@@ -116,7 +119,8 @@ export default function Campaign() {
                         ) : campaigns.length === 0 ? (
                             <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-gray-200">
                                 <p className="text-slate-500 font-medium">
-                                    No campaigns available at the moment.
+                                    {t("noCampaignsAvailable")}{" "}
+                                    {/* Translated */}
                                 </p>
                             </div>
                         ) : (
@@ -149,19 +153,6 @@ export default function Campaign() {
                                                 <h3 className="text-lg md:text-xl font-black text-white mb-2 tracking-tight">
                                                     {campaign.title}
                                                 </h3>
-
-                                                {/* <div className="max-w-[90%] overflow-hidden">
-                                                    <div className="text-white/90 text-xs flex items-center md:text-sm line-clamp-2 font-medium leading-relaxed transition-all duration-700 delay-100 opacity-100 lg:opacity-0 lg:group-hover:opacity-100">
-                                                        <div
-                                                            dangerouslySetInnerHTML={{
-                                                                __html: campaign.description.slice(
-                                                                    0,
-                                                                    15,
-                                                                ),
-                                                            }}
-                                                        ></div>
-                                                    </div>
-                                                </div> */}
                                             </div>
                                         </div>
 
@@ -195,7 +186,7 @@ export default function Campaign() {
                         {nextPageUrl && (
                             <div className="text-center mt-10">
                                 <Button
-                                    title="Load More"
+                                    title={t("loadMore")}
                                     variant="primary"
                                     size="md"
                                     className="!px-8"

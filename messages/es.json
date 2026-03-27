@@ -1874,6 +1874,10 @@
         }
     },
     "Campaign": {
+        "explore": "Explorar",
+        "allCampaigns": "Todas las Campañas",
+        "noCampaignsAvailable": "No hay campañas disponibles en este momento.",
+        "loadMore": "Cargar más",
         "campaignProduct": {
             "endsIn": "Termina en",
             "noProductsFound": "No se encontraron productos",
@@ -1883,6 +1887,17 @@
             "hours": "horas",
             "min": "min",
             "sec": "sec"
+        }
+    },
+    "Collection": {
+        "limitedTime": "Tiempo Limitado",
+        "allOffers": "Todas las Ofertas",
+        "noCollectionsAvailable": "No hay colecciones disponibles en este momento.",
+        "loadMore": "Cargar más",
+        "collectionProduct": {
+            "noProductsFound": "No se encontraron productos",
+            "off": "descuento",
+            "loadMore": "Cargar más"
         }
     }
 }
