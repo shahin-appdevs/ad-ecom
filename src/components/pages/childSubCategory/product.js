@@ -1,14 +1,11 @@
 "use client";
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
-import { useCart } from "@/components/context/CartContext";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import {
-    categoryGetAPI,
     childSubCategoryGetAPI,
     productGetAPI,
     nextPageGetAPI,
@@ -18,6 +15,7 @@ import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { useHomeData } from "@/components/context/HomeContext";
 import { ChevronRight } from "lucide-react";
+import { useTranslations } from "next-intl"; // ← Added
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -37,24 +35,19 @@ const ProductSkeleton = () => (
 );
 
 function ChildSubCategoryProduct() {
+    const t = useTranslations("Category.subChildCategory"); // ← Added as requested
+
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { incrementCart, decrementCart } = useCart();
     const searchParams = useSearchParams();
     const idParam = searchParams.get("id");
     const categoryId = searchParams.get("category-id");
     const childCategoryId = searchParams.get("child-id");
     const childSubCategoryId = searchParams.get("sub-child-id");
 
-    // const [categoryId, setCategoryId] = useState(null);
-    // const [childCategoryId, setChildCategoryId] = useState(null);
-    // const [childSubCategoryId, setSubChildCategoryId] = useState(null);
-    const [states, setStates] = useState([]);
-    const [childSubCategories, setChildSubCategories] = useState([]);
     const [currentChildSubCategory, setCurrentChildSubCategory] =
         useState(null);
-    const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
@@ -104,7 +97,7 @@ function ChildSubCategoryProduct() {
 
             try {
                 const response = await profiledGetAPI();
-                setUserProfile(response.data.data);
+
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );
@@ -116,91 +109,12 @@ function ChildSubCategoryProduct() {
         fetchUserProfile();
     }, [isLoggedIn]);
 
-    useEffect(() => {
-        if (idParam) {
-            // setCategoryId(parseInt(idParam));
-            // setChildCategoryId(parseInt(idParam));
-            setSubChildCategoryId(parseInt(idParam));
-        }
-    }, [idParam]);
-
     const formatPrice = (price) => {
         if (!price) return "৳0.00";
         const numericValue =
             typeof price === "string" ? parseFloat(price) : price;
         return `৳${numericValue.toFixed(2)}`;
     };
-
-    const saveToLocalStorage = useCallback(
-        (product, quantity) => {
-            if (!data?.products?.data) return;
-
-            const savedCart = localStorage.getItem("childSubCategoryCart");
-            let cartItems = savedCart ? JSON.parse(savedCart) : [];
-
-            const existingIndex = cartItems.findIndex(
-                (item) => item.id === product.id,
-            );
-
-            // Determine the price based on reseller status
-            const price =
-                isReseller && product.product_additional_prices?.resell_price
-                    ? product.product_additional_prices.resell_price
-                    : product.product_additional_prices?.flash_price ||
-                      product.product_prices?.sale_price ||
-                      product.product_prices?.list_price;
-
-            if (existingIndex >= 0) {
-                cartItems[existingIndex].quantity = quantity;
-                cartItems[existingIndex].price = price;
-            } else {
-                cartItems.push({
-                    id: product.id,
-                    title: product.title,
-                    price: price,
-                    quantity: quantity,
-                    image: product.main_image
-                        ? `${backendBaseURL}/${data.main_image_path}/${product.main_image}`
-                        : `${backendBaseURL}/${data.default_image_path}`,
-                    base_curr_symbol: data.base_curr_symbol,
-                    isResellerPrice:
-                        isReseller &&
-                        product.product_additional_prices?.resell_price,
-                });
-            }
-
-            cartItems = cartItems.filter((item) => item.quantity > 0);
-            localStorage.setItem(
-                "childSubCategoryCart",
-                JSON.stringify(cartItems),
-            );
-        },
-        [data, isReseller],
-    );
-
-    useEffect(() => {
-        if (!data?.products?.data) return;
-
-        const savedCart = localStorage.getItem("childSubCategoryCart");
-        const initialStates = data.products.data.map((product) => {
-            if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                const cartItem = parsedCart.find(
-                    (item) => item.id === product.id,
-                );
-                return {
-                    showQuantity: !!cartItem,
-                    quantity: cartItem?.quantity || 1,
-                };
-            }
-            return {
-                showQuantity: false,
-                quantity: 1,
-            };
-        });
-
-        setStates(initialStates);
-    }, [data]);
 
     useEffect(() => {
         const fetchChildSubCategories = async () => {
@@ -209,9 +123,6 @@ function ChildSubCategoryProduct() {
                 const response = await childSubCategoryGetAPI(childCategoryId);
 
                 if (response?.data?.data?.all_child_sub_categories) {
-                    setChildSubCategories(
-                        response.data.data.all_child_sub_categories,
-                    );
                     if (idParam) {
                         const foundCategory =
                             response.data.data.all_child_sub_categories.find(
@@ -321,12 +232,6 @@ function ChildSubCategoryProduct() {
                         });
 
                     setProducts(formattedProducts);
-                    setStates(
-                        formattedProducts.map(() => ({
-                            showQuantity: false,
-                            quantity: 1,
-                        })),
-                    );
                 }
             } catch (error) {
                 toast.error(error.response?.data?.message?.error?.[0]);
@@ -405,13 +310,7 @@ function ChildSubCategoryProduct() {
                 formatProduct(p, res.data.data),
             );
             setProducts((prev) => [...prev, ...newFormatted]);
-            setStates((prev) => [
-                ...prev,
-                ...newFormatted.map(() => ({
-                    showQuantity: false,
-                    quantity: 1,
-                })),
-            ]);
+
             setData((prev) => ({
                 ...prev,
                 products: {
@@ -427,52 +326,6 @@ function ChildSubCategoryProduct() {
         } finally {
             setLoadMoreLoading(false);
         }
-    };
-
-    const handleToggle = (index) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index ? { ...item, showQuantity: true } : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], 1);
-    };
-
-    const increaseQuantity = (index, value) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: Math.max(1, item.quantity + value),
-                      }
-                    : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], states[index].quantity + value);
-    };
-
-    const decreaseQuantity = (index, value) => {
-        const currentQty = states[index].quantity;
-
-        if (currentQty <= 1) {
-            return;
-        }
-
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: item.quantity - value,
-                      }
-                    : item,
-            ),
-        );
-        decrementCart();
-        saveToLocalStorage(products[index], states[index].quantity - value);
     };
 
     return (
@@ -507,7 +360,10 @@ function ChildSubCategoryProduct() {
                                                         ?.title
                                                 }
                                             </Link>
-                                            <ChevronRight size={16} />
+                                            <ChevronRight
+                                                size={16}
+                                                className="rtl:rotate-180"
+                                            />
                                             <Link
                                                 href={
                                                     categoryLinks?.childCategory
@@ -520,7 +376,10 @@ function ChildSubCategoryProduct() {
                                                         ?.title
                                                 }
                                             </Link>
-                                            <ChevronRight size={16} />
+                                            <ChevronRight
+                                                size={16}
+                                                className="rotate-180"
+                                            />
                                             <span>
                                                 {
                                                     categoryLinks
@@ -538,7 +397,8 @@ function ChildSubCategoryProduct() {
                                 ) : (
                                     <h6>
                                         {currentChildSubCategory?.title ||
-                                            "Products"}
+                                            t("products")}{" "}
+                                        {/* Translated */}
                                     </h6>
                                 )}
                             </div>
@@ -553,7 +413,8 @@ function ChildSubCategoryProduct() {
                                     )
                                 ) : products.length === 0 ? (
                                     <div className="col-span-full text-center py-10">
-                                        <p>No products found</p>
+                                        <p>{t("noProductsFound")}</p>{" "}
+                                        {/* Translated */}
                                     </div>
                                 ) : (
                                     products.map((product, index) => (
@@ -574,7 +435,9 @@ function ChildSubCategoryProduct() {
                                                 </div>
                                                 {product.hasDiscount && (
                                                     <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
-                                                        {product.discount} off
+                                                        {product.discount}{" "}
+                                                        {t("off")}{" "}
+                                                        {/* Translated */}
                                                     </span>
                                                 )}
                                             </div>
@@ -599,60 +462,6 @@ function ChildSubCategoryProduct() {
                                                         </span>
                                                     )}
                                                 </div>
-
-                                                {/* <div className="relative">
-                                                    {!states[index]?.showQuantity ? (
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-                                                                e.stopPropagation();
-                                                                handleToggle(index);
-                                                            }}
-                                                            className="bg-white shadow-sm text-gray-800 text-xs px-4 py-2 rounded-md font-medium flex items-center justify-between w-full"
-                                                            disabled={product.stock <= 0}
-                                                        >
-                                                            <PlusIcon className="h-5 w-5" />
-                                                            {product.stock <= 0 ? (
-                                                                <span>Out of Stock</span>
-                                                            ) : (
-                                                                <span className="flex items-center gap-2">Buy Now <span className="hidden sm:block">→</span></span>
-                                                            )}
-                                                        </button>
-                                                    ) : (
-                                                        <div className="flex items-center justify-between w-full bg-white shadow-sm rounded-md overflow-hidden">
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    decreaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                            >
-                                                                <MinusIcon className="h-4 w-4" />
-                                                            </button>
-                                                            <span className="px-3 py-1 bg-white text-gray-800">
-                                                                {states[index]?.quantity || 1}
-                                                            </span>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    increaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                                disabled={states[index]?.quantity >= product.stock}
-                                                            >
-                                                                <PlusIcon className="h-4 w-4" />
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </div> */}
                                             </div>
                                         </Link>
                                     ))
@@ -672,7 +481,7 @@ function ChildSubCategoryProduct() {
                             {data?.products?.next_page_url && (
                                 <div className="text-center mt-10">
                                     <Button
-                                        title="Load More"
+                                        title={t("loadMore")}
                                         variant="primary"
                                         size="md"
                                         className="!px-8"

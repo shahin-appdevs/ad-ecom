@@ -47,17 +47,21 @@
             "min": "دقيقة",
             "sec": "ثانية",
             "viewMore": "عرض المزيد",
-            "loadMore": "تحميل المزيد"
+            "loadMore": "تحميل المزيد",
+            "off": "خصم"
         },
         "newArrival": {
             "newArrivalTitle": "وصل حديثاً",
             "viewMore": "عرض المزيد",
-            "loadMore": "تحميل المزيد"
+            "loadMore": "تحميل المزيد",
+            "off": "خصم"
         },
         "shopByBrand": {
             "title": "تسوق حسب العلامة التجارية",
             "viewMore": "عرض المزيد",
-            "loadMore": "تحميل المزيد"
+            "loadMore": "تحميل المزيد",
+            "noProductsFound": "لا توجد منتجات",
+            "off": "خصم"
         },
         "stalls": {
             "title": "الأكشاك",
@@ -65,7 +69,8 @@
         },
         "categoryProducts": {
             "viewMore": "عرض المزيد",
-            "loadMore": "تحميل المزيد"
+            "loadMore": "تحميل المزيد",
+            "off": "خصم"
         },
         "wishlist": {
             "title": "قائمة رغباتي",
@@ -1844,6 +1849,40 @@
             "verifyRecaptcha": "يرجى التحقق من reCAPTCHA",
             "loginSuccess": "تم تسجيل الدخول بنجاح",
             "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى."
+        }
+    },
+    "Category": {
+        "category": {
+            "subCategories": "الفئات الفرعية",
+            "products": "المنتجات",
+            "noProductsFound": "لم يتم العثور على منتجات",
+            "off": "خصم",
+            "loadMore": "تحميل المزيد"
+        },
+        "subCategory": {
+            "moreCategories": "المزيد من الفئات",
+            "products": "المنتجات",
+            "noProductsFound": "لم يتم العثور على منتجات",
+            "off": "خصم",
+            "loadMore": "تحميل المزيد"
+        },
+        "subChildCategory": {
+            "products": "المنتجات",
+            "noProductsFound": "لم يتم العثور على منتجات",
+            "off": "خصم",
+            "loadMore": "تحميل المزيد"
+        }
+    },
+    "Campaign": {
+        "campaignProduct": {
+            "endsIn": "ينتهي في",
+            "noProductsFound": "لم يتم العثور على منتجات",
+            "off": "خصم",
+            "loadMore": "تحميل المزيد",
+            "days": "أيام",
+            "hours": "ساعات",
+            "min": "دقيقة",
+            "sec": "ثانية"
         }
     }
 }

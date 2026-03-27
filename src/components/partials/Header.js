@@ -442,9 +442,9 @@ export default function Header() {
                                                             ? `/product/details?id=${item.id}`
                                                             : `/stalls/details?id=${item.id}`
                                                     }
-                                                    className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                    className="flex items-center !gap-2 justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                 >
-                                                    <div className="w-10 h-10 mr-3 bg-gray-100 rounded overflow-hidden">
+                                                    <div className="w-10 h-10  bg-gray-100 rounded overflow-hidden">
                                                         <Image
                                                             src={item.image}
                                                             alt={item.title}
@@ -535,7 +535,7 @@ export default function Header() {
                                                                 false,
                                                             );
                                                         }}
-                                                        className={`!w-full text-left px-4 py-2  text-sm ${searchType === "product" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
+                                                        className={`!w-full ltr:text-left rtl:text-right px-4 py-2  text-sm ${searchType === "product" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
                                                     >
                                                         {
                                                             searchButton.searchByProduct
@@ -552,7 +552,7 @@ export default function Header() {
                                                                 false,
                                                             );
                                                         }}
-                                                        className={`w-full text-left px-4 py-2  text-sm ${searchType === "stall" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
+                                                        className={`!w-full ltr:text-left rtl:text-right px-4 py-2  text-sm ${searchType === "stall" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
                                                     >
                                                         {
                                                             searchButton.searchByStall
@@ -575,9 +575,9 @@ export default function Header() {
                                                             ? `/product/details?id=${product.id}`
                                                             : `/stalls/details?id=${product.id}`
                                                     }
-                                                    className="flex items-center justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                                                    className="flex items-center gap-2 justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                 >
-                                                    <div className="w-10 h-10 mr-3 bg-gray-100 rounded overflow-hidden">
+                                                    <div className="w-10 h-10  bg-gray-100 rounded overflow-hidden">
                                                         {product?.image && (
                                                             <Image
                                                                 src={
@@ -630,7 +630,7 @@ export default function Header() {
                                 )}
                                 {isCartHovered && (
                                     <div
-                                        className="absolute right-0 top-[95%] w-80 bg-white rounded-md shadow-md overflow-hidden z-50"
+                                        className="absolute ltr:right-0 rtl:left-0 top-[95%] w-80 bg-white rounded-md shadow-md overflow-hidden z-50"
                                         onMouseEnter={() =>
                                             setIsCartHovered(true)
                                         }
@@ -649,9 +649,9 @@ export default function Header() {
                                                 cartItems.map((item, index) => (
                                                     <div
                                                         key={`${item.id}-${item.source || "default"}-${index}`}
-                                                        className="flex items-center p-4 border-b hover:bg-gray-50"
+                                                        className="flex items-center gap-2 p-4 border-b hover:bg-gray-50"
                                                     >
-                                                        <div className="w-16 h-16 bg-gray-100 rounded mr-3 overflow-hidden">
+                                                        <div className="w-16 h-16 bg-gray-100 rounded  overflow-hidden">
                                                             <Image
                                                                 src={item.image}
                                                                 alt={item.title}
@@ -720,7 +720,7 @@ export default function Header() {
                                 )}
                                 {isWishlistHovered && (
                                     <div
-                                        className="absolute right-0 w-80 top-[95%] bg-white rounded-md shadow-md overflow-hidden z-50"
+                                        className="absolute ltr:right-0 rtl:left-0 w-80 top-[95%] bg-white rounded-md shadow-md overflow-hidden z-50"
                                         onMouseEnter={() =>
                                             setIsWishlistHovered(true)
                                         }
@@ -739,9 +739,9 @@ export default function Header() {
                                                 wishlistItems.map((item) => (
                                                     <div
                                                         key={item.id}
-                                                        className="flex items-center p-4 border-b hover:bg-gray-50"
+                                                        className="flex items-center p-4 gap-2 border-b hover:bg-gray-50"
                                                     >
-                                                        <div className="w-16 h-16 bg-gray-100 rounded mr-3 overflow-hidden">
+                                                        <div className="w-16 h-16 bg-gray-100 rounded overflow-hidden">
                                                             <Image
                                                                 src={item.image}
                                                                 alt={item.title}
@@ -815,45 +815,7 @@ export default function Header() {
                                 </div>
                             )}
                             <div className="relative max-w-[180px]">
-                                {/* <select
-                                    value={selectedLanguage?.name || ""}
-                                    onChange={(e) => {
-                                        const selected = languages.find(
-                                            (lang) =>
-                                                lang.name === e.target.value,
-                                        );
-                                        setSelectedLanguage(selected);
-                                    }}
-                                    className={`
-                                            w-full
-                                            px-3 py-1.5 pr-9             
-                                            text-sm
-                                            bg-white
-                                            border border-gray-300 rounded-md
-                                            shadow-sm
-                                            focus:outline-none focus:ring-0
-                                            hover:border-gray-400
-                                            transition-colors
-                                            appearance-none
-                                            cursor-pointer
-                                            `}
-                                >
-                                    {languages.map((language) => (
-                                        <option
-                                            key={language.id}
-                                            value={language.code}
-                                            className="text-sm"
-                                        >
-                                            {language.name}
-                                        </option>
-                                    ))}
-                                </select> */}
                                 <LanguageSwitcher />
-
-                                {/* Custom arrow icon - pointer-events-none so it doesn't block clicks */}
-                                {/* <div className="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none">
-                                    <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
-                                </div> */}
                             </div>
                         </div>
                     </div>

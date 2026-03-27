@@ -47,17 +47,21 @@
             "min": "মিনিট",
             "sec": "সেকেন্ড",
             "viewMore": "আরও দেখুন",
-            "loadMore": "আরও লোড করুন"
+            "loadMore": "আরও লোড করুন",
+            "off": "ছাড়"
         },
         "newArrival": {
             "newArrivalTitle": "নতুন আগমন",
             "viewMore": "আরও দেখুন",
-            "loadMore": "আরও লোড করুন"
+            "loadMore": "আরও লোড করুন",
+            "off": "ছাড়"
         },
         "shopByBrand": {
             "title": "ব্র্যান্ড অনুযায়ী কেনাকাটা করুন",
             "viewMore": "আরও দেখুন",
-            "loadMore": "আরও লোড করুন"
+            "loadMore": "আরও লোড করুন",
+            "noProductsFound": "কোনো পণ্য পাওয়া যায়নি",
+            "off": "ছাড়"
         },
         "stalls": {
             "title": "স্টলসমূহ",
@@ -65,7 +69,8 @@
         },
         "categoryProducts": {
             "viewMore": "আরও দেখুন",
-            "loadMore": "আরও লোড করুন"
+            "loadMore": "আরও লোড করুন",
+            "off": "ছাড়"
         },
         "wishlist": {
             "title": "আমার উইশলিস্ট",
@@ -1844,6 +1849,40 @@
             "verifyRecaptcha": "অনুগ্রহ করে reCAPTCHA যাচাই করুন",
             "loginSuccess": "লগইন সফল হয়েছে",
             "loginFailed": "লগইন ব্যর্থ হয়েছে। পুনরায় চেষ্টা করুন।"
+        }
+    },
+    "Category": {
+        "category": {
+            "subCategories": "সাব ক্যাটেগরি",
+            "products": "প্রোডাক্টস",
+            "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
+            "off": "ছাড়",
+            "loadMore": "আরও লোড করুন"
+        },
+        "subCategory": {
+            "moreCategories": "আরও ক্যাটেগরি",
+            "products": "প্রোডাক্টস",
+            "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
+            "off": "ছাড়",
+            "loadMore": "আরও লোড করুন"
+        },
+        "subChildCategory": {
+            "products": "প্রোডাক্টস",
+            "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
+            "off": "ছাড়",
+            "loadMore": "আরও লোড করুন"
+        }
+    },
+    "Campaign": {
+        "campaignProduct": {
+            "endsIn": "শেষ হবে",
+            "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
+            "off": "ছাড়",
+            "loadMore": "আরও লোড করুন",
+            "days": "দিন",
+            "hours": "ঘণ্টা",
+            "min": "মিনিট",
+            "sec": "সেকেন্ড"
         }
     }
 }

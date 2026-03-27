@@ -472,7 +472,7 @@ function BrandProduct() {
                                     )
                                 ) : products.length === 0 ? (
                                     <div className="col-span-full text-center py-10">
-                                        <p>No products found</p>
+                                        <p>{t("noProductsFound")}</p>
                                     </div>
                                 ) : (
                                     products.map((product, index) => (
@@ -493,7 +493,8 @@ function BrandProduct() {
                                                 </div>
                                                 {product.hasDiscount && (
                                                     <span className="absolute right-[8px] top-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
-                                                        {product.discount} off
+                                                        {product.discount}{" "}
+                                                        {t("off")}
                                                     </span>
                                                 )}
                                             </div>

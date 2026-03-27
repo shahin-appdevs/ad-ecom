@@ -334,24 +334,6 @@ function Checkout() {
 
     // Fetch districts when division is selected
     const fetchDistricts = async (divisionId) => {
-        // try {
-        //     const response = await divisionDataGetAPI();
-        //     if (response.data.message.success) {
-        //         const filteredDistricts = response.data.data.districts.filter(
-        //             (district) =>
-        //                 district.division_id === divisionId.toString(),
-        //         );
-        //         setDistricts(filteredDistricts);
-        //         setFormData((prev) => ({
-        //             ...prev,
-        //             district: "",
-        //             upazilla: "",
-        //         }));
-        //         setUpazillas([]);
-        //     }
-        // } catch (error) {
-        //     console.error("Error fetching districts:", error);
-        // }
         const filteredDistricts = allDistricts.filter(
             (district) => String(district.division_id) === String(divisionId),
         );
@@ -508,13 +490,6 @@ function Checkout() {
 
     return (
         <section className="py-4 sm:py-8 bg-white rounded-md max-w-6xl mx-auto px-4 sm:px-8 sm:mt-8">
-            <h2 className="text-lg md:text-xl font-bold mb-4">
-                {loading ? (
-                    <div className="h-6 bg-gray-200 rounded w-1/4 animate-pulse"></div>
-                ) : (
-                    `${t("shoppingBag")} (${cartItems.length} ${t("items")})`
-                )}
-            </h2>
             {loading ? (
                 <div className="grid grid-cols-1 lg:grid-cols-3 items-start gap-6">
                     <div className="lg:col-span-2 space-y-6">
@@ -530,6 +505,13 @@ function Checkout() {
                     onSubmit={handleOrderConfirm}
                 >
                     <div className="lg:col-span-2 space-y-6">
+                        <h2 className="text-lg md:text-xl font-bold mb-4">
+                            {loading ? (
+                                <div className="h-6 bg-gray-200 rounded w-1/4 animate-pulse"></div>
+                            ) : (
+                                `${t("shoppingBag")} (${cartItems.length} ${t("items")})`
+                            )}
+                        </h2>
                         {!isCheckout ? (
                             cartItems.length > 0 ? (
                                 cartItems.map((item, index) => (

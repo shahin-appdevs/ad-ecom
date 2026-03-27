@@ -46,7 +46,7 @@ const SkeletonCategoryMenu = ({ categoryTitle }) => (
     </div>
 );
 
-const SkeletonBanner = () => (
+export const SkeletonBanner = () => (
     <div className="w-full md:w-[calc(100%-240px)] relative">
         <div className="relative w-full h-[200px] md:h-[380px] overflow-hidden bg-gray-200 animate-pulse rounded-md"></div>
     </div>

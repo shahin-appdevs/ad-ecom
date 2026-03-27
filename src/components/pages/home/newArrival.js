@@ -273,6 +273,7 @@ export default function NewArrival() {
 
     const newArrivalTitle = t("newArrivalTitle");
     const viewMore = t("viewMore");
+    const off = t("off");
 
     // Format price with currency symbol
     const formatPrice = (price) => {
@@ -351,9 +352,11 @@ export default function NewArrival() {
                                                     className="group-hover/card:scale-105 transition-transform duration-300 w-full h-full object-cover rounded-t-md"
                                                 />
                                             </div>
-                                            <span className="absolute right-[8px] top-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
-                                                {discount} off
-                                            </span>
+                                            {hasDiscount && (
+                                                <span className="absolute right-[8px] top-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
+                                                    {discount} {off}
+                                                </span>
+                                            )}
                                         </div>
                                         <div className="p-[10px]">
                                             <h5 className="text-sm md:text-base font-normal text-[#4b5563] mb-2  truncate whitespace-nowrap overflow-hidden text-ellipsis">

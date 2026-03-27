@@ -47,17 +47,21 @@
             "min": "Min",
             "sec": "Seg",
             "viewMore": "Ver Más",
-            "loadMore": "Cargar más"
+            "loadMore": "Cargar más",
+            "off": "descuento"
         },
         "newArrival": {
             "newArrivalTitle": "Nueva Llegada",
             "viewMore": "Ver Más",
-            "loadMore": "Cargar más"
+            "loadMore": "Cargar más",
+            "off": "descuento"
         },
         "shopByBrand": {
             "title": "Comprar por marca",
             "viewMore": "Ver más",
-            "loadMore": "Cargar más"
+            "loadMore": "Cargar más",
+            "noProductsFound": "No se encontraron productos",
+            "off": "descuento"
         },
         "stalls": {
             "title": "Puestos",
@@ -65,7 +69,8 @@
         },
         "categoryProducts": {
             "viewMore": "Ver más",
-            "loadMore": "Cargar más"
+            "loadMore": "Cargar más",
+            "off": "descuento"
         },
         "wishlist": {
             "title": "Mi lista de deseos",
@@ -1844,6 +1849,40 @@
             "verifyRecaptcha": "Por favor verifique reCAPTCHA",
             "loginSuccess": "Inicio de sesión exitoso",
             "loginFailed": "Inicio de sesión fallido. Por favor, inténtelo de nuevo."
+        }
+    },
+    "Category": {
+        "category": {
+            "subCategories": "Subcategorías",
+            "products": "Productos",
+            "noProductsFound": "No se encontraron productos",
+            "off": "descuento",
+            "loadMore": "Cargar más"
+        },
+        "subCategory": {
+            "moreCategories": "Más Categorías",
+            "products": "Productos",
+            "noProductsFound": "No se encontraron productos",
+            "off": "descuento",
+            "loadMore": "Cargar más"
+        },
+        "subChildCategory": {
+            "products": "Productos",
+            "noProductsFound": "No se encontraron productos",
+            "off": "descuento",
+            "loadMore": "Cargar más"
+        }
+    },
+    "Campaign": {
+        "campaignProduct": {
+            "endsIn": "Termina en",
+            "noProductsFound": "No se encontraron productos",
+            "off": "descuento",
+            "loadMore": "Cargar más",
+            "days": "días",
+            "hours": "horas",
+            "min": "min",
+            "sec": "sec"
         }
     }
 }
