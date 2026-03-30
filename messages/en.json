@@ -1916,5 +1916,10 @@
             "off": "off",
             "loadMore": "Load More"
         }
+    },
+    "StallDetails": {
+        "noProductsFound": "No products found",
+        "off": "off",
+        "loadMore": "Load More"
     }
 }

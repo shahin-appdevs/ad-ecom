@@ -2,8 +2,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
-import { useCart } from "@/components/context/CartContext";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import Button from "@/components/utility/Button";
 import {
@@ -35,11 +33,14 @@ const ProductSkeleton = () => {
 
 const CountdownSkeleton = () => {
     return (
-        <div className="flex gap-3 text-sm sm:text-xl font-semibold text-color__heading">
-            {[...Array(4)].map((_, i) => (
-                <div key={i} className="text-center flex flex-col">
-                    <div className="h-6 w-6 sm:h-8 sm:w-8 bg-gray-300 rounded"></div>
-                    <span className="text-xs mt-1 h-3 w-full bg-gray-300 rounded"></span>
+        <div className="flex flex-wrap gap-2 justify-start lg:justify-end">
+            {[1, 2, 3, 4].map((_, i) => (
+                <div
+                    key={i}
+                    className="w-[60px] h-[60px] bg-gray-200 rounded-md animate-pulse flex flex-col items-center justify-center shadow-sm"
+                >
+                    <div className="h-6 w-8 bg-gray-300 rounded mb-1"></div>
+                    <div className="h-3 w-12 bg-gray-300 rounded"></div>
                 </div>
             ))}
         </div>
@@ -49,7 +50,6 @@ const CountdownSkeleton = () => {
 export default function FlashProduct() {
     const [flashData, setFlashData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [flashProducts, setFlashProducts] = useState([]);
@@ -85,7 +85,6 @@ export default function FlashProduct() {
 
             try {
                 const response = await profiledGetAPI();
-                setUserProfile(response.data.data);
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );
@@ -389,68 +388,6 @@ export default function FlashProduct() {
                                                         </span>
                                                     )}
                                                 </div>
-
-                                                {/* <div className="relative">
-                                                    {!states[index]
-                                                        ?.showQuantity ? (
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-                                                                e.stopPropagation();
-                                                                handleToggle(index);
-                                                            }}
-                                                            className="bg-white shadow-sm text-gray-800 text-xs px-4 py-2 rounded-md font-medium flex items-center justify-between w-full"
-                                                            disabled={stock <= 0}
-                                                        >
-                                                            <PlusIcon className="h-5 w-5" />
-                                                            {stock <= 0 ? (
-                                                                <span>
-                                                                    Out of Stock
-                                                                </span>
-                                                            ) : (
-                                                                <span className="flex items-center gap-2">
-                                                                    Buy Now{" "}
-                                                                    <span className="hidden sm:block">
-                                                                        →
-                                                                    </span>
-                                                                </span>
-                                                            )}
-                                                        </button>
-                                                    ) : (
-                                                        <div className="flex items-center justify-between w-full bg-white shadow-sm rounded-md overflow-hidden">
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    decreaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                            >
-                                                                <MinusIcon className="h-4 w-4" />
-                                                            </button>
-                                                            <span className="px-3 py-1 bg-white text-gray-800">
-                                                                {states[index]
-                                                                    ?.quantity || 1}
-                                                            </span>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    increaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                            >
-                                                                <PlusIcon className="h-4 w-4" />
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </div> */}
                                             </div>
                                         </Link>
                                     );

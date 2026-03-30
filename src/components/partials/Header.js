@@ -1,8 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-// import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { Listbox } from "@headlessui/react";
 import {
     UserIcon,
     ShoppingBagIcon,
@@ -12,16 +10,12 @@ import {
     MagnifyingGlassIcon,
     Bars3Icon,
     XMarkIcon,
-    ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 import { useCart } from "@/components/context/CartContext";
 import { useWishlist } from "@/components/context/WishlistContext";
 import { usePathname } from "next/navigation";
 import { useHomeData } from "@/components/context/HomeContext";
-import {
-    searchProductGetAPI,
-    profiledGetAPI,
-} from "@root/services/apiClient/apiClient";
+import { searchProductGetAPI } from "@root/services/apiClient/apiClient";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -31,63 +25,39 @@ import { Link, useRouter } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 
-const languages = [
-    { id: 1, name: "US EN" },
-    { id: 2, name: "BD BN" },
-];
-
 export default function Header() {
     const pathname = usePathname();
     const { cartCount } = useCart();
-    const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
     const [searchQuery, setSearchQuery] = useState("");
     const [searchResults, setSearchResults] = useState([]);
     const [isSearchFocused, setIsSearchFocused] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isCartHovered, setIsCartHovered] = useState(false);
     const [isWishlistHovered, setIsWishlistHovered] = useState(false);
-    const { wishlistItems, wishlistCount } = useWishlist();
+    const { wishlistItems } = useWishlist();
     const [searchType, setSearchType] = useState("product");
     const [isSearchTypeOpen, setIsSearchTypeOpen] = useState(false);
     const [showMobileSearch, setShowMobileSearch] = useState(false);
-    const [expandedCategory, setExpandedCategory] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isSellerLoggedIn, setIsSellerLoggedIn] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [cartTotal, setCartTotal] = useState("৳0");
-    const [isSearchLoading, setIsSearchLoading] = useState(false);
     const [storedReferCode, setStoredReferCode] = useState("");
-    const [referralCode, setReferralCode] = useState("");
     const data = useHomeData() || {};
     const homeData = data.homeData || null;
     const boxRef = useRef(null);
     const router = useRouter();
     const [mounted, setMounted] = useState(false);
 
-    // useEffect(() => {
-    //     const fetchUserProfile = async () => {
-    //         if (!isLoggedIn) return;
-
-    //         try {
-    //             const response = await profiledGetAPI();
-    //             setReferralCode(response.data.data?.user?.referral_code || "");
-    //         } catch (error) {
-    //             console.error("Failed to fetch user profile:", error);
-    //         }
-    //     };
-
-    //     fetchUserProfile();
-    // }, [isLoggedIn]);
-
     useEffect(() => {
         setMounted(true);
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-
         if (userInfo) {
-            setStoredReferCode(userInfo.referral_code);
+            setStoredReferCode(userInfo.referral_code || "");
         }
     }, []);
 
+    // API Search
     useEffect(() => {
         const searchProducts = async () => {
             if (searchQuery.trim() === "") {
@@ -96,16 +66,13 @@ export default function Header() {
             }
 
             try {
-                setIsSearchLoading(true);
-
                 const response = await searchProductGetAPI(
                     searchQuery,
                     searchType,
                 );
 
-                // Format products or stalls to match your UI expectations
-                let formattedResults = [];
                 const baseCurrency = response.data.data.base_curr_symbol || "৳";
+                let formattedResults = [];
 
                 if (searchType === "product") {
                     formattedResults =
@@ -131,18 +98,12 @@ export default function Header() {
 
                 setSearchResults(formattedResults);
             } catch (error) {
-                toast.error(error.response?.data?.message?.error?.[0]);
+                console.error("Search failed:", error);
                 setSearchResults([]);
-            } finally {
-                setIsSearchLoading(false);
             }
         };
 
-        // Add debounce to prevent too many API calls
-        const debounceTimer = setTimeout(() => {
-            searchProducts();
-        }, 300);
-
+        const debounceTimer = setTimeout(searchProducts, 300);
         return () => clearTimeout(debounceTimer);
     }, [searchQuery, searchType]);
 
@@ -156,57 +117,6 @@ export default function Header() {
         setIsSellerLoggedIn(!!sellerToken);
     }, []);
 
-    const categories =
-        homeData?.product_hierarchical?.map((category) => ({
-            id: category.id,
-            name: category.title,
-            categoryImage: category.image
-                ? `${backendBaseURL}/${homeData.category_image_path}/${category.image}`
-                : `${backendBaseURL}/${homeData.default_image_path}`,
-            subcategories:
-                category.child_categories?.map((childCategory) => ({
-                    id: childCategory.id,
-                    name: childCategory.title,
-                    subcategoryImage: childCategory.image
-                        ? `${backendBaseURL}/${homeData.child_category_image_path}/${childCategory.image}`
-                        : `${backendBaseURL}/${homeData.default_image_path}`,
-                    brands:
-                        childCategory.child_sub_categories?.map(
-                            (subCategory) => ({
-                                id: subCategory.id,
-                                name: subCategory.title,
-                                brandImage: subCategory.image
-                                    ? `${backendBaseURL}/${homeData.child_sub_category_image_path}/${subCategory.image}`
-                                    : `${backendBaseURL}/${homeData.default_image_path}`,
-                            }),
-                        ) || [],
-                })) || [],
-        })) || [];
-
-    const allProducts = [
-        { id: 1, title: "Panjabi FULL Coton", price: "৳2,650" },
-        { id: 2, title: "Panjabe Nevi blue color", price: "৳2,650" },
-        { id: 3, title: "Panjabe BT5 9TC 1.3FITA C5TG", price: "৳2,650" },
-        { id: 4, title: "Panjabe Blue Color", price: "৳2,650" },
-        { id: 5, title: "Black Color Panjabe C5TG", price: "৳2,650" },
-        { id: 6, title: "New Arrival Luxury Party Panjabi", price: "৳2,650" },
-        {
-            id: 7,
-            title: "Premium Quality Panjabi Indian Cotton",
-            price: "৳2,650",
-        },
-    ];
-
-    // const navItems = [
-    //     { href: "/", label: "Home" },
-    //     { href: "/categories", label: "Categories" },
-    //     { href: "/product/new", label: "New Product" },
-    //     { href: "/product/flash", label: "Flash Sale" },
-    //     { href: "/brands", label: "Brand" },
-    //     { href: "/campaigns", label: "Campaign" },
-    //     { href: "/collections", label: "Collection" },
-    // ];
-
     const navItems = [
         { href: "/", key: "home" },
         { href: "/categories", key: "categories" },
@@ -217,8 +127,8 @@ export default function Header() {
         { href: "/collections", key: "collection" },
     ];
 
+    // Cart from multiple localStorage sources
     useEffect(() => {
-        // List of all cart types
         const allCartTypes = [
             "flashSaleCart",
             "newArrivalCart",
@@ -233,13 +143,11 @@ export default function Header() {
             "productDetailsCart",
         ];
 
-        // Get all cart items from different sources
         const allCartItems = allCartTypes.reduce((acc, cartKey) => {
             const cart = localStorage.getItem(cartKey);
             if (cart) {
                 try {
-                    const parsedCart = JSON.parse(cart);
-                    return [...acc, ...parsedCart];
+                    return [...acc, ...JSON.parse(cart)];
                 } catch (error) {
                     console.error(`Error parsing ${cartKey}:`, error);
                     return acc;
@@ -250,9 +158,7 @@ export default function Header() {
 
         setCartItems(allCartItems);
 
-        // Calculate total from all cart items
         const total = allCartItems.reduce((sum, item) => {
-            // Handle cases where price might be a string or number
             const price =
                 typeof item.price === "string"
                     ? parseFloat(item.price.replace(/[^\d.]/g, ""))
@@ -260,7 +166,6 @@ export default function Header() {
             return sum + price * (item.quantity || 1);
         }, 0);
 
-        // Use the first available currency symbol or default
         const currencySymbol =
             allCartItems[0]?.base_curr_symbol ||
             allCartItems[0]?.currency_symbol ||
@@ -269,75 +174,43 @@ export default function Header() {
         setCartTotal(`${currencySymbol}${total.toFixed(2)}`);
     }, [cartCount]);
 
-    useEffect(() => {
-        if (searchQuery.trim() === "") {
-            setSearchResults([]);
-            return;
-        }
-
-        let results = [];
-        if (searchType === "product") {
-            results = allProducts
-                .filter((product) =>
-                    product.title
-                        .toLowerCase()
-                        .includes(searchQuery.toLowerCase()),
-                )
-                .slice(0, 5);
-        } else {
-        }
-
-        setSearchResults(results);
-    }, [searchQuery, searchType]);
-
-    const toggleCategory = (index) => {
-        setExpandedCategory(expandedCategory === index ? null : index);
-    };
-
     const handleCheckoutClick = (e) => {
         if (!isLoggedIn && !isSellerLoggedIn) {
             e.preventDefault();
-            const storedReferCode = localStorage.getItem("product_refer_code");
-            sessionStorage.setItem(
-                "redirectAfterLogin",
-                storedReferCode
-                    ? `/checkout?referCode=${storedReferCode}`
-                    : "/checkout",
-            );
+            const referCode = localStorage.getItem("product_refer_code");
+            const redirectUrl = referCode
+                ? `/checkout?referCode=${referCode}`
+                : "/checkout";
+            sessionStorage.setItem("redirectAfterLogin", redirectUrl);
+            localStorage.setItem("intendedUrl", redirectUrl);
             router.push("/user/auth/login");
         }
-        const localUrl = storedReferCode
-            ? `/checkout?referCode=${storedReferCode}`
-            : "/checkout";
-        localStorage.setItem("intendedUrl", localUrl);
     };
 
     const handleWishlistClick = (e) => {
         if (!isLoggedIn && !isSellerLoggedIn) {
             e.preventDefault();
             sessionStorage.setItem("redirectAfterLogin", "/wishlist");
+            localStorage.setItem("intendedUrl", "/wishlist");
             router.push("/user/auth/login");
         }
-        const localUrl = "/wishlist";
-        localStorage.setItem("intendedUrl", localUrl);
     };
 
+    // Close search type dropdown on outside click
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (boxRef.current && !boxRef.current.contains(event.target)) {
-                setIsSearchTypeOpen(false); // change state here
+                setIsSearchTypeOpen(false);
             }
         };
         document.addEventListener("mousedown", handleClickOutside);
-        return () => {
+        return () =>
             document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, [isSearchTypeOpen]);
+    }, []);
 
     const t = useTranslations("HomePage");
     const locale = useLocale();
 
-    // header translations
     const searchPlaceholder = t("header.searchPlaceholder");
     const searchButton = {
         searchByProduct: t("header.searchButton.searchByProduct"),
@@ -350,9 +223,7 @@ export default function Header() {
     const authTxt = {
         login: t("header.login"),
         register: t("header.register"),
-        logout: t("header.logout"),
     };
-
     const cartTxt = {
         title: t("header.cart.title"),
         checkout: t("header.cart.checkout"),
@@ -363,7 +234,6 @@ export default function Header() {
         emptyMsg: t("header.wishlist.emptyMsg"),
         view: t("header.wishlist.view"),
     };
-
     const mobileBottomBar = {
         home: t("header.mobileBottomBar.home"),
         categories: t("header.mobileBottomBar.categories"),
@@ -375,21 +245,19 @@ export default function Header() {
         <>
             <header className="w-full sticky top-0 left-0 z-50 bg-white border-b lg:border-b-primary__color">
                 <div className="container xl:max-w-[1530px] px-4 mx-auto">
+                    {/* Mobile Top Bar */}
                     <div className="flex items-center justify-between py-3 lg:hidden">
-                        <div className="flex items-center gap-2">
-                            <button
-                                onClick={() =>
-                                    setIsMobileMenuOpen((prev) => !prev)
-                                }
-                                aria-label="Toggle Menu"
-                            >
-                                {isMobileMenuOpen ? (
-                                    <XMarkIcon className="w-6 h-6 text-gray-700" />
-                                ) : (
-                                    <Bars3Icon className="w-6 h-6 text-gray-700" />
-                                )}
-                            </button>
-                        </div>
+                        <button
+                            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+                            aria-label="Toggle Menu"
+                        >
+                            {isMobileMenuOpen ? (
+                                <XMarkIcon className="w-6 h-6 text-gray-700" />
+                            ) : (
+                                <Bars3Icon className="w-6 h-6 text-gray-700" />
+                            )}
+                        </button>
+
                         <Link href="/">
                             <Image
                                 src={logo}
@@ -397,6 +265,7 @@ export default function Header() {
                                 className="h-6 w-auto"
                             />
                         </Link>
+
                         <div className="flex items-center gap-2">
                             <button
                                 onClick={() =>
@@ -412,6 +281,8 @@ export default function Header() {
                             <LanguageSwitcher />
                         </div>
                     </div>
+
+                    {/* Mobile Search */}
                     {showMobileSearch && (
                         <div className="relative w-full lg:hidden py-2">
                             <input
@@ -444,7 +315,7 @@ export default function Header() {
                                                     }
                                                     className="flex items-center !gap-2 justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                 >
-                                                    <div className="w-10 h-10  bg-gray-100 rounded overflow-hidden">
+                                                    <div className="w-10 h-10 bg-gray-100 rounded overflow-hidden">
                                                         <Image
                                                             src={item.image}
                                                             alt={item.title}
@@ -462,11 +333,6 @@ export default function Header() {
                                                                 {item.price}
                                                             </div>
                                                         )}
-                                                        {item.location && (
-                                                            <div className="text-xs text-gray-500">
-                                                                {item.location}
-                                                            </div>
-                                                        )}
                                                     </div>
                                                 </Link>
                                             </li>
@@ -476,16 +342,17 @@ export default function Header() {
                             )}
                         </div>
                     )}
+
+                    {/* Desktop Header */}
                     <div className="hidden lg:flex flex-col lg:flex-row justify-between items-center py-4 gap-2 lg:gap-0">
-                        <div className="flex items-center gap-4">
-                            <Link href="/">
-                                <Image
-                                    src={logo}
-                                    alt="Logo"
-                                    className="h-10 w-auto"
-                                />
-                            </Link>
-                        </div>
+                        <Link href="/">
+                            <Image
+                                src={logo}
+                                alt="Logo"
+                                className="h-10 w-auto"
+                            />
+                        </Link>
+
                         <div className="relative w-full lg:flex-1 mx-0 lg:mx-6">
                             <input
                                 type="text"
@@ -504,66 +371,58 @@ export default function Header() {
                             <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-black">
                                 <MagnifyingGlassIcon className="h-5 w-5" />
                             </span>
+
                             <div className="absolute right-3 top-1/2 transform -translate-y-1/2 z-50">
-                                <div className="relative">
-                                    <button
-                                        onClick={() =>
-                                            setIsSearchTypeOpen(
-                                                !isSearchTypeOpen,
-                                            )
-                                        }
-                                        className="h-full px-3 flex items-center justify-center text-sm"
-                                    >
-                                        {searchType === "product"
-                                            ? searchButton.searchByProduct
-                                            : searchButton.searchByStall}
-                                        <ChevronUpDownIcon className="w-4 h-4 ml-1" />
-                                    </button>
-                                    {isSearchTypeOpen && (
-                                        <div className="absolute z-10 mt-1 !w-full min-w-[170px] bg-white rounded-md shadow-md overflow-hidden">
-                                            <ul
-                                                ref={boxRef}
-                                                className="!w-full "
-                                            >
-                                                <li className="!w-full">
-                                                    <button
-                                                        onClick={() => {
-                                                            setSearchType(
-                                                                "product",
-                                                            );
-                                                            setIsSearchTypeOpen(
-                                                                false,
-                                                            );
-                                                        }}
-                                                        className={`!w-full ltr:text-left rtl:text-right px-4 py-2  text-sm ${searchType === "product" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
-                                                    >
-                                                        {
-                                                            searchButton.searchByProduct
-                                                        }
-                                                    </button>
-                                                </li>
-                                                <li className="!w-full">
-                                                    <button
-                                                        onClick={() => {
-                                                            setSearchType(
-                                                                "stall",
-                                                            );
-                                                            setIsSearchTypeOpen(
-                                                                false,
-                                                            );
-                                                        }}
-                                                        className={`!w-full ltr:text-left rtl:text-right px-4 py-2  text-sm ${searchType === "stall" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
-                                                    >
-                                                        {
-                                                            searchButton.searchByStall
-                                                        }
-                                                    </button>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    )}
-                                </div>
+                                <button
+                                    onClick={() =>
+                                        setIsSearchTypeOpen(!isSearchTypeOpen)
+                                    }
+                                    className="h-full px-3 flex items-center justify-center text-sm"
+                                >
+                                    {searchType === "product"
+                                        ? searchButton.searchByProduct
+                                        : searchButton.searchByStall}
+                                    <ChevronUpDownIcon className="w-4 h-4 ml-1" />
+                                </button>
+
+                                {isSearchTypeOpen && (
+                                    <div className="absolute z-10 mt-1 !w-full min-w-[170px] bg-white rounded-md shadow-md overflow-hidden">
+                                        <ul ref={boxRef} className="!w-full">
+                                            <li className="!w-full">
+                                                <button
+                                                    onClick={() => {
+                                                        setSearchType(
+                                                            "product",
+                                                        );
+                                                        setIsSearchTypeOpen(
+                                                            false,
+                                                        );
+                                                    }}
+                                                    className={`!w-full ltr:text-left rtl:text-right px-4 py-2 text-sm ${searchType === "product" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
+                                                >
+                                                    {
+                                                        searchButton.searchByProduct
+                                                    }
+                                                </button>
+                                            </li>
+                                            <li className="!w-full">
+                                                <button
+                                                    onClick={() => {
+                                                        setSearchType("stall");
+                                                        setIsSearchTypeOpen(
+                                                            false,
+                                                        );
+                                                    }}
+                                                    className={`!w-full ltr:text-left rtl:text-right px-4 py-2 text-sm ${searchType === "stall" ? "bg-indigo-100" : "hover:bg-gray-100"}`}
+                                                >
+                                                    {searchButton.searchByStall}
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                )}
                             </div>
+
                             {isSearchFocused && searchResults.length > 0 && (
                                 <div className="absolute z-50 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg">
                                     <ul className="py-1">
@@ -577,14 +436,14 @@ export default function Header() {
                                                     }
                                                     className="flex items-center gap-2 justify-between px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                                                 >
-                                                    <div className="w-10 h-10  bg-gray-100 rounded overflow-hidden">
+                                                    <div className="w-10 h-10 bg-gray-100 rounded overflow-hidden">
                                                         {product?.image && (
                                                             <Image
                                                                 src={
-                                                                    product?.image
+                                                                    product.image
                                                                 }
                                                                 alt={
-                                                                    product?.title
+                                                                    product.title
                                                                 }
                                                                 width={40}
                                                                 height={40}
@@ -609,20 +468,16 @@ export default function Header() {
                                 </div>
                             )}
                         </div>
+
                         <div className="flex flex-wrap justify-center lg:justify-end items-center gap-2 lg:gap-4 text-sm text-gray-700">
                             <Link
-                                href={
-                                    referralCode
-                                        ? "/checkout"
-                                        : `/checkout?referCode=${storedReferCode}`
-                                }
+                                href="/checkout"
                                 onClick={handleCheckoutClick}
-                                className="group relative  p-2 bg-gray-50 rounded-full border-gray-500/20 border hover:border-primary__color duration-300"
+                                className="group relative p-2 bg-gray-50 rounded-full border border-gray-500/20 hover:border-primary__color duration-300"
                                 onMouseEnter={() => setIsCartHovered(true)}
                                 onMouseLeave={() => setIsCartHovered(false)}
                             >
                                 <ShoppingCart className="w-5 h-5 cursor-pointer group-hover:text-primary__color" />
-
                                 {mounted && cartCount > 0 && (
                                     <span className="absolute -top-2 -right-2 bg-primary__color text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                                         {cartCount}
@@ -643,15 +498,14 @@ export default function Header() {
                                                 {cartTxt.title}
                                             </h3>
                                         </div>
-
                                         <div className="max-h-96 overflow-y-auto">
                                             {cartItems.length > 0 ? (
                                                 cartItems.map((item, index) => (
                                                     <div
-                                                        key={`${item.id}-${item.source || "default"}-${index}`}
+                                                        key={`${item.id}-${index}`}
                                                         className="flex items-center gap-2 p-4 border-b hover:bg-gray-50"
                                                     >
-                                                        <div className="w-16 h-16 bg-gray-100 rounded  overflow-hidden">
+                                                        <div className="w-16 h-16 bg-gray-100 rounded overflow-hidden">
                                                             <Image
                                                                 src={item.image}
                                                                 alt={item.title}
@@ -705,14 +559,15 @@ export default function Header() {
                                     </div>
                                 )}
                             </Link>
+
                             <Link
                                 href="/wishlist"
                                 onClick={handleWishlistClick}
-                                className="group relative block p-2 bg-gray-50 rounded-full border-gray-500/20 border hover:border-primary__color duration-300"
+                                className="group relative block p-2 bg-gray-50 rounded-full border border-gray-500/20 hover:border-primary__color duration-300"
                                 onMouseEnter={() => setIsWishlistHovered(true)}
                                 onMouseLeave={() => setIsWishlistHovered(false)}
                             >
-                                <HeartIcon className="w-5 h-5  group-hover:text-primary__color" />
+                                <HeartIcon className="w-5 h-5 group-hover:text-primary__color" />
                                 {mounted && wishlistItems.length > 0 && (
                                     <span className="absolute -top-2 -right-2 bg-primary__color text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                                         {wishlistItems.length}
@@ -733,7 +588,6 @@ export default function Header() {
                                                 {wishlistTxt.title}
                                             </h3>
                                         </div>
-
                                         <div className="max-h-96 overflow-y-auto">
                                             {wishlistItems.length > 0 ? (
                                                 wishlistItems.map((item) => (
@@ -780,6 +634,7 @@ export default function Header() {
                                     </div>
                                 )}
                             </Link>
+
                             {isLoggedIn ? (
                                 <Link
                                     href="/user/dashboard"
@@ -800,9 +655,8 @@ export default function Header() {
                                 <div className="flex items-center uppercase font-medium">
                                     <Link
                                         href="/user/auth/login"
-                                        className="flex items-center gap-1 hover:text-primary__color"
+                                        className="hover:text-primary__color"
                                     >
-                                        {/* <UserIcon className="w-5 h-5" /> */}
                                         <span>{authTxt.login}</span>
                                     </Link>
                                     <span>/</span>
@@ -814,156 +668,48 @@ export default function Header() {
                                     </Link>
                                 </div>
                             )}
+
                             <div className="relative max-w-[180px]">
                                 <LanguageSwitcher />
                             </div>
                         </div>
                     </div>
                 </div>
-                <nav className="bg-white  text-color__heading text-sm font-semibold">
+
+                {/* Navigation */}
+                <nav className="bg-white text-color__heading text-sm font-semibold">
                     <div className="container xl:max-w-[1530px] px-4 mx-auto">
-                        <ul className="hidden lg:flex items-center justify-center px-5  ">
-                            {navItems.map(({ href, key, icon }) => {
+                        <ul className="hidden lg:flex items-center justify-center px-5">
+                            {navItems.map(({ href, key }) => {
                                 const isActive =
                                     pathname ===
                                     `/${locale}${href === "/" ? "" : href}`;
-
                                 return (
                                     <li key={href} className="relative">
                                         <Link
                                             href={href}
-                                            className={`${key === "categories" ? "md:hidden" : ""} flex items-center gap-1 py-2 2xl:py-3.5 px-4  after:absolute after:bottom-[-1px] after:left-0  after:h-[1px] after:w-full after:z-10 border border-white rounded-t-md  ${isActive ? "bg-white text-primary__color !border-primary__color !border-b-white after:!bg-white  px-3 " : ""}`}
+                                            className={`${key === "categories" ? "md:hidden" : ""} flex items-center gap-1 py-2 2xl:py-3.5 px-4 after:absolute after:bottom-[-1px] after:left-0 after:h-[1px] after:w-full after:z-10 border border-white rounded-t-md ${isActive ? "bg-white text-primary__color !border-primary__color !border-b-white after:!bg-white px-3" : ""}`}
                                         >
                                             {t(`header.nav.${key}`)}
                                         </Link>
                                     </li>
                                 );
                             })}
-                            {/* {navItems.map(({ href, label, icon }) => {
-                                const isActive = pathname === href;
-                                return (
-                                    <li key={href} className="relative">
-                                        <Link
-                                            href={href}
-                                            className={`${label === "Categories" ? "md:hidden" : ""} flex items-center gap-1 py-2 2xl:py-3.5 px-4  after:absolute after:bottom-[-1px] after:left-0  after:h-[1px] after:w-full after:z-10 border border-white rounded-t-md  ${isActive ? "bg-white text-primary__color !border-primary__color !border-b-white after:!bg-white  px-3 " : ""}`}
-                                        >
-                                            {icon}
-                                            {label}
-                                        </Link>
-                                    </li>
-                                );
-                            })} */}
                         </ul>
-                        {isMobileMenuOpen && (
-                            <>
-                                <div className="fixed inset-0 bg-white z-50 mt-[40px] overflow-y-auto">
-                                    {/* <div className="border-b pb-4">
-                                    <h5 className="px-4 py-2 font-bold text-gray-700">
-                                        Categories
-                                    </h5>
-                                    <ul className="flex flex-col gap-1">
-                                        {categories.map((category, index) => (
-                                            <li
-                                                key={index}
-                                                className="border-b last:border-b-0"
-                                            >
-                                                <div
-                                                    className={`flex items-center justify-between px-4 py-2.5 ${expandedCategory === index ? "bg-gray-50" : ""}`}
-                                                    onClick={() =>
-                                                        toggleCategory(index)
-                                                    }
-                                                >
-                                                    <span className="font-medium">
-                                                        {category.name}
-                                                    </span>
-                                                    {category.subcategories
-                                                        .length > 0 && (
-                                                        <ChevronRightIcon
-                                                            className={`w-4 h-4 transition-transform ${expandedCategory === index ? "rotate-90" : ""}`}
-                                                        />
-                                                    )}
-                                                </div>
 
-                                                {expandedCategory === index &&
-                                                    category.subcategories
-                                                        .length > 0 && (
-                                                        <ul className="ml-4 mb-2 bg-gray-50 rounded">
-                                                            {category.subcategories.map(
-                                                                (
-                                                                    subcategory,
-                                                                    subIndex,
-                                                                ) => (
-                                                                    <li
-                                                                        key={
-                                                                            subIndex
-                                                                        }
-                                                                    >
-                                                                        <Link
-                                                                            href={`/categories/${category.name.toLowerCase().replace(/\s+/g, "-")}/${subcategory.name.toLowerCase().replace(/\s+/g, "-")}`}
-                                                                            className="block px-4 py-2 text-sm text-gray-600 hover:text-primary__color"
-                                                                            onClick={() =>
-                                                                                setIsMobileMenuOpen(
-                                                                                    false,
-                                                                                )
-                                                                            }
-                                                                        >
-                                                                            {
-                                                                                subcategory.name
-                                                                            }
-                                                                        </Link>
-                                                                    </li>
-                                                                ),
-                                                            )}
-                                                        </ul>
-                                                    )}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div> */}
-                                    <ul className="flex flex-col py-4">
-                                        {navItems.map(({ href, key }) => {
-                                            const isActive =
-                                                pathname ===
-                                                `/${locale}${href === "/" ? "" : href}`;
-                                            return (
-                                                <li
-                                                    key={href}
-                                                    className="border-b"
-                                                >
-                                                    <Link
-                                                        href={href}
-                                                        className={`block px-4 py-2.5 rounded text-sm ${
-                                                            isActive
-                                                                ? "text-primary__color font-semibold"
-                                                                : "text-gray-700"
-                                                        }`}
-                                                        onClick={() =>
-                                                            setIsMobileMenuOpen(
-                                                                false,
-                                                            )
-                                                        }
-                                                    >
-                                                        {t(`header.nav.${key}`)}
-                                                    </Link>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                </div>
-                                <ul className="flex flex-col gap-2 py-4 lg:hidden">
+                        {/* Mobile Menu */}
+                        {isMobileMenuOpen && (
+                            <div className="fixed inset-0 bg-white z-50 mt-[40px] overflow-y-auto lg:hidden">
+                                <ul className="flex flex-col py-4">
                                     {navItems.map(({ href, key }) => {
                                         const isActive =
                                             pathname ===
                                             `/${locale}${href === "/" ? "" : href}`;
                                         return (
-                                            <li key={href}>
+                                            <li key={href} className="border-b">
                                                 <Link
                                                     href={href}
-                                                    className={`block px-4 py-1.5 rounded text-sm ${
-                                                        isActive
-                                                            ? "bg-white text-primary__color font-semibold"
-                                                            : "hover:bg-white hover:text-primary__color"
-                                                    }`}
+                                                    className={`block px-4 py-2.5 rounded text-sm ${isActive ? "text-primary__color font-semibold" : "text-gray-700"}`}
                                                     onClick={() =>
                                                         setIsMobileMenuOpen(
                                                             false,
@@ -976,10 +722,12 @@ export default function Header() {
                                         );
                                     })}
                                 </ul>
-                            </>
+                            </div>
                         )}
                     </div>
                 </nav>
+
+                {/* Mobile Bottom Bar */}
                 <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-50">
                     <div className="flex justify-around items-center py-2">
                         <Link href="/" className="flex flex-col items-center">
@@ -1018,17 +766,15 @@ export default function Header() {
                                 </span>
                             </Link>
                         ) : (
-                            <>
-                                <Link
-                                    href="/user/auth/login"
-                                    className="flex flex-col items-center"
-                                >
-                                    <UserIcon className="w-5 h-5 text-gray-700" />
-                                    <span className="text-xs mt-1">
-                                        {mobileBottomBar.account}
-                                    </span>
-                                </Link>
-                            </>
+                            <Link
+                                href="/user/auth/login"
+                                className="flex flex-col items-center"
+                            >
+                                <UserIcon className="w-5 h-5 text-gray-700" />
+                                <span className="text-xs mt-1">
+                                    {mobileBottomBar.account}
+                                </span>
+                            </Link>
                         )}
                         <Link
                             href="/checkout"

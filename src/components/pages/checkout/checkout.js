@@ -504,7 +504,7 @@ function Checkout() {
                     className="grid grid-cols-1 lg:grid-cols-3 items-start gap-6"
                     onSubmit={handleOrderConfirm}
                 >
-                    <div className="lg:col-span-2 space-y-6">
+                    <div className="lg:col-span-2 space-y-6 bg-[#f5f5f5]/50 p-4 rounded-md">
                         <h2 className="text-lg md:text-xl font-bold mb-4">
                             {loading ? (
                                 <div className="h-6 bg-gray-200 rounded w-1/4 animate-pulse"></div>
@@ -517,7 +517,7 @@ function Checkout() {
                                 cartItems.map((item, index) => (
                                     <div
                                         key={item.uniqueId}
-                                        className="flex items-start gap-4 border-b pb-4"
+                                        className="flex items-start gap-4 border-b last:border-0 pb-4"
                                     >
                                         <Image
                                             src={item.image}
@@ -1033,7 +1033,7 @@ function Checkout() {
                         )}
                     </div>
                     {cartItems.length > 0 && (
-                        <div className="border rounded-md py-8 px-4">
+                        <div className="bg-[#f5f5f5]/50 p-4 rounded-md py-8 px-4">
                             {isPayment ? (
                                 <>
                                     <h3 className="text-lg font-bold mb-4">

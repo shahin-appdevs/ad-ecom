@@ -100,7 +100,7 @@ export default function Brand() {
                     </div>
                     <div className="col-span-1 xl:col-span-10">
                         <div className="bg-white p-4 rounded-md">
-                            <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center justify-between mb-4 ">
                                 <h5>{title}</h5>
                             </div>
                             {loading ? (

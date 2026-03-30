@@ -1916,5 +1916,10 @@
             "off": "descuento",
             "loadMore": "Cargar más"
         }
+    },
+    "StallDetails": {
+        "noProductsFound": "No se encontraron productos",
+        "off": "descuento",
+        "loadMore": "Cargar más"
     }
 }

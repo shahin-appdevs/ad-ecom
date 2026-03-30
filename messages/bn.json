@@ -1916,5 +1916,10 @@
             "off": "ছাড়",
             "loadMore": "আরও লোড করুন"
         }
+    },
+    "StallDetails": {
+        "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
+        "off": "ছাড়",
+        "loadMore": "আরও লোড করুন"
     }
 }

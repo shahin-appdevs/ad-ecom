@@ -41,6 +41,9 @@ export default function NewProduct() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [newArrivalProducts, setNewArrivalProducts] = useState([]);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
+    const [states, setStates] = useState([]);
+
+    const { incrementCart, decrementCart } = useCart();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -71,7 +74,6 @@ export default function NewProduct() {
     useEffect(() => {
         const fetchUserProfile = async () => {
             if (!isLoggedIn) return;
-
             try {
                 const response = await profiledGetAPI();
                 setUserProfile(response.data.data);
@@ -82,14 +84,10 @@ export default function NewProduct() {
                 toast.error("Failed to fetch user profile:", error);
             }
         };
-
         fetchUserProfile();
     }, [isLoggedIn]);
 
-    const { incrementCart, decrementCart } = useCart();
-    const [states, setStates] = useState([]);
-
-    // Add the comprehensive price calculation function from New Arrival
+    // Price calculation
     const calculateDiscount = (product) => {
         const listPrice = parseFloat(product.product_prices?.list_price || 0);
         const salePrice = parseFloat(product.product_prices?.sale_price || 0);
@@ -144,7 +142,6 @@ export default function NewProduct() {
         };
     };
 
-    // Format price with currency symbol
     const formatPrice = (price) => {
         if (!price || !newArrivalData?.base_curr_symbol)
             return `${newArrivalData?.base_curr_symbol || ""}0`;
@@ -162,7 +159,6 @@ export default function NewProduct() {
                 (item) => item.id === product.id,
             );
 
-            // Use the same price calculation logic for consistency
             const { displayPrice } = calculateDiscount(product);
 
             if (existingIndex >= 0) {
@@ -210,65 +206,8 @@ export default function NewProduct() {
                 };
             },
         );
-
         setStates(initialStates);
     }, [newArrivalData]);
-
-    const handleToggle = (index) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index ? { ...item, showQuantity: true } : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(newArrivalData.new_arrival_products.data[index], 1);
-    };
-
-    const increaseQuantity = (index, value) => {
-        if (!newArrivalData?.new_arrival_products) return;
-
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: Math.max(1, item.quantity + value),
-                      }
-                    : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(
-            newArrivalData.new_arrival_products.data[index],
-            states[index].quantity + value,
-        );
-    };
-
-    const decreaseQuantity = (index, value) => {
-        if (!newArrivalData?.new_arrival_products) return;
-
-        const currentQty = states[index].quantity;
-
-        if (currentQty <= 1) {
-            return;
-        }
-
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: item.quantity - value,
-                      }
-                    : item,
-            ),
-        );
-        decrementCart();
-        saveToLocalStorage(
-            newArrivalData.new_arrival_products.data[index],
-            states[index].quantity - value,
-        );
-    };
 
     const handleLoadMoreProducts = async () => {
         setLoadMoreLoading(true);
@@ -277,6 +216,7 @@ export default function NewProduct() {
                 newArrivalData.new_arrival_products?.next_page_url,
             );
             const newProducts = res.data.data.new_arrival_products?.data || [];
+
             setNewArrivalProducts((prev) => [...prev, ...newProducts]);
             setNewArrivalData((prev) => ({
                 ...prev,
@@ -297,7 +237,6 @@ export default function NewProduct() {
     };
 
     const t = useTranslations("HomePage.newArrival");
-
     const newArrivalTitle = t("newArrivalTitle");
     const loadMore = t("loadMore");
     const off = t("off");
@@ -307,7 +246,7 @@ export default function NewProduct() {
             <section className="sm:pt-4">
                 <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
                     <div className="grid grid-cols-1 xl:grid-cols-12 sm:gap-4">
-                        <div className="hidden p-2.5 xl:p-0   sm:block  col-span-1 xl:col-span-2  rounded-md  relative w-full h-full">
+                        <div className="hidden p-2.5 xl:p-0 sm:block col-span-1 xl:col-span-2 rounded-md relative w-full h-full">
                             <ProductSidebar />
                         </div>
                         <div className="col-span-1 xl:col-span-10">
@@ -343,6 +282,7 @@ export default function NewProduct() {
                             <div className="flex items-center justify-between mb-4">
                                 <h6>{newArrivalTitle}</h6>
                             </div>
+
                             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                                 {newArrivalProducts?.map((product, index) => {
                                     const {
@@ -360,7 +300,7 @@ export default function NewProduct() {
                                             key={index}
                                             className="group bg-gray-100 rounded-md hover:shadow-md transition-shadow block"
                                         >
-                                            <div className="relative ">
+                                            <div className="relative">
                                                 <div className="w-full h-[150px] sm:h-[215px] rounded-t-md overflow-hidden">
                                                     <Image
                                                         src={
@@ -399,73 +339,12 @@ export default function NewProduct() {
                                                         </span>
                                                     )}
                                                 </div>
-
-                                                {/* <div className="relative">
-                                                    {!states[index]
-                                                        ?.showQuantity ? (
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-                                                                e.stopPropagation();
-                                                                handleToggle(index);
-                                                            }}
-                                                            className="bg-white shadow-sm text-gray-800 text-xs px-4 py-2 rounded-md font-medium flex items-center justify-between w-full"
-                                                            disabled={stock <= 0}
-                                                        >
-                                                            <PlusIcon className="h-5 w-5" />
-                                                            {stock <= 0 ? (
-                                                                <span>
-                                                                    Out of Stock
-                                                                </span>
-                                                            ) : (
-                                                                <span className="flex items-center gap-2">
-                                                                    Buy Now{" "}
-                                                                    <span className="hidden sm:block">
-                                                                        →
-                                                                    </span>
-                                                                </span>
-                                                            )}
-                                                        </button>
-                                                    ) : (
-                                                        <div className="flex items-center justify-between w-full bg-white shadow-sm rounded-md overflow-hidden">
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    decreaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                            >
-                                                                <MinusIcon className="h-4 w-4" />
-                                                            </button>
-                                                            <span className="px-3 py-1 bg-white text-gray-800">
-                                                                {states[index]
-                                                                    ?.quantity || 1}
-                                                            </span>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    increaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                            >
-                                                                <PlusIcon className="h-4 w-4" />
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </div> */}
                                             </div>
                                         </Link>
                                     );
                                 })}
                             </div>
+
                             {loadMoreLoading && (
                                 <div className="mt-4 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                                     {[...Array(5)].map((_, index) => (
@@ -473,6 +352,7 @@ export default function NewProduct() {
                                     ))}
                                 </div>
                             )}
+
                             {newArrivalData?.new_arrival_products
                                 ?.next_page_url && (
                                 <div className="text-center mt-10">
