@@ -8,13 +8,6 @@ import {
     PhoneIcon,
     EnvelopeIcon,
 } from "@heroicons/react/24/outline";
-import {
-    FacebookIcon,
-    InstagramIcon,
-    XIcon,
-    YoutubeIcon,
-    WhatsappIcon,
-} from "@/components/icons/CustomIcons";
 
 // Images
 import logo from "@public/images/logo/logo.webp";
@@ -23,7 +16,6 @@ import { useEffect, useState } from "react";
 import { handleApiError } from "../utility/handleApiError";
 
 import {
-    appDownloadLinkGetAPI,
     appSettingGetAPI,
     footerInfoGetAPI,
 } from "@root/services/apiClient/apiClient";
@@ -32,7 +24,6 @@ import { useLocale, useTranslations } from "next-intl";
 export default function Footer() {
     const [appSettings, setAppSettings] = useState({});
     const [footerInfo, setFooterInfo] = useState({});
-    const [appDownloadLink, setAppDownloadLink] = useState({});
     const lang = useLocale();
 
     const footerContent = footerInfo?.footer_content?.language[lang];
@@ -66,19 +57,9 @@ export default function Footer() {
         }
     };
 
-    // const fetchAppDownloadLink = async () => {
-    //     try {
-    //         const result = await appDownloadLinkGetAPI();
-    //         setAppDownloadLink(result?.data?.data);
-    //     } catch (error) {
-    //         handleApiError(error);
-    //     }
-    // };
-
     useEffect(() => {
         footerInfoDataFetch();
         appSettingData();
-        // fetchAppDownloadLink();
     }, []);
 
     // ******** translations ***************
@@ -100,7 +81,6 @@ export default function Footer() {
     };
 
     const powerByText = t("footer.powerByText");
-    const downloadApp = t("footer.downloadApp");
 
     return (
         <section className="bg-white pt-8 sm:pt-16 pb-4 mt-4 sm:mt-16">
@@ -140,20 +120,6 @@ export default function Footer() {
                                 )}
                             </ul>
                         </div>
-
-                        {/* {appSettings?.app_url?.android_url && (
-                            <Link
-                                href={appSettings?.app_url?.android_url}
-                                target="_blank"
-                                className="mt-3"
-                            >
-                                <Image
-                                    src={googlePlay}
-                                    alt="Footer"
-                                    className="h-6 lg:h-10 w-auto"
-                                />
-                            </Link>
-                        )} */}
                     </div>
                     <div>
                         <h6 className="font-bold mb-4">{options.popular}</h6>
@@ -168,39 +134,6 @@ export default function Footer() {
                                     </Link>
                                 </li>
                             ))}
-
-                            {/* <li>
-                                <Link
-                                    href="/product/flash"
-                                    className="font-medium hover:text-primary__color"
-                                >
-                                    Flash Sale
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="/brands"
-                                    className="font-medium hover:text-primary__color"
-                                >
-                                    Brands
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="/campaigns"
-                                    className="font-medium hover:text-primary__color"
-                                >
-                                    Campaigns
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    href="/collections"
-                                    className="font-medium hover:text-primary__color"
-                                >
-                                    Collections
-                                </Link>
-                            </li> */}
                         </ul>
                     </div>
                     <div>
@@ -221,32 +154,6 @@ export default function Footer() {
                         </ul>
                     </div>
                     <div>
-                        {/* <div>
-                            <h6 className="font-bold mb-4">
-                                {options.address}
-                            </h6>
-                            <ul className="space-y-3">
-                                {contactInfo?.location && (
-                                    <li className="flex items-center font-medium gap-1">
-                                        <MapPinIcon className="w-4 h-4 shrink-0" />{" "}
-                                        {contactInfo?.location}
-                                    </li>
-                                )}
-                                {contactInfo?.mobile && (
-                                    <li className="flex items-center font-medium gap-1">
-                                        <PhoneIcon className="w-4 h-4 shrink-0" />{" "}
-                                        {contactInfo?.mobile}
-                                    </li>
-                                )}
-
-                                {contactInfo?.email && (
-                                    <li className="flex items-center font-medium gap-1">
-                                        <EnvelopeIcon className="w-4 h-4 shrink-0" />{" "}
-                                        {contactInfo?.email}
-                                    </li>
-                                )}
-                            </ul>
-                        </div> */}
                         <h6 className="font-bold mb-4">{options.address}</h6>
 
                         {/* social links  */}

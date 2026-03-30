@@ -1,12 +1,8 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import {
-    ChevronRightIcon,
-    Bars3Icon,
-    XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useHomeData } from "@/components/context/HomeContext";
 
 // Swiper imports
@@ -55,7 +51,6 @@ export const SkeletonBanner = () => (
 export default function Banner() {
     const [hoveredCategory, setHoveredCategory] = useState(null);
     const [hoveredSubcategory, setHoveredSubcategory] = useState(null);
-    const [menuOpen, setMenuOpen] = useState(false);
     const { homeData, loading } = useHomeData();
 
     const allBanners =
@@ -72,6 +67,7 @@ export default function Banner() {
     // If there are fewer than 3 banners, we might need a fallback, but assuming sufficient data for now or just handling what's available.
     // Logic: If >= 3 banners, spare last 2. If < 3, put all in slider??
     // Requirement says: "linked the last banner 2 index data"
+
     const sideBanners = allBanners.slice(-2);
     const sliderBanners = allBanners.slice(0, -2);
 
@@ -295,39 +291,6 @@ export default function Banner() {
                                     ))}
                                 </ul>
                             </div>
-                        </div>
-                    </div>
-
-                    {/* Mobile Menu Button - Kept for mobile referencing, although logic was a bit mixed in original. focusing on desktop structure mainly. */}
-                    {/* <div className="hidden  justify-between items-center mb-2">
-                        <button
-                            onClick={() => setMenuOpen(!menuOpen)}
-                            className="text-gray-700 bg-white p-2 rounded-md shadow-sm"
-                        >
-                            {menuOpen ? (
-                                <XMarkIcon className="w-6 h-6" />
-                            ) : (
-                                <Bars3Icon className="w-6 h-6" />
-                            )}
-                        </button>
-                    </div> */}
-                    <div
-                        className={`w-full lg:hidden  h-full z-40 relative rounded-md ${menuOpen ? "block" : "hidden"}`}
-                    >
-                        {/* Mobile Sidebar Content duplicated for simplicity or re-use logic */}
-                        <div className="bg-white p-2.5 rounded-md border">
-                            <ul className="max-h-[300px] overflow-y-auto">
-                                {categories.map((category, index) => (
-                                    <li key={index} className="py-2 border-b">
-                                        <Link
-                                            href={`/categories/products?id=${category.id}`}
-                                            className="text-sm font-medium"
-                                        >
-                                            {category.name}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
                         </div>
                     </div>
 
