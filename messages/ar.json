@@ -1916,5 +1916,10 @@
             "off": "خصم",
             "loadMore": "تحميل المزيد"
         }
+    },
+    "StallDetails": {
+        "noProductsFound": "لم يتم العثور على منتجات",
+        "off": "خصم",
+        "loadMore": "تحميل المزيد"
     }
 }

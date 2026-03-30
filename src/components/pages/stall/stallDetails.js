@@ -11,6 +11,7 @@ import {
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -36,6 +37,8 @@ const ProductSkeleton = () => (
 );
 
 function StallDetails() {
+    const t = useTranslations("StallDetails");
+
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
     const [stall, setStall] = useState(null);
@@ -362,7 +365,7 @@ function StallDetails() {
                                     <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
                                         {products.length === 0 ? (
                                             <div className="col-span-full text-center py-10">
-                                                <p>No products found</p>
+                                                <p>{t("noProductsFound")}</p>
                                             </div>
                                         ) : (
                                             products.map((product, index) => (
@@ -393,7 +396,7 @@ function StallDetails() {
                                                                 {
                                                                     product.discount
                                                                 }{" "}
-                                                                off
+                                                                {t("off")}
                                                             </span>
                                                         )}
                                                     </div>
@@ -422,42 +425,6 @@ function StallDetails() {
                                                                 </span>
                                                             )}
                                                         </div>
-
-                                                        {/* <div className="relative">
-                                                            {!states[index]?.showQuantity ? (
-                                                                <button
-                                                                    onClick={() => handleToggle(index)}
-                                                                    className="bg-white shadow-sm text-gray-800 text-xs px-4 py-2 rounded-md font-medium flex items-center justify-between w-full"
-                                                                    disabled={product.stock <= 0}
-                                                                >
-                                                                    <PlusIcon className="h-5 w-5" />
-                                                                    {product.stock <= 0 ? (
-                                                                        <span>Out of Stock</span>
-                                                                    ) : (
-                                                                        <span className="flex items-center gap-2">Buy Now <span className="hidden sm:block">→</span></span>
-                                                                    )}
-                                                                </button>
-                                                            ) : (
-                                                                <div className="flex items-center justify-between w-full bg-white shadow-sm rounded-md overflow-hidden">
-                                                                    <button
-                                                                        onClick={() => decreaseQuantity(index, 1)}
-                                                                        className="text-gray-800 px-4 py-2"
-                                                                    >
-                                                                        <MinusIcon className="h-4 w-4" />
-                                                                    </button>
-                                                                    <span className="px-3 py-1 bg-white text-gray-800">
-                                                                        {states[index]?.quantity || 1}
-                                                                    </span>
-                                                                    <button
-                                                                        onClick={() => increaseQuantity(index, 1)}
-                                                                        className="text-gray-800 px-4 py-2"
-                                                                        disabled={states[index]?.quantity >= product.stock}
-                                                                    >
-                                                                        <PlusIcon className="h-4 w-4" />
-                                                                    </button>
-                                                                </div>
-                                                            )}
-                                                        </div> */}
                                                     </div>
                                                 </div>
                                             ))
