@@ -23,14 +23,15 @@ const CampaignSkeleton = () => (
         <div className="w-full relative h-[200px] lg:h-[300px] mb-4 rounded-md overflow-hidden bg-gray-300">
             <div className="absolute top-3 right-3 z-10">
                 <div className="flex items-center gap-2 bg-gray-400/80 px-3 py-2 rounded-full">
-                    <div className="h-3 w-10 bg-gray-500 rounded"></div>
                     <div className="flex items-center gap-1">
-                        {[...Array(4)].map((_, i) => (
-                            <div
-                                key={`timer-skeleton-${i}`}
-                                className="h-6 w-8 bg-gray-500 rounded-full"
-                            />
-                        ))}
+                        <div className="flex items-center gap-1">
+                            {Array.from({ length: 4 }).map((_, index) => (
+                                <div
+                                    key={index}
+                                    className="h-8 w-[68px] bg-gray-200 animate-pulse rounded-full"
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -427,9 +428,6 @@ function CampaignProduct() {
                                                 {/* Translated & Mapped Timer */}
                                                 <div className="absolute top-3 right-3 z-10">
                                                     <div className="flex items-center gap-2 bg-black/60 backdrop-blur-sm px-3 py-2 rounded-full text-white text-xs sm:text-sm">
-                                                        <span className="font-semibold">
-                                                            {t("endsIn")}
-                                                        </span>
                                                         <div className="flex items-center gap-1">
                                                             {countdownLabels.map(
                                                                 (
