@@ -129,7 +129,15 @@
         "referral": {
             "shareTitle": "রেফারেল লিঙ্ক শেয়ার করুন",
             "shareText": "বন্ধুদের সাথে এই লিঙ্ক শেয়ার করে কমিশন আয় করুন:"
-        }
+        },
+        "relatedProduct": {
+            "title": "সম্পর্কিত পণ্য",
+            "noProductsFound": "কোনো পণ্য পাওয়া যায়নি",
+            "off": "ছাড়"
+        },
+        "noDescription": "কোনো বিবরণ নেই",
+        "noDetails": "কোনো বিস্তারিত নেই",
+        "referralLink": "রেফারেল লিঙ্ক"
     },
     "Dashboard": {
         "topBar": {

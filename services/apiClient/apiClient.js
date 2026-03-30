@@ -1483,7 +1483,39 @@ export const paymentLinkShareSubmitAPI = (
     cancelReturnUrl,
 ) => {
     const token = getToken();
-    if (token) {
+
+    if (paymentType === "wallet_payment") {
+        if (token) {
+            return apiClient.post(
+                "/payment/link/submit",
+                {
+                    target,
+                    payment_type: paymentType,
+                    email,
+                    phone,
+                    full_name: fullName,
+                    user_id: userId,
+                    wallet_currency: walletCurrency,
+                    amount,
+                    card_name: cardName,
+                    token: cardToken,
+                    last4_card: last4Card,
+                    payment_gateway: paymentGateway,
+                    source,
+                    success_return_url: successReturnUrl,
+                    cancel_return_url: cancelReturnUrl,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                },
+            );
+        } else {
+            throw new Error("No token found. Please log in.");
+        }
+    }
+    if (paymentType === "card_payment" || paymentType === "payment_gateway") {
         return apiClient.post(
             "/payment/link/submit",
             {
@@ -1510,7 +1542,7 @@ export const paymentLinkShareSubmitAPI = (
             },
         );
     } else {
-        throw new Error("No token found. Please log in.");
+        throw new Error("Invalid payment type.");
     }
 };
 

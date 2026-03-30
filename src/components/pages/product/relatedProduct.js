@@ -1,11 +1,10 @@
 "use client";
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl"; // ← Added
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
-import { useCart } from "@/components/context/CartContext";
 import {
     productDetailsGetAPI,
     profiledGetAPI,
@@ -30,15 +29,18 @@ const ProductSkeleton = () => (
 );
 
 function RelatedProduct() {
-    const [data, setData] = useState(null);
+    const t = useTranslations("ProductDetails.relatedProduct"); // ← Added
+
+    // Translation variables
+    const relatedProductsTitle = t("title");
+    const noProductsFound = t("noProductsFound");
+    const offText = t("off");
+
     const [products, setProducts] = useState(null);
     const [loading, setLoading] = useState(true);
-    const { incrementCart, decrementCart } = useCart();
     const searchParams = useSearchParams();
     const idParam = searchParams.get("id");
     const [productId, setProductId] = useState(null);
-    const [states, setStates] = useState([]);
-    const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -53,7 +55,6 @@ function RelatedProduct() {
 
             try {
                 const response = await profiledGetAPI();
-                setUserProfile(response.data.data);
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );
@@ -78,73 +79,6 @@ function RelatedProduct() {
         return `৳${numericValue.toFixed(2)}`;
     };
 
-    const saveToLocalStorage = useCallback(
-        (product, quantity) => {
-            if (!data?.related_products) return;
-
-            const savedCart = localStorage.getItem("relatedProductCart");
-            let cartItems = savedCart ? JSON.parse(savedCart) : [];
-
-            const existingIndex = cartItems.findIndex(
-                (item) => item.id === product.id,
-            );
-
-            const price =
-                isReseller && product.product_additional_prices?.resell_price
-                    ? product.product_additional_prices.resell_price
-                    : product.product_additional_prices?.flash_price ||
-                      product.product_prices?.sale_price ||
-                      product.product_prices?.list_price;
-
-            if (existingIndex >= 0) {
-                cartItems[existingIndex].quantity = quantity;
-                cartItems[existingIndex].price = price;
-            } else {
-                cartItems.push({
-                    id: product.id,
-                    title: product.title,
-                    price: price,
-                    quantity: quantity,
-                    image: product.main_image
-                        ? `${backendBaseURL}/${data.product_image_path}/${product.main_image}`
-                        : `${backendBaseURL}/${data.default_image_path}`,
-                    base_curr_symbol: data.base_curr_symbol,
-                });
-            }
-
-            cartItems = cartItems.filter((item) => item.quantity > 0);
-            localStorage.setItem(
-                "relatedProductCart",
-                JSON.stringify(cartItems),
-            );
-        },
-        [data, isReseller],
-    );
-
-    useEffect(() => {
-        if (!data?.related_products) return;
-
-        const savedCart = localStorage.getItem("relatedProductCart");
-        const initialStates = data.related_products.map((product) => {
-            if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                const cartItem = parsedCart.find(
-                    (item) => item.id === product.id,
-                );
-                return {
-                    showQuantity: !!cartItem,
-                    quantity: cartItem?.quantity || 1,
-                };
-            }
-            return {
-                showQuantity: false,
-                quantity: 1,
-            };
-        });
-
-        setStates(initialStates);
-    }, [data]);
-
     useEffect(() => {
         const fetchProductDetails = async () => {
             if (!productId) return;
@@ -152,8 +86,6 @@ function RelatedProduct() {
                 setLoading(true);
                 const response = await productDetailsGetAPI(productId);
                 if (response?.data?.data?.related_products) {
-                    setData(response.data.data);
-
                     const formattedProducts =
                         response.data.data.related_products.map((product) => {
                             const listPrice = parseFloat(
@@ -232,12 +164,6 @@ function RelatedProduct() {
                         });
 
                     setProducts(formattedProducts);
-                    setStates(
-                        formattedProducts.map(() => ({
-                            showQuantity: false,
-                            quantity: 1,
-                        })),
-                    );
                 }
             } catch (error) {
                 toast.error(error.response?.data?.message?.error?.[0]);
@@ -245,55 +171,8 @@ function RelatedProduct() {
                 setLoading(false);
             }
         };
-
         fetchProductDetails();
     }, [productId]);
-
-    const handleToggle = (index) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index ? { ...item, showQuantity: true } : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], 1);
-    };
-
-    const increaseQuantity = (index, value) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: Math.max(1, item.quantity + value),
-                      }
-                    : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], states[index].quantity + value);
-    };
-
-    const decreaseQuantity = (index, value) => {
-        const currentQty = states[index].quantity;
-
-        if (currentQty <= 1) {
-            return;
-        }
-
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: item.quantity - value,
-                      }
-                    : item,
-            ),
-        );
-        decrementCart();
-        saveToLocalStorage(products[index], states[index].quantity - value);
-    };
 
     return (
         <section className="sm:pt-4">
@@ -312,12 +191,12 @@ function RelatedProduct() {
                     ) : (
                         <>
                             <div className="flex items-center justify-between mb-4">
-                                <h5>Related Products</h5>
+                                <h5>{relatedProductsTitle}</h5>
                             </div>
                             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
                                 {products.length === 0 ? (
                                     <div className="col-span-full text-center py-10">
-                                        <p>No products found</p>
+                                        <p>{noProductsFound}</p>
                                     </div>
                                 ) : (
                                     products.map((product, index) => (
@@ -338,7 +217,8 @@ function RelatedProduct() {
                                                 </div>
                                                 {product.hasDiscount && (
                                                     <span className="absolute top-[8px] right-[8px] text-xs bg-red-500 text-white font-semibold py-[1px] px-[4px] rounded-[4px] transform rotate-[-3deg]">
-                                                        {product.discount} off
+                                                        {product.discount}{" "}
+                                                        {offText}
                                                     </span>
                                                 )}
                                             </div>
@@ -363,60 +243,6 @@ function RelatedProduct() {
                                                         </span>
                                                     )}
                                                 </div>
-
-                                                {/* <div className="relative">
-                                                    {!states[index]?.showQuantity ? (
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-                                                                e.stopPropagation();
-                                                                handleToggle(index);
-                                                            }}
-                                                            className="bg-white shadow-sm text-gray-800 text-xs px-4 py-2 rounded-md font-medium flex items-center justify-between w-full"
-                                                            disabled={product.stock <= 0}
-                                                        >
-                                                            <PlusIcon className="h-5 w-5" />
-                                                            {product.stock <= 0 ? (
-                                                                <span>Out of Stock</span>
-                                                            ) : (
-                                                                <span className="flex items-center gap-2">Buy Now <span className="hidden sm:block">→</span></span>
-                                                            )}
-                                                        </button>
-                                                    ) : (
-                                                        <div className="flex items-center justify-between w-full bg-white shadow-sm rounded-md overflow-hidden">
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    decreaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                            >
-                                                                <MinusIcon className="h-4 w-4" />
-                                                            </button>
-                                                            <span className="px-3 py-1 bg-white text-gray-800">
-                                                                {states[index]?.quantity || 1}
-                                                            </span>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    increaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                                disabled={states[index]?.quantity >= product.stock}
-                                                            >
-                                                                <PlusIcon className="h-4 w-4" />
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </div> */}
                                             </div>
                                         </Link>
                                     ))
@@ -432,7 +258,7 @@ function RelatedProduct() {
 
 export default function RelatedProductPage() {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<></>}>
             <RelatedProduct />
         </Suspense>
     );

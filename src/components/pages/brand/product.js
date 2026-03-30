@@ -1,16 +1,9 @@
 "use client";
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { Menu } from "@headlessui/react";
-import {
-    PlusIcon,
-    MinusIcon,
-    ArrowsUpDownIcon,
-} from "@heroicons/react/24/outline";
-import { useCart } from "@/components/context/CartContext";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import Button from "@/components/utility/Button";
 import {
@@ -22,15 +15,6 @@ import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
-
-const sortOptions = [
-    "Default",
-    "Newest Products",
-    "Most Popular",
-    "Highest Rating",
-    "Lowest Price",
-    "Highest Price",
-];
 
 const ProductSkeleton = () => (
     <div className="bg-gray-100 rounded-md animate-pulse">
@@ -48,17 +32,13 @@ const ProductSkeleton = () => (
 );
 
 function BrandProduct() {
-    const [selectedSort, setSelectedSort] = useState("Default");
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
     const [brand, setBrand] = useState(null);
     const [loading, setLoading] = useState(true);
-    const { incrementCart, decrementCart } = useCart();
     const searchParams = useSearchParams();
     const idParam = searchParams.get("id");
     const [brandId, setBrandId] = useState(null);
-    const [states, setStates] = useState([]);
-    const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
@@ -74,7 +54,6 @@ function BrandProduct() {
 
             try {
                 const response = await profiledGetAPI();
-                setUserProfile(response.data.data);
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );
@@ -98,73 +77,6 @@ function BrandProduct() {
             typeof price === "string" ? parseFloat(price) : price;
         return `৳${numericValue.toFixed(2)}`;
     };
-
-    const saveToLocalStorage = useCallback(
-        (product, quantity) => {
-            if (!data?.products?.data) return;
-
-            const savedCart = localStorage.getItem("brandCart");
-            let cartItems = savedCart ? JSON.parse(savedCart) : [];
-
-            const existingIndex = cartItems.findIndex(
-                (item) => item.id === product.id,
-            );
-
-            const price =
-                isReseller && product.product_additional_prices?.resell_price
-                    ? product.product_additional_prices.resell_price
-                    : product.product_additional_prices?.flash_price ||
-                      product.product_prices?.sale_price ||
-                      product.product_prices?.list_price;
-
-            if (existingIndex >= 0) {
-                cartItems[existingIndex].quantity = quantity;
-                cartItems[existingIndex].price = price;
-            } else {
-                cartItems.push({
-                    id: product.id,
-                    title: product.title,
-                    price: price,
-                    quantity: quantity,
-                    image: product.main_image
-                        ? `${backendBaseURL}/${data.product_image_path}/${product.main_image}`
-                        : `${backendBaseURL}/${data.default_image_path}`,
-                    base_curr_symbol: data.base_curr_symbol,
-                    isResellerPrice:
-                        isReseller &&
-                        product.product_additional_prices?.resell_price,
-                });
-            }
-
-            cartItems = cartItems.filter((item) => item.quantity > 0);
-            localStorage.setItem("brandCart", JSON.stringify(cartItems));
-        },
-        [data, isReseller],
-    );
-
-    useEffect(() => {
-        if (!data?.products?.data) return;
-
-        const savedCart = localStorage.getItem("brandCart");
-        const initialStates = data.products.data.map((product) => {
-            if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                const cartItem = parsedCart.find(
-                    (item) => item.id === product.id,
-                );
-                return {
-                    showQuantity: !!cartItem,
-                    quantity: cartItem?.quantity || 1,
-                };
-            }
-            return {
-                showQuantity: false,
-                quantity: 1,
-            };
-        });
-
-        setStates(initialStates);
-    }, [data]);
 
     useEffect(() => {
         const fetchBrandProduct = async () => {
@@ -261,12 +173,6 @@ function BrandProduct() {
                     }
 
                     setProducts(formattedProducts);
-                    setStates(
-                        formattedProducts.map(() => ({
-                            showQuantity: false,
-                            quantity: 1,
-                        })),
-                    );
                 }
             } catch (error) {
                 toast.error(error.response?.data?.message?.error?.[0]);
@@ -345,13 +251,6 @@ function BrandProduct() {
                 formatProduct(p, res.data.data),
             );
             setProducts((prev) => [...prev, ...newFormatted]);
-            setStates((prev) => [
-                ...prev,
-                ...newFormatted.map(() => ({
-                    showQuantity: false,
-                    quantity: 1,
-                })),
-            ]);
             setData((prev) => ({
                 ...prev,
                 products: {
@@ -369,52 +268,6 @@ function BrandProduct() {
         }
     };
 
-    const handleToggle = (index) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index ? { ...item, showQuantity: true } : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], 1);
-    };
-
-    const increaseQuantity = (index, value) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: Math.max(1, item.quantity + value),
-                      }
-                    : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], states[index].quantity + value);
-    };
-
-    const decreaseQuantity = (index, value) => {
-        const currentQty = states[index]?.quantity || 1;
-
-        if (currentQty <= 1) {
-            return;
-        }
-
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: item.quantity - value,
-                      }
-                    : item,
-            ),
-        );
-        decrementCart();
-        saveToLocalStorage(products[index], states[index].quantity - value);
-    };
-
     const t = useTranslations("HomePage.shopByBrand");
     const loadMore = t("loadMore");
 
@@ -430,35 +283,6 @@ function BrandProduct() {
                             {brand && (
                                 <div className="flex items-center justify-between gap-3 sm:gap-0 mb-4">
                                     <h6>{brand.title}</h6>
-                                    {/* <div className="flex items-center gap-2">
-                                        <div className="flex items-center gap-1">
-                                            <ArrowsUpDownIcon className="w-5 h-5 text-color__heading" />
-                                            <span className="text-color__heading text-sm font-medium">Sort by:</span>
-                                        </div>
-                                        <div className="relative z-10">
-                                            <Menu as="div" className="relative">
-                                                <Menu.Button className="bg-[#f5f5f5] text-color__heading text-sm font-medium px-3 sm:px-5 py-2.5 rounded-md">
-                                                    {selectedSort} ▾
-                                                </Menu.Button>
-                                                <Menu.Items className="absolute right-0 mt-2 w-[220px] bg-white border border-gray-100 shadow-lg rounded-md py-1">
-                                                    {sortOptions.map((item) => (
-                                                        <Menu.Item key={item}>
-                                                            {({ active }) => (
-                                                            <button
-                                                                onClick={() => setSelectedSort(item)}
-                                                                className={`${
-                                                                active ? 'bg-gray-100' : ''
-                                                                } w-full text-left px-4 py-2 text-sm text-gray-700`}
-                                                            >
-                                                                {item}
-                                                            </button>
-                                                            )}
-                                                        </Menu.Item>
-                                                    ))}
-                                                </Menu.Items>
-                                            </Menu>
-                                        </div>
-                                    </div> */}
                                 </div>
                             )}
                             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -519,60 +343,6 @@ function BrandProduct() {
                                                         </span>
                                                     )}
                                                 </div>
-
-                                                {/* <div className="relative">
-                                                    {!states[index]?.showQuantity ? (
-                                                        <button
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-                                                                e.stopPropagation();
-                                                                handleToggle(index);
-                                                            }}
-                                                            className="bg-white shadow-sm text-gray-800 text-xs px-4 py-2 rounded-md font-medium flex items-center justify-between w-full"
-                                                            disabled={product.stock <= 0}
-                                                        >
-                                                            <PlusIcon className="h-5 w-5" />
-                                                            {product.stock <= 0 ? (
-                                                                <span>Out of Stock</span>
-                                                            ) : (
-                                                                <span className="flex items-center gap-2">Buy Now <span className="hidden sm:block">→</span></span>
-                                                            )}
-                                                        </button>
-                                                    ) : (
-                                                        <div className="flex items-center justify-between w-full bg-white shadow-sm rounded-md overflow-hidden">
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    decreaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                            >
-                                                                <MinusIcon className="h-4 w-4" />
-                                                            </button>
-                                                            <span className="px-3 py-1 bg-white text-gray-800">
-                                                                {states[index]?.quantity || 1}
-                                                            </span>
-                                                            <button
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-                                                                    e.stopPropagation();
-                                                                    increaseQuantity(
-                                                                        index,
-                                                                        1,
-                                                                    );
-                                                                }}
-                                                                className="text-gray-800 px-4 py-2"
-                                                                disabled={states[index]?.quantity >= product.stock}
-                                                            >
-                                                                <PlusIcon className="h-4 w-4" />
-                                                            </button>
-                                                        </div>
-                                                    )}
-                                                </div> */}
                                             </div>
                                         </Link>
                                     ))

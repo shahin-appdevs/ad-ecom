@@ -129,7 +129,15 @@
         "referral": {
             "shareTitle": "Share Referral Link",
             "shareText": "Share this link with your friends to earn commissions:"
-        }
+        },
+        "relatedProduct": {
+            "title": "Related Products",
+            "noProductsFound": "No products found",
+            "off": "off"
+        },
+        "noDescription": "No description available",
+        "noDetails": "No details available",
+        "referralLink": "Referral Link"
     },
     "Dashboard": {
         "topBar": {

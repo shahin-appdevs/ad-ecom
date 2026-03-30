@@ -129,7 +129,15 @@
         "referral": {
             "shareTitle": "Compartir enlace de referido",
             "shareText": "Comparte este enlace con tus amigos y gana comisiones:"
-        }
+        },
+        "relatedProduct": {
+            "title": "Productos relacionados",
+            "noProductsFound": "No se encontraron productos",
+            "off": "descuento"
+        },
+        "noDescription": "No hay descripción disponible",
+        "noDetails": "No hay detalles disponibles",
+        "referralLink": "Enlace de referido"
     },
     "Dashboard": {
         "topBar": {

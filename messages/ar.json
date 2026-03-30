@@ -129,7 +129,15 @@
         "referral": {
             "shareTitle": "مشاركة رابط الإحالة",
             "shareText": "شارك هذا الرابط مع أصدقائك واكسب عمولات:"
-        }
+        },
+        "relatedProduct": {
+            "title": "منتجات ذات صلة",
+            "noProductsFound": "لا توجد منتجات",
+            "off": "خصم"
+        },
+        "noDescription": "لا يوجد وصف",
+        "noDetails": "لا توجد تفاصيل",
+        "referralLink": "رابط الإحالة"
     },
     "Dashboard": {
         "topBar": {

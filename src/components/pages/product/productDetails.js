@@ -22,9 +22,6 @@ import {
 import {
     HeartIcon,
     StarIcon,
-    PlusIcon,
-    MinusIcon,
-    CheckIcon,
     ClipboardIcon,
 } from "@heroicons/react/24/outline";
 import {
@@ -36,7 +33,6 @@ import {
     productDetailsGetAPI,
     productReviewAPI,
     addWishlistAPI,
-    profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useCart } from "@/components/context/CartContext";
@@ -49,62 +45,30 @@ import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
-const ProductImageSkeleton = () => (
-    <div className="border rounded-lg overflow-hidden w-[100%] h-[300px] md:h-[449px] aspect-square bg-gray-200 animate-pulse"></div>
-);
-const ThumbnailSkeleton = () => (
-    <div className="w-16 h-16 md:w-20 md:h-20 border border-gray-300 rounded-md bg-gray-200 animate-pulse"></div>
-);
 const TextSkeleton = ({ width = "full", height = "h-4" }) => (
     <div
         className={`${width} ${height} bg-gray-200 rounded animate-pulse`}
     ></div>
 );
-const ButtonSkeleton = () => (
-    <div className="w-full h-12 bg-gray-200 rounded-md animate-pulse"></div>
-);
-const ReviewSkeleton = () => (
-    <div className="border-b pb-6">
-        <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-full bg-gray-200 animate-pulse"></div>
-            <div className="flex-1 space-y-2">
-                <div className="flex justify-between">
-                    <TextSkeleton width="w-32" />
-                    <TextSkeleton width="w-20" />
-                </div>
-                <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="w-4 h-4 bg-gray-200 rounded-full animate-pulse"
-                        ></div>
-                    ))}
-                </div>
-                <TextSkeleton width="w-full" height="h-3" />
-                <TextSkeleton width="w-3/4" height="h-3" />
-            </div>
-        </div>
-    </div>
-);
 const ProductDetailsSkeleton = () => (
     <section className="sm:pt-8">
         <div className="xl:max-w-[1530px] container mx-auto sm:px-4">
             <div className="bg-white rounded-md p-6 md:p-10">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-pulse">
-                    {/* LEFT SIDE */}
-                    <div className="flex gap-4">
-                        {/* Thumbnails */}
-                        <div className="flex flex-col gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-pulse">
+                    {/* LEFT SIDE - Image Section */}
+                    <div className="flex flex-col-reverse gap-4  xl:flex-row">
+                        {/* Thumbnails - Visible only on xl and above */}
+                        <div className="flex xl:flex-col gap-3">
                             <div className="w-16 h-16 bg-gray-200 rounded-lg" />
                             <div className="w-16 h-16 bg-gray-200 rounded-lg" />
                             <div className="w-16 h-16 bg-gray-200 rounded-lg" />
                         </div>
 
                         {/* Main Image */}
-                        <div className="flex-1 h-[400px] bg-gray-200 rounded-xl" />
+                        <div className="xl:flex-1 h-[250px] md:h-[350px] lg:h-[400px] bg-gray-200 rounded-xl" />
                     </div>
 
-                    {/* RIGHT SIDE */}
+                    {/* RIGHT SIDE - Product Info */}
                     <div className="space-y-4">
                         {/* Title */}
                         <div className="h-6 w-2/3 bg-gray-200 rounded" />
@@ -143,6 +107,8 @@ const ProductDetailsSkeleton = () => (
                         <div className="h-24 w-full bg-gray-200 rounded-lg mt-6" />
                     </div>
                 </div>
+
+                {/* Description Section */}
                 <div className="mt-8 sm:mt-16 space-y-4">
                     <TextSkeleton width="w-48" height="h-6" />
                     {[...Array(5)].map((_, i) => (
@@ -198,8 +164,7 @@ function ProductDetails() {
     const [productId, setProductId] = useState(null);
     const [reviewLoading, setReviewLoading] = useState(false);
     const [reviews, setReviews] = useState([]);
-    const { incrementCart, decrementCart } = useCart();
-    const [quantity, setQuantity] = useState(1);
+    const { incrementCart } = useCart();
     const [showQuantity, setShowQuantity] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isSellerLoggedIn, setIsSellerLoggedIn] = useState(false);
@@ -213,7 +178,6 @@ function ProductDetails() {
     const [isReferralModalOpen, setIsReferralModalOpen] = useState(false);
     const referCodeFromUrl = searchParams.get("referCode");
     const [storedReferCode, setStoredReferCode] = useState("");
-    const [hasAddedToCart, setHasAddedToCart] = useState(false);
 
     // ────────────────────────────────────────────────
     //  All your useEffect hooks, functions, handlers remain 100% unchanged
@@ -239,16 +203,6 @@ function ProductDetails() {
     }, []);
 
     useEffect(() => {
-        // const fetchUserProfile = async () => {
-        //     if (!isLoggedIn) return;
-
-        //     try {
-        //         // const response = await profiledGetAPI();
-        //         // setUserProfile(response.data.data);
-        //     } catch (error) {
-        //         console.error("Failed to fetch user profile:", error);
-        //     }
-        // };
         const userInfo = JSON.parse(localStorage.getItem("userInfo"));
         if (userInfo) {
             setIsAffiliate(userInfo?.affiliate_status);
@@ -328,7 +282,6 @@ function ProductDetails() {
                 "productDetailsCart",
                 JSON.stringify(cartItems),
             );
-            console.log("Saved cart items:", cartItems);
         },
         [data, referCodeFromUrl, selectedVariants],
     );
@@ -349,10 +302,8 @@ function ProductDetails() {
             );
             if (cartItem) {
                 setShowQuantity(true);
-                setQuantity(cartItem.quantity);
             } else {
                 setShowQuantity(false);
-                setQuantity(1);
             }
         }
     }, [data, selectedVariants]);
@@ -600,7 +551,6 @@ function ProductDetails() {
     const handleCheckoutClick = (e) => {
         if (!showQuantity) {
             setShowQuantity(true);
-            setHasAddedToCart(true);
             incrementCart();
             saveToLocalStorage(product, 1);
         }
@@ -629,7 +579,7 @@ function ProductDetails() {
                         <div className="md:col-span-6">
                             <div>
                                 <div className="flex gap-2">
-                                    <div className="hidden lg:block">
+                                    <div className="hidden xl:block">
                                         <VerticalProductGallery
                                             productData={productData}
                                             selectedImage={selectedImage}
@@ -645,7 +595,7 @@ function ProductDetails() {
                                         />
                                     </div>
                                 </div>
-                                <div className="lg:hidden">
+                                <div className="xl:hidden">
                                     <ProductThumbnails
                                         productData={productData}
                                         selectedImage={selectedImage}
@@ -663,11 +613,11 @@ function ProductDetails() {
                                         <h1 className="text-lg sm:text-xl md:text-2xl font-semibold mb-2">
                                             {productData.title}{" "}
                                         </h1>
-                                        <span className="text-green-500 bg-green-50 px-3 border-green-300 text-xs border py-1 rounded-full font-medium">
-                                            {isOutOfStock
-                                                ? tOutOfStock
-                                                : tInStock}
-                                        </span>
+                                        {!isOutOfStock && (
+                                            <span className="text-green-500 bg-green-50 px-3 border-green-300 text-xs border py-1 rounded-full font-medium">
+                                                {tInStock}
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="text-primary__color text-lg md:text-2xl font-bold mb-2">
                                         {productData.newPrice}{" "}
@@ -681,7 +631,7 @@ function ProductDetails() {
                                         variant.values?.length > 0 ? (
                                             <div
                                                 key={variant.title}
-                                                className="mb-4"
+                                                className="mb-2 xl:mb-4"
                                             >
                                                 <p className="font-semibold mb-2">
                                                     {variant.title}
@@ -697,7 +647,7 @@ function ProductDetails() {
                                                                         value,
                                                                     )
                                                                 }
-                                                                className={`relative px-4 py-2 border rounded-full font-semibold transition-all ${
+                                                                className={`relative px-4 py-1 xl:py-2 border rounded-full font-semibold transition-all ${
                                                                     selectedVariants[
                                                                         variant
                                                                             .title
@@ -707,12 +657,6 @@ function ProductDetails() {
                                                                 }`}
                                                             >
                                                                 {value}
-                                                                {selectedVariants[
-                                                                    variant
-                                                                        .title
-                                                                ] === value && (
-                                                                    <CheckIcon className="w-4 h-4 absolute -top-1 -right-1 bg-white text-primary__color rounded-full" />
-                                                                )}
                                                             </button>
                                                         ),
                                                     )}
@@ -805,7 +749,9 @@ function ProductDetails() {
                                         )}
                                         {isAffiliate && referralCode && (
                                             <div className="flex gap-2">
-                                                <strong>Referral Link:</strong>{" "}
+                                                <strong>
+                                                    {t("referralLink")}:
+                                                </strong>{" "}
                                                 <div className="flex items-center gap-2">
                                                     <button
                                                         onClick={() =>
@@ -948,12 +894,16 @@ function ProductDetails() {
                                     <div className="mt-6 lg:mt-12">
                                         <h5 className="mb-3">{tProductDesc}</h5>
                                         <div className="overflow-x-auto">
-                                            <p
-                                                className="text-color__heading text-sm md:text-base font-medium leading-[28px]"
-                                                dangerouslySetInnerHTML={{
-                                                    __html: productData.description,
-                                                }}
-                                            />
+                                            {productData.description ? (
+                                                <p
+                                                    className="text-color__heading text-sm md:text-base font-medium leading-[28px]"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: productData.description,
+                                                    }}
+                                                />
+                                            ) : (
+                                                t("noDescription")
+                                            )}
                                         </div>
                                     </div>
                                 </TabPanel>
@@ -963,12 +913,16 @@ function ProductDetails() {
                                             {tProductDetails}
                                         </h5>
                                         <div className="overflow-x-auto">
-                                            <p
-                                                className="text-color__heading text-sm md:text-base font-medium leading-[28px]"
-                                                dangerouslySetInnerHTML={{
-                                                    __html: productData.tab_description,
-                                                }}
-                                            />
+                                            {productData.tab_description ? (
+                                                <p
+                                                    className="text-color__heading text-sm md:text-base font-medium leading-[28px]"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: productData.tab_description,
+                                                    }}
+                                                />
+                                            ) : (
+                                                t("noDetails")
+                                            )}
                                         </div>
                                     </div>
                                 </TabPanel>
@@ -1280,7 +1234,13 @@ function ProductDetails() {
 
 export default function ProductDetailsPage() {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense
+            fallback={
+                <>
+                    <ProductDetailsSkeleton />
+                </>
+            }
+        >
             <ProductDetails />
         </Suspense>
     );
