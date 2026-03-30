@@ -132,6 +132,15 @@
         }
     },
     "Dashboard": {
+        "topBar": {
+            "profile": "Perfil",
+            "setupPin": "Configurar PIN",
+            "twoFaVerification": "Verificación 2FA",
+            "logout": "Cerrar sesión",
+            "confirmLogout": "Confirmar cierre de sesión",
+            "logoutConfirmation": "¿Estás seguro de que quieres cerrar sesión?",
+            "cancel": "Cancelar"
+        },
         "sidenav": {
             "dashboard": "Tablero",
             "wallet": "Cartera",
@@ -1874,6 +1883,10 @@
         }
     },
     "Campaign": {
+        "explore": "Explorar",
+        "allCampaigns": "Todas las Campañas",
+        "noCampaignsAvailable": "No hay campañas disponibles en este momento.",
+        "loadMore": "Cargar más",
         "campaignProduct": {
             "endsIn": "Termina en",
             "noProductsFound": "No se encontraron productos",
@@ -1883,6 +1896,17 @@
             "hours": "horas",
             "min": "min",
             "sec": "sec"
+        }
+    },
+    "Collection": {
+        "limitedTime": "Tiempo Limitado",
+        "allOffers": "Todas las Ofertas",
+        "noCollectionsAvailable": "No hay colecciones disponibles en este momento.",
+        "loadMore": "Cargar más",
+        "collectionProduct": {
+            "noProductsFound": "No se encontraron productos",
+            "off": "descuento",
+            "loadMore": "Cargar más"
         }
     }
 }

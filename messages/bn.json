@@ -132,6 +132,15 @@
         }
     },
     "Dashboard": {
+        "topBar": {
+            "profile": "প্রোফাইল",
+            "setupPin": "পিন সেটআপ করুন",
+            "twoFaVerification": "২এফএ যাচাইকরণ",
+            "logout": "লগআউট",
+            "confirmLogout": "লগআউট নিশ্চিত করুন",
+            "logoutConfirmation": "আপনি কি নিশ্চিত যে লগআউট করতে চান?",
+            "cancel": "বাতিল"
+        },
         "sidenav": {
             "dashboard": "ড্যাশবোর্ড",
             "wallet": "ওয়ালেট",
@@ -1874,6 +1883,10 @@
         }
     },
     "Campaign": {
+        "explore": "অন্বেষণ করুন",
+        "allCampaigns": "সকল ক্যাম্পেইন",
+        "noCampaignsAvailable": "বর্তমানে কোনো ক্যাম্পেইন উপলব্ধ নেই।",
+        "loadMore": "আরও লোড করুন",
         "campaignProduct": {
             "endsIn": "শেষ হবে",
             "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
@@ -1883,6 +1896,17 @@
             "hours": "ঘণ্টা",
             "min": "মিনিট",
             "sec": "সেকেন্ড"
+        }
+    },
+    "Collection": {
+        "limitedTime": "সীমিত সময়",
+        "allOffers": "সকল অফার",
+        "noCollectionsAvailable": "বর্তমানে কোনো কালেকশন উপলব্ধ নেই।",
+        "loadMore": "আরও লোড করুন",
+        "collectionProduct": {
+            "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
+            "off": "ছাড়",
+            "loadMore": "আরও লোড করুন"
         }
     }
 }

@@ -132,6 +132,15 @@
         }
     },
     "Dashboard": {
+        "topBar": {
+            "profile": "Profile",
+            "setupPin": "Setup Pin",
+            "twoFaVerification": "2FA Verification",
+            "logout": "Logout",
+            "confirmLogout": "Confirm Logout",
+            "logoutConfirmation": "Are you sure you want to logout?",
+            "cancel": "Cancel"
+        },
         "sidenav": {
             "dashboard": "Dashboard",
             "wallet": "Wallet",
@@ -1874,6 +1883,10 @@
         }
     },
     "Campaign": {
+        "explore": "Explore",
+        "allCampaigns": "All Campaigns",
+        "noCampaignsAvailable": "No campaigns available at the moment.",
+        "loadMore": "Load More",
         "campaignProduct": {
             "endsIn": "Ends in",
             "noProductsFound": "No products found",
@@ -1883,6 +1896,17 @@
             "hours": "hours",
             "min": "min",
             "sec": "sec"
+        }
+    },
+    "Collection": {
+        "limitedTime": "Limited Time",
+        "allOffers": "All Offers",
+        "noCollectionsAvailable": "No collections available at the moment.",
+        "loadMore": "Load More",
+        "collectionProduct": {
+            "noProductsFound": "No products found",
+            "off": "off",
+            "loadMore": "Load More"
         }
     }
 }
