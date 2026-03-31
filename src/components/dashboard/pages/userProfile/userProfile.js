@@ -18,14 +18,12 @@ import { Listbox, Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
 import { useTranslations } from "next-intl";
-import { Eye, EyeOff } from "lucide-react";
-
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 // Images
 import user from "@public/images/user/userProfile.png";
 
 export default function UserProfileSection() {
     const t = useTranslations("Dashboard.account.profile");
-
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -52,7 +50,6 @@ export default function UserProfileSection() {
         newPassword: false,
         passwordConfirmation: false,
     });
-
     const [userData, setUserData] = useState({
         firstname: "",
         lastname: "",
@@ -70,9 +67,7 @@ export default function UserProfileSection() {
         },
         nid_or_birth_id: "",
     });
-
     const { canReselling } = useFeatureAccess();
-
     // KYC status mapping with translations
     const statusMap = {
         0: {
@@ -96,7 +91,6 @@ export default function UserProfileSection() {
             description: t("kyc.rejectedDesc"),
         },
     };
-
     // Fetch profile data on mount
     useEffect(() => {
         const fetchProfileData = async () => {
@@ -137,7 +131,6 @@ export default function UserProfileSection() {
         };
         fetchProfileData();
     }, []);
-
     // Handle profile form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -220,7 +213,6 @@ export default function UserProfileSection() {
             setIsUpdating(false);
         }
     };
-
     // Handle password change
     const handlePasswordUpdate = async (e) => {
         e.preventDefault();
@@ -255,7 +247,6 @@ export default function UserProfileSection() {
             setIsChanging(false);
         }
     };
-
     // Handle account deletion
     const onProfileDelete = async () => {
         setLoading(true);
@@ -282,7 +273,6 @@ export default function UserProfileSection() {
             setLoading(false);
         }
     };
-
     // Fetch KYC data
     const fetchKYCData = useCallback(async () => {
         try {
@@ -295,11 +285,9 @@ export default function UserProfileSection() {
             toast.error(t("errors.kycFetch"));
         }
     }, []);
-
     useEffect(() => {
         fetchKYCData();
     }, [fetchKYCData]);
-
     // KYC form submission
     const handleKycSubmit = async (e) => {
         e.preventDefault();
@@ -333,7 +321,6 @@ export default function UserProfileSection() {
             }
         }
     };
-
     // Dropzone for front ID
     const {
         getRootProps: getFrontRootProps,
@@ -360,7 +347,6 @@ export default function UserProfileSection() {
             setKycErrors([...kycErrors, t("kyc.errors.frontRejected")]);
         },
     });
-
     // Dropzone for back ID
     const {
         getRootProps: getBackRootProps,
@@ -387,7 +373,6 @@ export default function UserProfileSection() {
             setKycErrors([...kycErrors, t("kyc.errors.backRejected")]);
         },
     });
-
     // Fetch divisions on mount
     useEffect(() => {
         const fetchDivisions = async () => {
@@ -404,7 +389,6 @@ export default function UserProfileSection() {
         };
         fetchDivisions();
     }, []);
-
     // Fetch districts when division changes
     const fetchDistricts = async (divisionId) => {
         try {
@@ -429,7 +413,6 @@ export default function UserProfileSection() {
             console.error("Error fetching districts:", error);
         }
     };
-
     // Fetch upazillas when district changes
     const fetchUpazillas = async (districtId) => {
         try {
@@ -452,7 +435,6 @@ export default function UserProfileSection() {
             console.error("Error fetching upazillas:", error);
         }
     };
-
     const handleImageChange = (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -460,7 +442,6 @@ export default function UserProfileSection() {
             setUserImageUrl(URL.createObjectURL(file));
         }
     };
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setUserData((prev) => ({
@@ -468,7 +449,6 @@ export default function UserProfileSection() {
             [name]: value,
         }));
     };
-
     const handleAddressChange = (e) => {
         const { name, value } = e.target;
         setUserData((prev) => ({
@@ -484,7 +464,6 @@ export default function UserProfileSection() {
             fetchUpazillas(value);
         }
     };
-
     const CustomListbox = ({
         label,
         value,
@@ -569,7 +548,6 @@ export default function UserProfileSection() {
             </div>
         );
     };
-
     if (loading) {
         return (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
@@ -620,7 +598,6 @@ export default function UserProfileSection() {
             </div>
         );
     }
-
     return (
         <>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
@@ -772,7 +749,6 @@ export default function UserProfileSection() {
                                     </p>
                                 )}
                             </div>
-
                             <CustomListbox
                                 label={t("labels.division")}
                                 value={Number(userData.address.division)}
@@ -927,7 +903,6 @@ export default function UserProfileSection() {
                         />
                     </form>
                 </div>
-
                 <div className="flex flex-col gap-4 col-span-12 lg:col-span-5">
                     <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7">
                         <div className="flex items-center justify-between mb-4">
@@ -961,7 +936,6 @@ export default function UserProfileSection() {
                             )}
                         </div>
                     </div>
-
                     <div className="bg-white h-full rounded-[12px] p-5 sm:p-6 md:p-7">
                         <div className="flex items-center justify-between mb-4">
                             <h5>{t("sections.changePassword")}</h5>
@@ -1000,9 +974,9 @@ export default function UserProfileSection() {
                                         className="absolute ltr:right-3 rtl:left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
                                     >
                                         {showPassword?.currentPassword ? (
-                                            <EyeOff />
+                                            <EyeSlashIcon className="h-5 w-5" />
                                         ) : (
-                                            <Eye />
+                                            <EyeIcon className="h-5 w-5" />
                                         )}
                                     </button>
                                 </div>
@@ -1037,9 +1011,9 @@ export default function UserProfileSection() {
                                         className="absolute ltr:right-3 rtl:left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
                                     >
                                         {showPassword?.newPassword ? (
-                                            <EyeOff />
+                                            <EyeSlashIcon className="h-5 w-5" />
                                         ) : (
-                                            <Eye />
+                                            <EyeIcon className="h-5 w-5" />
                                         )}
                                     </button>
                                 </div>
@@ -1076,9 +1050,9 @@ export default function UserProfileSection() {
                                         className="absolute ltr:right-3 rtl:left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none transition-colors"
                                     >
                                         {showPassword?.passwordConfirmation ? (
-                                            <EyeOff />
+                                            <EyeSlashIcon className="h-5 w-5" />
                                         ) : (
-                                            <Eye />
+                                            <EyeIcon className="h-5 w-5" />
                                         )}
                                     </button>
                                 </div>
@@ -1098,7 +1072,6 @@ export default function UserProfileSection() {
                         </form>
                     </div>
                 </div>
-
                 <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12">
                     <div className="flex flex-col md:flex-row gap-2 md:gap-0 items-center justify-between mb-4">
                         <h5>{t("sections.kycInformation")}</h5>
@@ -1118,7 +1091,6 @@ export default function UserProfileSection() {
                             )}
                         </div>
                     </div>
-
                     {status === "Verified" ? (
                         <div className="p-4 bg-green-50 text-green-600 rounded-md">
                             <p className="font-medium">
@@ -1137,7 +1109,6 @@ export default function UserProfileSection() {
                                 <p className="text-xs text-gray-500 mb-3">
                                     {t("kyc.uploadInstruction")}
                                 </p>
-
                                 {kycErrors.length > 0 && (
                                     <div className="mb-3 p-3 bg-red-50 text-red-600 rounded-md">
                                         {kycErrors.map((error, index) => (
@@ -1147,7 +1118,6 @@ export default function UserProfileSection() {
                                         ))}
                                     </div>
                                 )}
-
                                 {/* Front ID */}
                                 <div className="mb-6">
                                     <label className="block text-sm font-medium mb-2">
@@ -1214,7 +1184,6 @@ export default function UserProfileSection() {
                                         )}
                                     </div>
                                 </div>
-
                                 {/* Back ID */}
                                 <div className="mb-6">
                                     <label className="block text-sm font-medium mb-2">
@@ -1282,7 +1251,6 @@ export default function UserProfileSection() {
                                     </div>
                                 </div>
                             </div>
-
                             <Button
                                 type="submit"
                                 title={
@@ -1299,7 +1267,6 @@ export default function UserProfileSection() {
                     )}
                 </div>
             </div>
-
             {/* Delete Account Confirmation Modal */}
             <Transition appear show={isLogoutModalOpen} as={Fragment}>
                 <Dialog
@@ -1318,7 +1285,6 @@ export default function UserProfileSection() {
                     >
                         <div className="fixed inset-0 bg-black bg-opacity-25" />
                     </Transition.Child>
-
                     <div className="fixed inset-0 overflow-y-auto">
                         <div className="flex min-h-full items-center justify-center p-4 text-center">
                             <Transition.Child

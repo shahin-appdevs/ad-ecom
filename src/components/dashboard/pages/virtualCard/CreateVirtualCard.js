@@ -9,15 +9,14 @@ import {
 
 import RHFSelect from "@/components/ui/form/RHFSelect";
 import {
-    Calendar1,
-    CalendarDays,
-    LoaderCircle,
-    Maximize2,
-    Minimize2,
-    Plus,
+    CalendarIcon,
+    CalendarDaysIcon,
+    LoaderCircleIcon,
+    ArrowsPointingOutIcon,
+    ArrowsPointingInIcon,
+    PlusIcon,
     WalletIcon,
-    Wifi,
-} from "lucide-react";
+} from "@heroicons/react/24/outline";
 import { Link } from "@/i18n/navigation";
 import { RHFInput } from "@/components/ui/form/Input";
 import {
@@ -312,7 +311,8 @@ export default function CreateVirtualCard() {
                     href={"/user/cards/virtual-card/update-customer"}
                     className=" bg-primary__color text-white__color flex justify-center items-center py-3 px-5 gap-2 font-semibold rounded-[6px] transition hover:bg-secondary__color hover:scale-x-105"
                 >
-                    <span>{t("updateCustomer")}</span> <Plus />
+                    <span>{t("updateCustomer")}</span>{" "}
+                    <PlusIcon className="h-5 w-5" />
                 </Link>
             </div>
             <div className=" grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -384,15 +384,6 @@ export default function CreateVirtualCard() {
                                     </span>
                                 </p>
                             )}
-                            {/* {calculation?.totalAmount && (
-                                <p className="text-sm inline-block p-2 md:p-4 bg-gray-50 border border-gray-200 rounded-lg w-full">
-                                    Payable Amount <br />{" "}
-                                    <span className="font-medium text-lg text-neutral-700">
-                                        {" "}
-                                        {`${parseFloat(calculation?.totalAmount).toFixed(6)}  ${cardCurrency.code}`}
-                                    </span>
-                                </p>
-                            )} */}
                         </div>
 
                         <button
@@ -401,12 +392,9 @@ export default function CreateVirtualCard() {
                         >
                             <span>{t("buyCard")}</span>{" "}
                             {isSubmitting ? (
-                                <LoaderCircle
-                                    size={20}
-                                    className="animate-spin"
-                                />
+                                <LoaderCircleIcon className="animate-spin w-[20px]" />
                             ) : (
-                                <Plus size={20} />
+                                <PlusIcon className="w-[20px]" />
                             )}
                         </button>
                     </form>
@@ -417,11 +405,13 @@ export default function CreateVirtualCard() {
                     <VirtualCardChargeOverview
                         amount={fromAmount}
                         calculation={calculation}
+                        t={t}
                     />
                     {/* Limit Informations */}
                     <VirtualCardLimits
                         limitsCalculation={limitsCalculation}
                         remainingLoading={remainingLoading}
+                        t={t}
                     />
                 </div>
             </div>
@@ -431,7 +421,7 @@ export default function CreateVirtualCard() {
 
 /* ------------------ Components ------------------ */
 
-const VirtualCardChargeOverview = ({ amount, calculation }) => {
+const VirtualCardChargeOverview = ({ amount, calculation, t }) => {
     return (
         <div className="bg-white  border border-gray-200 p-4 rounded-xl ">
             <Header title={t("overview")} />
@@ -479,7 +469,7 @@ const VirtualCardChargeOverview = ({ amount, calculation }) => {
     );
 };
 
-const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
+const VirtualCardLimits = ({ limitsCalculation, remainingLoading, t }) => {
     return (
         <div>
             <div className="bg-white border-gray-200 border rounded-2xl p-4">
@@ -494,7 +484,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                             {
                                 label: (
                                     <div className="flex items-center space-x-2 text-gray-600">
-                                        <Minimize2 className="w-5 h-5 text-indigo-500" />
+                                        <ArrowsPointingInIcon className="w-5 h-5 text-indigo-500" />
                                         <span>{t("minLimit")}</span>
                                     </div>
                                 ),
@@ -503,7 +493,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                             {
                                 label: (
                                     <div className="flex items-center space-x-2 text-gray-600">
-                                        <Maximize2 className="w-5 h-5 text-indigo-500" />
+                                        <ArrowsPointingOutIcon className="w-5 h-5 text-indigo-500" />
                                         <span>{t("maxLimit")}</span>
                                     </div>
                                 ),
@@ -512,7 +502,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                             {
                                 label: (
                                     <div className="flex items-center space-x-2">
-                                        <Calendar1 className="w-5 h-5 text-emerald-500" />
+                                        <CalendarIcon className="w-5 h-5 text-emerald-500" />
                                         <span>{t("dailyLimit")}</span>
                                     </div>
                                 ),
@@ -521,7 +511,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                             {
                                 label: (
                                     <div className="flex items-center space-x-2">
-                                        <CalendarDays className="w-5 h-5 text-emerald-500" />
+                                        <CalendarDaysIcon className="w-5 h-5 text-emerald-500" />
                                         <span>{t("monthlyLimit")}</span>
                                     </div>
                                 ),
@@ -530,7 +520,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                             {
                                 label: (
                                     <div className="flex items-center space-x-2">
-                                        <Calendar1 className="w-5 h-5 text-yellow-500" />
+                                        <CalendarIcon className="w-5 h-5 text-yellow-500" />
                                         <span>{t("remainingDailyLimit")}</span>
                                     </div>
                                 ),
@@ -539,7 +529,7 @@ const VirtualCardLimits = ({ limitsCalculation, remainingLoading }) => {
                             {
                                 label: (
                                     <div className="flex items-center space-x-2">
-                                        <CalendarDays className="w-5 h-5 text-yellow-500" />
+                                        <CalendarDaysIcon className="w-5 h-5 text-yellow-500" />
                                         <span>
                                             {t("remainingMonthlyLimit")}
                                         </span>
@@ -658,75 +648,6 @@ function VirtualCardCreateSkeleton() {
                                 <div className="h-3 w-24 bg-gray-200 rounded animate-pulse" />
                             </div>
                         ))}
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function DemoCard() {
-    return (
-        <div className="flex items-center justify-center cursor-pointer">
-            <div className="bg-gradient-to-br w-full max-w-[375px] hover:shadow-lg duration-300 from-blue-500/85 to-blue-700/85 rounded-3xl p-4 md:p-8 text-white shadow relative overflow-hidden">
-                {/* Background Pattern (optional subtle) */}
-                <div className="absolute inset-0 opacity-20">
-                    <div className="grid grid-cols-8 grid-rows-8 gap-1 h-full w-full">
-                        {Array.from({ length: 64 }).map((_, i) => (
-                            <div key={i} className="bg-white/10 rounded" />
-                        ))}
-                    </div>
-                </div>
-
-                {/* Card Content */}
-                <div className="relative z-10">
-                    <div className="flex justify-between items-start ">
-                        <div>
-                            <h3 className="text-xl text-white font-semibold  ">
-                                Demo
-                            </h3>
-                            <div className="flex gap-2 items-center">
-                                <div className=" p-3 rounded-lg">
-                                    <div className="chip">
-                                        <div className="chip-line"></div>
-                                        <div className="chip-line"></div>
-                                        <div className="chip-line"></div>
-                                        <div className="chip-line"></div>
-                                        <div className="chip-main"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <Wifi className="rotate-90 text-4xl" />
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* QR Code */}
-                        <div className="bg-white p-3 rounded-xl">
-                            <div className=" bg-gray-200 border-2 border-dashed rounded-xl" />
-                        </div>
-                    </div>
-
-                    {/* Card Number */}
-                    <div className="text-xs md:text-xl 2xl:text-2xl tracking-wider mb-4 font-mono">
-                        4334 51** **** *15 83
-                    </div>
-
-                    {/* Expiry & Name */}
-                    <div className="flex justify-between items-end">
-                        <div>
-                            <p className="text-xs xl:text-sm opacity-90">
-                                EXP. END
-                            </p>
-                            <p className="text-base 2xl:text-xl font-semibold">
-                                00/0000
-                            </p>
-                        </div>
-                        <div className="text-right">
-                            <p className="text-sm md:text-xl font-semibold uppercase">
-                                VISA
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>

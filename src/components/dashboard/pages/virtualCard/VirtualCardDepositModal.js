@@ -15,13 +15,12 @@ import {
     walletGetAPI,
 } from "@root/services/apiClient/apiClient";
 import {
-    Calendar1,
-    CalendarDays,
-    Maximize2,
-    Minimize2,
-    Wallet,
+    CalendarIcon,
+    CalendarDaysIcon,
+    ArrowsPointingOutIcon, // Maximize2
+    ArrowsPointingInIcon, // Minimize2
     WalletIcon,
-} from "lucide-react";
+} from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useRouter } from "@/i18n/navigation";
 import React, { useEffect, useMemo, useState } from "react";
@@ -30,7 +29,6 @@ import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
 
 //exchange helper function
-
 const getExchangeRate = (fromRate, toRate) => {
     if (!fromRate || !toRate) return 0;
     return Number(fromRate) / Number(toRate);
@@ -379,7 +377,7 @@ const VirtualCardDepositModal = ({
                             <div className="flex items-center gap-3 mb-3">
                                 <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
                                     <span className="text-green-700 text-xl">
-                                        <Wallet />
+                                        <WalletIcon className="w-6 h-6" />
                                     </span>
                                 </div>
                                 <div>
@@ -431,7 +429,7 @@ const VirtualCardDepositModal = ({
                                                 0,
                                                 4,
                                             )}
-                                            
+                                           
                                             ${myVirtualCard?.card_number?.slice(
                                                 4,
                                                 6,
@@ -441,7 +439,7 @@ const VirtualCardDepositModal = ({
                                                 -4,
                                                 -2,
                                             )}
-                                            
+                                           
                                             ${myVirtualCard?.card_number?.slice(
                                                 -2,
                                             )}
@@ -515,7 +513,7 @@ const VirtualCardDepositModal = ({
                                     {
                                         label: (
                                             <div className="flex items-center space-x-2 text-gray-600">
-                                                <Minimize2 className="w-5 h-5 text-indigo-500" />
+                                                <ArrowsPointingInIcon className="w-5 h-5 text-indigo-500" />
                                                 <span>{t("minLimit")}</span>
                                             </div>
                                         ),
@@ -524,7 +522,7 @@ const VirtualCardDepositModal = ({
                                     {
                                         label: (
                                             <div className="flex items-center space-x-2 text-gray-600">
-                                                <Maximize2 className="w-5 h-5 text-indigo-500" />
+                                                <ArrowsPointingOutIcon className="w-5 h-5 text-indigo-500" />
                                                 <span>{t("maxLimit")}</span>
                                             </div>
                                         ),
@@ -533,7 +531,7 @@ const VirtualCardDepositModal = ({
                                     {
                                         label: (
                                             <div className="flex items-center space-x-2">
-                                                <Calendar1 className="w-5 h-5 text-emerald-500" />
+                                                <CalendarIcon className="w-5 h-5 text-emerald-500" />
                                                 <span>{t("dailyLimit")}</span>
                                             </div>
                                         ),
@@ -542,7 +540,7 @@ const VirtualCardDepositModal = ({
                                     {
                                         label: (
                                             <div className="flex items-center space-x-2">
-                                                <CalendarDays className="w-5 h-5 text-emerald-500" />
+                                                <CalendarDaysIcon className="w-5 h-5 text-emerald-500" />
                                                 <span>{t("monthlyLimit")}</span>
                                             </div>
                                         ),
@@ -551,7 +549,7 @@ const VirtualCardDepositModal = ({
                                     {
                                         label: (
                                             <div className="flex items-center space-x-2">
-                                                <Calendar1 className="w-5 h-5 text-yellow-500" />
+                                                <CalendarIcon className="w-5 h-5 text-yellow-500" />
                                                 <span>
                                                     {t("remainingDailyLimit")}
                                                 </span>
@@ -562,7 +560,7 @@ const VirtualCardDepositModal = ({
                                     {
                                         label: (
                                             <div className="flex items-center space-x-2">
-                                                <CalendarDays className="w-5 h-5 text-yellow-500" />
+                                                <CalendarDaysIcon className="w-5 h-5 text-yellow-500" />
                                                 <span>
                                                     {t("remainingMonthlyLimit")}
                                                 </span>

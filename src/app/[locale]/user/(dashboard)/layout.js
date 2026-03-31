@@ -8,7 +8,7 @@ import DynamicTitle from "@/components/shared/dynamicTitle";
 import { dashboardGetAPI } from "@root/services/apiClient/apiClient";
 import { DashboardProvider } from "@/components/context/DashboardContext";
 import { WalletProvider } from "@/components/context/WalletContext";
-import { LoaderCircle } from "lucide-react";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
 
 export default function DashboardLayout({ children }) {
@@ -95,7 +95,7 @@ export default function DashboardLayout({ children }) {
     if (isLoading) {
         return (
             <div className="h-screen w-screen absolute top-0 left-0 flex items-center justify-center bg-white z-[999]">
-                <LoaderCircle className="inline-block w-7 h-auto animate-spin text-primary__color" />
+                <ArrowPathIcon className="inline-block w-7 h-auto animate-spin text-primary__color" />
             </div>
         );
     }
