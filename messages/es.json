@@ -1921,5 +1921,9 @@
         "noProductsFound": "No se encontraron productos",
         "off": "descuento",
         "loadMore": "Cargar más"
+    },
+    "CategoryPage": {
+        "title": "Todas las Categorías",
+        "viewAll": "Ver Todo"
     }
 }

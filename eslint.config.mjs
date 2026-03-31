@@ -1,14 +1,15 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+// eslint.config.mjs
 import { FlatCompat } from "@eslint/eslintrc";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+    // Node v20.11.0+ এ কাজ করে
+    baseDirectory: import.meta.dirname,
 });
 
-const eslintConfig = [...compat.extends("next/core-web-vitals")];
+const eslintConfig = [
+    ...compat.config({
+        extends: ["next/core-web-vitals"],
+    }),
+];
 
 export default eslintConfig;

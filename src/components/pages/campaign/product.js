@@ -1,11 +1,9 @@
 "use client";
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
-import { useCart } from "@/components/context/CartContext";
 import {
     campaignProductGetAPI,
     nextPageGetAPI,
@@ -74,8 +72,6 @@ function CampaignProduct() {
         minutes: "00",
         seconds: "00",
     });
-    const [states, setStates] = useState([]);
-    const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
@@ -91,7 +87,7 @@ function CampaignProduct() {
 
             try {
                 const response = await profiledGetAPI();
-                setUserProfile(response.data.data);
+
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );
@@ -136,8 +132,6 @@ function CampaignProduct() {
                 quantity: 1,
             };
         });
-
-        setStates(initialStates);
     }, [data]);
 
     useEffect(() => {
@@ -240,12 +234,6 @@ function CampaignProduct() {
                     }
 
                     setProducts(formattedProducts);
-                    setStates(
-                        formattedProducts.map(() => ({
-                            showQuantity: false,
-                            quantity: 1,
-                        })),
-                    );
                 }
             } catch (error) {
                 toast.error(error.response?.data?.message?.error?.[0]);
@@ -324,13 +312,7 @@ function CampaignProduct() {
                 formatProduct(p, res.data.data),
             );
             setProducts((prev) => [...prev, ...newFormatted]);
-            setStates((prev) => [
-                ...prev,
-                ...newFormatted.map(() => ({
-                    showQuantity: false,
-                    quantity: 1,
-                })),
-            ]);
+
             setData((prev) => ({
                 ...prev,
                 products: {

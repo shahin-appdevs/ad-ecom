@@ -1,10 +1,9 @@
 "use client";
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { useCart } from "@/components/context/CartContext";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import {
     childCategoryGetAPI,
@@ -42,13 +41,11 @@ function SubCategoryProduct() {
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { incrementCart, decrementCart } = useCart();
     const searchParams = useSearchParams();
     const idParam = searchParams.get("id");
     const categoryId = searchParams.get("category-id");
     const childCategoryId = searchParams.get("child-id");
     const [childSubCategoryId, setSubChildCategoryId] = useState(null);
-    const [states, setStates] = useState([]);
     const [childSubCategories, setChildSubCategories] = useState([]);
     const [currentSubCategory, setCurrentSubCategory] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
@@ -90,70 +87,6 @@ function SubCategoryProduct() {
             typeof price === "string" ? parseFloat(price) : price;
         return `৳${numericValue.toFixed(2)}`;
     };
-
-    const saveToLocalStorage = useCallback(
-        (product, quantity) => {
-            if (!data?.products?.data) return;
-
-            const savedCart = localStorage.getItem("subCategoryCart");
-            let cartItems = savedCart ? JSON.parse(savedCart) : [];
-
-            const existingIndex = cartItems.findIndex(
-                (item) => item.id === product.id,
-            );
-
-            const price =
-                isReseller && product.product_additional_prices?.resell_price
-                    ? product.product_additional_prices.resell_price
-                    : product.product_additional_prices?.flash_price ||
-                      product.product_prices?.sale_price ||
-                      product.product_prices?.list_price;
-
-            if (existingIndex >= 0) {
-                cartItems[existingIndex].quantity = quantity;
-                cartItems[existingIndex].price = price;
-            } else {
-                cartItems.push({
-                    id: product.id,
-                    title: product.title,
-                    price: price,
-                    quantity: quantity,
-                    image: product.main_image
-                        ? `${backendBaseURL}/${data.main_image_path}/${product.main_image}`
-                        : `${backendBaseURL}/${data.default_image_path}`,
-                    base_curr_symbol: data.base_curr_symbol,
-                });
-            }
-
-            cartItems = cartItems.filter((item) => item.quantity > 0);
-            localStorage.setItem("subCategoryCart", JSON.stringify(cartItems));
-        },
-        [data, isReseller],
-    );
-
-    useEffect(() => {
-        if (!data?.products?.data) return;
-
-        const savedCart = localStorage.getItem("subCategoryCart");
-        const initialStates = data.products.data.map((product) => {
-            if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                const cartItem = parsedCart.find(
-                    (item) => item.id === product.id,
-                );
-                return {
-                    showQuantity: !!cartItem,
-                    quantity: cartItem?.quantity || 1,
-                };
-            }
-            return {
-                showQuantity: false,
-                quantity: 1,
-            };
-        });
-
-        setStates(initialStates);
-    }, [data]);
 
     useEffect(() => {
         const fetchSubCategories = async () => {
@@ -269,12 +202,6 @@ function SubCategoryProduct() {
                         });
 
                     setProducts(formattedProducts);
-                    setStates(
-                        formattedProducts.map(() => ({
-                            showQuantity: false,
-                            quantity: 1,
-                        })),
-                    );
                 }
             } catch (error) {
                 toast.error(error.response?.data?.message?.error?.[0]);
@@ -372,13 +299,7 @@ function SubCategoryProduct() {
                 formatProduct(p, res.data.data),
             );
             setProducts((prev) => [...prev, ...newFormatted]);
-            setStates((prev) => [
-                ...prev,
-                ...newFormatted.map(() => ({
-                    showQuantity: false,
-                    quantity: 1,
-                })),
-            ]);
+
             setData((prev) => ({
                 ...prev,
                 products: {

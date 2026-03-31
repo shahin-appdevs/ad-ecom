@@ -13,16 +13,6 @@ import { useTranslations } from "next-intl"; // ← Added
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
-const CollectionSkeleton = () => (
-    <div className="w-full sm:h-[175px] relative overflow-hidden rounded-md">
-        <div className="w-full h-full bg-gray-200 animate-pulse"></div>
-        <div className="absolute bottom-0 left-0 right-0 p-2">
-            <div className="h-4 bg-gray-300 rounded w-3/4 mb-2 animate-pulse"></div>
-            <div className="h-3 bg-gray-300 rounded w-1/2 animate-pulse"></div>
-        </div>
-    </div>
-);
-
 export default function Collection() {
     const t = useTranslations("Collection"); // ← Added as requested
 

@@ -1921,5 +1921,9 @@
         "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
         "off": "ছাড়",
         "loadMore": "আরও লোড করুন"
+    },
+    "CategoryPage": {
+        "title": "সকল ক্যাটেগরি",
+        "viewAll": "সব দেখুন"
     }
 }

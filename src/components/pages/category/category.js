@@ -8,13 +8,14 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 // Skeleton Loading Components
 const CategorySkeleton = () => (
-    <div className="text-center  px-[10px] md:p-[10px] ">
-        <div className="w-full h-[56px] md:h-[106px] bg-gray-200  animate-pulse"></div>
+    <div className="text-center px-[10px] md:p-[10px]">
+        <div className="w-full h-[56px] md:h-[106px] bg-gray-200 animate-pulse"></div>
         <div className="pt-[10px]">
             <div className="h-4 bg-gray-200 rounded animate-pulse mx-auto w-3/4"></div>
         </div>
@@ -25,7 +26,7 @@ const SubcategorySkeleton = () => (
     <div className="text-center">
         <div className="w-[70px] h-[70px] md:w-[100px] md:h-[100px] bg-gray-200 mx-auto animate-pulse"></div>
         <div className="pt-[10px]">
-            <div className="h-4 bg-gray-200  animate-pulse mx-auto w-3/4"></div>
+            <div className="h-4 bg-gray-200 animate-pulse mx-auto w-3/4"></div>
         </div>
     </div>
 );
@@ -43,6 +44,9 @@ export default function Categories() {
         child_category_image_path: "",
         default_image_path: "",
     });
+
+    // Language Support
+    const t = useTranslations("CategoryPage");
 
     useEffect(() => {
         fetchCategories();
@@ -105,13 +109,15 @@ export default function Categories() {
 
     return (
         <section className="sm:pt-4">
-            <div className="xl:max-w-[1530px] mx-auto ">
+            <div className="xl:max-w-[1530px] mx-auto">
                 <div className="bg-white rounded-md">
                     <div className="flex items-center justify-between gap-3 sm:gap-0 py-4 px-6">
-                        <h5>All Categories</h5>
+                        <h5>{t("title")}</h5>
                     </div>
-                    <div className="grid grid-cols-12 md:grid-cols-12  md:gap-4">
-                        <div className="col-span-3  md:col-span-3 lg:col-span-3 xl:col-span-2 relative w-full h-full">
+
+                    <div className="grid grid-cols-12 md:gap-4">
+                        {/* Left Sidebar - Main Categories */}
+                        <div className="col-span-3 md:col-span-3 lg:col-span-3 xl:col-span-2 relative w-full h-full">
                             <div className="max-h-[100vh] overflow-y-auto border-r">
                                 <ul className="lg:px-12 space-y-2">
                                     {loading.main
@@ -147,7 +153,7 @@ export default function Categories() {
                                                   />
 
                                                   <div className="relative flex items-center justify-center">
-                                                      <div className="aspect-square md:h-[106px] md:w-[106px]  overflow-hidden">
+                                                      <div className="aspect-square md:h-[106px] md:w-[106px] overflow-hidden">
                                                           <Image
                                                               src={getCategoryImage(
                                                                   category,
@@ -157,7 +163,7 @@ export default function Categories() {
                                                               alt={
                                                                   category.title
                                                               }
-                                                              className="w-full h-full  object-cover transition-transform duration-300 group-hover:scale-105"
+                                                              className="w-full h-full object-cover transition-transform duration-300"
                                                           />
                                                       </div>
                                                   </div>
@@ -172,6 +178,8 @@ export default function Categories() {
                                 </ul>
                             </div>
                         </div>
+
+                        {/* Right Side - Subcategories */}
                         <div className="col-span-9 md:col-span-9 lg:col-span-9 xl:col-span-10 px-2 md:px-0">
                             <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 md:gap-6">
                                 {loading.subcategories ? (
@@ -184,34 +192,26 @@ export default function Categories() {
                                         ))
                                 ) : (
                                     <>
+                                        {/* View All Button */}
                                         {selectedCategory && (
-                                            <div className="group text-center ">
+                                            <div className="group text-center">
                                                 <Link
                                                     href={`/categories/products?id=${selectedCategory.id}`}
-                                                    className="relative "
+                                                    className="relative"
                                                 >
-                                                    <div className="w-[70px] md:w-[100px] h-[70px] md:h-[100px]  mx-auto transition flex items-center justify-center border ">
-                                                        {/* <Image
-                                                            src={getCategoryImage(
-                                                                selectedCategory,
-                                                            )}
-                                                            width={100}
-                                                            height={100}
-                                                            alt={
-                                                                selectedCategory.title
-                                                            }
-                                                            className="w-full h-full object-cover "
-                                                        /> */}
-                                                        <ArrowRight className="text-primary__color" />
+                                                    <div className="w-[70px] md:w-[100px] h-[70px] md:h-[100px] mx-auto transition flex items-center justify-center border">
+                                                        <ArrowRight className="text-primary__color rtl:rotate-180" />
                                                     </div>
                                                 </Link>
                                                 <div className="pt-[10px]">
                                                     <h5 className="text-xs md:text-sm font-semibold group-hover:text-primary__color transition duration-300">
-                                                        View All
+                                                        {t("viewAll")}
                                                     </h5>
                                                 </div>
                                             </div>
                                         )}
+
+                                        {/* Child Categories */}
                                         {childCategories.map(
                                             (childCategory) => (
                                                 <div
@@ -219,10 +219,10 @@ export default function Categories() {
                                                     className="text-center group"
                                                 >
                                                     <Link
-                                                        href={`/sub-categories/products?category-id=${selectedCategory.id}&child-id=${childCategory.id}`}
+                                                        href={`/sub-categories/products?category-id=${selectedCategory?.id}&child-id=${childCategory.id}`}
                                                         className="relative"
                                                     >
-                                                        <div className="w-[70px] md:w-[100px] h-[70px] md:h-[100px]  mx-auto transition ">
+                                                        <div className="w-[70px] md:w-[100px] h-[70px] md:h-[100px] mx-auto transition">
                                                             <Image
                                                                 src={getChildCategoryImage(
                                                                     childCategory,
@@ -232,7 +232,7 @@ export default function Categories() {
                                                                 alt={
                                                                     childCategory.title
                                                                 }
-                                                                className="w-full h-full object-cover "
+                                                                className="w-full h-full object-cover"
                                                             />
                                                         </div>
                                                     </Link>

@@ -1,11 +1,9 @@
 "use client";
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
-import { useCart } from "@/components/context/CartContext";
 import {
     collectionProductGetAPI,
     nextPageGetAPI,
@@ -45,12 +43,9 @@ function CollectionProduct() {
     const [products, setProducts] = useState([]);
     const [collection, setCollection] = useState(null);
     const [loading, setLoading] = useState(true);
-    const { incrementCart, decrementCart } = useCart();
     const searchParams = useSearchParams();
     const idParam = searchParams.get("id");
     const [collectionId, setCollectionId] = useState(null);
-    const [states, setStates] = useState([]);
-    const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
@@ -66,7 +61,7 @@ function CollectionProduct() {
 
             try {
                 const response = await profiledGetAPI();
-                setUserProfile(response.data.data);
+
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );
@@ -91,49 +86,6 @@ function CollectionProduct() {
         return `৳${numericValue.toFixed(2)}`;
     };
 
-    const saveToLocalStorage = useCallback(
-        (product, quantity) => {
-            if (!data?.products?.data) return;
-
-            const savedCart = localStorage.getItem("collectionCart");
-            let cartItems = savedCart ? JSON.parse(savedCart) : [];
-
-            const existingIndex = cartItems.findIndex(
-                (item) => item.id === product.id,
-            );
-
-            const price =
-                isReseller && product.product_additional_prices?.resell_price
-                    ? product.product_additional_prices.resell_price
-                    : product.product_additional_prices?.flash_price ||
-                      product.product_prices?.sale_price ||
-                      product.product_prices?.list_price;
-
-            if (existingIndex >= 0) {
-                cartItems[existingIndex].quantity = quantity;
-                cartItems[existingIndex].price = price;
-            } else {
-                cartItems.push({
-                    id: product.id,
-                    title: product.title,
-                    price: price,
-                    quantity: quantity,
-                    image: product.main_image
-                        ? `${backendBaseURL}/${data.product_image_path}/${product.main_image}`
-                        : `${backendBaseURL}/${data.default_image_path}`,
-                    base_curr_symbol: data.base_curr_symbol,
-                    isResellerPrice:
-                        isReseller &&
-                        product.product_additional_prices?.resell_price,
-                });
-            }
-
-            cartItems = cartItems.filter((item) => item.quantity > 0);
-            localStorage.setItem("collectionCart", JSON.stringify(cartItems));
-        },
-        [data, isReseller],
-    );
-
     useEffect(() => {
         if (!data?.products?.data) return;
 
@@ -154,8 +106,6 @@ function CollectionProduct() {
                 quantity: 1,
             };
         });
-
-        setStates(initialStates);
     }, [data]);
 
     useEffect(() => {
@@ -262,12 +212,6 @@ function CollectionProduct() {
                     }
 
                     setProducts(formattedProducts);
-                    setStates(
-                        formattedProducts.map(() => ({
-                            showQuantity: false,
-                            quantity: 1,
-                        })),
-                    );
                 }
             } catch (error) {
                 toast.error(error.response?.data?.message?.error?.[0]);
@@ -346,13 +290,7 @@ function CollectionProduct() {
                 formatProduct(p, res.data.data),
             );
             setProducts((prev) => [...prev, ...newFormatted]);
-            setStates((prev) => [
-                ...prev,
-                ...newFormatted.map(() => ({
-                    showQuantity: false,
-                    quantity: 1,
-                })),
-            ]);
+
             setData((prev) => ({
                 ...prev,
                 products: {
@@ -368,52 +306,6 @@ function CollectionProduct() {
         } finally {
             setLoadMoreLoading(false);
         }
-    };
-
-    const handleToggle = (index) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index ? { ...item, showQuantity: true } : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], 1);
-    };
-
-    const increaseQuantity = (index, value) => {
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: Math.max(1, item.quantity + value),
-                      }
-                    : item,
-            ),
-        );
-        incrementCart();
-        saveToLocalStorage(products[index], states[index].quantity + value);
-    };
-
-    const decreaseQuantity = (index, value) => {
-        const currentQty = states[index].quantity;
-
-        if (currentQty <= 1) {
-            return;
-        }
-
-        setStates((prev) =>
-            prev.map((item, i) =>
-                i === index
-                    ? {
-                          ...item,
-                          quantity: item.quantity - value,
-                      }
-                    : item,
-            ),
-        );
-        decrementCart();
-        saveToLocalStorage(products[index], states[index].quantity - value);
     };
 
     return (
