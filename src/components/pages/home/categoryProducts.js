@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { useHomeData } from "@/components/context/HomeContext";
 import { profiledGetAPI } from "@root/services/apiClient/apiClient";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -163,10 +163,7 @@ export default function CategoryProducts() {
                                     className="text-[#4b5563] font-semibold flex items-center gap-1 text-primary__color"
                                 >
                                     <span>{viewMore}</span>
-                                    <ArrowRightIcon
-                                        size={18}
-                                        className="w-4 h-4 rtl:rotate-180"
-                                    />
+                                    <ArrowRightIcon className="w-4 h-4 rtl:rotate-180" />
                                 </Link>
                             </div>
                         </div>

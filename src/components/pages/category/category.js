@@ -7,8 +7,8 @@ import {
     childCategoryGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-import { ArrowRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -148,7 +148,7 @@ export default function Categories() {
                                               >
                                                   {/* Animated left border */}
                                                   <span
-                                                      className={`absolute left-0 top-0 w-[3px] bg-primary__color transition-all duration-300 ease-out
+                                                      className={`absolute ltr:left-0 rtl:right-0 top-0 w-[3px] bg-primary__color transition-all duration-300 ease-out
                                                         ${selectedCategory?.id === category.id ? "h-full" : "h-0"}`}
                                                   />
 
@@ -200,7 +200,7 @@ export default function Categories() {
                                                     className="relative"
                                                 >
                                                     <div className="w-[70px] md:w-[100px] h-[70px] md:h-[100px] mx-auto transition flex items-center justify-center border">
-                                                        <ArrowRight className="text-primary__color rtl:rotate-180" />
+                                                        <ArrowRightIcon className="text-primary__color rtl:rotate-180 w-[30px] h-[30px]" />
                                                     </div>
                                                 </Link>
                                                 <div className="pt-[10px]">

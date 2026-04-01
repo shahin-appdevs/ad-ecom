@@ -19,7 +19,7 @@ import { searchProductGetAPI } from "@root/services/apiClient/apiClient";
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 import logo from "@public/images/logo/logo.webp";
-import { LayoutDashboard, ShoppingCart } from "lucide-react";
+import { Squares2X2Icon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -470,7 +470,7 @@ export default function Header() {
                                 onMouseEnter={() => setIsCartHovered(true)}
                                 onMouseLeave={() => setIsCartHovered(false)}
                             >
-                                <ShoppingCart className="w-5 h-5 cursor-pointer group-hover:text-primary__color" />
+                                <ShoppingCartIcon className="w-5 h-5 cursor-pointer group-hover:text-primary__color" />
                                 {mounted && cartCount > 0 && (
                                     <span className="absolute -top-2 -right-2 bg-primary__color text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                                         {cartCount}
@@ -736,7 +736,7 @@ export default function Header() {
                             href="/categories"
                             className="flex flex-col items-center"
                         >
-                            <LayoutDashboard className="w-5 h-5 text-gray-700" />
+                            <Squares2X2Icon className="w-5 h-5 text-gray-700" />
                             <span className="text-xs mt-1">
                                 {mobileBottomBar.categories}
                             </span>
@@ -777,7 +777,7 @@ export default function Header() {
                             onClick={handleCheckoutClick}
                             className="flex flex-col items-center relative"
                         >
-                            <ShoppingBagIcon className="w-5 h-5 text-gray-700" />
+                            <ShoppingCartIcon className="w-5 h-5 text-gray-700" />
                             {mounted && cartCount > 0 && (
                                 <span className="absolute -top-1 -right-2 bg-primary__color text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                                     {cartCount}

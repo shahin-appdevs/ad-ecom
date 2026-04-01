@@ -14,8 +14,8 @@ import {
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { Menu } from "@headlessui/react";
-import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -319,10 +319,7 @@ function CategoryProduct() {
                                             </span>
                                             {currentCategory.child_categories
                                                 ?.length > 0 && (
-                                                <ChevronRight
-                                                    size={18}
-                                                    className="rtl:rotate-180"
-                                                />
+                                                <ChevronRightIcon className="rtl:rotate-180 w-[16px] h-[16px]" />
                                             )}
                                         </h5>
                                     </div>
@@ -337,10 +334,7 @@ function CategoryProduct() {
                                             <Menu.Button className="flex items-center gap-2 text-sm md:text-base bg-white text-primary__color border py-1 px-4 rounded-2xl font-normal">
                                                 {t("subCategories")}{" "}
                                                 {/* ← Translated */}
-                                                <ChevronRight
-                                                    size={16}
-                                                    className="rtl:-rotate-180"
-                                                />
+                                                <ChevronRightIcon className="rtl:-rotate-180 w-[16px] h-[16px]" />
                                             </Menu.Button>
 
                                             {/* Dropdown */}

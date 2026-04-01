@@ -15,8 +15,10 @@ import {
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { Menu } from "@headlessui/react";
-import { ChevronRight } from "lucide-react";
-import { useTranslations } from "next-intl"; // ← Added
+
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
+
+import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -36,7 +38,7 @@ const ProductSkeleton = () => (
 );
 
 function SubCategoryProduct() {
-    const t = useTranslations("Category.subCategory"); // ← Added as requested
+    const t = useTranslations("Category.subCategory");
 
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
@@ -348,20 +350,14 @@ function SubCategoryProduct() {
                                                 }
                                             </Link>
 
-                                            <ChevronRight
-                                                size={16}
-                                                className="rtl:rotate-180"
-                                            />
+                                            <ChevronRightIcon className="w-[18px] h-[18px] rtl:rotate-180" />
                                             <span className="">
                                                 {currentSubCategory.title}
                                             </span>
                                         </h5>
                                     </div>
                                     {childSubCategories?.length > 0 && (
-                                        <ChevronRight
-                                            size={16}
-                                            className="text-neutral-800 rtl:rotate-180"
-                                        />
+                                        <ChevronRightIcon className="w-[18px] h-[18px] rtl:rotate-180" />
                                     )}
                                     <ul className="flex items-center gap-4">
                                         {childSubCategories?.length > 0 && (
@@ -373,10 +369,7 @@ function SubCategoryProduct() {
                                                     <Menu.Button className="flex text-sm md:text-base items-center gap-2 bg-white border py-1 text-primary__color px-4 rounded-2xl  font-medium">
                                                         {t("moreCategories")}{" "}
                                                         {/* Translated */}
-                                                        <ChevronRight
-                                                            size={16}
-                                                            className="rtl:rotate-180"
-                                                        />
+                                                        <ChevronRightIcon className="w-[18px] h-[18px] rtl:rotate-180" />
                                                     </Menu.Button>
 
                                                     <Menu.Items className="absolute p-2 left-0 mt-2 min-w-[240px] rounded-lg bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-50">

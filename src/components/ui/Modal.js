@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { X } from "lucide-react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 const Modal = ({ open, onClose, title, description, children, className }) => {
     return (
@@ -53,7 +53,7 @@ const Modal = ({ open, onClose, title, description, children, className }) => {
                                                     onClick={onClose}
                                                     className="p-2 rounded-lg hover:bg-gray-100"
                                                 >
-                                                    <X />
+                                                    <XMarkIcon className="w-5 h-5" />
                                                 </button>
                                             </div>
                                             <div className="border-b  border-black/10"></div>

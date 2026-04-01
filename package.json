@@ -27,7 +27,6 @@
         "date-fns": "^4.1.0",
         "framer-motion": "^12.9.2",
         "jsbarcode": "^3.11.6",
-        "lucide-react": "^0.510.0",
         "next": "^15.2.4",
         "next-intl": "^4.8.3",
         "react": "^19.0.0",

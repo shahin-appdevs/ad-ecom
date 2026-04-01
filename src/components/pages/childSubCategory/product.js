@@ -14,8 +14,8 @@ import {
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { useHomeData } from "@/components/context/HomeContext";
-import { ChevronRight } from "lucide-react";
-import { useTranslations } from "next-intl"; // ← Added
+import { useTranslations } from "next-intl";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -35,7 +35,7 @@ const ProductSkeleton = () => (
 );
 
 function ChildSubCategoryProduct() {
-    const t = useTranslations("Category.subChildCategory"); // ← Added as requested
+    const t = useTranslations("Category.subChildCategory");
 
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
@@ -360,10 +360,7 @@ function ChildSubCategoryProduct() {
                                                         ?.title
                                                 }
                                             </Link>
-                                            <ChevronRight
-                                                size={16}
-                                                className="rtl:rotate-180"
-                                            />
+                                            <ChevronRightIcon className="rtl:rotate-180 w-[16px] h-[16px]" />
                                             <Link
                                                 href={
                                                     categoryLinks?.childCategory
@@ -376,10 +373,7 @@ function ChildSubCategoryProduct() {
                                                         ?.title
                                                 }
                                             </Link>
-                                            <ChevronRight
-                                                size={16}
-                                                className="rotate-180"
-                                            />
+                                            <ChevronRightIcon className="w-[16px] h-[16px] rtl:rotate-180" />
                                             <span>
                                                 {
                                                     categoryLinks

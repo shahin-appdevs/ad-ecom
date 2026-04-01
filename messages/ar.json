@@ -1909,6 +1909,10 @@
             "noProductsFound": "لم يتم العثور على منتجات",
             "off": "خصم",
             "loadMore": "تحميل المزيد"
+        },
+        "categorySidebar": {
+            "categories": "الفئات",
+            "browseCategory": "تصفح الفئة"
         }
     },
     "Campaign": {

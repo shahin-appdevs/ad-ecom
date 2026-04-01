@@ -1,7 +1,6 @@
 "use client";
 import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import { registerAPI, sendOtpAPI } from "@root/services/apiClient/apiClient";
@@ -10,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 
 import logo from "@public/images/logo/favicon.jpeg";
-import { LoaderCircle } from "lucide-react";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import ReCAPTCHA from "react-google-recaptcha";
 import useGoogleRecaptcha from "@/hooks/useGoogleRecaptcha";
 import { useLocale, useTranslations } from "next-intl";
@@ -406,7 +405,7 @@ export default function Register() {
         <Suspense
             fallback={
                 <div className="min-h-screen flex items-center justify-center">
-                    <LoaderCircle className="text-primary__color animate-spin text-lg" />
+                    <ArrowPathIcon className="text-primary__color animate-spin h-[18px] w-[18px]" />
                 </div>
             }
         >

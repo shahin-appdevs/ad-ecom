@@ -8,7 +8,7 @@ import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import { useHomeData } from "@/components/context/HomeContext";
 import { profiledGetAPI } from "@root/services/apiClient/apiClient";
-import { ArrowRightIcon } from "lucide-react";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
@@ -327,10 +327,7 @@ export default function FlashSale() {
                             className="text-red-500 font-semibold flex items-center gap-2 border border-red-500 rounded-md px-4 py-2 hover:!bg-red-500 hover:!text-white duration-200"
                         >
                             <span>{t("viewMore")}</span>
-                            <ArrowRightIcon
-                                size={18}
-                                className="w-4 h-4 rtl:rotate-180"
-                            />
+                            <ArrowRightIcon className="w-4 h-4 rtl:rotate-180" />
                         </Link>
                     </div>
                 </div>

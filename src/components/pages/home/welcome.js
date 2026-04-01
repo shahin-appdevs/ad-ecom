@@ -4,7 +4,7 @@ import { useHomeData } from "@/components/context/HomeContext";
 export default function Welcome() {
     const { homeData, loading } = useHomeData();
 
-    if (loading || !homeData) {
+    if (loading) {
         return (
             <section className="sm:pt-4">
                 <div className="xl:max-w-[1530px] container mx-auto sm:px-4">

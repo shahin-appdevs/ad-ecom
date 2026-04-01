@@ -1909,6 +1909,10 @@
             "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
             "off": "ছাড়",
             "loadMore": "আরও লোড করুন"
+        },
+        "categorySidebar": {
+            "categories": "ক্যাটাগরি",
+            "browseCategory": "ক্যাটাগরি ব্রাউজ করুন"
         }
     },
     "Campaign": {

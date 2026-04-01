@@ -2,8 +2,8 @@ import React from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import { ChevronUp, ChevronDown } from "lucide-react";
 
+import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/24/outline";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
@@ -21,7 +21,7 @@ const VerticalProductGallery = ({
         <div className="relative flex flex-col items-center group py-10 px-2">
             {/* Navigation Top */}
             <button className="prev-thumb absolute top-2 z-20 w-8 h-8 flex items-center justify-center bg-white border border-slate-200 shadow-md rounded-full text-slate-400 hover:text-primary__color hover:border-primary__color transition-all duration-300 disabled:opacity-20">
-                <ChevronUp size={18} />
+                <ChevronUpIcon className="w-[18px] h-[18px] stroke-[2px]" />
             </button>
 
             {/* Swiper Container - Height is set to fit exactly 4 items + gaps */}
@@ -63,7 +63,7 @@ const VerticalProductGallery = ({
 
             {/* Navigation Bottom */}
             <button className="next-thumb absolute bottom-2 z-20 w-8 h-8 flex items-center justify-center bg-white border border-slate-200 shadow-md rounded-full text-slate-400 hover:text-primary__color hover:border-primary__color transition-all duration-300 disabled:opacity-20">
-                <ChevronDown size={18} />
+                <ChevronDownIcon className="w-[18px] h-[18px] stroke-[2px]" />
             </button>
         </div>
     );

@@ -1909,6 +1909,10 @@
             "noProductsFound": "No products found",
             "off": "off",
             "loadMore": "Load More"
+        },
+        "categorySidebar": {
+            "categories": "Categories",
+            "browseCategory": "Browse Category"
         }
     },
     "Campaign": {

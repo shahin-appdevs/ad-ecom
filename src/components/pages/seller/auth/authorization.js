@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { LoaderCircle } from "lucide-react";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
 import {
     resendAuthorizationCodeSellerAPI,
@@ -187,7 +187,7 @@ export default function Authorization() {
                                 >
                                     {loadingResend ? (
                                         <span className="inline-flex items-center">
-                                            <LoaderCircle className="w-4 h-4 mr-1 animate-spin" />
+                                            <ArrowPathIcon className="w-4 h-4 mr-1 animate-spin" />
                                             Sending...
                                         </span>
                                     ) : (

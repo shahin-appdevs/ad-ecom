@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 // Import Swiper styles
 import "swiper/css";
@@ -62,11 +62,11 @@ const ProductThumbnails = ({
 
             {/* Customized Navigation Buttons */}
             <button className="prev-thumb absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center bg-white border border-gray-100 shadow-lg rounded-full text-neutral-600 hover:text-primary__color hover:bg-slate-50 transition-all disabled:opacity-30">
-                <ChevronLeft size={20} strokeWidth={2.5} />
+                <ChevronLeftIcon strokeWidth={2.5} className="w-5 h-5" />
             </button>
 
             <button className="next-thumb absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center bg-white border border-gray-100 shadow-lg rounded-full text-neutral-600 hover:text-primary__color hover:bg-slate-50 transition-all disabled:opacity-30">
-                <ChevronRight size={20} strokeWidth={2.5} />
+                <ChevronRightIcon strokeWidth={2.5} className="w-5 h-5" />
             </button>
 
             {/* Subtle Bottom Glow to match your theme */}
