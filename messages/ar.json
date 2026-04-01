@@ -14,7 +14,8 @@
             "cart": {
                 "title": "السلة",
                 "checkout": "إتمام الشراء",
-                "emptyMsg": "سلة التسوق فارغة"
+                "emptyMsg": "سلة التسوق فارغة",
+                "quantity": "الكمية"
             },
             "wishlist": {
                 "title": "قائمة الرغبات",
@@ -1551,6 +1552,11 @@
                     "yourPhoto": "صورتك",
                     "submitting": "جاري التقديم...",
                     "submit": "تقديم"
+                },
+                "pendingModal": {
+                    "title": "تم الإرسال بنجاح!",
+                    "message": "تم إرسال طلبك بنجاح. يرجى الانتظار حتى تتم الموافقة عليه.",
+                    "updateCustomer": "تحديث بيانات العميل"
                 }
             },
             "giftCard": {
@@ -1866,6 +1872,21 @@
             "verifyRecaptcha": "يرجى التحقق من reCAPTCHA",
             "loginSuccess": "تم تسجيل الدخول بنجاح",
             "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى."
+        },
+        "otp": {
+            "title": "التحقق عبر الرسائل القصيرة",
+            "subtitle": "أدخل رمز التحقق المرسل إلى هاتفك",
+            "verificationCode": "رمز التحقق",
+            "enterCodePlaceholder": "أدخل رمز من 6 أرقام",
+            "didntReceiveCode": "لم تستلم الرمز؟ ",
+            "sending": "جاري الإرسال...",
+            "resendCode": "إعادة إرسال الرمز",
+            "resendIn": "إعادة إرسال الرمز في",
+            "verifying": "جاري التحقق...",
+            "verify": "تحقق",
+            "backToLogin": "العودة إلى تسجيل الدخول؟ ",
+            "logIn": "تسجيل الدخول",
+            "createAccount": "إنشاء حساب"
         }
     },
     "Category": {

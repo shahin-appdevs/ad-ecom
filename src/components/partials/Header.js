@@ -14,7 +14,6 @@ import {
 import { useCart } from "@/components/context/CartContext";
 import { useWishlist } from "@/components/context/WishlistContext";
 import { usePathname } from "next/navigation";
-import { useHomeData } from "@/components/context/HomeContext";
 import { searchProductGetAPI } from "@root/services/apiClient/apiClient";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -42,19 +41,12 @@ export default function Header() {
     const [isSellerLoggedIn, setIsSellerLoggedIn] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [cartTotal, setCartTotal] = useState("৳0");
-    const [storedReferCode, setStoredReferCode] = useState("");
-    const data = useHomeData() || {};
-    const homeData = data.homeData || null;
     const boxRef = useRef(null);
     const router = useRouter();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        if (userInfo) {
-            setStoredReferCode(userInfo.referral_code || "");
-        }
     }, []);
 
     // API Search
@@ -228,6 +220,7 @@ export default function Header() {
         title: t("header.cart.title"),
         checkout: t("header.cart.checkout"),
         emptyMsg: t("header.cart.emptyMsg"),
+        quantity: t("header.cart.quantity"),
     };
     const wishlistTxt = {
         title: t("header.wishlist.title"),
@@ -520,7 +513,10 @@ export default function Header() {
                                                             </h4>
                                                             <div className="flex justify-between items-center mt-1">
                                                                 <span className="text-xs font-medium">
-                                                                    Qty:{" "}
+                                                                    {
+                                                                        cartTxt.quantity
+                                                                    }
+                                                                    :{" "}
                                                                     {
                                                                         item.quantity
                                                                     }

@@ -2,8 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { LoaderCircle } from "lucide-react";
+import { ArrowPathIcon } from "@heroicons/react/24/outline"; // ← Replaced LoaderCircle
 import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import {
@@ -11,11 +10,12 @@ import {
     forgotPasswordOtpAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-
-import logo from "@public/images/logo/favicon.jpeg";
 import getImageUrl from "@/components/utility/getImageUrl";
+import { useTranslations } from "next-intl";
 
 export default function Otp() {
+    const t = useTranslations("Auth.otp"); // ← Add your translation namespace here
+
     const [otp, setOtp] = useState("");
     const [countdown, setCountdown] = useState(59);
     const [canResend, setCanResend] = useState(false);
@@ -90,7 +90,6 @@ export default function Otp() {
             const response = await resendforgotPasswordOtpAPI(phone);
 
             if (response?.data?.message?.success) {
-                // Success case
                 toast.success(
                     response.data.message.success[0] ||
                         "Verification code resent successfully",
@@ -99,11 +98,9 @@ export default function Otp() {
                 setCanResend(false);
                 localStorage.setItem("otpCountdown", "59");
             } else {
-                // Handle unexpected response format
                 toast.error("Failed to resend code. Please try again.");
             }
         } catch (error) {
-            // Handle different error formats
             const errorMessage =
                 error.response?.data?.message?.error?.[0] ||
                 error.response?.data?.message ||
@@ -111,7 +108,6 @@ export default function Otp() {
 
             toast.error(errorMessage);
 
-            // If it's an authentication error, redirect to login
             if (error.response?.status === 401) {
                 router.push("/user/auth/login");
             }
@@ -158,11 +154,11 @@ export default function Otp() {
                 <div className="w-full p-8 flex flex-col justify-center">
                     {/* Header Section */}
                     <h2 className="text-center text-xl font-bold text-gray-900 mb-6 border-b pb-4">
-                        OTP Verification
+                        {t("title")}
                     </h2>
 
                     {/* Logo Section */}
-                    <div className="flex items-center space-x-4 mb-8">
+                    <div className="flex items-center gap-2 mb-8">
                         <div className="bg-gray-100 p-1.5 rounded-full shadow-sm w-[50px] h-[50px] flex items-center justify-center">
                             <Image
                                 src={getImageUrl(
@@ -180,7 +176,7 @@ export default function Otp() {
                                 {appSettingsData?.site_name}
                             </h6>
                             <p className="text-sm text-gray-500 leading-tight">
-                                Enter the verification code sent to your phone
+                                {t("subtitle")}
                             </p>
                         </div>
                     </div>
@@ -192,13 +188,13 @@ export default function Otp() {
                                 htmlFor="otp"
                                 className="block text-sm font-medium text-gray-700 mb-1"
                             >
-                                Verification Code
+                                {t("verificationCode")}
                             </label>
                             <div className="relative">
                                 <input
                                     id="otp"
                                     type="text"
-                                    placeholder="Enter 6-digit code"
+                                    placeholder={t("enterCodePlaceholder")}
                                     value={otp}
                                     onChange={handleOtpChange}
                                     maxLength={12}
@@ -216,11 +212,12 @@ export default function Otp() {
                                 </p>
                             )}
                         </div>
+
                         {/* Resend Logic Section */}
                         <div className="text-sm text-center bg-gray-50 py-2 rounded-lg border border-dashed border-gray-200">
                             {canResend ? (
                                 <p className="text-gray-600">
-                                    Didn&apos;t receive code?{" "}
+                                    {t("didntReceiveCode")}{" "}
                                     <button
                                         type="button"
                                         onClick={handleResend}
@@ -229,27 +226,28 @@ export default function Otp() {
                                     >
                                         {loadingResend ? (
                                             <span className="inline-flex items-center">
-                                                <LoaderCircle className="w-4 h-4 mr-1 animate-spin" />
-                                                Sending...
+                                                <ArrowPathIcon className="w-4 h-4 mr-1 animate-spin" />
+                                                {t("sending")}
                                             </span>
                                         ) : (
-                                            "Resend Code"
+                                            t("resendCode")
                                         )}
                                     </button>
                                 </p>
                             ) : (
                                 <p className="text-gray-500 italic">
-                                    Resend code in{" "}
+                                    {t("resendIn")}{" "}
                                     <span className="font-bold text-primary__color not-italic">
                                         {countdown}s
                                     </span>
                                 </p>
                             )}
                         </div>
+
                         <div className="pt-2">
                             <Button
                                 type="submit"
-                                title={loading ? "Verifying..." : "Verify"}
+                                title={loading ? t("verifying") : t("verify")}
                                 variant="primary"
                                 size="md"
                                 className="w-full py-3.5 text-base font-bold shadow-lg shadow-primary__color/30 hover:shadow-primary__color/50 transition-all duration-300"
@@ -262,19 +260,19 @@ export default function Otp() {
                     <div className="mt-10 pt-6 border-t border-gray-100">
                         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                             <p className="text-sm text-gray-600">
-                                Back to login?{" "}
+                                {t("backToLogin")}{" "}
                                 <Link
                                     href="/user/auth/login"
                                     className="font-bold text-primary__color hover:underline"
                                 >
-                                    Log In
+                                    {t("logIn")}
                                 </Link>
                             </p>
                             <Link
                                 href="/user/auth/register"
                                 className="text-sm font-bold text-gray-500 hover:text-primary__color transition-colors"
                             >
-                                Create Account
+                                {t("createAccount")}
                             </Link>
                         </div>
                     </div>

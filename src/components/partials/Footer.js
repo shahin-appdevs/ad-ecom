@@ -39,6 +39,7 @@ export default function Footer() {
             handleApiError(error);
         }
     };
+
     const appSettingData = async () => {
         try {
             const result = await appSettingGetAPI();

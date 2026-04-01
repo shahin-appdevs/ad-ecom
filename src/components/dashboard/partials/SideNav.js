@@ -29,7 +29,6 @@ import {
     ArrowUpOnSquareIcon,
     ChartBarSquareIcon,
     LockClosedIcon,
-    ArrowLeftStartOnRectangleIcon,
     PresentationChartBarIcon,
     EllipsisHorizontalIcon,
     UserIcon,
@@ -48,10 +47,12 @@ import {
 } from "@heroicons/react/24/solid";
 // Images
 import logo from "@public/images/logo/logo.webp";
-import rocket from "@public/images/icon/rocket.png";
-import { CreditCardIcon, GiftIcon } from "@heroicons/react/24/outline";
+import {
+    CreditCardIcon,
+    GiftIcon,
+    ChevronLeftIcon,
+} from "@heroicons/react/24/outline";
 import { useDashboardData } from "@/components/context/DashboardContext";
-import { ChevronLeftIcon } from "lucide-react";
 
 // Nav Links Data
 export const navLink = [
@@ -564,24 +565,9 @@ export default function SideNav() {
                                 })}
                         </div>
                     </div>
-                    <div className="mt-5 ">
-                        {/* <button
-                            onClick={() => setIsLogoutModalOpen(true)}
-                            className="flex w-full items-center justify-center gap-3 px-4 py-2 text-white bg-red-600 hover:bg-red-700 rounded-md duration-200"
-                        >
-                            <LogOut className="h-4 w-4" />
-                            <span>Logout</span>
-                        </button> */}
+                    <div className="mt-5">
                         <div className="w-full p-4 rounded-2xl bg-gray-100">
                             <div className="flex items-center gap-2">
-                                {/* <Image
-                                    src={rocket}
-                                    width={20}
-                                    priority={true}
-                                    quality={50}
-                                    className=""
-                                    alt="Icon"
-                                /> */}
                                 <h4 className="text-[18px] font-bold text-gray-800">
                                     {t("helpCenter")}
                                 </h4>

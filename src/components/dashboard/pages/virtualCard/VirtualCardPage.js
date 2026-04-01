@@ -3,10 +3,11 @@
 import "swiper/css";
 import "swiper/css/navigation";
 import { Suspense, useEffect, useState } from "react";
-import { Plus, Wifi } from "lucide-react";
 import VirtualCardTransaction from "./VirtualCardTransaction";
 import VirtualCardDetailsModal from "./VirtualCardDetailsModal";
 import { useRouter } from "@/i18n/navigation";
+import { PlusIcon, WifiIcon } from "@heroicons/react/24/outline";
+
 import {
     myStroWalletCardGetAPI,
     stroWalletPageInfoGetApi,
@@ -29,7 +30,6 @@ function VirtualCardSection() {
     const [cardDetails, setCardDetails] = useState("");
     const [openDepositModal, setOpenDepositModal] = useState(false);
     const [myVirtualCard, setMyVirtualCard] = useState({});
-
     const cardBackground = myWalletCards?.card_basic_info?.card_bg;
 
     const myWalletCardsFetch = async () => {
@@ -112,14 +112,16 @@ function VirtualCardSection() {
                 </h1>
                 {pageInfoLoading ? (
                     <button className="bg-gray-200 flex gap-2 items-center animate-pulse text-gray-200 font-medium px-4 md:px-6 py-2 md:py-3 rounded-lg transition">
-                        <span>{t("createCard")}</span> <Plus size={18} />
+                        <span>{t("createCard")}</span>{" "}
+                        <PlusIcon className="w-[18px] h-[18px]" />
                     </button>
                 ) : (
                     <button
                         onClick={handleCreateCard}
                         className="flex items-center gap-2 bg-blue-600  hover:bg-blue-700 text-white font-medium px-4 md:px-6 py-2 md:py-3 rounded-lg transition"
                     >
-                        <span>{t("createCard")}</span> <Plus size={18} />
+                        <span>{t("createCard")}</span>{" "}
+                        <PlusIcon className="w-[18px] h-[18px]" />
                     </button>
                 )}
             </div>
@@ -157,20 +159,6 @@ function VirtualCardSection() {
                                 }
                                 className={`bg-cover bg-center  h-full w-full max-w-[420px] hover:shadow-lg duration-300 rounded-3xl p-4 md:p-4 xl:p-4 2xl:p-6 text-white shadow relative overflow-hidden`}
                             >
-                                {/* Background Pattern (optional subtle) */}
-                                {/* <div className="absolute inset-0 opacity-20">
-                                    <div className="grid grid-cols-8 grid-rows-8 gap-1 h-full w-full">
-                                        {Array.from({ length: 64 }).map(
-                                            (_, i) => (
-                                                <div
-                                                    key={i}
-                                                    className="bg-white/10 rounded"
-                                                />
-                                            ),
-                                        )}
-                                    </div>
-                                </div> */}
-
                                 {/* Card Content */}
                                 <div className="relative z-10">
                                     <div className="flex justify-between items-start ">
@@ -196,7 +184,7 @@ function VirtualCardSection() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Wifi className="rotate-90 text-4xl" />
+                                                    <WifiIcon className="rotate-90 w-[32px] h-[32px]" />
                                                 </div>
                                             </div>
                                         </div>
@@ -339,7 +327,7 @@ function VirtualCardGridSkeleton() {
                                         {/* wifi */}
                                     </div>
                                 </div>
-                                {/* <div className="w-20 h-20 bg-white/30 rounded-xl" />{" "} */}
+
                                 {/* QR placeholder */}
                             </div>
 

@@ -1,12 +1,12 @@
 import {
-    ArrowDownLeft,
-    ArrowRight,
-    Eye,
-    Files,
-    LoaderCircle,
-    Snowflake,
-    Wifi,
-} from "lucide-react";
+    ArrowDownLeftIcon,
+    ArrowRightIcon,
+    EyeIcon,
+    DocumentDuplicateIcon,
+    ArrowPathIcon,
+    WifiIcon,
+} from "@heroicons/react/24/outline";
+
 import { copyToClipboard } from "@/components/utility/copyToClipboard";
 import Modal from "@/components/ui/Modal";
 import { useEffect, useState } from "react";
@@ -32,7 +32,6 @@ export default function VirtualCardDetailsModal({
 }) {
     const t = useTranslations("Dashboard.cards.virtualCard.virtualCardDetails");
     const [show, setShow] = useState(false);
-    // const [openDepositModal, setOpenDepositModal] = useState(false);
     const [detailsLoading, setDetailsLoading] = useState(false);
     const [cardDetails, setCardDetails] = useState({});
     const [cardFreezeLoading, setCardFreezeLoading] = useState(false);
@@ -196,7 +195,7 @@ export default function VirtualCardDetailsModal({
                                                             <div className="chip-main" />
                                                         </div>
                                                     </div>
-                                                    <Wifi className="rotate-90 text-3xl" />
+                                                    <WifiIcon className="rotate-90 h-[30px] w-[30px]" />
                                                 </div>
                                             </div>
 
@@ -208,7 +207,7 @@ export default function VirtualCardDetailsModal({
                                                     }
                                                     className=" w-[28px] h-[24px] cursor-pointer border rounded-md flex items-center justify-center"
                                                 >
-                                                    <Eye size={18} />
+                                                    <EyeIcon className="w-[18px] h-[18px]" />
                                                 </div>
                                                 <div
                                                     onClick={() =>
@@ -221,7 +220,7 @@ export default function VirtualCardDetailsModal({
                                                     }
                                                     className=" w-[28px] h-[24px] cursor-pointer border rounded-md flex items-center justify-center"
                                                 >
-                                                    <Files size={18} />
+                                                    <DocumentDuplicateIcon className="w-[18px] h-[18px]" />
                                                 </div>
                                             </div>
                                         </div>
@@ -248,7 +247,7 @@ export default function VirtualCardDetailsModal({
                                                 title={t("copy")}
                                                 className=" w-[28px] h-[24px] cursor-pointer rounded-md flex items-center justify-center"
                                             >
-                                                <Files size={18} />
+                                                <DocumentDuplicateIcon className="w-[18px] h-[18px]" />
                                             </div>
                                         </div>
                                         {/* Card Name */}
@@ -278,7 +277,7 @@ export default function VirtualCardDetailsModal({
                                                             )}
                                                             className=" w-[28px] h-[24px] cursor-pointer rounded-md flex items-center justify-center"
                                                         >
-                                                            <Files size={18} />
+                                                            <DocumentDuplicateIcon className="w-[18px] h-[18px]" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -302,7 +301,7 @@ export default function VirtualCardDetailsModal({
                                                             title={t("copy")}
                                                             className=" w-[28px] h-[24px]  rounded-md flex items-center justify-center"
                                                         >
-                                                            <Files size={18} />
+                                                            <DocumentDuplicateIcon className="w-[18px] h-[18px]" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -391,7 +390,7 @@ export default function VirtualCardDetailsModal({
                                         }
                                         className=" w-[28px] h-[24px] cursor-pointer border bg-gray-50 border-gray-300 rounded-md flex items-center justify-center"
                                     >
-                                        <Files size={18} />
+                                        <DocumentDuplicateIcon className="w-[18px] h-[18px]" />
                                     </div>
                                 </div>
                                 <div className="">
@@ -432,7 +431,7 @@ export default function VirtualCardDetailsModal({
                                 className="w-full flex gap-2 items-center justify-center py-3 rounded-xl border font-medium hover:bg-gray-50"
                             >
                                 <span>{t("viewTransactions")}</span>{" "}
-                                <ArrowRight size={18} />
+                                <ArrowRightIcon className="w-[18px] h-[18px]" />
                             </Link>
                             <button
                                 onClick={() => {
@@ -443,7 +442,7 @@ export default function VirtualCardDetailsModal({
                                 className=" flex gap-2 items-center justify-center w-full py-3 rounded-xl bg-emerald-700 text-white font-medium hover:bg-emerald-800"
                             >
                                 <span>{t("deposit")}</span>{" "}
-                                <ArrowDownLeft size={18} />
+                                <ArrowDownLeftIcon className="w-[18px] h-[18px]" />
                             </button>
                             <div className="grid grid-cols-2 gap-3">
                                 <button
@@ -460,12 +459,9 @@ export default function VirtualCardDetailsModal({
                                         </span>
                                     )}
                                     {makeDefaultLoading ? (
-                                        <LoaderCircle
-                                            className="animate-spin"
-                                            size={18}
-                                        />
+                                        <ArrowPathIcon className="animate-spin w-[18px] h-[18px]" />
                                     ) : (
-                                        <ArrowRight size={18} />
+                                        <ArrowRightIcon className="w-[18px] h-[18px]" />
                                     )}
                                 </button>
 
@@ -484,10 +480,33 @@ export default function VirtualCardDetailsModal({
                                             ? t("unfreeze")
                                             : t("freeze")}
                                     </span>
-                                    <Snowflake
-                                        size={18}
-                                        className={`${cardFreezeLoading && "animate-spin"} `}
-                                    />
+                                    <span>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="18"
+                                            height="18"
+                                            viewBox="0 0 24 24"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            stroke-width="2"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            className={`lucide lucide-snowflake-icon lucide-snowflake ${cardFreezeLoading && "animate-spin"}`}
+                                        >
+                                            <path d="m10 20-1.25-2.5L6 18" />
+                                            <path d="M10 4 8.75 6.5 6 6" />
+                                            <path d="m14 20 1.25-2.5L18 18" />
+                                            <path d="m14 4 1.25 2.5L18 6" />
+                                            <path d="m17 21-3-6h-4" />
+                                            <path d="m17 3-3 6 1.5 3" />
+                                            <path d="M2 12h6.5L10 9" />
+                                            <path d="m20 10-1.5 2 1.5 2" />
+                                            <path d="M22 12h-6.5L14 15" />
+                                            <path d="m4 10 1.5 2L4 14" />
+                                            <path d="m7 21 3-6-1.5-3" />
+                                            <path d="m7 3 3 6h4" />
+                                        </svg>
+                                    </span>
                                 </button>
                             </div>
 

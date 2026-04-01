@@ -8,13 +8,22 @@ import { usePathname } from "next/navigation";
 // Images
 import userProfile from "@public/images/user/userProfile.png";
 import { useRouter, Link } from "@/i18n/navigation";
-import { LoaderCircle, Lock, LogOut, ShieldCheck, User } from "lucide-react";
+
+// Correct Heroicons v2 imports
+import {
+    ArrowPathIcon,
+    LockClosedIcon,
+    ArrowRightOnRectangleIcon,
+    ShieldCheckIcon,
+    UserIcon,
+} from "@heroicons/react/24/outline";
+
 import { Dialog, Transition } from "@headlessui/react";
 import LanguageSwitcher from "@/components/partials/LanguageSwitcher";
-import { useTranslations } from "next-intl"; // ← Added
+import { useTranslations } from "next-intl";
 
 export default function TopBar() {
-    const t = useTranslations("Dashboard.topBar"); // ← Added as requested
+    const t = useTranslations("Dashboard.topBar");
 
     const pathname = usePathname();
     const [loading, setLoading] = useState(true);
@@ -65,7 +74,6 @@ export default function TopBar() {
             localStorage.removeItem("email_verified");
             localStorage.removeItem("sms_verified");
             localStorage.removeItem("two_factor_verified");
-            // sessionStorage.removeItem("active_virtual_system");
 
             successMessage.forEach((msg) => {
                 toast.success(msg);
@@ -210,11 +218,10 @@ export default function TopBar() {
                                                         href="/user/user/profile"
                                                         className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
                                                     >
-                                                        <User className="h-4 w-4 text-gray-500" />
+                                                        <UserIcon className="h-4 w-4 text-gray-500" />
                                                         <span>
                                                             {t("profile")}
-                                                        </span>{" "}
-                                                        {/* Translated */}
+                                                        </span>
                                                     </Link>
                                                 </li>
 
@@ -227,11 +234,10 @@ export default function TopBar() {
                                                         href="/user/setup/pin"
                                                         className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
                                                     >
-                                                        <ShieldCheck className="h-4 w-4 text-gray-500" />
+                                                        <ShieldCheckIcon className="h-4 w-4 text-gray-500" />
                                                         <span>
                                                             {t("setupPin")}
-                                                        </span>{" "}
-                                                        {/* Translated */}
+                                                        </span>
                                                     </Link>
                                                 </li>
 
@@ -244,13 +250,12 @@ export default function TopBar() {
                                                         href="/user/security/google/2fa"
                                                         className="flex items-center gap-3 px-4 py-2 hover:bg-gray-100"
                                                     >
-                                                        <Lock className="h-4 w-4 text-gray-500" />
+                                                        <LockClosedIcon className="h-4 w-4 text-gray-500" />
                                                         <span>
                                                             {t(
                                                                 "twoFaVerification",
                                                             )}
-                                                        </span>{" "}
-                                                        {/* Translated */}
+                                                        </span>
                                                     </Link>
                                                 </li>
 
@@ -263,11 +268,10 @@ export default function TopBar() {
                                                         }
                                                         className="flex w-full items-center gap-3 px-4 py-2 text-red-600 hover:bg-red-50"
                                                     >
-                                                        <LogOut className="h-4 w-4" />
+                                                        <ArrowRightOnRectangleIcon className="h-4 w-4" />
                                                         <span>
                                                             {t("logout")}
-                                                        </span>{" "}
-                                                        {/* Translated */}
+                                                        </span>
                                                     </button>
                                                 </li>
                                             </ul>
@@ -341,12 +345,11 @@ export default function TopBar() {
                                         as="h3"
                                         className="text-lg font-medium leading-6 text-gray-900"
                                     >
-                                        {t("confirmLogout")} {/* Translated */}
+                                        {t("confirmLogout")}
                                     </Dialog.Title>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-500">
-                                            {t("logoutConfirmation")}{" "}
-                                            {/* Translated */}
+                                            {t("logoutConfirmation")}
                                         </p>
                                     </div>
                                     <div className="mt-4 flex justify-end gap-3">
@@ -357,7 +360,7 @@ export default function TopBar() {
                                                 setIsLogoutModalOpen(false)
                                             }
                                         >
-                                            {t("cancel")} {/* Translated */}
+                                            {t("cancel")}
                                         </button>
                                         <button
                                             type="button"
@@ -366,10 +369,9 @@ export default function TopBar() {
                                         >
                                             <span className="flex items-center gap-2">
                                                 {logoutLoading && (
-                                                    <LoaderCircle className="animate-spin text-white" />
+                                                    <ArrowPathIcon className="animate-spin text-white w-[18px] h-[18px]" />
                                                 )}
-                                                <span>{t("logout")}</span>{" "}
-                                                {/* Translated */}
+                                                <span>{t("logout")}</span>
                                             </span>
                                         </button>
                                     </div>

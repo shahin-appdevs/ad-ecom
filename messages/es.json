@@ -14,7 +14,8 @@
             "cart": {
                 "title": "Carro",
                 "checkout": "Finalizar compra",
-                "emptyMsg": "Tu carrito esta vacío"
+                "emptyMsg": "Tu carrito esta vacío",
+                "quantity": "Qty"
             },
             "wishlist": {
                 "title": "Lista de deseos",
@@ -1551,6 +1552,11 @@
                     "yourPhoto": "Tu Foto",
                     "submitting": "Enviando...",
                     "submit": "Enviar"
+                },
+                "pendingModal": {
+                    "title": "¡Enviado Exitosamente!",
+                    "message": "Tu solicitud ha sido enviada exitosamente. Por favor espera la aprobación.",
+                    "updateCustomer": "Actualizar Cliente"
                 }
             },
             "giftCard": {
@@ -1866,6 +1872,21 @@
             "verifyRecaptcha": "Por favor verifique reCAPTCHA",
             "loginSuccess": "Inicio de sesión exitoso",
             "loginFailed": "Inicio de sesión fallido. Por favor, inténtelo de nuevo."
+        },
+        "otp": {
+            "title": "Verificación por SMS",
+            "subtitle": "Ingresa el código de verificación enviado a tu teléfono",
+            "verificationCode": "Código de verificación",
+            "enterCodePlaceholder": "Ingresa código de 6 dígitos",
+            "didntReceiveCode": "¿No recibiste código? ",
+            "sending": "Enviando...",
+            "resendCode": "Reenviar código",
+            "resendIn": "Reenviar código en",
+            "verifying": "Verificando...",
+            "verify": "Verificar",
+            "backToLogin": "¿Volver al inicio de sesión? ",
+            "logIn": "Iniciar Sesión",
+            "createAccount": "Crear Cuenta"
         }
     },
     "Category": {

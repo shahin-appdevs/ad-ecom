@@ -14,7 +14,8 @@
             "cart": {
                 "title": "Cart",
                 "checkout": "Checkout",
-                "emptyMsg": "Your cart is empty"
+                "emptyMsg": "Your cart is empty",
+                "quantity": "Qty"
             },
             "wishlist": {
                 "title": "Wishlist",
@@ -1551,6 +1552,11 @@
                     "yourPhoto": "Your Photo",
                     "submitting": "Submitting...",
                     "submit": "Submit"
+                },
+                "pendingModal": {
+                    "title": "Submitted Successfully!",
+                    "message": "Your request has been submitted successfully. Please wait for approval.",
+                    "updateCustomer": "Update Customer"
                 }
             },
             "giftCard": {
@@ -1866,6 +1872,21 @@
             "verifyRecaptcha": "Please verify reCAPTCHA",
             "loginSuccess": "Login successful",
             "loginFailed": "Login failed. Please try again."
+        },
+        "otp": {
+            "title": "SMS Verification",
+            "subtitle": "Enter the verification code sent to your phone",
+            "verificationCode": "Verification Code",
+            "enterCodePlaceholder": "Enter 6-digit code",
+            "didntReceiveCode": "Didn't receive code? ",
+            "sending": "Sending...",
+            "resendCode": "Resend Code",
+            "resendIn": "Resend code in",
+            "verifying": "Verifying...",
+            "verify": "Verify",
+            "backToLogin": "Back to login? ",
+            "logIn": "Log In",
+            "createAccount": "Create Account"
         }
     },
     "Category": {
