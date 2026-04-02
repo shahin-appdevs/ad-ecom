@@ -16,6 +16,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -163,7 +164,9 @@ export default function AffiliatePlanConfirm() {
                                 <Listbox.Button className="relative w-full cursor-pointer rounded-lg border bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:outline-none sm:text-sm">
                                     <span className="flex items-center">
                                         {selectedCurrency && (
-                                            <img
+                                            <Image
+                                                width={24}
+                                                height={24}
                                                 src={`${backendBaseURL}/${gatewayImagePath}/${selectedCurrency.image}`}
                                                 alt={selectedCurrency.alias}
                                                 className="w-6 h-6 mr-2 rounded"
@@ -195,7 +198,9 @@ export default function AffiliatePlanConfirm() {
                                                         <span
                                                             className={`flex items-center ${selected ? "font-medium" : "font-normal"}`}
                                                         >
-                                                            <img
+                                                            <Image
+                                                                width={24}
+                                                                height={24}
                                                                 src={`${backendBaseURL}/${gatewayImagePath}/${currency.image}`}
                                                                 alt={
                                                                     currency.alias

@@ -273,6 +273,7 @@ export default function OrderDetailsPage() {
                                 ? t("transferred")
                                 : order?.logistics_info?.transfer_false_text}
                         </p>
+
                         {order?.logistics_info?.tracking_id && (
                             <p className="flex items-center gap-2">
                                 <span className="font-semibold">
@@ -283,7 +284,7 @@ export default function OrderDetailsPage() {
                                 </span>
                                 <button
                                     onClick={() => {
-                                        const copyLink = `https://steadfast.com.bd/t/${order?.logistics_info?.tracking_id}`;
+                                        const copyLink = `${order?.logistics_info?.tracking_url}`;
                                         navigator.clipboard.writeText(copyLink);
                                         toast.success(t("trackingCopied"));
                                     }}

@@ -7,6 +7,7 @@ import GiftCardBuyConfirmModal from "./GiftCardBuyConfirmModal";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { giftCardDetailsGetAPI } from "@root/services/apiClient/apiClient";
+import Image from "next/image";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -59,7 +60,7 @@ export default function GiftCardPurchase() {
         control,
         watch,
         setValue,
-        reset,
+
         formState: { errors },
     } = useForm({
         defaultValues: {
@@ -83,9 +84,7 @@ export default function GiftCardPurchase() {
     const receiverEmail = watch("receiverEmail");
     const phoneNumber = watch("phoneNumber");
     const fromName = watch("fromName");
-    const country = watch("country");
     const quantity = watch("quantity");
-    // const walletCurrency = watch("wallet_currency");
 
     const onSubmit = (data) => {
         setOpen(true);
@@ -114,14 +113,14 @@ export default function GiftCardPurchase() {
                                     <div className="lg:col-span-1 flex justify-center lg:justify-end w-full">
                                         <div className="relative w-full">
                                             {product?.logoUrls?.length > 0 && (
-                                                <img
+                                                <Image
+                                                    width={24}
+                                                    height={24}
                                                     src={product?.logoUrls[0]}
                                                     alt={product?.productName}
                                                     className="rounded-xl shadow w-full"
                                                 />
                                             )}
-
-                                            {/* <div className="absolute inset-0 rounded-xl ring-4 ring-primary__color ring-opacity-20 pointer-events-none"></div> */}
                                         </div>
                                     </div>
                                     <div className="lg:col-span-2 w-full">
@@ -155,23 +154,6 @@ export default function GiftCardPurchase() {
                                                                         : "border-gray-200 hover:border-gray-300 bg-white",
                                                                 )}
                                                             >
-                                                                {/* <input
-                                                                type="radio"
-                                                                value={amount}
-                                                                {...register(
-                                                                    "amount",
-                                                                    {
-                                                                        onClick:
-                                                                            () =>
-                                                                                setValue(
-                                                                                    "amount",
-                                                                                    amount,
-                                                                                ),
-                                                                        required: true,
-                                                                    },
-                                                                )}
-                                                                className="sr-only"
-                                                            /> */}
                                                                 <span className="text-lg font-bold text-gray-900">
                                                                     {selectedAmount?.toString() ===
                                                                     amount?.toString() ? (
