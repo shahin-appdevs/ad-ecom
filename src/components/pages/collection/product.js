@@ -12,6 +12,7 @@ import {
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl"; // ← Added
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -79,11 +80,13 @@ function CollectionProduct() {
         }
     }, [idParam]);
 
+    const { baseCurrencySymbol } = getBaseCurrency(data);
+
     const formatPrice = (price) => {
-        if (!price) return "৳0.00";
+        if (!price) return `${baseCurrencySymbol}0.00`;
         const numericValue =
             typeof price === "string" ? parseFloat(price) : price;
-        return `৳${numericValue.toFixed(2)}`;
+        return `${baseCurrencySymbol}${numericValue.toFixed(2)}`;
     };
 
     useEffect(() => {

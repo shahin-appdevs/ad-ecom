@@ -8,7 +8,6 @@ import {
 } from "@heroicons/react/24/solid";
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
-import { useCart } from "@/components/context/CartContext";
 import { useWishlist } from "@/components/context/WishlistContext";
 
 const ProductSkeleton = () => (
@@ -25,7 +24,6 @@ export default function Wishlist() {
     const t = useTranslations("HomePage.wishlist");
     const { wishlistItems, wishlistCount, updateWishlist } = useWishlist();
     const [loading, setLoading] = useState(true);
-    const { addToCart } = useCart();
 
     useEffect(() => {
         // Loading is handled by the WishlistContext
@@ -36,19 +34,6 @@ export default function Wishlist() {
         const updatedWishlist = wishlistItems.filter((item) => item.id !== id);
         updateWishlist(updatedWishlist);
         toast.success(t("removeSuccess"));
-    };
-
-    const moveToCart = (item) => {
-        addToCart({
-            id: item.id,
-            title: item.title,
-            price: item.price,
-            image: item.image,
-            quantity: 1,
-            base_curr_symbol: item.base_curr_symbol || "৳",
-        });
-        removeFromWishlist(item.id);
-        toast.success(t("moveSuccess"));
     };
 
     return (
@@ -92,7 +77,7 @@ export default function Wishlist() {
                                                 <div className="flex items-center gap-2">
                                                     <span className="font-semibold">
                                                         {item.base_curr_symbol ||
-                                                            "৳"}
+                                                            ""}
                                                         {parseFloat(
                                                             item.price,
                                                         ).toFixed(2)}
@@ -111,22 +96,6 @@ export default function Wishlist() {
                                             <XMarkIcon className="h-5 w-5" />
                                         </button>
                                     </div>
-                                    {/* <div className="flex gap-2 mt-3">
-                                        <Button
-                                            type="button"
-                                            title="Move to Cart"
-                                            variant="primary"
-                                            size="sm"
-                                            className="!bg-[#f5f5f5] !text-color__heading"
-                                            onClick={() => moveToCart(item)}
-                                        />
-                                        <Button
-                                            href={`/product/details?id=${item.id}`}
-                                            title="View Details"
-                                            variant="primary"
-                                            size="sm"
-                                        />
-                                    </div> */}
                                 </div>
                             </div>
                         ))

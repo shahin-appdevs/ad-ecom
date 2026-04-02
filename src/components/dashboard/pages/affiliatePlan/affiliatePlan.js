@@ -5,6 +5,7 @@ import { toast } from "react-hot-toast";
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 function SkeletonCard() {
     return (
@@ -33,7 +34,7 @@ export default function AffiliatePlan() {
     const [loading, setLoading] = useState(true);
     const [plans, setPlans] = useState([]);
     const [activePlan, setActivePlan] = useState(null);
-    const [currency, setCurrency] = useState({ code: "BDT", symbol: "৳" });
+    const [currency, setCurrency] = useState({ code: "", symbol: "" });
     const router = useRouter();
 
     useEffect(() => {
@@ -43,9 +44,13 @@ export default function AffiliatePlan() {
                 const data = res?.data?.data;
                 setPlans(data?.all_plans || []);
                 setActivePlan(data?.my_active_plan || null);
+
+                const { baseCurrencySymbol, baseCurrencyCode } =
+                    getBaseCurrency(data);
+
                 setCurrency({
-                    code: data?.base_curr,
-                    symbol: data?.base_curr_symbol,
+                    code: baseCurrencyCode,
+                    symbol: baseCurrencySymbol,
                 });
             } catch (err) {
                 toast.error(t("failedLoad"));

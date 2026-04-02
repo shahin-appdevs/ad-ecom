@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import {
     UserIcon,
-    ShoppingBagIcon,
     HeartIcon,
     HomeIcon,
     ChevronUpDownIcon,
@@ -40,7 +39,7 @@ export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isSellerLoggedIn, setIsSellerLoggedIn] = useState(false);
     const [cartItems, setCartItems] = useState([]);
-    const [cartTotal, setCartTotal] = useState("৳0");
+    const [cartTotal, setCartTotal] = useState("0");
     const boxRef = useRef(null);
     const router = useRouter();
     const [mounted, setMounted] = useState(false);
@@ -63,7 +62,7 @@ export default function Header() {
                     searchType,
                 );
 
-                const baseCurrency = response.data.data.base_curr_symbol || "৳";
+                const baseCurrency = response.data.data.base_curr_symbol || "";
                 let formattedResults = [];
 
                 if (searchType === "product") {
@@ -161,7 +160,7 @@ export default function Header() {
         const currencySymbol =
             allCartItems[0]?.base_curr_symbol ||
             allCartItems[0]?.currency_symbol ||
-            "৳";
+            "";
 
         setCartTotal(`${currencySymbol}${total.toFixed(2)}`);
     }, [cartCount]);
@@ -523,7 +522,7 @@ export default function Header() {
                                                                 </span>
                                                                 <span className="text-sm font-semibold text-primary__color">
                                                                     {item.base_curr_symbol ||
-                                                                        "৳"}
+                                                                        ""}
                                                                     {parseFloat(
                                                                         item.price,
                                                                     ).toFixed(
@@ -606,7 +605,7 @@ export default function Header() {
                                                             </h4>
                                                             <div className="text-sm font-semibold text-primary__color mt-1">
                                                                 {item.base_curr_symbol ||
-                                                                    "৳"}
+                                                                    ""}
                                                                 {parseFloat(
                                                                     item.price,
                                                                 ).toFixed(2)}

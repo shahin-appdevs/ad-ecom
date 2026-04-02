@@ -14,6 +14,7 @@ import { toast } from "react-hot-toast";
 import { useCart } from "@/components/context/CartContext";
 import { Listbox } from "@headlessui/react";
 import { useSearchParams } from "next/navigation";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const ProductSkeleton = () => (
     <div className="flex items-start gap-4 border-b pb-4">
@@ -76,8 +77,8 @@ function Checkout() {
     const [allDistricts, setAllDistricts] = useState([]);
     const [deliveryCharge, setDeliveryCharge] = useState(0);
     const [baseCurrency, setBaseCurrency] = useState({
-        symbol: "৳",
-        code: "BDT",
+        symbol: "",
+        code: "",
     });
 
     const [divisions, setDivisions] = useState([]);
@@ -95,6 +96,9 @@ function Checkout() {
     const searchParams = useSearchParams();
     const referralCodeFromUrl = searchParams.get("referCode");
     const [storedReferralCode, setStoredReferralCode] = useState("");
+    const [apiData, setApiData] = useState(null);
+
+    const { baseCurrencySymbol } = getBaseCurrency(apiData);
 
     const [formData, setFormData] = useState({
         phone: "",
@@ -113,10 +117,10 @@ function Checkout() {
         // Check both URL params and localStorage
         const localReferralCode = localStorage.getItem("product_refer_code");
         if (referralCodeFromUrl) {
-            console.log("Referral code from URL:", referralCodeFromUrl);
+            // console.log("Referral code from URL:", referralCodeFromUrl);
             setStoredReferralCode(referralCodeFromUrl);
         } else if (localReferralCode) {
-            console.log("Referral code from localStorage:", localReferralCode);
+            //  console.log("Referral code from localStorage:", localReferralCode);
             setStoredReferralCode(localReferralCode);
         }
     }, [referralCodeFromUrl]);
@@ -136,11 +140,13 @@ function Checkout() {
             try {
                 setLoading(true);
                 const response = await deliveryOptionGetAPI();
+
+                setApiData(response.data.data);
                 if (response.data.data) {
                     setDeliveryOptions(response.data.data.delivery_options);
                     setBaseCurrency({
-                        symbol: response.data.data.base_curr_symbol || "৳",
-                        code: response.data.data.base_curr || "BDT",
+                        symbol: baseCurrencySymbol || "",
+                        code: response.data.data.base_curr || "",
                     });
                     const insideDhaka =
                         response.data.data.delivery_options.find(
@@ -537,8 +543,10 @@ function Checkout() {
                                                         <div className="">
                                                             <div className="flex items-center gap-2">
                                                                 <span className="font-semibold">
-                                                                    {item.base_curr_symbol ||
-                                                                        "৳"}
+                                                                    {
+                                                                        baseCurrencySymbol
+                                                                    }
+
                                                                     {parseFloat(
                                                                         item.price,
                                                                     ).toFixed(
@@ -548,7 +556,9 @@ function Checkout() {
                                                                 {item.oldPrice && (
                                                                     <div className="flex items-center gap-2 text-sm mt-1">
                                                                         <span className="line-through text-gray-500">
-                                                                            ৳
+                                                                            {
+                                                                                baseCurrencySymbol
+                                                                            }
                                                                             {
                                                                                 item.oldPrice
                                                                             }
@@ -571,7 +581,9 @@ function Checkout() {
                                                                     {t(
                                                                         "youAreSaving",
                                                                     )}{" "}
-                                                                    ৳
+                                                                    {
+                                                                        baseCurrencySymbol
+                                                                    }
                                                                     {item.oldPrice -
                                                                         item.price}
                                                                 </p>
@@ -961,16 +973,7 @@ function Checkout() {
                                             )}
                                             disabled={!formData.division}
                                         />
-                                        {/* <CustomListbox
-                                            label="Enter Upazilla"
-                                            value={formData.upazilla}
-                                            onChange={(value) => handleInputChange({ target: { name: 'upazilla', value } })}
-                                            options={upazillas.map(upazilla => ({
-                                                value: upazilla.id,
-                                                label: `${upazilla.name} (${upazilla.bn_name})`
-                                            }))}
-                                            disabled={!formData.district}
-                                        /> */}
+
                                         <div className="pt-2">
                                             <p className="text-sm font-medium text-gray-700 mb-3">
                                                 {t("deliveryOption")}
@@ -1041,11 +1044,15 @@ function Checkout() {
                                     </h3>
                                     <div className="flex justify-between text-base font-semibold mb-4">
                                         <span>{t("totalProduct")}</span>
-                                        <span>{formatCurrency(total)}</span>
+                                        <span>
+                                            {baseCurrencySymbol}{" "}
+                                            {formatCurrency(total)}
+                                        </span>
                                     </div>
                                     <p className="flex justify-between mb-2">
                                         <span>{t("deliveryFee")}:</span>
                                         <span className="font-medium">
+                                            {baseCurrencySymbol}{" "}
                                             {formatCurrency(deliveryCharge)}
                                         </span>
                                     </p>
@@ -1062,6 +1069,7 @@ function Checkout() {
                                     <p className="flex justify-between text-base text-primary__color font-bold">
                                         <span>{t("grandTotal")}:</span>
                                         <span>
+                                            {baseCurrencySymbol}{" "}
                                             {formatCurrency(
                                                 total +
                                                     parseFloat(deliveryCharge),
@@ -1101,11 +1109,15 @@ function Checkout() {
                                     </h3>
                                     <div className="flex justify-between text-base font-semibold mb-4">
                                         <span>{t("totalProduct")}</span>
-                                        <span>{formatCurrency(total)}</span>
+                                        <span>
+                                            {baseCurrencySymbol}{" "}
+                                            {formatCurrency(total)}
+                                        </span>
                                     </div>
                                     <p className="flex justify-between mb-2">
                                         <span>{t("deliveryFee")}:</span>
                                         <span className="font-medium">
+                                            {baseCurrencySymbol}{" "}
                                             {formatCurrency(deliveryCharge)}
                                         </span>
                                     </p>
@@ -1148,7 +1160,10 @@ function Checkout() {
                                 <>
                                     <div className="flex justify-between text-base font-semibold mb-4">
                                         <span>{t("totalProduct")}</span>
-                                        <span>{formatCurrency(total)}</span>
+                                        <span>
+                                            {baseCurrencySymbol}{" "}
+                                            {formatCurrency(total)}
+                                        </span>
                                     </div>
                                     <Button
                                         type="button"

@@ -12,6 +12,7 @@ import {
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl"; // ← Added
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 export const dynamic = "force-dynamic";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -75,6 +76,7 @@ function CampaignProduct() {
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
+    const { baseCurrencySymbol } = getBaseCurrency(data);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -106,33 +108,11 @@ function CampaignProduct() {
     }, [idParam]);
 
     const formatPrice = (price) => {
-        if (!price) return "৳0.00";
+        if (!price) return `${baseCurrencySymbol}0.00`;
         const numericValue =
             typeof price === "string" ? parseFloat(price) : price;
-        return `৳${numericValue.toFixed(2)}`;
+        return `${baseCurrencySymbol}${numericValue.toFixed(2)}`;
     };
-
-    useEffect(() => {
-        if (!data?.products?.data) return;
-
-        const savedCart = localStorage.getItem("campaignCart");
-        const initialStates = data.products.data.map((product) => {
-            if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                const cartItem = parsedCart.find(
-                    (item) => item.id === product.id,
-                );
-                return {
-                    showQuantity: !!cartItem,
-                    quantity: cartItem?.quantity || 1,
-                };
-            }
-            return {
-                showQuantity: false,
-                quantity: 1,
-            };
-        });
-    }, [data]);
 
     useEffect(() => {
         const fetchCampaignProduct = async () => {
@@ -140,9 +120,8 @@ function CampaignProduct() {
             try {
                 setLoading(true);
                 const response = await campaignProductGetAPI(campaignId);
+                setData(response.data.data);
                 if (response?.data?.data?.products) {
-                    setData(response.data.data);
-
                     const formattedProducts =
                         response.data.data.products.data.map((product) => {
                             const listPrice = parseFloat(

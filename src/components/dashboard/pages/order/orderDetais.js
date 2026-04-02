@@ -18,6 +18,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
 import { useTranslations } from "next-intl";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const formatAmount = (value) => {
     if (!value) return "0.00";
@@ -65,6 +66,8 @@ export default function OrderDetailsPage() {
     const [loading, setLoading] = useState(true);
     const [downloading, setDownloading] = useState(false);
     const t = useTranslations("Dashboard.ecommerce.orderDetails");
+    const [data, setData] = useState(null);
+    const { baseCurrencySymbol } = getBaseCurrency(data);
 
     useEffect(() => {
         if (!orderId) return;
@@ -72,6 +75,7 @@ export default function OrderDetailsPage() {
             try {
                 const response = await productOrderDetailsGetAPI(orderId);
                 setOrder(response.data.data.order_info);
+                setData(response.data.data);
             } catch (error) {
                 const errorMessage =
                     error.response?.data?.message?.error?.[0] ||
@@ -175,7 +179,8 @@ export default function OrderDetailsPage() {
                                     {t("productTotal")}{" "}
                                 </span>
                                 <span className="font-semibold">
-                                    ৳ {formatAmount(order?.product_total)}
+                                    {baseCurrencySymbol}{" "}
+                                    {formatAmount(order?.product_total)}
                                 </span>
                             </p>
                             <p className="flex items-center gap-2">
@@ -184,7 +189,8 @@ export default function OrderDetailsPage() {
                                     {t("deliveryFee")}{" "}
                                 </span>
                                 <span className="font-semibold">
-                                    ৳ {formatAmount(order?.delivery_fee)}
+                                    {baseCurrencySymbol}{" "}
+                                    {formatAmount(order?.delivery_fee)}
                                 </span>
                             </p>
                             <p className="flex items-center gap-2">
@@ -218,13 +224,15 @@ export default function OrderDetailsPage() {
                                 {t("grandTotal")}
                             </span>{" "}
                             <span className="font-semibold">
-                                ৳ {formatAmount(order?.grand_total)}
+                                {baseCurrencySymbol}{" "}
+                                {formatAmount(order?.grand_total)}
                             </span>
                         </p>
                         <p>
                             <span className="font-semibold">{t("profit")}</span>{" "}
                             <span className="font-semibold">
-                                ৳ {formatAmount(order?.profit_amount)}
+                                {baseCurrencySymbol}{" "}
+                                {formatAmount(order?.profit_amount)}
                             </span>
                         </p>
                         <p>

@@ -286,7 +286,7 @@ const getDeviceId = () => {
         deviceId = uuidv4();
         localStorage.setItem("device-id", deviceId);
     }
-    console.log("Device-ID:", deviceId);
+
     return deviceId;
 };
 

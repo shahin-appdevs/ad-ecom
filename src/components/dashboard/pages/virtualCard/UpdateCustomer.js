@@ -90,7 +90,6 @@ export default function UpdateCustomer() {
             if (value instanceof FileList) {
                 if (value.length > 0) {
                     formData.append(key, value[0]);
-                    console.log(value[0]);
                 }
             } else {
                 formData.append(key, value);

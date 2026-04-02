@@ -19,6 +19,7 @@ import {
 import { toast } from "react-hot-toast";
 
 import product20 from "@public/images/product/product20.jpg";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 function SkeletonRow() {
     return (
@@ -68,6 +69,7 @@ const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 export default function ProductSection() {
     const [activeTab, setActiveTab] = useState("All");
+    const [apiData, setApiData] = useState(null);
     const [selectedProducts, setSelectedProducts] = useState([]);
     const [selectedAction, setSelectedAction] = useState("Action");
     const [showFilters, setShowFilters] = useState(false);
@@ -75,6 +77,9 @@ export default function ProductSection() {
     const [statusloading, setStatusLoading] = useState(true);
     const [products, setProducts] = useState([]);
     const router = useRouter();
+
+    const { baseCurrencySymbol } = getBaseCurrency(apiData);
+
     const [filterOptions, setFilterOptions] = useState({
         category: [{ id: 1, name: "Select category", value: "" }],
         childCategory: [{ id: 2, name: "Select child category", value: "" }],
@@ -105,6 +110,7 @@ export default function ProductSection() {
             try {
                 setLoading(true);
                 const response = await productGetSellerAPI();
+                setApiData(response.data.data);
 
                 const transformedProducts =
                     response.data.data.my_products.data.map((product) => ({
@@ -330,7 +336,7 @@ export default function ProductSection() {
 
         return (
             <div className="w-12 h-12 flex items-center justify-center">
-                <img
+                <Image
                     src={imageUrl}
                     width={50}
                     height={50}
@@ -789,13 +795,16 @@ export default function ProductSection() {
                                         {product.stock}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        ৳{product.cost}
+                                        {baseCurrencySymbol}
+                                        {product.cost}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        ৳{product.price}
+                                        {baseCurrencySymbol}
+                                        {product.price}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        ৳{product.profit}
+                                        {baseCurrencySymbol}
+                                        {product.profit}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm">
                                         <span className="block">

@@ -10,6 +10,7 @@ import {
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -43,6 +44,7 @@ function RelatedProduct() {
     const [productId, setProductId] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [data, setData] = useState(null);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -72,11 +74,13 @@ function RelatedProduct() {
         }
     }, [idParam]);
 
+    const { baseCurrencySymbol } = getBaseCurrency(data);
+
     const formatPrice = (price) => {
-        if (!price) return "৳0.00";
+        if (!price) return `${baseCurrencySymbol}0.00`;
         const numericValue =
             typeof price === "string" ? parseFloat(price) : price;
-        return `৳${numericValue.toFixed(2)}`;
+        return `${baseCurrencySymbol}${numericValue.toFixed(2)}`;
     };
 
     useEffect(() => {
@@ -85,6 +89,7 @@ function RelatedProduct() {
             try {
                 setLoading(true);
                 const response = await productDetailsGetAPI(productId);
+                setData(response.data.data);
                 if (response?.data?.data?.related_products) {
                     const formattedProducts =
                         response.data.data.related_products.map((product) => {

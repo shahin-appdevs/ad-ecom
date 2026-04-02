@@ -19,6 +19,7 @@ import { Menu } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 
 import { useTranslations } from "next-intl";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -54,6 +55,8 @@ function SubCategoryProduct() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
+    const { baseCurrencySymbol } = getBaseCurrency(data);
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         setIsLoggedIn(!!token);
@@ -84,10 +87,10 @@ function SubCategoryProduct() {
     }, [idParam]);
 
     const formatPrice = (price) => {
-        if (!price) return "৳0.00";
+        if (!price) return `${baseCurrencySymbol}0.00`;
         const numericValue =
             typeof price === "string" ? parseFloat(price) : price;
-        return `৳${numericValue.toFixed(2)}`;
+        return `${baseCurrencySymbol}${numericValue.toFixed(2)}`;
     };
 
     useEffect(() => {

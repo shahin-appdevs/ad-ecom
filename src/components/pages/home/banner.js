@@ -52,7 +52,6 @@ export const SkeletonBanner = () => (
 );
 
 export default function Banner() {
-    const [hoveredCategory, setHoveredCategory] = useState(null);
     const [hoveredSubcategory, setHoveredSubcategory] = useState(null);
     const { homeData, loading } = useHomeData();
 
@@ -142,12 +141,6 @@ export default function Banner() {
                                         <li
                                             key={index}
                                             className="group flex px-3 border-b last:border-b-0 items-center justify-between transition-all  text-neutral-600 hover:text-primary__color py-2.5 "
-                                            onMouseEnter={() =>
-                                                setHoveredCategory(index)
-                                            }
-                                            onMouseLeave={() =>
-                                                setHoveredCategory(null)
-                                            }
                                         >
                                             <Link
                                                 href={`/categories/products?id=${category.id}`}

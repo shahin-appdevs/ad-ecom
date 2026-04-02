@@ -13,6 +13,7 @@ import {
     CircleStackIcon,
     ArrowRightCircleIcon,
 } from "@heroicons/react/24/outline";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const formatAmount = (value) => {
     if (!value) return "0.00";
@@ -31,19 +32,20 @@ function SkeletonCard() {
 
 export default function PointsPage() {
     const [points, setPoints] = useState([]);
-    const [currencySymbol, setCurrencySymbol] = useState("৳");
+    const [apiData, setApiData] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [selectedPoint, setSelectedPoint] = useState(null);
     const [converting, setConverting] = useState(false);
     const [loading, setLoading] = useState(true);
     const t = useTranslations("Dashboard.account.pointToCash");
+    const { baseCurrencySymbol } = getBaseCurrency(apiData);
 
     useEffect(() => {
         const fetchPoints = async () => {
             try {
                 const response = await pointToCashGetAPI();
+                setApiData(response.data.data);
                 setPoints(response.data.data.points.data || []);
-                setCurrencySymbol(response.data.data.base_curr_symbol);
             } catch (error) {
                 const errorMessage =
                     error.response?.data?.message?.error?.[0] ||
@@ -104,7 +106,7 @@ export default function PointsPage() {
                                     <GiftIcon className="w-6 h-6 text-indigo-500" />
                                     <h5 className="font-semibold">
                                         {item.point_amount} {t("points")} →{" "}
-                                        {currencySymbol}{" "}
+                                        {baseCurrencySymbol}{" "}
                                         {formatAmount(item.cash_amount)}
                                     </h5>
                                 </div>
@@ -124,7 +126,7 @@ export default function PointsPage() {
                                     <span className="font-semibold">
                                         {t("cashAmount")}
                                     </span>{" "}
-                                    {currencySymbol}{" "}
+                                    {baseCurrencySymbol}{" "}
                                     {formatAmount(item.cash_amount)}
                                 </p>
                                 <p className="flex items-center gap-2">
@@ -157,7 +159,7 @@ export default function PointsPage() {
                                 ),
                                 amount: (chunks) => (
                                     <b>
-                                        {currencySymbol}{" "}
+                                        {baseCurrencySymbol}{" "}
                                         {formatAmount(
                                             selectedPoint?.cash_amount,
                                         )}

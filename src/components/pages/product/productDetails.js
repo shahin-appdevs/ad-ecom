@@ -42,6 +42,7 @@ import ProductZoomImage from "./productDetails/ProductZoomImage";
 import ProductThumbnails from "./productDetails/ProductThumbnails";
 import VerticalProductGallery from "./productDetails/VerticalSlider";
 import { useTranslations } from "next-intl";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -192,7 +193,6 @@ function ProductDetails() {
 
     useEffect(() => {
         if (referCodeFromUrl) {
-            console.log("Referral code from URL:", referCodeFromUrl);
             localStorage.setItem("product_refer_code", referCodeFromUrl);
         }
     }, [referCodeFromUrl]);
@@ -396,11 +396,7 @@ function ProductDetails() {
             setReviewLoading(false);
         }
     };
-
-    const currencySymbol = data?.base_curr_symbol || "৳";
-    const toggleReviews = () => {
-        setShowReviews(!showReviews);
-    };
+    const { baseCurrencySymbol } = getBaseCurrency(data);
 
     const handleWishlist = async (e) => {
         if (!isLoggedIn && !isSellerLoggedIn) {
@@ -478,10 +474,10 @@ function ProductDetails() {
         stock: product.product_quantity,
         sku: product.product_sku,
         newPrice: product.sale_price
-            ? `${currencySymbol}${parseFloat(product.sale_price).toFixed(2)}`
-            : `${currencySymbol}0.00`,
+            ? `${baseCurrencySymbol}${parseFloat(product.sale_price).toFixed(2)}`
+            : `${baseCurrencySymbol}0.00`,
         oldPrice: product.list_price
-            ? `${currencySymbol}${parseFloat(product.list_price).toFixed(2)}`
+            ? `${baseCurrencySymbol}${parseFloat(product.list_price).toFixed(2)}`
             : null,
         image: product.main_image
             ? `${backendBaseURL}/${data.main_image_path}/${product.main_image}`
@@ -523,10 +519,10 @@ function ProductDetails() {
             id: product.id,
             title: product.title,
             newPrice: product.product_prices?.sale_price
-                ? `${currencySymbol}${parseFloat(product.product_prices.sale_price).toFixed(2)}`
-                : `${currencySymbol}0.00`,
+                ? `${baseCurrencySymbol}${parseFloat(product.product_prices.sale_price).toFixed(2)}`
+                : `${baseCurrencySymbol}0.00`,
             oldPrice: product.product_prices?.list_price
-                ? `${currencySymbol}${parseFloat(product.product_prices.list_price).toFixed(2)}`
+                ? `${baseCurrencySymbol}${parseFloat(product.product_prices.list_price).toFixed(2)}`
                 : null,
             image: product.main_image
                 ? `${backendBaseURL}/${data.main_image_path}/${product.main_image}`
