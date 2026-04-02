@@ -785,7 +785,7 @@
             },
             "topup": {
                 "topUpType": "Top Up Type",
-                "bdTopUp": "BD TopUp",
+                "localTopUp": "Local TopUp",
                 "global": "Global",
                 "continue": "Continue",
                 "topupLog": "Mobile Topup Logs",

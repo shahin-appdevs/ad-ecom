@@ -53,7 +53,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
             daily_limit: "0.00",
             monthly_limit: "0.00",
         },
-        base_curr: "BDT",
+        base_curr: "",
         base_curr_rate: "1.0000",
     });
 
@@ -69,6 +69,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                 setIsLoading(true);
                 const response = await billPayGetAPI();
                 const data = response.data.data;
+
                 setBillPayData({
                     ...data,
                     billPayCharge:

@@ -785,7 +785,7 @@
             },
             "topup": {
                 "topUpType": "Tipo de recarga",
-                "bdTopUp": "Recarga BD",
+                "localTopUp": "Recarga Local",
                 "global": "Global",
                 "continue": "Continuar",
                 "topupLog": "Registros de recarga móvil",

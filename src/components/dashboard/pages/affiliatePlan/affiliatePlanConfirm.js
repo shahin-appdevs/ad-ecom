@@ -35,18 +35,8 @@ export default function AffiliatePlanConfirm() {
     const [loading, setLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [gateways, setGateways] = useState([]);
-    const [selectedGateway, setSelectedGateway] = useState(null);
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [gatewayImagePath, setGatewayImagePath] = useState("");
-    const [payInfo, setPayInfo] = useState({
-        pay_information: {
-            requested_amount: "0.00",
-            total_charge: "0.00",
-            total_amount: "0.00",
-            sender_cur_code: "BDT",
-        },
-        redirect_url: null,
-    });
 
     useEffect(() => {
         if (idParam) {
@@ -87,7 +77,6 @@ export default function AffiliatePlanConfirm() {
                     resPlans?.data?.data?.gateway_image_path || "",
                 );
                 if (gwList.length > 0) {
-                    setSelectedGateway(gwList[0]);
                     setSelectedCurrency(gwList[0].currencies[0]);
                 }
             } catch (err) {
@@ -111,7 +100,6 @@ export default function AffiliatePlanConfirm() {
                 `${window.location.origin}/user/affiliate-plan/success`,
                 `${window.location.origin}/user/affiliate-plan/cancel`,
             );
-            setPayInfo(res.data.data);
             window.location.href = res.data.data.redirect_url;
         } catch (err) {
             toast.error(err.response?.data?.message?.error?.[0]);

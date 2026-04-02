@@ -9,7 +9,7 @@ import Button from "@/components/utility/Button";
 export default function MobileTopupSection() {
     const t = useTranslations("Dashboard.services.topup");
     const topupTypes = [
-        { id: 1, name: t("bdTopUp") },
+        { id: 1, name: t("localTopUp") },
         { id: 2, name: t("global") },
     ];
     const [selectedTopupType, setSelectedTopupType] = useState(topupTypes[0]);
@@ -18,7 +18,7 @@ export default function MobileTopupSection() {
     const handleContinue = (e) => {
         e.preventDefault();
         if (selectedTopupType.id === 1) {
-            router.push("/user/mobile/topup/bd-topup");
+            router.push("/user/mobile/topup/local-topup");
         } else {
             router.push("/user/mobile/topup/global-topup");
         }

@@ -785,7 +785,7 @@
             },
             "topup": {
                 "topUpType": "نوع الشحن",
-                "bdTopUp": "شحن BD",
+                "localTopUp": "شحن محلي",
                 "global": "عالمي",
                 "continue": "متابعة",
                 "topupLog": "سجلات شحن الجوال",

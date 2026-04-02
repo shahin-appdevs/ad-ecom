@@ -5,7 +5,6 @@ import {
     localMobileTopupInfoGetAPI,
     mobileTopupGetAPI,
     submitLocalMobileTopupAPI,
-    SubmitMobileTopupAPI,
     walletCardRemainingLimitsGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { Listbox } from "@headlessui/react";
@@ -38,7 +37,7 @@ export default function MobileTopupManualSection() {
         useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [defaultCurrency, setDefaultCurrency] = useState({
-        code: "BDT",
+        code: "",
         rate: "1.0000",
     });
     const [amount, setAmount] = useState("");
@@ -257,13 +256,9 @@ export default function MobileTopupManualSection() {
                 }));
 
                 setDefaultCurrency({
-                    code: data.base_curr,
-                    rate: data.base_curr_rate,
+                    code: data.base_curr || "",
+                    rate: data.base_curr_rate || "1.0000",
                 });
-
-                // if (data.topupTypes?.length > 0) {
-                //     setSelectedOperator(data.topupTypes[0]);
-                // }
 
                 if (data.all_countries?.length > 0) {
                     setSelectedCountry(

@@ -40,7 +40,7 @@ export default function RequestMoneySection({ setRefetch }) {
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [defaultCurrency, setDefaultCurrency] = useState({
-        code: "BDT",
+        code: "",
         rate: "1.0000",
     });
     const [amount, setAmount] = useState("");
@@ -230,8 +230,8 @@ export default function RequestMoneySection({ setRefetch }) {
                     requestMoneyData.requestMoneyCharge,
             });
             setDefaultCurrency({
-                code: data.base_curr,
-                rate: data.base_curr_rate,
+                code: data.base_curr || "",
+                rate: data.base_curr_rate || "1.0000",
             });
         } catch (error) {
             toast.error(

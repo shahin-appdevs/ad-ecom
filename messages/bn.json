@@ -785,7 +785,7 @@
             },
             "topup": {
                 "topUpType": "টপ আপের ধরন",
-                "bdTopUp": "বিডি টপআপ",
+                "localTopUp": "লোকাল টপআপ",
                 "global": "গ্লোবাল",
                 "continue": "চালিয়ে যান",
                 "topupLog": "মোবাইল টপআপ লগ",
