@@ -242,6 +242,20 @@
                     "title": "تم إلغاء إضافة الأموال!",
                     "message": "شكراً لك على تقديمك. ولكن تم إلغاء معاملتك وسيتم معالجتها قريباً.",
                     "continueButton": "متابعة إضافة الأموال"
+                },
+                "manual": {
+                    "paymentSummary": "ملخص الدفع",
+                    "transactionId": "معرف المعاملة",
+                    "paymentMethod": "طريقة الدفع",
+                    "amount": "المبلغ",
+                    "exchangeRate": "سعر الصرف",
+                    "payableAmount": "المبلغ المستحق",
+                    "confirmPayment": "تأكيد الدفع",
+                    "confirming": "جاري التأكيد...",
+                    "noAdditionalInfo": "لا توجد معلومات إضافية مطلوبة لهذه الطريقة في الدفع.",
+                    "maxCharacters": "الحد الأقصى {max} حرفًا",
+                    "submissionFailed": "فشل الإرسال",
+                    "noPaymentData": "لم يتم العثور على بيانات الدفع"
                 }
             },
             "exchangeMoney": {

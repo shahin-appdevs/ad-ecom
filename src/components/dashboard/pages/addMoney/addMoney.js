@@ -267,7 +267,7 @@ export default function AddMoneySection() {
         };
     }, [selectedCurrency, wallet?.selectedCurrency, remainingLimit]);
 
-    const handleAddMoney = async (e) => {
+    const handleAddMoney = async () => {
         setLoading(true);
         try {
             const response = await InsertAddMoneyAPI(

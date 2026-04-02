@@ -1,70 +1,79 @@
-'use client';
-import { useState, useEffect } from 'react';
-import { toast } from 'react-hot-toast';
+"use client";
+import { useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
 import QRCode from "react-qr-code";
-import { 
+import {
     CurrencyDollarIcon,
     BanknotesIcon,
     ArrowTrendingDownIcon,
     ChartBarIcon,
     ClipboardIcon,
-    CheckIcon
-} 
-from '@heroicons/react/24/outline';
+    CheckIcon,
+} from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
-import { tatumAddMoneyAPI } from '@root/services/apiClient/apiClient';
+import { tatumAddMoneyAPI } from "@root/services/apiClient/apiClient";
+import { useTranslations } from "next-intl";
 
 function CryptoConfirmationPage() {
+    const t = useTranslations("Dashboard.wallet.addMoney.crypto");
     const [paymentData, setPaymentData] = useState(null);
-    const [txnHash, setTxnHash] = useState('');
+    const [txnHash, setTxnHash] = useState("");
     const [loading, setLoading] = useState(false);
     const [copied, setCopied] = useState(false);
 
     useEffect(() => {
-        const storedData = sessionStorage.getItem('cryptoPaymentData');
+        const storedData = sessionStorage.getItem("cryptoPaymentData");
         if (storedData) {
             setPaymentData(JSON.parse(storedData));
         } else {
-            window.location.href = '/user/add/money';
-            toast.error('No payment data found');
+            window.location.href = "/user/add/money";
+            toast.error("No payment data found");
         }
     }, []);
 
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(paymentData?.address || '');
+        navigator.clipboard.writeText(paymentData?.address || "");
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-        toast.success('Address copied to clipboard!');
+        toast.success("Address copied to clipboard!");
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        
+
         try {
             if (!txnHash) {
-                throw new Error('Please enter transaction hash');
+                throw new Error("Please enter transaction hash");
             }
             if (!/^0x[a-fA-F0-9]{64}$/.test(txnHash)) {
-                throw new Error('Please enter a valid transaction hash');
+                throw new Error("Please enter a valid transaction hash");
             }
 
             const response = await tatumAddMoneyAPI(txnHash, paymentData.trx);
 
             if (response.data.message?.success) {
                 toast.success(response.data.message.success[0]);
-                sessionStorage.removeItem('cryptoPaymentData');
+                sessionStorage.removeItem("cryptoPaymentData");
             } else {
-                toast.error(response?.data?.message?.error?.[0] || 'Submission failed');
+                toast.error(
+                    response?.data?.message?.error?.[0] || "Submission failed",
+                );
             }
         } catch (error) {
-            toast.error(error.response?.data?.message?.error?.[0] || 'Submission failed');
+            toast.error(
+                error.response?.data?.message?.error?.[0] ||
+                    "Submission failed",
+            );
         } finally {
             setLoading(false);
         }
     };
 
-    if (!paymentData) return <div className="text-center py-10">Loading payment details...</div>;
+    if (!paymentData)
+        return (
+            <div className="text-center py-10">Loading payment details...</div>
+        );
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
@@ -72,7 +81,9 @@ function CryptoConfirmationPage() {
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="col-span-2">
-                            <label className="block text-sm font-medium mb-2">Address</label>
+                            <label className="block text-sm font-medium mb-2">
+                                {t("address")}
+                            </label>
                             <div className="relative">
                                 <input
                                     type="text"
@@ -95,7 +106,7 @@ function CryptoConfirmationPage() {
                         </div>
                         <div className="col-span-2">
                             <div className="flex justify-center bg-white p-4 shadow-primary__shadow my-6">
-                                <QRCode 
+                                <QRCode
                                     value={paymentData.address}
                                     size={128}
                                     level="H"
@@ -105,13 +116,15 @@ function CryptoConfirmationPage() {
                             </div>
                         </div>
                         <div className="col-span-2">
-                            <label className="block text-sm font-medium mb-2">Transaction Hash (Txn Hash)</label>
+                            <label className="block text-sm font-medium mb-2">
+                                {t("transactionHash")}
+                            </label>
                             <input
                                 type="text"
                                 value={txnHash}
                                 onChange={(e) => setTxnHash(e.target.value)}
                                 className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100"
-                                placeholder="Enter Txn Hash..."
+                                placeholder={t("enterTxnHash")}
                                 required
                                 pattern="^0x[a-fA-F0-9]{64}$"
                                 title="Enter a valid Ethereum transaction hash (0x followed by 64 characters)"
@@ -119,7 +132,7 @@ function CryptoConfirmationPage() {
                         </div>
                     </div>
                     <Button
-                        title={loading ? "Confirming..." : "Confirm Payment"}
+                        title={loading ? t("confirming") : t("confirmPayment")}
                         variant="primary"
                         size="md"
                         className="w-full"
@@ -130,11 +143,13 @@ function CryptoConfirmationPage() {
             </div>
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
-                    <h5 className="text-base font-semibold text-gray-800">Preview</h5>
+                    <h5 className="text-base font-semibold text-gray-800">
+                        {t("preview")}
+                    </h5>
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2 text-gray-600">
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Transaction ID</span>
+                            <span>{t("transactionId")}</span>
                         </div>
                         <span className="font-medium text-gray-800">
                             {paymentData.trx}
@@ -143,7 +158,7 @@ function CryptoConfirmationPage() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2 text-gray-600">
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
-                            <span>Request Amount</span>
+                            <span>{t("requestAmount")}</span>
                         </div>
                         <span className="text-gray-800">
                             {paymentData.paymentInfo.request_amount}
@@ -152,7 +167,7 @@ function CryptoConfirmationPage() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2 text-gray-600">
                             <BanknotesIcon className="w-5 h-5 text-emerald-500" />
-                            <span>Network Fee</span>
+                            <span>{t("networkFee")}</span>
                         </div>
                         <span className="text-gray-800">
                             {paymentData.paymentInfo.total_charge}
@@ -161,7 +176,7 @@ function CryptoConfirmationPage() {
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-cyan-800" />
-                            <span>Exchange Rate</span>
+                            <span>{t("exchangeRate")}</span>
                         </div>
                         <span className="text-gray-800">
                             {paymentData.paymentInfo.exchange_rate}

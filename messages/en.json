@@ -242,6 +242,20 @@
                     "title": "Add Money Canceled!",
                     "message": "Thank you for your submission. But your transaction has been canceled and will be processed shortly.",
                     "continueButton": "Continue Add Money"
+                },
+                "manual": {
+                    "paymentSummary": "Payment Summary",
+                    "transactionId": "Transaction ID",
+                    "paymentMethod": "Payment Method",
+                    "amount": "Amount",
+                    "exchangeRate": "Exchange Rate",
+                    "payableAmount": "Payable Amount",
+                    "confirmPayment": "Confirm Payment",
+                    "confirming": "Confirming...",
+                    "noAdditionalInfo": "No additional information required for this payment method.",
+                    "maxCharacters": "Maximum {max} characters",
+                    "submissionFailed": "Submission failed",
+                    "noPaymentData": "No payment data found"
                 }
             },
             "exchangeMoney": {

@@ -242,6 +242,20 @@
                     "title": "অ্যাড মানি বাতিল করা হয়েছে!",
                     "message": "আপনার আবেদনের জন্য ধন্যবাদ। কিন্তু আপনার লেনদেনটি বাতিল করা হয়েছে এবং শীঘ্রই এটি প্রক্রিয়া করা হবে।",
                     "continueButton": "অ্যাড মানি চালিয়ে যান"
+                },
+                "manual": {
+                    "paymentSummary": "পেমেন্ট সারাংশ",
+                    "transactionId": "লেনদেন আইডি",
+                    "paymentMethod": "পেমেন্ট পদ্ধতি",
+                    "amount": "পরিমাণ",
+                    "exchangeRate": "বিনিময় হার",
+                    "payableAmount": "প্রদেয় পরিমাণ",
+                    "confirmPayment": "পেমেন্ট নিশ্চিত করুন",
+                    "confirming": "নিশ্চিত করা হচ্ছে...",
+                    "noAdditionalInfo": "এই পেমেন্ট পদ্ধতির জন্য কোনো অতিরিক্ত তথ্যের প্রয়োজন নেই।",
+                    "maxCharacters": "সর্বোচ্চ {max} অক্ষর",
+                    "submissionFailed": "জমা দিতে ব্যর্থ হয়েছে",
+                    "noPaymentData": "কোনো পেমেন্ট ডেটা পাওয়া যায়নি"
                 }
             },
             "exchangeMoney": {

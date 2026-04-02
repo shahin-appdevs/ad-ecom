@@ -242,6 +242,20 @@
                     "title": "¡Adición de dinero cancelada!",
                     "message": "Gracias por su envío. Pero su transacción ha sido cancelada y será procesada en breve.",
                     "continueButton": "Continuar agregando dinero"
+                },
+                "manual": {
+                    "paymentSummary": "Resumen de Pago",
+                    "transactionId": "ID de Transacción",
+                    "paymentMethod": "Método de Pago",
+                    "amount": "Monto",
+                    "exchangeRate": "Tipo de Cambio",
+                    "payableAmount": "Monto a Pagar",
+                    "confirmPayment": "Confirmar Pago",
+                    "confirming": "Confirmando...",
+                    "noAdditionalInfo": "No se requiere información adicional para este método de pago.",
+                    "maxCharacters": "Máximo {max} caracteres",
+                    "submissionFailed": "Error al enviar",
+                    "noPaymentData": "No se encontraron datos de pago"
                 }
             },
             "exchangeMoney": {
