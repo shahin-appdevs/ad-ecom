@@ -76,16 +76,6 @@ export default function RequestMoneySection({ setRefetch }) {
         }
     }, [wallet.selectedCurrency]);
 
-    // Calculate exchange rate between sender and receiver currencies
-    const exchangeRate = useMemo(() => {
-        if (selectedCurrency && defaultCurrency) {
-            const senderRate = parseFloat(selectedCurrency.rate || 1);
-            const receiverRate = parseFloat(defaultCurrency.rate || 1);
-            return receiverRate / senderRate;
-        }
-        return 1;
-    }, [selectedCurrency, defaultCurrency]);
-
     const exchangeRateText = useMemo(() => {
         if (selectedCurrency && defaultCurrency) {
             const rate =

@@ -8,7 +8,10 @@ import {
     paymentLinkStoreAPI,
 } from "@root/services/apiClient/apiClient";
 import { Listbox } from "@headlessui/react";
-import { DocumentArrowUpIcon } from "@heroicons/react/24/outline";
+import {
+    BanknotesIcon,
+    DocumentArrowUpIcon,
+} from "@heroicons/react/24/outline";
 import { useDropzone } from "react-dropzone";
 import {
     ChevronUpDownIcon,
@@ -590,7 +593,7 @@ export default function CreateLinkSection() {
 
                                     <div className="flex items-center border rounded-md px-2">
                                         <span className="text-sm mr-1 text-gray-500">
-                                            $
+                                            <BanknotesIcon className="h-5 w-5" />
                                         </span>
                                         <input
                                             type="text"
@@ -683,7 +686,7 @@ export default function CreateLinkSection() {
 
                                 <div className="flex items-center border rounded-md px-2">
                                     <span className="text-sm mr-1 text-gray-500">
-                                        $
+                                        <BanknotesIcon className="h-5 w-5" />
                                     </span>
                                     <input
                                         type="text"

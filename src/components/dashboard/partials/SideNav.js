@@ -51,6 +51,7 @@ import {
     CreditCardIcon,
     GiftIcon,
     ChevronLeftIcon,
+    ArrowRightOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 import { useDashboardData } from "@/components/context/DashboardContext";
 
@@ -566,6 +567,17 @@ export default function SideNav() {
                         </div>
                     </div>
                     <div className="mt-5">
+                        <div className="w-full p-4 rounded-2xl ">
+                            <button
+                                onClick={() => setIsLogoutModalOpen(true)}
+                                className=" bg-gray-100 text-red-500 flex w-full justify-center items-center py-2 px-5 gap-2 font-semibold rounded-lg transition hover:bg-red-500 hover:text-white hover:scale-x-105"
+                            >
+                                <ArrowRightOnRectangleIcon className="size-5 stroke-2" />
+                                {t("logout")}
+                            </button>
+                        </div>
+                    </div>
+                    {/* <div className="mt-5">
                         <div className="w-full p-4 rounded-2xl bg-gray-100">
                             <div className="flex items-center gap-2">
                                 <h4 className="text-[18px] font-bold text-gray-800">
@@ -582,7 +594,7 @@ export default function SideNav() {
                                 {t("getSupport")}
                             </Link>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </section>
             <Transition appear show={isLogoutModalOpen} as={Fragment}>
@@ -665,11 +677,8 @@ const SidebarSkeleton = () => {
 
             {/* Nav Items */}
             <div className="flex-1 space-y-6">
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-                    <div
-                        key={item}
-                        className="flex items-center justify-between"
-                    >
+                {Array.from({ length: 8 }).map((_, i) => (
+                    <div key={i} className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             {/* Icon Placeholder */}
                             <div className="h-5 w-5 bg-gray-200 rounded"></div>
@@ -677,7 +686,7 @@ const SidebarSkeleton = () => {
                             <div className="h-4 w-24 bg-gray-200 rounded"></div>
                         </div>
                         {/* Arrow Placeholder (except for first item) */}
-                        {item !== 1 && (
+                        {i !== 0 && (
                             <div className="h-3 w-3 bg-gray-100 rounded"></div>
                         )}
                     </div>
@@ -685,10 +694,8 @@ const SidebarSkeleton = () => {
             </div>
 
             {/* Help Center Card Placeholder */}
-            <div className="mt-auto bg-blue-50/50 rounded-2xl p-5 space-y-3">
-                <div className="h-4 w-28 bg-gray-200 rounded mx-auto"></div>
-                <div className="h-3 w-36 bg-gray-100 rounded mx-auto"></div>
-                <div className="h-10 w-full bg-indigo-200 rounded-xl mt-2"></div>
+            <div className="mt-auto bg-gray-50 rounded-2xl  space-y-3">
+                <div className="h-10 w-full bg-gray-100 rounded-xl"></div>
             </div>
         </div>
     );

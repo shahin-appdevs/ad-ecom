@@ -724,6 +724,22 @@
                     "failedBanks": "فشل تحميل البنوك",
                     "failedBranches": "فشل تحميل الفروع",
                     "loading": "جاري التحميل..."
+                },
+                "withdrawManual": {
+                    "mobileNumber": "رقم الجوال",
+                    "mobileNumberPlaceholder": "أدخل رقم جوالك",
+                    "pin": "الرقم السري",
+                    "pinPlaceholder": "أدخل الرقم السري",
+                    "transactionId": "رقم المعاملة",
+                    "transactionIdPlaceholder": "أدخل رقم المعاملة",
+                    "confirmWithdraw": "تأكيد السحب",
+                    "confirming": "جاري التأكيد...",
+                    "preview": "معاينة",
+                    "transactionIdLabel": "رقم المعاملة",
+                    "paymentMethod": "طريقة الدفع",
+                    "amount": "المبلغ",
+                    "exchangeRate": "سعر الصرف",
+                    "payableAmount": "المبلغ المستحق"
                 }
             }
         },

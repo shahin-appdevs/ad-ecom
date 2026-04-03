@@ -724,6 +724,22 @@
                     "failedBanks": "ব্যাংক লোড করতে ব্যর্থ হয়েছে",
                     "failedBranches": "শাখা লোড করতে ব্যর্থ হয়েছে",
                     "loading": "লোড হচ্ছে..."
+                },
+                "withdrawManual": {
+                    "mobileNumber": "মোবাইল নম্বর",
+                    "mobileNumberPlaceholder": "আপনার মোবাইল নম্বর দিন",
+                    "pin": "পিন",
+                    "pinPlaceholder": "আপনার পিন দিন",
+                    "transactionId": "ট্রানজেকশন আইডি",
+                    "transactionIdPlaceholder": "ট্রানজেকশন আইডি দিন",
+                    "confirmWithdraw": "উত্তোলন নিশ্চিত করুন",
+                    "confirming": "নিশ্চিত করা হচ্ছে...",
+                    "preview": "প্রিভিউ",
+                    "transactionIdLabel": "ট্রানজেকশন আইডি",
+                    "paymentMethod": "পেমেন্ট মেথড",
+                    "amount": "পরিমাণ",
+                    "exchangeRate": "বিনিময় হার",
+                    "payableAmount": "প্রদেয় পরিমাণ"
                 }
             }
         },

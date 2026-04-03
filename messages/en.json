@@ -724,6 +724,22 @@
                     "failedBanks": "Failed to load banks",
                     "failedBranches": "Failed to load branches",
                     "loading": "Loading..."
+                },
+                "withdrawManual": {
+                    "mobileNumber": "Mobile Number",
+                    "mobileNumberPlaceholder": "Enter your mobile number",
+                    "pin": "PIN",
+                    "pinPlaceholder": "Enter your PIN",
+                    "transactionId": "Transaction ID",
+                    "transactionIdPlaceholder": "Enter transaction ID",
+                    "confirmWithdraw": "Confirm Withdraw",
+                    "confirming": "Confirming...",
+                    "preview": "Preview",
+                    "transactionIdLabel": "Transaction ID",
+                    "paymentMethod": "Payment Method",
+                    "amount": "Amount",
+                    "exchangeRate": "Exchange Rate",
+                    "payableAmount": "Payable Amount"
                 }
             }
         },

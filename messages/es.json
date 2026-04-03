@@ -724,6 +724,22 @@
                     "failedBanks": "Error al cargar los bancos",
                     "failedBranches": "Error al cargar las sucursales",
                     "loading": "Cargando..."
+                },
+                "withdrawManual": {
+                    "mobileNumber": "Número de móvil",
+                    "mobileNumberPlaceholder": "Ingrese su número de móvil",
+                    "pin": "PIN",
+                    "pinPlaceholder": "Ingrese su PIN",
+                    "transactionId": "ID de transacción",
+                    "transactionIdPlaceholder": "Ingrese el ID de la transacción",
+                    "confirmWithdraw": "Confirmar retiro",
+                    "confirming": "Confirmando...",
+                    "preview": "Vista previa",
+                    "transactionIdLabel": "ID de transacción",
+                    "paymentMethod": "Método de pago",
+                    "amount": "Monto",
+                    "exchangeRate": "Tasa de cambio",
+                    "payableAmount": "Monto a pagar"
                 }
             }
         },

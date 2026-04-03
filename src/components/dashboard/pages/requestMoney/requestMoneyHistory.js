@@ -184,27 +184,25 @@ export default function RequestMoneyHistorySection({ isRefetch }) {
                                         dir="ltr"
                                         className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium"
                                     >
-                                        {transaction.request_amount ||
-                                            "0.00 USD"}
+                                        {transaction.request_amount || "0.00"}
                                     </td>
                                     <td
                                         dir="ltr"
                                         className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium"
                                     >
-                                        {transaction.payable_amount ||
-                                            "0.00 USD"}
+                                        {transaction.payable_amount || "0.00"}
                                     </td>
                                     <td
                                         dir="ltr"
                                         className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium"
                                     >
-                                        {transaction.total_charge || "0.00 USD"}
+                                        {transaction.total_charge || "0.00"}
                                     </td>
                                     <td
                                         dir="ltr"
                                         className="rtl:text-right py-3.5 px-5 whitespace-nowrap text-sm font-medium"
                                     >
-                                        {transaction.will_get || "0.00 USD"}
+                                        {transaction.will_get || "0.00"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap">
                                         <span
