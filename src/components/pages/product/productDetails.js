@@ -37,7 +37,7 @@ import {
 import { toast } from "react-hot-toast";
 import { useCart } from "@/components/context/CartContext";
 import { useWishlist } from "@/components/context/WishlistContext";
-import chatUserThree from "@public/images/user/chatUserThree.png";
+import chatUserThree from "@public/images/user/chat-user-3.png";
 import ProductZoomImage from "./productDetails/ProductZoomImage";
 import ProductThumbnails from "./productDetails/ProductThumbnails";
 import VerticalProductGallery from "./productDetails/VerticalSlider";

@@ -1,7 +1,6 @@
 "use client";
 import { Suspense, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { Link, useRouter } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import {
@@ -12,11 +11,11 @@ import {
 import useAuthRedirect from "@/components/utility/useAuthRedirect";
 import { useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
-import logo from "@public/images/logo/favicon.jpeg";
 import ReCAPTCHA from "react-google-recaptcha";
 import { handleApiError } from "@/components/utility/handleApiError";
 import getImageUrl from "@/components/utility/getImageUrl";
 import { useLocale, useTranslations } from "next-intl";
+import { useAppSettings } from "@/hooks/useAppSettings";
 
 function Login() {
     useAuthRedirect();
@@ -27,7 +26,7 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [recaptcha, setRecaptcha] = useState(null);
     const [loginBasicData, setLoginBasicData] = useState(null);
-    const [appSettingsData, setAppSettingsData] = useState(null);
+    const { appSettingsData } = useAppSettings();
     const locale = useLocale();
     const t = useTranslations("Auth.login");
     const searchParams = useSearchParams();
@@ -42,9 +41,6 @@ function Login() {
 
     // get app settings from session storage
     useEffect(() => {
-        const appSettings = sessionStorage.getItem("appSettings");
-        setAppSettingsData(appSettings ? JSON.parse(appSettings) : null);
-
         // get redirect url from session storage
         const url = sessionStorage?.getItem("redirectAfterLogin");
         setRedirectUrl(url);

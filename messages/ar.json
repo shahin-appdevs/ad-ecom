@@ -1,4 +1,8 @@
 {
+    "Metadata": {
+        "title": "متجر إي دي",
+        "description": "منصة التجارة الإلكترونية متعددة البائعين"
+    },
     "HomePage": {
         "header": {
             "searchPlaceholder": "ابحث بالاسم...",

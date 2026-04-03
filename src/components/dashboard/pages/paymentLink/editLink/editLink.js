@@ -2,13 +2,15 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-
 import {
     paymentLinkUpdateAPI,
     paymentLinkEditAPI,
 } from "@root/services/apiClient/apiClient";
 import { Listbox } from "@headlessui/react";
-import { DocumentArrowUpIcon } from "@heroicons/react/24/outline";
+import {
+    BanknotesIcon,
+    DocumentArrowUpIcon,
+} from "@heroicons/react/24/outline";
 import { useDropzone } from "react-dropzone";
 import {
     ChevronUpDownIcon,
@@ -20,10 +22,9 @@ import Button from "@/components/utility/Button";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import PinVerificationModal from "@/components/dashboard/partials/PinVerificationModal";
-
-import logo from "@public/images/logo/favicon.jpeg";
 import mockup from "@public/images/payment/mockup.png";
 import getImageUrl from "@/components/utility/getImageUrl";
+import { useAppSettings } from "@/hooks/useAppSettings";
 
 const CreateLinkSkeleton = () => {
     return (
@@ -99,11 +100,6 @@ const CreateLinkSkeleton = () => {
     );
 };
 
-// const paymentTypes = [
-//     { id: 1, name: "Customers Choose What To Pay", value: "pay" },
-//     { id: 2, name: "Products Or Subscriptions", value: "product" },
-// ];
-
 export default function EditLinkSection() {
     const t = useTranslations("Dashboard.wallet.paymentLink.createPaymentLink");
 
@@ -128,7 +124,6 @@ export default function EditLinkSection() {
     const [showLimits, setShowLimits] = useState(false);
     const [previewMode, setPreviewMode] = useState("desktop");
     const [title, setTitle] = useState("");
-    const [subTitle, setSubTitle] = useState("");
     const [description, setDescription] = useState("");
     const [minAmount, setMinAmount] = useState("");
     const [maxAmount, setMaxAmount] = useState("");
@@ -141,6 +136,7 @@ export default function EditLinkSection() {
     const [isInitialLoading, setIsInitialLoading] = useState(true);
     const router = useRouter();
     const [showPinModal, setShowPinModal] = useState(false);
+    const { appSettingsData } = useAppSettings();
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -160,7 +156,6 @@ export default function EditLinkSection() {
 
             // Set basic fields
             setTitle(linkData.title || "");
-            setSubTitle(linkData.sub_title || "");
             setDescription(linkData.details || "");
 
             // Set payment type (still using static array here – matches original)
@@ -266,7 +261,6 @@ export default function EditLinkSection() {
             if (response.data?.data?.payment_link) {
                 toast.success(response?.data?.message?.success?.[0]);
                 setTitle("");
-                setSubTitle("");
                 setDescription("");
                 setMinAmount("");
                 setMaxAmount("");
@@ -640,7 +634,7 @@ export default function EditLinkSection() {
                                     </label>
                                     <div className="flex items-center border rounded-md px-2">
                                         <span className="text-sm mr-1 text-gray-500">
-                                            $
+                                            <BanknotesIcon className="w-5 h-5" />
                                         </span>
                                         <input
                                             type="text"
@@ -654,7 +648,7 @@ export default function EditLinkSection() {
                                         />
                                     </div>
                                 </div>
-                                <div className="flex justify-center">
+                                <div className="flex justify-center py-2">
                                     {preview ? (
                                         <Image
                                             src={preview}
@@ -665,7 +659,10 @@ export default function EditLinkSection() {
                                         />
                                     ) : (
                                         <Image
-                                            src={logo}
+                                            src={getImageUrl(
+                                                appSettingsData?.site_logo,
+                                                appSettingsData?.logo_image_path,
+                                            )}
                                             width={96}
                                             height={96}
                                             alt="QR"
@@ -728,7 +725,7 @@ export default function EditLinkSection() {
                                 </label>
                                 <div className="flex items-center border rounded-md px-2">
                                     <span className="text-sm mr-1 text-gray-500">
-                                        $
+                                        <BanknotesIcon className="w-5 h-5" />
                                     </span>
                                     <input
                                         type="text"
@@ -753,7 +750,10 @@ export default function EditLinkSection() {
                                     />
                                 ) : (
                                     <Image
-                                        src={logo}
+                                        src={getImageUrl(
+                                            appSettingsData?.site_logo,
+                                            appSettingsData?.logo_image_path,
+                                        )}
                                         width={96}
                                         height={96}
                                         alt="QR"

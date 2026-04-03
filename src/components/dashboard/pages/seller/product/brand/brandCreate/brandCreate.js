@@ -1,6 +1,5 @@
 "use client";
 import { useState, useCallback } from "react";
-import { toast } from "react-hot-toast";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -286,9 +285,7 @@ export default function BrandCreateSection() {
                     </label>
                     <div
                         className={`border-2 border-dashed rounded-md ${
-                            imageFile
-                                ? "border-gray-300"
-                                : "border-gray-300"
+                            imageFile ? "border-gray-300" : "border-gray-300"
                         }`}
                         onDrop={handleImageDrop}
                         onDragOver={(e) => e.preventDefault()}
@@ -393,10 +390,7 @@ export default function BrandCreateSection() {
                     </p>
                     <div className="space-y-4">
                         {statusOptions.map((option) => (
-                            <div
-                                key={option.id}
-                                className="flex items-start"
-                            >
+                            <div key={option.id} className="flex items-start">
                                 <div className="flex items-center h-5">
                                     <input
                                         id={`status-option-${option.id}`}

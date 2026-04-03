@@ -1,4 +1,8 @@
 {
+    "Metadata": {
+        "title": "AD e-commerce",
+        "description": "Multi vendor e-commerce platform"
+    },
     "HomePage": {
         "header": {
             "searchPlaceholder": "Search by name...",

@@ -107,7 +107,7 @@ export default function Footer() {
                                     </li>
                                 )}
                                 {contactInfo?.mobile && (
-                                    <li className="flex items-center font-medium gap-1">
+                                    <li className="flex items-center  font-medium gap-1">
                                         <PhoneIcon className="w-4 h-4 shrink-0" />{" "}
                                         {contactInfo?.mobile}
                                     </li>

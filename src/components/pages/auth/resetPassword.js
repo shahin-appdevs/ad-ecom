@@ -1,16 +1,14 @@
 "use client";
-import { useState, Suspense, useEffect } from "react";
+import { useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Image from "next/image";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import { resetPasswordAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-
-import logo from "@public/images/logo/favicon.jpeg";
 import getImageUrl from "@/components/utility/getImageUrl";
 import { useTranslations } from "next-intl";
+import { useAppSettings } from "@/hooks/useAppSettings";
 
 function ResetPasswordForm() {
     const t = useTranslations("Auth.resetPassword");
@@ -21,7 +19,7 @@ function ResetPasswordForm() {
     const router = useRouter();
     const token = searchParams.get("token");
     const phone = searchParams.get("phone");
-    const [appSettingsData, setAppSettingsData] = useState(null);
+    const { appSettingsData } = useAppSettings();
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -56,11 +54,6 @@ function ResetPasswordForm() {
             setLoading(false);
         }
     };
-
-    useEffect(() => {
-        const appSettings = sessionStorage.getItem("appSettings");
-        setAppSettingsData(appSettings ? JSON.parse(appSettings) : null);
-    }, []);
 
     return (
         <section className="flex items-center justify-center  py-4 md:py-12 px-4 sm:px-6 lg:px-8">

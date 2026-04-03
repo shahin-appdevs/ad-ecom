@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-
 import {
     paymentLinkListAPI,
     paymentLinkStoreAPI,
@@ -23,9 +22,9 @@ import Button from "@/components/utility/Button";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import PinVerificationModal from "@/components/dashboard/partials/PinVerificationModal";
-
-import logo from "@public/images/logo/favicon.jpeg";
 import mockup from "@public/images/payment/mockup.png";
+import { useAppSettings } from "@/hooks/useAppSettings";
+import getImageUrl from "@/components/utility/getImageUrl";
 
 const CreateLinkSkeleton = () => {
     return (
@@ -122,6 +121,7 @@ export default function CreateLinkSection() {
     const router = useRouter();
     const [showPinModal, setShowPinModal] = useState(false);
     const t = useTranslations("Dashboard.wallet.paymentLink.createPaymentLink");
+    const { appSettingsData } = useAppSettings();
 
     const paymentTypes = [
         {
@@ -618,7 +618,10 @@ export default function CreateLinkSection() {
                                         />
                                     ) : (
                                         <Image
-                                            src={logo}
+                                            src={getImageUrl(
+                                                appSettingsData?.site_logo,
+                                                appSettingsData?.logo_image_path,
+                                            )}
                                             width={96}
                                             height={96}
                                             alt="QR"
@@ -711,7 +714,10 @@ export default function CreateLinkSection() {
                                     />
                                 ) : (
                                     <Image
-                                        src={logo}
+                                        src={getImageUrl(
+                                            appSettingsData?.site_logo,
+                                            appSettingsData?.logo_image_path,
+                                        )}
                                         width={96}
                                         height={96}
                                         alt="QR"
