@@ -14,7 +14,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
 // Images
-import user from "@public/images/user/userProfile.png";
+import user from "";
   
 export default function UserProfileSection() {
     const [currentPassword, setCurrentPassword] = useState('');

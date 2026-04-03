@@ -18,7 +18,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
-import product20 from "@public/images/product/product20.jpg";
+const product20 = "";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 function SkeletonRow() {

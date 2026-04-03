@@ -6,7 +6,7 @@ import { toast } from "react-hot-toast";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 // Images
-import userProfile from "@public/images/user/userProfile.png";
+const userProfile = "";
 
 export default function TopBar() {
     const pathname = usePathname();

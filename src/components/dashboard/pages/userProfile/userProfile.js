@@ -20,7 +20,7 @@ import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
 import { useTranslations } from "next-intl";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 // Images
-import user from "@public/images/user/userProfile.png";
+const user = "";
 
 export default function UserProfileSection() {
     const t = useTranslations("Dashboard.account.profile");

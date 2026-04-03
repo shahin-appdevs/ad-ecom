@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 // Images
-import userProfile from "@public/images/user/userProfile.png";
 import { useRouter, Link } from "@/i18n/navigation";
 
 // Correct Heroicons v2 imports
@@ -18,6 +17,7 @@ import {
     UserIcon,
 } from "@heroicons/react/24/outline";
 
+const userProfile = "";
 import { Dialog, Transition } from "@headlessui/react";
 import LanguageSwitcher from "@/components/partials/LanguageSwitcher";
 import { useTranslations } from "next-intl";
