@@ -3,12 +3,12 @@ import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { PlusIcon, ComputerDesktopIcon } from "@heroicons/react/24/outline";
-import { Menu, Listbox } from "@headlessui/react";
+import { Menu } from "@headlessui/react";
 import { toast } from "react-hot-toast";
 
-import kidsbag from "@public/images/category/kidsbag.jpg";
-import cctv from "@public/images/category/cctv.jpg";
-import decor from "@public/images/category/decor.webp";
+const kidsbag = "";
+const cctv = "";
+const decor = "";
 
 const actionOptions = ["Active", "Inactive", "Delete"];
 

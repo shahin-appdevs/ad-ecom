@@ -3,13 +3,13 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "node dev-cloudflare.js",
+        "dev": "node dev-cloudflare.mjs",
         "build": "next build",
         "start": "next start",
         "preview": "npx opennextjs-cloudflare build && npx wrangler dev",
         "deploy": "npx opennextjs-cloudflare build && npx wrangler deploy",
         "cf-typegen": "npx wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-        "lint": "next lint"
+        "lint": "eslint ."
     },
     "dependencies": {
         "@headlessui/react": "^2.2.0",

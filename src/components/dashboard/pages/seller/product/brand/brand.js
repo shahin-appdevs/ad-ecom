@@ -6,9 +6,9 @@ import { PlusIcon, ComputerDesktopIcon } from "@heroicons/react/24/outline";
 import { Menu } from "@headlessui/react";
 import { toast } from "react-hot-toast";
 
-import brand17 from "";
-import brand1 from "";
-import brand2 from "";
+const brand17 = "";
+const brand1 = "";
+const brand2 = "";
 
 const actionOptions = ["Active", "Inactive", "Delete"];
 

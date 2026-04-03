@@ -1,13 +1,8 @@
 "use client";
 import { useState, useCallback } from "react";
 import Image from "next/image";
-import { toast } from "react-hot-toast";
-import { Menu, Listbox } from "@headlessui/react";
-import {
-    ComputerDesktopIcon,
-    ChevronUpDownIcon,
-    CheckIcon,
-} from "@heroicons/react/24/outline";
+import { Listbox } from "@headlessui/react";
+import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -16,9 +11,9 @@ import Color from "@tiptap/extension-color";
 import LinkExtension from "@tiptap/extension-link";
 import ImageExtension from "@tiptap/extension-image";
 
-import product20 from "";
-import product3 from "";
-import product15 from "";
+const product20 = "";
+const product3 = "";
+const product15 = "";
 
 const sortOptions = [
     "Latest",

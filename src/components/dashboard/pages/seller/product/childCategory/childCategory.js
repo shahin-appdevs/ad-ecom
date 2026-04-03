@@ -3,12 +3,12 @@ import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { PlusIcon, ComputerDesktopIcon } from "@heroicons/react/24/outline";
-import { Menu, Listbox } from "@headlessui/react";
+import { Menu } from "@headlessui/react";
 import { toast } from "react-hot-toast";
 
-import laptop from "@public/images/category/laptop.png";
-import kitchen from "@public/images/category/kitchen.jpg";
-import monitor from "@public/images/category/monitor.jpg";
+const laptop = "";
+const kitchen = "";
+const monitor = "";
 
 const actionOptions = ["Active", "Inactive", "Delete"];
 

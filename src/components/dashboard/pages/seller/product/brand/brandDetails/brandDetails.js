@@ -11,9 +11,9 @@ import Color from "@tiptap/extension-color";
 import LinkExtension from "@tiptap/extension-link";
 import ImageExtension from "@tiptap/extension-image";
 
-import product20 from "";
-import product3 from "";
-import product15 from "";
+const product20 = "";
+const product3 = "";
+const product15 = "";
 
 const sortOptions = [
     "Latest",
