@@ -90,28 +90,6 @@ function CollectionProduct() {
     };
 
     useEffect(() => {
-        if (!data?.products?.data) return;
-
-        const savedCart = localStorage.getItem("collectionCart");
-        const initialStates = data.products.data.map((product) => {
-            if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                const cartItem = parsedCart.find(
-                    (item) => item.id === product.id,
-                );
-                return {
-                    showQuantity: !!cartItem,
-                    quantity: cartItem?.quantity || 1,
-                };
-            }
-            return {
-                showQuantity: false,
-                quantity: 1,
-            };
-        });
-    }, [data]);
-
-    useEffect(() => {
         const fetchCollectionProduct = async () => {
             if (!collectionId) return;
             try {
@@ -224,7 +202,7 @@ function CollectionProduct() {
         };
 
         fetchCollectionProduct();
-    }, [collectionId]);
+    }, [collectionId, isReseller]);
 
     const formatProduct = (product, responseData) => {
         const listPrice = parseFloat(product.product_prices?.list_price || 0);

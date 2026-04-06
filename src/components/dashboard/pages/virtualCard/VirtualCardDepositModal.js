@@ -10,7 +10,6 @@ import {
 import {
     dashboardGetAPI,
     stroWalletCardFundAPI,
-    stroWalletFeeChargeGetAPI,
     walletCardRemainingLimitsGetAPI,
     walletGetAPI,
 } from "@root/services/apiClient/apiClient";
@@ -25,7 +24,6 @@ import Image from "next/image";
 import { useRouter } from "@/i18n/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
 
 //exchange helper function
@@ -60,7 +58,7 @@ const VirtualCardDepositModal = ({
     const {
         control,
         handleSubmit,
-        formState: { isSubmitting, errors },
+        formState: { isSubmitting },
         setValue,
         reset,
         watch,
@@ -85,7 +83,7 @@ const VirtualCardDepositModal = ({
 
                 setValue("from_currency", allWallets[0]?.currency?.code);
             } catch (err) {
-                toast.error("Failed to load wallets data");
+                handleApiError(err, "Failed to load wallets data");
             } finally {
                 setWalletLoading(false);
             }
@@ -199,11 +197,12 @@ const VirtualCardDepositModal = ({
             };
         }
 
-        const availableWalletCurrencyRate = parseFloat(
-            availableBalance?.currency?.rate,
-        );
-        const cardCurrencyRate = parseFloat(cardCurrency?.rate);
-        const exchangeRate = availableWalletCurrencyRate / cardCurrencyRate;
+        // exchange rate calculation
+        // const availableWalletCurrencyRate = parseFloat(
+        //     availableBalance?.currency?.rate,
+        // );
+        // const cardCurrencyRate = parseFloat(cardCurrency?.rate);
+        // const exchangeRate = availableWalletCurrencyRate / cardCurrencyRate;
 
         const minLimit = `${cardCharge?.min_limit} ${cardCurrency?.code}`;
         const maxLimit = `${cardCharge?.max_limit} ${cardCurrency?.code}`;
@@ -239,7 +238,7 @@ const VirtualCardDepositModal = ({
         };
     }, [availableBalance, cardCurrency]);
 
-    const onSubmit = async (data) => {
+    const onSubmit = async () => {
         const formData = new FormData();
         formData.append("fund_amount", amount);
         formData.append("card_id", myVirtualCard?.card_id);

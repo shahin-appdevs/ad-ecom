@@ -23,20 +23,12 @@ import Image from "next/image";
 import getImageUrl from "@/components/utility/getImageUrl";
 
 // Stripe Card Form Component
-const StripeCardForm = ({
-    formData,
-    onFormDataChange,
-    publicKey,
-    onCardDetailsChange,
-}) => {
+const StripeCardForm = ({ formData, onFormDataChange }) => {
     const t = useTranslations(
         "Dashboard.wallet.paymentLink.paymentLinkShare.stripeForm",
     );
 
-    const stripe = useStripe();
-    const elements = useElements();
     const [cardError, setCardError] = useState("");
-    const [isProcessing, setIsProcessing] = useState(false);
 
     const handleCardChange = (event) => {
         if (event.error) {
@@ -201,7 +193,7 @@ function PaymentLinkShareContent({
                 last4: token.card.last4,
             };
         } catch (err) {
-            toast.error(t("errors.cardProcessingFailed"));
+            handleApiError(err, t("errors.cardProcessingFailed"));
             return null;
         }
     };
@@ -873,7 +865,6 @@ export default function PaymentLinkSharePage() {
     const [apiLoading, setApiLoading] = useState(false);
     const [error, setError] = useState(null);
     const [paymentType, setPaymentType] = useState("payment_gateway");
-    const [userId, setUserId] = useState(null);
     const [stripePromise, setStripePromise] = useState(null);
     const [formData, setFormData] = useState({
         email: "",
@@ -904,7 +895,6 @@ export default function PaymentLinkSharePage() {
                 const userInfo = localStorage.getItem("userInfo");
                 if (userInfo) {
                     const user = JSON.parse(userInfo);
-                    setUserId(user.id.toString());
                     setFormData((prev) => ({
                         ...prev,
                         userId: user.id.toString(),

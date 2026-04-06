@@ -1,11 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
 import { affiliatePlanGetAPI } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 function SkeletonCard() {
     return (
@@ -53,7 +53,7 @@ export default function AffiliatePlan() {
                     symbol: baseCurrencySymbol,
                 });
             } catch (err) {
-                toast.error(t("failedLoad"));
+                handleApiError(err, t("failedLoad"));
             } finally {
                 setLoading(false);
             }

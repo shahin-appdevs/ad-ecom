@@ -154,10 +154,10 @@ export default function PointsPage() {
                         </Dialog.Title>
                         <Dialog.Description className="mt-2 text-gray-600">
                             {t.rich("confirmMsg", {
-                                points: (chunks) => (
+                                points: () => (
                                     <b>{selectedPoint?.point_amount}</b>
                                 ),
-                                amount: (chunks) => (
+                                amount: () => (
                                     <b>
                                         {baseCurrencySymbol}{" "}
                                         {formatAmount(

@@ -5,6 +5,7 @@ export async function copyToClipboard(text, message) {
         await navigator.clipboard.writeText(text);
         toast.success(message || "Copied!");
     } catch (error) {
+        console.log(error);
         toast.error("Copy failed");
     }
 }

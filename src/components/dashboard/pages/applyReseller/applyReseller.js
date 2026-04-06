@@ -14,6 +14,7 @@ import Image from "next/image";
 import { Listbox, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -41,7 +42,6 @@ export default function UserProfileSection() {
     const [backPreview, setBackPreview] = useState(null);
     const [resellerErrors, setResellerErrors] = useState([]);
     const [idType, setIdType] = useState("");
-    const [inputFields, setInputFields] = useState([]);
     const [idTypeOptions, setIdTypeOptions] = useState([]);
     const [submittedData, setSubmittedData] = useState(null);
     const [isResellerEnabled, setIsResellerEnabled] = useState(() => {
@@ -92,8 +92,6 @@ export default function UserProfileSection() {
                 response.data.data.input_fields &&
                 response.data.data.input_fields.length > 0
             ) {
-                setInputFields(response.data.data.input_fields);
-
                 // Extract ID type options
                 const idTypeField = response.data.data.input_fields.find(
                     (field) => field.name === "id_type",
@@ -171,6 +169,7 @@ export default function UserProfileSection() {
 
             if (response.data && response.data.message.success) {
                 toast.success(t("messages.success"), { id: toastId });
+
                 setStatus("2"); // Set to pending
                 setFrontFile(null);
                 setBackFile(null);
@@ -179,7 +178,7 @@ export default function UserProfileSection() {
                 await fetchResellerInfo();
             }
         } catch (err) {
-            console.error("Reseller submission failed:", err);
+            handleApiError(err, t("errors.submitFailed"));
 
             // Handle specific backend validation errors
             if (err.response?.data?.message?.error) {

@@ -65,7 +65,6 @@ export default function MobileTopupManualSection() {
     });
 
     const [selectedOperator, setSelectedOperator] = useState(null);
-    const [selectedCountry, setSelectedCountry] = useState(null);
     const [localTopupInfo, setLocalTopupInfo] = useState({});
     const [selectedOperatorType, setSelectedOperatorType] = useState(null);
 
@@ -259,19 +258,8 @@ export default function MobileTopupManualSection() {
                     code: data.base_curr || "",
                     rate: data.base_curr_rate || "1.0000",
                 });
-
-                if (data.all_countries?.length > 0) {
-                    setSelectedCountry(
-                        data.all_countries.find((c) => c.iso2 === "US") ||
-                            data.all_countries[0],
-                    );
-                }
             } catch (error) {
-                toast.error(
-                    error.response?.data?.message?.error?.[0] ||
-                        error.message ||
-                        "Failed to load top-up data",
-                );
+                handleApiError(error, t("failedLoad"));
             } finally {
                 setApiLoading(false);
             }

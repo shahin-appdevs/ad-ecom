@@ -1,10 +1,9 @@
 "use client";
-import { useCallback, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
     profiledGetAPI,
     profileUpdateAPI,
     updatePasswordAPI,
-    kycGetAPI,
     kycUpdateAPI,
     ProfileDeleteAPI,
     divisionDataGetAPI,
@@ -30,13 +29,11 @@ export default function UserProfileSection() {
     const [userImageFile, setUserImageFile] = useState(null);
     const [userImageUrl, setUserImageUrl] = useState(user);
     const [status, setStatus] = useState("Unverified");
-    const [files, setFiles] = useState([]);
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [loading, setLoading] = useState(true);
     const [errors, setErrors] = useState({});
     const [isUpdating, setIsUpdating] = useState(false);
     const [isChanging, setIsChanging] = useState(false);
-    const [kycRequirements, setKycRequirements] = useState([]);
     const [frontFile, setFrontFile] = useState(null);
     const [backFile, setBackFile] = useState(null);
     const [frontPreview, setFrontPreview] = useState(null);
@@ -124,13 +121,14 @@ export default function UserProfileSection() {
                     setUserImageUrl(data.userImage);
                 }
             } catch (error) {
-                toast.error(t("errors.profileFetch"));
+                handleApiError(error, t("errors.profileFetch"));
             } finally {
                 setLoading(false);
             }
         };
         fetchProfileData();
     }, []);
+
     // Handle profile form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -208,7 +206,7 @@ export default function UserProfileSection() {
                 }
             }
         } catch (error) {
-            toast.error(t("errors.profileUpdate"));
+            handleApiError(error, t("errors.profileUpdate"));
         } finally {
             setIsUpdating(false);
         }
@@ -273,21 +271,7 @@ export default function UserProfileSection() {
             setLoading(false);
         }
     };
-    // Fetch KYC data
-    const fetchKYCData = useCallback(async () => {
-        try {
-            const response = await kycGetAPI();
-            const { kyc_status, userKyc } = response.data;
-            // setStatus(statusMap[kyc_status]?.text || t("kyc.unverified"));
-            setKycRequirements(userKyc || []);
-        } catch (err) {
-            console.error("Failed to fetch KYC data:", err);
-            toast.error(t("errors.kycFetch"));
-        }
-    }, []);
-    useEffect(() => {
-        fetchKYCData();
-    }, [fetchKYCData]);
+
     // KYC form submission
     const handleKycSubmit = async (e) => {
         e.preventDefault();

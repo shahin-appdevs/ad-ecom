@@ -165,7 +165,7 @@ function Checkout() {
             }
         };
         fetchDeliveryOptions();
-    }, []);
+    }, [baseCurrencySymbol]);
 
     useEffect(() => {
         const fetchPaymentGateways = async () => {
@@ -210,7 +210,7 @@ function Checkout() {
                 selectedDelivery?.slug || "inside-dhaka",
             );
 
-            cartItems.forEach((item, index) => {
+            cartItems.forEach((item) => {
                 formDataToSend.append(`product_id[]`, item.id);
                 formDataToSend.append(`product_price[]`, item.price);
                 formDataToSend.append(`product_quantity[]`, item.quantity);
@@ -397,7 +397,7 @@ function Checkout() {
     );
 
     const removeItem = useCallback(
-        (uniqueId, source) => {
+        (uniqueId) => {
             removeItemFromAllCarts(uniqueId);
             loadCartItems();
             toast.success(t("itemRemoved"));
@@ -520,7 +520,7 @@ function Checkout() {
                         </h2>
                         {!isCheckout ? (
                             cartItems.length > 0 ? (
-                                cartItems.map((item, index) => (
+                                cartItems.map((item) => (
                                     <div
                                         key={item.uniqueId}
                                         className="flex items-start gap-4 border-b last:border-0 pb-4"
@@ -972,6 +972,25 @@ function Checkout() {
                                                 }),
                                             )}
                                             disabled={!formData.division}
+                                        />
+                                        <CustomListbox
+                                            label={t("enterUpazilla")}
+                                            value={formData.upazilla}
+                                            onChange={(value) =>
+                                                handleInputChange({
+                                                    target: {
+                                                        name: "upazilla",
+                                                        value,
+                                                    },
+                                                })
+                                            }
+                                            options={upazillas.map(
+                                                (upazilla) => ({
+                                                    value: upazilla.id,
+                                                    label: `${upazilla.name} (${upazilla.bn_name})`,
+                                                }),
+                                            )}
+                                            disabled={!formData.district}
                                         />
 
                                         <div className="pt-2">

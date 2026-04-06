@@ -1,9 +1,7 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
-import { useCart } from "@/components/context/CartContext";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import Button from "@/components/utility/Button";
 import {
@@ -36,14 +34,10 @@ const ProductSkeleton = () => {
 export default function NewProduct() {
     const [newArrivalData, setNewArrivalData] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [newArrivalProducts, setNewArrivalProducts] = useState([]);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
-    const [states, setStates] = useState([]);
-
-    const { incrementCart, decrementCart } = useCart();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -76,7 +70,6 @@ export default function NewProduct() {
             if (!isLoggedIn) return;
             try {
                 const response = await profiledGetAPI();
-                setUserProfile(response.data.data);
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );
@@ -147,67 +140,6 @@ export default function NewProduct() {
             return `${newArrivalData?.base_curr_symbol || ""}0`;
         return `${newArrivalData.base_curr_symbol}${parseFloat(price).toFixed(2)}`;
     };
-
-    const saveToLocalStorage = useCallback(
-        (product, quantity) => {
-            if (!newArrivalData?.new_arrival_products?.data) return;
-
-            const savedCart = localStorage.getItem("newArrivalCart");
-            let cartItems = savedCart ? JSON.parse(savedCart) : [];
-
-            const existingIndex = cartItems.findIndex(
-                (item) => item.id === product.id,
-            );
-
-            const { displayPrice } = calculateDiscount(product);
-
-            if (existingIndex >= 0) {
-                cartItems[existingIndex].quantity = quantity;
-                cartItems[existingIndex].price = displayPrice;
-            } else {
-                cartItems.push({
-                    id: product.id,
-                    title: product.title,
-                    price: displayPrice,
-                    quantity: quantity,
-                    image: product.main_image
-                        ? `${backendBaseURL}/${newArrivalData.product_image_path}/${product.main_image}`
-                        : `${backendBaseURL}/${newArrivalData.default_image_path}`,
-                    base_curr_symbol: newArrivalData.base_curr_symbol,
-                    isResellerPrice: isReseller,
-                });
-            }
-
-            cartItems = cartItems.filter((item) => item.quantity > 0);
-            localStorage.setItem("newArrivalCart", JSON.stringify(cartItems));
-        },
-        [newArrivalData, isReseller],
-    );
-
-    useEffect(() => {
-        if (!newArrivalData?.new_arrival_products?.data) return;
-
-        const savedCart = localStorage.getItem("newArrivalCart");
-        const initialStates = newArrivalData.new_arrival_products.data.map(
-            (product) => {
-                if (savedCart) {
-                    const parsedCart = JSON.parse(savedCart);
-                    const cartItem = parsedCart.find(
-                        (item) => item.id === product.id,
-                    );
-                    return {
-                        showQuantity: !!cartItem,
-                        quantity: cartItem?.quantity || 1,
-                    };
-                }
-                return {
-                    showQuantity: false,
-                    quantity: 1,
-                };
-            },
-        );
-        setStates(initialStates);
-    }, [newArrivalData]);
 
     const handleLoadMoreProducts = async () => {
         setLoadMoreLoading(true);
@@ -291,7 +223,6 @@ export default function NewProduct() {
                                         originalPrice,
                                         hasDiscount,
                                         isResellerPrice,
-                                        stock,
                                     } = calculateDiscount(product);
 
                                     return (

@@ -1772,6 +1772,7 @@
             "enterShippingAddress": "Introducir dirección de envío",
             "enterDivision": "Introducir división",
             "enterDistrict": "Introducir distrito",
+            "enterUpazilla": "Introducir upazilla",
             "deliveryOption": "Opción de entrega",
             "deliveryFee": "Gastos de envío:",
             "orderSummary": "Resumen del pedido",

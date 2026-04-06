@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { stroWalletWebhookTransaction } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import { format } from "date-fns";
 import { handleApiError } from "@/components/utility/handleApiError";
@@ -81,7 +80,7 @@ export default function VirtualCardWebHookTransaction() {
         };
 
         fetchWebHookTrxData();
-    }, []);
+    }, [cardId]);
 
     const getStatusColor = (status) => {
         switch (status) {

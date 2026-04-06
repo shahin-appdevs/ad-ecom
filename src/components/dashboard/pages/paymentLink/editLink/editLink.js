@@ -224,7 +224,7 @@ export default function EditLinkSection() {
         maxFiles: 1,
     });
 
-    const handleEditLink = async (e) => {
+    const handleEditLink = async () => {
         if (!linkId) return;
         setIsLoading(true);
 

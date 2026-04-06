@@ -1,13 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-import {
-    myGiftCardGetAPI,
-    stroWalletCardTransactionGetAPI,
-} from "@root/services/apiClient/apiClient";
+import { stroWalletCardTransactionGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
-import { toast } from "react-hot-toast";
-import { useRouter, useSearchParams } from "next/navigation";
-import Image from "next/image";
 import { handleApiError } from "@/components/utility/handleApiError";
 import { useTranslations } from "next-intl";
 

@@ -114,16 +114,6 @@ export default function MobileTopupAutomaticSection() {
         })();
     }, [amount, mobileTopupData, selectedCurrency]);
 
-    // Calculate exchange rate between sender and receiver currencies
-    const exchangeRate = useMemo(() => {
-        if (selectedCurrency && defaultCurrency) {
-            const senderRate = parseFloat(selectedCurrency.rate || 1);
-            const receiverRate = parseFloat(defaultCurrency.rate || 1);
-            return receiverRate / senderRate;
-        }
-        return 1;
-    }, [selectedCurrency, defaultCurrency]);
-
     const exchangeRateText = useMemo(() => {
         if (selectedCurrency && defaultCurrency) {
             const rate =
@@ -307,7 +297,7 @@ export default function MobileTopupAutomaticSection() {
     const handleMobileTopup = async () => {
         try {
             setLoading(true);
-            const response = await SubmitMobileTopupAutomaticAPI(
+            await SubmitMobileTopupAutomaticAPI(
                 operatorInfo.operatorId,
                 selectedCountry.mobile_code,
                 mobileNumber,

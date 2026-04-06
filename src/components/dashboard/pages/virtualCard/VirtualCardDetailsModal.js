@@ -17,7 +17,6 @@ import {
     stroWalletCardUnfreezeAPI,
 } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
-import toast from "react-hot-toast";
 import Image from "next/image";
 import { handleApiError } from "@/components/utility/handleApiError";
 import { handleApiSuccess } from "@/components/utility/handleApiSuccess";
@@ -48,7 +47,7 @@ export default function VirtualCardDetailsModal({
                 setCardDetails(result.data?.data);
                 setMyCard(result.data?.data?.myCards);
             } catch (error) {
-                toast.error("Failed to fetch card details");
+                handleApiError(error, "Failed to fetch card details");
             } finally {
                 setDetailsLoading(false);
             }

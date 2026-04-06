@@ -14,7 +14,6 @@ export default function RHFSelect({
     rules,
     searchable = false,
     searchPlaceholder = "Search...",
-    inputClassName,
 }) {
     const [query, setQuery] = useState("");
 

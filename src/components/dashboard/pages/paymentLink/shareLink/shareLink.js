@@ -9,6 +9,7 @@ import { ClipboardIcon, CheckIcon } from "@heroicons/react/24/outline";
 // Internal Imports
 import { Link, useRouter } from "@/i18n/navigation";
 import { paymentLinkListAPI } from "@root/services/apiClient/apiClient";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const ShareLinkSkeleton = () => {
     return (
@@ -61,7 +62,7 @@ export default function ShareLinkPage() {
                     router.push("/user/payment/link");
                 }
             } catch (error) {
-                toast.error(t("errorFetch"));
+                handleApiError(error, t("errorFetch"));
                 router.push("/user/payment/link");
             } finally {
                 setIsLoading(false);

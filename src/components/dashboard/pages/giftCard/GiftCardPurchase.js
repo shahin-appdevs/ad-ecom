@@ -23,7 +23,6 @@ export default function GiftCardPurchase() {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [product, setProduct] = useState({});
-    const [productCurrency, setProductCurrency] = useState({});
     const [countries, setCountries] = useState([]);
     const [userWallet, setUserWallet] = useState([]);
     const [selectedCountry, setSelectedCountry] = useState({});
@@ -37,7 +36,6 @@ export default function GiftCardPurchase() {
                 const data = result?.data?.data;
                 setProduct(data?.product);
 
-                setProductCurrency(data?.productCurrency);
                 setCountries(data?.countries);
                 setUserWallet(data?.userWallet);
 
@@ -86,7 +84,7 @@ export default function GiftCardPurchase() {
     const fromName = watch("fromName");
     const quantity = watch("quantity");
 
-    const onSubmit = (data) => {
+    const onSubmit = () => {
         setOpen(true);
     };
 

@@ -154,12 +154,10 @@ function ProductDetails() {
 
     const [data, setData] = useState(null);
     const [product, setProduct] = useState(null);
-    const [recentlyViewedProduct, setRecentlyViewedProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
     const [review, setReview] = useState("");
-    const [showReviews, setShowReviews] = useState(false);
     const searchParams = useSearchParams();
     const idParam = searchParams.get("id");
     const [productId, setProductId] = useState(null);
@@ -326,9 +324,6 @@ function ProductDetails() {
                     setData(response.data.data);
                     setProduct(response.data.data.product);
 
-                    setRecentlyViewedProduct(
-                        response.data.data.recently_viewed_products,
-                    );
                     // review
                     const reviewsData =
                         response.data.data.product_reviews || [];

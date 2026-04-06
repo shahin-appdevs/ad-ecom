@@ -15,6 +15,7 @@ import { RHFFileUpload } from "@/components/ui/form/RHFFileUpload";
 import { RHFTextarea } from "@/components/ui/form/RHFTextarea";
 import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 export default function CreateCustomer() {
     const t = useTranslations("Dashboard.cards.virtualCard.createCustomer");
@@ -54,7 +55,7 @@ export default function CreateCustomer() {
                     }
                 });
             } catch (error) {
-                toast.error(t("fetchError"));
+                handleApiError(error, t("fetchError"));
             } finally {
                 setLoading(false);
             }

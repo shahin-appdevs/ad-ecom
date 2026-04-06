@@ -39,8 +39,6 @@ const SkeletonCategoryMenu = () => (
 
 export default function ProductSidebar() {
     const t = useTranslations("Category.categorySidebar");
-
-    const [hoveredCategory, setHoveredCategory] = useState(null);
     const [hoveredSubcategory, setHoveredSubcategory] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
     const { homeData, loading } = useHomeData();
@@ -112,8 +110,6 @@ export default function ProductSidebar() {
                             <li
                                 key={index}
                                 className="group flex px-3 border-b last:border-b-0 items-center justify-between transition-all text-neutral-600 hover:text-primary__color py-1.5"
-                                onMouseEnter={() => setHoveredCategory(index)}
-                                onMouseLeave={() => setHoveredCategory(null)}
                             >
                                 <Link
                                     href={`/categories/products?id=${category.id}`}

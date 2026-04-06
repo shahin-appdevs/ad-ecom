@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import {
+    ArrowPathIcon,
     ArrowTrendingDownIcon,
     CurrencyDollarIcon,
     ExclamationCircleIcon,
@@ -11,7 +12,6 @@ import RHFSelect from "@/components/ui/form/RHFSelect";
 import {
     CalendarIcon,
     CalendarDaysIcon,
-    LoaderCircleIcon,
     ArrowsPointingOutIcon,
     ArrowsPointingInIcon,
     PlusIcon,
@@ -21,7 +21,6 @@ import { Link } from "@/i18n/navigation";
 import { RHFInput } from "@/components/ui/form/Input";
 import {
     dashboardGetAPI,
-    myStroWalletCardGetAPI,
     stroWalletBuyCardAPI,
     walletCardRemainingLimitsGetAPI,
     walletGetAPI,
@@ -46,7 +45,7 @@ export default function CreateVirtualCard() {
     const router = useRouter();
     const [wallets, setWallets] = useState([]);
     const [walletLoading, setWalletLoading] = useState(false);
-    const [cardCurrencies, setCardCurrencies] = useState(() => {
+    const [cardCurrencies] = useState(() => {
         const supportedCurrency = JSON.parse(
             sessionStorage.getItem("base_currency"),
         );
@@ -61,13 +60,12 @@ export default function CreateVirtualCard() {
     const [remainingLoading, setRemainingLoading] = useState(false);
 
     const {
-        register,
         control,
         handleSubmit,
         watch,
         reset,
         setValue,
-        formState: { errors, isSubmitting },
+        formState: { isSubmitting },
     } = useForm({
         defaultValues: {
             name_on_card: "",
@@ -88,7 +86,7 @@ export default function CreateVirtualCard() {
                 setWallets(userWallets);
                 setValue("from_currency", userWallets[0]?.currency?.code);
             } catch (err) {
-                toast.error(t("walletLoadError"));
+                handleApiError(err, t("walletLoadError"));
             } finally {
                 setWalletLoading(false);
             }
@@ -100,23 +98,10 @@ export default function CreateVirtualCard() {
                 const result = await dashboardGetAPI();
                 setCardCharge(result?.data?.data?.card_create_charge);
             } catch (err) {
-                toast.error(t("feeLoadError"));
+                handleApiError(err, t("feeLoadError"));
             }
         })();
     }, []);
-
-    // my cards fetch
-    const myWalletCardsFetch = async () => {
-        // setMyWalletCardLoading(true);
-        try {
-            const result = await myStroWalletCardGetAPI();
-            setMyWalletCards(result?.data?.data || []);
-        } catch (error) {
-            handleApiError(error);
-        } finally {
-            // setMyWalletCardLoading(false);
-        }
-    };
 
     const onSubmit = async (data) => {
         // console.log("Form Data:", data);
@@ -272,11 +257,11 @@ export default function CreateVirtualCard() {
             };
         }
 
-        const availableWalletCurrencyRate = parseFloat(
-            fromWallet?.currency?.rate,
-        );
-        const cardCurrencyRate = parseFloat(cardCurrency?.rate);
-        const exchangeRate = availableWalletCurrencyRate / cardCurrencyRate;
+        // const availableWalletCurrencyRate = parseFloat(
+        //     fromWallet?.currency?.rate,
+        // );
+        // const cardCurrencyRate = parseFloat(cardCurrency?.rate);
+        // const exchangeRate = availableWalletCurrencyRate / cardCurrencyRate;
 
         const minLimit = `${cardCharge?.min_limit} ${cardCurrency?.code}`;
         const maxLimit = `${cardCharge?.max_limit} ${cardCurrency?.code}`;
@@ -392,7 +377,7 @@ export default function CreateVirtualCard() {
                         >
                             <span>{t("buyCard")}</span>{" "}
                             {isSubmitting ? (
-                                <LoaderCircleIcon className="animate-spin w-[20px]" />
+                                <ArrowPathIcon className="animate-spin w-[20px]" />
                             ) : (
                                 <PlusIcon className="w-[20px]" />
                             )}

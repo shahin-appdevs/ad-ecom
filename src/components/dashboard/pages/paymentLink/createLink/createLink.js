@@ -154,7 +154,7 @@ export default function CreateLinkSection() {
                     setSelectedCurrency(defaultCurrency);
                 }
             } catch (error) {
-                toast.error("Failed to load currencies");
+                handleApiError(error, t("errorFetch"));
             } finally {
                 setIsInitialLoading(false);
             }

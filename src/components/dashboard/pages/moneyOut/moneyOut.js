@@ -293,10 +293,7 @@ export default function MoneyOutSection({ setRefetch }) {
                 });
                 setIsLoading(false);
             } catch (error) {
-                toast.error(
-                    error.response?.data?.message?.error?.[0] ||
-                        t("failedLoad"),
-                );
+                handleApiError(error, t("failedLoad"));
                 setIsLoading(false);
             }
         };
@@ -310,10 +307,7 @@ export default function MoneyOutSection({ setRefetch }) {
                 try {
                     await moneyOutCheckAgentAPI(credentials);
                 } catch (error) {
-                    toast.error(
-                        error.response?.data?.message?.error?.[0] ||
-                            t("userNotFound"),
-                    );
+                    handleApiError(error, t("userNotFound"));
                 }
             }
         };
@@ -340,8 +334,8 @@ export default function MoneyOutSection({ setRefetch }) {
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
             }
-        } catch (err) {
-            toast.error(t("cameraError"));
+        } catch (error) {
+            handleApiError(error, t("cameraError"));
             setIsCameraOpen(false);
         }
     };
@@ -360,13 +354,11 @@ export default function MoneyOutSection({ setRefetch }) {
             closeCamera();
             toast.success(response?.data?.message?.success?.[0]);
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] || t("failedScan"),
-            );
+            handleApiError(error, t("failedScan"));
         }
     };
 
-    const handleMoneyOut = async (e) => {
+    const handleMoneyOut = async () => {
         try {
             setIsSubmitting(true);
             const response = await SubmitMoneyOutAPI(
@@ -384,10 +376,7 @@ export default function MoneyOutSection({ setRefetch }) {
             setCredentials("");
             setRemark("");
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    t("failedMoneyOut"),
-            );
+            handleApiError(error, t("failedMoneyOut"));
         } finally {
             setIsSubmitting(false);
             setRefetch((prev) => !prev);

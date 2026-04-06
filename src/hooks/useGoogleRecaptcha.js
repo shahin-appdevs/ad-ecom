@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { basicDataGetAPI } from "@root/services/apiClient/apiClient";
 import { handleApiError } from "@/components/utility/handleApiError";

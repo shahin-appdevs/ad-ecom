@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "@/i18n/navigation";
 import { ArrowPathIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import {
-    createCustomerAPI,
     stroWalletPageInfoGetApi,
     updateCustomerAPI,
 } from "@root/services/apiClient/apiClient";

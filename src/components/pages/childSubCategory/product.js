@@ -52,7 +52,7 @@ function ChildSubCategoryProduct() {
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
-    const { homeData, loading: homeLoading } = useHomeData();
+    const { homeData } = useHomeData();
     const [categoryLinks, setCategoryLinks] = useState({});
 
     useEffect(() => {

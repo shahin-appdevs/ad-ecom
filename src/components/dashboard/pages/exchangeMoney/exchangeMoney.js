@@ -252,19 +252,6 @@ export default function ExchangeMoneySection({ setRefetch }) {
         }
     }, [amount, exchangeRate, selectedCurrency, receiverCurrency]);
 
-    const handleReceiverAmountChange = (e) => {
-        const value = e.target.value;
-        setReceiverAmount(value);
-
-        if (value && selectedCurrency && receiverCurrency) {
-            const calculatedAmount = parseFloat(value) / exchangeRate;
-            // Remove .toFixed(4) to avoid forced decimal formatting
-            setAmount(calculatedAmount.toString());
-        } else {
-            setAmount("");
-        }
-    };
-
     // Handle amount input change with proper validation
     const handleAmountChange = (e) => {
         const value = e.target.value;
@@ -313,7 +300,7 @@ export default function ExchangeMoneySection({ setRefetch }) {
         fetchExchangeData();
     }, []);
 
-    const handleExchangeMoney = async (e) => {
+    const handleExchangeMoney = async () => {
         setLoading(true);
         try {
             const response = await SubmitExchangeAPI(

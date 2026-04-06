@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import {
     CurrencyDollarIcon,
-    BanknotesIcon,
     ArrowTrendingDownIcon,
     WalletIcon,
     ChartBarIcon,
+    BanknotesIcon,
 } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
 import { ManualAddMoneyAPI } from "@root/services/apiClient/apiClient";
@@ -206,7 +206,7 @@ function ManualConfirmationPage() {
                     {paymentData.inputFields &&
                     paymentData.inputFields.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {paymentData.inputFields.map((field, index) => (
+                            {paymentData.inputFields.map((field) => (
                                 <div
                                     key={field.name}
                                     className={

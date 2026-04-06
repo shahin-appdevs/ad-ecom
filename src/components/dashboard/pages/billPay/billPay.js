@@ -6,7 +6,6 @@ import {
     ChevronUpDownIcon,
     CheckIcon,
     CurrencyDollarIcon,
-    BanknotesIcon,
     ArrowTrendingDownIcon,
     WalletIcon,
     ArrowsUpDownIcon,
@@ -35,7 +34,6 @@ const BillPaySection = ({ setBillPaySuccess }) => {
     const t = useTranslations("Dashboard.services.billPay");
     const [selectedBillType, setSelectedBillType] = useState(null);
     const [selectedBillMonth, setSelectedBillMonth] = useState(null);
-    const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [amount, setAmount] = useState("");
     const [billNumber, setBillNumber] = useState("");
     const [billTypes, setBillTypes] = useState([]);

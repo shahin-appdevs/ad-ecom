@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import ProductSidebar from "@/components/partials/ProductSidebar";
@@ -103,8 +103,6 @@ export default function FlashProduct() {
         seconds: "00",
     });
 
-    const [states, setStates] = useState([]);
-
     // Add the comprehensive price calculation function
     const calculateDiscount = (product) => {
         const listPrice = parseFloat(product.product_prices?.list_price || 0);
@@ -166,30 +164,6 @@ export default function FlashProduct() {
             return `${flashData?.base_curr_symbol || ""}0`;
         return `${flashData.base_curr_symbol}${parseFloat(price).toFixed(2)}`;
     };
-
-    useEffect(() => {
-        if (!flashData?.flash_products) return;
-
-        const savedCart = localStorage.getItem("flashSaleCart");
-        const initialStates = flashData.flash_products?.data?.map((product) => {
-            if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                const cartItem = parsedCart.find(
-                    (item) => item.id === product.id,
-                );
-                return {
-                    showQuantity: !!cartItem,
-                    quantity: cartItem?.quantity || 1,
-                };
-            }
-            return {
-                showQuantity: false,
-                quantity: 1,
-            };
-        });
-
-        setStates(initialStates);
-    }, [flashData]);
 
     useEffect(() => {
         if (!flashData?.flash_sale_end_date) return;
@@ -340,7 +314,6 @@ export default function FlashProduct() {
                                         originalPrice,
                                         hasDiscount,
                                         isResellerPrice,
-                                        stock,
                                     } = calculateDiscount(product);
 
                                     return (

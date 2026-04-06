@@ -262,7 +262,7 @@ export default function FlashSale() {
                         modules={[Autoplay]}
                         className="!py-2"
                     >
-                        {flash_products.map((product, index) => {
+                        {flash_products.map((product) => {
                             const {
                                 discount,
                                 displayPrice,

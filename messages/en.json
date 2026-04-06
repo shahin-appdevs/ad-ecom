@@ -1772,6 +1772,7 @@
             "enterShippingAddress": "Enter Shipping Address",
             "enterDivision": "Enter Division",
             "enterDistrict": "Enter District",
+            "enterUpazilla": "Enter Upazilla",
             "deliveryOption": "Delivery option",
             "deliveryFee": "Delivery fee:",
             "orderSummary": "Order Summary",

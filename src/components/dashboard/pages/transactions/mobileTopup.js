@@ -1,9 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import {
-    allTransactionsGetAPI,
-    mobileTopupGetAPI,
-} from "@root/services/apiClient/apiClient";
+import { allTransactionsGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";

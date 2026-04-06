@@ -190,7 +190,7 @@ export default function NewArrival() {
                         modules={[Autoplay]}
                         className="!py-2"
                     >
-                        {new_arrival_products.map((product, index) => {
+                        {new_arrival_products.map((product) => {
                             const {
                                 discount,
                                 displayPrice,

@@ -1,5 +1,4 @@
 "use client";
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 import { referralStatusGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";

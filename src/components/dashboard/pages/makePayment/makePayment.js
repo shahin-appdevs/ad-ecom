@@ -347,7 +347,7 @@ export default function MakePaymentSection({ setRefetch }) {
                 videoRef.current.srcObject = stream;
             }
         } catch (err) {
-            toast.error(t("cameraError"));
+            handleApiError(err, t("cameraError"));
             setIsCameraOpen(false);
         }
     };
@@ -372,7 +372,7 @@ export default function MakePaymentSection({ setRefetch }) {
         }
     };
 
-    const handleMakePayment = async (e) => {
+    const handleMakePayment = async () => {
         try {
             setIsSubmitting(true);
             const response = await submitMakePaymentAPI(

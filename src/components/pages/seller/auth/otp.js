@@ -12,7 +12,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
-import logo from "@public/images/logo/favicon.jpeg";
+const logo = "";
 
 export default function Otp() {
     const [otp, setOtp] = useState("");

@@ -2,9 +2,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { walletGetAPI } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 export default function WalletSection() {
     const t = useTranslations("Dashboard.homepage.wallet");
@@ -19,7 +19,7 @@ export default function WalletSection() {
                 const response = await walletGetAPI();
                 setWalletData(response?.data?.data);
             } catch (error) {
-                toast.error(t("failedFetch"));
+                handleApiError(error, t("failedFetch"));
             } finally {
                 setLoading(false);
             }

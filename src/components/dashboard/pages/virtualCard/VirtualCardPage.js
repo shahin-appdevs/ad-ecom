@@ -52,7 +52,7 @@ function VirtualCardSection() {
                 const result = await stroWalletPageInfoGetApi();
                 setStroWalletPageInfo(result?.data?.data || {});
             } catch (error) {
-                toast.error(t("fetchError"));
+                handleApiError(error, t("fetchError"));
             } finally {
                 setPageInfoLoading(false);
             }

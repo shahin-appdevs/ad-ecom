@@ -311,7 +311,7 @@ export default function SendMoneySection({ setRefetch }) {
         };
 
         fetchInitialData();
-    }, [wallet.selectedCurrency]);
+    }, [wallet.selectedCurrency, sendMoneyData.sendMoneyCharge]);
 
     useEffect(() => {
         const checkUser = async () => {
@@ -350,7 +350,7 @@ export default function SendMoneySection({ setRefetch }) {
                 videoRef.current.srcObject = stream;
             }
         } catch (err) {
-            toast.error(t("cameraError"));
+            handleApiError(err, t("cameraError"));
             setIsCameraOpen(false);
         }
     };
@@ -369,13 +369,11 @@ export default function SendMoneySection({ setRefetch }) {
             closeCamera();
             toast.success(response?.data?.message?.success?.[0]);
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] || t("failedScan"),
-            );
+            handleApiError(error, t("failedScan"));
         }
     };
 
-    const handleSendMoney = async (e) => {
+    const handleSendMoney = async () => {
         try {
             setIsSubmitting(true);
             const response = await SubmitSendMoneyAPI(
@@ -394,10 +392,7 @@ export default function SendMoneySection({ setRefetch }) {
             setCredentials("");
             setRemark("");
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    t("failedTransfer"),
-            );
+            handleApiError(error, t("failedTransfer"));
         } finally {
             setIsSubmitting(false);
             setRefetch((isRefetch) => !isRefetch);
