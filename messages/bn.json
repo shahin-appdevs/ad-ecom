@@ -887,7 +887,19 @@
                     "dailyLimit": "দৈনিক সীমা",
                     "monthlyLimit": "মাসিক সীমা",
                     "dailyRemainingLimit": "দৈনিক অবশিষ্ট সীমা",
-                    "monthlyRemainingLimit": "মাসিক অবশিষ্ট সীমা"
+                    "monthlyRemainingLimit": "মাসিক অবশিষ্ট সীমা",
+                    "failedFetchLimits": "অবশিষ্ট সীমা আনতে ব্যর্থ হয়েছে",
+                    "failedLoadData": "মোবাইল টপআপ তথ্য লোড করতে ব্যর্থ হয়েছে",
+                    "operatorFound": "অপারেটর সফলভাবে পাওয়া গেছে",
+                    "operatorNotFound": "অপারেটর পাওয়া যায়নি",
+                    "failedCheckOperator": "অপারেটর পরীক্ষা করতে ব্যর্থ হয়েছে",
+                    "topupSuccess": "মোবাইল টপআপ সফল হয়েছে!",
+                    "failedProcess": "মোবাইল টপআপ প্রক্রিয়া করতে ব্যর্থ হয়েছে",
+                    "invalidAmount": "অনুগ্রহ করে একটি সঠিক পরিমাণ লিখুন",
+                    "invalidMobile": "অনুগ্রহ করে একটি সঠিক মোবাইল নম্বর লিখুন",
+                    "amountMin": "পরিমাণ কমপক্ষে হতে হবে",
+                    "amountMax": "পরিমাণ এর বেশি হতে পারবে না",
+                    "invalidOperator": "অনুগ্রহ করে একটি সঠিক অপারেটর নির্বাচন করুন"
                 }
             }
         },
@@ -1985,5 +1997,14 @@
     "CategoryPage": {
         "title": "সকল ক্যাটেগরি",
         "viewAll": "সব দেখুন"
+    },
+    "Terms": {
+        "failedToLoad": "শর্তাবলী লোড করতে ব্যর্থ হয়েছে"
+    },
+    "Refund": {
+        "failedToLoad": "রিফান্ড নীতি লোড করতে ব্যর্থ হয়েছে"
+    },
+    "Privacy": {
+        "failedToLoad": "গোপনীয়তা নীতি লোড করতে ব্যর্থ হয়েছে"
     }
 }

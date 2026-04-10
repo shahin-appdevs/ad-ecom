@@ -1,5 +1,4 @@
 // Components
-import BillPayTransactionSection from "@/components/dashboard/pages/transactions/billPay";
 import MyGiftCardsLogs from "@/components/dashboard/pages/transactions/giftCard";
 
 export default function GiftCardTransactionPage() {

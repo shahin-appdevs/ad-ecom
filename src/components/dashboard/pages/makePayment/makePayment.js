@@ -308,7 +308,7 @@ export default function MakePaymentSection({ setRefetch }) {
         };
 
         fetchInitialData();
-    }, [wallet.selectedCurrency]);
+    }, [wallet.selectedCurrency, makePaymentData.makePaymentCharge]);
 
     useEffect(() => {
         const checkUser = async () => {

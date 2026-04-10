@@ -887,7 +887,19 @@
                     "dailyLimit": "Daily Limit",
                     "monthlyLimit": "Monthly Limit",
                     "dailyRemainingLimit": "Daily Remaining Limit",
-                    "monthlyRemainingLimit": "Monthly Remaining Limit"
+                    "monthlyRemainingLimit": "Monthly Remaining Limit",
+                    "failedFetchLimits": "Failed to fetch remaining limits",
+                    "failedLoadData": "Failed to load mobile topup data",
+                    "operatorFound": "Operator found successfully",
+                    "operatorNotFound": "Operator not found",
+                    "failedCheckOperator": "Failed to check operator",
+                    "topupSuccess": "Mobile topup successful!",
+                    "failedProcess": "Failed to process mobile topup",
+                    "invalidAmount": "Please enter a valid amount",
+                    "invalidMobile": "Please enter a valid mobile number",
+                    "amountMin": "Amount must be at least",
+                    "amountMax": "Amount must not exceed",
+                    "invalidOperator": "Please select a valid operator"
                 }
             }
         },
@@ -1985,5 +1997,14 @@
     "CategoryPage": {
         "title": "All Categories",
         "viewAll": "View All"
+    },
+    "Terms": {
+        "failedToLoad": "Failed to load terms and conditions"
+    },
+    "Refund": {
+        "failedToLoad": "Failed to load refund policy"
+    },
+    "Privacy": {
+        "failedToLoad": "Failed to load privacy policy"
     }
 }

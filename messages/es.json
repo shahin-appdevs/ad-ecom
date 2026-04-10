@@ -1,8 +1,8 @@
 {
     "Metadata": {
-    "title": "AD e-commerce",
-    "description": "Plataforma de comercio electrónico multi-vendedor"
-  },
+        "title": "AD e-commerce",
+        "description": "Plataforma de comercio electrónico multi-vendedor"
+    },
     "HomePage": {
         "header": {
             "searchPlaceholder": "Buscar por nombre...",
@@ -887,7 +887,19 @@
                     "dailyLimit": "Límite diario",
                     "monthlyLimit": "Límite mensual",
                     "dailyRemainingLimit": "Límite diario restante",
-                    "monthlyRemainingLimit": "Límite mensual restante"
+                    "monthlyRemainingLimit": "Límite mensual restante",
+                    "failedFetchLimits": "Error al obtener los límites restantes",
+                    "failedLoadData": "Error al cargar los datos de recarga móvil",
+                    "operatorFound": "Operador encontrado con éxito",
+                    "operatorNotFound": "Operador no encontrado",
+                    "failedCheckOperator": "Error al verificar el operador",
+                    "topupSuccess": "¡Recarga móvil exitosa!",
+                    "failedProcess": "Error al procesar la recarga móvil",
+                    "invalidAmount": "Por favor, ingrese un monto válido",
+                    "invalidMobile": "Por favor, ingrese un número de teléfono válido",
+                    "amountMin": "El monto debe ser al menos",
+                    "amountMax": "El monto no debe exceder",
+                    "invalidOperator": "Por favor, seleccione un operador válido"
                 }
             }
         },
@@ -1985,5 +1997,14 @@
     "CategoryPage": {
         "title": "Todas las Categorías",
         "viewAll": "Ver Todo"
+    },
+    "Terms": {
+        "failedToLoad": "Error al cargar los términos y condiciones"
+    },
+    "Refund": {
+        "failedToLoad": "Error al cargar la política de reembolso"
+    },
+    "Privacy": {
+        "failedToLoad": "Error al cargar la política de privacidad"
     }
 }

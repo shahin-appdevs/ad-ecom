@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import {
     mobileTopupGetAPI,
     mobileTopupAutomaticGetAPI,
@@ -33,6 +34,7 @@ function Skeleton({ className }) {
 
 export default function MobileTopupAutomaticSection() {
     const t = useTranslations("Dashboard.services.topup.globalTopup");
+    const router = useRouter();
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [defaultCurrency, setDefaultCurrency] = useState({
@@ -101,7 +103,7 @@ export default function MobileTopupAutomaticSection() {
                     monthlyLimit: data?.remainingMonthly,
                 });
             } catch (error) {
-                handleApiError(error, "Failed to fetch remaining limits");
+                handleApiError(error, t("failedFetchLimits"));
                 const data = error?.response?.data?.data;
 
                 setRemainingLimit({
@@ -112,7 +114,7 @@ export default function MobileTopupAutomaticSection() {
                 setRemainingLoading(false);
             }
         })();
-    }, [amount, mobileTopupData, selectedCurrency]);
+    }, [amount, mobileTopupData, selectedCurrency, t]);
 
     const exchangeRateText = useMemo(() => {
         if (selectedCurrency && defaultCurrency) {
@@ -232,10 +234,6 @@ export default function MobileTopupAutomaticSection() {
     }, [selectedCurrency, mobileTopupData.topupCharge, remainingLimit]);
 
     useEffect(() => {
-        fetchMobileTopupData();
-    }, []);
-
-    useEffect(() => {
         if (mobileNumber && selectedCountry && mobileNumber.length > 3) {
             const timer = setTimeout(() => {
                 checkOperator();
@@ -245,10 +243,11 @@ export default function MobileTopupAutomaticSection() {
         }
     }, [mobileNumber, selectedCountry]);
 
-    const fetchMobileTopupData = async () => {
+    const fetchMobileTopupData = useCallback(async () => {
         try {
             setApiLoading(true);
             const response = await mobileTopupGetAPI();
+
             const data = response.data.data;
             setMobileTopupData((prevData) => ({
                 ...data,
@@ -269,12 +268,16 @@ export default function MobileTopupAutomaticSection() {
         } catch (error) {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
-                    "Failed to load mobile topup data",
+                    t("failedLoadData"),
             );
         } finally {
             setApiLoading(false);
         }
-    };
+    }, [t]);
+
+    useEffect(() => {
+        fetchMobileTopupData();
+    }, []);
 
     const checkOperator = async () => {
         try {
@@ -283,13 +286,19 @@ export default function MobileTopupAutomaticSection() {
                 mobileNumber,
                 selectedCountry.iso2,
             );
-            setOperatorInfo(response.data.data.data);
-            toast.success("Operator found successfully");
+
+            if (response.data.data.data?.status) {
+                setOperatorInfo(response.data.data.data);
+                toast.success(t("operatorFound"));
+            } else {
+                setOperatorInfo(null);
+                toast.error(t("operatorNotFound"));
+            }
         } catch (error) {
             setOperatorInfo(null);
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
-                    "Failed to check operator",
+                    t("failedCheckOperator"),
             );
         }
     };
@@ -306,14 +315,14 @@ export default function MobileTopupAutomaticSection() {
                 selectedCurrency.code,
             );
 
-            toast.success("Mobile topup successful!");
+            toast.success(t("topupSuccess"));
             setAmount("");
             setMobileNumber("");
             setOperatorInfo(null);
+            router.refresh();
         } catch (error) {
             toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to process mobile topup",
+                error.response?.data?.message?.error?.[0] || t("failedProcess"),
             );
         } finally {
             setLoading(false);
@@ -328,27 +337,27 @@ export default function MobileTopupAutomaticSection() {
         const minLimit = parseFloat(limitsCalculation.minLimit);
         const maxLimit = parseFloat(limitsCalculation.maxLimit);
 
-        if (isNaN(amountNum)) {
-            toast.error("Please enter a valid amount");
+        if (!amount || isNaN(amount) || amount <= 0) {
+            toast.error(t("invalidAmount"));
             return;
         }
 
         if (amountNum < minLimit) {
             toast.error(
-                `Amount must be at least ${minLimit} ${selectedCurrency?.code}`,
+                `${t("amountMin")} ${minLimit} ${selectedCurrency?.code}`,
             );
             return;
         }
 
         if (amountNum > maxLimit) {
             toast.error(
-                `Amount must not exceed ${maxLimit} ${selectedCurrency?.code}`,
+                `${t("amountMax")} ${maxLimit} ${selectedCurrency?.code}`,
             );
             return;
         }
 
         if (!operatorInfo) {
-            toast.error("Please enter a valid mobile number");
+            toast.error(t("invalidOperator"));
             return;
         }
 

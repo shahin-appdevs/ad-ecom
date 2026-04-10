@@ -20,7 +20,7 @@ const dmSans = DM_Sans({
 });
 
 // Metadata
-export async function generateMetadata({ params }) {
+export async function generateMetadata() {
     const t = await getTranslations("Metadata");
 
     return {
