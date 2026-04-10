@@ -218,7 +218,7 @@ function ProductDetails() {
         const referralLink = getReferralLink();
         if (referralLink) {
             navigator.clipboard.writeText(referralLink);
-            toast.success("Referral link copied to clipboard!");
+            toast.success(t("referral.linkCopied"));
         }
     };
 
@@ -293,7 +293,7 @@ function ProductDetails() {
                 Object.entries(selectedVariants)
                     .sort(([a], [b]) => a.localeCompare(b))
                     .map(([k, v]) => `${k}:${v}`)
-                    .join("||") || "no-variants";
+                    .join("||") || t("variants.noVariants");
             const currentUniqueId = `${data.product.id}-${variantKey}`;
             const cartItem = parsedCart.find(
                 (item) => item.uniqueId === currentUniqueId,

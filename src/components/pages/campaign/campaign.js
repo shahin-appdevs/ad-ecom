@@ -79,8 +79,7 @@ export default function Campaign() {
             setNextPageUrl(res.data.data.all_campaigns?.next_page_url || null);
         } catch (error) {
             toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to load more campaigns",
+                error.response?.data?.message?.error?.[0] || t("failedToLoad"),
             );
         } finally {
             setLoadMoreLoading(false);

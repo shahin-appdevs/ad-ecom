@@ -53,19 +53,24 @@
             "sec": "সেকেন্ড",
             "viewMore": "আরও দেখুন",
             "loadMore": "আরও লোড করুন",
-            "off": "ছাড়"
+            "off": "ছাড়",
+            "failedToLoad": "ফ্ল্যাশ পণ্য লোড করতে ব্যর্থ",
+            "failedFetchProfile": "প্রোফাইল লোড করতে ব্যর্থ"
         },
         "newArrival": {
             "newArrivalTitle": "নতুন আগমন",
             "viewMore": "আরও দেখুন",
             "loadMore": "আরও লোড করুন",
-            "off": "ছাড়"
+            "off": "ছাড়",
+            "failedToLoad": "নতুন পণ্য লোড করতে ব্যর্থ",
+            "failedFetchProfile": "প্রোফাইল লোড করতে ব্যর্থ"
         },
         "shopByBrand": {
             "title": "ব্র্যান্ড অনুযায়ী কেনাকাটা করুন",
             "viewMore": "আরও দেখুন",
             "loadMore": "আরও লোড করুন",
             "noProductsFound": "কোনো পণ্য পাওয়া যায়নি",
+            "failedToLoad": "ব্র্যান্ড লোড করতে ব্যর্থ",
             "off": "ছাড়"
         },
         "stalls": {
@@ -133,16 +138,21 @@
         "close": "বন্ধ করুন",
         "referral": {
             "shareTitle": "রেফারেল লিঙ্ক শেয়ার করুন",
-            "shareText": "বন্ধুদের সাথে এই লিঙ্ক শেয়ার করে কমিশন আয় করুন:"
+            "shareText": "বন্ধুদের সাথে এই লিঙ্ক শেয়ার করে কমিশন আয় করুন:",
+            "linkCopied": "রেফারেল লিঙ্ক ক্লিপবোর্ডে কপি করা হয়েছে!"
         },
         "relatedProduct": {
             "title": "সম্পর্কিত পণ্য",
             "noProductsFound": "কোনো পণ্য পাওয়া যায়নি",
-            "off": "ছাড়"
+            "off": "ছাড়",
+            "failedFetchUserProfile": "প্রোফাইল লোড করতে ব্যর্থ"
         },
         "noDescription": "কোনো বিবরণ নেই",
         "noDetails": "কোনো বিস্তারিত নেই",
-        "referralLink": "রেফারেল লিঙ্ক"
+        "referralLink": "রেফারেল লিঙ্ক",
+        "variants": {
+            "noVariants": "কোনো ভেরিয়েন্ট নেই"
+        }
     },
     "Dashboard": {
         "topBar": {
@@ -1809,7 +1819,8 @@
             "confirm": "নিশ্চিত করুন",
             "confirming": "নিশ্চিত করা হচ্ছে...",
             "itemRemoved": "কার্ট থেকে আইটেম সরানো হয়েছে",
-            "insideDhaka": "ঢাকার ভিতরে"
+            "insideDhaka": "ঢাকার ভিতরে",
+            "failedToOrder": "অর্ডার নিশ্চিত করতে ব্যর্থ"
         }
     },
     "Auth": {
@@ -1954,20 +1965,28 @@
             "products": "প্রোডাক্টস",
             "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
             "off": "ছাড়",
-            "loadMore": "আরও লোড করুন"
+            "loadMore": "আরও লোড করুন",
+            "failedFetchProfile": "প্রোফাইল লোড করতে ব্যর্থ",
+            "failedToLoad": "প্রোডাক্ট লোড করতে ব্যর্থ",
+            "failedFetchFlashProducts": "ফ্ল্যাশ প্রোডাক্ট লোড করতে ব্যর্থ"
         },
         "subCategory": {
             "moreCategories": "আরও ক্যাটেগরি",
             "products": "প্রোডাক্টস",
             "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
             "off": "ছাড়",
-            "loadMore": "আরও লোড করুন"
+            "loadMore": "আরও লোড করুন",
+            "failedFetchProfile": "প্রোফাইল লোড করতে ব্যর্থ",
+            "failedToLoad": "প্রোডাক্ট লোড করতে ব্যর্থ",
+            "failedFetchFlashProducts": "ফ্ল্যাশ প্রোডাক্ট লোড করতে ব্যর্থ"
         },
         "subChildCategory": {
             "products": "প্রোডাক্টস",
             "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
             "off": "ছাড়",
-            "loadMore": "আরও লোড করুন"
+            "loadMore": "আরও লোড করুন",
+            "failedToLoad": "প্রোডাক্ট লোড করতে ব্যর্থ",
+            "failedFetchProfile": "প্রোফাইল লোড করতে ব্যর্থ"
         },
         "categorySidebar": {
             "categories": "ক্যাটাগরি",
@@ -1979,11 +1998,14 @@
         "allCampaigns": "সকল ক্যাম্পেইন",
         "noCampaignsAvailable": "বর্তমানে কোনো ক্যাম্পেইন উপলব্ধ নেই।",
         "loadMore": "আরও লোড করুন",
+        "failedToLoad": "ক্যাম্পেইন লোড করতে ব্যর্থ",
         "campaignProduct": {
             "endsIn": "শেষ হবে",
             "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
             "off": "ছাড়",
             "loadMore": "আরও লোড করুন",
+            "failedFetchProfile": "প্রোফাইল লোড করতে ব্যর্থ",
+            "failedToLoad": "প্রোডাক্ট লোড করতে ব্যর্থ",
             "days": "দিন",
             "hours": "ঘণ্টা",
             "min": "মিনিট",
@@ -1995,16 +2017,26 @@
         "allOffers": "সকল অফার",
         "noCollectionsAvailable": "বর্তমানে কোনো কালেকশন উপলব্ধ নেই।",
         "loadMore": "আরও লোড করুন",
+        "failedToLoad": "প্রোডাক্ট লোড করতে ব্যর্থ",
         "collectionProduct": {
             "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
             "off": "ছাড়",
-            "loadMore": "আরও লোড করুন"
+            "loadMore": "আরও লোড করুন",
+            "failedFetchProfile": "প্রোফাইল লোড করতে ব্যর্থ",
+            "failedToLoad": "প্রোডাক্ট লোড করতে ব্যর্থ"
         }
     },
-    "StallDetails": {
-        "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
-        "off": "ছাড়",
-        "loadMore": "আরও লোড করুন"
+    "Stall": {
+        "title": "স্টলসমূহ",
+        "viewMore": "আরও দেখুন",
+        "failedFetchStalls": "স্টল লোড করতে ব্যর্থ",
+        "StallDetails": {
+            "noProductsFound": "কোনো প্রোডাক্ট পাওয়া যায়নি",
+            "off": "ছাড়",
+            "loadMore": "আরও লোড করুন",
+            "failedFetchProfile": "প্রোফাইল লোড করতে ব্যর্থ",
+            "failedToLoad": "প্রোডাক্ট লোড করতে ব্যর্থ"
+        }
     },
     "CategoryPage": {
         "title": "সকল ক্যাটেগরি",

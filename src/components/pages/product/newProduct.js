@@ -11,6 +11,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -39,6 +40,11 @@ export default function NewProduct() {
     const [newArrivalProducts, setNewArrivalProducts] = useState([]);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
+    const t = useTranslations("HomePage.newArrival");
+    const newArrivalTitle = t("newArrivalTitle");
+    const loadMore = t("loadMore");
+    const off = t("off");
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         setIsLoggedIn(!!token);
@@ -54,10 +60,7 @@ export default function NewProduct() {
                     response.data.data?.new_arrival_products?.data || [],
                 );
             } catch (error) {
-                toast.error(
-                    error.response?.data?.message?.error?.[0] ||
-                        "Failed to fetch new arrival products",
-                );
+                handleApiError(error, t("failedToLoad"));
             } finally {
                 setLoading(false);
             }
@@ -74,7 +77,7 @@ export default function NewProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                toast.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
         fetchUserProfile();
@@ -167,11 +170,6 @@ export default function NewProduct() {
             setLoadMoreLoading(false);
         }
     };
-
-    const t = useTranslations("HomePage.newArrival");
-    const newArrivalTitle = t("newArrivalTitle");
-    const loadMore = t("loadMore");
-    const off = t("off");
 
     if (loading) {
         return (

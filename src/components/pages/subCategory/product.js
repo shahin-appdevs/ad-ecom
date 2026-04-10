@@ -15,11 +15,10 @@ import {
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { Menu } from "@headlessui/react";
-
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-
 import { useTranslations } from "next-intl";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -73,7 +72,7 @@ function SubCategoryProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                console.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 
@@ -313,10 +312,7 @@ function SubCategoryProduct() {
                 },
             }));
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to load more products",
-            );
+            handleApiError(error, t("failedToLoadMore"));
         } finally {
             setLoadMoreLoading(false);
         }

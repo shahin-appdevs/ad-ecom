@@ -21,6 +21,7 @@ import {
 import getJwtToken from "@/components/utility/getJwtToken";
 import Image from "next/image";
 import getImageUrl from "@/components/utility/getImageUrl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 // Stripe Card Form Component
 const StripeCardForm = ({ formData, onFormDataChange }) => {

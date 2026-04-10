@@ -10,6 +10,7 @@ import {
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -35,7 +36,7 @@ const ProductSkeleton = () => (
 );
 
 function StallDetails() {
-    const t = useTranslations("StallDetails");
+    const t = useTranslations("Stall.StallDetails");
 
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
@@ -63,7 +64,7 @@ function StallDetails() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                console.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 
@@ -187,7 +188,7 @@ function StallDetails() {
                     setProducts(formattedProducts);
                 }
             } catch (error) {
-                toast.error(error.response?.data?.message?.error?.[0]);
+                handleApiError(error, t("failedToLoad"));
             } finally {
                 setLoading(false);
             }

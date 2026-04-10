@@ -17,6 +17,7 @@ import { Menu } from "@headlessui/react";
 import { useTranslations } from "next-intl";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -66,7 +67,7 @@ function CategoryProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                console.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 

@@ -53,19 +53,23 @@
             "sec": "ثانية",
             "viewMore": "عرض المزيد",
             "loadMore": "تحميل المزيد",
-            "off": "خصم"
+            "off": "خصم",
+            "failedToLoad": "فشل في تحميل المنتجات"
         },
         "newArrival": {
             "newArrivalTitle": "وصل حديثاً",
             "viewMore": "عرض المزيد",
             "loadMore": "تحميل المزيد",
-            "off": "خصم"
+            "off": "خصم",
+            "failedToLoad": "فشل في تحميل المنتجات",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي"
         },
         "shopByBrand": {
             "title": "تسوق حسب العلامة التجارية",
             "viewMore": "عرض المزيد",
             "loadMore": "تحميل المزيد",
             "noProductsFound": "لا توجد منتجات",
+            "failedToLoad": "فشل في تحميل العلامات التجارية",
             "off": "خصم"
         },
         "stalls": {
@@ -133,16 +137,21 @@
         "close": "إغلاق",
         "referral": {
             "shareTitle": "مشاركة رابط الإحالة",
-            "shareText": "شارك هذا الرابط مع أصدقائك واكسب عمولات:"
+            "shareText": "شارك هذا الرابط مع أصدقائك واكسب عمولات:",
+            "linkCopied": "تم نسخ رابط الإحالة إلى الحافظة!"
         },
         "relatedProduct": {
             "title": "منتجات ذات صلة",
             "noProductsFound": "لا توجد منتجات",
-            "off": "خصم"
+            "off": "خصم",
+            "failedFetchUserProfile": "فشل في تحميل الملف الشخصي"
         },
         "noDescription": "لا يوجد وصف",
         "noDetails": "لا توجد تفاصيل",
-        "referralLink": "رابط الإحالة"
+        "referralLink": "رابط الإحالة",
+        "variants": {
+            "noVariants": "لا توجد خيارات"
+        }
     },
     "Dashboard": {
         "topBar": {
@@ -1809,7 +1818,8 @@
             "confirm": "تأكيد",
             "confirming": "جاري التأكيد...",
             "itemRemoved": "تمت إزالة العنصر من سلة التسوق",
-            "insideDhaka": "داخل دكا"
+            "insideDhaka": "داخل دكا",
+            "failedToOrder": "فشل في تأكيد الطلب"
         }
     },
     "Auth": {
@@ -1954,20 +1964,28 @@
             "products": "المنتجات",
             "noProductsFound": "لم يتم العثور على منتجات",
             "off": "خصم",
-            "loadMore": "تحميل المزيد"
+            "loadMore": "تحميل المزيد",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي",
+            "failedToLoad": "فشل في تحميل المنتجات",
+            "failedFetchFlashProducts": "فشل في تحميل المنتجات"
         },
         "subCategory": {
             "moreCategories": "المزيد من الفئات",
             "products": "المنتجات",
             "noProductsFound": "لم يتم العثور على منتجات",
             "off": "خصم",
-            "loadMore": "تحميل المزيد"
+            "loadMore": "تحميل المزيد",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي",
+            "failedToLoad": "فشل في تحميل المنتجات",
+            "failedFetchFlashProducts": "فشل في تحميل المنتجات"
         },
         "subChildCategory": {
             "products": "المنتجات",
             "noProductsFound": "لم يتم العثور على منتجات",
             "off": "خصم",
-            "loadMore": "تحميل المزيد"
+            "loadMore": "تحميل المزيد",
+            "failedToLoad": "فشل في تحميل المنتجات",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي"
         },
         "categorySidebar": {
             "categories": "الفئات",
@@ -1979,6 +1997,7 @@
         "allCampaigns": "جميع الحملات",
         "noCampaignsAvailable": "لا توجد حملات متاحة حالياً.",
         "loadMore": "تحميل المزيد",
+        "failedToLoad": "فشل في تحميل الحملات",
         "campaignProduct": {
             "endsIn": "ينتهي في",
             "noProductsFound": "لم يتم العثور على منتجات",
@@ -1987,7 +2006,9 @@
             "days": "أيام",
             "hours": "ساعات",
             "min": "دقيقة",
-            "sec": "ثانية"
+            "sec": "ثانية",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي",
+            "failedToLoad": "فشل في تحميل المنتجات"
         }
     },
     "Collection": {
@@ -1995,16 +2016,24 @@
         "allOffers": "جميع العروض",
         "noCollectionsAvailable": "لا توجد مجموعات متاحة حالياً.",
         "loadMore": "تحميل المزيد",
+        "failedToLoad": "فشل تحميل المزيد من المنتجات",
         "collectionProduct": {
             "noProductsFound": "لم يتم العثور على منتجات",
             "off": "خصم",
             "loadMore": "تحميل المزيد"
         }
     },
-    "StallDetails": {
-        "noProductsFound": "لم يتم العثور على منتجات",
-        "off": "خصم",
-        "loadMore": "تحميل المزيد"
+    "Stall": {
+        "title": "الأكشاك",
+        "viewMore": "عرض المزيد",
+        "failedFetchStalls": "فشل في تحميل الأكشاك",
+        "StallDetails": {
+            "noProductsFound": "لم يتم العثور على منتجات",
+            "off": "خصم",
+            "loadMore": "تحميل المزيد",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي",
+            "failedToLoad": "فشل في تحميل المنتجات"
+        }
     },
     "CategoryPage": {
         "title": "جميع الفئات",

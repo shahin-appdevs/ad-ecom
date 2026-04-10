@@ -45,6 +45,8 @@ function BrandProduct() {
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
     const { baseCurrencySymbol } = getBaseCurrency(data);
+    const t = useTranslations("HomePage.shopByBrand");
+    const loadMore = t("loadMore");
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -263,16 +265,12 @@ function BrandProduct() {
             }));
         } catch (error) {
             toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to load more products",
+                error.response?.data?.message?.error?.[0] || t("failedToLoad"),
             );
         } finally {
             setLoadMoreLoading(false);
         }
     };
-
-    const t = useTranslations("HomePage.shopByBrand");
-    const loadMore = t("loadMore");
 
     return (
         <section className="sm:pt-4">

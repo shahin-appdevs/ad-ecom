@@ -53,19 +53,24 @@
             "sec": "Sec",
             "viewMore": "View More",
             "loadMore": "Load More",
-            "off": "off"
+            "off": "off",
+            "failedToLoad": "Failed to load flash products",
+            "failedFetchProfile": "Failed to fetch profile"
         },
         "newArrival": {
             "newArrivalTitle": "New Arrival",
             "viewMore": "View More",
             "loadMore": "Load More",
-            "off": "off"
+            "off": "off",
+            "failedToLoad": "Failed to load new products",
+            "failedFetchProfile": "Failed to load profile"
         },
         "shopByBrand": {
             "title": "Shop by Brand",
             "viewMore": "View More",
             "loadMore": "Load More",
             "noProductsFound": "No products found",
+            "failedToLoad": "Failed to load brands",
             "off": "off"
         },
         "stalls": {
@@ -133,16 +138,21 @@
         "close": "Close",
         "referral": {
             "shareTitle": "Share Referral Link",
-            "shareText": "Share this link with your friends to earn commissions:"
+            "shareText": "Share this link with your friends to earn commissions:",
+            "linkCopied": "Referral link copied to clipboard!"
         },
         "relatedProduct": {
             "title": "Related Products",
             "noProductsFound": "No products found",
-            "off": "off"
+            "off": "off",
+            "failedFetchUserProfile": "Failed to load profile"
         },
         "noDescription": "No description available",
         "noDetails": "No details available",
-        "referralLink": "Referral Link"
+        "referralLink": "Referral Link",
+        "variants": {
+            "noVariants": "No variants"
+        }
     },
     "Dashboard": {
         "topBar": {
@@ -1809,7 +1819,8 @@
             "confirm": "Confirm",
             "confirming": "Confirming...",
             "itemRemoved": "Item removed from cart",
-            "insideDhaka": "Inside Dhaka"
+            "insideDhaka": "Inside Dhaka",
+            "failedToOrder": "Failed to order"
         }
     },
     "Auth": {
@@ -1945,7 +1956,8 @@
             "verify": "Verify",
             "backToLogin": "Back to login? ",
             "logIn": "Log In",
-            "createAccount": "Create Account"
+            "createAccount": "Create Account",
+            "failedToLoad": "Failed to load products"
         }
     },
     "Category": {
@@ -1954,20 +1966,26 @@
             "subCategories": "Sub Categories",
             "noProductsFound": "No products found",
             "off": "Off",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "failedFetchProfile": "Failed to fetch profile",
+            "failedToLoad": "Failed to load products"
         },
         "subCategory": {
             "moreCategories": "More Categories",
             "products": "Products",
             "noProductsFound": "No products found",
             "off": "off",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "failedFetchProfile": "Failed to fetch profile",
+            "failedToLoad": "Failed to load products"
         },
         "subChildCategory": {
             "products": "Products",
             "noProductsFound": "No products found",
             "off": "off",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "failedToLoad": "Failed to load products",
+            "failedFetchProfile": "Failed to fetch profile"
         },
         "categorySidebar": {
             "categories": "Categories",
@@ -1979,6 +1997,7 @@
         "allCampaigns": "All Campaigns",
         "noCampaignsAvailable": "No campaigns available at the moment.",
         "loadMore": "Load More",
+        "failedToLoad": "Failed to load campaigns",
         "campaignProduct": {
             "endsIn": "Ends in",
             "noProductsFound": "No products found",
@@ -1987,7 +2006,9 @@
             "days": "days",
             "hours": "hours",
             "min": "min",
-            "sec": "sec"
+            "sec": "sec",
+            "failedFetchProfile": "Failed to fetch profile",
+            "failedToLoad": "Failed to load products"
         }
     },
     "Collection": {
@@ -1995,17 +2016,28 @@
         "allOffers": "All Offers",
         "noCollectionsAvailable": "No collections available at the moment.",
         "loadMore": "Load More",
+        "failedToLoad": "Failed to load more products",
         "collectionProduct": {
             "noProductsFound": "No products found",
             "off": "off",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "failedFetchProfile": "Failed to fetch profile",
+            "failedToLoad": "Failed to load products"
         }
     },
-    "StallDetails": {
-        "noProductsFound": "No products found",
-        "off": "off",
-        "loadMore": "Load More"
+    "Stall": {
+        "title": "Stalls",
+        "viewMore": "View More",
+        "failedFetchStalls": "Failed to fetch stalls",
+        "StallDetails": {
+            "noProductsFound": "No products found",
+            "off": "off",
+            "loadMore": "Load More",
+            "failedFetchProfile": "Failed to fetch profile",
+            "failedToLoad": "Failed to load products"
+        }
     },
+
     "CategoryPage": {
         "title": "All Categories",
         "viewAll": "View All"

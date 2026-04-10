@@ -11,6 +11,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -30,7 +31,7 @@ const ProductSkeleton = () => (
 );
 
 function RelatedProduct() {
-    const t = useTranslations("ProductDetails.relatedProduct"); // ← Added
+    const t = useTranslations("ProductDetails.relatedProduct");
 
     // Translation variables
     const relatedProductsTitle = t("title");
@@ -61,7 +62,7 @@ function RelatedProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                console.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchUserProfile"));
             }
         };
 

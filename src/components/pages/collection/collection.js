@@ -10,6 +10,7 @@ import { toast } from "react-hot-toast";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import Button from "@/components/utility/Button";
 import { useTranslations } from "next-intl"; // ← Added
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -72,10 +73,7 @@ export default function Collection() {
                 res.data.data.all_collections?.next_page_url || null,
             );
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to load more collections",
-            );
+            handleApiError(error, t("failedToLoad"));
         } finally {
             setLoadMoreLoading(false);
         }

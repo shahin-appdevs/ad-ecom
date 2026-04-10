@@ -11,6 +11,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -55,6 +56,18 @@ export default function FlashProduct() {
     const [flashProducts, setFlashProducts] = useState([]);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
+    // translation
+    const t = useTranslations("HomePage.flashSale");
+    const flashSaleTitle = t("flashSaleTitle");
+    const countdownLabels = [
+        { key: "days", value: timeLeft.days },
+        { key: "hours", value: timeLeft.hours },
+        { key: "min", value: timeLeft.minutes },
+        { key: "sec", value: timeLeft.seconds },
+    ];
+    const loadMore = t("loadMore");
+    const off = t("off");
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         setIsLoggedIn(!!token);
@@ -68,10 +81,7 @@ export default function FlashProduct() {
                 setFlashData(response.data.data);
                 setFlashProducts(response.data.data.flash_products?.data || []);
             } catch (error) {
-                toast.error(
-                    error.response?.data?.message?.error?.[0] ||
-                        "Failed to fetch flash products",
-                );
+                handleApiError(error, t("failedToLoad"));
             } finally {
                 setLoading(false);
             }
@@ -89,7 +99,7 @@ export default function FlashProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                toast.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 
@@ -219,25 +229,11 @@ export default function FlashProduct() {
                 },
             }));
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to fetch flash products",
-            );
+            handleApiError(error, t("failedFetchFlashProducts"));
         } finally {
             setLoadMoreLoading(false);
         }
     };
-    // translation
-    const t = useTranslations("HomePage.flashSale");
-    const flashSaleTitle = t("flashSaleTitle");
-    const countdownLabels = [
-        { key: "days", value: timeLeft.days },
-        { key: "hours", value: timeLeft.hours },
-        { key: "min", value: timeLeft.minutes },
-        { key: "sec", value: timeLeft.seconds },
-    ];
-    const loadMore = t("loadMore");
-    const off = t("off");
 
     if (loading) {
         return (

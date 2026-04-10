@@ -18,6 +18,7 @@ import { Fragment } from "react";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
 import { useTranslations } from "next-intl";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
+import { handleApiError } from "@/components/utility/handleApiError";
 // Images
 const user = "";
 

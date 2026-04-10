@@ -17,6 +17,7 @@ import { useHomeData } from "@/components/context/HomeContext";
 import { useTranslations } from "next-intl";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -103,7 +104,7 @@ function ChildSubCategoryProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                console.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 
@@ -322,10 +323,7 @@ function ChildSubCategoryProduct() {
                 },
             }));
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to load more products",
-            );
+            handleApiError(error, t("failedToLoad"));
         } finally {
             setLoadMoreLoading(false);
         }

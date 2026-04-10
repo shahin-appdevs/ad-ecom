@@ -15,6 +15,7 @@ import { useCart } from "@/components/context/CartContext";
 import { Listbox } from "@headlessui/react";
 import { useSearchParams } from "next/navigation";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const ProductSkeleton = () => (
     <div className="flex items-start gap-4 border-b pb-4">
@@ -299,7 +300,7 @@ function Checkout() {
                 toast.error(response?.data?.message?.error?.[0]);
             }
         } catch (error) {
-            toast.error(error.response?.data?.message?.error?.[0]);
+            handleApiError(error, t("failedToOrder"));
         } finally {
             setIsSubmitting(false);
         }

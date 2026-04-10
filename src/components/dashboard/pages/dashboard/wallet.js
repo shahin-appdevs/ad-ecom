@@ -6,6 +6,7 @@ import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 export default function WalletSection() {
     const [dashboardData, setDashboardData] = useState(null);

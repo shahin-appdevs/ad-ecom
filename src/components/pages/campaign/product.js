@@ -13,6 +13,7 @@ import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl"; // ← Added
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 export const dynamic = "force-dynamic";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -94,7 +95,7 @@ function CampaignProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                console.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 
@@ -301,8 +302,7 @@ function CampaignProduct() {
             }));
         } catch (error) {
             toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to load more products",
+                error.response?.data?.message?.error?.[0] || t("failedToLoad"),
             );
         } finally {
             setLoadMoreLoading(false);
