@@ -861,7 +861,19 @@
                     "dailyLimit": "Daily Limit",
                     "monthlyLimit": "Monthly Limit",
                     "dailyRemainingLimit": "Daily Remaining Limit",
-                    "monthlyRemainingLimit": "Monthly Remaining Limit"
+                    "monthlyRemainingLimit": "Monthly Remaining Limit",
+                    "failedFetchLimits": "Failed to fetch remaining limits",
+                    "failedLoad": "Failed to load mobile topup data",
+                    "topupSuccess": "Top-up successful",
+                    "topupFailed": "Top-up failed",
+                    "invalidMobile": "Invalid mobile number",
+                    "selectOperatorError": "Please select an operator",
+                    "selectTypeError": "Please select an operator type",
+                    "enterMobileError": "Please enter a mobile number",
+                    "enterAmountError": "Please enter an amount",
+                    "invalidAmount": "Please enter a valid amount",
+                    "amountMin": "Amount must be at least",
+                    "amountMax": "Amount must not exceed"
                 },
                 "globalTopup": {
                     "exchangeRate": "Exchange Rate",

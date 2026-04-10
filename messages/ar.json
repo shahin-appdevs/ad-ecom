@@ -861,7 +861,19 @@
                     "dailyLimit": "الحد اليومي",
                     "monthlyLimit": "الحد الشهري",
                     "dailyRemainingLimit": "الحد اليومي المتبقي",
-                    "monthlyRemainingLimit": "الحد الشهري المتبقي"
+                    "monthlyRemainingLimit": "الحد الشهري المتبقي",
+                    "failedFetchLimits": "فشل في جلب الحدود المتبقية",
+                    "failedLoad": "فشل في تحميل بيانات شحن الجوال",
+                    "topupSuccess": "تم الشحن بنجاح",
+                    "topupFailed": "فشل الشحن",
+                    "invalidMobile": "رقم الجوال غير صالح",
+                    "selectOperatorError": "يرجى اختيار المشغل",
+                    "selectTypeError": "يرجى اختيار نوع المشغل",
+                    "enterMobileError": "يرجى إدخال رقم الجوال",
+                    "enterAmountError": "يرجى إدخال المبلغ",
+                    "invalidAmount": "يرجى إدخال مبلغ صالح",
+                    "amountMin": "يجب أن يكون المبلغ على الأقل",
+                    "amountMax": "يجب ألا يتجاوز المبلغ"
                 },
                 "globalTopup": {
                     "exchangeRate": "سعر الصرف",

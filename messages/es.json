@@ -861,7 +861,19 @@
                     "dailyLimit": "Límite diario",
                     "monthlyLimit": "Límite mensual",
                     "dailyRemainingLimit": "Límite diario restante",
-                    "monthlyRemainingLimit": "Límite mensual restante"
+                    "monthlyRemainingLimit": "Límite mensual restante",
+                    "failedFetchLimits": "Error al obtener los límites restantes",
+                    "failedLoad": "Error al cargar los datos de recarga móvil",
+                    "topupSuccess": "Recarga exitosa",
+                    "topupFailed": "Recarga fallida",
+                    "invalidMobile": "Número de móvil no válido",
+                    "selectOperatorError": "Por favor seleccione un operador",
+                    "selectTypeError": "Por favor seleccione un tipo de operador",
+                    "enterMobileError": "Por favor ingrese un número de móvil",
+                    "enterAmountError": "Por favor ingrese un monto",
+                    "invalidAmount": "Por favor ingrese un monto válido",
+                    "amountMin": "El monto debe ser al menos",
+                    "amountMax": "El monto no debe exceder"
                 },
                 "globalTopup": {
                     "exchangeRate": "Tipo de cambio",

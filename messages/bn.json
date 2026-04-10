@@ -861,7 +861,19 @@
                     "dailyLimit": "দৈনিক সীমা",
                     "monthlyLimit": "মাসিক সীমা",
                     "dailyRemainingLimit": "দৈনিক অবশিষ্ট সীমা",
-                    "monthlyRemainingLimit": "মাসিক অবশিষ্ট সীমা"
+                    "monthlyRemainingLimit": "মাসিক অবশিষ্ট সীমা",
+                    "failedFetchLimits": "অবশিষ্ট সীমা আনতে ব্যর্থ হয়েছে",
+                    "failedLoad": "মোবাইল টপআপ তথ্য লোড করতে ব্যর্থ হয়েছে",
+                    "topupSuccess": "টপ-আপ সফল হয়েছে",
+                    "topupFailed": "টপ-আপ ব্যর্থ হয়েছে",
+                    "invalidMobile": "অবৈধ মোবাইল নম্বর",
+                    "selectOperatorError": "অনুগ্রহ করে একটি অপারেটর নির্বাচন করুন",
+                    "selectTypeError": "অনুগ্রহ করে একটি অপারেটর টাইপ নির্বাচন করুন",
+                    "enterMobileError": "অনুগ্রহ করে একটি মোবাইল নম্বর লিখুন",
+                    "enterAmountError": "অনুগ্রহ করে একটি পরিমাণ লিখুন",
+                    "invalidAmount": "অনুগ্রহ করে একটি সঠিক পরিমাণ লিখুন",
+                    "amountMin": "পরিমাণ কমপক্ষে হতে হবে",
+                    "amountMax": "পরিমাণ এর বেশি হতে পারবে না"
                 },
                 "globalTopup": {
                     "exchangeRate": "বিনিময় হার",
