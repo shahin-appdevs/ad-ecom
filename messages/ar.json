@@ -257,18 +257,39 @@
                     "continueButton": "متابعة إضافة الأموال"
                 },
                 "manual": {
+                    "noPaymentDataFound": "لم يتم العثور على بيانات الدفع",
+                    "loadingPaymentDetails": "جاري تحميل تفاصيل الدفع...",
+                    "confirmPayment": "تأكيد الدفع",
+                    "confirming": "جاري التأكيد...",
                     "paymentSummary": "ملخص الدفع",
-                    "transactionId": "معرف المعاملة",
+                    "transactionId": "رقم المعاملة",
                     "paymentMethod": "طريقة الدفع",
                     "amount": "المبلغ",
                     "exchangeRate": "سعر الصرف",
                     "payableAmount": "المبلغ المستحق",
+                    "noAdditionalInfo": "لا توجد معلومات إضافية مطلوبة",
+                    "maxCharacters": "الحد الأقصى {max} حرف",
+                    "enter": "أدخل",
+                    "select": "اختر",
+                    "submissionFailed": "فشل في الإرسال",
+                    "missingRequiredFields": "يرجى ملء جميع الحقول المطلوبة: {fields}"
+                },
+                "crypto": {
+                    "noPaymentDataFound": "لم يتم العثور على بيانات الدفع",
+                    "loadingPaymentDetails": "جاري تحميل تفاصيل الدفع...",
+                    "walletAddress": "عنوان المحفظة",
+                    "addressCopied": "تم نسخ العنوان إلى الحافظة!",
+                    "transactionHash": "معرف المعاملة",
+                    "enterTxnHash": "أدخل معرف المعاملة",
+                    "txnHashFormat": "أدخل معرف معاملة صحيح (0x متبوعًا بـ 64 حرفًا)",
                     "confirmPayment": "تأكيد الدفع",
                     "confirming": "جاري التأكيد...",
-                    "noAdditionalInfo": "لا توجد معلومات إضافية مطلوبة لهذه الطريقة في الدفع.",
-                    "maxCharacters": "الحد الأقصى {max} حرفًا",
-                    "submissionFailed": "فشل الإرسال",
-                    "noPaymentData": "لم يتم العثور على بيانات الدفع"
+                    "preview": "معاينة",
+                    "transactionId": "معرف المعاملة",
+                    "requestAmount": "المبلغ المطلوب",
+                    "networkFee": "رسوم الشبكة",
+                    "exchangeRate": "سعر الصرف",
+                    "submissionFailed": "فشل الإرسال"
                 }
             },
             "exchangeMoney": {
@@ -1940,7 +1961,8 @@
             "registerNow": "سجل الآن",
             "verifyRecaptcha": "يرجى التحقق من reCAPTCHA",
             "loginSuccess": "تم تسجيل الدخول بنجاح",
-            "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى."
+            "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+            "failedToLoadBasicData": "فشل تحميل البيانات الأساسية"
         },
         "otp": {
             "title": "التحقق عبر الرسائل القصيرة",

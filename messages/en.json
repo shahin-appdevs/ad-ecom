@@ -258,18 +258,39 @@
                     "continueButton": "Continue Add Money"
                 },
                 "manual": {
+                    "noPaymentDataFound": "No payment data found",
+                    "loadingPaymentDetails": "Loading payment details...",
+                    "confirmPayment": "Confirm Payment",
+                    "confirming": "Confirming...",
                     "paymentSummary": "Payment Summary",
                     "transactionId": "Transaction ID",
                     "paymentMethod": "Payment Method",
                     "amount": "Amount",
                     "exchangeRate": "Exchange Rate",
                     "payableAmount": "Payable Amount",
+                    "noAdditionalInfo": "No additional information required",
+                    "maxCharacters": "Maximum {max} characters",
+                    "enter": "Enter",
+                    "select": "Select",
+                    "submissionFailed": "Submission failed",
+                    "missingRequiredFields": "Please fill all required fields: {fields}"
+                },
+                "crypto": {
+                    "noPaymentDataFound": "No payment data found",
+                    "loadingPaymentDetails": "Loading payment details...",
+                    "walletAddress": "Wallet Address",
+                    "addressCopied": "Address copied to clipboard!",
+                    "transactionHash": "Transaction Hash",
+                    "enterTxnHash": "Enter transaction hash",
+                    "txnHashFormat": "Enter a valid transaction hash (0x followed by 64 characters)",
                     "confirmPayment": "Confirm Payment",
                     "confirming": "Confirming...",
-                    "noAdditionalInfo": "No additional information required for this payment method.",
-                    "maxCharacters": "Maximum {max} characters",
-                    "submissionFailed": "Submission failed",
-                    "noPaymentData": "No payment data found"
+                    "preview": "Preview",
+                    "transactionId": "Transaction ID",
+                    "requestAmount": "Request Amount",
+                    "networkFee": "Network Fee",
+                    "exchangeRate": "Exchange Rate",
+                    "submissionFailed": "Submission failed"
                 }
             },
             "exchangeMoney": {
@@ -1941,7 +1962,8 @@
             "registerNow": "Register Now",
             "verifyRecaptcha": "Please verify reCAPTCHA",
             "loginSuccess": "Login successful",
-            "loginFailed": "Login failed. Please try again."
+            "loginFailed": "Login failed. Please try again.",
+            "failedToLoadBasicData": "Failed to load basic data"
         },
         "otp": {
             "title": "SMS Verification",
@@ -2050,5 +2072,9 @@
     },
     "Privacy": {
         "failedToLoad": "Failed to load privacy policy"
+    },
+    "CopyToClipboard": {
+        "copied": "Copied to clipboard",
+        "copyFailed": "Copy failed"
     }
 }

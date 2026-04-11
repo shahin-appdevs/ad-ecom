@@ -20,6 +20,7 @@ function Skeleton({ className }) {
 
 function ManualConfirmationPage() {
     const t = useTranslations("Dashboard.wallet.addMoney.manual");
+
     const [paymentData, setPaymentData] = useState(null);
     const [formValues, setFormValues] = useState({});
     const [loading, setLoading] = useState(false);
@@ -40,9 +41,9 @@ function ManualConfirmationPage() {
             setFormValues(initialValues);
         } else {
             window.location.href = "/user/add/money";
-            toast.error("No payment data found");
+            toast.error(t("noPaymentDataFound"));
         }
-    }, []);
+    }, [t]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -64,36 +65,38 @@ function ManualConfirmationPage() {
                 );
 
                 if (missingFields.length > 0) {
-                    throw new Error(
-                        `Please fill all required fields: ${missingFields.map((f) => f.label).join(", ")}`,
+                    toast.error(
+                        t("missingRequiredFields", {
+                            fields: missingFields
+                                .map((f) => f.label)
+                                .join(", "),
+                        }),
                     );
+                    return;
                 }
             }
-
             // Prepare submission data
             const submissionData = {
                 track: paymentData.trx,
                 ...formValues,
             };
-
             // Submit to API
             const response = await ManualAddMoneyAPI(submissionData);
 
             if (response.data.message?.success) {
                 toast.success(response.data.message.success[0]);
                 sessionStorage.removeItem("manualPaymentData");
-                // Optionally redirect to success page
-                // window.location.href = '/user/add/money/success';
             } else {
                 toast.error(
-                    response?.data?.message?.error?.[0] || "Submission failed",
+                    response?.data?.message?.error?.[0] ||
+                        t("submissionFailed"),
                 );
             }
         } catch (error) {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
                     error.message ||
-                    "Submission failed",
+                    t("submissionFailed"),
             );
         } finally {
             setLoading(false);
@@ -110,7 +113,7 @@ function ManualConfirmationPage() {
             required: field.required || false,
             maxLength: field.validation?.max || undefined,
             minLength: field.validation?.min || undefined,
-            placeholder: `Enter ${field.label.toLowerCase()}`,
+            placeholder: t("enter") + " " + field.label.toLowerCase(),
         };
 
         switch (field.type) {
@@ -119,7 +122,9 @@ function ManualConfirmationPage() {
             case "select":
                 return (
                     <select {...commonProps}>
-                        <option value="">Select {field.label}</option>
+                        <option value="">
+                            {t("select")} {field.label}
+                        </option>
                         {field.validation?.options?.map((option, index) => (
                             <option key={index} value={option}>
                                 {option}
@@ -146,25 +151,13 @@ function ManualConfirmationPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <Skeleton className="h-4 w-24 mb-2" />
-                            <div className="relative">
-                                <Skeleton className="h-10 w-full" />
-                                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-20">
-                                    <Skeleton className="h-8 w-full" />
-                                </div>
-                            </div>
+                            <Skeleton className="h-10 w-full" />
                         </div>
                         <div>
                             <Skeleton className="h-4 w-24 mb-2" />
-                            <div className="relative">
-                                <Skeleton className="h-10 w-full" />
-                                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-20">
-                                    <Skeleton className="h-8 w-full" />
-                                </div>
-                            </div>
+                            <Skeleton className="h-10 w-full" />
                         </div>
                     </div>
-
-                    <Skeleton className="h-12 w-full" />
                     <Skeleton className="h-12 w-full" />
                 </div>
                 <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
@@ -176,12 +169,6 @@ function ManualConfirmationPage() {
                                 <Skeleton className="h-4 w-20" />
                             </div>
                         ))}
-                        <div className="border-t pt-3">
-                            <div className="flex justify-between">
-                                <Skeleton className="h-4 w-28" />
-                                <Skeleton className="h-4 w-24" />
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -228,7 +215,7 @@ function ManualConfirmationPage() {
                                         <p className="text-xs text-gray-500 mt-1">
                                             {t("maxCharacters", {
                                                 max: field.validation.max,
-                                            })}{" "}
+                                            })}
                                         </p>
                                     )}
                                 </div>
@@ -250,13 +237,15 @@ function ManualConfirmationPage() {
                     />
                 </form>
             </div>
+
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
                         {t("paymentSummary")}
                     </h5>
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+
+                    <div className="flex items-center justify-between ">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
                             <span>{t("transactionId")}</span>
                         </div>
@@ -264,8 +253,9 @@ function ManualConfirmationPage() {
                             {paymentData.trx}
                         </span>
                     </div>
+
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
                             <span>{t("paymentMethod")}</span>
                         </div>
@@ -273,8 +263,9 @@ function ManualConfirmationPage() {
                             {paymentData.gateway}
                         </span>
                     </div>
+
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <BanknotesIcon className="w-5 h-5 text-emerald-500" />
                             <span>{t("amount")}</span>
                         </div>
@@ -282,8 +273,9 @@ function ManualConfirmationPage() {
                             {paymentData.amount}
                         </span>
                     </div>
+
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-cyan-800" />
                             <span>{t("exchangeRate")}</span>
                         </div>
@@ -291,8 +283,9 @@ function ManualConfirmationPage() {
                             {paymentData.exchangeRate}
                         </span>
                     </div>
+
                     <div className="flex items-center justify-between border-t pt-3 font-semibold text-gray-800">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-2">
                             <WalletIcon className="w-5 h-5 text-indigo-600" />
                             <span>{t("payableAmount")}</span>
                         </div>

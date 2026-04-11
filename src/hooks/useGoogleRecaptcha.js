@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from "react";
 
 import { basicDataGetAPI } from "@root/services/apiClient/apiClient";
 import { handleApiError } from "@/components/utility/handleApiError";
+import { useTranslations } from "next-intl";
 
 export default function useGoogleRecaptcha() {
+    const t = useTranslations("Login");
     const [recaptcha, setRecaptcha] = useState(null);
 
     const [loginBasicData, setLoginBasicData] = useState(null);
@@ -18,7 +20,7 @@ export default function useGoogleRecaptcha() {
                 const result = await basicDataGetAPI();
                 setLoginBasicData(result?.data?.data);
             } catch (error) {
-                handleApiError(error, "Failed to fetch basic data");
+                handleApiError(error, t("failedToLoadBasicData"));
             }
         })();
     }, []);

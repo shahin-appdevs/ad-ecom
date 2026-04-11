@@ -16,6 +16,7 @@ import { useTranslations } from "next-intl";
 
 function CryptoConfirmationPage() {
     const t = useTranslations("Dashboard.wallet.addMoney.crypto");
+
     const [paymentData, setPaymentData] = useState(null);
     const [txnHash, setTxnHash] = useState("");
     const [loading, setLoading] = useState(false);
@@ -27,15 +28,17 @@ function CryptoConfirmationPage() {
             setPaymentData(JSON.parse(storedData));
         } else {
             window.location.href = "/user/add/money";
-            toast.error("No payment data found");
+            toast.error(t("noPaymentDataFound"));
         }
-    }, []);
+    }, [t]);
 
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(paymentData?.address || "");
+        if (!paymentData?.address) return;
+
+        navigator.clipboard.writeText(paymentData.address);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
-        toast.success("Address copied to clipboard!");
+        toast.success(t("addressCopied"));
     };
 
     const handleSubmit = async (e) => {
@@ -44,10 +47,12 @@ function CryptoConfirmationPage() {
 
         try {
             if (!txnHash) {
-                throw new Error("Please enter transaction hash");
+                toast.error(t("enterTxnHash"));
+                return;
             }
             if (!/^0x[a-fA-F0-9]{64}$/.test(txnHash)) {
-                throw new Error("Please enter a valid transaction hash");
+                toast.error(t("invalidTxnHash"));
+                return;
             }
 
             const response = await tatumAddMoneyAPI(txnHash, paymentData.trx);
@@ -57,13 +62,14 @@ function CryptoConfirmationPage() {
                 sessionStorage.removeItem("cryptoPaymentData");
             } else {
                 toast.error(
-                    response?.data?.message?.error?.[0] || "Submission failed",
+                    response?.data?.message?.error?.[0] ||
+                        t("submissionFailed"),
                 );
             }
         } catch (error) {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
-                    "Submission failed",
+                    t("submissionFailed"),
             );
         } finally {
             setLoading(false);
@@ -72,7 +78,9 @@ function CryptoConfirmationPage() {
 
     if (!paymentData)
         return (
-            <div className="text-center py-10">Loading payment details...</div>
+            <div className="text-center py-10">
+                {t("loadingPaymentDetails")}
+            </div>
         );
 
     return (
@@ -82,7 +90,7 @@ function CryptoConfirmationPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="col-span-2">
                             <label className="block text-sm font-medium mb-2">
-                                {t("address")}
+                                {t("walletAddress")}
                             </label>
                             <div className="relative">
                                 <input
@@ -104,6 +112,7 @@ function CryptoConfirmationPage() {
                                 </button>
                             </div>
                         </div>
+
                         <div className="col-span-2">
                             <div className="flex justify-center bg-white p-4 shadow-primary__shadow my-6">
                                 <QRCode
@@ -115,6 +124,7 @@ function CryptoConfirmationPage() {
                                 />
                             </div>
                         </div>
+
                         <div className="col-span-2">
                             <label className="block text-sm font-medium mb-2">
                                 {t("transactionHash")}
@@ -127,10 +137,11 @@ function CryptoConfirmationPage() {
                                 placeholder={t("enterTxnHash")}
                                 required
                                 pattern="^0x[a-fA-F0-9]{64}$"
-                                title="Enter a valid Ethereum transaction hash (0x followed by 64 characters)"
+                                title={t("txnHashFormat")}
                             />
                         </div>
                     </div>
+
                     <Button
                         title={loading ? t("confirming") : t("confirmPayment")}
                         variant="primary"
@@ -141,11 +152,13 @@ function CryptoConfirmationPage() {
                     />
                 </form>
             </div>
+
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
                         {t("preview")}
                     </h5>
+
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2 text-gray-600">
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
@@ -155,6 +168,7 @@ function CryptoConfirmationPage() {
                             {paymentData.trx}
                         </span>
                     </div>
+
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2 text-gray-600">
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
@@ -164,6 +178,7 @@ function CryptoConfirmationPage() {
                             {paymentData.paymentInfo.request_amount}
                         </span>
                     </div>
+
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2 text-gray-600">
                             <BanknotesIcon className="w-5 h-5 text-emerald-500" />
@@ -173,6 +188,7 @@ function CryptoConfirmationPage() {
                             {paymentData.paymentInfo.total_charge}
                         </span>
                     </div>
+
                     <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-cyan-800" />

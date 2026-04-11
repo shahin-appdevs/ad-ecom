@@ -258,18 +258,39 @@
                     "continueButton": "অ্যাড মানি চালিয়ে যান"
                 },
                 "manual": {
+                    "noPaymentDataFound": "কোনো পেমেন্ট ডেটা পাওয়া যায়নি",
+                    "loadingPaymentDetails": "পেমেন্ট বিবরণ লোড করা হচ্ছে...",
+                    "confirmPayment": "পেমেন্ট নিশ্চিত করুন",
+                    "confirming": "নিশ্চিত করা হচ্ছে...",
                     "paymentSummary": "পেমেন্ট সারাংশ",
-                    "transactionId": "লেনদেন আইডি",
-                    "paymentMethod": "পেমেন্ট পদ্ধতি",
+                    "transactionId": "ট্রানজেকশন আইডি",
+                    "paymentMethod": "পেমেন্ট মেথড",
                     "amount": "পরিমাণ",
                     "exchangeRate": "বিনিময় হার",
                     "payableAmount": "প্রদেয় পরিমাণ",
+                    "noAdditionalInfo": "কোনো অতিরিক্ত তথ্যের প্রয়োজন নেই",
+                    "maxCharacters": "সর্বোচ্চ {max} অক্ষর",
+                    "enter": "দিন",
+                    "select": "নির্বাচন করুন",
+                    "submissionFailed": "জমা দিতে ব্যর্থ হয়েছে",
+                    "missingRequiredFields": "অনুগ্রহ করে সব প্রয়োজনীয় ক্ষেত্র পূরণ করুন: {fields}"
+                },
+                "crypto": {
+                    "noPaymentDataFound": "কোনো পেমেন্ট ডেটা পাওয়া যায়নি",
+                    "loadingPaymentDetails": "পেমেন্টের বিবরণ লোড হচ্ছে...",
+                    "walletAddress": "ওয়ালেট ঠিকানা",
+                    "addressCopied": "ঠিকানা ক্লিপবোর্ডে কপি করা হয়েছে!",
+                    "transactionHash": "লেনদেন হ্যাশ",
+                    "enterTxnHash": "লেনদেন হ্যাশ লিখুন",
+                    "txnHashFormat": "একটি বৈধ লেনদেন হ্যাশ লিখুন (0x এর পরে 64 অক্ষর)",
                     "confirmPayment": "পেমেন্ট নিশ্চিত করুন",
                     "confirming": "নিশ্চিত করা হচ্ছে...",
-                    "noAdditionalInfo": "এই পেমেন্ট পদ্ধতির জন্য কোনো অতিরিক্ত তথ্যের প্রয়োজন নেই।",
-                    "maxCharacters": "সর্বোচ্চ {max} অক্ষর",
-                    "submissionFailed": "জমা দিতে ব্যর্থ হয়েছে",
-                    "noPaymentData": "কোনো পেমেন্ট ডেটা পাওয়া যায়নি"
+                    "preview": "প্রিভিউ",
+                    "transactionId": "লেনদেন আইডি",
+                    "requestAmount": "অনুরোধিত পরিমাণ",
+                    "networkFee": "নেটওয়ার্ক ফি",
+                    "exchangeRate": "বিনিময় হার",
+                    "submissionFailed": "জমা দিতে ব্যর্থ হয়েছে"
                 }
             },
             "exchangeMoney": {
@@ -1941,7 +1962,8 @@
             "registerNow": "এখনই নিবন্ধন করুন",
             "verifyRecaptcha": "অনুগ্রহ করে reCAPTCHA যাচাই করুন",
             "loginSuccess": "লগইন সফল হয়েছে",
-            "loginFailed": "লগইন ব্যর্থ হয়েছে। পুনরায় চেষ্টা করুন।"
+            "loginFailed": "লগইন ব্যর্থ হয়েছে। পুনরায় চেষ্টা করুন।",
+            "failedToLoadBasicData": "বেসিক ডেটা লোড করতে ব্যর্থ"
         },
         "otp": {
             "title": "এসএমএস যাচাইকরণ",
