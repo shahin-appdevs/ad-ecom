@@ -48,7 +48,7 @@ export default function TransactionHistorySection() {
         };
 
         fetchReferralData();
-    }, [t]);
+    }, []);
 
     return (
         <div className="bg-white rounded-[12px] p-7">

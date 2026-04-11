@@ -1993,20 +1993,24 @@
             "somethingWentWrong": "Something went wrong"
         },
         "otp": {
-            "title": "SMS Verification",
+            "title": "OTP Verification",
             "subtitle": "Enter the verification code sent to your phone",
             "verificationCode": "Verification Code",
             "enterCodePlaceholder": "Enter 6-digit code",
-            "didntReceiveCode": "Didn't receive code? ",
-            "sending": "Sending...",
+            "didntReceiveCode": "Didn't receive code?",
             "resendCode": "Resend Code",
+            "sending": "Sending...",
             "resendIn": "Resend code in",
-            "verifying": "Verifying...",
             "verify": "Verify",
-            "backToLogin": "Back to login? ",
+            "verifying": "Verifying...",
+            "backToLogin": "Back to login?",
             "logIn": "Log In",
             "createAccount": "Create Account",
-            "failedToLoad": "Failed to load products"
+            "verificationCodeResent": "Verification code resent successfully",
+            "failedToResendCode": "Failed to resend code. Please try again.",
+            "failedToResendVerificationCode": "Failed to resend verification code. Please try again later.",
+            "invalidOtp": "Please enter a valid 6-digit OTP",
+            "verificationFailed": "Verification failed. Please try again."
         }
     },
     "Category": {

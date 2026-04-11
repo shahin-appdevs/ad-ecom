@@ -21,7 +21,7 @@ export default function WidgetSection() {
             }
         };
         fetchDashboardData();
-    }, [t]);
+    }, []);
 
     const parseAmount = (str) => {
         if (!str || typeof str !== "string") return { value: 0, currency: "" };

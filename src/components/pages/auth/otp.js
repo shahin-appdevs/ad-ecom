@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
-import { ArrowPathIcon } from "@heroicons/react/24/outline"; // ← Replaced LoaderCircle
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import {
@@ -14,7 +14,7 @@ import getImageUrl from "@/components/utility/getImageUrl";
 import { useTranslations } from "next-intl";
 
 export default function Otp() {
-    const t = useTranslations("Auth.otp"); // ← Add your translation namespace here
+    const t = useTranslations("Auth.otp");
 
     const [otp, setOtp] = useState("");
     const [countdown, setCountdown] = useState(59);
@@ -92,19 +92,19 @@ export default function Otp() {
             if (response?.data?.message?.success) {
                 toast.success(
                     response.data.message.success[0] ||
-                        "Verification code resent successfully",
+                        t("verificationCodeResent"),
                 );
                 setCountdown(59);
                 setCanResend(false);
                 localStorage.setItem("otpCountdown", "59");
             } else {
-                toast.error("Failed to resend code. Please try again.");
+                toast.error(t("failedToResendCode"));
             }
         } catch (error) {
             const errorMessage =
                 error.response?.data?.message?.error?.[0] ||
                 error.response?.data?.message ||
-                "Failed to resend verification code. Please try again later.";
+                t("failedToResendVerificationCode");
 
             toast.error(errorMessage);
 
@@ -121,7 +121,7 @@ export default function Otp() {
         const cleanOtp = otp.replace(/ - /g, "");
 
         if (cleanOtp.length !== 6) {
-            setError("Please enter a valid 6-digit OTP");
+            setError(t("invalidOtp"));
             return;
         }
 
@@ -140,7 +140,7 @@ export default function Otp() {
         } catch (error) {
             const errorMsg =
                 error.response?.data?.message?.error?.[0] ||
-                "Verification failed. Please try again.";
+                t("verificationFailed");
             setError(errorMsg);
             toast.error(errorMsg);
         } finally {

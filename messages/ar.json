@@ -2000,7 +2000,12 @@
             "verify": "تحقق",
             "backToLogin": "العودة إلى تسجيل الدخول؟ ",
             "logIn": "تسجيل الدخول",
-            "createAccount": "إنشاء حساب"
+            "createAccount": "إنشاء حساب",
+            "verificationCodeResent": "تم إعادة إرسال رمز التحقق بنجاح",
+            "failedToResendCode": "فشل إعادة إرسال الرمز. يرجى المحاولة مرة أخرى.",
+            "failedToResendVerificationCode": "فشل إعادة إرسال رمز التحقق. يرجى المحاولة مرة أخرى لاحقًا.",
+            "invalidOtp": "يرجى إدخال رمز OTP صحيح مكون من 6 أرقام",
+            "verificationFailed": "فشل التحقق. يرجى المحاولة مرة أخرى."
         }
     },
     "Category": {
