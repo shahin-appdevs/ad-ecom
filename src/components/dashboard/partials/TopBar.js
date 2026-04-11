@@ -20,10 +20,11 @@ import {
 const userProfile = "";
 import { Dialog, Transition } from "@headlessui/react";
 import LanguageSwitcher from "@/components/partials/LanguageSwitcher";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function TopBar() {
     const t = useTranslations("Dashboard.topBar");
+    const locale = useLocale();
 
     const pathname = usePathname();
     const [loading, setLoading] = useState(true);
@@ -63,7 +64,7 @@ export default function TopBar() {
         setLogoutLoading(true);
 
         try {
-            const response = await logoutAPI();
+            const response = await logoutAPI(locale);
 
             const successMessage = response?.data?.message?.success || [
                 t("logoutSuccessful"),

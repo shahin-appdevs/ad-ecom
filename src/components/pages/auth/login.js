@@ -49,7 +49,7 @@ function Login() {
     useEffect(() => {
         (async () => {
             try {
-                const result = await basicDataGetAPI();
+                const result = await basicDataGetAPI(locale);
                 setLoginBasicData(result?.data?.data);
             } catch (error) {
                 handleApiError(error, t("failedToFetchBasicData"));
@@ -74,7 +74,7 @@ function Login() {
             formData.append("g-recaptcha-response", recaptcha);
             formData.append("language", locale);
 
-            const response = await loginAPI(formData);
+            const response = await loginAPI(formData, locale);
 
             if (response?.data?.data?.token) {
                 const token = response.data.data.token;
@@ -218,7 +218,7 @@ function Login() {
                                     onChange={(e) =>
                                         setCredentials(e.target.value)
                                     }
-                                    className="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary__color/50 focus:border-primary__color transition-all duration-200 bg-gray-50 focus:bg-white"
+                                    className="block rtl:text-right w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary__color/50 focus:border-primary__color transition-all duration-200 bg-gray-50 focus:bg-white"
                                     required
                                 />
                             </div>

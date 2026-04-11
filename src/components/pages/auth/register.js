@@ -74,7 +74,7 @@ function RegisterComp() {
                 formData.append("referral_code", referralCode.trim());
             }
 
-            const response = await registerAPI(formData);
+            const response = await registerAPI(formData, locale);
 
             if (response?.data?.data?.token) {
                 const token = response.data.data.token;

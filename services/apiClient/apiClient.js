@@ -291,9 +291,9 @@ const getDeviceId = () => {
 };
 
 // Register API (post)
-export const registerAPI = (formData) => {
+export const registerAPI = (formData, lang = "") => {
     const deviceId = getDeviceId();
-    return apiClient.post("/user/register", formData, {
+    return apiClient.post(`/user/register?lang=${lang}`, formData, {
         headers: {
             "Content-Type": "multipart/form-data",
             "Device-ID": deviceId,
@@ -302,13 +302,13 @@ export const registerAPI = (formData) => {
 };
 
 // Basic Data GET Api
-export const basicDataGetAPI = () => {
-    return apiClient.get("/get/basic/data");
+export const basicDataGetAPI = (lang = "") => {
+    return apiClient.get(`/get/basic/data?lang=${lang}`);
 };
 
 // Login API (post)
-export const loginAPI = (formData) => {
-    return apiClient.post("/user/login", formData, {
+export const loginAPI = (formData, lang = "") => {
+    return apiClient.post(`/user/login?lang=${lang}`, formData, {
         headers: {
             "Content-Type": "multipart/form-data",
         },
@@ -438,11 +438,11 @@ export const twoFactorAPI = (otp) => {
 };
 
 // Logout API (post)
-export const logoutAPI = () => {
+export const logoutAPI = (lang = "") => {
     const token = getToken();
     if (token) {
         return apiClient.post(
-            "/user/logout",
+            `/user/logout?lang=${lang}`,
             {},
             {
                 headers: {

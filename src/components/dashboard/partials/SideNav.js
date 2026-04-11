@@ -10,7 +10,7 @@ import { Fragment } from "react";
 import { logoutAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 // Icons
 import {
     ChevronRightIcon,
@@ -332,6 +332,7 @@ export default function SideNav() {
         return initialIndex === -1 ? null : initialIndex;
     });
     const { dashboardData, loading } = useDashboardData();
+    const locale = useLocale();
 
     if (loading) return <SidebarSkeleton />;
 
@@ -350,7 +351,7 @@ export default function SideNav() {
         e.preventDefault();
 
         try {
-            const response = await logoutAPI();
+            const response = await logoutAPI(locale);
 
             const successMessage = response?.data?.message?.success;
 
