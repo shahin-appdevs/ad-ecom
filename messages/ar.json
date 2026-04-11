@@ -161,7 +161,9 @@
             "logout": "تسجيل الخروج",
             "confirmLogout": "تأكيد تسجيل الخروج",
             "logoutConfirmation": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-            "cancel": "إلغاء"
+            "cancel": "إلغاء",
+            "somethingWentWrong": "حدث خطأ",
+            "logoutSuccessful": "تم تسجيل الخروج بنجاح"
         },
         "sidenav": {
             "dashboard": "لوحة القيادة",
@@ -376,6 +378,7 @@
                 "monthlyLimit": "الحد الشهري",
                 "dailyRemaining": "الحد اليومي المتبقي",
                 "monthlyRemaining": "الحد الشهري المتبقي",
+                "failedToFetchLimits": "فشل جلب الحدود المتبقية",
                 "sendMoneyLog": {
                     "title": "سجلات إرسال الأموال",
                     "viewAll": "عرض الكل",
@@ -424,6 +427,7 @@
                 "monthlyLimit": "الحد الشهري",
                 "dailyRemaining": "الحد اليومي المتبقي",
                 "monthlyRemaining": "الحد الشهري المتبقي",
+                "failedToFetchLimits": "فشل جلب الحدود المتبقية",
                 "requestMoneyLog": {
                     "title": "سجلات طلبات الأموال",
                     "viewAll": "عرض الكل",
@@ -782,7 +786,8 @@
                     "paymentMethod": "طريقة الدفع",
                     "amount": "المبلغ",
                     "exchangeRate": "سعر الصرف",
-                    "payableAmount": "المبلغ المستحق"
+                    "payableAmount": "المبلغ المستحق",
+                    "invalidTransactionData": "بيانات المعاملة غير صالحة"
                 }
             }
         },
@@ -1557,7 +1562,9 @@
                     "dailyLimit": "الحد اليومي",
                     "monthlyLimit": "الحد الشهري",
                     "remainingDailyLimit": "الحد اليومي المتبقي",
-                    "remainingMonthlyLimit": "الحد الشهري المتبقي"
+                    "remainingMonthlyLimit": "الحد الشهري المتبقي",
+                    "failedToFetchLimits": "فشل جلب الحدود المتبقية",
+                    "failedToLoadWalletsData": "فشل تحميل بيانات المحافظ"
                 },
                 "singleCardTrx": {
                     "recentTransaction": "المعاملات الأخيرة",
@@ -1627,7 +1634,10 @@
                     "makingDefault": "جاري التعيين كافتراضي",
                     "makeDefault": "تعيين كافتراضي",
                     "unfreeze": "إلغاء التجميد",
-                    "freeze": "تجميد"
+                    "freeze": "تجميد",
+                    "failedToFetchCardDetails": "فشل جلب تفاصيل البطاقة",
+                    "failedToUnfreezeCard": "فشل إلغاء تجميد البطاقة",
+                    "failedToUpdateStatus": "فشل تحديث الحالة"
                 },
                 "virtualCardWebhookTrx": {
                     "title": "معاملات الويب هوك",
@@ -1974,7 +1984,8 @@
             "verifyRecaptcha": "يرجى التحقق من reCAPTCHA",
             "loginSuccess": "تم تسجيل الدخول بنجاح",
             "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
-            "failedToLoadBasicData": "فشل تحميل البيانات الأساسية"
+            "failedToLoadBasicData": "فشل تحميل البيانات الأساسية",
+            "somethingWentWrong": "حدث خطأ"
         },
         "otp": {
             "title": "التحقق عبر الرسائل القصيرة",

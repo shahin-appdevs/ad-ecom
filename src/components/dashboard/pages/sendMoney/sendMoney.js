@@ -120,7 +120,7 @@ export default function SendMoneySection({ setRefetch }) {
                     monthlyLimit: data?.remainingMonthly,
                 });
             } catch (error) {
-                handleApiError(error, "Failed to fetch remaining limits");
+                handleApiError(error, t("failedToFetchLimits"));
                 const data = error?.response?.data?.data;
 
                 setRemainingLimit({

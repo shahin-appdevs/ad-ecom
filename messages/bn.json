@@ -162,7 +162,9 @@
             "logout": "লগআউট",
             "confirmLogout": "লগআউট নিশ্চিত করুন",
             "logoutConfirmation": "আপনি কি নিশ্চিত যে লগআউট করতে চান?",
-            "cancel": "বাতিল"
+            "cancel": "বাতিল",
+            "somethingWentWrong": "কিছু একটা ভুল হয়েছে",
+            "logoutSuccessful": "লগআউট সফল হয়েছে"
         },
         "sidenav": {
             "dashboard": "ড্যাশবোর্ড",
@@ -377,6 +379,7 @@
                 "monthlyLimit": "মাসিক সীমা",
                 "dailyRemaining": "দৈনিক অবশিষ্ট সীমা",
                 "monthlyRemaining": "মাসিক অবশিষ্ট সীমা",
+                "failedToFetchLimits": "অবশিষ্ট সীমা আনতে ব্যর্থ হয়েছে",
                 "sendMoneyLog": {
                     "title": "টাকা পাঠানোর লগ",
                     "viewAll": "সব দেখুন",
@@ -425,6 +428,7 @@
                 "monthlyLimit": "মাসিক সীমা",
                 "dailyRemaining": "দৈনিক অবশিষ্ট সীমা",
                 "monthlyRemaining": "মাসিক অবশিষ্ট সীমা",
+                "failedToFetchLimits": "অবশিষ্ট সীমা আনতে ব্যর্থ হয়েছে",
                 "requestMoneyLog": {
                     "title": "টাকা অনুরোধের লগ",
                     "viewAll": "সব দেখুন",
@@ -783,7 +787,8 @@
                     "paymentMethod": "পেমেন্ট মেথড",
                     "amount": "পরিমাণ",
                     "exchangeRate": "বিনিময় হার",
-                    "payableAmount": "প্রদেয় পরিমাণ"
+                    "payableAmount": "প্রদেয় পরিমাণ",
+                    "invalidTransactionData": "অকার্যকর লেনদেন তথ্য"
                 }
             }
         },
@@ -1558,7 +1563,8 @@
                     "dailyLimit": "দৈনিক সীমা",
                     "monthlyLimit": "মাসিক সীমা",
                     "remainingDailyLimit": "অবশিষ্ট দৈনিক সীমা",
-                    "remainingMonthlyLimit": "অবশিষ্ট মাসিক সীমা"
+                    "remainingMonthlyLimit": "অবশিষ্ট মাসিক সীমা",
+                    "failedToFetchLimits": "অবশিষ্ট সীমা আনতে ব্যর্থ হয়েছে"
                 },
                 "singleCardTrx": {
                     "recentTransaction": "সাম্প্রতিক লেনদেন",
@@ -1604,7 +1610,8 @@
                     "dailyLimit": "দৈনিক সীমা",
                     "monthlyLimit": "মাসিক সীমা",
                     "remainingDailyLimit": "অবশিষ্ট দৈনিক সীমা",
-                    "remainingMonthlyLimit": "অবশিষ্ট মাসিক সীমা"
+                    "remainingMonthlyLimit": "অবশিষ্ট মাসিক সীমা",
+                    "failedToLoadWalletsData": "ওয়ালেট ডেটা লোড করতে ব্যর্থ"
                 },
                 "virtualCardDetails": {
                     "title": "কার্ডের তথ্য",
@@ -1628,7 +1635,10 @@
                     "makingDefault": "ডিফল্ট করা হচ্ছে",
                     "makeDefault": "ডিফল্ট করুন",
                     "unfreeze": "আনফ্রিজ করুন",
-                    "freeze": "ফ্রিজ করুন"
+                    "freeze": "ফ্রিজ করুন",
+                    "failedToFetchCardDetails": "কার্ডের বিবরণ আনতে ব্যর্থ হয়েছে",
+                    "failedToUnfreezeCard": "কার্ড আনফ্রিজ করতে ব্যর্থ হয়েছে",
+                    "failedToUpdateStatus": "স্ট্যাটাস আপডেট করতে ব্যর্থ হয়েছে"
                 },
                 "virtualCardWebhookTrx": {
                     "title": "ওয়েবহুক লেনদেন",
@@ -1975,7 +1985,8 @@
             "verifyRecaptcha": "অনুগ্রহ করে reCAPTCHA যাচাই করুন",
             "loginSuccess": "লগইন সফল হয়েছে",
             "loginFailed": "লগইন ব্যর্থ হয়েছে। পুনরায় চেষ্টা করুন।",
-            "failedToLoadBasicData": "বেসিক ডেটা লোড করতে ব্যর্থ"
+            "failedToLoadBasicData": "বেসিক ডেটা লোড করতে ব্যর্থ",
+            "somethingWentWrong": "কিছু একটা ভুল হয়েছে"
         },
         "otp": {
             "title": "এসএমএস যাচাইকরণ",

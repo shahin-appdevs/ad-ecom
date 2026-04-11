@@ -23,12 +23,12 @@ export default function ManualWithdrawPage() {
     });
     const [transactionInfo, setTransactionInfo] = useState(null);
 
-    useState(() => {
+    useEffect(() => {
         const manualPaymentData = JSON.parse(
             sessionStorage.getItem("manualPaymentData"),
         );
         if (!manualPaymentData) {
-            toast.error("Invalid transaction data");
+            toast.error(t("invalidTransactionData"));
             window.location.href = "/user/withdraw/money";
             return;
         }

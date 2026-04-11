@@ -52,7 +52,7 @@ function Login() {
                 const result = await basicDataGetAPI();
                 setLoginBasicData(result?.data?.data);
             } catch (error) {
-                handleApiError(error, "Failed to fetch basic data");
+                handleApiError(error, t("failedToFetchBasicData"));
             }
         })();
     }, []);
@@ -118,7 +118,7 @@ function Login() {
 
                 toast.success(successMessage);
             } else {
-                toast.error("Login failed. Please try again.");
+                toast.error(t("loginFailed"));
             }
         } catch (err) {
             const errorMessage =

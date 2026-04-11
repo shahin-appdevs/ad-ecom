@@ -47,7 +47,7 @@ export default function VirtualCardDetailsModal({
                 setCardDetails(result.data?.data);
                 setMyCard(result.data?.data?.myCards);
             } catch (error) {
-                handleApiError(error, "Failed to fetch card details");
+                handleApiError(error, t("failedToFetchCardDetails"));
             } finally {
                 setDetailsLoading(false);
             }
@@ -91,7 +91,7 @@ export default function VirtualCardDetailsModal({
             handleApiSuccess(result);
             setStatusUpdate(!statusUpdate);
         } catch (error) {
-            handleApiError(error, "Failed to unfreeze card");
+            handleApiError(error, t("failedToUnfreezeCard"));
         } finally {
             setCardFreezeLoading(false); // stop loading
         }
@@ -109,10 +109,10 @@ export default function VirtualCardDetailsModal({
 
             const result = await stroWalletCardMakeDefaultOrRemove(formData);
 
-            handleApiSuccess(result, "Status Updated successfully");
+            handleApiSuccess(result, t("statusUpdatedSuccessfully"));
             setStatusUpdate(!statusUpdate);
         } catch (error) {
-            handleApiError(error);
+            handleApiError(error, t("failedToUpdateStatus"));
         } finally {
             setMakeDefaultLoading(false); // stop loading
         }

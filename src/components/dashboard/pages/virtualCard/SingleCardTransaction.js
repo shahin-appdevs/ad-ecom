@@ -9,10 +9,8 @@ export default function VirtualCardTransaction() {
     const t = useTranslations("Dashboard.cards.virtualCard.singleCardTrx");
     const [isLoading, setIsLoading] = useState(true);
     const [myCardTransaction, setMyCardTransaction] = useState([]);
-    // const router = useRouter();
     const params = useSearchParams();
 
-    // console.log(params.get("card_id"));
     const cardId = params.get("card_id");
 
     useEffect(() => {

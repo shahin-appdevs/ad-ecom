@@ -48,7 +48,7 @@ export default function TopBar() {
             } catch (error) {
                 toast.error(
                     error?.response?.data?.message?.error?.[0] ||
-                        "Something went wrong",
+                        t("somethingWentWrong"),
                 );
             } finally {
                 setLoading(false);
@@ -66,7 +66,7 @@ export default function TopBar() {
             const response = await logoutAPI();
 
             const successMessage = response?.data?.message?.success || [
-                "Logout successful",
+                t("logoutSuccessful"),
             ];
 
             localStorage.removeItem("jwtToken");
@@ -89,7 +89,7 @@ export default function TopBar() {
                     toast.error(msg);
                 });
             } else {
-                toast.error(err.message || "Something went wrong");
+                toast.error(err.message || t("somethingWentWrong"));
             }
         } finally {
             setLogoutLoading(false);

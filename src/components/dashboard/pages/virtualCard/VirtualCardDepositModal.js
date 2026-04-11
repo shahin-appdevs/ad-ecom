@@ -83,7 +83,7 @@ const VirtualCardDepositModal = ({
 
                 setValue("from_currency", allWallets[0]?.currency?.code);
             } catch (err) {
-                handleApiError(err, "Failed to load wallets data");
+                handleApiError(err, t("failedToLoadWalletsData"));
             } finally {
                 setWalletLoading(false);
             }

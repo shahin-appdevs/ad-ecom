@@ -162,7 +162,9 @@
             "logout": "Logout",
             "confirmLogout": "Confirm Logout",
             "logoutConfirmation": "Are you sure you want to logout?",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "somethingWentWrong": "Something went wrong",
+            "logoutSuccessful": "Logout successful"
         },
         "sidenav": {
             "dashboard": "Dashboard",
@@ -381,6 +383,7 @@
                 "monthlyLimit": "Monthly Limit",
                 "dailyRemaining": "Daily Remaining Limit",
                 "monthlyRemaining": "Monthly Remaining Limit",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
                 "sendMoneyLog": {
                     "title": "Send Money Logs",
                     "viewAll": "View All",
@@ -429,6 +432,7 @@
                 "monthlyLimit": "Monthly Limit",
                 "dailyRemaining": "Daily Remaining Limit",
                 "monthlyRemaining": "Monthly Remaining Limit",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
                 "requestMoneyLog": {
                     "title": "Request Money Logs",
                     "viewAll": "View All",
@@ -787,7 +791,8 @@
                     "paymentMethod": "Payment Method",
                     "amount": "Amount",
                     "exchangeRate": "Exchange Rate",
-                    "payableAmount": "Payable Amount"
+                    "payableAmount": "Payable Amount",
+                    "invalidTransactionData": "Invalid transaction data"
                 }
             }
         },
@@ -1562,7 +1567,8 @@
                     "dailyLimit": "Daily Limit",
                     "monthlyLimit": "Monthly Limit",
                     "remainingDailyLimit": "Remaining Daily Limit",
-                    "remainingMonthlyLimit": "Remaining Monthly Limit"
+                    "remainingMonthlyLimit": "Remaining Monthly Limit",
+                    "failedToFetchLimits": "Failed to fetch remaining limits"
                 },
                 "singleCardTrx": {
                     "recentTransaction": "Recent Transaction",
@@ -1608,7 +1614,8 @@
                     "dailyLimit": "Daily Limit",
                     "monthlyLimit": "Monthly Limit",
                     "remainingDailyLimit": "Remaining Daily Limit",
-                    "remainingMonthlyLimit": "Remaining Monthly Limit"
+                    "remainingMonthlyLimit": "Remaining Monthly Limit",
+                    "failedToLoadWalletsData": "Failed to load wallets data"
                 },
                 "virtualCardDetails": {
                     "title": "Card Information",
@@ -1632,7 +1639,10 @@
                     "makingDefault": "Making Default",
                     "makeDefault": "Make Default",
                     "unfreeze": "Unfreeze",
-                    "freeze": "Freeze"
+                    "freeze": "Freeze",
+                    "failedToFetchCardDetails": "Failed to fetch card details",
+                    "failedToUnfreezeCard": "Failed to unfreeze card",
+                    "failedToUpdateStatus": "Failed to update status"
                 },
                 "virtualCardWebhookTrx": {
                     "title": "Webhook Transactions",
@@ -1979,7 +1989,8 @@
             "verifyRecaptcha": "Please verify reCAPTCHA",
             "loginSuccess": "Login successful",
             "loginFailed": "Login failed. Please try again.",
-            "failedToLoadBasicData": "Failed to load basic data"
+            "failedToLoadBasicData": "Failed to load basic data",
+            "somethingWentWrong": "Something went wrong"
         },
         "otp": {
             "title": "SMS Verification",
