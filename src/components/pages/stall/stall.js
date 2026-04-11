@@ -4,7 +4,6 @@ import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import { stallGetAPI } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
 import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;

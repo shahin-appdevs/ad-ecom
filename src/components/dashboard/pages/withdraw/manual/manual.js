@@ -60,10 +60,7 @@ export default function ManualWithdrawPage() {
                 sessionStorage.removeItem("manualPaymentData");
             }
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Withdrawal failed",
-            );
+            toast.error(error.response?.data?.message?.error?.[0]);
         } finally {
             setLoading(false);
         }

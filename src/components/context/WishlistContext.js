@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { createContext, useState, useEffect, useContext } from "react";
 
 // Create context with default value
@@ -60,8 +61,9 @@ export const WishlistProvider = ({ children }) => {
 // Custom hook with error handling
 export const useWishlist = () => {
     const context = useContext(WishlistContext);
+    const t = useTranslations("Wishlist");
     if (!context) {
-        throw new Error("useWishlist must be used within a WishlistProvider");
+        return toast.error(t("error"));
     }
     return context;
 };

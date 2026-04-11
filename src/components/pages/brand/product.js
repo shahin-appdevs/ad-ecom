@@ -63,7 +63,7 @@ function BrandProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                toast.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 

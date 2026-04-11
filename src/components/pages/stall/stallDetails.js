@@ -7,7 +7,6 @@ import {
     stallDetailsGetAPI,
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 import { handleApiError } from "@/components/utility/handleApiError";

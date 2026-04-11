@@ -71,7 +71,8 @@
             "loadMore": "আরও লোড করুন",
             "noProductsFound": "কোনো পণ্য পাওয়া যায়নি",
             "failedToLoad": "ব্র্যান্ড লোড করতে ব্যর্থ",
-            "off": "ছাড়"
+            "off": "ছাড়",
+            "failedFetchProfile": "প্রোফাইল লোড করতে ব্যর্থ"
         },
         "stalls": {
             "title": "স্টলসমূহ",
@@ -155,6 +156,11 @@
         }
     },
     "Dashboard": {
+        "DashboardLayout": {
+            "sessionExpired": "সেশন মেয়াদোত্তীর্ণ বা অবৈধ। অনুগ্রহ করে আবার লগইন করুন।",
+
+            "failedToLoadDashboardData": "ড্যাশবোর্ড ডেটা লোড করতে ব্যর্থ"
+        },
         "topBar": {
             "profile": "প্রোফাইল",
             "setupPin": "পিন সেটআপ করুন",
@@ -206,7 +212,8 @@
             "confirmLogout": "লগআউট নিশ্চিত করুন",
             "logoutConfirmText": "আপনি কি নিশ্চিতভাবে লগআউট করতে চান?",
             "cancel": "বাতিল",
-            "walletAccount": "ওয়ালেট অ্যাকাউন্ট"
+            "walletAccount": "ওয়ালেট অ্যাকাউন্ট",
+            "somethingWentWrong": "কিছু একটা ভুল হয়েছে"
         },
         "wallet": {
             "addMoney": {
@@ -2018,7 +2025,8 @@
             "loadMore": "আরও লোড করুন",
             "failedFetchProfile": "প্রোফাইল লোড করতে ব্যর্থ",
             "failedToLoad": "প্রোডাক্ট লোড করতে ব্যর্থ",
-            "failedFetchFlashProducts": "ফ্ল্যাশ প্রোডাক্ট লোড করতে ব্যর্থ"
+            "failedFetchFlashProducts": "ফ্ল্যাশ প্রোডাক্ট লোড করতে ব্যর্থ",
+            "failedToLoadMoreProducts": "আরও প্রোডাক্ট লোড করতে ব্যর্থ"
         },
         "subCategory": {
             "moreCategories": "আরও ক্যাটেগরি",
@@ -2100,5 +2108,8 @@
     },
     "Privacy": {
         "failedToLoad": "গোপনীয়তা নীতি লোড করতে ব্যর্থ হয়েছে"
+    },
+    "Wishlist": {
+        "error": "useWishlist অবশ্যই WishlistProvider এর ভিতরে ব্যবহার করতে হবে"
     }
 }

@@ -10,11 +10,14 @@ import { DashboardProvider } from "@/components/context/DashboardContext";
 import { WalletProvider } from "@/components/context/WalletContext";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 export default function DashboardLayout({ children }) {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
     const [dashboardData, setDashboardData] = useState(null);
+
+    const t = useTranslations("DashboardLayout");
 
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -44,18 +47,9 @@ export default function DashboardLayout({ children }) {
                     "two_factor_verified",
                     userData.two_factor_verified,
                 );
-                // sessionStorage.setItem(
-                //     "active_virtual_system",
-                //     response.data?.data?.active_virtual_system,
-                // );
 
                 setDashboardData(response.data.data);
                 setIsLoading(false);
-                // const intendedUrl = localStorage.getItem("intendedUrl");
-                // if (intendedUrl) {
-                //     localStorage.removeItem("intendedUrl");
-                //     router.push(intendedUrl);
-                // }
             } catch (error) {
                 if (error.response?.status === 400) {
                     const smsVerified = localStorage.getItem("sms_verified");
@@ -75,15 +69,12 @@ export default function DashboardLayout({ children }) {
                     } else if (twoFactorVerified === "0") {
                         router.push("/user/auth/2fa");
                     } else {
-                        toast.error(
-                            "Session expired or invalid. Please login again.",
-                        );
+                        toast.error(t("sessionExpired"));
                         localStorage.removeItem("jwtToken");
-                        // sessionStorage.removeItem("jwtToken"); // Removed as per task
                         router.push("/user/auth/login");
                     }
                 } else {
-                    toast.error("Failed to load dashboard data");
+                    toast.error(t("failedToLoadDashboardData"));
                     setIsLoading(false);
                 }
             }

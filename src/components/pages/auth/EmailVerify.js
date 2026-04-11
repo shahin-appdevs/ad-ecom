@@ -131,7 +131,6 @@ export default function EmailVerify() {
                 const isPhoneVerified = localStorage.getItem("sms_verified");
 
                 if (isPhoneVerified === "0") {
-                    // await resendAuthorizationCodeAPI();
                     router.push("/user/auth/phone-verify");
                 } else {
                     router.push("/user/dashboard");

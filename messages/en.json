@@ -71,7 +71,8 @@
             "loadMore": "Load More",
             "noProductsFound": "No products found",
             "failedToLoad": "Failed to load brands",
-            "off": "off"
+            "off": "off",
+            "failedFetchProfile": "Failed to fetch profile"
         },
         "stalls": {
             "title": "Stalls",
@@ -155,6 +156,10 @@
         }
     },
     "Dashboard": {
+        "DashboardLayout": {
+            "sessionExpired": "Session expired or invalid. Please login again.",
+            "failedToLoadDashboardData": "Failed to load dashboard data"
+        },
         "topBar": {
             "profile": "Profile",
             "setupPin": "Setup Pin",
@@ -206,7 +211,8 @@
             "confirmLogout": "Confirm Logout",
             "logoutConfirmText": "Are you sure you want to logout?",
             "cancel": "Cancel",
-            "walletAccount": "Wallet Account"
+            "walletAccount": "Wallet Account",
+            "somethingWentWrong": "Something went wrong"
         },
         "wallet": {
             "addMoney": {
@@ -2021,7 +2027,8 @@
             "off": "Off",
             "loadMore": "Load More",
             "failedFetchProfile": "Failed to fetch profile",
-            "failedToLoad": "Failed to load products"
+            "failedToLoad": "Failed to load products",
+            "failedToLoadMoreProducts": "Failed to load more products"
         },
         "subCategory": {
             "moreCategories": "More Categories",
@@ -2107,5 +2114,8 @@
     "CopyToClipboard": {
         "copied": "Copied to clipboard",
         "copyFailed": "Copy failed"
+    },
+    "Wishlist": {
+        "error": "useWishlist must be used within WishlistProvider"
     }
 }

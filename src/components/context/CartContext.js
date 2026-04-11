@@ -165,7 +165,7 @@ export function CartProvider({ children }) {
             // Initialize cart count from existing items
             updateCartCount();
         }
-    }, [updateCartCount]);
+    }, []);
 
     useEffect(() => {
         localStorage.setItem("cartCount", cartCount.toString());

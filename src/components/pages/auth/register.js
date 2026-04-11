@@ -112,7 +112,7 @@ function RegisterComp() {
 
                 toast.success(successMessage);
             } else {
-                toast.error("Registration failed. Please try again.");
+                toast.error(t("registerFailed"));
             }
         } catch (err) {
             const errorMessage =

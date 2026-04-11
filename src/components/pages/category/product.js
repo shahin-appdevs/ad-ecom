@@ -291,7 +291,7 @@ function CategoryProduct() {
         } catch (error) {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
-                    "Failed to load more products",
+                    t("failedToLoadMoreProducts"),
             );
         } finally {
             setLoadMoreLoading(false);

@@ -352,16 +352,13 @@ export default function SideNav() {
         try {
             const response = await logoutAPI();
 
-            const successMessage = response?.data?.message?.success || [
-                "Logout successful",
-            ];
+            const successMessage = response?.data?.message?.success;
 
             localStorage.removeItem("jwtToken");
             localStorage.removeItem("userInfo");
             localStorage.removeItem("email_verified");
             localStorage.removeItem("sms_verified");
             localStorage.removeItem("two_factor_verified");
-            // sessionStorage.removeItem("active_virtual_system");
 
             successMessage.forEach((msg) => {
                 toast.success(msg);
@@ -377,7 +374,7 @@ export default function SideNav() {
                     toast.error(msg);
                 });
             } else {
-                toast.error(err.message || "Something went wrong");
+                toast.error(err.message, t("somethingWentWrong"));
             }
         }
     };

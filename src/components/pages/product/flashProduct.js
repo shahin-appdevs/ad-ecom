@@ -9,7 +9,6 @@ import {
     nextPageGetAPI,
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
 import { handleApiError } from "@/components/utility/handleApiError";
 
@@ -59,6 +58,14 @@ export default function FlashProduct() {
     // translation
     const t = useTranslations("HomePage.flashSale");
     const flashSaleTitle = t("flashSaleTitle");
+
+    const [timeLeft, setTimeLeft] = useState({
+        days: "00",
+        hours: "00",
+        minutes: "00",
+        seconds: "00",
+    });
+
     const countdownLabels = [
         { key: "days", value: timeLeft.days },
         { key: "hours", value: timeLeft.hours },
@@ -105,13 +112,6 @@ export default function FlashProduct() {
 
         fetchUserProfile();
     }, [isLoggedIn]);
-
-    const [timeLeft, setTimeLeft] = useState({
-        days: "00",
-        hours: "00",
-        minutes: "00",
-        seconds: "00",
-    });
 
     // Add the comprehensive price calculation function
     const calculateDiscount = (product) => {
