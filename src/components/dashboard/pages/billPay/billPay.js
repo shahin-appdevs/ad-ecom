@@ -1,6 +1,6 @@
 "use client";
-import { useTranslations } from "next-intl";
 import { useState, useEffect, useMemo } from "react";
+import { toast } from "react-hot-toast";
 import { Listbox } from "@headlessui/react";
 import {
     ChevronUpDownIcon,
@@ -19,7 +19,7 @@ import {
     SubmitBillPayAPI,
     walletCardRemainingLimitsGetAPI,
 } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
+import { useTranslations } from "next-intl";
 import PinVerificationModal from "@/components/dashboard/partials/PinVerificationModal";
 import { useWallet } from "@/components/context/WalletContext";
 import { handleApiError } from "@/components/utility/handleApiError";
@@ -32,6 +32,7 @@ function Skeleton({ className }) {
 
 const BillPaySection = ({ setBillPaySuccess }) => {
     const t = useTranslations("Dashboard.services.billPay");
+
     const [selectedBillType, setSelectedBillType] = useState(null);
     const [selectedBillMonth, setSelectedBillMonth] = useState(null);
     const [amount, setAmount] = useState("");
@@ -42,6 +43,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [showPinModal, setShowPinModal] = useState(false);
     const { wallet, updateSelectedCurrency } = useWallet();
+
     const [billPayData, setBillPayData] = useState({
         billPayCharge: {
             fixed_charge: "0.00",
@@ -88,7 +90,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                     name: data.bill_months[0].field_name,
                 });
             } catch (error) {
-                toast.error(error.response?.data?.message?.error?.[0]);
+                handleApiError(error, t("failedToLoadBillPay"));
             } finally {
                 setIsLoading(false);
             }
@@ -128,7 +130,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                     monthlyLimit: data?.remainingMonthly,
                 });
             } catch (error) {
-                handleApiError(error, "Failed to fetch remaining limits");
+                handleApiError(error, t("failedToFetchLimits"));
                 const data = error?.response?.data?.data;
 
                 setRemainingLimit({
@@ -139,7 +141,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                 setRemainingLoading(false);
             }
         })();
-    }, [amount, billPayData, wallet?.selectedCurrency?.code]);
+    }, [amount, billPayData, wallet?.selectedCurrency?.code, t]);
 
     // Calculate exchange rate
     const exchangeRateText = useMemo(() => {
@@ -265,7 +267,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
         };
     }, [wallet?.selectedCurrency, billPayData.billPayCharge, remainingLimit]);
 
-    const handleBillPay = async (e) => {
+    const handleBillPay = async () => {
         try {
             setIsSubmitting(true);
             const response = await SubmitBillPayAPI(
@@ -282,7 +284,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
         } catch (error) {
             const errorMessage =
                 error?.response?.data?.message?.error?.[0] ||
-                "Something went wrong.";
+                t("somethingWentWrong");
             toast.error(errorMessage);
         } finally {
             setIsSubmitting(false);
@@ -376,6 +378,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                             </h6>
                         </div>
                     </div>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium mb-2">
@@ -414,6 +417,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                                 </div>
                             </Listbox>
                         </div>
+
                         <div>
                             <label className="block text-sm font-medium mb-2">
                                 {t("billMonth")}
@@ -451,6 +455,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                                 </div>
                             </Listbox>
                         </div>
+
                         <div>
                             <label className="block text-sm font-medium mb-2">
                                 {t("billNumber")}
@@ -464,6 +469,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                                 onChange={(e) => setBillNumber(e.target.value)}
                             />
                         </div>
+
                         <div>
                             <label className="block text-sm font-medium mb-2">
                                 {t("enterAmount")}
@@ -531,6 +537,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                             </div>
                         </div>
                     </div>
+
                     <Button
                         title={isSubmitting ? t("paying") : t("payBill")}
                         variant="primary"
@@ -541,11 +548,13 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                     />
                 </form>
             </div>
+
             <PinVerificationModal
                 isOpen={showPinModal}
                 onClose={() => setShowPinModal(false)}
                 onVerify={handleBillPay}
             />
+
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 xl:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">
@@ -592,6 +601,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                     </div>
                 </div>
             </div>
+
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12">
                 <div className="bg-[#F9FAFB] p-5 rounded-xl border border-gray-200 space-y-4 text-sm shadow-sm">
                     <h5 className="text-base font-semibold text-gray-800">

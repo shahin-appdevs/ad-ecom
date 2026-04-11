@@ -846,7 +846,10 @@
                 "currentBalance": "Current Balance",
                 "status": "status",
                 "timeAndDate": "Time & Date",
-                "noTransactions": "No bill pay transactions found"
+                "noTransactions": "No bill pay transactions found",
+                "failedToLoadBillPay": "Failed to load bill pay data",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
+                "somethingWentWrong": "Something went wrong"
             },
             "topup": {
                 "topUpType": "Top Up Type",

@@ -846,7 +846,10 @@
                 "currentBalance": "বর্তমান ব্যালেন্স",
                 "status": "স্ট্যাটাস",
                 "timeAndDate": "সময় এবং তারিখ",
-                "noTransactions": "কোন বিল পে ট্রানজেকশন পাওয়া যায়নি"
+                "noTransactions": "কোন বিল পে ট্রানজেকশন পাওয়া যায়নি",
+                "failedToLoadBillPay": "বিল পে ডেটা লোড করতে ব্যর্থ",
+                "failedToFetchLimits": "অবশিষ্ট সীমা লোড করতে ব্যর্থ",
+                "somethingWentWrong": "কিছু একটা ভুল হয়েছে"
             },
             "topup": {
                 "topUpType": "টপ আপের ধরন",

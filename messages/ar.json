@@ -845,7 +845,10 @@
                 "currentBalance": "الرصيد الحالي",
                 "status": "الحالة",
                 "timeAndDate": "الوقت والتاريخ",
-                "noTransactions": "لم يتم العثور على معاملات دفع الفواتير"
+                "noTransactions": "لم يتم العثور على معاملات دفع الفواتير",
+                "failedToLoadBillPay": "فشل تحميل بيانات دفع الفواتير",
+                "failedToFetchLimits": "فشل جلب الحدود المتبقية",
+                "somethingWentWrong": "حدث خطأ ما"
             },
             "topup": {
                 "topUpType": "نوع الشحن",
