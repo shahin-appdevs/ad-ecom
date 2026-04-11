@@ -386,7 +386,7 @@ function PaymentLinkShareContent({
                             </div>
                         )}
                     </div>
-                    {paymentLink.image && (
+                    {paymentLink?.image && (
                         <div className="mt-6">
                             <Image
                                 src={getImageUrl(

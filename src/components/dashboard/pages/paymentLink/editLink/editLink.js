@@ -195,12 +195,8 @@ export default function EditLinkSection() {
                 );
             }
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    error.response?.data?.message ||
-                    "Failed to load payment link data",
-            );
-            console.error("Error fetching payment link:", error);
+            handleApiError(error, t("failedToLoadPaymentLinkData"));
+
             router.push("/user/payment/link");
         } finally {
             setIsLoading(false);
@@ -273,12 +269,12 @@ export default function EditLinkSection() {
                     `/user/payment/link/share?token=${response.data.data.payment_link.token}`,
                 );
             } else {
-                throw new Error("Invalid response from server");
+                toast.error(t("invalidServerResponse"));
             }
         } catch (error) {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
-                    "Failed to create payment link",
+                    t("failedToCreatePaymentLink"),
             );
         } finally {
             setIsLoading(false);

@@ -499,6 +499,10 @@
                     "secureSave": "১-ক্লিক চেকআউটের জন্য আমার তথ্য নিরাপদে সংরক্ষণ করুন",
                     "payFaster": "লিঙ্ক গ্রহণ করা হয় এমন সব জায়গায় দ্রুত পেমেন্ট করুন",
                     "pay": "পেমেন্ট করুন",
+                    "paymentLinkCreated": "পেমেন্ট লিঙ্ক সফলভাবে তৈরি হয়েছে",
+                    "invalidServerResponse": "সার্ভার থেকে অবৈধ প্রতিক্রিয়া",
+                    "failedToCreatePaymentLink": "পেমেন্ট লিঙ্ক তৈরি করতে ব্যর্থ হয়েছে",
+                    "failedToLoadPaymentLinkData": "পেমেন্ট লিঙ্ক ডেটা লোড করতে ব্যর্থ হয়েছে",
                     "types": {
                         "pay": "গ্রাহক নিজেই পেমেন্টের পরিমাণ নির্ধারণ করবেন",
                         "product": "পণ্য বা সাবস্ক্রিপশন"
@@ -621,6 +625,7 @@
                 "monthlyLimit": "মাসিক সীমা",
                 "dailyRemaining": "দৈনিক অবশিষ্ট সীমা",
                 "monthlyRemaining": "মাসিক অবশিষ্ট সীমা",
+                "failedToFetchLimits": "অবশিষ্ট সীমা লোড করতে ব্যর্থ হয়েছে",
                 "moneyOutLog": {
                     "title": "টাকা বের করার লগ",
                     "viewAll": "সব দেখুন",
@@ -669,6 +674,10 @@
                 "monthlyLimit": "মাসিক সীমা",
                 "dailyRemaining": "দৈনিক অবশিষ্ট সীমা",
                 "monthlyRemaining": "মাসিক অবশিষ্ট সীমা",
+                "failedToFetchLimits": "অবশিষ্ট সীমা লোড করতে ব্যর্থ হয়েছে",
+                "failedToLoadMakePayment": "মেক পেমেন্ট তথ্য লোড করতে ব্যর্থ হয়েছে",
+                "failedToFetchExchangeRate": "বিনিময় হার লোড করতে ব্যর্থ হয়েছে",
+                "failedToFetchProfile": "প্রোফাইল লোড করতে ব্যর্থ হয়েছে",
                 "makePaymentLog": {
                     "title": "পেমেন্ট লগ",
                     "viewAll": "সব দেখুন",

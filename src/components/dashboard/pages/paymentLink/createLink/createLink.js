@@ -213,7 +213,12 @@ export default function CreateLinkSection() {
             const response = await paymentLinkStoreAPI(formData);
 
             if (response.data?.data?.payment_link) {
-                toast.success(response?.data?.message?.success?.[0]);
+                toast.success(
+                    response?.data?.message?.success?.[0] ||
+                        t("paymentLinkCreated"),
+                );
+
+                // Reset form
                 setTitle("");
                 setSubTitle("");
                 setDescription("");
@@ -224,16 +229,17 @@ export default function CreateLinkSection() {
                 setShowLimits(false);
                 setPreview(null);
                 setFile(null);
+
                 router.push(
                     `/user/payment/link/share?token=${response.data.data.payment_link.token}`,
                 );
             } else {
-                throw new Error("Invalid response from server");
+                toast.error(t("invalidServerResponse"));
             }
         } catch (error) {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
-                    "Failed to create payment link",
+                    t("failedToCreatePaymentLink"),
             );
         } finally {
             setIsLoading(false);

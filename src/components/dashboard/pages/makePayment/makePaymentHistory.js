@@ -159,30 +159,32 @@ export default function MakePaymentHistorySection({ isRefetch }) {
                     <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                         <thead>
                             <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                <th className="py-4 px-5 font-semibold">Trx</th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Request Amount
+                                    {t("trx")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payable
+                                    {t("requestAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Exchange Rate
+                                    {t("payable")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Fees & Charges
+                                    {t("exchangeRate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Recipient Received
+                                    {t("feesAndCharges")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Current Balance
+                                    {t("recipientReceived")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    status
+                                    {t("currentBalance")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Time & Date
+                                    {t("status")}
+                                </th>
+                                <th className="py-4 px-5 font-semibold">
+                                    {t("timeAndDate")}
                                 </th>
                             </tr>
                         </thead>

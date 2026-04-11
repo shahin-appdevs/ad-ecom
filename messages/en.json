@@ -319,6 +319,10 @@
                 "invalidAmount": "Please enter a valid amount",
                 "selectBoth": "Please select both currencies",
                 "somethingWrong": "Something went wrong.",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
+                "failedToLoadExchange": "Failed to load exchange data",
+                "failedToLoadExchangeData": "Failed to load exchange data",
+
                 "exchangeMoneyLog": {
                     "title": "Money Exchange Logs",
                     "viewAll": "View All",
@@ -499,6 +503,10 @@
                     "secureSave": "Securely save my information for 1-click checkout",
                     "payFaster": "Pay faster on and everywhere Link is accepted",
                     "pay": "Pay",
+                    "paymentLinkCreated": "Payment link created successfully",
+                    "invalidServerResponse": "Invalid response from server",
+                    "failedToCreatePaymentLink": "Failed to create payment link",
+                    "failedToLoadPaymentLinkData": "Failed to load payment link data",
                     "types": {
                         "pay": "Customers Choose What To Pay",
                         "product": "Products Or Subscriptions"
@@ -621,6 +629,7 @@
                 "monthlyLimit": "Monthly Limit",
                 "dailyRemaining": "Daily Remaining Limit",
                 "monthlyRemaining": "Monthly Remaining Limit",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
                 "moneyOutLog": {
                     "title": "Money Out Logs",
                     "viewAll": "View All",
@@ -669,6 +678,10 @@
                 "monthlyLimit": "Monthly Limit",
                 "dailyRemaining": "Daily Remaining Limit",
                 "monthlyRemaining": "Monthly Remaining Limit",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
+                "failedToLoadMakePayment": "Failed to load make payment information",
+                "failedToFetchExchangeRate": "Failed to fetch exchange rate",
+                "failedToFetchProfile": "Failed to fetch profile",
                 "makePaymentLog": {
                     "title": "Make Payment Logs",
                     "viewAll": "View All",

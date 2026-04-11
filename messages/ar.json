@@ -498,6 +498,10 @@
                     "secureSave": "حفظ بياناتي بأمان للدفع بنقرة واحدة",
                     "payFaster": "ادفع بشكل أسرع في كل مكان يُقبل فيه الرابط",
                     "pay": "دفع",
+                    "paymentLinkCreated": "تم إنشاء رابط الدفع بنجاح",
+                    "invalidServerResponse": "استجابة غير صالحة من الخادم",
+                    "failedToCreatePaymentLink": "فشل إنشاء رابط الدفع",
+                    "failedToLoadPaymentLinkData": "فشل تحميل بيانات رابط الدفع",
                     "types": {
                         "pay": "العملاء يختارون ما يدفعونه",
                         "product": "المنتجات أو الاشتراكات"
@@ -620,6 +624,7 @@
                 "monthlyLimit": "الحد الشهري",
                 "dailyRemaining": "الحد اليومي المتبقي",
                 "monthlyRemaining": "الحد الشهري المتبقي",
+                "failedToFetchLimits": "فشل جلب الحدود المتبقية",
                 "moneyOutLog": {
                     "title": "سجلات سحب الأموال",
                     "viewAll": "عرض الكل",
@@ -668,6 +673,10 @@
                 "monthlyLimit": "الحد الشهري",
                 "dailyRemaining": "الحد اليومي المتبقي",
                 "monthlyRemaining": "الحد الشهري المتبقي",
+                "failedToFetchLimits": "فشل جلب الحدود المتبقية",
+                "failedToLoadMakePayment": "فشل تحميل معلومات الدفع",
+                "failedToFetchExchangeRate": "فشل جلب سعر الصرف",
+                "failedToFetchProfile": "فشل جلب الملف الشخصي",
                 "makePaymentLog": {
                     "title": "سجلات الدفع",
                     "viewAll": "عرض الكل",
