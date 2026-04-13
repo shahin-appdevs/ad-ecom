@@ -2,9 +2,8 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "@/i18n/navigation";
-import { ArrowLeft, LoaderCircle } from "lucide-react";
+import { ArrowPathIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 import {
-    createCustomerAPI,
     stroWalletPageInfoGetApi,
     updateCustomerAPI,
 } from "@root/services/apiClient/apiClient";
@@ -16,6 +15,7 @@ import { RHFFileUpload } from "@/components/ui/form/RHFFileUpload";
 import { RHFTextarea } from "@/components/ui/form/RHFTextarea";
 import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export default function UpdateCustomer() {
     const t = useTranslations("Dashboard.cards.virtualCard.updateCustomer");
@@ -63,16 +63,6 @@ export default function UpdateCustomer() {
 
                 const userInfo = JSON.parse(localStorage.getItem("userInfo"));
 
-                // Set default values dynamically
-                // fields.forEach((field) => {
-                //     if (field.field_name === "customer_email") {
-                //         setValue(field.field_name, userInfo?.email);
-                //     } else if (field.field_name === "phone_code") {
-                //         setValue(field.field_name, userInfo?.mobile_code);
-                //     } else {
-                //         setValue(field.field_name, field[field.field_name]);
-                //     }
-                // });
                 fields.forEach((field) => {
                     const backendKey = FIELD_VALUE_MAP[field.field_name];
 
@@ -99,7 +89,6 @@ export default function UpdateCustomer() {
             if (value instanceof FileList) {
                 if (value.length > 0) {
                     formData.append(key, value[0]);
-                    console.log(value[0]);
                 }
             } else {
                 formData.append(key, value);
@@ -107,9 +96,6 @@ export default function UpdateCustomer() {
         });
 
         // For demonstration: log FormData keys and values
-        // for (let pair of formData.entries()) {
-        //     console.log(pair[0], pair[1]);
-        // }
 
         try {
             const result = await updateCustomerAPI(formData);
@@ -180,14 +166,6 @@ export default function UpdateCustomer() {
         }
     };
 
-    // const phoneCodeField = customerFields.find(
-    //     (f) => f.field_name === "phone_code",
-    // );
-
-    // const modifiedPhoneCodeField = phoneCodeField
-    //     ? { ...phoneCodeField, type: "select", options: ["+1", "+2", "+3"] }
-    //     : null;
-
     if (loading) return <KYCFormSkeleton />;
 
     return (
@@ -197,56 +175,47 @@ export default function UpdateCustomer() {
                     onClick={() => router.back()}
                     className="bg-primary__color text-white__color flex justify-center items-center py-2 px-4 gap-2 font-semibold rounded-[6px] transition hover:bg-secondary__color hover:scale-x-105"
                 >
-                    <ArrowLeft />
+                    <ArrowLeftIcon className="w-5 h-5" />
                 </button>
             </div>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {customerFields.map((field, idx) => {
-                        // if (field.field_name === "phone") {
-                        //     return (
-                        //         <div className="grid grid-cols-12" key={idx}>
-                        //             <div className="col-span-4 md:col-span-4 xl:col-span-3">
-                        //                 {renderField(modifiedPhoneCodeField)}
-                        //             </div>
-                        //             <div className="col-span-8 md:col-span-8 xl:col-span-9">
-                        //                 {renderField(field)}
-                        //             </div>
-                        //         </div>
-                        //     );
-                        // }
-                        // if (field.field_name !== "phone_code") {
-                        //     return renderField(field);
-                        // }
                         return renderField(field, idx);
                     })}
                 </div>
 
                 <div className="flex items-start gap-2">
-                    <div>
-                        <label className="block mb-1 text-sm font-medium text-gray-700">
-                            {t("idCardImage")}
-                        </label>
-                        <img
-                            src={customerCardInfo?.idImage}
-                            alt="Id Image"
-                            height={200}
-                            className="w-[250px]"
-                        />
-                    </div>
+                    {customerCardInfo?.idImage && (
+                        <div>
+                            <label className="block mb-1 text-sm font-medium text-gray-700">
+                                {t("idCardImage")}
+                            </label>
 
-                    <div>
-                        <label className="block mb-1 text-sm font-medium text-gray-700">
-                            {t("yourPhoto")}
-                        </label>
-                        <img
-                            src={customerCardInfo?.userPhoto}
-                            alt="Id Image"
-                            height={200}
-                            className="w-[250px]"
-                        />
-                    </div>
+                            <Image
+                                src={customerCardInfo?.idImage}
+                                alt="Id Image"
+                                height={200}
+                                width={250}
+                                className="w-[250px]"
+                            />
+                        </div>
+                    )}
+                    {customerCardInfo?.userPhoto && (
+                        <div>
+                            <label className="block mb-1 text-sm font-medium text-gray-700">
+                                {t("yourPhoto")}
+                            </label>
+                            <Image
+                                src={customerCardInfo?.userPhoto}
+                                alt="Id Image"
+                                height={200}
+                                width={250}
+                                className="w-[250px]"
+                            />
+                        </div>
+                    )}
                 </div>
 
                 <button
@@ -255,7 +224,7 @@ export default function UpdateCustomer() {
                 >
                     {isSubmitting ? t("submitting") : t("submit")}
                     {isSubmitting ? (
-                        <LoaderCircle className="text-white animate-spin inline ms-2" />
+                        <ArrowPathIcon className="text-white animate-spin inline ms-2 w-5 h-5" />
                     ) : (
                         ""
                     )}

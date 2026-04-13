@@ -2,7 +2,11 @@
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import {
+    ChevronRightIcon,
+    ChevronDownIcon,
+    ListBulletIcon,
+} from "@heroicons/react/24/outline";
 import { useHomeData } from "@/components/context/HomeContext";
 
 // Swiper imports
@@ -11,7 +15,6 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { ChevronDownIcon, List } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -20,10 +23,10 @@ const SkeletonCategoryMenu = ({ categoryTitle }) => (
     <div className="w-full md:w-[240px] h-full md:min-h-[380px] bg-white border relative rounded-md hidden lg:block">
         <div className=" gap-2 bg-primary__color rounded-t-md py-2 text-white px-2 justify-between font-semibold flex items-center">
             <span className="flex items-center gap-2 ">
-                <List size={18} />
+                <ListBulletIcon className="w-[18px] h-[18px]" />
                 <span>{categoryTitle}</span>
             </span>
-            <ChevronDownIcon size={18} />
+            <ChevronDownIcon className="w-[18px] h-[18px]" />
         </div>
         <ul className="md:max-h-[360px] md:overflow-y-auto p-2.5">
             {[...Array(10)].map((_, i) => (
@@ -49,7 +52,6 @@ export const SkeletonBanner = () => (
 );
 
 export default function Banner() {
-    const [hoveredCategory, setHoveredCategory] = useState(null);
     const [hoveredSubcategory, setHoveredSubcategory] = useState(null);
     const { homeData, loading } = useHomeData();
 
@@ -128,10 +130,10 @@ export default function Banner() {
                         >
                             <div className=" gap-2 bg-primary__color rounded-t-md py-2 text-white px-2 justify-between font-semibold flex items-center">
                                 <span className="flex items-center gap-2 ">
-                                    <List size={18} />
+                                    <ListBulletIcon className="w-[18px] h-[18px]" />
                                     <span>{categoryTitle}</span>
                                 </span>
-                                <ChevronDownIcon size={18} />
+                                <ChevronDownIcon className="w-[18px] h-[18px]" />
                             </div>
                             <div className="relative">
                                 <ul className="md:max-h-[360px] md:overflow-y-auto rounded-b-md ">
@@ -139,12 +141,6 @@ export default function Banner() {
                                         <li
                                             key={index}
                                             className="group flex px-3 border-b last:border-b-0 items-center justify-between transition-all  text-neutral-600 hover:text-primary__color py-2.5 "
-                                            onMouseEnter={() =>
-                                                setHoveredCategory(index)
-                                            }
-                                            onMouseLeave={() =>
-                                                setHoveredCategory(null)
-                                            }
                                         >
                                             <Link
                                                 href={`/categories/products?id=${category.id}`}

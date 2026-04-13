@@ -1,11 +1,7 @@
 "use client";
 import { useState, useCallback } from "react";
-import { toast } from "react-hot-toast";
-import { Menu, Listbox } from "@headlessui/react";
-import {
-    ChevronUpDownIcon,
-    CheckIcon,
-} from "@heroicons/react/24/outline";
+import { Listbox } from "@headlessui/react";
+import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -31,8 +27,12 @@ const childCategoryTypes = [
 
 export default function ChildSubCategoryCreateSection() {
     const [imageFile, setImageFile] = useState(null);
-    const [selectedCategoryType, setSelectedCategoryType] = useState(categoryTypes[0]);
-    const [selectedChildCategoryType, setSelectedChildCategoryType] = useState(childCategoryTypes[0]);
+    const [selectedCategoryType, setSelectedCategoryType] = useState(
+        categoryTypes[0],
+    );
+    const [selectedChildCategoryType, setSelectedChildCategoryType] = useState(
+        childCategoryTypes[0],
+    );
 
     const handleImageDrop = useCallback((e) => {
         e.preventDefault();
@@ -96,7 +96,9 @@ export default function ChildSubCategoryCreateSection() {
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                <h2 className="text-[16px] font-semibold">Child Sub Category</h2>
+                <h2 className="text-[16px] font-semibold">
+                    Child Sub Category
+                </h2>
             </div>
             <form className="pt-4 grid grid-cols-1 gap-4">
                 <div className="grid grid-cols-12 gap-4">
@@ -180,24 +182,26 @@ export default function ChildSubCategoryCreateSection() {
                                     <ChevronUpDownIcon className="w-5 h-5 text-gray-400" />
                                 </Listbox.Button>
                                 <Listbox.Options className="absolute mt-1 w-full bg-white shadow-md rounded-md z-10">
-                                    {childCategoryTypes.map((childCategoryType) => (
-                                        <Listbox.Option
-                                            key={childCategoryType.id}
-                                            value={childCategoryType}
-                                            className={({ active }) =>
-                                                `cursor-pointer select-none px-4 py-2 text-sm ${active ? "bg-indigo-100" : ""}`
-                                            }
-                                        >
-                                            {({ selected }) => (
-                                                <span className="flex justify-between">
-                                                    {childCategoryType.name}
-                                                    {selected && (
-                                                        <CheckIcon className="w-4 h-4 text-indigo-600" />
-                                                    )}
-                                                </span>
-                                            )}
-                                        </Listbox.Option>
-                                    ))}
+                                    {childCategoryTypes.map(
+                                        (childCategoryType) => (
+                                            <Listbox.Option
+                                                key={childCategoryType.id}
+                                                value={childCategoryType}
+                                                className={({ active }) =>
+                                                    `cursor-pointer select-none px-4 py-2 text-sm ${active ? "bg-indigo-100" : ""}`
+                                                }
+                                            >
+                                                {({ selected }) => (
+                                                    <span className="flex justify-between">
+                                                        {childCategoryType.name}
+                                                        {selected && (
+                                                            <CheckIcon className="w-4 h-4 text-indigo-600" />
+                                                        )}
+                                                    </span>
+                                                )}
+                                            </Listbox.Option>
+                                        ),
+                                    )}
                                 </Listbox.Options>
                             </div>
                         </Listbox>
@@ -380,9 +384,7 @@ export default function ChildSubCategoryCreateSection() {
                     </label>
                     <div
                         className={`border-2 border-dashed rounded-md ${
-                            imageFile
-                                ? "border-gray-300"
-                                : "border-gray-300"
+                            imageFile ? "border-gray-300" : "border-gray-300"
                         }`}
                         onDrop={handleImageDrop}
                         onDragOver={(e) => e.preventDefault()}
@@ -487,10 +489,7 @@ export default function ChildSubCategoryCreateSection() {
                     </p>
                     <div className="space-y-4">
                         {statusOptions.map((option) => (
-                            <div
-                                key={option.id}
-                                className="flex items-start"
-                            >
+                            <div key={option.id} className="flex items-start">
                                 <div className="flex items-center h-5">
                                     <input
                                         id={`status-option-${option.id}`}

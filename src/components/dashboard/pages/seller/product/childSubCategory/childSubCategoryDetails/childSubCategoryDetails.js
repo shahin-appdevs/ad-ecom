@@ -1,13 +1,8 @@
 "use client";
 import { useState, useCallback } from "react";
 import Image from "next/image";
-import { toast } from "react-hot-toast";
-import { Menu, Listbox } from '@headlessui/react';
-import {
-    ComputerDesktopIcon,
-    ChevronUpDownIcon,
-    CheckIcon
-} from "@heroicons/react/24/outline";
+import { Listbox } from "@headlessui/react";
+import { ChevronUpDownIcon, CheckIcon } from "@heroicons/react/24/outline";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
@@ -16,49 +11,60 @@ import Color from "@tiptap/extension-color";
 import LinkExtension from "@tiptap/extension-link";
 import ImageExtension from "@tiptap/extension-image";
 
-import product20 from "@public/images/product/product20.jpg";
-import product3 from "@public/images/product/product3.jpg";
-import product15 from "@public/images/product/product15.jpg";
+const product20 = "";
+const product3 = "";
+const product15 = "";
 
-const sortOptions = ['Latest', 'Oldest', 'Name (A-Z)', 'Name (Z-A)', 'Price (Low-High)', 'Price (High-Low)'];
+const sortOptions = [
+    "Latest",
+    "Oldest",
+    "Name (A-Z)",
+    "Name (Z-A)",
+    "Price (Low-High)",
+    "Price (High-Low)",
+];
 
 const filterOptions = {
     category: [
-        { id: 1, name: 'Select category', value: '' },
-        { id: 2, name: 'Electronics', value: 'electronics' },
-        { id: 3, name: 'Clothing', value: 'clothing' }
+        { id: 1, name: "Select category", value: "" },
+        { id: 2, name: "Electronics", value: "electronics" },
+        { id: 3, name: "Clothing", value: "clothing" },
     ],
     childCategory: [
-        { id: 1, name: 'Select child category', value: '' },
-        { id: 2, name: 'Laptops', value: 'laptops' },
-        { id: 3, name: 'Phones', value: 'phones' }
+        { id: 1, name: "Select child category", value: "" },
+        { id: 2, name: "Laptops", value: "laptops" },
+        { id: 3, name: "Phones", value: "phones" },
     ],
     subChildCategory: [
-        { id: 1, name: 'Select sub child category', value: '' },
-        { id: 2, name: 'Gaming Laptops', value: 'gaming' },
-        { id: 3, name: 'Ultrabooks', value: 'ultrabooks' }
+        { id: 1, name: "Select sub child category", value: "" },
+        { id: 2, name: "Gaming Laptops", value: "gaming" },
+        { id: 3, name: "Ultrabooks", value: "ultrabooks" },
     ],
     collection: [
-        { id: 1, name: 'Select collection', value: '' },
-        { id: 2, name: 'Offer 50%', value: 'offer50' },
-        { id: 3, name: 'Offer 70%', value: 'offer70' }
+        { id: 1, name: "Select collection", value: "" },
+        { id: 2, name: "Offer 50%", value: "offer50" },
+        { id: 3, name: "Offer 70%", value: "offer70" },
     ],
     brand: [
-        { id: 1, name: 'Select brand', value: '' },
-        { id: 2, name: 'ASUS', value: 'asus' },
-        { id: 3, name: 'Apple', value: 'apple' }
+        { id: 1, name: "Select brand", value: "" },
+        { id: 2, name: "ASUS", value: "asus" },
+        { id: 3, name: "Apple", value: "apple" },
     ],
     supplier: [
-        { id: 1, name: 'Select supplier', value: '' },
-        { id: 2, name: 'Supplier 1', value: 'supplier1' },
-        { id: 3, name: 'Supplier 2', value: 'supplier2' }
+        { id: 1, name: "Select supplier", value: "" },
+        { id: 2, name: "Supplier 1", value: "supplier1" },
+        { id: 3, name: "Supplier 2", value: "supplier2" },
     ],
     shop: [
-        { id: 1, name: 'Select merchant', value: '' },
-        { id: 2, name: 'Shop 1', value: 'shop1' },
-        { id: 3, name: 'Shop 2', value: 'shop2' }
+        { id: 1, name: "Select merchant", value: "" },
+        { id: 2, name: "Shop 1", value: "shop1" },
+        { id: 3, name: "Shop 2", value: "shop2" },
     ],
-    sort: sortOptions.map((option, index) => ({ id: index + 1, name: option, value: option }))
+    sort: sortOptions.map((option, index) => ({
+        id: index + 1,
+        name: option,
+        value: option,
+    })),
 };
 
 export default function ChildSubCategoryDetailsSection() {
@@ -73,7 +79,7 @@ export default function ChildSubCategoryDetailsSection() {
         brand: filterOptions.brand[0],
         supplier: filterOptions.supplier[0],
         shop: filterOptions.shop[0],
-        sort: filterOptions.sort[0]
+        sort: filterOptions.sort[0],
     });
 
     const [products, setProducts] = useState([
@@ -165,14 +171,14 @@ export default function ChildSubCategoryDetailsSection() {
         {
             id: 3,
             name: "Parent",
-            description: 'If parent, third party users can categorised themselves.',
+            description:
+                "If parent, third party users can categorised themselves.",
             checked: false,
         },
         {
             id: 4,
             name: "External",
-            description:
-                "To use external link for other websites.",
+            description: "To use external link for other websites.",
             checked: false,
         },
     ]);
@@ -218,46 +224,54 @@ export default function ChildSubCategoryDetailsSection() {
 
     const handleFilterChange = (e) => {
         const { name, value } = e.target;
-        setFilters(prev => ({
+        setFilters((prev) => ({
             ...prev,
-            [name]: value
+            [name]: value,
         }));
     };
 
     const ToggleButton = ({ active, onChange }) => {
         return (
             <button
-            type="button"
-            onClick={() => onChange(!active)}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary__color focus:ring-offset-2 ${
-                active ? 'bg-primary__color' : 'bg-gray-200'
-            }`}
-            >
-            <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
-                active ? 'translate-x-6' : 'translate-x-1'
+                type="button"
+                onClick={() => onChange(!active)}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary__color focus:ring-offset-2 ${
+                    active ? "bg-primary__color" : "bg-gray-200"
                 }`}
-            />
+            >
+                <span
+                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                        active ? "translate-x-6" : "translate-x-1"
+                    }`}
+                />
             </button>
         );
     };
 
     const toggleProductActive = (index) => {
-        setProducts(prevProducts => {
+        setProducts((prevProducts) => {
             const newProducts = [...prevProducts];
             newProducts[index].active = !newProducts[index].active;
-            newProducts[index].status = newProducts[index].active ? "Active" : "Inactive";
+            newProducts[index].status = newProducts[index].active
+                ? "Active"
+                : "Inactive";
             return newProducts;
         });
     };
 
     const FilterListbox = ({ name, options }) => (
-        <Listbox value={filters[name]} onChange={(value) => handleFilterChange(name, value)}>
+        <Listbox
+            value={filters[name]}
+            onChange={(value) => handleFilterChange(name, value)}
+        >
             <div className="relative">
                 <Listbox.Button className="relative w-full cursor-default rounded-md bg-white py-2 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-1 focus:ring-primary__color sm:text-sm sm:leading-6">
                     <span className="block truncate">{filters[name].name}</span>
                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                        <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                        <ChevronUpDownIcon
+                            className="h-5 w-5 text-gray-400"
+                            aria-hidden="true"
+                        />
                     </span>
                 </Listbox.Button>
                 <Listbox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
@@ -266,19 +280,26 @@ export default function ChildSubCategoryDetailsSection() {
                             key={option.id}
                             className={({ active }) =>
                                 `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                                    active ? 'bg-primary__color text-white' : 'text-gray-900'
+                                    active
+                                        ? "bg-primary__color text-white"
+                                        : "text-gray-900"
                                 }`
                             }
                             value={option}
                         >
                             {({ selected }) => (
                                 <>
-                                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                                    <span
+                                        className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
+                                    >
                                         {option.name}
                                     </span>
                                     {selected ? (
                                         <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-white">
-                                            <CheckIcon className="h-5 w-5" aria-hidden="true" />
+                                            <CheckIcon
+                                                className="h-5 w-5"
+                                                aria-hidden="true"
+                                            />
                                         </span>
                                     ) : null}
                                 </>
@@ -293,15 +314,13 @@ export default function ChildSubCategoryDetailsSection() {
     return (
         <div className="bg-white rounded-[12px] p-7">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between pb-3 mb-2 gap-3 border-b-[1.5px] border-[#F5F7FF]">
-                <h2 className="text-[16px] font-semibold">Child Sub Category</h2>
+                <h2 className="text-[16px] font-semibold">
+                    Child Sub Category
+                </h2>
             </div>
             <div className="tab-wrapper overflow-x-auto">
                 <div className="flex border-b-[1.5px] border-[#F5F7FF]-200 mb-4 min-w-max sm:min-w-full">
-                    {[
-                        "Overview",
-                        "Products",
-                        "All Products",
-                    ].map((tab) => (
+                    {["Overview", "Products", "All Products"].map((tab) => (
                         <button
                             key={tab}
                             className={`py-2 px-3 sm:px-5 font-medium text-sm focus:outline-none ${
@@ -805,88 +824,170 @@ export default function ChildSubCategoryDetailsSection() {
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Category</label>
-                                    <FilterListbox name="category" options={filterOptions.category} />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Child Category</label>
-                                    <FilterListbox 
-                                        name="childCategory" 
-                                        options={filters.category.value === 'electronics' 
-                                            ? filterOptions.childCategory 
-                                            : [filterOptions.childCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Category
+                                    </label>
+                                    <FilterListbox
+                                        name="category"
+                                        options={filterOptions.category}
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sub Child Category</label>
-                                    <FilterListbox 
-                                        name="subChildCategory" 
-                                        options={filters.childCategory.value === 'laptops' 
-                                            ? filterOptions.subChildCategory 
-                                            : [filterOptions.subChildCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="childCategory"
+                                        options={
+                                            filters.category.value ===
+                                            "electronics"
+                                                ? filterOptions.childCategory
+                                                : [
+                                                      filterOptions
+                                                          .childCategory[0],
+                                                  ]
+                                        }
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Collection</label>
-                                    <FilterListbox name="collection" options={filterOptions.collection} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sub Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="subChildCategory"
+                                        options={
+                                            filters.childCategory.value ===
+                                            "laptops"
+                                                ? filterOptions.subChildCategory
+                                                : [
+                                                      filterOptions
+                                                          .subChildCategory[0],
+                                                  ]
+                                        }
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Brand</label>
-                                    <FilterListbox name="brand" options={filterOptions.brand} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Collection
+                                    </label>
+                                    <FilterListbox
+                                        name="collection"
+                                        options={filterOptions.collection}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Supplier</label>
-                                    <FilterListbox name="supplier" options={filterOptions.supplier} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Brand
+                                    </label>
+                                    <FilterListbox
+                                        name="brand"
+                                        options={filterOptions.brand}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Shop</label>
-                                    <FilterListbox name="shop" options={filterOptions.shop} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Supplier
+                                    </label>
+                                    <FilterListbox
+                                        name="supplier"
+                                        options={filterOptions.supplier}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sort</label>
-                                    <FilterListbox name="sort" options={filterOptions.sort} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Shop
+                                    </label>
+                                    <FilterListbox
+                                        name="shop"
+                                        options={filterOptions.shop}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sort
+                                    </label>
+                                    <FilterListbox
+                                        name="sort"
+                                        options={filterOptions.sort}
+                                    />
                                 </div>
                             </div>
                             <div className="table-wrapper overflow-x-auto">
                                 <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                                     <thead>
                                         <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                            <th className="py-4 px-5 font-semibold">SL</th>
-                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">Title</th>
-                                            <th className="py-4 px-5 font-semibold">Image</th>
-                                            <th className="py-4 px-5 font-semibold">Stock</th>
-                                            <th className="py-4 px-5 font-semibold">Cost</th>
-                                            <th className="py-4 px-5 font-semibold">Price</th>
-                                            <th className="py-4 px-5 font-semibold">Profit</th>
-                                            <th className="py-4 px-5 font-semibold">Action</th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                SL
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">
+                                                Title
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Image
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Stock
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Cost
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Price
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Profit
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-[#F5F7FF]">
                                         {products.map((product, index) => (
                                             <tr key={index}>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">{index + 1}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
+                                                    {index + 1}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                                    <span className="block mb-1">{product.title}</span>
-                                                    <span className="font-bold text-primary__color mr-2">{product.id}</span>
-                                                    <span className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}>
+                                                    <span className="block mb-1">
+                                                        {product.title}
+                                                    </span>
+                                                    <span className="font-bold text-primary__color mr-2">
+                                                        {product.id}
+                                                    </span>
+                                                    <span
+                                                        className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}
+                                                    >
                                                         {product.status}
                                                     </span>
                                                 </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap">
                                                     <div className="flex items-center">
-                                                        {getProductImage(product.image)}
+                                                        {getProductImage(
+                                                            product.image,
+                                                        )}
                                                     </div>
                                                 </td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">{product.stock}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.cost}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.price}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.profit}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    {product.stock}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.cost}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.price}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.profit}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-center gap-4">
-                                                    <ToggleButton 
-                                                        active={product.active} 
-                                                        onChange={() => toggleProductActive(index)} 
+                                                    <ToggleButton
+                                                        active={product.active}
+                                                        onChange={() =>
+                                                            toggleProductActive(
+                                                                index,
+                                                            )
+                                                        }
                                                     />
                                                 </td>
                                             </tr>
@@ -900,88 +1001,170 @@ export default function ChildSubCategoryDetailsSection() {
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Category</label>
-                                    <FilterListbox name="category" options={filterOptions.category} />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Child Category</label>
-                                    <FilterListbox 
-                                        name="childCategory" 
-                                        options={filters.category.value === 'electronics' 
-                                            ? filterOptions.childCategory 
-                                            : [filterOptions.childCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Category
+                                    </label>
+                                    <FilterListbox
+                                        name="category"
+                                        options={filterOptions.category}
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sub Child Category</label>
-                                    <FilterListbox 
-                                        name="subChildCategory" 
-                                        options={filters.childCategory.value === 'laptops' 
-                                            ? filterOptions.subChildCategory 
-                                            : [filterOptions.subChildCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="childCategory"
+                                        options={
+                                            filters.category.value ===
+                                            "electronics"
+                                                ? filterOptions.childCategory
+                                                : [
+                                                      filterOptions
+                                                          .childCategory[0],
+                                                  ]
+                                        }
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Collection</label>
-                                    <FilterListbox name="collection" options={filterOptions.collection} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sub Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="subChildCategory"
+                                        options={
+                                            filters.childCategory.value ===
+                                            "laptops"
+                                                ? filterOptions.subChildCategory
+                                                : [
+                                                      filterOptions
+                                                          .subChildCategory[0],
+                                                  ]
+                                        }
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Brand</label>
-                                    <FilterListbox name="brand" options={filterOptions.brand} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Collection
+                                    </label>
+                                    <FilterListbox
+                                        name="collection"
+                                        options={filterOptions.collection}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Supplier</label>
-                                    <FilterListbox name="supplier" options={filterOptions.supplier} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Brand
+                                    </label>
+                                    <FilterListbox
+                                        name="brand"
+                                        options={filterOptions.brand}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Shop</label>
-                                    <FilterListbox name="shop" options={filterOptions.shop} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Supplier
+                                    </label>
+                                    <FilterListbox
+                                        name="supplier"
+                                        options={filterOptions.supplier}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sort</label>
-                                    <FilterListbox name="sort" options={filterOptions.sort} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Shop
+                                    </label>
+                                    <FilterListbox
+                                        name="shop"
+                                        options={filterOptions.shop}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sort
+                                    </label>
+                                    <FilterListbox
+                                        name="sort"
+                                        options={filterOptions.sort}
+                                    />
                                 </div>
                             </div>
                             <div className="table-wrapper overflow-x-auto">
                                 <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                                     <thead>
                                         <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                            <th className="py-4 px-5 font-semibold">SL</th>
-                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">Title</th>
-                                            <th className="py-4 px-5 font-semibold">Image</th>
-                                            <th className="py-4 px-5 font-semibold">Stock</th>
-                                            <th className="py-4 px-5 font-semibold">Cost</th>
-                                            <th className="py-4 px-5 font-semibold">Price</th>
-                                            <th className="py-4 px-5 font-semibold">Profit</th>
-                                            <th className="py-4 px-5 font-semibold">Action</th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                SL
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">
+                                                Title
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Image
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Stock
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Cost
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Price
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Profit
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-[#F5F7FF]">
                                         {products.map((product, index) => (
                                             <tr key={index}>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">{index + 1}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
+                                                    {index + 1}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                                    <span className="block mb-1">{product.title}</span>
-                                                    <span className="font-bold text-primary__color mr-2">{product.id}</span>
-                                                    <span className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}>
+                                                    <span className="block mb-1">
+                                                        {product.title}
+                                                    </span>
+                                                    <span className="font-bold text-primary__color mr-2">
+                                                        {product.id}
+                                                    </span>
+                                                    <span
+                                                        className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}
+                                                    >
                                                         {product.status}
                                                     </span>
                                                 </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap">
                                                     <div className="flex items-center">
-                                                        {getProductImage(product.image)}
+                                                        {getProductImage(
+                                                            product.image,
+                                                        )}
                                                     </div>
                                                 </td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">{product.stock}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.cost}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.price}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.profit}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    {product.stock}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.cost}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.price}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.profit}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-center gap-4">
-                                                    <ToggleButton 
-                                                        active={product.active} 
-                                                        onChange={() => toggleProductActive(index)} 
+                                                    <ToggleButton
+                                                        active={product.active}
+                                                        onChange={() =>
+                                                            toggleProductActive(
+                                                                index,
+                                                            )
+                                                        }
                                                     />
                                                 </td>
                                             </tr>
@@ -995,88 +1178,170 @@ export default function ChildSubCategoryDetailsSection() {
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Category</label>
-                                    <FilterListbox name="category" options={filterOptions.category} />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Child Category</label>
-                                    <FilterListbox 
-                                        name="childCategory" 
-                                        options={filters.category.value === 'electronics' 
-                                            ? filterOptions.childCategory 
-                                            : [filterOptions.childCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Category
+                                    </label>
+                                    <FilterListbox
+                                        name="category"
+                                        options={filterOptions.category}
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sub Child Category</label>
-                                    <FilterListbox 
-                                        name="subChildCategory" 
-                                        options={filters.childCategory.value === 'laptops' 
-                                            ? filterOptions.subChildCategory 
-                                            : [filterOptions.subChildCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="childCategory"
+                                        options={
+                                            filters.category.value ===
+                                            "electronics"
+                                                ? filterOptions.childCategory
+                                                : [
+                                                      filterOptions
+                                                          .childCategory[0],
+                                                  ]
+                                        }
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Collection</label>
-                                    <FilterListbox name="collection" options={filterOptions.collection} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sub Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="subChildCategory"
+                                        options={
+                                            filters.childCategory.value ===
+                                            "laptops"
+                                                ? filterOptions.subChildCategory
+                                                : [
+                                                      filterOptions
+                                                          .subChildCategory[0],
+                                                  ]
+                                        }
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Brand</label>
-                                    <FilterListbox name="brand" options={filterOptions.brand} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Collection
+                                    </label>
+                                    <FilterListbox
+                                        name="collection"
+                                        options={filterOptions.collection}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Supplier</label>
-                                    <FilterListbox name="supplier" options={filterOptions.supplier} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Brand
+                                    </label>
+                                    <FilterListbox
+                                        name="brand"
+                                        options={filterOptions.brand}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Shop</label>
-                                    <FilterListbox name="shop" options={filterOptions.shop} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Supplier
+                                    </label>
+                                    <FilterListbox
+                                        name="supplier"
+                                        options={filterOptions.supplier}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sort</label>
-                                    <FilterListbox name="sort" options={filterOptions.sort} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Shop
+                                    </label>
+                                    <FilterListbox
+                                        name="shop"
+                                        options={filterOptions.shop}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sort
+                                    </label>
+                                    <FilterListbox
+                                        name="sort"
+                                        options={filterOptions.sort}
+                                    />
                                 </div>
                             </div>
                             <div className="table-wrapper overflow-x-auto">
                                 <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                                     <thead>
                                         <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                            <th className="py-4 px-5 font-semibold">SL</th>
-                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">Title</th>
-                                            <th className="py-4 px-5 font-semibold">Image</th>
-                                            <th className="py-4 px-5 font-semibold">Stock</th>
-                                            <th className="py-4 px-5 font-semibold">Cost</th>
-                                            <th className="py-4 px-5 font-semibold">Price</th>
-                                            <th className="py-4 px-5 font-semibold">Profit</th>
-                                            <th className="py-4 px-5 font-semibold">Action</th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                SL
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">
+                                                Title
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Image
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Stock
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Cost
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Price
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Profit
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-[#F5F7FF]">
                                         {products.map((product, index) => (
                                             <tr key={index}>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">{index + 1}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
+                                                    {index + 1}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                                    <span className="block mb-1">{product.title}</span>
-                                                    <span className="font-bold text-primary__color mr-2">{product.id}</span>
-                                                    <span className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}>
+                                                    <span className="block mb-1">
+                                                        {product.title}
+                                                    </span>
+                                                    <span className="font-bold text-primary__color mr-2">
+                                                        {product.id}
+                                                    </span>
+                                                    <span
+                                                        className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}
+                                                    >
                                                         {product.status}
                                                     </span>
                                                 </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap">
                                                     <div className="flex items-center">
-                                                        {getProductImage(product.image)}
+                                                        {getProductImage(
+                                                            product.image,
+                                                        )}
                                                     </div>
                                                 </td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">{product.stock}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.cost}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.price}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.profit}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    {product.stock}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.cost}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.price}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.profit}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-center gap-4">
-                                                    <ToggleButton 
-                                                        active={product.active} 
-                                                        onChange={() => toggleProductActive(index)} 
+                                                    <ToggleButton
+                                                        active={product.active}
+                                                        onChange={() =>
+                                                            toggleProductActive(
+                                                                index,
+                                                            )
+                                                        }
                                                     />
                                                 </td>
                                             </tr>
@@ -1109,88 +1374,170 @@ export default function ChildSubCategoryDetailsSection() {
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Category</label>
-                                    <FilterListbox name="category" options={filterOptions.category} />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Child Category</label>
-                                    <FilterListbox 
-                                        name="childCategory" 
-                                        options={filters.category.value === 'electronics' 
-                                            ? filterOptions.childCategory 
-                                            : [filterOptions.childCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Category
+                                    </label>
+                                    <FilterListbox
+                                        name="category"
+                                        options={filterOptions.category}
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sub Child Category</label>
-                                    <FilterListbox 
-                                        name="subChildCategory" 
-                                        options={filters.childCategory.value === 'laptops' 
-                                            ? filterOptions.subChildCategory 
-                                            : [filterOptions.subChildCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="childCategory"
+                                        options={
+                                            filters.category.value ===
+                                            "electronics"
+                                                ? filterOptions.childCategory
+                                                : [
+                                                      filterOptions
+                                                          .childCategory[0],
+                                                  ]
+                                        }
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Collection</label>
-                                    <FilterListbox name="collection" options={filterOptions.collection} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sub Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="subChildCategory"
+                                        options={
+                                            filters.childCategory.value ===
+                                            "laptops"
+                                                ? filterOptions.subChildCategory
+                                                : [
+                                                      filterOptions
+                                                          .subChildCategory[0],
+                                                  ]
+                                        }
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Brand</label>
-                                    <FilterListbox name="brand" options={filterOptions.brand} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Collection
+                                    </label>
+                                    <FilterListbox
+                                        name="collection"
+                                        options={filterOptions.collection}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Supplier</label>
-                                    <FilterListbox name="supplier" options={filterOptions.supplier} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Brand
+                                    </label>
+                                    <FilterListbox
+                                        name="brand"
+                                        options={filterOptions.brand}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Shop</label>
-                                    <FilterListbox name="shop" options={filterOptions.shop} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Supplier
+                                    </label>
+                                    <FilterListbox
+                                        name="supplier"
+                                        options={filterOptions.supplier}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sort</label>
-                                    <FilterListbox name="sort" options={filterOptions.sort} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Shop
+                                    </label>
+                                    <FilterListbox
+                                        name="shop"
+                                        options={filterOptions.shop}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sort
+                                    </label>
+                                    <FilterListbox
+                                        name="sort"
+                                        options={filterOptions.sort}
+                                    />
                                 </div>
                             </div>
                             <div className="table-wrapper overflow-x-auto">
                                 <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                                     <thead>
                                         <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                            <th className="py-4 px-5 font-semibold">SL</th>
-                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">Title</th>
-                                            <th className="py-4 px-5 font-semibold">Image</th>
-                                            <th className="py-4 px-5 font-semibold">Stock</th>
-                                            <th className="py-4 px-5 font-semibold">Cost</th>
-                                            <th className="py-4 px-5 font-semibold">Price</th>
-                                            <th className="py-4 px-5 font-semibold">Profit</th>
-                                            <th className="py-4 px-5 font-semibold">Action</th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                SL
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">
+                                                Title
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Image
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Stock
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Cost
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Price
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Profit
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-[#F5F7FF]">
                                         {products.map((product, index) => (
                                             <tr key={index}>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">{index + 1}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
+                                                    {index + 1}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                                    <span className="block mb-1">{product.title}</span>
-                                                    <span className="font-bold text-primary__color mr-2">{product.id}</span>
-                                                    <span className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}>
+                                                    <span className="block mb-1">
+                                                        {product.title}
+                                                    </span>
+                                                    <span className="font-bold text-primary__color mr-2">
+                                                        {product.id}
+                                                    </span>
+                                                    <span
+                                                        className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}
+                                                    >
                                                         {product.status}
                                                     </span>
                                                 </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap">
                                                     <div className="flex items-center">
-                                                        {getProductImage(product.image)}
+                                                        {getProductImage(
+                                                            product.image,
+                                                        )}
                                                     </div>
                                                 </td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">{product.stock}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.cost}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.price}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.profit}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    {product.stock}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.cost}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.price}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.profit}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-center gap-4">
-                                                    <ToggleButton 
-                                                        active={product.active} 
-                                                        onChange={() => toggleProductActive(index)} 
+                                                    <ToggleButton
+                                                        active={product.active}
+                                                        onChange={() =>
+                                                            toggleProductActive(
+                                                                index,
+                                                            )
+                                                        }
                                                     />
                                                 </td>
                                             </tr>
@@ -1204,88 +1551,170 @@ export default function ChildSubCategoryDetailsSection() {
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Category</label>
-                                    <FilterListbox name="category" options={filterOptions.category} />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Child Category</label>
-                                    <FilterListbox 
-                                        name="childCategory" 
-                                        options={filters.category.value === 'electronics' 
-                                            ? filterOptions.childCategory 
-                                            : [filterOptions.childCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Category
+                                    </label>
+                                    <FilterListbox
+                                        name="category"
+                                        options={filterOptions.category}
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sub Child Category</label>
-                                    <FilterListbox 
-                                        name="subChildCategory" 
-                                        options={filters.childCategory.value === 'laptops' 
-                                            ? filterOptions.subChildCategory 
-                                            : [filterOptions.subChildCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="childCategory"
+                                        options={
+                                            filters.category.value ===
+                                            "electronics"
+                                                ? filterOptions.childCategory
+                                                : [
+                                                      filterOptions
+                                                          .childCategory[0],
+                                                  ]
+                                        }
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Collection</label>
-                                    <FilterListbox name="collection" options={filterOptions.collection} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sub Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="subChildCategory"
+                                        options={
+                                            filters.childCategory.value ===
+                                            "laptops"
+                                                ? filterOptions.subChildCategory
+                                                : [
+                                                      filterOptions
+                                                          .subChildCategory[0],
+                                                  ]
+                                        }
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Brand</label>
-                                    <FilterListbox name="brand" options={filterOptions.brand} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Collection
+                                    </label>
+                                    <FilterListbox
+                                        name="collection"
+                                        options={filterOptions.collection}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Supplier</label>
-                                    <FilterListbox name="supplier" options={filterOptions.supplier} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Brand
+                                    </label>
+                                    <FilterListbox
+                                        name="brand"
+                                        options={filterOptions.brand}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Shop</label>
-                                    <FilterListbox name="shop" options={filterOptions.shop} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Supplier
+                                    </label>
+                                    <FilterListbox
+                                        name="supplier"
+                                        options={filterOptions.supplier}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sort</label>
-                                    <FilterListbox name="sort" options={filterOptions.sort} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Shop
+                                    </label>
+                                    <FilterListbox
+                                        name="shop"
+                                        options={filterOptions.shop}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sort
+                                    </label>
+                                    <FilterListbox
+                                        name="sort"
+                                        options={filterOptions.sort}
+                                    />
                                 </div>
                             </div>
                             <div className="table-wrapper overflow-x-auto">
                                 <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                                     <thead>
                                         <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                            <th className="py-4 px-5 font-semibold">SL</th>
-                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">Title</th>
-                                            <th className="py-4 px-5 font-semibold">Image</th>
-                                            <th className="py-4 px-5 font-semibold">Stock</th>
-                                            <th className="py-4 px-5 font-semibold">Cost</th>
-                                            <th className="py-4 px-5 font-semibold">Price</th>
-                                            <th className="py-4 px-5 font-semibold">Profit</th>
-                                            <th className="py-4 px-5 font-semibold">Action</th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                SL
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">
+                                                Title
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Image
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Stock
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Cost
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Price
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Profit
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-[#F5F7FF]">
                                         {products.map((product, index) => (
                                             <tr key={index}>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">{index + 1}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
+                                                    {index + 1}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                                    <span className="block mb-1">{product.title}</span>
-                                                    <span className="font-bold text-primary__color mr-2">{product.id}</span>
-                                                    <span className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}>
+                                                    <span className="block mb-1">
+                                                        {product.title}
+                                                    </span>
+                                                    <span className="font-bold text-primary__color mr-2">
+                                                        {product.id}
+                                                    </span>
+                                                    <span
+                                                        className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}
+                                                    >
                                                         {product.status}
                                                     </span>
                                                 </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap">
                                                     <div className="flex items-center">
-                                                        {getProductImage(product.image)}
+                                                        {getProductImage(
+                                                            product.image,
+                                                        )}
                                                     </div>
                                                 </td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">{product.stock}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.cost}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.price}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.profit}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    {product.stock}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.cost}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.price}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.profit}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-center gap-4">
-                                                    <ToggleButton 
-                                                        active={product.active} 
-                                                        onChange={() => toggleProductActive(index)} 
+                                                    <ToggleButton
+                                                        active={product.active}
+                                                        onChange={() =>
+                                                            toggleProductActive(
+                                                                index,
+                                                            )
+                                                        }
                                                     />
                                                 </td>
                                             </tr>
@@ -1299,88 +1728,170 @@ export default function ChildSubCategoryDetailsSection() {
                         <>
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Category</label>
-                                    <FilterListbox name="category" options={filterOptions.category} />
-                                </div>
-                                <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Child Category</label>
-                                    <FilterListbox 
-                                        name="childCategory" 
-                                        options={filters.category.value === 'electronics' 
-                                            ? filterOptions.childCategory 
-                                            : [filterOptions.childCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Category
+                                    </label>
+                                    <FilterListbox
+                                        name="category"
+                                        options={filterOptions.category}
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sub Child Category</label>
-                                    <FilterListbox 
-                                        name="subChildCategory" 
-                                        options={filters.childCategory.value === 'laptops' 
-                                            ? filterOptions.subChildCategory 
-                                            : [filterOptions.subChildCategory[0]]
-                                        } 
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="childCategory"
+                                        options={
+                                            filters.category.value ===
+                                            "electronics"
+                                                ? filterOptions.childCategory
+                                                : [
+                                                      filterOptions
+                                                          .childCategory[0],
+                                                  ]
+                                        }
                                     />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Collection</label>
-                                    <FilterListbox name="collection" options={filterOptions.collection} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sub Child Category
+                                    </label>
+                                    <FilterListbox
+                                        name="subChildCategory"
+                                        options={
+                                            filters.childCategory.value ===
+                                            "laptops"
+                                                ? filterOptions.subChildCategory
+                                                : [
+                                                      filterOptions
+                                                          .subChildCategory[0],
+                                                  ]
+                                        }
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Brand</label>
-                                    <FilterListbox name="brand" options={filterOptions.brand} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Collection
+                                    </label>
+                                    <FilterListbox
+                                        name="collection"
+                                        options={filterOptions.collection}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Supplier</label>
-                                    <FilterListbox name="supplier" options={filterOptions.supplier} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Brand
+                                    </label>
+                                    <FilterListbox
+                                        name="brand"
+                                        options={filterOptions.brand}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Shop</label>
-                                    <FilterListbox name="shop" options={filterOptions.shop} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Supplier
+                                    </label>
+                                    <FilterListbox
+                                        name="supplier"
+                                        options={filterOptions.supplier}
+                                    />
                                 </div>
                                 <div>
-                                    <label className="block text-xs font-medium text-gray-700 mb-2">Sort</label>
-                                    <FilterListbox name="sort" options={filterOptions.sort} />
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Shop
+                                    </label>
+                                    <FilterListbox
+                                        name="shop"
+                                        options={filterOptions.shop}
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-xs font-medium text-gray-700 mb-2">
+                                        Sort
+                                    </label>
+                                    <FilterListbox
+                                        name="sort"
+                                        options={filterOptions.sort}
+                                    />
                                 </div>
                             </div>
                             <div className="table-wrapper overflow-x-auto">
                                 <table className="min-w-full divide-y divide-[#F5F7FF] whitespace-nowrap">
                                     <thead>
                                         <tr className="bg-[#F5F7FF] text-left text-sm text-color__paragraph">
-                                            <th className="py-4 px-5 font-semibold">SL</th>
-                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">Title</th>
-                                            <th className="py-4 px-5 font-semibold">Image</th>
-                                            <th className="py-4 px-5 font-semibold">Stock</th>
-                                            <th className="py-4 px-5 font-semibold">Cost</th>
-                                            <th className="py-4 px-5 font-semibold">Price</th>
-                                            <th className="py-4 px-5 font-semibold">Profit</th>
-                                            <th className="py-4 px-5 font-semibold">Action</th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                SL
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold whitespace-nowrap">
+                                                Title
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Image
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Stock
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Cost
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Price
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Profit
+                                            </th>
+                                            <th className="py-4 px-5 font-semibold">
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-[#F5F7FF]">
                                         {products.map((product, index) => (
                                             <tr key={index}>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">{index + 1}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-primary__color">
+                                                    {index + 1}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                                    <span className="block mb-1">{product.title}</span>
-                                                    <span className="font-bold text-primary__color mr-2">{product.id}</span>
-                                                    <span className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}>
+                                                    <span className="block mb-1">
+                                                        {product.title}
+                                                    </span>
+                                                    <span className="font-bold text-primary__color mr-2">
+                                                        {product.id}
+                                                    </span>
+                                                    <span
+                                                        className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(product.status)}`}
+                                                    >
                                                         {product.status}
                                                     </span>
                                                 </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap">
                                                     <div className="flex items-center">
-                                                        {getProductImage(product.image)}
+                                                        {getProductImage(
+                                                            product.image,
+                                                        )}
                                                     </div>
                                                 </td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">{product.stock}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.cost}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.price}</td>
-                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">৳{product.profit}</td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    {product.stock}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.cost}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.price}
+                                                </td>
+                                                <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                                    ৳{product.profit}
+                                                </td>
                                                 <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium text-center gap-4">
-                                                    <ToggleButton 
-                                                        active={product.active} 
-                                                        onChange={() => toggleProductActive(index)} 
+                                                    <ToggleButton
+                                                        active={product.active}
+                                                        onChange={() =>
+                                                            toggleProductActive(
+                                                                index,
+                                                            )
+                                                        }
                                                     />
                                                 </td>
                                             </tr>

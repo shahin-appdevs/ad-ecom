@@ -260,7 +260,7 @@ export default function ProductEditSection() {
                 formData.append("product_video", videoFile);
             }
             const response = await UpdateProductSellerAPI(formData);
-            console.log(response);
+            
             toast.success(response?.data?.message?.success?.[0]);
         } catch (error) {
             toast.error(error.response?.data?.message?.error?.[0]);

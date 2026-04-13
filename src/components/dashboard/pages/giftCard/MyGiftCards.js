@@ -1,9 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import {
-    billPayGetAPI,
-    myGiftCardGetAPI,
-} from "@root/services/apiClient/apiClient";
+import { myGiftCardGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
@@ -83,35 +80,6 @@ export default function MyGiftCards() {
 
         fetchGiftCardData();
     }, []);
-
-    const getStatusColor = (status) => {
-        switch (status?.toLowerCase()) {
-            case "success":
-                return "bg-green-100 text-green-800";
-            case "rejected":
-                return "bg-red-100 text-red-800";
-            case "pending":
-                return "bg-yellow-100 text-yellow-800";
-            case "active":
-                return "bg-blue-100 text-blue-800";
-            default:
-                return "bg-gray-100 text-gray-800";
-        }
-    };
-
-    const formatDate = (dateString) => {
-        if (!dateString) return "";
-        const date = new Date(dateString);
-        return date.toLocaleString("en-US", {
-            year: "2-digit",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: true,
-        });
-    };
 
     return (
         <div className="bg-white rounded-[12px] p-7">

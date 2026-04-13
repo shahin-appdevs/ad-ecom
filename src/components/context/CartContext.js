@@ -36,7 +36,7 @@ export function CartProvider({ children }) {
                     return itemUniqueId !== uniqueId;
                 });
                 localStorage.setItem(cartKey, JSON.stringify(updatedItems));
-                console.log(`Updated ${cartKey}:`, updatedItems);
+                // console.log(`Updated ${cartKey}:`, updatedItems);
             }
         });
 

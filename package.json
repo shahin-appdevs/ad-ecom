@@ -3,13 +3,13 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "node dev-cloudflare.js",
+        "dev": "node dev-cloudflare.mjs",
         "build": "next build",
         "start": "next start",
         "preview": "npx opennextjs-cloudflare build && npx wrangler dev",
         "deploy": "npx opennextjs-cloudflare build && npx wrangler deploy",
         "cf-typegen": "npx wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-        "lint": "next lint"
+        "lint": "eslint ."
     },
     "dependencies": {
         "@headlessui/react": "^2.2.0",
@@ -25,15 +25,11 @@
         "@tiptap/starter-kit": "^2.12.0",
         "axios": "^1.7.9",
         "date-fns": "^4.1.0",
-        "embla-carousel-autoplay": "^8.5.2",
-        "embla-carousel-react": "^8.5.2",
         "framer-motion": "^12.9.2",
         "jsbarcode": "^3.11.6",
-        "lucide-react": "^0.510.0",
         "next": "^15.2.4",
         "next-intl": "^4.8.3",
         "react": "^19.0.0",
-        "react-date-range": "^2.0.1",
         "react-dom": "^19.0.0",
         "react-dropzone": "^14.3.8",
         "react-google-recaptcha": "^3.1.0",
@@ -41,11 +37,8 @@
         "react-hot-toast": "^2.5.1",
         "react-qr-code": "^2.0.15",
         "react-router-dom": "^7.6.2",
-        "react-select": "^5.10.0",
-        "recharts": "^2.15.2",
         "swiper": "^11.2.6",
-        "uuid": "^11.1.0",
-        "world-countries": "^5.1.0"
+        "uuid": "^11.1.0"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3",

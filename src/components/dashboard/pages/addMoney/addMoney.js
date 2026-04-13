@@ -17,7 +17,6 @@ import {
     ArrowsUpDownIcon,
     CalendarDaysIcon,
     ChartBarIcon,
-    QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
@@ -267,7 +266,7 @@ export default function AddMoneySection() {
         };
     }, [selectedCurrency, wallet?.selectedCurrency, remainingLimit]);
 
-    const handleAddMoney = async (e) => {
+    const handleAddMoney = async () => {
         setLoading(true);
         try {
             const response = await InsertAddMoneyAPI(

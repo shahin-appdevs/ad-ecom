@@ -10,6 +10,8 @@ import {
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -29,7 +31,7 @@ const ProductSkeleton = () => (
 );
 
 function RelatedProduct() {
-    const t = useTranslations("ProductDetails.relatedProduct"); // ← Added
+    const t = useTranslations("ProductDetails.relatedProduct");
 
     // Translation variables
     const relatedProductsTitle = t("title");
@@ -43,6 +45,7 @@ function RelatedProduct() {
     const [productId, setProductId] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [data, setData] = useState(null);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -59,7 +62,7 @@ function RelatedProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                console.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchUserProfile"));
             }
         };
 
@@ -72,11 +75,13 @@ function RelatedProduct() {
         }
     }, [idParam]);
 
+    const { baseCurrencySymbol } = getBaseCurrency(data);
+
     const formatPrice = (price) => {
-        if (!price) return "৳0.00";
+        if (!price) return `${baseCurrencySymbol}0.00`;
         const numericValue =
             typeof price === "string" ? parseFloat(price) : price;
-        return `৳${numericValue.toFixed(2)}`;
+        return `${baseCurrencySymbol}${numericValue.toFixed(2)}`;
     };
 
     useEffect(() => {
@@ -85,6 +90,7 @@ function RelatedProduct() {
             try {
                 setLoading(true);
                 const response = await productDetailsGetAPI(productId);
+                setData(response.data.data);
                 if (response?.data?.data?.related_products) {
                     const formattedProducts =
                         response.data.data.related_products.map((product) => {

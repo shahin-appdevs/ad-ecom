@@ -5,11 +5,10 @@ import Image from "next/image";
 import Button from "@/components/utility/Button";
 import { twoFactorAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-import logo from "@public/images/logo/favicon.jpeg";
 import { Link } from "@/i18n/navigation";
 import getImageUrl from "@/components/utility/getImageUrl";
 import { useTranslations } from "next-intl";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export default function Otp() {
     const t = useTranslations("Auth.2fa");
@@ -142,7 +141,8 @@ export default function Otp() {
                         href="/user/auth/login"
                         className="text-sm rtl:text-left flex items-center justify-center gap-2 font-semibold text-gray-400 hover:text-primary__color transition-colors uppercase tracking-widest"
                     >
-                        <ArrowLeft /> <span>{t("backToLogin")}</span>
+                        <ArrowLeftIcon className="h-4 w-4" />{" "}
+                        <span>{t("backToLogin")}</span>
                     </Link>
                 </div>
             </div>

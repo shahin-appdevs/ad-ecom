@@ -2,11 +2,11 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { dashboardGetAPI } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
 import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 export default function WalletSection() {
     const [dashboardData, setDashboardData] = useState(null);
@@ -21,7 +21,7 @@ export default function WalletSection() {
                 const response = await dashboardGetAPI();
                 setDashboardData(response?.data?.data);
             } catch (error) {
-                toast.error(t("failedFetch"));
+                handleApiError(error, t("failedFetch"));
             } finally {
                 setLoading(false);
             }

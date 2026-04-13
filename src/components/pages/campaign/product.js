@@ -1,11 +1,9 @@
 "use client";
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { PlusIcon, MinusIcon } from "@heroicons/react/24/outline";
-import { useCart } from "@/components/context/CartContext";
 import {
     campaignProductGetAPI,
     nextPageGetAPI,
@@ -14,6 +12,8 @@ import {
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl"; // ← Added
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 export const dynamic = "force-dynamic";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -74,11 +74,10 @@ function CampaignProduct() {
         minutes: "00",
         seconds: "00",
     });
-    const [states, setStates] = useState([]);
-    const [userProfile, setUserProfile] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
+    const { baseCurrencySymbol } = getBaseCurrency(data);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -91,12 +90,12 @@ function CampaignProduct() {
 
             try {
                 const response = await profiledGetAPI();
-                setUserProfile(response.data.data);
+
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                console.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 
@@ -110,35 +109,11 @@ function CampaignProduct() {
     }, [idParam]);
 
     const formatPrice = (price) => {
-        if (!price) return "৳0.00";
+        if (!price) return `${baseCurrencySymbol}0.00`;
         const numericValue =
             typeof price === "string" ? parseFloat(price) : price;
-        return `৳${numericValue.toFixed(2)}`;
+        return `${baseCurrencySymbol}${numericValue.toFixed(2)}`;
     };
-
-    useEffect(() => {
-        if (!data?.products?.data) return;
-
-        const savedCart = localStorage.getItem("campaignCart");
-        const initialStates = data.products.data.map((product) => {
-            if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                const cartItem = parsedCart.find(
-                    (item) => item.id === product.id,
-                );
-                return {
-                    showQuantity: !!cartItem,
-                    quantity: cartItem?.quantity || 1,
-                };
-            }
-            return {
-                showQuantity: false,
-                quantity: 1,
-            };
-        });
-
-        setStates(initialStates);
-    }, [data]);
 
     useEffect(() => {
         const fetchCampaignProduct = async () => {
@@ -146,9 +121,8 @@ function CampaignProduct() {
             try {
                 setLoading(true);
                 const response = await campaignProductGetAPI(campaignId);
+                setData(response.data.data);
                 if (response?.data?.data?.products) {
-                    setData(response.data.data);
-
                     const formattedProducts =
                         response.data.data.products.data.map((product) => {
                             const listPrice = parseFloat(
@@ -240,12 +214,6 @@ function CampaignProduct() {
                     }
 
                     setProducts(formattedProducts);
-                    setStates(
-                        formattedProducts.map(() => ({
-                            showQuantity: false,
-                            quantity: 1,
-                        })),
-                    );
                 }
             } catch (error) {
                 toast.error(error.response?.data?.message?.error?.[0]);
@@ -324,13 +292,7 @@ function CampaignProduct() {
                 formatProduct(p, res.data.data),
             );
             setProducts((prev) => [...prev, ...newFormatted]);
-            setStates((prev) => [
-                ...prev,
-                ...newFormatted.map(() => ({
-                    showQuantity: false,
-                    quantity: 1,
-                })),
-            ]);
+
             setData((prev) => ({
                 ...prev,
                 products: {
@@ -340,8 +302,7 @@ function CampaignProduct() {
             }));
         } catch (error) {
             toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to load more products",
+                error.response?.data?.message?.error?.[0] || t("failedToLoad"),
             );
         } finally {
             setLoadMoreLoading(false);

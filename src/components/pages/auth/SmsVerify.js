@@ -3,16 +3,15 @@ import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { LoaderCircle } from "lucide-react";
 import Button from "@/components/utility/Button";
 import {
     resendAuthorizationCodeAPI,
     authorizationCodeAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-import logo from "@public/images/logo/favicon.jpeg";
 import getImageUrl from "@/components/utility/getImageUrl";
 import { useTranslations } from "next-intl";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export default function SmsVerify() {
     const t = useTranslations("Auth.smsVerify");
@@ -194,7 +193,7 @@ export default function SmsVerify() {
                                 placeholder={t("placeholder")}
                                 value={otp}
                                 onChange={handleOtpChange}
-                                maxLength={12} // Accounts for " - " separators if needed
+                                maxLength={12}
                                 className={`w-full px-4 bg-gray-50 py-3.5 text-base font-medium rounded-lg border transition-all duration-200 focus:outline-none focus:ring-2 
                         ${
                             error
@@ -228,7 +227,7 @@ export default function SmsVerify() {
                                 >
                                     {loadingResend ? (
                                         <span className="inline-flex items-center">
-                                            <LoaderCircle className="w-4 h-4 mr-1 animate-spin" />
+                                            <ArrowPathIcon className="w-4 h-4 mr-1 animate-spin" />
                                             {t("sending")}
                                         </span>
                                     ) : (

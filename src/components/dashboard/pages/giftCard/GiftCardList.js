@@ -2,11 +2,12 @@
 import { useState, useEffect } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Link } from "@/i18n/navigation";
 import { allGiftCardGetAPI } from "@root/services/apiClient/apiClient";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -43,7 +44,7 @@ export default function GiftCardList() {
                 setProducts(result?.data?.data?.products || {});
                 setTotalPages(result?.data?.data?.products?.last_page || 1);
             } catch (error) {
-                toast.error(t("errors.loadFailed"));
+                handleApiError(error, t("errors.loadFailed"));
                 // reset data on error
                 setGiftCards([]);
                 setCountries([]);
@@ -130,7 +131,9 @@ export default function GiftCardList() {
                                 className="bg-white block rounded-xl shadow overflow-hidden transform transition-all duration-300 border border-transparent hover:border-blue-800/70 hover:shadow-xl cursor-pointer"
                             >
                                 {card?.logoUrls?.length > 0 && (
-                                    <img
+                                    <Image
+                                        width={500}
+                                        height={500}
                                         src={card?.logoUrls[0]}
                                         alt={
                                             card?.productName ||

@@ -113,7 +113,7 @@ export default function MakePaymentSection({ setRefetch }) {
                     monthlyLimit: data?.remainingMonthly,
                 });
             } catch (error) {
-                handleApiError(error, "Failed to fetch remaining limits");
+                handleApiError(error, t("failedToFetchLimits"));
                 const data = error?.response?.data?.data;
 
                 setRemainingLimit({
@@ -308,7 +308,7 @@ export default function MakePaymentSection({ setRefetch }) {
         };
 
         fetchInitialData();
-    }, [wallet.selectedCurrency]);
+    }, [wallet.selectedCurrency, makePaymentData.makePaymentCharge]);
 
     useEffect(() => {
         const checkUser = async () => {
@@ -347,7 +347,7 @@ export default function MakePaymentSection({ setRefetch }) {
                 videoRef.current.srcObject = stream;
             }
         } catch (err) {
-            toast.error(t("cameraError"));
+            handleApiError(err, t("cameraError"));
             setIsCameraOpen(false);
         }
     };
@@ -372,7 +372,7 @@ export default function MakePaymentSection({ setRefetch }) {
         }
     };
 
-    const handleMakePayment = async (e) => {
+    const handleMakePayment = async () => {
         try {
             setIsSubmitting(true);
             const response = await submitMakePaymentAPI(

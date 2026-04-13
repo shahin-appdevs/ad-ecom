@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, useState, useEffect } from "react";
 import { walletGetAPI } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
+import { handleApiError } from "../utility/handleApiError";
 
 const WalletContext = createContext();
 
@@ -26,16 +26,6 @@ export function WalletProvider({ children }) {
                 (wallet) => wallet.currency.default,
             );
 
-            // old condition
-            // const currencies =
-            //     data?.userWallets?.map((wallet) => wallet.currency) || [];
-            // const userWallet = data?.userWallets?.find(
-            //     (wallet) =>
-            //         wallet.currency.default ||
-            //         (currencies.length > 0 &&
-            //             wallet.currency.code === currencies[0].code),
-            // );
-
             setWallet((prev) => ({
                 ...prev,
                 currencies,
@@ -45,7 +35,7 @@ export function WalletProvider({ children }) {
                 currencyCode: userWallet?.currency?.code || "",
             }));
         } catch (error) {
-            toast.error("Failed to fetch wallet data");
+            handleApiError(error, "Failed to fetch wallet data");
         }
     };
 

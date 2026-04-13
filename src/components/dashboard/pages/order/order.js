@@ -6,6 +6,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "@/i18n/navigation";
 import { ComputerDesktopIcon } from "@heroicons/react/24/outline";
 import { useTranslations } from "next-intl";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 function SkeletonRow() {
     return (
@@ -46,6 +47,7 @@ export default function OrderSection() {
     const [orders, setOrders] = useState([]);
     const router = useRouter();
     const t = useTranslations("Dashboard.ecommerce.orderLog");
+    const { baseCurrencySymbol } = getBaseCurrency(apiData);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -195,11 +197,13 @@ export default function OrderSection() {
                                         #{order.order_id || "N/A"}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                        {baseCurrencySymbol}{" "}
                                         {parseFloat(
                                             order.product_total,
                                         ).toFixed(2)}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                        {baseCurrencySymbol}{" "}
                                         {parseFloat(order.delivery_fee).toFixed(
                                             2,
                                         )}
@@ -211,13 +215,11 @@ export default function OrderSection() {
                                         {order.payment_method}
                                     </td>
                                     <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
+                                        {baseCurrencySymbol}{" "}
                                         {parseFloat(order?.grand_total).toFixed(
                                             2,
                                         )}
                                     </td>
-                                    {/* <td className="py-3.5 px-5 whitespace-nowrap text-sm font-medium">
-                                        {parseFloat(order.profit_amount).toFixed(2)}
-                                    </td> */}
                                     <td className="py-3.5 px-5 whitespace-nowrap">
                                         <span
                                             className={`px-3 inline-flex text-[10px] leading-5 font-semibold rounded-[4px] ${getStatusColor(order.status)}`}

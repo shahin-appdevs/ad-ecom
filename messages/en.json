@@ -1,4 +1,8 @@
 {
+    "Metadata": {
+        "title": "AD e-commerce",
+        "description": "Multi vendor e-commerce platform"
+    },
     "HomePage": {
         "header": {
             "searchPlaceholder": "Search by name...",
@@ -14,7 +18,8 @@
             "cart": {
                 "title": "Cart",
                 "checkout": "Checkout",
-                "emptyMsg": "Your cart is empty"
+                "emptyMsg": "Your cart is empty",
+                "quantity": "Qty"
             },
             "wishlist": {
                 "title": "Wishlist",
@@ -48,20 +53,26 @@
             "sec": "Sec",
             "viewMore": "View More",
             "loadMore": "Load More",
-            "off": "off"
+            "off": "off",
+            "failedToLoad": "Failed to load flash products",
+            "failedFetchProfile": "Failed to fetch profile"
         },
         "newArrival": {
             "newArrivalTitle": "New Arrival",
             "viewMore": "View More",
             "loadMore": "Load More",
-            "off": "off"
+            "off": "off",
+            "failedToLoad": "Failed to load new products",
+            "failedFetchProfile": "Failed to load profile"
         },
         "shopByBrand": {
             "title": "Shop by Brand",
             "viewMore": "View More",
             "loadMore": "Load More",
             "noProductsFound": "No products found",
-            "off": "off"
+            "failedToLoad": "Failed to load brands",
+            "off": "off",
+            "failedFetchProfile": "Failed to fetch profile"
         },
         "stalls": {
             "title": "Stalls",
@@ -128,18 +139,27 @@
         "close": "Close",
         "referral": {
             "shareTitle": "Share Referral Link",
-            "shareText": "Share this link with your friends to earn commissions:"
+            "shareText": "Share this link with your friends to earn commissions:",
+            "linkCopied": "Referral link copied to clipboard!"
         },
         "relatedProduct": {
             "title": "Related Products",
             "noProductsFound": "No products found",
-            "off": "off"
+            "off": "off",
+            "failedFetchUserProfile": "Failed to load profile"
         },
         "noDescription": "No description available",
         "noDetails": "No details available",
-        "referralLink": "Referral Link"
+        "referralLink": "Referral Link",
+        "variants": {
+            "noVariants": "No variants"
+        }
     },
     "Dashboard": {
+        "DashboardLayout": {
+            "sessionExpired": "Session expired or invalid. Please login again.",
+            "failedToLoadDashboardData": "Failed to load dashboard data"
+        },
         "topBar": {
             "profile": "Profile",
             "setupPin": "Setup Pin",
@@ -147,7 +167,9 @@
             "logout": "Logout",
             "confirmLogout": "Confirm Logout",
             "logoutConfirmation": "Are you sure you want to logout?",
-            "cancel": "Cancel"
+            "cancel": "Cancel",
+            "somethingWentWrong": "Something went wrong",
+            "logoutSuccessful": "Logout successful"
         },
         "sidenav": {
             "dashboard": "Dashboard",
@@ -189,7 +211,8 @@
             "confirmLogout": "Confirm Logout",
             "logoutConfirmText": "Are you sure you want to logout?",
             "cancel": "Cancel",
-            "walletAccount": "Wallet Account"
+            "walletAccount": "Wallet Account",
+            "somethingWentWrong": "Something went wrong"
         },
         "wallet": {
             "addMoney": {
@@ -241,6 +264,41 @@
                     "title": "Add Money Canceled!",
                     "message": "Thank you for your submission. But your transaction has been canceled and will be processed shortly.",
                     "continueButton": "Continue Add Money"
+                },
+                "manual": {
+                    "noPaymentDataFound": "No payment data found",
+                    "loadingPaymentDetails": "Loading payment details...",
+                    "confirmPayment": "Confirm Payment",
+                    "confirming": "Confirming...",
+                    "paymentSummary": "Payment Summary",
+                    "transactionId": "Transaction ID",
+                    "paymentMethod": "Payment Method",
+                    "amount": "Amount",
+                    "exchangeRate": "Exchange Rate",
+                    "payableAmount": "Payable Amount",
+                    "noAdditionalInfo": "No additional information required",
+                    "maxCharacters": "Maximum {max} characters",
+                    "enter": "Enter",
+                    "select": "Select",
+                    "submissionFailed": "Submission failed",
+                    "missingRequiredFields": "Please fill all required fields: {fields}"
+                },
+                "crypto": {
+                    "noPaymentDataFound": "No payment data found",
+                    "loadingPaymentDetails": "Loading payment details...",
+                    "walletAddress": "Wallet Address",
+                    "addressCopied": "Address copied to clipboard!",
+                    "transactionHash": "Transaction Hash",
+                    "enterTxnHash": "Enter transaction hash",
+                    "txnHashFormat": "Enter a valid transaction hash (0x followed by 64 characters)",
+                    "confirmPayment": "Confirm Payment",
+                    "confirming": "Confirming...",
+                    "preview": "Preview",
+                    "transactionId": "Transaction ID",
+                    "requestAmount": "Request Amount",
+                    "networkFee": "Network Fee",
+                    "exchangeRate": "Exchange Rate",
+                    "submissionFailed": "Submission failed"
                 }
             },
             "exchangeMoney": {
@@ -269,6 +327,10 @@
                 "invalidAmount": "Please enter a valid amount",
                 "selectBoth": "Please select both currencies",
                 "somethingWrong": "Something went wrong.",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
+                "failedToLoadExchange": "Failed to load exchange data",
+                "failedToLoadExchangeData": "Failed to load exchange data",
+
                 "exchangeMoneyLog": {
                     "title": "Money Exchange Logs",
                     "viewAll": "View All",
@@ -327,6 +389,7 @@
                 "monthlyLimit": "Monthly Limit",
                 "dailyRemaining": "Daily Remaining Limit",
                 "monthlyRemaining": "Monthly Remaining Limit",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
                 "sendMoneyLog": {
                     "title": "Send Money Logs",
                     "viewAll": "View All",
@@ -375,6 +438,7 @@
                 "monthlyLimit": "Monthly Limit",
                 "dailyRemaining": "Daily Remaining Limit",
                 "monthlyRemaining": "Monthly Remaining Limit",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
                 "requestMoneyLog": {
                     "title": "Request Money Logs",
                     "viewAll": "View All",
@@ -449,6 +513,10 @@
                     "secureSave": "Securely save my information for 1-click checkout",
                     "payFaster": "Pay faster on and everywhere Link is accepted",
                     "pay": "Pay",
+                    "paymentLinkCreated": "Payment link created successfully",
+                    "invalidServerResponse": "Invalid response from server",
+                    "failedToCreatePaymentLink": "Failed to create payment link",
+                    "failedToLoadPaymentLinkData": "Failed to load payment link data",
                     "types": {
                         "pay": "Customers Choose What To Pay",
                         "product": "Products Or Subscriptions"
@@ -571,6 +639,7 @@
                 "monthlyLimit": "Monthly Limit",
                 "dailyRemaining": "Daily Remaining Limit",
                 "monthlyRemaining": "Monthly Remaining Limit",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
                 "moneyOutLog": {
                     "title": "Money Out Logs",
                     "viewAll": "View All",
@@ -619,6 +688,10 @@
                 "monthlyLimit": "Monthly Limit",
                 "dailyRemaining": "Daily Remaining Limit",
                 "monthlyRemaining": "Monthly Remaining Limit",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
+                "failedToLoadMakePayment": "Failed to load make payment information",
+                "failedToFetchExchangeRate": "Failed to fetch exchange rate",
+                "failedToFetchProfile": "Failed to fetch profile",
                 "makePaymentLog": {
                     "title": "Make Payment Logs",
                     "viewAll": "View All",
@@ -709,6 +782,23 @@
                     "failedBanks": "Failed to load banks",
                     "failedBranches": "Failed to load branches",
                     "loading": "Loading..."
+                },
+                "withdrawManual": {
+                    "mobileNumber": "Mobile Number",
+                    "mobileNumberPlaceholder": "Enter your mobile number",
+                    "pin": "PIN",
+                    "pinPlaceholder": "Enter your PIN",
+                    "transactionId": "Transaction ID",
+                    "transactionIdPlaceholder": "Enter transaction ID",
+                    "confirmWithdraw": "Confirm Withdraw",
+                    "confirming": "Confirming...",
+                    "preview": "Preview",
+                    "transactionIdLabel": "Transaction ID",
+                    "paymentMethod": "Payment Method",
+                    "amount": "Amount",
+                    "exchangeRate": "Exchange Rate",
+                    "payableAmount": "Payable Amount",
+                    "invalidTransactionData": "Invalid transaction data"
                 }
             }
         },
@@ -780,11 +870,14 @@
                 "currentBalance": "Current Balance",
                 "status": "status",
                 "timeAndDate": "Time & Date",
-                "noTransactions": "No bill pay transactions found"
+                "noTransactions": "No bill pay transactions found",
+                "failedToLoadBillPay": "Failed to load bill pay data",
+                "failedToFetchLimits": "Failed to fetch remaining limits",
+                "somethingWentWrong": "Something went wrong"
             },
             "topup": {
                 "topUpType": "Top Up Type",
-                "bdTopUp": "BD TopUp",
+                "localTopUp": "Local TopUp",
                 "global": "Global",
                 "continue": "Continue",
                 "topupLog": "Mobile Topup Logs",
@@ -826,7 +919,19 @@
                     "dailyLimit": "Daily Limit",
                     "monthlyLimit": "Monthly Limit",
                     "dailyRemainingLimit": "Daily Remaining Limit",
-                    "monthlyRemainingLimit": "Monthly Remaining Limit"
+                    "monthlyRemainingLimit": "Monthly Remaining Limit",
+                    "failedFetchLimits": "Failed to fetch remaining limits",
+                    "failedLoad": "Failed to load mobile topup data",
+                    "topupSuccess": "Top-up successful",
+                    "topupFailed": "Top-up failed",
+                    "invalidMobile": "Invalid mobile number",
+                    "selectOperatorError": "Please select an operator",
+                    "selectTypeError": "Please select an operator type",
+                    "enterMobileError": "Please enter a mobile number",
+                    "enterAmountError": "Please enter an amount",
+                    "invalidAmount": "Please enter a valid amount",
+                    "amountMin": "Amount must be at least",
+                    "amountMax": "Amount must not exceed"
                 },
                 "globalTopup": {
                     "exchangeRate": "Exchange Rate",
@@ -852,7 +957,19 @@
                     "dailyLimit": "Daily Limit",
                     "monthlyLimit": "Monthly Limit",
                     "dailyRemainingLimit": "Daily Remaining Limit",
-                    "monthlyRemainingLimit": "Monthly Remaining Limit"
+                    "monthlyRemainingLimit": "Monthly Remaining Limit",
+                    "failedFetchLimits": "Failed to fetch remaining limits",
+                    "failedLoadData": "Failed to load mobile topup data",
+                    "operatorFound": "Operator found successfully",
+                    "operatorNotFound": "Operator not found",
+                    "failedCheckOperator": "Failed to check operator",
+                    "topupSuccess": "Mobile topup successful!",
+                    "failedProcess": "Failed to process mobile topup",
+                    "invalidAmount": "Please enter a valid amount",
+                    "invalidMobile": "Please enter a valid mobile number",
+                    "amountMin": "Amount must be at least",
+                    "amountMax": "Amount must not exceed",
+                    "invalidOperator": "Please select a valid operator"
                 }
             }
         },
@@ -1456,7 +1573,8 @@
                     "dailyLimit": "Daily Limit",
                     "monthlyLimit": "Monthly Limit",
                     "remainingDailyLimit": "Remaining Daily Limit",
-                    "remainingMonthlyLimit": "Remaining Monthly Limit"
+                    "remainingMonthlyLimit": "Remaining Monthly Limit",
+                    "failedToFetchLimits": "Failed to fetch remaining limits"
                 },
                 "singleCardTrx": {
                     "recentTransaction": "Recent Transaction",
@@ -1502,7 +1620,8 @@
                     "dailyLimit": "Daily Limit",
                     "monthlyLimit": "Monthly Limit",
                     "remainingDailyLimit": "Remaining Daily Limit",
-                    "remainingMonthlyLimit": "Remaining Monthly Limit"
+                    "remainingMonthlyLimit": "Remaining Monthly Limit",
+                    "failedToLoadWalletsData": "Failed to load wallets data"
                 },
                 "virtualCardDetails": {
                     "title": "Card Information",
@@ -1526,7 +1645,10 @@
                     "makingDefault": "Making Default",
                     "makeDefault": "Make Default",
                     "unfreeze": "Unfreeze",
-                    "freeze": "Freeze"
+                    "freeze": "Freeze",
+                    "failedToFetchCardDetails": "Failed to fetch card details",
+                    "failedToUnfreezeCard": "Failed to unfreeze card",
+                    "failedToUpdateStatus": "Failed to update status"
                 },
                 "virtualCardWebhookTrx": {
                     "title": "Webhook Transactions",
@@ -1551,6 +1673,11 @@
                     "yourPhoto": "Your Photo",
                     "submitting": "Submitting...",
                     "submit": "Submit"
+                },
+                "pendingModal": {
+                    "title": "Submitted Successfully!",
+                    "message": "Your request has been submitted successfully. Please wait for approval.",
+                    "updateCustomer": "Update Customer"
                 }
             },
             "giftCard": {
@@ -1732,6 +1859,7 @@
             "enterShippingAddress": "Enter Shipping Address",
             "enterDivision": "Enter Division",
             "enterDistrict": "Enter District",
+            "enterUpazilla": "Enter Upazilla",
             "deliveryOption": "Delivery option",
             "deliveryFee": "Delivery fee:",
             "orderSummary": "Order Summary",
@@ -1744,7 +1872,8 @@
             "confirm": "Confirm",
             "confirming": "Confirming...",
             "itemRemoved": "Item removed from cart",
-            "insideDhaka": "Inside Dhaka"
+            "insideDhaka": "Inside Dhaka",
+            "failedToOrder": "Failed to order"
         }
     },
     "Auth": {
@@ -1865,7 +1994,29 @@
             "registerNow": "Register Now",
             "verifyRecaptcha": "Please verify reCAPTCHA",
             "loginSuccess": "Login successful",
-            "loginFailed": "Login failed. Please try again."
+            "loginFailed": "Login failed. Please try again.",
+            "failedToLoadBasicData": "Failed to load basic data",
+            "somethingWentWrong": "Something went wrong"
+        },
+        "otp": {
+            "title": "OTP Verification",
+            "subtitle": "Enter the verification code sent to your phone",
+            "verificationCode": "Verification Code",
+            "enterCodePlaceholder": "Enter 6-digit code",
+            "didntReceiveCode": "Didn't receive code?",
+            "resendCode": "Resend Code",
+            "sending": "Sending...",
+            "resendIn": "Resend code in",
+            "verify": "Verify",
+            "verifying": "Verifying...",
+            "backToLogin": "Back to login?",
+            "logIn": "Log In",
+            "createAccount": "Create Account",
+            "verificationCodeResent": "Verification code resent successfully",
+            "failedToResendCode": "Failed to resend code. Please try again.",
+            "failedToResendVerificationCode": "Failed to resend verification code. Please try again later.",
+            "invalidOtp": "Please enter a valid 6-digit OTP",
+            "verificationFailed": "Verification failed. Please try again."
         }
     },
     "Category": {
@@ -1874,20 +2025,31 @@
             "subCategories": "Sub Categories",
             "noProductsFound": "No products found",
             "off": "Off",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "failedFetchProfile": "Failed to fetch profile",
+            "failedToLoad": "Failed to load products",
+            "failedToLoadMoreProducts": "Failed to load more products"
         },
         "subCategory": {
             "moreCategories": "More Categories",
             "products": "Products",
             "noProductsFound": "No products found",
             "off": "off",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "failedFetchProfile": "Failed to fetch profile",
+            "failedToLoad": "Failed to load products"
         },
         "subChildCategory": {
             "products": "Products",
             "noProductsFound": "No products found",
             "off": "off",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "failedToLoad": "Failed to load products",
+            "failedFetchProfile": "Failed to fetch profile"
+        },
+        "categorySidebar": {
+            "categories": "Categories",
+            "browseCategory": "Browse Category"
         }
     },
     "Campaign": {
@@ -1895,6 +2057,7 @@
         "allCampaigns": "All Campaigns",
         "noCampaignsAvailable": "No campaigns available at the moment.",
         "loadMore": "Load More",
+        "failedToLoad": "Failed to load campaigns",
         "campaignProduct": {
             "endsIn": "Ends in",
             "noProductsFound": "No products found",
@@ -1903,7 +2066,9 @@
             "days": "days",
             "hours": "hours",
             "min": "min",
-            "sec": "sec"
+            "sec": "sec",
+            "failedFetchProfile": "Failed to fetch profile",
+            "failedToLoad": "Failed to load products"
         }
     },
     "Collection": {
@@ -1911,15 +2076,46 @@
         "allOffers": "All Offers",
         "noCollectionsAvailable": "No collections available at the moment.",
         "loadMore": "Load More",
+        "failedToLoad": "Failed to load more products",
         "collectionProduct": {
             "noProductsFound": "No products found",
             "off": "off",
-            "loadMore": "Load More"
+            "loadMore": "Load More",
+            "failedFetchProfile": "Failed to fetch profile",
+            "failedToLoad": "Failed to load products"
         }
     },
-    "StallDetails": {
-        "noProductsFound": "No products found",
-        "off": "off",
-        "loadMore": "Load More"
+    "Stall": {
+        "title": "Stalls",
+        "viewMore": "View More",
+        "failedFetchStalls": "Failed to fetch stalls",
+        "StallDetails": {
+            "noProductsFound": "No products found",
+            "off": "off",
+            "loadMore": "Load More",
+            "failedFetchProfile": "Failed to fetch profile",
+            "failedToLoad": "Failed to load products"
+        }
+    },
+
+    "CategoryPage": {
+        "title": "All Categories",
+        "viewAll": "View All"
+    },
+    "Terms": {
+        "failedToLoad": "Failed to load terms and conditions"
+    },
+    "Refund": {
+        "failedToLoad": "Failed to load refund policy"
+    },
+    "Privacy": {
+        "failedToLoad": "Failed to load privacy policy"
+    },
+    "CopyToClipboard": {
+        "copied": "Copied to clipboard",
+        "copyFailed": "Copy failed"
+    },
+    "Wishlist": {
+        "error": "useWishlist must be used within WishlistProvider"
     }
 }

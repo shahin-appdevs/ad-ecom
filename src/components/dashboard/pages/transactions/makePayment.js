@@ -154,22 +154,22 @@ export default function MakePaymentHistorySection() {
                                     {t("trx")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Request Amount
+                                    {t("requestAmount")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Payable
+                                    {t("payable")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Exchange Rate
+                                    {t("rate")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Fees & Charges
+                                    {t("fees")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Recipient Received
+                                    {t("recipientReceived")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
-                                    Current Balance
+                                    {t("balance")}
                                 </th>
                                 <th className="py-4 px-5 font-semibold">
                                     {t("status")}

@@ -37,11 +37,12 @@ import {
 import { toast } from "react-hot-toast";
 import { useCart } from "@/components/context/CartContext";
 import { useWishlist } from "@/components/context/WishlistContext";
-import chatUserThree from "@public/images/user/chatUserThree.png";
+import chatUserThree from "@public/images/user/chat-user-3.png";
 import ProductZoomImage from "./productDetails/ProductZoomImage";
 import ProductThumbnails from "./productDetails/ProductThumbnails";
 import VerticalProductGallery from "./productDetails/VerticalSlider";
 import { useTranslations } from "next-intl";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -153,12 +154,10 @@ function ProductDetails() {
 
     const [data, setData] = useState(null);
     const [product, setProduct] = useState(null);
-    const [recentlyViewedProduct, setRecentlyViewedProduct] = useState([]);
     const [loading, setLoading] = useState(true);
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
     const [review, setReview] = useState("");
-    const [showReviews, setShowReviews] = useState(false);
     const searchParams = useSearchParams();
     const idParam = searchParams.get("id");
     const [productId, setProductId] = useState(null);
@@ -192,7 +191,6 @@ function ProductDetails() {
 
     useEffect(() => {
         if (referCodeFromUrl) {
-            console.log("Referral code from URL:", referCodeFromUrl);
             localStorage.setItem("product_refer_code", referCodeFromUrl);
         }
     }, [referCodeFromUrl]);
@@ -220,7 +218,7 @@ function ProductDetails() {
         const referralLink = getReferralLink();
         if (referralLink) {
             navigator.clipboard.writeText(referralLink);
-            toast.success("Referral link copied to clipboard!");
+            toast.success(t("referral.linkCopied"));
         }
     };
 
@@ -295,7 +293,7 @@ function ProductDetails() {
                 Object.entries(selectedVariants)
                     .sort(([a], [b]) => a.localeCompare(b))
                     .map(([k, v]) => `${k}:${v}`)
-                    .join("||") || "no-variants";
+                    .join("||") || t("variants.noVariants");
             const currentUniqueId = `${data.product.id}-${variantKey}`;
             const cartItem = parsedCart.find(
                 (item) => item.uniqueId === currentUniqueId,
@@ -326,9 +324,6 @@ function ProductDetails() {
                     setData(response.data.data);
                     setProduct(response.data.data.product);
 
-                    setRecentlyViewedProduct(
-                        response.data.data.recently_viewed_products,
-                    );
                     // review
                     const reviewsData =
                         response.data.data.product_reviews || [];
@@ -396,11 +391,7 @@ function ProductDetails() {
             setReviewLoading(false);
         }
     };
-
-    const currencySymbol = data?.base_curr_symbol || "৳";
-    const toggleReviews = () => {
-        setShowReviews(!showReviews);
-    };
+    const { baseCurrencySymbol } = getBaseCurrency(data);
 
     const handleWishlist = async (e) => {
         if (!isLoggedIn && !isSellerLoggedIn) {
@@ -478,10 +469,10 @@ function ProductDetails() {
         stock: product.product_quantity,
         sku: product.product_sku,
         newPrice: product.sale_price
-            ? `${currencySymbol}${parseFloat(product.sale_price).toFixed(2)}`
-            : `${currencySymbol}0.00`,
+            ? `${baseCurrencySymbol}${parseFloat(product.sale_price).toFixed(2)}`
+            : `${baseCurrencySymbol}0.00`,
         oldPrice: product.list_price
-            ? `${currencySymbol}${parseFloat(product.list_price).toFixed(2)}`
+            ? `${baseCurrencySymbol}${parseFloat(product.list_price).toFixed(2)}`
             : null,
         image: product.main_image
             ? `${backendBaseURL}/${data.main_image_path}/${product.main_image}`
@@ -523,10 +514,10 @@ function ProductDetails() {
             id: product.id,
             title: product.title,
             newPrice: product.product_prices?.sale_price
-                ? `${currencySymbol}${parseFloat(product.product_prices.sale_price).toFixed(2)}`
-                : `${currencySymbol}0.00`,
+                ? `${baseCurrencySymbol}${parseFloat(product.product_prices.sale_price).toFixed(2)}`
+                : `${baseCurrencySymbol}0.00`,
             oldPrice: product.product_prices?.list_price
-                ? `${currencySymbol}${parseFloat(product.product_prices.list_price).toFixed(2)}`
+                ? `${baseCurrencySymbol}${parseFloat(product.product_prices.list_price).toFixed(2)}`
                 : null,
             image: product.main_image
                 ? `${backendBaseURL}/${data.main_image_path}/${product.main_image}`

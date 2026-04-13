@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { LoaderCircle } from "lucide-react";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
 import {
     resendAuthorizationCodeSellerAPI,
@@ -11,7 +11,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
-import logo from "@public/images/logo/favicon.jpeg";
+const logo = "";
 
 export default function Authorization() {
     const [otp, setOtp] = useState("");
@@ -146,7 +146,7 @@ export default function Authorization() {
                         className="rounded-full"
                     />
                     <div>
-                        <h6 className="font-semibold">JARA B2B.COM</h6>
+                        <h6 className="font-semibold">AD e-commerce</h6>
                         <p className="text-sm text-gray-600">
                             Enter the verification code sent to your phone
                         </p>
@@ -178,7 +178,7 @@ export default function Authorization() {
                     <div className="text-sm">
                         {canResend ? (
                             <p>
-                                Didn't receive code?{" "}
+                                Didn&apos;t receive code?{" "}
                                 <button
                                     type="button"
                                     onClick={handleResend}
@@ -187,7 +187,7 @@ export default function Authorization() {
                                 >
                                     {loadingResend ? (
                                         <span className="inline-flex items-center">
-                                            <LoaderCircle className="w-4 h-4 mr-1 animate-spin" />
+                                            <ArrowPathIcon className="w-4 h-4 mr-1 animate-spin" />
                                             Sending...
                                         </span>
                                     ) : (

@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import {
     requestMoneyGetAPI,
     SubmitRequestMoneyAPI,
-    requestMoneyCheckUserAPI,
     requestMoneyScanAPI,
     walletCardRemainingLimitsGetAPI,
 } from "@root/services/apiClient/apiClient";
@@ -40,7 +39,7 @@ export default function RequestMoneySection({ setRefetch }) {
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [defaultCurrency, setDefaultCurrency] = useState({
-        code: "BDT",
+        code: "",
         rate: "1.0000",
     });
     const [amount, setAmount] = useState("");
@@ -49,7 +48,6 @@ export default function RequestMoneySection({ setRefetch }) {
     const [isCameraOpen, setIsCameraOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [userData, setUserData] = useState(null);
     const [showPinModal, setShowPinModal] = useState(false);
     const [requestMoneyData, setRequestMoneyData] = useState({
         requestMoneyCharge: {
@@ -75,16 +73,6 @@ export default function RequestMoneySection({ setRefetch }) {
             setSelectedCurrency(wallet.selectedCurrency);
         }
     }, [wallet.selectedCurrency]);
-
-    // Calculate exchange rate between sender and receiver currencies
-    const exchangeRate = useMemo(() => {
-        if (selectedCurrency && defaultCurrency) {
-            const senderRate = parseFloat(selectedCurrency.rate || 1);
-            const receiverRate = parseFloat(defaultCurrency.rate || 1);
-            return receiverRate / senderRate;
-        }
-        return 1;
-    }, [selectedCurrency, defaultCurrency]);
 
     const exchangeRateText = useMemo(() => {
         if (selectedCurrency && defaultCurrency) {
@@ -204,20 +192,6 @@ export default function RequestMoneySection({ setRefetch }) {
         };
     }, [selectedCurrency, requestMoneyData.requestMoneyCharge, remainingLimit]);
 
-    useEffect(() => {
-        fetchRequestMoneyData();
-    }, []);
-
-    useEffect(() => {
-        if (credentials && credentials.length > 3) {
-            const timer = setTimeout(() => {
-                checkUser();
-            }, 500);
-
-            return () => clearTimeout(timer);
-        }
-    }, [credentials]);
-
     const fetchRequestMoneyData = async () => {
         try {
             setIsLoading(true);
@@ -230,8 +204,8 @@ export default function RequestMoneySection({ setRefetch }) {
                     requestMoneyData.requestMoneyCharge,
             });
             setDefaultCurrency({
-                code: data.base_curr,
-                rate: data.base_curr_rate,
+                code: data.base_curr || "",
+                rate: data.base_curr_rate || "1.0000",
             });
         } catch (error) {
             toast.error(
@@ -241,6 +215,9 @@ export default function RequestMoneySection({ setRefetch }) {
             setIsLoading(false);
         }
     };
+    useEffect(() => {
+        fetchRequestMoneyData();
+    }, []);
 
     // fetch remaining limits
     useEffect(() => {
@@ -274,7 +251,7 @@ export default function RequestMoneySection({ setRefetch }) {
                     monthlyLimit: data?.remainingMonthly,
                 });
             } catch (error) {
-                handleApiError(error, "Failed to fetch remaining limits");
+                handleApiError(error, t("failedToFetchLimits"));
                 const data = error?.response?.data?.data;
 
                 setRemainingLimit({
@@ -287,26 +264,10 @@ export default function RequestMoneySection({ setRefetch }) {
         })();
     }, [amount, requestMoneyData, selectedCurrency]);
 
-    const checkUser = async () => {
-        try {
-            const response = await requestMoneyCheckUserAPI(credentials);
-            setUserData(response.data.data);
-            toast.success(t("userFoundValid"));
-        } catch (error) {
-            setUserData(null);
-            if (error.response?.status !== 404) {
-                toast.error(
-                    error.response?.data?.message?.error?.[0] ||
-                        t("errorCheckingUser"),
-                );
-            }
-        }
-    };
-
-    const handleRequestMoney = async (e) => {
+    const handleRequestMoney = async () => {
         try {
             setIsSubmitting(true);
-            const response = await SubmitRequestMoneyAPI(
+            await SubmitRequestMoneyAPI(
                 amount,
                 selectedCurrency.code,
                 credentials,
@@ -318,9 +279,7 @@ export default function RequestMoneySection({ setRefetch }) {
             setCredentials("");
             setRemark("");
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] || t("failedRequest"),
-            );
+            handleApiError(error, t("failedRequest"));
         } finally {
             setIsSubmitting(false);
             setRefetch((isRefetch) => !isRefetch);
@@ -340,9 +299,7 @@ export default function RequestMoneySection({ setRefetch }) {
             toast.success("QR code scanned successfully");
             closeCamera();
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] || t("failedScan"),
-            );
+            handleApiError(error, t("failedScan"));
             closeCamera();
         }
     };
@@ -363,7 +320,7 @@ export default function RequestMoneySection({ setRefetch }) {
                 videoRef.current.srcObject = stream;
             }
         } catch (err) {
-            toast.error(t("cameraError"));
+            handleApiError(err, t("cameraError"));
             setIsCameraOpen(false);
         }
     };

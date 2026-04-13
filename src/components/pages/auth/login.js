@@ -1,7 +1,6 @@
 "use client";
 import { Suspense, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { Link, useRouter } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import {
@@ -12,11 +11,11 @@ import {
 import useAuthRedirect from "@/components/utility/useAuthRedirect";
 import { useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
-import logo from "@public/images/logo/favicon.jpeg";
 import ReCAPTCHA from "react-google-recaptcha";
 import { handleApiError } from "@/components/utility/handleApiError";
 import getImageUrl from "@/components/utility/getImageUrl";
 import { useLocale, useTranslations } from "next-intl";
+import { useAppSettings } from "@/hooks/useAppSettings";
 
 function Login() {
     useAuthRedirect();
@@ -27,7 +26,7 @@ function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [recaptcha, setRecaptcha] = useState(null);
     const [loginBasicData, setLoginBasicData] = useState(null);
-    const [appSettingsData, setAppSettingsData] = useState(null);
+    const { appSettingsData } = useAppSettings();
     const locale = useLocale();
     const t = useTranslations("Auth.login");
     const searchParams = useSearchParams();
@@ -42,9 +41,6 @@ function Login() {
 
     // get app settings from session storage
     useEffect(() => {
-        const appSettings = sessionStorage.getItem("appSettings");
-        setAppSettingsData(appSettings ? JSON.parse(appSettings) : null);
-
         // get redirect url from session storage
         const url = sessionStorage?.getItem("redirectAfterLogin");
         setRedirectUrl(url);
@@ -53,10 +49,10 @@ function Login() {
     useEffect(() => {
         (async () => {
             try {
-                const result = await basicDataGetAPI();
+                const result = await basicDataGetAPI(locale);
                 setLoginBasicData(result?.data?.data);
             } catch (error) {
-                handleApiError(error, "Failed to fetch basic data");
+                handleApiError(error, t("failedToFetchBasicData"));
             }
         })();
     }, []);
@@ -78,7 +74,7 @@ function Login() {
             formData.append("g-recaptcha-response", recaptcha);
             formData.append("language", locale);
 
-            const response = await loginAPI(formData);
+            const response = await loginAPI(formData, locale);
 
             if (response?.data?.data?.token) {
                 const token = response.data.data.token;
@@ -122,7 +118,7 @@ function Login() {
 
                 toast.success(successMessage);
             } else {
-                toast.error("Login failed. Please try again.");
+                toast.error(t("loginFailed"));
             }
         } catch (err) {
             const errorMessage =
@@ -222,7 +218,7 @@ function Login() {
                                     onChange={(e) =>
                                         setCredentials(e.target.value)
                                     }
-                                    className="block w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary__color/50 focus:border-primary__color transition-all duration-200 bg-gray-50 focus:bg-white"
+                                    className="block rtl:text-right w-full px-4 py-3 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary__color/50 focus:border-primary__color transition-all duration-200 bg-gray-50 focus:bg-white"
                                     required
                                 />
                             </div>

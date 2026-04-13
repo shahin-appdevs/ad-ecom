@@ -3,12 +3,12 @@ import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { PlusIcon, ComputerDesktopIcon } from "@heroicons/react/24/outline";
-import { Menu, Listbox } from "@headlessui/react";
+import { Menu } from "@headlessui/react";
 import { toast } from "react-hot-toast";
 
-import brand17 from "@public/images/brand/brand17.jpg";
-import brand1 from "@public/images/brand/brand1.png";
-import brand2 from "@public/images/brand/brand2.jpg";
+const brand17 = "";
+const brand1 = "";
+const brand2 = "";
 
 const actionOptions = ["Active", "Inactive", "Delete"];
 

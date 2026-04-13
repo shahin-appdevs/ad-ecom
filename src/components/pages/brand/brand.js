@@ -44,6 +44,10 @@ export default function Brand() {
     const [loading, setLoading] = useState(false);
     const [brands, setBrands] = useState([]);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
+    // translation
+    const t = useTranslations("HomePage.shopByBrand");
+    const title = t("title");
+    const loadMore = t("loadMore");
 
     useEffect(() => {
         const fetchBrandData = async () => {
@@ -55,7 +59,7 @@ export default function Brand() {
             } catch (error) {
                 toast.error(
                     error.response?.data?.message?.error?.[0] ||
-                        "Failed to fetch brands",
+                        t("failedToLoad"),
                 );
             } finally {
                 setLoading(false);
@@ -79,17 +83,12 @@ export default function Brand() {
             }));
         } catch (error) {
             toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to fetch brands",
+                error.response?.data?.message?.error?.[0] || t("failedToLoad"),
             );
         } finally {
             setLoadMoreLoading(false);
         }
     };
-    // translation
-    const t = useTranslations("HomePage.shopByBrand");
-    const title = t("title");
-    const loadMore = t("loadMore");
 
     return (
         <section className="sm:pt-4">

@@ -3,10 +3,11 @@
 import "swiper/css";
 import "swiper/css/navigation";
 import { Suspense, useEffect, useState } from "react";
-import { Plus, Wifi } from "lucide-react";
 import VirtualCardTransaction from "./VirtualCardTransaction";
 import VirtualCardDetailsModal from "./VirtualCardDetailsModal";
 import { useRouter } from "@/i18n/navigation";
+import { PlusIcon, WifiIcon } from "@heroicons/react/24/outline";
+
 import {
     myStroWalletCardGetAPI,
     stroWalletPageInfoGetApi,
@@ -29,7 +30,6 @@ function VirtualCardSection() {
     const [cardDetails, setCardDetails] = useState("");
     const [openDepositModal, setOpenDepositModal] = useState(false);
     const [myVirtualCard, setMyVirtualCard] = useState({});
-
     const cardBackground = myWalletCards?.card_basic_info?.card_bg;
 
     const myWalletCardsFetch = async () => {
@@ -52,7 +52,7 @@ function VirtualCardSection() {
                 const result = await stroWalletPageInfoGetApi();
                 setStroWalletPageInfo(result?.data?.data || {});
             } catch (error) {
-                toast.error(t("fetchError"));
+                handleApiError(error, t("fetchError"));
             } finally {
                 setPageInfoLoading(false);
             }
@@ -112,14 +112,16 @@ function VirtualCardSection() {
                 </h1>
                 {pageInfoLoading ? (
                     <button className="bg-gray-200 flex gap-2 items-center animate-pulse text-gray-200 font-medium px-4 md:px-6 py-2 md:py-3 rounded-lg transition">
-                        <span>{t("createCard")}</span> <Plus size={18} />
+                        <span>{t("createCard")}</span>{" "}
+                        <PlusIcon className="w-[18px] h-[18px]" />
                     </button>
                 ) : (
                     <button
                         onClick={handleCreateCard}
                         className="flex items-center gap-2 bg-blue-600  hover:bg-blue-700 text-white font-medium px-4 md:px-6 py-2 md:py-3 rounded-lg transition"
                     >
-                        <span>{t("createCard")}</span> <Plus size={18} />
+                        <span>{t("createCard")}</span>{" "}
+                        <PlusIcon className="w-[18px] h-[18px]" />
                     </button>
                 )}
             </div>
@@ -157,20 +159,6 @@ function VirtualCardSection() {
                                 }
                                 className={`bg-cover bg-center  h-full w-full max-w-[420px] hover:shadow-lg duration-300 rounded-3xl p-4 md:p-4 xl:p-4 2xl:p-6 text-white shadow relative overflow-hidden`}
                             >
-                                {/* Background Pattern (optional subtle) */}
-                                {/* <div className="absolute inset-0 opacity-20">
-                                    <div className="grid grid-cols-8 grid-rows-8 gap-1 h-full w-full">
-                                        {Array.from({ length: 64 }).map(
-                                            (_, i) => (
-                                                <div
-                                                    key={i}
-                                                    className="bg-white/10 rounded"
-                                                />
-                                            ),
-                                        )}
-                                    </div>
-                                </div> */}
-
                                 {/* Card Content */}
                                 <div className="relative z-10">
                                     <div className="flex justify-between items-start ">
@@ -196,7 +184,7 @@ function VirtualCardSection() {
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <Wifi className="rotate-90 text-4xl" />
+                                                    <WifiIcon className="rotate-90 w-[32px] h-[32px]" />
                                                 </div>
                                             </div>
                                         </div>
@@ -339,7 +327,7 @@ function VirtualCardGridSkeleton() {
                                         {/* wifi */}
                                     </div>
                                 </div>
-                                {/* <div className="w-20 h-20 bg-white/30 rounded-xl" />{" "} */}
+
                                 {/* QR placeholder */}
                             </div>
 
@@ -361,285 +349,3 @@ function VirtualCardGridSkeleton() {
         </div>
     );
 }
-
-// <div className="max-w-6xl mx-auto relative">
-//                 {/* Header */}
-//                 <div className="flex justify-between items-center mb-4">
-//                     <h1 className="text-xl md:text-2xl font-bold text-gray-900">
-//                         Virtual Card
-//                     </h1>
-//                     <Link
-//                         href={"/user/cards/virtual-card/create-virtual-card"}
-//                         className="flex items-center gap-2 bg-blue-600  hover:bg-blue-700 text-white font-medium px-4 md:px-6 py-2 md:py-3 rounded-lg transition"
-//                     >
-//                         <span>Create Card</span> <Plus />
-//                     </Link>
-//                 </div>
-
-//                 {/* Swiper Carousel */}
-//                 <Swiper
-//                     modules={[Navigation]}
-//                     navigation={{
-//                         prevEl: ".swiper-button-prev",
-//                         nextEl: ".swiper-button-next",
-//                     }}
-//                     spaceBetween={50}
-//                     slidesPerView={1}
-//                     // centeredSlides={true}
-//                     loop={true}
-//                     className="relative"
-//                 >
-//                     {/* Card Slide */}
-//                     <SwiperSlide>
-//                         <div className="bg-gray-100 rounded-3xl p-4 md:p-8 ">
-//                             {/* Card Header */}
-//                             <div className="flex  justify-between items-center mb-8 ">
-//                                 <div className="flex items-center gap-3">
-//                                     <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-//                                         !
-//                                     </div>
-//                                     <span className="text-sm md:text-lg font-medium text-gray-700">
-//                                         My Card (1/3)
-//                                     </span>
-//                                 </div>
-//                                 <div className="bg-black text-xs md:text-base text-white px-5 py-2 rounded-full font-semibold">
-//                                     Balance: 2.0000 USD
-//                                 </div>
-//                             </div>
-
-//                             {/* Virtual Card */}
-//                             <div className="flex items-center justify-center">
-//                                 <div className="bg-gradient-to-br w-full max-w-[480px] from-blue-500 to-blue-700 rounded-3xl p-4 md:p-8 text-white shadow relative overflow-hidden">
-//                                     {/* Background Pattern (optional subtle) */}
-//                                     <div className="absolute inset-0 opacity-20">
-//                                         <div className="grid grid-cols-8 grid-rows-8 gap-1 h-full w-full">
-//                                             {Array.from({ length: 64 }).map(
-//                                                 (_, i) => (
-//                                                     <div
-//                                                         key={i}
-//                                                         className="bg-white/10 rounded"
-//                                                     />
-//                                                 ),
-//                                             )}
-//                                         </div>
-//                                     </div>
-
-//                                     {/* Card Content */}
-//                                     <div className="relative z-10">
-//                                         <div className="flex justify-between items-start mb-4 md:mb-10">
-//                                             <div>
-//                                                 <h3 className="text-xl text-white font-semibold mb-2 md:mb-6">
-//                                                     Jara B2B
-//                                                 </h3>
-//                                                 <div className="flex gap-2 items-center">
-//                                                     <div className=" p-3 rounded-lg">
-//                                                         <div className="chip">
-//                                                             <div className="chip-line"></div>
-//                                                             <div className="chip-line"></div>
-//                                                             <div className="chip-line"></div>
-//                                                             <div className="chip-line"></div>
-//                                                             <div className="chip-main"></div>
-//                                                         </div>
-//                                                     </div>
-//                                                     <div>
-//                                                         <Wifi className="rotate-90 text-4xl" />
-//                                                     </div>
-//                                                 </div>
-//                                             </div>
-
-//                                             {/* QR Code */}
-//                                             <div className="bg-white p-3 rounded-xl">
-//                                                 <div className=" bg-gray-200 border-2 border-dashed rounded-xl" />
-//                                             </div>
-//                                         </div>
-
-//                                         {/* Card Number */}
-//                                         <div className="text-xs md:text-2xl tracking-wider mb-4 font-mono">
-//                                             4334 51** **** *15 83
-//                                         </div>
-
-//                                         {/* Expiry & Name */}
-//                                         <div className="flex justify-between items-end">
-//                                             <div>
-//                                                 <p className="text-xs md:text-sm opacity-90">
-//                                                     EXP. END
-//                                                 </p>
-//                                                 <p className="text-sm md:text-xl font-semibold">
-//                                                     11/2027
-//                                                 </p>
-//                                             </div>
-//                                             <div className="text-right">
-//                                                 <p className="text-sm md:text-xl font-semibold uppercase">
-//                                                     Test User
-//                                                 </p>
-//                                             </div>
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-
-//                             {/* Action Buttons */}
-//                             <div className="mt-6 md:mt-10 flex flex-wrap gap-4 justify-center">
-//                                 <button className="bg-blue-100 text-blue-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-blue-200 transition">
-//                                     <CircleAlert />
-//                                     Details
-//                                 </button>
-//                                 <button className="bg-blue-100 text-blue-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-blue-200 transition">
-//                                     <Bolt />
-//                                     Make Default
-//                                 </button>
-//                                 <button className="bg-blue-100 text-blue-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-blue-200 transition">
-//                                     <CreditCard />
-//                                     Deposit
-//                                 </button>
-//                                 <button className="bg-blue-100 text-blue-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-blue-200 transition">
-//                                     <BanknoteArrowDown />
-//                                     Withdraw
-//                                 </button>
-//                             </div>
-
-//                             {/* Bottom Actions */}
-//                             <div className="mt-8 flex flex-wrap gap-4 justify-center">
-//                                 <button className="bg-gray-100 text-gray-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-gray-200 transition">
-//                                     <ChevronRight />
-//                                     Transactions
-//                                 </button>
-//                                 <button className="bg-red-100 text-red-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-red-200 transition">
-//                                     <X />
-//                                     Close Card
-//                                 </button>
-//                             </div>
-//                         </div>
-//                     </SwiperSlide>
-//                     {/* Card Slide */}
-//                     <SwiperSlide>
-//                         <div className="bg-gray-100 rounded-3xl p-4 md:p-8 ">
-//                             {/* Card Header */}
-//                             <div className="flex  justify-between items-center mb-8 ">
-//                                 <div className="flex items-center gap-3">
-//                                     <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
-//                                         !
-//                                     </div>
-//                                     <span className="text-sm md:text-lg font-medium text-gray-700">
-//                                         My Card (1/3)
-//                                     </span>
-//                                 </div>
-//                                 <div className="bg-black text-xs md:text-base text-white px-5 py-2 rounded-full font-semibold">
-//                                     Balance: 2.0000 USD
-//                                 </div>
-//                             </div>
-
-//                             {/* Virtual Card */}
-//                             <div className="flex items-center justify-center">
-//                                 <div className="bg-gradient-to-br w-full max-w-[480px] from-blue-500 to-blue-700 rounded-3xl p-4 md:p-8 text-white shadow relative overflow-hidden">
-//                                     {/* Background Pattern (optional subtle) */}
-//                                     <div className="absolute inset-0 opacity-20">
-//                                         <div className="grid grid-cols-8 grid-rows-8 gap-1 h-full w-full">
-//                                             {Array.from({ length: 64 }).map(
-//                                                 (_, i) => (
-//                                                     <div
-//                                                         key={i}
-//                                                         className="bg-white/10 rounded"
-//                                                     />
-//                                                 ),
-//                                             )}
-//                                         </div>
-//                                     </div>
-
-//                                     {/* Card Content */}
-//                                     <div className="relative z-10">
-//                                         <div className="flex justify-between items-start mb-4 md:mb-10">
-//                                             <div>
-//                                                 <h3 className="text-xl text-white font-semibold mb-2 md:mb-6">
-//                                                     Jara B2B
-//                                                 </h3>
-//                                                 <div className="flex gap-2 items-center">
-//                                                     <div className=" p-3 rounded-lg">
-//                                                         <div className="chip">
-//                                                             <div className="chip-line"></div>
-//                                                             <div className="chip-line"></div>
-//                                                             <div className="chip-line"></div>
-//                                                             <div className="chip-line"></div>
-//                                                             <div className="chip-main"></div>
-//                                                         </div>
-//                                                     </div>
-//                                                     <div>
-//                                                         <Wifi className="rotate-90 text-4xl" />
-//                                                     </div>
-//                                                 </div>
-//                                             </div>
-
-//                                             {/* QR Code */}
-//                                             <div className="bg-white p-3 rounded-xl">
-//                                                 <div className=" bg-gray-200 border-2 border-dashed rounded-xl" />
-//                                             </div>
-//                                         </div>
-
-//                                         {/* Card Number */}
-//                                         <div className="text-xs md:text-2xl tracking-wider mb-4 font-mono">
-//                                             4334 51** **** *15 83
-//                                         </div>
-
-//                                         {/* Expiry & Name */}
-//                                         <div className="flex justify-between items-end">
-//                                             <div>
-//                                                 <p className="text-xs md:text-sm opacity-90">
-//                                                     EXP. END
-//                                                 </p>
-//                                                 <p className="text-sm md:text-xl font-semibold">
-//                                                     11/2027
-//                                                 </p>
-//                                             </div>
-//                                             <div className="text-right">
-//                                                 <p className="text-sm md:text-xl font-semibold uppercase">
-//                                                     Test User
-//                                                 </p>
-//                                             </div>
-//                                         </div>
-//                                     </div>
-//                                 </div>
-//                             </div>
-
-//                             {/* Action Buttons */}
-//                             <div className="mt-6 md:mt-10 flex flex-wrap gap-4 justify-center">
-//                                 <button className="bg-blue-100 text-blue-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-blue-200 transition">
-//                                     <CircleAlert />
-//                                     Details
-//                                 </button>
-//                                 <button className="bg-blue-100 text-blue-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-blue-200 transition">
-//                                     <Bolt />
-//                                     Make Default
-//                                 </button>
-//                                 <button className="bg-blue-100 text-blue-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-blue-200 transition">
-//                                     <CreditCard />
-//                                     Deposit
-//                                 </button>
-//                                 <button className="bg-blue-100 text-blue-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-blue-200 transition">
-//                                     <BanknoteArrowDown />
-//                                     Withdraw
-//                                 </button>
-//                             </div>
-
-//                             {/* Bottom Actions */}
-//                             <div className="mt-8 flex flex-wrap gap-4 justify-center">
-//                                 <button className="bg-gray-100 text-gray-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-gray-200 transition">
-//                                     <ChevronRight />
-//                                     Transactions
-//                                 </button>
-//                                 <button className="bg-red-100 text-red-700 px-4 py-2 md:px-6 md:py-3 rounded-full font-medium flex items-center gap-2 hover:bg-red-200 transition">
-//                                     <X />
-//                                     Close Card
-//                                 </button>
-//                             </div>
-//                         </div>
-//                     </SwiperSlide>
-
-//                     {/* Add more slides if you have multiple cards */}
-//                 </Swiper>
-
-//                 {/* Custom Navigation Buttons */}
-//                 <div className="flex  justify-center mt-12 gap-8">
-//                     <button className="swiper-button-prev  rounded-full  flex items-center justify-center transition"></button>
-//                     <button className="swiper-button-next rounded-full  flex items-center justify-center  transition"></button>
-//                 </div>
-//             </div>

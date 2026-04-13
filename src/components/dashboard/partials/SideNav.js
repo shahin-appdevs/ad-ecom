@@ -10,7 +10,7 @@ import { Fragment } from "react";
 import { logoutAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 // Icons
 import {
     ChevronRightIcon,
@@ -29,7 +29,6 @@ import {
     ArrowUpOnSquareIcon,
     ChartBarSquareIcon,
     LockClosedIcon,
-    ArrowLeftStartOnRectangleIcon,
     PresentationChartBarIcon,
     EllipsisHorizontalIcon,
     UserIcon,
@@ -48,10 +47,13 @@ import {
 } from "@heroicons/react/24/solid";
 // Images
 import logo from "@public/images/logo/logo.webp";
-import rocket from "@public/images/icon/rocket.png";
-import { CreditCardIcon, GiftIcon } from "@heroicons/react/24/outline";
+import {
+    CreditCardIcon,
+    GiftIcon,
+    ChevronLeftIcon,
+    ArrowRightOnRectangleIcon,
+} from "@heroicons/react/24/outline";
 import { useDashboardData } from "@/components/context/DashboardContext";
-import { ChevronLeftIcon } from "lucide-react";
 
 // Nav Links Data
 export const navLink = [
@@ -330,6 +332,7 @@ export default function SideNav() {
         return initialIndex === -1 ? null : initialIndex;
     });
     const { dashboardData, loading } = useDashboardData();
+    const locale = useLocale();
 
     if (loading) return <SidebarSkeleton />;
 
@@ -348,18 +351,15 @@ export default function SideNav() {
         e.preventDefault();
 
         try {
-            const response = await logoutAPI();
+            const response = await logoutAPI(locale);
 
-            const successMessage = response?.data?.message?.success || [
-                "Logout successful",
-            ];
+            const successMessage = response?.data?.message?.success;
 
             localStorage.removeItem("jwtToken");
             localStorage.removeItem("userInfo");
             localStorage.removeItem("email_verified");
             localStorage.removeItem("sms_verified");
             localStorage.removeItem("two_factor_verified");
-            // sessionStorage.removeItem("active_virtual_system");
 
             successMessage.forEach((msg) => {
                 toast.success(msg);
@@ -375,7 +375,7 @@ export default function SideNav() {
                     toast.error(msg);
                 });
             } else {
-                toast.error(err.message || "Something went wrong");
+                toast.error(err.message, t("somethingWentWrong"));
             }
         }
     };
@@ -564,24 +564,20 @@ export default function SideNav() {
                                 })}
                         </div>
                     </div>
-                    <div className="mt-5 ">
-                        {/* <button
-                            onClick={() => setIsLogoutModalOpen(true)}
-                            className="flex w-full items-center justify-center gap-3 px-4 py-2 text-white bg-red-600 hover:bg-red-700 rounded-md duration-200"
-                        >
-                            <LogOut className="h-4 w-4" />
-                            <span>Logout</span>
-                        </button> */}
+                    <div className="mt-5">
+                        <div className="w-full p-4 rounded-2xl ">
+                            <button
+                                onClick={() => setIsLogoutModalOpen(true)}
+                                className=" bg-gray-100 text-red-500 flex w-full justify-center items-center py-2 px-5 gap-2 font-semibold rounded-lg transition hover:bg-red-500 hover:text-white hover:scale-x-105"
+                            >
+                                <ArrowRightOnRectangleIcon className="size-5 stroke-2" />
+                                {t("logout")}
+                            </button>
+                        </div>
+                    </div>
+                    {/* <div className="mt-5">
                         <div className="w-full p-4 rounded-2xl bg-gray-100">
                             <div className="flex items-center gap-2">
-                                {/* <Image
-                                    src={rocket}
-                                    width={20}
-                                    priority={true}
-                                    quality={50}
-                                    className=""
-                                    alt="Icon"
-                                /> */}
                                 <h4 className="text-[18px] font-bold text-gray-800">
                                     {t("helpCenter")}
                                 </h4>
@@ -596,7 +592,7 @@ export default function SideNav() {
                                 {t("getSupport")}
                             </Link>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </section>
             <Transition appear show={isLogoutModalOpen} as={Fragment}>
@@ -679,11 +675,8 @@ const SidebarSkeleton = () => {
 
             {/* Nav Items */}
             <div className="flex-1 space-y-6">
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-                    <div
-                        key={item}
-                        className="flex items-center justify-between"
-                    >
+                {Array.from({ length: 8 }).map((_, i) => (
+                    <div key={i} className="flex items-center justify-between">
                         <div className="flex items-center gap-4">
                             {/* Icon Placeholder */}
                             <div className="h-5 w-5 bg-gray-200 rounded"></div>
@@ -691,7 +684,7 @@ const SidebarSkeleton = () => {
                             <div className="h-4 w-24 bg-gray-200 rounded"></div>
                         </div>
                         {/* Arrow Placeholder (except for first item) */}
-                        {item !== 1 && (
+                        {i !== 0 && (
                             <div className="h-3 w-3 bg-gray-100 rounded"></div>
                         )}
                     </div>
@@ -699,10 +692,8 @@ const SidebarSkeleton = () => {
             </div>
 
             {/* Help Center Card Placeholder */}
-            <div className="mt-auto bg-blue-50/50 rounded-2xl p-5 space-y-3">
-                <div className="h-4 w-28 bg-gray-200 rounded mx-auto"></div>
-                <div className="h-3 w-36 bg-gray-100 rounded mx-auto"></div>
-                <div className="h-10 w-full bg-indigo-200 rounded-xl mt-2"></div>
+            <div className="mt-auto bg-gray-50 rounded-2xl  space-y-3">
+                <div className="h-10 w-full bg-gray-100 rounded-xl"></div>
             </div>
         </div>
     );

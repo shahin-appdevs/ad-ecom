@@ -20,13 +20,8 @@ import {
     UserIcon,
     LockOpenIcon,
     PuzzlePieceIcon,
-    Bars3CenterLeftIcon,
     QueueListIcon,
     Square3Stack3DIcon,
-    LightBulbIcon,
-    StopCircleIcon,
-    LifebuoyIcon,
-    FilmIcon,
 } from "@heroicons/react/24/solid";
 // Images
 import logo from "@public/images/logo/logo.webp";

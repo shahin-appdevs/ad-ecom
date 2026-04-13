@@ -1,14 +1,33 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+// eslint.config.mjs
 import { FlatCompat } from "@eslint/eslintrc";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+    baseDirectory: import.meta.dirname,
 });
 
-const eslintConfig = [...compat.extends("next/core-web-vitals")];
+const eslintConfig = [
+    ...compat.config({
+        extends: ["next/core-web-vitals"],
+    }),
+    {
+        ignores: [
+            ".next/**",
+            "node_modules/**",
+            "next_module/**", // if you have this folder
+        ],
+    },
+    {
+        rules: {
+            "no-unused-vars": [
+                "warn", // or "error" if you want it strict
+                {
+                    argsIgnorePattern: "^_", // Ignore variables starting with underscore (_)
+                    varsIgnorePattern: "^_", // Ignore variables starting with underscore
+                    ignoreRestSiblings: true,
+                },
+            ],
+        },
+    },
+];
 
 export default eslintConfig;

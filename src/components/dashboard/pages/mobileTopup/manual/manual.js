@@ -5,7 +5,6 @@ import {
     localMobileTopupInfoGetAPI,
     mobileTopupGetAPI,
     submitLocalMobileTopupAPI,
-    SubmitMobileTopupAPI,
     walletCardRemainingLimitsGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { Listbox } from "@headlessui/react";
@@ -38,7 +37,7 @@ export default function MobileTopupManualSection() {
         useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [defaultCurrency, setDefaultCurrency] = useState({
-        code: "BDT",
+        code: "",
         rate: "1.0000",
     });
     const [amount, setAmount] = useState("");
@@ -66,7 +65,6 @@ export default function MobileTopupManualSection() {
     });
 
     const [selectedOperator, setSelectedOperator] = useState(null);
-    const [selectedCountry, setSelectedCountry] = useState(null);
     const [localTopupInfo, setLocalTopupInfo] = useState({});
     const [selectedOperatorType, setSelectedOperatorType] = useState(null);
 
@@ -108,7 +106,7 @@ export default function MobileTopupManualSection() {
                     monthlyLimit: data?.remainingMonthly,
                 });
             } catch (error) {
-                handleApiError(error, "Failed to fetch remaining limits");
+                handleApiError(error, t("failedFetchLimits"));
                 const data = error?.response?.data?.data;
 
                 setRemainingLimit({
@@ -257,26 +255,11 @@ export default function MobileTopupManualSection() {
                 }));
 
                 setDefaultCurrency({
-                    code: data.base_curr,
-                    rate: data.base_curr_rate,
+                    code: data.base_curr || "",
+                    rate: data.base_curr_rate || "1.0000",
                 });
-
-                // if (data.topupTypes?.length > 0) {
-                //     setSelectedOperator(data.topupTypes[0]);
-                // }
-
-                if (data.all_countries?.length > 0) {
-                    setSelectedCountry(
-                        data.all_countries.find((c) => c.iso2 === "US") ||
-                            data.all_countries[0],
-                    );
-                }
             } catch (error) {
-                toast.error(
-                    error.response?.data?.message?.error?.[0] ||
-                        error.message ||
-                        "Failed to load top-up data",
-                );
+                handleApiError(error, t("failedLoad"));
             } finally {
                 setApiLoading(false);
             }
@@ -300,7 +283,7 @@ export default function MobileTopupManualSection() {
             const response = await submitLocalMobileTopupAPI(topupData);
 
             toast.success(
-                response?.data?.message?.success?.[0] || "Top-up successful",
+                response?.data?.message?.success?.[0] || t("topupSuccess"),
             );
             setAmount("");
             setMobileNumber("");
@@ -311,7 +294,7 @@ export default function MobileTopupManualSection() {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
                     error.message ||
-                    "Top-up failed",
+                    t("topupFailed"),
             );
         } finally {
             setLoading(false);
@@ -324,28 +307,28 @@ export default function MobileTopupManualSection() {
         const bdMobileRegex = /^(?:\+880|880)?01[3-9]\d{8}$/;
 
         if (!bdMobileRegex.test(mobileNumber)) {
-            toast.error("Invalid mobile number");
+            toast.error(t("invalidMobile"));
             return;
         }
 
         // Validate inputs
         if (!selectedOperator) {
-            toast.error("Please select an operator");
+            toast.error(t("selectOperatorError"));
             return;
         }
 
         if (!selectedOperatorType) {
-            toast.error("Please select an operator type");
+            toast.error(t("selectTypeError"));
             return;
         }
 
         if (!mobileNumber) {
-            toast.error("Please enter a mobile number");
+            toast.error(t("enterMobileError"));
             return;
         }
 
         if (!amount) {
-            toast.error("Please enter an amount");
+            toast.error(t("enterAmountError"));
             return;
         }
 
@@ -354,20 +337,20 @@ export default function MobileTopupManualSection() {
         const maxLimit = parseFloat(limitsCalculation.maxLimit);
 
         if (isNaN(amountNum)) {
-            toast.error("Please enter a valid amount");
+            toast.error(t("invalidAmount"));
             return;
         }
 
         if (amountNum < minLimit) {
             toast.error(
-                `Amount must be at least ${minLimit} ${selectedCurrency?.code}`,
+                `${t("amountMin")} ${minLimit} ${selectedCurrency?.code}`,
             );
             return;
         }
 
         if (amountNum > maxLimit) {
             toast.error(
-                `Amount must not exceed ${maxLimit} ${selectedCurrency?.code}`,
+                `${t("amountMax")} ${maxLimit} ${selectedCurrency?.code}`,
             );
             return;
         }

@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import { dashboardGetAPI } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 export default function WidgetSection() {
     const t = useTranslations("Dashboard.homepage.widget");
@@ -15,13 +15,13 @@ export default function WidgetSection() {
                 const response = await dashboardGetAPI();
                 setDashboardData(response?.data?.data);
             } catch (error) {
-                toast.error(t("failedFetch"));
+                handleApiError(error, t("failedFetch"));
             } finally {
                 setLoading(false);
             }
         };
         fetchDashboardData();
-    }, [t]);
+    }, []);
 
     const parseAmount = (str) => {
         if (!str || typeof str !== "string") return { value: 0, currency: "" };

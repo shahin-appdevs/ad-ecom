@@ -1,23 +1,21 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import { forgotPasswordAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-
-import logo from "@public/images/logo/favicon.jpeg";
 import getImageUrl from "@/components/utility/getImageUrl";
 import { useTranslations } from "next-intl";
+import { useAppSettings } from "@/hooks/useAppSettings";
 
 export default function ForgotPassword() {
     const t = useTranslations("Auth.forgotPassword");
     const [credentials, setCredentials] = useState("");
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [appSettingsData, setAppSettingsData] = useState(null);
+    const { appSettingsData } = useAppSettings();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -50,10 +48,6 @@ export default function ForgotPassword() {
             setLoading(false);
         }
     };
-    useEffect(() => {
-        const appSettings = sessionStorage.getItem("appSettings");
-        setAppSettingsData(appSettings ? JSON.parse(appSettings) : null);
-    }, []);
 
     return (
         <section className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 ">
@@ -62,7 +56,6 @@ export default function ForgotPassword() {
 
                 {/* Right Side: Reset Password Form */}
                 <div className="w-full  p-8  flex flex-col justify-center">
-                    {/* Mobile Logo */}
                     {/* Header Section */}
                     <h2 className="text-center text-xl font-bold text-gray-900 mb-6 border-b pb-4">
                         {t("title")}

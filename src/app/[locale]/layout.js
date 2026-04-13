@@ -4,6 +4,7 @@ import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { DM_Sans } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import { getTranslations } from "next-intl/server";
 
 // Style Sheets
 import "@/styles/css/globals.css";
@@ -19,16 +20,20 @@ const dmSans = DM_Sans({
 });
 
 // Metadata
-export const metadata = {
-    title: {
-        template: "%s | QR E-commerce",
-        default: "QR E-commerce",
-    },
-    description: "Multi vendor e-commerce platform",
-    icons: {
-        icon: "/images/logo/favicon.jpeg",
-    },
-};
+export async function generateMetadata() {
+    const t = await getTranslations("Metadata");
+
+    return {
+        title: {
+            template: `%s | ${t("title")}`,
+            default: t("title"),
+        },
+        description: t("description"),
+        icons: {
+            icon: "/images/logo/favicon.png",
+        },
+    };
+}
 
 // This is required for output: "export"
 export function generateStaticParams() {

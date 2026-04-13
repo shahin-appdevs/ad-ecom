@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "@/i18n/navigation";
-import { ArrowLeft, LoaderCircle } from "lucide-react";
+import { ArrowLeftIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
 import {
     createCustomerAPI,
     stroWalletPageInfoGetApi,
@@ -15,6 +15,7 @@ import { RHFFileUpload } from "@/components/ui/form/RHFFileUpload";
 import { RHFTextarea } from "@/components/ui/form/RHFTextarea";
 import toast from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 export default function CreateCustomer() {
     const t = useTranslations("Dashboard.cards.virtualCard.createCustomer");
@@ -54,7 +55,7 @@ export default function CreateCustomer() {
                     }
                 });
             } catch (error) {
-                toast.error(t("fetchError"));
+                handleApiError(error, t("fetchError"));
             } finally {
                 setLoading(false);
             }
@@ -166,7 +167,7 @@ export default function CreateCustomer() {
                     onClick={() => router.back()}
                     className="bg-primary__color text-white__color flex justify-center items-center py-2 px-4 gap-2 font-semibold rounded-[6px] transition hover:bg-secondary__color hover:scale-x-105"
                 >
-                    <ArrowLeft />
+                    <ArrowLeftIcon className="h-5 w-5" />
                 </button>
             </div>
 
@@ -198,7 +199,7 @@ export default function CreateCustomer() {
                 >
                     {isSubmitting ? t("submitting") : t("submit")}
                     {isSubmitting ? (
-                        <LoaderCircle className="text-white animate-spin inline ms-2" />
+                        <ArrowPathIcon className="text-white animate-spin inline ms-2 h-5 w-5" />
                     ) : (
                         ""
                     )}

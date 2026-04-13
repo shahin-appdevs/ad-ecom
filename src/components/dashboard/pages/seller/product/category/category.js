@@ -3,12 +3,12 @@ import { useState } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { PlusIcon, ComputerDesktopIcon } from "@heroicons/react/24/outline";
-import { Menu, Listbox } from "@headlessui/react";
+import { Menu } from "@headlessui/react";
 import { toast } from "react-hot-toast";
 
-import camera from "@public/images/category/camera.jpg";
-import cosmetics from "@public/images/category/cosmetics.png";
-import electronics from "@public/images/category/electronics.jpg";
+const camera = "";
+const cosmetics = "";
+const electronics = "";
 
 const actionOptions = ["Active", "Inactive", "Delete"];
 

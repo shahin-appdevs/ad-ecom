@@ -2,10 +2,6 @@ import VirtualCardPage from "@/components/dashboard/pages/virtualCard/VirtualCar
 import React from "react";
 
 const VirtualCard = () => {
-    // const [activeVirtualCard, setActiveVirtualCard] = useState(() => {
-    //     return sessionStorage.getItem("active_virtual_system");
-    // });
-
     return (
         <>
             <VirtualCardPage />

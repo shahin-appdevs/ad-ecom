@@ -8,7 +8,7 @@ import Button from "@/components/utility/Button";
 import { resetPasswordSellerAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
-import logo from "@public/images/logo/favicon.jpeg";
+const logo = "";
 
 function ResetPasswordForm() {
     const [password, setPassword] = useState("");

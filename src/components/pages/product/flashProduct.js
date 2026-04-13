@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import ProductSidebar from "@/components/partials/ProductSidebar";
@@ -9,8 +9,8 @@ import {
     nextPageGetAPI,
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -55,6 +55,26 @@ export default function FlashProduct() {
     const [flashProducts, setFlashProducts] = useState([]);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
+    // translation
+    const t = useTranslations("HomePage.flashSale");
+    const flashSaleTitle = t("flashSaleTitle");
+
+    const [timeLeft, setTimeLeft] = useState({
+        days: "00",
+        hours: "00",
+        minutes: "00",
+        seconds: "00",
+    });
+
+    const countdownLabels = [
+        { key: "days", value: timeLeft.days },
+        { key: "hours", value: timeLeft.hours },
+        { key: "min", value: timeLeft.minutes },
+        { key: "sec", value: timeLeft.seconds },
+    ];
+    const loadMore = t("loadMore");
+    const off = t("off");
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         setIsLoggedIn(!!token);
@@ -68,10 +88,7 @@ export default function FlashProduct() {
                 setFlashData(response.data.data);
                 setFlashProducts(response.data.data.flash_products?.data || []);
             } catch (error) {
-                toast.error(
-                    error.response?.data?.message?.error?.[0] ||
-                        "Failed to fetch flash products",
-                );
+                handleApiError(error, t("failedToLoad"));
             } finally {
                 setLoading(false);
             }
@@ -89,21 +106,12 @@ export default function FlashProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                toast.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 
         fetchUserProfile();
     }, [isLoggedIn]);
-
-    const [timeLeft, setTimeLeft] = useState({
-        days: "00",
-        hours: "00",
-        minutes: "00",
-        seconds: "00",
-    });
-
-    const [states, setStates] = useState([]);
 
     // Add the comprehensive price calculation function
     const calculateDiscount = (product) => {
@@ -168,30 +176,6 @@ export default function FlashProduct() {
     };
 
     useEffect(() => {
-        if (!flashData?.flash_products) return;
-
-        const savedCart = localStorage.getItem("flashSaleCart");
-        const initialStates = flashData.flash_products?.data?.map((product) => {
-            if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                const cartItem = parsedCart.find(
-                    (item) => item.id === product.id,
-                );
-                return {
-                    showQuantity: !!cartItem,
-                    quantity: cartItem?.quantity || 1,
-                };
-            }
-            return {
-                showQuantity: false,
-                quantity: 1,
-            };
-        });
-
-        setStates(initialStates);
-    }, [flashData]);
-
-    useEffect(() => {
         if (!flashData?.flash_sale_end_date) return;
         const endTime = new Date(flashData.flash_sale_end_date).getTime();
 
@@ -245,25 +229,11 @@ export default function FlashProduct() {
                 },
             }));
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to fetch flash products",
-            );
+            handleApiError(error, t("failedFetchFlashProducts"));
         } finally {
             setLoadMoreLoading(false);
         }
     };
-    // translation
-    const t = useTranslations("HomePage.flashSale");
-    const flashSaleTitle = t("flashSaleTitle");
-    const countdownLabels = [
-        { key: "days", value: timeLeft.days },
-        { key: "hours", value: timeLeft.hours },
-        { key: "min", value: timeLeft.minutes },
-        { key: "sec", value: timeLeft.seconds },
-    ];
-    const loadMore = t("loadMore");
-    const off = t("off");
 
     if (loading) {
         return (
@@ -340,7 +310,6 @@ export default function FlashProduct() {
                                         originalPrice,
                                         hasDiscount,
                                         isResellerPrice,
-                                        stock,
                                     } = calculateDiscount(product);
 
                                     return (

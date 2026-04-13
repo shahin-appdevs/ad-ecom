@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import { stallGetAPI } from "@root/services/apiClient/apiClient";
-import { toast } from "react-hot-toast";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -38,7 +38,7 @@ const StallSkeleton = () => {
 export default function Stall() {
     const [stallData, setStallData] = useState(null);
     const [loading, setLoading] = useState(false);
-
+    const t = useTranslations("Stall");
     useEffect(() => {
         const fetchStallData = async () => {
             setLoading(true);
@@ -46,10 +46,7 @@ export default function Stall() {
                 const response = await stallGetAPI();
                 setStallData(response.data.data);
             } catch (error) {
-                toast.error(
-                    error.response?.data?.message?.error?.[0] ||
-                        "Failed to fetch stalls",
-                );
+                handleApiError(error, t("failedFetchStalls"));
             } finally {
                 setLoading(false);
             }

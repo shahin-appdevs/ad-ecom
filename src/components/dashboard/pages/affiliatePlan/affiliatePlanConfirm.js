@@ -16,6 +16,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -35,18 +36,8 @@ export default function AffiliatePlanConfirm() {
     const [loading, setLoading] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [gateways, setGateways] = useState([]);
-    const [selectedGateway, setSelectedGateway] = useState(null);
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [gatewayImagePath, setGatewayImagePath] = useState("");
-    const [payInfo, setPayInfo] = useState({
-        pay_information: {
-            requested_amount: "0.00",
-            total_charge: "0.00",
-            total_amount: "0.00",
-            sender_cur_code: "BDT",
-        },
-        redirect_url: null,
-    });
 
     useEffect(() => {
         if (idParam) {
@@ -87,7 +78,6 @@ export default function AffiliatePlanConfirm() {
                     resPlans?.data?.data?.gateway_image_path || "",
                 );
                 if (gwList.length > 0) {
-                    setSelectedGateway(gwList[0]);
                     setSelectedCurrency(gwList[0].currencies[0]);
                 }
             } catch (err) {
@@ -111,7 +101,6 @@ export default function AffiliatePlanConfirm() {
                 `${window.location.origin}/user/affiliate-plan/success`,
                 `${window.location.origin}/user/affiliate-plan/cancel`,
             );
-            setPayInfo(res.data.data);
             window.location.href = res.data.data.redirect_url;
         } catch (err) {
             toast.error(err.response?.data?.message?.error?.[0]);
@@ -175,7 +164,9 @@ export default function AffiliatePlanConfirm() {
                                 <Listbox.Button className="relative w-full cursor-pointer rounded-lg border bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:outline-none sm:text-sm">
                                     <span className="flex items-center">
                                         {selectedCurrency && (
-                                            <img
+                                            <Image
+                                                width={24}
+                                                height={24}
                                                 src={`${backendBaseURL}/${gatewayImagePath}/${selectedCurrency.image}`}
                                                 alt={selectedCurrency.alias}
                                                 className="w-6 h-6 mr-2 rounded"
@@ -207,7 +198,9 @@ export default function AffiliatePlanConfirm() {
                                                         <span
                                                             className={`flex items-center ${selected ? "font-medium" : "font-normal"}`}
                                                         >
-                                                            <img
+                                                            <Image
+                                                                width={24}
+                                                                height={24}
                                                                 src={`${backendBaseURL}/${gatewayImagePath}/${currency.image}`}
                                                                 alt={
                                                                     currency.alias

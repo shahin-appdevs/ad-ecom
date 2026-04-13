@@ -1,4 +1,8 @@
 {
+    "Metadata": {
+        "title": "متجر إي دي",
+        "description": "منصة التجارة الإلكترونية متعددة البائعين"
+    },
     "HomePage": {
         "header": {
             "searchPlaceholder": "ابحث بالاسم...",
@@ -14,7 +18,8 @@
             "cart": {
                 "title": "السلة",
                 "checkout": "إتمام الشراء",
-                "emptyMsg": "سلة التسوق فارغة"
+                "emptyMsg": "سلة التسوق فارغة",
+                "quantity": "الكمية"
             },
             "wishlist": {
                 "title": "قائمة الرغبات",
@@ -48,20 +53,25 @@
             "sec": "ثانية",
             "viewMore": "عرض المزيد",
             "loadMore": "تحميل المزيد",
-            "off": "خصم"
+            "off": "خصم",
+            "failedToLoad": "فشل في تحميل المنتجات"
         },
         "newArrival": {
             "newArrivalTitle": "وصل حديثاً",
             "viewMore": "عرض المزيد",
             "loadMore": "تحميل المزيد",
-            "off": "خصم"
+            "off": "خصم",
+            "failedToLoad": "فشل في تحميل المنتجات",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي"
         },
         "shopByBrand": {
             "title": "تسوق حسب العلامة التجارية",
             "viewMore": "عرض المزيد",
             "loadMore": "تحميل المزيد",
             "noProductsFound": "لا توجد منتجات",
-            "off": "خصم"
+            "failedToLoad": "فشل في تحميل العلامات التجارية",
+            "off": "خصم",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي"
         },
         "stalls": {
             "title": "الأكشاك",
@@ -128,18 +138,27 @@
         "close": "إغلاق",
         "referral": {
             "shareTitle": "مشاركة رابط الإحالة",
-            "shareText": "شارك هذا الرابط مع أصدقائك واكسب عمولات:"
+            "shareText": "شارك هذا الرابط مع أصدقائك واكسب عمولات:",
+            "linkCopied": "تم نسخ رابط الإحالة إلى الحافظة!"
         },
         "relatedProduct": {
             "title": "منتجات ذات صلة",
             "noProductsFound": "لا توجد منتجات",
-            "off": "خصم"
+            "off": "خصم",
+            "failedFetchUserProfile": "فشل في تحميل الملف الشخصي"
         },
         "noDescription": "لا يوجد وصف",
         "noDetails": "لا توجد تفاصيل",
-        "referralLink": "رابط الإحالة"
+        "referralLink": "رابط الإحالة",
+        "variants": {
+            "noVariants": "لا توجد خيارات"
+        }
     },
     "Dashboard": {
+        "DashboardLayout": {
+            "sessionExpired": "انتهت صلاحية الجلسة أو أنها غير صالحة. يرجى تسجيل الدخول مرة أخرى.",
+            "failedToLoadDashboardData": "فشل تحميل بيانات لوحة القيادة"
+        },
         "topBar": {
             "profile": "الملف الشخصي",
             "setupPin": "إعداد PIN",
@@ -147,7 +166,9 @@
             "logout": "تسجيل الخروج",
             "confirmLogout": "تأكيد تسجيل الخروج",
             "logoutConfirmation": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-            "cancel": "إلغاء"
+            "cancel": "إلغاء",
+            "somethingWentWrong": "حدث خطأ",
+            "logoutSuccessful": "تم تسجيل الخروج بنجاح"
         },
         "sidenav": {
             "dashboard": "لوحة القيادة",
@@ -189,7 +210,8 @@
             "confirmLogout": "تأكيد تسجيل الخروج",
             "logoutConfirmText": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
             "cancel": "إلغاء",
-            "walletAccount": "حساب المحفظة"
+            "walletAccount": "حساب المحفظة",
+            "somethingWentWrong": "حدث خطأ ما"
         },
         "wallet": {
             "addMoney": {
@@ -241,6 +263,41 @@
                     "title": "تم إلغاء إضافة الأموال!",
                     "message": "شكراً لك على تقديمك. ولكن تم إلغاء معاملتك وسيتم معالجتها قريباً.",
                     "continueButton": "متابعة إضافة الأموال"
+                },
+                "manual": {
+                    "noPaymentDataFound": "لم يتم العثور على بيانات الدفع",
+                    "loadingPaymentDetails": "جاري تحميل تفاصيل الدفع...",
+                    "confirmPayment": "تأكيد الدفع",
+                    "confirming": "جاري التأكيد...",
+                    "paymentSummary": "ملخص الدفع",
+                    "transactionId": "رقم المعاملة",
+                    "paymentMethod": "طريقة الدفع",
+                    "amount": "المبلغ",
+                    "exchangeRate": "سعر الصرف",
+                    "payableAmount": "المبلغ المستحق",
+                    "noAdditionalInfo": "لا توجد معلومات إضافية مطلوبة",
+                    "maxCharacters": "الحد الأقصى {max} حرف",
+                    "enter": "أدخل",
+                    "select": "اختر",
+                    "submissionFailed": "فشل في الإرسال",
+                    "missingRequiredFields": "يرجى ملء جميع الحقول المطلوبة: {fields}"
+                },
+                "crypto": {
+                    "noPaymentDataFound": "لم يتم العثور على بيانات الدفع",
+                    "loadingPaymentDetails": "جاري تحميل تفاصيل الدفع...",
+                    "walletAddress": "عنوان المحفظة",
+                    "addressCopied": "تم نسخ العنوان إلى الحافظة!",
+                    "transactionHash": "معرف المعاملة",
+                    "enterTxnHash": "أدخل معرف المعاملة",
+                    "txnHashFormat": "أدخل معرف معاملة صحيح (0x متبوعًا بـ 64 حرفًا)",
+                    "confirmPayment": "تأكيد الدفع",
+                    "confirming": "جاري التأكيد...",
+                    "preview": "معاينة",
+                    "transactionId": "معرف المعاملة",
+                    "requestAmount": "المبلغ المطلوب",
+                    "networkFee": "رسوم الشبكة",
+                    "exchangeRate": "سعر الصرف",
+                    "submissionFailed": "فشل الإرسال"
                 }
             },
             "exchangeMoney": {
@@ -327,6 +384,7 @@
                 "monthlyLimit": "الحد الشهري",
                 "dailyRemaining": "الحد اليومي المتبقي",
                 "monthlyRemaining": "الحد الشهري المتبقي",
+                "failedToFetchLimits": "فشل جلب الحدود المتبقية",
                 "sendMoneyLog": {
                     "title": "سجلات إرسال الأموال",
                     "viewAll": "عرض الكل",
@@ -375,6 +433,7 @@
                 "monthlyLimit": "الحد الشهري",
                 "dailyRemaining": "الحد اليومي المتبقي",
                 "monthlyRemaining": "الحد الشهري المتبقي",
+                "failedToFetchLimits": "فشل جلب الحدود المتبقية",
                 "requestMoneyLog": {
                     "title": "سجلات طلبات الأموال",
                     "viewAll": "عرض الكل",
@@ -449,6 +508,10 @@
                     "secureSave": "حفظ بياناتي بأمان للدفع بنقرة واحدة",
                     "payFaster": "ادفع بشكل أسرع في كل مكان يُقبل فيه الرابط",
                     "pay": "دفع",
+                    "paymentLinkCreated": "تم إنشاء رابط الدفع بنجاح",
+                    "invalidServerResponse": "استجابة غير صالحة من الخادم",
+                    "failedToCreatePaymentLink": "فشل إنشاء رابط الدفع",
+                    "failedToLoadPaymentLinkData": "فشل تحميل بيانات رابط الدفع",
                     "types": {
                         "pay": "العملاء يختارون ما يدفعونه",
                         "product": "المنتجات أو الاشتراكات"
@@ -571,6 +634,7 @@
                 "monthlyLimit": "الحد الشهري",
                 "dailyRemaining": "الحد اليومي المتبقي",
                 "monthlyRemaining": "الحد الشهري المتبقي",
+                "failedToFetchLimits": "فشل جلب الحدود المتبقية",
                 "moneyOutLog": {
                     "title": "سجلات سحب الأموال",
                     "viewAll": "عرض الكل",
@@ -619,6 +683,10 @@
                 "monthlyLimit": "الحد الشهري",
                 "dailyRemaining": "الحد اليومي المتبقي",
                 "monthlyRemaining": "الحد الشهري المتبقي",
+                "failedToFetchLimits": "فشل جلب الحدود المتبقية",
+                "failedToLoadMakePayment": "فشل تحميل معلومات الدفع",
+                "failedToFetchExchangeRate": "فشل جلب سعر الصرف",
+                "failedToFetchProfile": "فشل جلب الملف الشخصي",
                 "makePaymentLog": {
                     "title": "سجلات الدفع",
                     "viewAll": "عرض الكل",
@@ -709,6 +777,23 @@
                     "failedBanks": "فشل تحميل البنوك",
                     "failedBranches": "فشل تحميل الفروع",
                     "loading": "جاري التحميل..."
+                },
+                "withdrawManual": {
+                    "mobileNumber": "رقم الجوال",
+                    "mobileNumberPlaceholder": "أدخل رقم جوالك",
+                    "pin": "الرقم السري",
+                    "pinPlaceholder": "أدخل الرقم السري",
+                    "transactionId": "رقم المعاملة",
+                    "transactionIdPlaceholder": "أدخل رقم المعاملة",
+                    "confirmWithdraw": "تأكيد السحب",
+                    "confirming": "جاري التأكيد...",
+                    "preview": "معاينة",
+                    "transactionIdLabel": "رقم المعاملة",
+                    "paymentMethod": "طريقة الدفع",
+                    "amount": "المبلغ",
+                    "exchangeRate": "سعر الصرف",
+                    "payableAmount": "المبلغ المستحق",
+                    "invalidTransactionData": "بيانات المعاملة غير صالحة"
                 }
             }
         },
@@ -780,11 +865,14 @@
                 "currentBalance": "الرصيد الحالي",
                 "status": "الحالة",
                 "timeAndDate": "الوقت والتاريخ",
-                "noTransactions": "لم يتم العثور على معاملات دفع الفواتير"
+                "noTransactions": "لم يتم العثور على معاملات دفع الفواتير",
+                "failedToLoadBillPay": "فشل تحميل بيانات دفع الفواتير",
+                "failedToFetchLimits": "فشل جلب الحدود المتبقية",
+                "somethingWentWrong": "حدث خطأ ما"
             },
             "topup": {
                 "topUpType": "نوع الشحن",
-                "bdTopUp": "شحن BD",
+                "localTopUp": "شحن محلي",
                 "global": "عالمي",
                 "continue": "متابعة",
                 "topupLog": "سجلات شحن الجوال",
@@ -826,7 +914,19 @@
                     "dailyLimit": "الحد اليومي",
                     "monthlyLimit": "الحد الشهري",
                     "dailyRemainingLimit": "الحد اليومي المتبقي",
-                    "monthlyRemainingLimit": "الحد الشهري المتبقي"
+                    "monthlyRemainingLimit": "الحد الشهري المتبقي",
+                    "failedFetchLimits": "فشل في جلب الحدود المتبقية",
+                    "failedLoad": "فشل في تحميل بيانات شحن الجوال",
+                    "topupSuccess": "تم الشحن بنجاح",
+                    "topupFailed": "فشل الشحن",
+                    "invalidMobile": "رقم الجوال غير صالح",
+                    "selectOperatorError": "يرجى اختيار المشغل",
+                    "selectTypeError": "يرجى اختيار نوع المشغل",
+                    "enterMobileError": "يرجى إدخال رقم الجوال",
+                    "enterAmountError": "يرجى إدخال المبلغ",
+                    "invalidAmount": "يرجى إدخال مبلغ صالح",
+                    "amountMin": "يجب أن يكون المبلغ على الأقل",
+                    "amountMax": "يجب ألا يتجاوز المبلغ"
                 },
                 "globalTopup": {
                     "exchangeRate": "سعر الصرف",
@@ -852,7 +952,19 @@
                     "dailyLimit": "الحد اليومي",
                     "monthlyLimit": "الحد الشهري",
                     "dailyRemainingLimit": "الحد اليومي المتبقي",
-                    "monthlyRemainingLimit": "الحد الشهري المتبقي"
+                    "monthlyRemainingLimit": "الحد الشهري المتبقي",
+                    "failedFetchLimits": "فشل في جلب الحدود المتبقية",
+                    "failedLoadData": "فشل في تحميل بيانات شحن الجوال",
+                    "operatorFound": "تم العثور على المشغل بنجاح",
+                    "operatorNotFound": "المشغل غير موجود",
+                    "failedCheckOperator": "فشل في التحقق من المشغل",
+                    "topupSuccess": "تم شحن الجوال بنجاح!",
+                    "failedProcess": "فشل في معالجة شحن الجوال",
+                    "invalidAmount": "يرجى إدخال مبلغ صالح",
+                    "invalidMobile": "يرجى إدخال رقم جوال صالح",
+                    "amountMin": "يجب أن يكون المبلغ على الأقل",
+                    "amountMax": "يجب ألا يتجاوز المبلغ",
+                    "invalidOperator": "يرجى تحديد مشغل صالح"
                 }
             }
         },
@@ -1456,7 +1568,9 @@
                     "dailyLimit": "الحد اليومي",
                     "monthlyLimit": "الحد الشهري",
                     "remainingDailyLimit": "الحد اليومي المتبقي",
-                    "remainingMonthlyLimit": "الحد الشهري المتبقي"
+                    "remainingMonthlyLimit": "الحد الشهري المتبقي",
+                    "failedToFetchLimits": "فشل جلب الحدود المتبقية",
+                    "failedToLoadWalletsData": "فشل تحميل بيانات المحافظ"
                 },
                 "singleCardTrx": {
                     "recentTransaction": "المعاملات الأخيرة",
@@ -1526,7 +1640,10 @@
                     "makingDefault": "جاري التعيين كافتراضي",
                     "makeDefault": "تعيين كافتراضي",
                     "unfreeze": "إلغاء التجميد",
-                    "freeze": "تجميد"
+                    "freeze": "تجميد",
+                    "failedToFetchCardDetails": "فشل جلب تفاصيل البطاقة",
+                    "failedToUnfreezeCard": "فشل إلغاء تجميد البطاقة",
+                    "failedToUpdateStatus": "فشل تحديث الحالة"
                 },
                 "virtualCardWebhookTrx": {
                     "title": "معاملات الويب هوك",
@@ -1551,6 +1668,11 @@
                     "yourPhoto": "صورتك",
                     "submitting": "جاري التقديم...",
                     "submit": "تقديم"
+                },
+                "pendingModal": {
+                    "title": "تم الإرسال بنجاح!",
+                    "message": "تم إرسال طلبك بنجاح. يرجى الانتظار حتى تتم الموافقة عليه.",
+                    "updateCustomer": "تحديث بيانات العميل"
                 }
             },
             "giftCard": {
@@ -1732,6 +1854,7 @@
             "enterShippingAddress": "أدخل عنوان الشحن",
             "enterDivision": "أدخل القسم",
             "enterDistrict": "أدخل المنطقة",
+            "enterUpazilla": "أدخل المنطقة",
             "deliveryOption": "خيارات التوصيل",
             "deliveryFee": "رسوم التوصيل:",
             "orderSummary": "ملخص الطلب",
@@ -1744,7 +1867,8 @@
             "confirm": "تأكيد",
             "confirming": "جاري التأكيد...",
             "itemRemoved": "تمت إزالة العنصر من سلة التسوق",
-            "insideDhaka": "داخل دكا"
+            "insideDhaka": "داخل دكا",
+            "failedToOrder": "فشل في تأكيد الطلب"
         }
     },
     "Auth": {
@@ -1865,7 +1989,29 @@
             "registerNow": "سجل الآن",
             "verifyRecaptcha": "يرجى التحقق من reCAPTCHA",
             "loginSuccess": "تم تسجيل الدخول بنجاح",
-            "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى."
+            "loginFailed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
+            "failedToLoadBasicData": "فشل تحميل البيانات الأساسية",
+            "somethingWentWrong": "حدث خطأ"
+        },
+        "otp": {
+            "title": "التحقق عبر الرسائل القصيرة",
+            "subtitle": "أدخل رمز التحقق المرسل إلى هاتفك",
+            "verificationCode": "رمز التحقق",
+            "enterCodePlaceholder": "أدخل رمز من 6 أرقام",
+            "didntReceiveCode": "لم تستلم الرمز؟ ",
+            "sending": "جاري الإرسال...",
+            "resendCode": "إعادة إرسال الرمز",
+            "resendIn": "إعادة إرسال الرمز في",
+            "verifying": "جاري التحقق...",
+            "verify": "تحقق",
+            "backToLogin": "العودة إلى تسجيل الدخول؟ ",
+            "logIn": "تسجيل الدخول",
+            "createAccount": "إنشاء حساب",
+            "verificationCodeResent": "تم إعادة إرسال رمز التحقق بنجاح",
+            "failedToResendCode": "فشل إعادة إرسال الرمز. يرجى المحاولة مرة أخرى.",
+            "failedToResendVerificationCode": "فشل إعادة إرسال رمز التحقق. يرجى المحاولة مرة أخرى لاحقًا.",
+            "invalidOtp": "يرجى إدخال رمز OTP صحيح مكون من 6 أرقام",
+            "verificationFailed": "فشل التحقق. يرجى المحاولة مرة أخرى."
         }
     },
     "Category": {
@@ -1874,20 +2020,33 @@
             "products": "المنتجات",
             "noProductsFound": "لم يتم العثور على منتجات",
             "off": "خصم",
-            "loadMore": "تحميل المزيد"
+            "loadMore": "تحميل المزيد",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي",
+            "failedToLoad": "فشل في تحميل المنتجات",
+            "failedFetchFlashProducts": "فشل في تحميل المنتجات",
+            "failedToLoadMoreProducts": "فشل في تحميل المزيد من المنتجات"
         },
         "subCategory": {
             "moreCategories": "المزيد من الفئات",
             "products": "المنتجات",
             "noProductsFound": "لم يتم العثور على منتجات",
             "off": "خصم",
-            "loadMore": "تحميل المزيد"
+            "loadMore": "تحميل المزيد",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي",
+            "failedToLoad": "فشل في تحميل المنتجات",
+            "failedFetchFlashProducts": "فشل في تحميل المنتجات"
         },
         "subChildCategory": {
             "products": "المنتجات",
             "noProductsFound": "لم يتم العثور على منتجات",
             "off": "خصم",
-            "loadMore": "تحميل المزيد"
+            "loadMore": "تحميل المزيد",
+            "failedToLoad": "فشل في تحميل المنتجات",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي"
+        },
+        "categorySidebar": {
+            "categories": "الفئات",
+            "browseCategory": "تصفح الفئة"
         }
     },
     "Campaign": {
@@ -1895,6 +2054,7 @@
         "allCampaigns": "جميع الحملات",
         "noCampaignsAvailable": "لا توجد حملات متاحة حالياً.",
         "loadMore": "تحميل المزيد",
+        "failedToLoad": "فشل في تحميل الحملات",
         "campaignProduct": {
             "endsIn": "ينتهي في",
             "noProductsFound": "لم يتم العثور على منتجات",
@@ -1903,7 +2063,9 @@
             "days": "أيام",
             "hours": "ساعات",
             "min": "دقيقة",
-            "sec": "ثانية"
+            "sec": "ثانية",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي",
+            "failedToLoad": "فشل في تحميل المنتجات"
         }
     },
     "Collection": {
@@ -1911,15 +2073,36 @@
         "allOffers": "جميع العروض",
         "noCollectionsAvailable": "لا توجد مجموعات متاحة حالياً.",
         "loadMore": "تحميل المزيد",
+        "failedToLoad": "فشل تحميل المزيد من المنتجات",
         "collectionProduct": {
             "noProductsFound": "لم يتم العثور على منتجات",
             "off": "خصم",
             "loadMore": "تحميل المزيد"
         }
     },
-    "StallDetails": {
-        "noProductsFound": "لم يتم العثور على منتجات",
-        "off": "خصم",
-        "loadMore": "تحميل المزيد"
+    "Stall": {
+        "title": "الأكشاك",
+        "viewMore": "عرض المزيد",
+        "failedFetchStalls": "فشل في تحميل الأكشاك",
+        "StallDetails": {
+            "noProductsFound": "لم يتم العثور على منتجات",
+            "off": "خصم",
+            "loadMore": "تحميل المزيد",
+            "failedFetchProfile": "فشل في تحميل الملف الشخصي",
+            "failedToLoad": "فشل في تحميل المنتجات"
+        }
+    },
+    "CategoryPage": {
+        "title": "جميع الفئات",
+        "viewAll": "عرض الكل"
+    },
+    "Refund": {
+        "failedToLoad": "فشل تحميل سياسة الاسترداد"
+    },
+    "Terms": {
+        "failedToLoad": "فشل تحميل الشروط والأحكام"
+    },
+    "Wishlist": {
+        "error": "يجب استخدام useWishlist داخل WishlistProvider"
     }
 }

@@ -3,7 +3,6 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import {
     UserIcon,
-    ShoppingBagIcon,
     HeartIcon,
     HomeIcon,
     ChevronUpDownIcon,
@@ -14,13 +13,12 @@ import {
 import { useCart } from "@/components/context/CartContext";
 import { useWishlist } from "@/components/context/WishlistContext";
 import { usePathname } from "next/navigation";
-import { useHomeData } from "@/components/context/HomeContext";
 import { searchProductGetAPI } from "@root/services/apiClient/apiClient";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 import logo from "@public/images/logo/logo.webp";
-import { LayoutDashboard, ShoppingCart } from "lucide-react";
+import { Squares2X2Icon, ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { Link, useRouter } from "@/i18n/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -41,20 +39,13 @@ export default function Header() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isSellerLoggedIn, setIsSellerLoggedIn] = useState(false);
     const [cartItems, setCartItems] = useState([]);
-    const [cartTotal, setCartTotal] = useState("৳0");
-    const [storedReferCode, setStoredReferCode] = useState("");
-    const data = useHomeData() || {};
-    const homeData = data.homeData || null;
+    const [cartTotal, setCartTotal] = useState("0");
     const boxRef = useRef(null);
     const router = useRouter();
     const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
         setMounted(true);
-        const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-        if (userInfo) {
-            setStoredReferCode(userInfo.referral_code || "");
-        }
     }, []);
 
     // API Search
@@ -71,7 +62,7 @@ export default function Header() {
                     searchType,
                 );
 
-                const baseCurrency = response.data.data.base_curr_symbol || "৳";
+                const baseCurrency = response.data.data.base_curr_symbol || "";
                 let formattedResults = [];
 
                 if (searchType === "product") {
@@ -169,7 +160,7 @@ export default function Header() {
         const currencySymbol =
             allCartItems[0]?.base_curr_symbol ||
             allCartItems[0]?.currency_symbol ||
-            "৳";
+            "";
 
         setCartTotal(`${currencySymbol}${total.toFixed(2)}`);
     }, [cartCount]);
@@ -228,6 +219,7 @@ export default function Header() {
         title: t("header.cart.title"),
         checkout: t("header.cart.checkout"),
         emptyMsg: t("header.cart.emptyMsg"),
+        quantity: t("header.cart.quantity"),
     };
     const wishlistTxt = {
         title: t("header.wishlist.title"),
@@ -477,7 +469,7 @@ export default function Header() {
                                 onMouseEnter={() => setIsCartHovered(true)}
                                 onMouseLeave={() => setIsCartHovered(false)}
                             >
-                                <ShoppingCart className="w-5 h-5 cursor-pointer group-hover:text-primary__color" />
+                                <ShoppingCartIcon className="w-5 h-5 cursor-pointer group-hover:text-primary__color" />
                                 {mounted && cartCount > 0 && (
                                     <span className="absolute -top-2 -right-2 bg-primary__color text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                                         {cartCount}
@@ -520,14 +512,17 @@ export default function Header() {
                                                             </h4>
                                                             <div className="flex justify-between items-center mt-1">
                                                                 <span className="text-xs font-medium">
-                                                                    Qty:{" "}
+                                                                    {
+                                                                        cartTxt.quantity
+                                                                    }
+                                                                    :{" "}
                                                                     {
                                                                         item.quantity
                                                                     }
                                                                 </span>
                                                                 <span className="text-sm font-semibold text-primary__color">
                                                                     {item.base_curr_symbol ||
-                                                                        "৳"}
+                                                                        ""}
                                                                     {parseFloat(
                                                                         item.price,
                                                                     ).toFixed(
@@ -610,7 +605,7 @@ export default function Header() {
                                                             </h4>
                                                             <div className="text-sm font-semibold text-primary__color mt-1">
                                                                 {item.base_curr_symbol ||
-                                                                    "৳"}
+                                                                    ""}
                                                                 {parseFloat(
                                                                     item.price,
                                                                 ).toFixed(2)}
@@ -740,7 +735,7 @@ export default function Header() {
                             href="/categories"
                             className="flex flex-col items-center"
                         >
-                            <LayoutDashboard className="w-5 h-5 text-gray-700" />
+                            <Squares2X2Icon className="w-5 h-5 text-gray-700" />
                             <span className="text-xs mt-1">
                                 {mobileBottomBar.categories}
                             </span>
@@ -781,7 +776,7 @@ export default function Header() {
                             onClick={handleCheckoutClick}
                             className="flex flex-col items-center relative"
                         >
-                            <ShoppingBagIcon className="w-5 h-5 text-gray-700" />
+                            <ShoppingCartIcon className="w-5 h-5 text-gray-700" />
                             {mounted && cartCount > 0 && (
                                 <span className="absolute -top-1 -right-2 bg-primary__color text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                                     {cartCount}

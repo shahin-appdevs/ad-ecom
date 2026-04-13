@@ -1,10 +1,9 @@
 "use client";
-import { Suspense, useCallback } from "react";
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-import { useCart } from "@/components/context/CartContext";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import {
     childCategoryGetAPI,
@@ -16,8 +15,10 @@ import {
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { Menu } from "@headlessui/react";
-import { ChevronRight } from "lucide-react";
-import { useTranslations } from "next-intl"; // ← Added
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useTranslations } from "next-intl";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -37,23 +38,23 @@ const ProductSkeleton = () => (
 );
 
 function SubCategoryProduct() {
-    const t = useTranslations("Category.subCategory"); // ← Added as requested
+    const t = useTranslations("Category.subCategory");
 
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { incrementCart, decrementCart } = useCart();
     const searchParams = useSearchParams();
     const idParam = searchParams.get("id");
     const categoryId = searchParams.get("category-id");
     const childCategoryId = searchParams.get("child-id");
     const [childSubCategoryId, setSubChildCategoryId] = useState(null);
-    const [states, setStates] = useState([]);
     const [childSubCategories, setChildSubCategories] = useState([]);
     const [currentSubCategory, setCurrentSubCategory] = useState(null);
     const [isReseller, setIsReseller] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
+
+    const { baseCurrencySymbol } = getBaseCurrency(data);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -71,7 +72,7 @@ function SubCategoryProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                console.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 
@@ -85,75 +86,11 @@ function SubCategoryProduct() {
     }, [idParam]);
 
     const formatPrice = (price) => {
-        if (!price) return "৳0.00";
+        if (!price) return `${baseCurrencySymbol}0.00`;
         const numericValue =
             typeof price === "string" ? parseFloat(price) : price;
-        return `৳${numericValue.toFixed(2)}`;
+        return `${baseCurrencySymbol}${numericValue.toFixed(2)}`;
     };
-
-    const saveToLocalStorage = useCallback(
-        (product, quantity) => {
-            if (!data?.products?.data) return;
-
-            const savedCart = localStorage.getItem("subCategoryCart");
-            let cartItems = savedCart ? JSON.parse(savedCart) : [];
-
-            const existingIndex = cartItems.findIndex(
-                (item) => item.id === product.id,
-            );
-
-            const price =
-                isReseller && product.product_additional_prices?.resell_price
-                    ? product.product_additional_prices.resell_price
-                    : product.product_additional_prices?.flash_price ||
-                      product.product_prices?.sale_price ||
-                      product.product_prices?.list_price;
-
-            if (existingIndex >= 0) {
-                cartItems[existingIndex].quantity = quantity;
-                cartItems[existingIndex].price = price;
-            } else {
-                cartItems.push({
-                    id: product.id,
-                    title: product.title,
-                    price: price,
-                    quantity: quantity,
-                    image: product.main_image
-                        ? `${backendBaseURL}/${data.main_image_path}/${product.main_image}`
-                        : `${backendBaseURL}/${data.default_image_path}`,
-                    base_curr_symbol: data.base_curr_symbol,
-                });
-            }
-
-            cartItems = cartItems.filter((item) => item.quantity > 0);
-            localStorage.setItem("subCategoryCart", JSON.stringify(cartItems));
-        },
-        [data, isReseller],
-    );
-
-    useEffect(() => {
-        if (!data?.products?.data) return;
-
-        const savedCart = localStorage.getItem("subCategoryCart");
-        const initialStates = data.products.data.map((product) => {
-            if (savedCart) {
-                const parsedCart = JSON.parse(savedCart);
-                const cartItem = parsedCart.find(
-                    (item) => item.id === product.id,
-                );
-                return {
-                    showQuantity: !!cartItem,
-                    quantity: cartItem?.quantity || 1,
-                };
-            }
-            return {
-                showQuantity: false,
-                quantity: 1,
-            };
-        });
-
-        setStates(initialStates);
-    }, [data]);
 
     useEffect(() => {
         const fetchSubCategories = async () => {
@@ -269,12 +206,6 @@ function SubCategoryProduct() {
                         });
 
                     setProducts(formattedProducts);
-                    setStates(
-                        formattedProducts.map(() => ({
-                            showQuantity: false,
-                            quantity: 1,
-                        })),
-                    );
                 }
             } catch (error) {
                 toast.error(error.response?.data?.message?.error?.[0]);
@@ -372,13 +303,7 @@ function SubCategoryProduct() {
                 formatProduct(p, res.data.data),
             );
             setProducts((prev) => [...prev, ...newFormatted]);
-            setStates((prev) => [
-                ...prev,
-                ...newFormatted.map(() => ({
-                    showQuantity: false,
-                    quantity: 1,
-                })),
-            ]);
+
             setData((prev) => ({
                 ...prev,
                 products: {
@@ -387,10 +312,7 @@ function SubCategoryProduct() {
                 },
             }));
         } catch (error) {
-            toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to load more products",
-            );
+            handleApiError(error, t("failedToLoadMore"));
         } finally {
             setLoadMoreLoading(false);
         }
@@ -427,20 +349,14 @@ function SubCategoryProduct() {
                                                 }
                                             </Link>
 
-                                            <ChevronRight
-                                                size={16}
-                                                className="rtl:rotate-180"
-                                            />
+                                            <ChevronRightIcon className="w-[18px] h-[18px] rtl:rotate-180" />
                                             <span className="">
                                                 {currentSubCategory.title}
                                             </span>
                                         </h5>
                                     </div>
                                     {childSubCategories?.length > 0 && (
-                                        <ChevronRight
-                                            size={16}
-                                            className="text-neutral-800 rtl:rotate-180"
-                                        />
+                                        <ChevronRightIcon className="w-[18px] h-[18px] rtl:rotate-180" />
                                     )}
                                     <ul className="flex items-center gap-4">
                                         {childSubCategories?.length > 0 && (
@@ -452,10 +368,7 @@ function SubCategoryProduct() {
                                                     <Menu.Button className="flex text-sm md:text-base items-center gap-2 bg-white border py-1 text-primary__color px-4 rounded-2xl  font-medium">
                                                         {t("moreCategories")}{" "}
                                                         {/* Translated */}
-                                                        <ChevronRight
-                                                            size={16}
-                                                            className="rtl:rotate-180"
-                                                        />
+                                                        <ChevronRightIcon className="w-[18px] h-[18px] rtl:rotate-180" />
                                                     </Menu.Button>
 
                                                     <Menu.Items className="absolute p-2 left-0 mt-2 min-w-[240px] rounded-lg bg-white shadow-lg ring-1 ring-black/5 focus:outline-none z-50">

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import Image from "next/image";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { LoaderCircle } from "lucide-react";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import {
@@ -12,7 +12,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 
-import logo from "@public/images/logo/favicon.jpeg";
+const logo = "";
 
 export default function Otp() {
     const [otp, setOtp] = useState("");
@@ -200,7 +200,7 @@ export default function Otp() {
                                 >
                                     {loadingResend ? (
                                         <span className="inline-flex items-center">
-                                            <LoaderCircle className="w-4 h-4 mr-1 animate-spin" />
+                                            <ArrowPathIcon className="w-4 h-4 mr-1 animate-spin" />
                                             Sending...
                                         </span>
                                     ) : (

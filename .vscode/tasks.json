@@ -5,6 +5,7 @@
             "label": "Run Next Dev",
             "type": "shell",
             "command": "npm run dev",
+            "isBackground": true,
             "problemMatcher": [],
             "runOptions": {
                 "runOn": "folderOpen"

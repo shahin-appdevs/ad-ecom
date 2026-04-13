@@ -184,7 +184,7 @@ export default function WithdrawSection({ setRefetch }) {
             }
         }
         return "0.00 - 0.00";
-    }, [selectedCurrency, wallet?.selectedCurrency, t]);
+    }, [selectedCurrency, wallet?.selectedCurrency]);
 
     // Calculate fees and charges
     const feesCalculation = useMemo(() => {
@@ -279,7 +279,7 @@ export default function WithdrawSection({ setRefetch }) {
         };
     }, [selectedCurrency, wallet?.selectedCurrency, remainingLimit]);
 
-    const handleWithdrawMoney = async (e) => {
+    const handleWithdrawMoney = async () => {
         try {
             setLoading(true);
             const response = await InsertWithdrawAPI(
@@ -334,27 +334,7 @@ export default function WithdrawSection({ setRefetch }) {
                     setManualInputs({});
                     setAmount("");
                     handleFileReset();
-
-                    // sessionStorage.removeItem("manualPaymentData");
                 }
-
-                // old withdraw system
-
-                // const manualTransactionData = {
-                //     trx: response.data.data.payment_information?.trx,
-                //     gateway: response.data.data.gateway_currency_name,
-                //     amount: response.data.data.payment_information
-                //         ?.request_amount,
-                //     payable: response.data.data.payment_information?.payable,
-                //     details: response.data.data.details,
-                //     exchangeRate:
-                //         response.data.data.payment_information?.exchange_rate,
-                // };
-                // sessionStorage.setItem(
-                //     "manualPaymentData",
-                //     JSON.stringify(manualTransactionData),
-                // );
-                // window.location.href = "/user/withdraw/manual";
             } else {
                 toast.error(
                     response?.data?.message?.error?.[0] ||

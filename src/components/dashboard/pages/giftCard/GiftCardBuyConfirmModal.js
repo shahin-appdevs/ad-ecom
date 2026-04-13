@@ -173,16 +173,6 @@ export default function GiftCardBuyConfirmModal({
                                         </div>
                                     ))}
 
-                                    {/* Total Payable */}
-                                    {/* <div className="flex justify-between items-center pt-2">
-                                        <span className="text-base font-bold">
-                                            Total Payable Amount
-                                        </span>
-                                        <span className="text-lg font-bold text-blue-600">
-                                            {product?.totalPayable?.toFixed(4)}{" "}
-                                            USD
-                                        </span>
-                                    </div> */}
                                     <div className="mt-4!">
                                         <button
                                             onClick={handleOrderSubmit}

@@ -9,7 +9,7 @@ import useAuthRedirect from "@/components/utility/useAuthSellerRedirect";
 import { useRouter } from "@/i18n/navigation";
 import { toast } from "react-hot-toast";
 
-import logo from "@public/images/logo/favicon.jpeg";
+const logo = "";
 
 export default function Register() {
     useAuthRedirect();

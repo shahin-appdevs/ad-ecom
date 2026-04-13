@@ -1,19 +1,18 @@
 "use client";
 import { Suspense, useEffect, useState } from "react";
 import Image from "next/image";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { Link } from "@/i18n/navigation";
 import Button from "@/components/utility/Button";
 import { registerAPI, sendOtpAPI } from "@root/services/apiClient/apiClient";
 import useAuthRedirect from "@/components/utility/useAuthRedirect";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
-
-import logo from "@public/images/logo/favicon.jpeg";
-import { LoaderCircle } from "lucide-react";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import ReCAPTCHA from "react-google-recaptcha";
 import useGoogleRecaptcha from "@/hooks/useGoogleRecaptcha";
 import { useLocale, useTranslations } from "next-intl";
+import getImageUrl from "@/components/utility/getImageUrl";
+import { useAppSettings } from "@/hooks/useAppSettings";
 
 function RegisterComp() {
     useAuthRedirect();
@@ -34,6 +33,8 @@ function RegisterComp() {
     const t = useTranslations("Auth.register");
 
     const searchParam = useSearchParams();
+
+    const { appSettingsData } = useAppSettings();
 
     useEffect(() => {
         const refCode = searchParam.get("referral_code");
@@ -73,7 +74,7 @@ function RegisterComp() {
                 formData.append("referral_code", referralCode.trim());
             }
 
-            const response = await registerAPI(formData);
+            const response = await registerAPI(formData, locale);
 
             if (response?.data?.data?.token) {
                 const token = response.data.data.token;
@@ -111,7 +112,7 @@ function RegisterComp() {
 
                 toast.success(successMessage);
             } else {
-                toast.error("Registration failed. Please try again.");
+                toast.error(t("registerFailed"));
             }
         } catch (err) {
             const errorMessage =
@@ -138,7 +139,10 @@ function RegisterComp() {
                         <div className="flex items-center space-x-3 mb-8">
                             <div className="bg-white/10 p-2 rounded-lg backdrop-blur-sm">
                                 <Image
-                                    src={logo}
+                                    src={getImageUrl(
+                                        appSettingsData?.site_logo,
+                                        appSettingsData?.logo_image_path,
+                                    )}
                                     alt="Logo"
                                     width={40}
                                     height={40}
@@ -146,7 +150,7 @@ function RegisterComp() {
                                 />
                             </div>
                             <span className="text-white text-xl font-bold tracking-wide">
-                                QR eCommerce
+                                {appSettingsData?.site_name}
                             </span>
                         </div>
                         <h2 className="text-4xl font-bold text-gray-400 mb-6 leading-tight">
@@ -166,7 +170,10 @@ function RegisterComp() {
                 <div className="w-full md:w-1/2 p-8 sm:p-12 lg:p-16 flex flex-col justify-center">
                     <div className="md:hidden flex items-center space-x-3 mb-8 justify-center">
                         <Image
-                            src={logo}
+                            src={getImageUrl(
+                                appSettingsData?.site_logo,
+                                appSettingsData?.logo_image_path,
+                            )}
                             alt="Logo"
                             width={48}
                             height={48}
@@ -406,7 +413,7 @@ export default function Register() {
         <Suspense
             fallback={
                 <div className="min-h-screen flex items-center justify-center">
-                    <LoaderCircle className="text-primary__color animate-spin text-lg" />
+                    <ArrowPathIcon className="text-primary__color animate-spin h-[18px] w-[18px]" />
                 </div>
             }
         >

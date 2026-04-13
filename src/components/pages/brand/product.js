@@ -13,6 +13,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useTranslations } from "next-intl";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -43,6 +44,10 @@ function BrandProduct() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
+    const { baseCurrencySymbol } = getBaseCurrency(data);
+    const t = useTranslations("HomePage.shopByBrand");
+    const loadMore = t("loadMore");
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         setIsLoggedIn(!!token);
@@ -58,7 +63,7 @@ function BrandProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                toast.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 
@@ -72,10 +77,10 @@ function BrandProduct() {
     }, [idParam]);
 
     const formatPrice = (price) => {
-        if (!price) return "৳0.00";
+        if (!price) return `${baseCurrencySymbol}0.00`;
         const numericValue =
             typeof price === "string" ? parseFloat(price) : price;
-        return `৳${numericValue.toFixed(2)}`;
+        return `${baseCurrencySymbol}${numericValue.toFixed(2)}`;
     };
 
     useEffect(() => {
@@ -260,16 +265,12 @@ function BrandProduct() {
             }));
         } catch (error) {
             toast.error(
-                error.response?.data?.message?.error?.[0] ||
-                    "Failed to load more products",
+                error.response?.data?.message?.error?.[0] || t("failedToLoad"),
             );
         } finally {
             setLoadMoreLoading(false);
         }
     };
-
-    const t = useTranslations("HomePage.shopByBrand");
-    const loadMore = t("loadMore");
 
     return (
         <section className="sm:pt-4">

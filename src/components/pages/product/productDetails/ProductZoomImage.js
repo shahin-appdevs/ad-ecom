@@ -15,7 +15,7 @@ export default function ProductZoomImage({ selectedImage, productData }) {
             imageZoom.style.setProperty("--zoomY", `${pointer.y}%`);
         });
 
-        imageZoom.addEventListener("mouseleave", (event) => {
+        imageZoom.addEventListener("mouseleave", () => {
             imageZoom.style.setProperty("--display", "none");
         });
     }, []);

@@ -2,13 +2,15 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-
 import {
     paymentLinkListAPI,
     paymentLinkStoreAPI,
 } from "@root/services/apiClient/apiClient";
 import { Listbox } from "@headlessui/react";
-import { DocumentArrowUpIcon } from "@heroicons/react/24/outline";
+import {
+    BanknotesIcon,
+    DocumentArrowUpIcon,
+} from "@heroicons/react/24/outline";
 import { useDropzone } from "react-dropzone";
 import {
     ChevronUpDownIcon,
@@ -20,9 +22,10 @@ import Button from "@/components/utility/Button";
 import Image from "next/image";
 import { toast } from "react-hot-toast";
 import PinVerificationModal from "@/components/dashboard/partials/PinVerificationModal";
-
-import logo from "@public/images/logo/favicon.jpeg";
 import mockup from "@public/images/payment/mockup.png";
+import { useAppSettings } from "@/hooks/useAppSettings";
+import getImageUrl from "@/components/utility/getImageUrl";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const CreateLinkSkeleton = () => {
     return (
@@ -119,6 +122,7 @@ export default function CreateLinkSection() {
     const router = useRouter();
     const [showPinModal, setShowPinModal] = useState(false);
     const t = useTranslations("Dashboard.wallet.paymentLink.createPaymentLink");
+    const { appSettingsData } = useAppSettings();
 
     const paymentTypes = [
         {
@@ -151,7 +155,7 @@ export default function CreateLinkSection() {
                     setSelectedCurrency(defaultCurrency);
                 }
             } catch (error) {
-                toast.error("Failed to load currencies");
+                handleApiError(error, t("errorFetch"));
             } finally {
                 setIsInitialLoading(false);
             }
@@ -209,7 +213,12 @@ export default function CreateLinkSection() {
             const response = await paymentLinkStoreAPI(formData);
 
             if (response.data?.data?.payment_link) {
-                toast.success(response?.data?.message?.success?.[0]);
+                toast.success(
+                    response?.data?.message?.success?.[0] ||
+                        t("paymentLinkCreated"),
+                );
+
+                // Reset form
                 setTitle("");
                 setSubTitle("");
                 setDescription("");
@@ -220,16 +229,17 @@ export default function CreateLinkSection() {
                 setShowLimits(false);
                 setPreview(null);
                 setFile(null);
+
                 router.push(
                     `/user/payment/link/share?token=${response.data.data.payment_link.token}`,
                 );
             } else {
-                throw new Error("Invalid response from server");
+                toast.error(t("invalidServerResponse"));
             }
         } catch (error) {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
-                    "Failed to create payment link",
+                    t("failedToCreatePaymentLink"),
             );
         } finally {
             setIsLoading(false);
@@ -590,7 +600,7 @@ export default function CreateLinkSection() {
 
                                     <div className="flex items-center border rounded-md px-2">
                                         <span className="text-sm mr-1 text-gray-500">
-                                            $
+                                            <BanknotesIcon className="h-5 w-5" />
                                         </span>
                                         <input
                                             type="text"
@@ -615,7 +625,10 @@ export default function CreateLinkSection() {
                                         />
                                     ) : (
                                         <Image
-                                            src={logo}
+                                            src={getImageUrl(
+                                                appSettingsData?.site_logo,
+                                                appSettingsData?.logo_image_path,
+                                            )}
                                             width={96}
                                             height={96}
                                             alt="QR"
@@ -683,7 +696,7 @@ export default function CreateLinkSection() {
 
                                 <div className="flex items-center border rounded-md px-2">
                                     <span className="text-sm mr-1 text-gray-500">
-                                        $
+                                        <BanknotesIcon className="h-5 w-5" />
                                     </span>
                                     <input
                                         type="text"
@@ -708,7 +721,10 @@ export default function CreateLinkSection() {
                                     />
                                 ) : (
                                     <Image
-                                        src={logo}
+                                        src={getImageUrl(
+                                            appSettingsData?.site_logo,
+                                            appSettingsData?.logo_image_path,
+                                        )}
                                         width={96}
                                         height={96}
                                         alt="QR"

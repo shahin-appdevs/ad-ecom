@@ -14,8 +14,10 @@ import {
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { Menu } from "@headlessui/react";
-import { ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { ChevronRightIcon } from "@heroicons/react/24/outline";
+import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
+import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -65,7 +67,7 @@ function CategoryProduct() {
                     response.data.data?.user?.reseller_verified === "1",
                 );
             } catch (error) {
-                console.error("Failed to fetch user profile:", error);
+                handleApiError(error, t("failedFetchProfile"));
             }
         };
 
@@ -80,11 +82,13 @@ function CategoryProduct() {
         }
     }, [idParam]);
 
+    const { baseCurrencySymbol } = getBaseCurrency(data);
+
     const formatPrice = (price) => {
-        if (!price) return "৳0.00";
+        if (!price) return `${baseCurrencySymbol}0.00`;
         const numericValue =
             typeof price === "string" ? parseFloat(price) : price;
-        return `৳${numericValue.toFixed(2)}`;
+        return `${baseCurrencySymbol}${numericValue.toFixed(2)}`;
     };
 
     useEffect(() => {
@@ -287,7 +291,7 @@ function CategoryProduct() {
         } catch (error) {
             toast.error(
                 error.response?.data?.message?.error?.[0] ||
-                    "Failed to load more products",
+                    t("failedToLoadMoreProducts"),
             );
         } finally {
             setLoadMoreLoading(false);
@@ -319,10 +323,7 @@ function CategoryProduct() {
                                             </span>
                                             {currentCategory.child_categories
                                                 ?.length > 0 && (
-                                                <ChevronRight
-                                                    size={18}
-                                                    className="rtl:rotate-180"
-                                                />
+                                                <ChevronRightIcon className="rtl:rotate-180 w-[16px] h-[16px]" />
                                             )}
                                         </h5>
                                     </div>
@@ -337,10 +338,7 @@ function CategoryProduct() {
                                             <Menu.Button className="flex items-center gap-2 text-sm md:text-base bg-white text-primary__color border py-1 px-4 rounded-2xl font-normal">
                                                 {t("subCategories")}{" "}
                                                 {/* ← Translated */}
-                                                <ChevronRight
-                                                    size={16}
-                                                    className="rtl:-rotate-180"
-                                                />
+                                                <ChevronRightIcon className="rtl:-rotate-180 w-[16px] h-[16px]" />
                                             </Menu.Button>
 
                                             {/* Dropdown */}

@@ -1,16 +1,16 @@
-'use client';
-import { useState, useEffect } from 'react';
-import { toast } from 'react-hot-toast';
-import { 
+"use client";
+import { useState, useEffect } from "react";
+import { toast } from "react-hot-toast";
+import {
     CurrencyDollarIcon,
-    BanknotesIcon,
     ArrowTrendingDownIcon,
     WalletIcon,
     ChartBarIcon,
-} 
-from '@heroicons/react/24/outline';
+    BanknotesIcon,
+} from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
-import { ManualAddMoneyAPI } from '@root/services/apiClient/apiClient';
+import { ManualAddMoneyAPI } from "@root/services/apiClient/apiClient";
+import { useTranslations } from "next-intl";
 
 function Skeleton({ className }) {
     return (
@@ -19,73 +19,85 @@ function Skeleton({ className }) {
 }
 
 function ManualConfirmationPage() {
+    const t = useTranslations("Dashboard.wallet.addMoney.manual");
+
     const [paymentData, setPaymentData] = useState(null);
     const [formValues, setFormValues] = useState({});
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const storedData = sessionStorage.getItem('manualPaymentData');
+        const storedData = sessionStorage.getItem("manualPaymentData");
         if (storedData) {
             const parsedData = JSON.parse(storedData);
             setPaymentData(parsedData);
-            
+
             // Initialize form values based on input fields
             const initialValues = {};
             if (parsedData.inputFields) {
-                parsedData.inputFields.forEach(field => {
-                    initialValues[field.name] = '';
+                parsedData.inputFields.forEach((field) => {
+                    initialValues[field.name] = "";
                 });
             }
             setFormValues(initialValues);
         } else {
-            window.location.href = '/user/add/money';
-            toast.error('No payment data found');
+            window.location.href = "/user/add/money";
+            toast.error(t("noPaymentDataFound"));
         }
-    }, []);
+    }, [t]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormValues(prev => ({
+        setFormValues((prev) => ({
             ...prev,
-            [name]: value
+            [name]: value,
         }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        
+
         try {
             // Validate required fields
             if (paymentData.inputFields) {
-                const missingFields = paymentData.inputFields.filter(field => 
-                    field.required && !formValues[field.name]
+                const missingFields = paymentData.inputFields.filter(
+                    (field) => field.required && !formValues[field.name],
                 );
-                
+
                 if (missingFields.length > 0) {
-                    throw new Error(`Please fill all required fields: ${missingFields.map(f => f.label).join(', ')}`);
+                    toast.error(
+                        t("missingRequiredFields", {
+                            fields: missingFields
+                                .map((f) => f.label)
+                                .join(", "),
+                        }),
+                    );
+                    return;
                 }
             }
-
             // Prepare submission data
             const submissionData = {
                 track: paymentData.trx,
-                ...formValues
+                ...formValues,
             };
-
             // Submit to API
             const response = await ManualAddMoneyAPI(submissionData);
 
             if (response.data.message?.success) {
                 toast.success(response.data.message.success[0]);
-                sessionStorage.removeItem('manualPaymentData');
-                // Optionally redirect to success page
-                // window.location.href = '/user/add/money/success';
+                sessionStorage.removeItem("manualPaymentData");
             } else {
-                toast.error(response?.data?.message?.error?.[0] || 'Submission failed');
+                toast.error(
+                    response?.data?.message?.error?.[0] ||
+                        t("submissionFailed"),
+                );
             }
         } catch (error) {
-            toast.error(error.response?.data?.message?.error?.[0] || error.message || 'Submission failed');
+            toast.error(
+                error.response?.data?.message?.error?.[0] ||
+                    error.message ||
+                    t("submissionFailed"),
+            );
         } finally {
             setLoading(false);
         }
@@ -94,22 +106,25 @@ function ManualConfirmationPage() {
     const renderInputField = (field) => {
         const commonProps = {
             name: field.name,
-            value: formValues[field.name] || '',
+            value: formValues[field.name] || "",
             onChange: handleInputChange,
-            className: "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100",
+            className:
+                "w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-100",
             required: field.required || false,
             maxLength: field.validation?.max || undefined,
             minLength: field.validation?.min || undefined,
-            placeholder: `Enter ${field.label.toLowerCase()}`
+            placeholder: t("enter") + " " + field.label.toLowerCase(),
         };
 
         switch (field.type) {
-            case 'textarea':
+            case "textarea":
                 return <textarea {...commonProps} rows={3} />;
-            case 'select':
+            case "select":
                 return (
                     <select {...commonProps}>
-                        <option value="">Select {field.label}</option>
+                        <option value="">
+                            {t("select")} {field.label}
+                        </option>
                         {field.validation?.options?.map((option, index) => (
                             <option key={index} value={option}>
                                 {option}
@@ -117,11 +132,11 @@ function ManualConfirmationPage() {
                         ))}
                     </select>
                 );
-            case 'file':
+            case "file":
                 return <input type="file" {...commonProps} />;
-            case 'number':
+            case "number":
                 return <input type="number" {...commonProps} />;
-            case 'email':
+            case "email":
                 return <input type="email" {...commonProps} />;
             default:
                 return <input type="text" {...commonProps} />;
@@ -136,25 +151,13 @@ function ManualConfirmationPage() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <Skeleton className="h-4 w-24 mb-2" />
-                            <div className="relative">
-                                <Skeleton className="h-10 w-full" />
-                                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-20">
-                                    <Skeleton className="h-8 w-full" />
-                                </div>
-                            </div>
+                            <Skeleton className="h-10 w-full" />
                         </div>
                         <div>
                             <Skeleton className="h-4 w-24 mb-2" />
-                            <div className="relative">
-                                <Skeleton className="h-10 w-full" />
-                                <div className="absolute right-2 top-1/2 transform -translate-y-1/2 w-20">
-                                    <Skeleton className="h-8 w-full" />
-                                </div>
-                            </div>
+                            <Skeleton className="h-10 w-full" />
                         </div>
                     </div>
-                    
-                    <Skeleton className="h-12 w-full" />
                     <Skeleton className="h-12 w-full" />
                 </div>
                 <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
@@ -166,12 +169,6 @@ function ManualConfirmationPage() {
                                 <Skeleton className="h-4 w-20" />
                             </div>
                         ))}
-                        <div className="border-t pt-3">
-                            <div className="flex justify-between">
-                                <Skeleton className="h-4 w-28" />
-                                <Skeleton className="h-4 w-24" />
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -184,28 +181,41 @@ function ManualConfirmationPage() {
                 <form className="space-y-5" onSubmit={handleSubmit}>
                     {/* Payment Instructions */}
                     {paymentData.details && (
-                        <div 
-                            className="prose prose-sm mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200" 
-                            dangerouslySetInnerHTML={{ __html: paymentData.details }} 
+                        <div
+                            className="prose prose-sm mb-6 p-4 bg-blue-50 rounded-lg border border-blue-200"
+                            dangerouslySetInnerHTML={{
+                                __html: paymentData.details,
+                            }}
                         />
                     )}
 
                     {/* Dynamic Input Fields */}
-                    {paymentData.inputFields && paymentData.inputFields.length > 0 ? (
+                    {paymentData.inputFields &&
+                    paymentData.inputFields.length > 0 ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            {paymentData.inputFields.map((field, index) => (
-                                <div 
-                                    key={field.name} 
-                                    className={field.type === 'textarea' ? 'col-span-2' : ''}
+                            {paymentData.inputFields.map((field) => (
+                                <div
+                                    key={field.name}
+                                    className={
+                                        field.type === "textarea"
+                                            ? "col-span-2"
+                                            : ""
+                                    }
                                 >
                                     <label className="block text-sm font-medium mb-2">
                                         {field.label}
-                                        {field.required && <span className="text-red-500 ml-1">*</span>}
+                                        {field.required && (
+                                            <span className="text-red-500 ml-1">
+                                                *
+                                            </span>
+                                        )}
                                     </label>
                                     {renderInputField(field)}
                                     {field.validation?.max && (
                                         <p className="text-xs text-gray-500 mt-1">
-                                            Maximum {field.validation.max} characters
+                                            {t("maxCharacters", {
+                                                max: field.validation.max,
+                                            })}
                                         </p>
                                     )}
                                 </div>
@@ -213,12 +223,12 @@ function ManualConfirmationPage() {
                         </div>
                     ) : (
                         <div className="text-center py-8 text-gray-500">
-                            No additional information required for this payment method.
+                            {t("noAdditionalInfo")}
                         </div>
                     )}
 
                     <Button
-                        title={loading ? "Confirming..." : "Confirm Payment"}
+                        title={loading ? t("confirming") : t("confirmPayment")}
                         variant="primary"
                         size="md"
                         className="w-full"
@@ -227,53 +237,59 @@ function ManualConfirmationPage() {
                     />
                 </form>
             </div>
+
             <div className="bg-white rounded-[12px] p-5 sm:p-6 md:p-7 col-span-12 lg:col-span-5">
                 <div className="bg-gray-50 p-5 rounded-xl border border-gray-200 space-y-4 shadow-sm">
-                    <h5 className="text-base font-semibold text-gray-800">Payment Summary</h5>
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                    <h5 className="text-base font-semibold text-gray-800">
+                        {t("paymentSummary")}
+                    </h5>
+
+                    <div className="flex items-center justify-between ">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <CurrencyDollarIcon className="w-5 h-5 text-indigo-500" />
-                            <span>Transaction ID</span>
+                            <span>{t("transactionId")}</span>
                         </div>
                         <span className="font-medium text-gray-800">
                             {paymentData.trx}
                         </span>
                     </div>
+
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ArrowTrendingDownIcon className="w-5 h-5 text-red-500" />
-                            <span>Payment Method</span>
+                            <span>{t("paymentMethod")}</span>
                         </div>
                         <span className="text-gray-800">
                             {paymentData.gateway}
                         </span>
                     </div>
+
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <BanknotesIcon className="w-5 h-5 text-emerald-500" />
-                            <span>Amount</span>
+                            <span>{t("amount")}</span>
                         </div>
                         <span className="text-gray-800">
                             {paymentData.amount}
                         </span>
                     </div>
+
                     <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-gray-600">
+                        <div className="flex items-center gap-2 text-gray-600">
                             <ChartBarIcon className="w-5 h-5 text-cyan-800" />
-                            <span>Exchange Rate</span>
+                            <span>{t("exchangeRate")}</span>
                         </div>
                         <span className="text-gray-800">
                             {paymentData.exchangeRate}
                         </span>
                     </div>
+
                     <div className="flex items-center justify-between border-t pt-3 font-semibold text-gray-800">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center gap-2">
                             <WalletIcon className="w-5 h-5 text-indigo-600" />
-                            <span>Payable Amount</span>
+                            <span>{t("payableAmount")}</span>
                         </div>
-                        <span>
-                            {paymentData.payable}
-                        </span>
+                        <span>{paymentData.payable}</span>
                     </div>
                 </div>
             </div>

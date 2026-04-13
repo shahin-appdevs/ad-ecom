@@ -8,7 +8,13 @@ import {
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { useHomeData } from "@/components/context/HomeContext";
-import { ChevronDownIcon, List } from "lucide-react";
+import { useTranslations } from "next-intl";
+
+// Correct Heroicons replacements for Lucide icons
+import {
+    ListBulletIcon, // Replacement for LayoutDashboard / List (grid style)
+    ChevronDownIcon,
+} from "@heroicons/react/24/outline";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -32,7 +38,7 @@ const SkeletonCategoryMenu = () => (
 );
 
 export default function ProductSidebar() {
-    const [hoveredCategory, setHoveredCategory] = useState(null);
+    const t = useTranslations("Category.categorySidebar");
     const [hoveredSubcategory, setHoveredSubcategory] = useState(null);
     const [menuOpen, setMenuOpen] = useState(false);
     const { homeData, loading } = useHomeData();
@@ -81,26 +87,29 @@ export default function ProductSidebar() {
                         <Bars3Icon className="w-6 h-6" />
                     )}
                 </button>
-                <span className="text-sm font-semibold">Categories</span>
+                <span className="text-sm font-semibold">
+                    {t("categories") || "Categories"}
+                </span>
             </div>
+
             <div
                 className={`${menuOpen ? "block" : "hidden"} xl:block max-h-[100vh] sticky top-[130px] z-10`}
             >
-                <div className=" gap-2 bg-primary__color rounded-t-md py-2 text-white px-2 justify-between font-semibold flex items-center">
-                    <span className="flex items-center gap-2 ">
-                        <List size={18} />
-                        <span>Browse Category</span>
+                <div className="gap-2 bg-primary__color rounded-t-md py-2 text-white px-2 justify-between font-semibold flex items-center">
+                    <span className="flex items-center gap-2">
+                        <ListBulletIcon className="w-5 h-5" />{" "}
+                        {/* Replaced List */}
+                        <span>{t("browseCategory")}</span>
                     </span>
-                    <ChevronDownIcon size={18} />
+                    <ChevronDownIcon className="w-5 h-5" />
                 </div>
+
                 <div className="relative">
-                    <ul className="max-h-[65vh] 2xl:max-h-[80vh]  overflow-y-auto">
+                    <ul className="max-h-[65vh] 2xl:max-h-[80vh] overflow-y-auto">
                         {categories.map((category, index) => (
                             <li
                                 key={index}
-                                className="group flex px-3 border-b last:border-b-0 items-center justify-between transition-all text-neutral-600 hover:text-primary__color py-1.5 "
-                                onMouseEnter={() => setHoveredCategory(index)}
-                                onMouseLeave={() => setHoveredCategory(null)}
+                                className="group flex px-3 border-b last:border-b-0 items-center justify-between transition-all text-neutral-600 hover:text-primary__color py-1.5"
                             >
                                 <Link
                                     href={`/categories/products?id=${category.id}`}
@@ -120,9 +129,10 @@ export default function ProductSidebar() {
                                         <ChevronRightIcon className="h-4 w-4 text-primary__color group-hover:translate-x-1 duration-200 rtl:-rotate-180 rtl:group-hover:-translate-x-1" />
                                     )}
                                 </Link>
+
                                 {category?.subcategories?.length > 0 && (
                                     <div
-                                        className="absolute hidden md:block left-full rtl:right-full ml-[-5px] top-0 w-[250px] h-full bg-white rounded-md  p-2.5 z-50 shadow-2xl
+                                        className="absolute hidden md:block left-full rtl:right-full ml-[-5px] top-0 w-[250px] h-full bg-white rounded-md p-2.5 z-50 shadow-2xl
                                                 invisible opacity-0 -translate-x-4
                                                 group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
                                                 transition-all duration-300"
@@ -135,7 +145,7 @@ export default function ProductSidebar() {
                                                             subcategory.id ||
                                                             subIndex
                                                         }
-                                                        className="flex items-center justify-between transition-all  hover:text-primary__color text-neutral-600 py-1.5 px-2 rounded"
+                                                        className="flex items-center justify-between transition-all hover:text-primary__color text-neutral-600 py-1.5 px-2 rounded"
                                                         onMouseEnter={() =>
                                                             setHoveredSubcategory(
                                                                 `${index}-${subIndex}`,
@@ -169,15 +179,16 @@ export default function ProductSidebar() {
                                                             </div>
                                                             {subcategory.brands
                                                                 .length > 0 && (
-                                                                <ChevronRightIcon className="h-4 w-4 text-primary__color rtl:-rotate-180 " />
+                                                                <ChevronRightIcon className="h-4 w-4 text-primary__color rtl:-rotate-180" />
                                                             )}
                                                         </Link>
+
                                                         {hoveredSubcategory ===
                                                             `${index}-${subIndex}` &&
                                                             subcategory.brands
                                                                 ?.length >
                                                                 0 && (
-                                                                <div className="absolute left-full rtl:-left-full  ml-[-10px] rtl:-ml-[-20px] top-0 w-[240px] h-full bg-white  rounded-md shadow-xl p-2 z-20">
+                                                                <div className="absolute left-full rtl:-left-full ml-[-10px] rtl:-ml-[-20px] top-0 w-[240px] h-full bg-white rounded-md shadow-xl p-2 z-20">
                                                                     <ul>
                                                                         {subcategory.brands.map(
                                                                             (
@@ -189,7 +200,7 @@ export default function ProductSidebar() {
                                                                                         brand.id ||
                                                                                         brandIndex
                                                                                     }
-                                                                                    className="flex items-center justify-between transition-all  hover:text-primary__color text-neutral-600 py-1.5 px-2 rounded"
+                                                                                    className="flex items-center justify-between transition-all hover:text-primary__color text-neutral-600 py-1.5 px-2 rounded"
                                                                                 >
                                                                                     <Link
                                                                                         href={`/child-sub-categories/products?category-id=${category.id}&child-id=${subcategory.id}&sub-child-id=${brand.id}`}
