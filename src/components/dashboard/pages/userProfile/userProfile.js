@@ -734,12 +734,14 @@ export default function UserProfileSection() {
                                     </p>
                                 )}
                             </div>
+
+                           
                             <CustomListbox
                                 label={t("labels.division")}
-                                value={Number(userData.address.division)}
+                                value={userData.address.division}
                                 onChange={(value) =>
                                     handleAddressChange({
-                                        target: { name: "division", value },
+                                        target: { name: "division", value: Number(value) },
                                     })
                                 }
                                 options={divisions.map((division) => ({
@@ -751,10 +753,10 @@ export default function UserProfileSection() {
                             />
                             <CustomListbox
                                 label={t("labels.district")}
-                                value={Number(userData.address.district)}
+                                value={userData.address.district}
                                 onChange={(value) =>
                                     handleAddressChange({
-                                        target: { name: "district", value },
+                                        target: { name: "district", value: Number(value) },
                                     })
                                 }
                                 options={districts.map((district) => ({
@@ -770,10 +772,10 @@ export default function UserProfileSection() {
                             />
                             <CustomListbox
                                 label={t("labels.upazila")}
-                                value={Number(userData.address.upazila)}
+                                value={userData.address.upazila}
                                 onChange={(value) =>
                                     handleAddressChange({
-                                        target: { name: "upazila", value },
+                                        target: { name: "upazila", value: Number(value) },
                                     })
                                 }
                                 options={upazillas.map((upazilla) => ({
@@ -899,7 +901,7 @@ export default function UserProfileSection() {
                                     title={t("buttons.deleteAccount")}
                                     variant="primary"
                                     size="s"
-                                    className="text-white bg-red-500 hover:!bg-red-600 text-xs px-2 w-full"
+                                    className="text-white bg-red-500 hover:!bg-red-600 text-xs 2xl:text-sm px-2 w-full"
                                     onClick={() => setIsLogoutModalOpen(true)}
                                 />
                             </div>
