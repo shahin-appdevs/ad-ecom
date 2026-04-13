@@ -13,7 +13,7 @@ import Button from "@/components/utility/Button";
 import Image from "next/image";
 import { Listbox, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -34,6 +34,7 @@ const setLocalStorage = (key, value) => {
 
 export default function UserProfileSection() {
     const t = useTranslations("Dashboard.account.applyReseller");
+    const lang = useLocale();
     const [status, setStatus] = useState("0");
     const [loading, setLoading] = useState(true);
     const [frontFile, setFrontFile] = useState(null);
@@ -75,7 +76,7 @@ export default function UserProfileSection() {
     const fetchResellerInfo = useCallback(async () => {
         try {
             setLoading(true);
-            const response = await resellerInfoGetAPI();
+            const response = await resellerInfoGetAPI(lang);
             setStatus(response.data.data.reseller_status);
 
             // Only set from backend if we have no localStorage value yet
@@ -103,7 +104,7 @@ export default function UserProfileSection() {
 
             // If verified, fetch submitted info
             if (response.data.data.reseller_status === "1") {
-                const submittedInfoResponse = await resellerSubmitInfoGetAPI();
+                const submittedInfoResponse = await resellerSubmitInfoGetAPI(lang);
                 setSubmittedData(submittedInfoResponse.data.data);
             }
 
@@ -122,7 +123,7 @@ export default function UserProfileSection() {
         const newStatus = !isResellerEnabled;
         setSwitchLoading(true);
         try {
-            const response = await switchResellerAPI(newStatus ? "1" : "0");
+            const response = await switchResellerAPI(newStatus ? "1" : "0", lang);
 
             if (response.data && response.data.message.success) {
                 setIsResellerEnabled(newStatus);
@@ -165,6 +166,7 @@ export default function UserProfileSection() {
                 idType,
                 frontFile,
                 backFile,
+                lang
             );
 
             if (response.data && response.data.message.success) {

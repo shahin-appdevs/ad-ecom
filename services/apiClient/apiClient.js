@@ -1970,7 +1970,7 @@ export const stroWalletPageInfoGetApi = (lang = "en") => {
 };
 
 // strowallet virtual card create customer api
-export const createCustomerAPI = (formData, lang = "") => {
+export const createCustomerAPI = (formData, lang = "en") => {
     const token = getToken();
     if (token) {
         return apiClient.post(
@@ -2280,7 +2280,7 @@ export const sudoVirtualCardMakeDefaultOrRemove = (formData, lang = "") => {
     }
 };
 
-// strowallet virtual card  fund api
+// sudo virtual card  fund api
 export const sudoVirtualCardFundAPI = (formData, lang = "") => {
     const token = getToken();
     if (token) {

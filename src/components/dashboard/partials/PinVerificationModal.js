@@ -4,10 +4,11 @@ import { Dialog } from "@headlessui/react";
 import { VerifyPinAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import Button from "@/components/utility/Button";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function PinVerificationModal({ isOpen, onClose, onVerify }) {
     const t = useTranslations("Dashboard.pinVerificationModal");
+    const lang = useLocale();
 
     const [pin, setPin] = useState("");
     const [loading, setLoading] = useState(false);
@@ -21,7 +22,7 @@ export default function PinVerificationModal({ isOpen, onClose, onVerify }) {
     const handleVerify = async () => {
         setLoading(true);
         try {
-            const response = await VerifyPinAPI(pin);
+            const response = await VerifyPinAPI(pin, lang);
             if (response?.data?.data?.match_status) {
                 toast.success(response?.data?.message?.success?.[0]);
                 onVerify();

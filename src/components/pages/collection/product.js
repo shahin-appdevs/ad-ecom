@@ -11,7 +11,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
-import { useTranslations } from "next-intl"; // ← Added
+import { useLocale, useTranslations } from "next-intl"; // ← Added
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 import { handleApiError } from "@/components/utility/handleApiError";
 
@@ -40,6 +40,7 @@ const ProductSkeleton = () => (
 
 function CollectionProduct() {
     const t = useTranslations("Collection.collectionProduct"); // ← Added as requested
+    const lang = useLocale();
 
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
@@ -62,7 +63,7 @@ function CollectionProduct() {
             if (!isLoggedIn) return;
 
             try {
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
 
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
@@ -95,7 +96,7 @@ function CollectionProduct() {
             if (!collectionId) return;
             try {
                 setLoading(true);
-                const response = await collectionProductGetAPI(collectionId);
+                const response = await collectionProductGetAPI(collectionId, lang);
                 if (response?.data?.data?.products) {
                     setData(response.data.data);
 

@@ -12,10 +12,11 @@ import {
 } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
 import { tatumAddMoneyAPI } from "@root/services/apiClient/apiClient";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 function CryptoConfirmationPage() {
     const t = useTranslations("Dashboard.wallet.addMoney.crypto");
+    const lang = useLocale();
 
     const [paymentData, setPaymentData] = useState(null);
     const [txnHash, setTxnHash] = useState("");
@@ -55,7 +56,7 @@ function CryptoConfirmationPage() {
                 return;
             }
 
-            const response = await tatumAddMoneyAPI(txnHash, paymentData.trx);
+            const response = await tatumAddMoneyAPI(txnHash, paymentData.trx, lang);
 
             if (response.data.message?.success) {
                 toast.success(response.data.message.success[0]);

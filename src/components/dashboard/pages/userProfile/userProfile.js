@@ -16,7 +16,7 @@ import Image from "next/image";
 import { Listbox, Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { handleApiError } from "@/components/utility/handleApiError";
 // Images
@@ -24,6 +24,7 @@ const user = "";
 
 export default function UserProfileSection() {
     const t = useTranslations("Dashboard.account.profile");
+    const lang = useLocale();
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -94,7 +95,7 @@ export default function UserProfileSection() {
         const fetchProfileData = async () => {
             try {
                 setLoading(true);
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
                 const data = response.data.data.user;
                 setUserData({
                     firstname: data.firstname || "",
@@ -161,11 +162,11 @@ export default function UserProfileSection() {
             if (userImageFile) {
                 formData.append("image", userImageFile);
             }
-            const response = await profileUpdateAPI(formData);
+            const response = await profileUpdateAPI(formData, lang);
             if (response.data.message?.success) {
                 toast.success(t("success.profileUpdated"));
                 // Refresh user data
-                const profileResponse = await profiledGetAPI();
+                const profileResponse = await profiledGetAPI(lang);
                 const updatedData = profileResponse.data.data.user;
                 setUserData((prev) => ({
                     ...prev,
@@ -222,6 +223,7 @@ export default function UserProfileSection() {
                 currentPassword,
                 newPassword,
                 passwordConfirmation,
+                lang
             );
             response.data.message.success.forEach((msg) => {
                 toast.success(msg);
@@ -250,7 +252,7 @@ export default function UserProfileSection() {
     const onProfileDelete = async () => {
         setLoading(true);
         try {
-            const response = await ProfileDeleteAPI();
+            const response = await ProfileDeleteAPI(lang);
             const successMessage = response?.data?.message?.success || [
                 t("success.accountDeleted"),
             ];
@@ -286,7 +288,7 @@ export default function UserProfileSection() {
         }
         const toastId = toast.loading(t("kyc.submitting"));
         try {
-            const response = await kycUpdateAPI(frontFile, backFile);
+            const response = await kycUpdateAPI(frontFile, backFile, lang);
             if (response.data && response.data.message.success) {
                 toast.success(t("kyc.successSubmitted"), { id: toastId });
                 setStatus(t("kyc.pending"));
@@ -362,7 +364,7 @@ export default function UserProfileSection() {
     useEffect(() => {
         const fetchDivisions = async () => {
             try {
-                const response = await divisionDataGetAPI();
+                const response = await divisionDataGetAPI(lang);
                 if (response.data.message.success) {
                     setDivisions(response.data.data.divisions);
                     setDistricts(response.data.data.districts);
@@ -377,7 +379,7 @@ export default function UserProfileSection() {
     // Fetch districts when division changes
     const fetchDistricts = async (divisionId) => {
         try {
-            const response = await divisionDataGetAPI();
+            const response = await divisionDataGetAPI(lang);
             if (response.data.message.success) {
                 const filteredDistricts = response.data.data.districts.filter(
                     (district) =>
@@ -401,7 +403,7 @@ export default function UserProfileSection() {
     // Fetch upazillas when district changes
     const fetchUpazillas = async (districtId) => {
         try {
-            const response = await divisionDataGetAPI();
+            const response = await divisionDataGetAPI(lang);
             if (response.data.message.success) {
                 const filteredUpazillas = response.data.data.upazilas.filter(
                     (upazilla) =>

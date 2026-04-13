@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import { mobileTopupGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
@@ -49,6 +49,7 @@ function SkeletonRow() {
 
 export default function MobileTopupHistorySection() {
     const t = useTranslations("Dashboard.services.topup");
+    const lang = useLocale();
     const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -57,7 +58,7 @@ export default function MobileTopupHistorySection() {
         const fetchInitialData = async () => {
             try {
                 setIsLoading(true);
-                const response = await mobileTopupGetAPI();
+                const response = await mobileTopupGetAPI(lang);
                 setTransactions(response.data.data.transactions || []);
             } catch (error) {
                 const errorMessage = error.response?.data?.message?.error?.[0];

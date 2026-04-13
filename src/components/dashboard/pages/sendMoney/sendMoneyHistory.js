@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { sendMoneyGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
@@ -43,6 +43,7 @@ function SkeletonRow() {
 
 export default function SendMoneyHistorySection({ isRefetch }) {
     const t = useTranslations("Dashboard.wallet.sendMoney.sendMoneyLog");
+    const lang = useLocale();
     const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -51,7 +52,7 @@ export default function SendMoneyHistorySection({ isRefetch }) {
         const fetchInitialData = async () => {
             try {
                 setIsLoading(true);
-                const response = await sendMoneyGetAPI();
+                const response = await sendMoneyGetAPI(lang);
                 setTransactions(response.data.data.transactions || []);
             } catch (error) {
                 const errorMessage = error.response?.data?.message?.error?.[0];

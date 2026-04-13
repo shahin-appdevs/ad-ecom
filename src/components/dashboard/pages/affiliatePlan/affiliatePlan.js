@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { affiliatePlanGetAPI } from "@root/services/apiClient/apiClient";
 import { CheckBadgeIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 import { handleApiError } from "@/components/utility/handleApiError";
 
@@ -31,6 +31,7 @@ function SkeletonCard() {
 
 export default function AffiliatePlan() {
     const t = useTranslations("Dashboard.account.affiliatePlan");
+    const lang = useLocale();
     const [loading, setLoading] = useState(true);
     const [plans, setPlans] = useState([]);
     const [activePlan, setActivePlan] = useState(null);
@@ -40,7 +41,7 @@ export default function AffiliatePlan() {
     useEffect(() => {
         const fetchPlans = async () => {
             try {
-                const res = await affiliatePlanGetAPI();
+                const res = await affiliatePlanGetAPI(lang);
                 const data = res?.data?.data;
                 setPlans(data?.all_plans || []);
                 setActivePlan(data?.my_active_plan || null);

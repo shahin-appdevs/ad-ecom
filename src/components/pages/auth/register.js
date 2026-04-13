@@ -29,7 +29,7 @@ function RegisterComp() {
     const [showPassword, setShowPassword] = useState(false);
     const { recaptcha, recaptchaRef, recaptchaChange, loginBasicData } =
         useGoogleRecaptcha();
-    const locale = useLocale();
+    const lang = useLocale();
     const t = useTranslations("Auth.register");
 
     const searchParam = useSearchParams();
@@ -68,13 +68,13 @@ function RegisterComp() {
             formData.append("password", password);
             formData.append("agree", agree.toString());
             formData.append("g-recaptcha-response", recaptcha);
-            formData.append("language", locale);
+            formData.append("language", lang);
 
             if (showReferralInput && referralCode) {
                 formData.append("referral_code", referralCode.trim());
             }
 
-            const response = await registerAPI(formData, locale);
+            const response = await registerAPI(formData, lang);
 
             if (response?.data?.data?.token) {
                 const token = response.data.data.token;
@@ -101,10 +101,10 @@ function RegisterComp() {
                 );
 
                 if (userInfo?.email_verified === 0) {
-                    await sendOtpAPI();
+                    await sendOtpAPI(lang);
                     router.push("/user/auth/email-verify");
                 } else if (userInfo?.sms_verified === 0) {
-                    await resendAuthorizationCodeAPI();
+                    await resendAuthorizationCodeAPI(lang);
                     router.push("/user/auth/phone-verify");
                 } else {
                     router.push("/user/dashboard");

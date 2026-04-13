@@ -38,7 +38,7 @@ function Skeleton({ className }) {
 
 export default function WithdrawSection({ setRefetch }) {
     const t = useTranslations("Dashboard.wallet.withdrawMoney");
-    const locale = useLocale();
+    const lang = useLocale();
     const [apiData, setApiData] = useState(null);
     const [apiLoading, setApiLoading] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -68,7 +68,7 @@ export default function WithdrawSection({ setRefetch }) {
         const fetchWithdrawInfo = async () => {
             try {
                 setApiLoading(true);
-                const response = await withdrawGetAPI();
+                const response = await withdrawGetAPI(lang);
 
                 setApiData(response.data.data);
                 setGateways(response.data.data.gateways);
@@ -119,6 +119,7 @@ export default function WithdrawSection({ setRefetch }) {
                     senderAmount,
                     currencyCode,
                     chargeId,
+                    lang
                 );
                 const data = result?.data?.data;
                 setRemainingLimit({
@@ -286,6 +287,7 @@ export default function WithdrawSection({ setRefetch }) {
                 amount,
                 wallet.selectedCurrency.code,
                 selectedCurrency.alias,
+                lang
             );
             if (response.data.data.gateway_type === "AUTOMATIC") {
                 toast.success(response?.data?.message?.success?.[0]);
@@ -304,7 +306,7 @@ export default function WithdrawSection({ setRefetch }) {
                     "autoPaymentData",
                     JSON.stringify(autoTransactionData),
                 );
-                window.location.href = `/${locale}/user/withdraw/automatic`;
+                window.location.href = `/${lang}/user/withdraw/automatic`;
             } else if (response.data.data.gateway_type === "MANUAL") {
                 toast.success(response?.data?.message?.success?.[0]);
 
@@ -324,7 +326,7 @@ export default function WithdrawSection({ setRefetch }) {
                 });
 
                 // withdraw manual api call
-                const withdrawResponse = await ManualWithdrawAPI(formData);
+                const withdrawResponse = await ManualWithdrawAPI(formData, lang);
 
                 if (withdrawResponse.data) {
                     toast.success(

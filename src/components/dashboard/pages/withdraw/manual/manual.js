@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ManualWithdrawAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import Button from "@/components/utility/Button";
@@ -14,6 +14,7 @@ import {
 
 export default function ManualWithdrawPage() {
     const t = useTranslations("Dashboard.wallet.withdrawMoney.withdrawManual");
+    const lang = useLocale();
 
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
@@ -53,6 +54,7 @@ export default function ManualWithdrawPage() {
                 formData.mobileNumber,
                 formData.pin,
                 formData.trasnactionId,
+                lang
             );
 
             if (response.data) {

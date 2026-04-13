@@ -1,18 +1,19 @@
 "use client";
 import { useState, useEffect } from "react";
 import { dashboardGetAPI } from "@root/services/apiClient/apiClient";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { handleApiError } from "@/components/utility/handleApiError";
 
 export default function WidgetSection() {
     const t = useTranslations("Dashboard.homepage.widget");
+    const lang = useLocale();
     const [dashboardData, setDashboardData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const response = await dashboardGetAPI();
+                const response = await dashboardGetAPI(lang);
                 setDashboardData(response?.data?.data);
             } catch (error) {
                 handleApiError(error, t("failedFetch"));

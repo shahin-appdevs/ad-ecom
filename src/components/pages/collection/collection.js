@@ -9,13 +9,14 @@ import {
 import { toast } from "react-hot-toast";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import Button from "@/components/utility/Button";
-import { useTranslations } from "next-intl"; // ← Added
+import { useLocale, useTranslations } from "next-intl"; // ← Added
 import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
 export default function Collection() {
     const t = useTranslations("Collection"); // ← Added as requested
+    const lang = useLocale();
 
     const [collections, setCollections] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -30,7 +31,7 @@ export default function Collection() {
         const fetchCollections = async () => {
             try {
                 setLoading(true);
-                const response = await collectionsGetAPI();
+                const response = await collectionsGetAPI(lang);
 
                 if (response?.data?.data?.all_collections?.data) {
                     const publicCollections =

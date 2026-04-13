@@ -42,7 +42,7 @@ function SkeletonRow() {
 
 export default function PaymentLinksSection() {
     const t = useTranslations("Dashboard.wallet.paymentLink");
-    const locale = useLocale();
+    const lang = useLocale();
     const [dropdownIndex, setDropdownIndex] = useState(null);
     const [paymentLinks, setPaymentLinks] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -71,7 +71,7 @@ export default function PaymentLinksSection() {
         const fetchPaymentLinks = async () => {
             try {
                 setLoading(true);
-                const response = await paymentLinkListAPI();
+                const response = await paymentLinkListAPI(lang);
                 if (response.data.data && response.data.data.payment_links) {
                     setPaymentLinks(response.data.data.payment_links);
                 }
@@ -162,7 +162,7 @@ export default function PaymentLinksSection() {
         if (!selectedLinkId) return;
 
         try {
-            const response = await paymentLinkStatusAPI(selectedLinkId);
+            const response = await paymentLinkStatusAPI(selectedLinkId, lang);
             toast.success(response?.data?.message?.success?.[0]);
             setPaymentLinks((prevLinks) =>
                 prevLinks.map((link) =>
@@ -306,7 +306,7 @@ export default function PaymentLinksSection() {
                                                 <button
                                                     onClick={() =>
                                                         copyToClipboard(
-                                                            `${window.location.origin}/${locale}/payment-link?token=${link?.token}`,
+                                                            `${window.location.origin}/${lang}/payment-link?token=${link?.token}`,
                                                         )
                                                     }
                                                 >

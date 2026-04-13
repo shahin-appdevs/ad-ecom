@@ -17,7 +17,7 @@ import {
     CloudArrowDownIcon,
 } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const formatAmount = (value) => {
@@ -66,6 +66,7 @@ export default function OrderDetailsPage() {
     const [loading, setLoading] = useState(true);
     const [downloading, setDownloading] = useState(false);
     const t = useTranslations("Dashboard.ecommerce.orderDetails");
+    const lang = useLocale();
     const [data, setData] = useState(null);
     const { baseCurrencySymbol } = getBaseCurrency(data);
 
@@ -73,7 +74,7 @@ export default function OrderDetailsPage() {
         if (!orderId) return;
         const fetchOrderDetails = async () => {
             try {
-                const response = await productOrderDetailsGetAPI(orderId);
+                const response = await productOrderDetailsGetAPI(orderId, lang);
                 setOrder(response.data.data.order_info);
                 setData(response.data.data);
             } catch (error) {
@@ -92,7 +93,7 @@ export default function OrderDetailsPage() {
         if (!orderId) return;
         setDownloading(true);
         try {
-            const res = await productOrderDownloadInvoiceGetAPI(orderId);
+            const res = await productOrderDownloadInvoiceGetAPI(orderId, lang);
             const downloadLink = res.data.data.download_link;
             toast.success(res.data.message.success?.[0] || t("invoiceReady"));
 

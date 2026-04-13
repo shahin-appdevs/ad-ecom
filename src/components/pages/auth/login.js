@@ -27,7 +27,7 @@ function Login() {
     const [recaptcha, setRecaptcha] = useState(null);
     const [loginBasicData, setLoginBasicData] = useState(null);
     const { appSettingsData } = useAppSettings();
-    const locale = useLocale();
+    const lang = useLocale();
     const t = useTranslations("Auth.login");
     const searchParams = useSearchParams();
     const payLinkToken = searchParams.get("pay_link_token");
@@ -49,7 +49,7 @@ function Login() {
     useEffect(() => {
         (async () => {
             try {
-                const result = await basicDataGetAPI(locale);
+                const result = await basicDataGetAPI(lang);
                 setLoginBasicData(result?.data?.data);
             } catch (error) {
                 handleApiError(error, t("failedToFetchBasicData"));
@@ -72,9 +72,9 @@ function Login() {
             formData.append("credentials", credentials.trim());
             formData.append("password", password);
             formData.append("g-recaptcha-response", recaptcha);
-            formData.append("language", locale);
+            formData.append("language", lang);
 
-            const response = await loginAPI(formData, locale);
+            const response = await loginAPI(formData, lang);
 
             if (response?.data?.data?.token) {
                 const token = response.data.data.token;
@@ -98,7 +98,7 @@ function Login() {
                 );
 
                 if (userInfo?.email_verified === 0) {
-                    await sendOtpAPI();
+                    await sendOtpAPI(lang);
                     router.push("/user/auth/email-verify");
                 } else if (userInfo?.sms_verified === 0) {
                     // await resendAuthorizationCodeAPI();

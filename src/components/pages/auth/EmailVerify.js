@@ -14,10 +14,11 @@ import {
 import { toast } from "react-hot-toast";
 
 import getImageUrl from "@/components/utility/getImageUrl";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function EmailVerify() {
     const t = useTranslations("Auth.emailVerify");
+    const lang = useLocale();
     const [otp, setOtp] = useState("");
     const [countdown, setCountdown] = useState(59);
     const [canResend, setCanResend] = useState(false);
@@ -73,7 +74,7 @@ export default function EmailVerify() {
         setError("");
 
         try {
-            const response = await resendAuthorizationCodeAPI();
+            const response = await resendAuthorizationCodeAPI(lang);
 
             if (response?.data?.message?.success) {
                 // Success case
@@ -120,7 +121,7 @@ export default function EmailVerify() {
 
             formData.append("code", cleanOtp);
 
-            const response = await emailVerifyAPI(formData);
+            const response = await emailVerifyAPI(formData, lang);
 
             if (response?.data?.message?.success) {
                 response.data.message.success.forEach((msg) =>

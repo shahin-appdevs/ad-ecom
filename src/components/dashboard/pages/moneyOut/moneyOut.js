@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect, useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
     moneyOutGetAPI,
     SubmitMoneyOutAPI,
@@ -37,6 +37,7 @@ function Skeleton({ className }) {
 
 export default function MoneyOutSection({ setRefetch }) {
     const t = useTranslations("Dashboard.wallet.moneyOut");
+    const lang = useLocale();
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [receiverCurrency, setReceiverCurrency] = useState(
@@ -105,6 +106,7 @@ export default function MoneyOutSection({ setRefetch }) {
                     senderAmount,
                     currencyCode,
                     chargeId,
+                    lang
                 );
                 const data = result?.data?.data;
                 setRemainingLimit({
@@ -284,7 +286,7 @@ export default function MoneyOutSection({ setRefetch }) {
     useEffect(() => {
         const fetchInitialData = async () => {
             try {
-                const response = await moneyOutGetAPI();
+                const response = await moneyOutGetAPI(lang);
                 const data = response.data.data;
                 setMoneyOutData({
                     ...data,
@@ -305,7 +307,7 @@ export default function MoneyOutSection({ setRefetch }) {
         const checkUser = async () => {
             if (credentials && credentials.length > 3) {
                 try {
-                    await moneyOutCheckAgentAPI(credentials);
+                    await moneyOutCheckAgentAPI(credentials, lang);
                 } catch (error) {
                     handleApiError(error, t("userNotFound"));
                 }
@@ -349,7 +351,7 @@ export default function MoneyOutSection({ setRefetch }) {
 
     const handleScanSuccess = async (qrCode) => {
         try {
-            const response = await moneyOutScanAPI(qrCode);
+            const response = await moneyOutScanAPI(qrCode, lang);
             setCredentials(response.data.data.credentials);
             closeCamera();
             toast.success(response?.data?.message?.success?.[0]);
@@ -368,6 +370,7 @@ export default function MoneyOutSection({ setRefetch }) {
                 receiverAmount,
                 receiverCurrency.code,
                 remark,
+                lang
             );
 
             toast.success(response?.data?.message?.success?.[0]);

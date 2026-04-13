@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { withdrawGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
@@ -43,6 +43,7 @@ function SkeletonRow() {
 
 export default function WithdrawHistorySection({ isRefetch }) {
     const t = useTranslations("Dashboard.wallet.withdrawMoney.withdrawLogs");
+    const lang = useLocale();
     const [loading, setLoading] = useState(false);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -51,7 +52,7 @@ export default function WithdrawHistorySection({ isRefetch }) {
         const fetchWithdrawInfo = async () => {
             try {
                 setLoading(true);
-                const response = await withdrawGetAPI();
+                const response = await withdrawGetAPI(lang);
                 setTransactions(response.data.data.transactions || []);
             } catch (error) {
                 const errorMessage = error.response?.data?.message?.error?.[0];

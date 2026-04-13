@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { exchangeGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 function SkeletonRow() {
     return (
@@ -44,11 +44,12 @@ export default function ExchangeMoneyHistorySection() {
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
     const t = useTranslations("Dashboard.transactions.moneyExTransaction");
+    const lang = useLocale();
 
     useEffect(() => {
         const fetchExchangeData = async () => {
             try {
-                const response = await exchangeGetAPI();
+                const response = await exchangeGetAPI(lang);
                 setTransactions(response.data.data.transactions || []);
                 setApiLoading(false);
             } catch (error) {

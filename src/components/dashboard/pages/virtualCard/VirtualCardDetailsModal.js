@@ -9,7 +9,7 @@ import {
 
 import { copyToClipboard } from "@/components/utility/copyToClipboard";
 import Modal from "@/components/ui/Modal";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import {
     stroWalletCardDetailsGetAPI,
     stroWalletCardFreezedAPI,
@@ -20,7 +20,7 @@ import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { handleApiError } from "@/components/utility/handleApiError";
 import { handleApiSuccess } from "@/components/utility/handleApiSuccess";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function VirtualCardDetailsModal({
     open,
@@ -30,6 +30,7 @@ export default function VirtualCardDetailsModal({
     setMyVirtualCard,
 }) {
     const t = useTranslations("Dashboard.cards.virtualCard.virtualCardDetails");
+    const lang = useLocale();
     const [show, setShow] = useState(false);
     const [detailsLoading, setDetailsLoading] = useState(false);
     const [cardDetails, setCardDetails] = useState({});
@@ -43,7 +44,7 @@ export default function VirtualCardDetailsModal({
             setDetailsLoading(true);
 
             try {
-                const result = await stroWalletCardDetailsGetAPI(cardId);
+                const result = await stroWalletCardDetailsGetAPI(cardId, lang);
                 setCardDetails(result.data?.data);
                 setMyCard(result.data?.data?.myCards);
             } catch (error) {
@@ -65,7 +66,7 @@ export default function VirtualCardDetailsModal({
             const formData = new FormData();
             formData.append("card_id", myCard?.card_id);
 
-            const result = await stroWalletCardFreezedAPI(formData);
+            const result = await stroWalletCardFreezedAPI(formData, lang);
 
             handleApiSuccess(result);
             setStatusUpdate(!statusUpdate);
@@ -86,7 +87,7 @@ export default function VirtualCardDetailsModal({
             const formData = new FormData();
             formData.append("card_id", myCard?.card_id); // pass card_id if API requires
 
-            const result = await stroWalletCardUnfreezeAPI(formData);
+            const result = await stroWalletCardUnfreezeAPI(formData, lang);
 
             handleApiSuccess(result);
             setStatusUpdate(!statusUpdate);
@@ -107,7 +108,7 @@ export default function VirtualCardDetailsModal({
             const formData = new FormData();
             formData.append("card_id", myCard?.card_id);
 
-            const result = await stroWalletCardMakeDefaultOrRemove(formData);
+            const result = await stroWalletCardMakeDefaultOrRemove(formData, lang);
 
             handleApiSuccess(result, t("statusUpdatedSuccessfully"));
             setStatusUpdate(!statusUpdate);

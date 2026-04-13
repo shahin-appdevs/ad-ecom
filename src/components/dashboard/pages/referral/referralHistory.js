@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { referralStatusGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 function SkeletonRow() {
     return (
@@ -28,13 +28,14 @@ function SkeletonRow() {
 
 export default function TransactionHistorySection() {
     const t = useTranslations("Dashboard.account.referral");
+    const lang = useLocale();
     const [loading, setLoading] = useState(true);
     const [referralUsers, setReferralUsers] = useState([]);
 
     useEffect(() => {
         const fetchReferralData = async () => {
             try {
-                const response = await referralStatusGetAPI();
+                const response = await referralStatusGetAPI(lang);
                 const users = response?.data?.data?.total_referred_users || [];
                 setReferralUsers(users);
             } catch (error) {

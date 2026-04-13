@@ -5,7 +5,7 @@ import { dashboardGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { handleApiError } from "@/components/utility/handleApiError";
 
 export default function WalletSection() {
@@ -14,11 +14,12 @@ export default function WalletSection() {
     const [activeTab, setActiveTab] = useState("user");
     const { canEarnWallet } = useFeatureAccess();
     const t = useTranslations("Dashboard.homepage.wallet");
+    const lang = useLocale();
 
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const response = await dashboardGetAPI();
+                const response = await dashboardGetAPI(lang);
                 setDashboardData(response?.data?.data);
             } catch (error) {
                 handleApiError(error, t("failedFetch"));

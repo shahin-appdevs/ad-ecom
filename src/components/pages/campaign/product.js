@@ -11,7 +11,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
-import { useTranslations } from "next-intl"; // ← Added
+import { useLocale, useTranslations } from "next-intl"; // ← Added
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 import { handleApiError } from "@/components/utility/handleApiError";
 export const dynamic = "force-dynamic";
@@ -60,6 +60,7 @@ const ProductSkeleton = () => (
 
 function CampaignProduct() {
     const t = useTranslations("Campaign.campaignProduct"); // ← Namespace as requested
+    const lang = useLocale();
 
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
@@ -89,7 +90,7 @@ function CampaignProduct() {
             if (!isLoggedIn) return;
 
             try {
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
 
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
@@ -120,7 +121,7 @@ function CampaignProduct() {
             if (!campaignId) return;
             try {
                 setLoading(true);
-                const response = await campaignProductGetAPI(campaignId);
+                const response = await campaignProductGetAPI(campaignId, lang);
                 setData(response.data.data);
                 if (response?.data?.data?.products) {
                     const formattedProducts =

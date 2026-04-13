@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { allTransactionsGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 function SkeletonRow() {
     return (
@@ -44,11 +44,12 @@ export default function AffiliatePlanTransactionSection() {
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
     const t = useTranslations("Dashboard.transactions.affiliatePlan");
+    const lang = useLocale();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await allTransactionsGetAPI();
+                const response = await allTransactionsGetAPI(lang);
                 setApiData(response.data.data);
                 setTransactions(
                     response.data.data.transactions.affiliate_plan || [],

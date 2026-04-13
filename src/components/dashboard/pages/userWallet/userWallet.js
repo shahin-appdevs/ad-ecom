@@ -1,13 +1,14 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import Image from "next/image";
 import { walletGetAPI } from "@root/services/apiClient/apiClient";
 import { useFeatureAccess } from "@/components/hooks/useFeatureAccess";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { handleApiError } from "@/components/utility/handleApiError";
 
 export default function WalletSection() {
     const t = useTranslations("Dashboard.homepage.wallet");
+    const lang = useLocale();
     const [walletData, setWalletData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [activeTab, setActiveTab] = useState("user");
@@ -16,7 +17,7 @@ export default function WalletSection() {
     useEffect(() => {
         const fetchWalletData = async () => {
             try {
-                const response = await walletGetAPI();
+                const response = await walletGetAPI(lang);
                 setWalletData(response?.data?.data);
             } catch (error) {
                 handleApiError(error, t("failedFetch"));

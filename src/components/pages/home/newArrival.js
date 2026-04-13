@@ -9,7 +9,7 @@ import { Autoplay } from "swiper/modules";
 import { useHomeData } from "@/components/context/HomeContext";
 import { profiledGetAPI } from "@root/services/apiClient/apiClient";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -57,6 +57,7 @@ const NewArrivalSkeleton = () => {
 
 export default function NewArrival() {
     const { homeData, loading } = useHomeData();
+    const lang = useLocale();
     const {
         new_arrival_products = [],
         base_curr_symbol,
@@ -75,7 +76,7 @@ export default function NewArrival() {
             if (!isLoggedIn) return;
 
             try {
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );

@@ -14,11 +14,12 @@ import RHFSelect from "@/components/ui/form/RHFSelect";
 import { RHFFileUpload } from "@/components/ui/form/RHFFileUpload";
 import { RHFTextarea } from "@/components/ui/form/RHFTextarea";
 import toast from "react-hot-toast";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { handleApiError } from "@/components/utility/handleApiError";
 
 export default function CreateCustomer() {
     const t = useTranslations("Dashboard.cards.virtualCard.createCustomer");
+    const lang = useLocale();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
@@ -38,7 +39,7 @@ export default function CreateCustomer() {
         (async () => {
             setLoading(true);
             try {
-                const result = await stroWalletPageInfoGetApi();
+                const result = await stroWalletPageInfoGetApi(lang);
                 const fields = result?.data?.data?.customer_create_fields || [];
                 setCustomerFields(fields);
 
@@ -82,7 +83,7 @@ export default function CreateCustomer() {
         // }
 
         try {
-            const result = await createCustomerAPI(formData);
+            const result = await createCustomerAPI(formData, lang);
             const messages = result?.data?.message?.success;
             messages.forEach((message) => toast.success(message));
             router.replace("/user/cards/virtual-card");

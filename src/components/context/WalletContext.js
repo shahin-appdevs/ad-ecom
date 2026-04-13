@@ -2,11 +2,13 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { walletGetAPI } from "@root/services/apiClient/apiClient";
 import { handleApiError } from "../utility/handleApiError";
+import { useLocale } from "next-intl";
 
 const WalletContext = createContext();
 
 export function WalletProvider({ children }) {
     const [dashboardData, setDashboardData] = useState(null);
+    const lang = useLocale();
     const [wallet, setWallet] = useState({
         selectedCurrency: null,
         currencies: [],
@@ -16,7 +18,7 @@ export function WalletProvider({ children }) {
 
     const fetchWalletCurrencies = async () => {
         try {
-            const response = await walletGetAPI();
+            const response = await walletGetAPI(lang);
             const data = response?.data?.data;
             setDashboardData(data);
 

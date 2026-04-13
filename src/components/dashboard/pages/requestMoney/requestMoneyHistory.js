@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { requestMoneyGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
@@ -40,12 +40,13 @@ export default function RequestMoneyHistorySection({ isRefetch }) {
     const [isLoading, setIsLoading] = useState(false);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
+    const lang = useLocale();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setIsLoading(true);
-                const response = await requestMoneyGetAPI();
+                const response = await requestMoneyGetAPI(lang);
                 setTransactions(response.data.data.transactions || []);
             } catch (error) {
                 const errorMessage = error.response?.data?.message?.error?.[0];

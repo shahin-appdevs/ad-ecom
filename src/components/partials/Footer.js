@@ -42,7 +42,7 @@ export default function Footer() {
 
     const appSettingData = async () => {
         try {
-            const result = await appSettingGetAPI();
+            const result = await appSettingGetAPI(lang);
             const settings = result?.data?.data;
             setAppSettings(settings);
 

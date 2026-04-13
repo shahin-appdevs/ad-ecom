@@ -10,7 +10,7 @@ import {
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -40,7 +40,9 @@ export default function NewProduct() {
     const [newArrivalProducts, setNewArrivalProducts] = useState([]);
     const [loadMoreLoading, setLoadMoreLoading] = useState(false);
 
+    const lang = useLocale();
     const t = useTranslations("HomePage.newArrival");
+
     const newArrivalTitle = t("newArrivalTitle");
     const loadMore = t("loadMore");
     const off = t("off");
@@ -72,7 +74,7 @@ export default function NewProduct() {
         const fetchUserProfile = async () => {
             if (!isLoggedIn) return;
             try {
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );

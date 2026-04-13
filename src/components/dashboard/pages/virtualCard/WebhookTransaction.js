@@ -4,7 +4,7 @@ import { stroWalletWebhookTransaction } from "@root/services/apiClient/apiClient
 import { useRouter, useSearchParams } from "next/navigation";
 import { format } from "date-fns";
 import { handleApiError } from "@/components/utility/handleApiError";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 function SkeletonRow() {
     return (
@@ -53,6 +53,7 @@ export default function VirtualCardWebHookTransaction() {
     const t = useTranslations(
         "Dashboard.cards.virtualCard.virtualCardWebhookTrx",
     );
+    const lang = useLocale();
     const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -63,7 +64,7 @@ export default function VirtualCardWebHookTransaction() {
         const fetchWebHookTrxData = async () => {
             try {
                 setIsLoading(true);
-                const response = await stroWalletWebhookTransaction(cardId);
+                const response = await stroWalletWebhookTransaction(cardId, lang);
                 setTransactions(response.data.data.transactions || []);
             } catch (error) {
                 const errorMessage = error.response?.data?.message?.error?.[0];

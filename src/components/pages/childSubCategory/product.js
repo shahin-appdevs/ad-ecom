@@ -14,7 +14,7 @@ import {
 import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { useHomeData } from "@/components/context/HomeContext";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 import { handleApiError } from "@/components/utility/handleApiError";
@@ -38,6 +38,7 @@ const ProductSkeleton = () => (
 
 function ChildSubCategoryProduct() {
     const t = useTranslations("Category.subChildCategory");
+    const lang = useLocale();
 
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
@@ -98,7 +99,7 @@ function ChildSubCategoryProduct() {
             if (!isLoggedIn) return;
 
             try {
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
 
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",

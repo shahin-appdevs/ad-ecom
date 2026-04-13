@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, use } from "react";
 import { useSearchParams } from "next/navigation";
 import {
     affiliatePlanInitializeAPI,
@@ -15,7 +15,7 @@ import {
     WalletIcon,
 } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -28,6 +28,7 @@ function Skeleton({ className }) {
 
 export default function AffiliatePlanConfirm() {
     const t = useTranslations("Dashboard.account.affiliatePlan.confirm");
+    const lang = useLocale();
     const searchParams = useSearchParams();
     const idParam = searchParams.get("planId");
     const amount = searchParams.get("amount");
@@ -71,7 +72,7 @@ export default function AffiliatePlanConfirm() {
     useEffect(() => {
         const initPayment = async () => {
             try {
-                const resPlans = await affiliatePlanGetAPI();
+                const resPlans = await affiliatePlanGetAPI(lang);
                 const gwList = resPlans?.data?.data?.gateways || [];
                 setGateways(gwList);
                 setGatewayImagePath(
@@ -100,6 +101,7 @@ export default function AffiliatePlanConfirm() {
                 "WEB",
                 `${window.location.origin}/user/affiliate-plan/success`,
                 `${window.location.origin}/user/affiliate-plan/cancel`,
+                lang,
             );
             window.location.href = res.data.data.redirect_url;
         } catch (err) {

@@ -24,7 +24,7 @@ import Image from "next/image";
 import { useRouter } from "@/i18n/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 //exchange helper function
 const getExchangeRate = (fromRate, toRate) => {
@@ -40,6 +40,7 @@ const VirtualCardDepositModal = ({
     myVirtualCard,
 }) => {
     const t = useTranslations("Dashboard.cards.virtualCard.virtualCardDeposit");
+    const lang = useLocale();
     const router = useRouter();
     const [calculation, setCalculation] = useState({
         totalCharge: "0.00",
@@ -77,7 +78,7 @@ const VirtualCardDepositModal = ({
             try {
                 setWalletLoading(true);
 
-                const result = await walletGetAPI();
+                const result = await walletGetAPI(lang);
                 const allWallets = result?.data?.data?.userWallets;
                 setWallets(allWallets);
 
@@ -94,7 +95,7 @@ const VirtualCardDepositModal = ({
         // fetch fee and charges
         (async () => {
             try {
-                const result = await dashboardGetAPI();
+                const result = await dashboardGetAPI(lang);
 
                 setCardCharge(result?.data?.data?.card_reload_charge);
             } catch (err) {
@@ -163,6 +164,7 @@ const VirtualCardDepositModal = ({
                     senderAmount,
                     currencyCode,
                     chargeId,
+                    lang
                 );
 
                 const data = result?.data?.data;
@@ -248,7 +250,7 @@ const VirtualCardDepositModal = ({
         // formData.append("currency", "GBP");
 
         try {
-            const result = await stroWalletCardFundAPI(formData);
+            const result = await stroWalletCardFundAPI(formData, lang);
 
             handleApiSuccess(result, t("depositSuccessful"));
             reset(); // clear form

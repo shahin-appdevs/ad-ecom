@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
     profiledGetAPI,
     SetupPinAPI,
@@ -17,12 +17,13 @@ export default function SetupPinSection() {
     const [apiLoading, setApiLoading] = useState(false);
     const [loading, setLoading] = useState(false);
     const t = useTranslations("Dashboard.security.setupPin");
+    const lang = useLocale()
 
     useEffect(() => {
         const fetchProfileData = async () => {
             try {
                 setApiLoading(true);
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
                 const data = response.data.data.user;
                 setStatus(data.pin_status);
             } catch (error) {
@@ -32,14 +33,14 @@ export default function SetupPinSection() {
             }
         };
 
-        fetchProfileData();
+       fetchProfileData();
     }, []);
 
     const handleSetupSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await SetupPinAPI(pinCode);
+            const response = await SetupPinAPI(pinCode, lang);
             toast.success(response?.data?.message?.success?.[0]);
             setPinCode("");
             setStatus(true);
@@ -54,7 +55,7 @@ export default function SetupPinSection() {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await UpdatePinAPI(oldPin, newPin);
+            const response = await UpdatePinAPI(oldPin, newPin, lang);
             toast.success(response?.data?.message?.success?.[0]);
             setOldPin("");
             setNewPin("");

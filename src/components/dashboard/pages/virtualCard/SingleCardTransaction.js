@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import { stroWalletCardTransactionGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
 import { handleApiError } from "@/components/utility/handleApiError";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function VirtualCardTransaction() {
     const t = useTranslations("Dashboard.cards.virtualCard.singleCardTrx");
+    const lang = useLocale()
     const [isLoading, setIsLoading] = useState(true);
     const [myCardTransaction, setMyCardTransaction] = useState([]);
     const params = useSearchParams();
@@ -17,7 +18,7 @@ export default function VirtualCardTransaction() {
         const fetchSingleCardTrxData = async () => {
             try {
                 setIsLoading(true);
-                const response = await stroWalletCardTransactionGetAPI(cardId); // will be single card api
+                const response = await stroWalletCardTransactionGetAPI(cardId, lang); // will be single card api
 
                 setMyCardTransaction(
                     response?.data?.data?.card_transactions || [],
