@@ -16,6 +16,7 @@ import { Listbox } from "@headlessui/react";
 import { useSearchParams } from "next/navigation";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 import { handleApiError } from "@/components/utility/handleApiError";
+import Loading from "@/components/partials/Loading";
 
 const ProductSkeleton = () => (
     <div className="flex items-start gap-4 border-b pb-4">
@@ -1066,14 +1067,13 @@ function Checkout() {
                                     <div className="flex justify-between text-base font-semibold mb-4">
                                         <span>{t("totalProduct")}</span>
                                         <span>
-                                            {baseCurrencySymbol}{" "}
                                             {formatCurrency(total)}
                                         </span>
                                     </div>
                                     <p className="flex justify-between mb-2">
                                         <span>{t("deliveryFee")}:</span>
                                         <span className="font-medium">
-                                            {baseCurrencySymbol}{" "}
+                                            
                                             {formatCurrency(deliveryCharge)}
                                         </span>
                                     </p>
@@ -1090,7 +1090,7 @@ function Checkout() {
                                     <p className="flex justify-between text-base text-primary__color font-bold">
                                         <span>{t("grandTotal")}:</span>
                                         <span>
-                                            {baseCurrencySymbol}{" "}
+                                            
                                             {formatCurrency(
                                                 total +
                                                     parseFloat(deliveryCharge),
@@ -1131,14 +1131,14 @@ function Checkout() {
                                     <div className="flex justify-between text-base font-semibold mb-4">
                                         <span>{t("totalProduct")}</span>
                                         <span>
-                                            {baseCurrencySymbol}{" "}
+                                            
                                             {formatCurrency(total)}
                                         </span>
                                     </div>
                                     <p className="flex justify-between mb-2">
                                         <span>{t("deliveryFee")}:</span>
                                         <span className="font-medium">
-                                            {baseCurrencySymbol}{" "}
+                                            
                                             {formatCurrency(deliveryCharge)}
                                         </span>
                                     </p>
@@ -1182,7 +1182,7 @@ function Checkout() {
                                     <div className="flex justify-between text-base font-semibold mb-4">
                                         <span>{t("totalProduct")}</span>
                                         <span>
-                                            {baseCurrencySymbol}{" "}
+                                           
                                             {formatCurrency(total)}
                                         </span>
                                     </div>
@@ -1209,7 +1209,7 @@ function Checkout() {
 
 export default function CheckoutPage() {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div><Loading/></div>}>
             <Checkout />
         </Suspense>
     );

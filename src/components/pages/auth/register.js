@@ -13,6 +13,7 @@ import useGoogleRecaptcha from "@/hooks/useGoogleRecaptcha";
 import { useLocale, useTranslations } from "next-intl";
 import getImageUrl from "@/components/utility/getImageUrl";
 import { useAppSettings } from "@/hooks/useAppSettings";
+const logo = "/images/logo/logo.webp";
 
 function RegisterComp() {
     useAuthRedirect();
@@ -31,9 +32,7 @@ function RegisterComp() {
         useGoogleRecaptcha();
     const lang = useLocale();
     const t = useTranslations("Auth.register");
-
     const searchParam = useSearchParams();
-
     const { appSettingsData } = useAppSettings();
 
     useEffect(() => {
@@ -137,12 +136,9 @@ function RegisterComp() {
 
                     <div className="relative z-10">
                         <div className="flex items-center space-x-3 mb-8">
-                            <div className="bg-white/10 p-2 rounded-lg backdrop-blur-sm">
+                            <div className="bg-white/10 p-2 w-[50px] h-[50px] rounded-full backdrop-blur-sm flex items-center justify-center">
                                 <Image
-                                    src={getImageUrl(
-                                        appSettingsData?.site_logo,
-                                        appSettingsData?.logo_image_path,
-                                    )}
+                                    src={logo}
                                     alt="Logo"
                                     width={40}
                                     height={40}
@@ -162,7 +158,10 @@ function RegisterComp() {
                     </div>
 
                     <div className="relative z-10 text-sm text-blue-200/60">
-                        {t("copyright", { year: new Date().getFullYear() })}
+                        {t("copyright", {
+                            year: new Date().getFullYear(),
+                            siteName: appSettingsData?.site_name,
+                        })}
                     </div>
                 </div>
 
@@ -362,7 +361,7 @@ function RegisterComp() {
                             >
                                 {t("agreeTo")}{" "}
                                 <Link
-                                    href="/terms"
+                                    href="/terms-and-conditions"
                                     className="font-medium text-gray-900 hover:underline"
                                 >
                                     {t("terms")}

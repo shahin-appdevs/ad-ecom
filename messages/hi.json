@@ -1948,7 +1948,7 @@
         "register": {
             "joinNetwork": "हमारे होलसेल नेटवर्क में शामिल हों",
             "joinNetworkDesc": "एक्सक्लूसिव कलेक्शन, बल्क प्राइसिंग और अपना इन्वेंट्री मैनेज करने के लिए अकाउंट बनाएं।",
-            "copyright": "© {year} QR eCommerce. सर्वाधिकार सुरक्षित।",
+            "copyright": "© {year} {siteName}. सर्वाधिकार सुरक्षित।",
             "createAccount": "अकाउंट बनाएं",
             "signInViaPhone": "फोन नंबर से साइन इन करें",
             "fullName": "पूरा नाम",

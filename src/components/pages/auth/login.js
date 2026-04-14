@@ -16,6 +16,8 @@ import { handleApiError } from "@/components/utility/handleApiError";
 import getImageUrl from "@/components/utility/getImageUrl";
 import { useLocale, useTranslations } from "next-intl";
 import { useAppSettings } from "@/hooks/useAppSettings";
+import Loading from "@/components/partials/Loading";
+const logo = "/images/logo/logo.webp";
 
 function Login() {
     useAuthRedirect();
@@ -146,10 +148,7 @@ function Login() {
                         <div className="flex items-center space-x-3 mb-8">
                             <div className="bg-white/10 p-2 rounded-full backdrop-blur-sm w-[50px] h-[50px] flex items-center justify-center">
                                 <Image
-                                    src={getImageUrl(
-                                        appSettingsData?.site_logo,
-                                        appSettingsData?.logo_image_path,
-                                    )}
+                                    src={logo}
                                     alt="Logo"
                                     width={40}
                                     height={40}
@@ -343,7 +342,7 @@ function Login() {
 
 export default function LoginSection() {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading/>}>
             <Login />
         </Suspense>
     );

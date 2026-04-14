@@ -1951,7 +1951,7 @@
         "register": {
             "joinNetwork": "Join Our Wholesale Network",
             "joinNetworkDesc": "Create an account to browse exclusive collections, bulk pricing, and manage your inventory.",
-            "copyright": "© {year} QR eCommerce. All rights reserved.",
+            "copyright": "© {year} {siteName}. All rights reserved.",
             "createAccount": "Create Account",
             "signInViaPhone": "Sign in via phone number",
             "fullName": "Full Name",

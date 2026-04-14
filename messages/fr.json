@@ -1948,7 +1948,7 @@
         "register": {
             "joinNetwork": "Rejoignez notre réseau de grossistes",
             "joinNetworkDesc": "Créez un compte pour accéder à des collections exclusives, des prix de gros et gérer votre inventaire.",
-            "copyright": "© {year} QR eCommerce. Tous droits réservés.",
+            "copyright": "© {year} {siteName}. Tous droits réservés.",
             "createAccount": "Créer un compte",
             "signInViaPhone": "Se connecter via le numéro de téléphone",
             "fullName": "Nom complet",

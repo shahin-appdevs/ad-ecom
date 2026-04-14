@@ -2295,10 +2295,7 @@ export const sudoVirtualCardFundAPI = (formData, lang = "") => {
     }
 };
 
-// app download link get api
-export const appDownloadLinkGetAPI = (lang = "") => {
-    return apiClient.get(`/download/app?lang=${lang}`);
-};
+
 
 //**************** Seller Panel ****************/
 // Register API (post)
