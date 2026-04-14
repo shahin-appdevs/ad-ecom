@@ -11,6 +11,7 @@ import { PlusIcon, WifiIcon } from "@heroicons/react/24/outline";
 import {
     myStroWalletCardGetAPI,
     stroWalletPageInfoGetApi,
+    stroWalletUpdateCustomerStatus,
 } from "@root/services/apiClient/apiClient";
 import PendingModal from "../../partials/PendingModal";
 import toast from "react-hot-toast";
@@ -52,6 +53,14 @@ function VirtualCardSection() {
             try {
                 const result = await stroWalletPageInfoGetApi(lang);
                 setStroWalletPageInfo(result?.data?.data || {});
+
+                const isCustomerExist = result?.data?.data?.customer_exist_status;
+                if(isCustomerExist){
+                    // if customer exist then status update 
+                  const status  = await stroWalletUpdateCustomerStatus(lang)
+                  toast.success(status?.data?.message?.success[0])
+                }
+
             } catch (error) {
                 handleApiError(error, t("fetchError"));
             } finally {
@@ -140,7 +149,7 @@ function VirtualCardSection() {
             {myWalletCardLoading ? (
                 <VirtualCardGridSkeleton />
             ) : (
-                <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6">
+                <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3  gap-4 md:gap-6">
                     {myWalletCards?.myCards?.map((card, idx) => (
                         <div
                             onClick={() => {
@@ -299,7 +308,7 @@ export default function VirtualCardPage() {
 
 function VirtualCardGridSkeleton() {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4 md:gap-6 animate-pulse">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6 animate-pulse">
             {Array.from({ length: 8 }).map((_, idx) => (
                 <div key={idx} className="flex items-center justify-center">
                     <div className="bg-gradient-to-br from-neutral-500/60 to-neutral-700/60 w-full max-w-[480px] rounded-3xl p-4 md:p-8 shadow relative overflow-hidden">

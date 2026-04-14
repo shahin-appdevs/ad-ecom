@@ -488,9 +488,9 @@ export default function VirtualCardDetailsModal({
                                             viewBox="0 0 24 24"
                                             fill="none"
                                             stroke="currentColor"
-                                            stroke-width="2"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
+                                            strokeWidth="2"
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
                                             className={`lucide lucide-snowflake-icon lucide-snowflake ${cardFreezeLoading && "animate-spin"}`}
                                         >
                                             <path d="m10 20-1.25-2.5L6 18" />
