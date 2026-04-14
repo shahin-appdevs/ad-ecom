@@ -4,6 +4,7 @@ import { stroWalletCardTransactionGetAPI } from "@root/services/apiClient/apiCli
 import { Link } from "@/i18n/navigation";
 import { handleApiError } from "@/components/utility/handleApiError";
 import { useLocale, useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 
 export default function VirtualCardTransaction() {
     const t = useTranslations("Dashboard.cards.virtualCard.singleCardTrx");

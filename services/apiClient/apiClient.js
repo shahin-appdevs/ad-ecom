@@ -2155,6 +2155,23 @@ export const stroWalletWebhookTransaction = (cardId, lang = "") => {
     }
 };
 
+// stroWallet virtual card customer status api
+export const stroWalletUpdateCustomerStatus = ( lang = "") => {
+    const token = getToken();
+    if (token) {
+        return apiClient.get(
+            `/user/strowallet-card/update/customer/status?lang=${lang}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            },
+        );
+    } else {
+        throw new Error("No token found. Please log in.");
+    }
+};
+
 //------------------> sudo virtual card api <---------------/
 
 // my sudo virtual cards
@@ -2294,6 +2311,7 @@ export const sudoVirtualCardFundAPI = (formData, lang = "") => {
         throw new Error("No token found. Please log in.");
     }
 };
+
 
 
 
