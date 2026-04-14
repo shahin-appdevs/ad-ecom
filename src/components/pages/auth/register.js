@@ -13,7 +13,7 @@ import useGoogleRecaptcha from "@/hooks/useGoogleRecaptcha";
 import { useLocale, useTranslations } from "next-intl";
 import getImageUrl from "@/components/utility/getImageUrl";
 import { useAppSettings } from "@/hooks/useAppSettings";
-const logo = "/images/logo/logo.webp";
+const logo = "/images/logo/favicon.png";
 
 function RegisterComp() {
     useAuthRedirect();

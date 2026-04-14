@@ -1,8 +1,13 @@
 "use client";
 import { Link } from "@/i18n/navigation";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
 import { useTranslations } from "next-intl";
+import dynamic from "next/dynamic";
+
+const motion = dynamic(() => import("framer-motion").then((mod) => mod.motion), {
+    ssr: false,
+});
 
 export default function ShareLinkSuccessPage() {
     const t = useTranslations(

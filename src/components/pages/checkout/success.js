@@ -1,8 +1,13 @@
 "use client";
 import { Link } from "@/i18n/navigation";
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { CheckCircleIcon } from "@heroicons/react/24/outline";
+import dynamic from "next/dynamic";
+
+const motion = dynamic(() => import("framer-motion").then((mod) => mod.motion), {
+    ssr: false,
+});
 
 export default function OrderSuccessPage() {
     const t = useTranslations("Checkout.orderSuccess");
