@@ -41,7 +41,7 @@ import chatUserThree from "@public/images/user/chat-user-3.png";
 import ProductZoomImage from "./productDetails/ProductZoomImage";
 import ProductThumbnails from "./productDetails/ProductThumbnails";
 import VerticalProductGallery from "./productDetails/VerticalSlider";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -123,6 +123,7 @@ const ProductDetailsSkeleton = () => (
 
 function ProductDetails() {
     const t = useTranslations("ProductDetails");
+    const lang = useLocale();
 
     // Translation variables (makes JSX much cleaner)
     const tAddToCart = t("addToCart");
@@ -369,7 +370,7 @@ function ProductDetails() {
         localStorage.setItem("intendedUrl", localUrl);
         try {
             setReviewLoading(true);
-            const response = await productReviewAPI(productId, rating, review);
+            const response = await productReviewAPI(productId, rating, review, lang);
             if (response.data.message?.success) {
                 toast.success(response.data.message.success[0]);
                 const newReview = {
@@ -405,7 +406,7 @@ function ProductDetails() {
         const localUrl = `/product/details?id=${product.id}`;
         localStorage.setItem("intendedUrl", localUrl);
         try {
-            const response = await addWishlistAPI(productId);
+            const response = await addWishlistAPI(productId, lang);
             if (response.data.message?.success) {
                 toast.success(response.data.message.success[0]);
                 let newWishlist;

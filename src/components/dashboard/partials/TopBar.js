@@ -24,7 +24,7 @@ import { useLocale, useTranslations } from "next-intl";
 
 export default function TopBar() {
     const t = useTranslations("Dashboard.topBar");
-    const locale = useLocale();
+    const lang = useLocale();
 
     const pathname = usePathname();
     const [loading, setLoading] = useState(true);
@@ -43,7 +43,7 @@ export default function TopBar() {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const response = await dashboardGetAPI();
+                const response = await dashboardGetAPI(lang);
                 const userData = response?.data?.data?.user || [];
                 setUserData(userData);
             } catch (error) {
@@ -64,7 +64,7 @@ export default function TopBar() {
         setLogoutLoading(true);
 
         try {
-            const response = await logoutAPI(locale);
+            const response = await logoutAPI(lang);
 
             const successMessage = response?.data?.message?.success || [
                 t("logoutSuccessful"),

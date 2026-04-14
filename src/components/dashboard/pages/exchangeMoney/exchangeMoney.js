@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
     exchangeGetAPI,
     SubmitExchangeAPI,
@@ -32,6 +32,7 @@ function Skeleton({ className }) {
 
 export default function ExchangeMoneySection({ setRefetch }) {
     const t = useTranslations("Dashboard.wallet.exchangeMoney");
+    const lang = useLocale();
 
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
@@ -91,6 +92,7 @@ export default function ExchangeMoneySection({ setRefetch }) {
                     senderAmount,
                     currencyCode,
                     chargeId,
+                    lang
                 );
                 const data = result?.data?.data;
                 setRemainingLimit({
@@ -282,7 +284,7 @@ export default function ExchangeMoneySection({ setRefetch }) {
     useEffect(() => {
         const fetchExchangeData = async () => {
             try {
-                const response = await exchangeGetAPI();
+                const response = await exchangeGetAPI(lang);
                 setExchangeData({
                     ...response.data.data,
                     charges: response.data.data.charges || exchangeData.charges,
@@ -308,11 +310,12 @@ export default function ExchangeMoneySection({ setRefetch }) {
                 selectedCurrency.code,
                 receiverAmount,
                 receiverCurrency.code,
+                lang
             );
             toast.success(response.data.message.success[0]);
             setAmount("");
             setReceiverAmount("");
-            const updatedData = await exchangeGetAPI();
+            const updatedData = await exchangeGetAPI(lang);
             setExchangeData(updatedData.data.data);
         } catch (error) {
             const errorMessage =

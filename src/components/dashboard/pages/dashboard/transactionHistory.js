@@ -4,7 +4,7 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import { useState, useEffect } from "react";
 import { dashboardGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 function SkeletonRow() {
     return (
@@ -39,13 +39,14 @@ function SkeletonRow() {
 
 export default function TransactionHistorySection() {
     const t = useTranslations("Dashboard.homepage.transactionHistory");
+    const lang = useLocale()
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const response = await dashboardGetAPI();
+                const response = await dashboardGetAPI(lang);
                 const transactions = response?.data?.data?.transactions || [];
                 setTransactions(transactions);
             } catch (error) {

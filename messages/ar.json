@@ -1946,7 +1946,7 @@
         "register": {
             "joinNetwork": "انضم إلى شبكة الجملة لدينا",
             "joinNetworkDesc": "قم بإنشاء حساب لتصفح التشكيلات الحصرية وأسعار الجملة وإدارة مخزونك.",
-            "copyright": "© {year} QR eCommerce. جميع الحقوق محفوظة.",
+            "copyright": "© {year} {siteName}. جميع الحقوق محفوظة.",
             "createAccount": "إنشاء حساب",
             "signInViaPhone": "تسجيل الدخول عبر رقم الهاتف",
             "fullName": "الاسم الكامل",

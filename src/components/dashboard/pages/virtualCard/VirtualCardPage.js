@@ -16,10 +16,11 @@ import PendingModal from "../../partials/PendingModal";
 import toast from "react-hot-toast";
 import VirtualCardDepositModal from "./VirtualCardDepositModal";
 import { handleApiError } from "@/components/utility/handleApiError";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 function VirtualCardSection() {
     const t = useTranslations("Dashboard.cards.virtualCard.myVirtualCard");
+    const lang = useLocale();
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [stroWalletPageInfo, setStroWalletPageInfo] = useState({});
@@ -35,7 +36,7 @@ function VirtualCardSection() {
     const myWalletCardsFetch = async () => {
         setMyWalletCardLoading(true);
         try {
-            const result = await myStroWalletCardGetAPI();
+            const result = await myStroWalletCardGetAPI(lang);
             setMyWalletCards(result?.data?.data || []);
         } catch (error) {
             handleApiError(error);
@@ -49,7 +50,7 @@ function VirtualCardSection() {
         (async () => {
             setPageInfoLoading(true);
             try {
-                const result = await stroWalletPageInfoGetApi();
+                const result = await stroWalletPageInfoGetApi(lang);
                 setStroWalletPageInfo(result?.data?.data || {});
             } catch (error) {
                 handleApiError(error, t("fetchError"));

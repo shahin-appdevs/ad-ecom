@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { billPayGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 function SkeletonRow() {
     return (
@@ -53,12 +53,13 @@ export default function BillPayHistorySection() {
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
     const t = useTranslations("Dashboard.transactions.billPayTransaction");
+    const lang = useLocale();
 
     useEffect(() => {
         const fetchBillPayData = async () => {
             try {
                 setIsLoading(true);
-                const response = await billPayGetAPI();
+                const response = await billPayGetAPI(lang);
                 setTransactions(response.data.data.transactions || []);
             } catch (error) {
                 const errorMessage = error.response?.data?.message?.error?.[0];

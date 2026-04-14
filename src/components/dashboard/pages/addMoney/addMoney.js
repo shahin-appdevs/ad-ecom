@@ -39,7 +39,7 @@ const DEPOSIT_TYPES = [
 
 export default function AddMoneySection() {
     const t = useTranslations("Dashboard.wallet.addMoney");
-    const locale = useLocale();
+    const lang = useLocale();
     const [gateways, setGateways] = useState([]);
     const [selectedGateway, setSelectedGateway] = useState(null);
     const [selectedCurrency, setSelectedCurrency] = useState(null);
@@ -63,7 +63,7 @@ export default function AddMoneySection() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await addMoneyGetAPI();
+                const response = await addMoneyGetAPI(lang);
                 setApiData(response.data.data);
                 setGateways(response.data.data.gateways);
                 setImagePath(response.data.data.image_path);
@@ -111,6 +111,7 @@ export default function AddMoneySection() {
                     senderAmount,
                     currencyCode,
                     chargeId,
+                    lang
                 );
 
                 const data = result?.data?.data;
@@ -275,8 +276,9 @@ export default function AddMoneySection() {
                 selectedCurrency.alias,
                 wallet.selectedCurrency.code,
                 "WEB",
-                `${window.location.origin}/${locale}/user/add/money/success`,
-                `${window.location.origin}/${locale}/user/add/money/cancel`,
+                `${window.location.origin}/${lang}/user/add/money/success`,
+                `${window.location.origin}/${lang}/user/add/money/cancel`,
+                lang
             );
 
             if (response.data.data.gateway_type === "AUTOMATIC") {

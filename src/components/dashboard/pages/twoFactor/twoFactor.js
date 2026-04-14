@@ -10,7 +10,7 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { Dialog, Transition } from "@headlessui/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 // Images
 import authenticator from "@public/images/security/authenticator.png";
@@ -24,6 +24,7 @@ export default function TwoFactorSection() {
     const [qrStatus, setQrStatus] = useState(0);
     const [isUpdated, setIsUpdated] = useState(false);
     const t = useTranslations("Dashboard.security.2faSecurity");
+    const lang = useLocale();
 
     const handleCopy = (e) => {
         e.preventDefault();
@@ -36,7 +37,7 @@ export default function TwoFactorSection() {
         const fetchGoogle2fa = async () => {
             setLoading(true);
             try {
-                const response = await google2faGetAPI();
+                const response = await google2faGetAPI(lang);
                 const { qr_secrete, qr_code, qr_status } =
                     response.data?.data || {};
 
@@ -68,7 +69,7 @@ export default function TwoFactorSection() {
     const handleSubmit2FA = async () => {
         setLoading(true);
         try {
-            const response = await submitGoogle2faAPI();
+            const response = await submitGoogle2faAPI(lang);
             if (response?.data) {
                 toast.success(t("successEnable"));
                 setIsGoogle2faModalOpen(false);

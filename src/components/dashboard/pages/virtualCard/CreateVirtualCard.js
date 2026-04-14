@@ -29,7 +29,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "@/i18n/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { handleApiError } from "@/components/utility/handleApiError";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 //exchange helper function
 
@@ -42,6 +42,7 @@ const getExchangeRate = (fromRate, toRate) => {
 
 export default function CreateVirtualCard() {
     const t = useTranslations("Dashboard.cards.virtualCard.createVirtualCard");
+    const lang = useLocale();
     const router = useRouter();
     const [wallets, setWallets] = useState([]);
     const [walletLoading, setWalletLoading] = useState(false);
@@ -81,7 +82,7 @@ export default function CreateVirtualCard() {
             try {
                 setWalletLoading(true);
 
-                const result = await walletGetAPI();
+                const result = await walletGetAPI(lang);
                 const userWallets = result?.data?.data?.userWallets;
                 setWallets(userWallets);
                 setValue("from_currency", userWallets[0]?.currency?.code);
@@ -95,7 +96,7 @@ export default function CreateVirtualCard() {
         // fetch fee and charges
         (async () => {
             try {
-                const result = await dashboardGetAPI();
+                const result = await dashboardGetAPI(lang);
                 setCardCharge(result?.data?.data?.card_create_charge);
             } catch (err) {
                 handleApiError(err, t("feeLoadError"));
@@ -115,7 +116,7 @@ export default function CreateVirtualCard() {
         formData.append("from_currency", data.from_currency || "");
 
         try {
-            const result = await stroWalletBuyCardAPI(formData);
+            const result = await stroWalletBuyCardAPI(formData, lang);
             const messages = result?.data?.message?.success;
             messages?.forEach((message) => {
                 toast.success(message);
@@ -188,6 +189,7 @@ export default function CreateVirtualCard() {
                     senderAmount,
                     currencyCode,
                     chargeId,
+                    lang
                 );
 
                 const data = result?.data?.data;

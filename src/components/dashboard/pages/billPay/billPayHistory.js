@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import { billPayGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
@@ -52,6 +52,7 @@ function SkeletonRow() {
 
 export default function BillPayHistorySection({ billPaySuccess }) {
     const t = useTranslations("Dashboard.services.billPay");
+    const lang = useLocale();
     const [isLoading, setIsLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
@@ -60,7 +61,7 @@ export default function BillPayHistorySection({ billPaySuccess }) {
         const fetchBillPayData = async () => {
             try {
                 setIsLoading(true);
-                const response = await billPayGetAPI();
+                const response = await billPayGetAPI(lang);
                 setTransactions(response.data.data.transactions || []);
             } catch (error) {
                 const errorMessage = error.response?.data?.message?.error?.[0];

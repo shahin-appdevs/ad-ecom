@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useHomeData } from "@/components/context/HomeContext";
 import { profiledGetAPI } from "@root/services/apiClient/apiClient";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -41,6 +41,7 @@ const SkeletonCategorySection = () => (
 
 export default function CategoryProducts() {
     const { homeData, loading } = useHomeData();
+    const lang = useLocale();
     const {
         products_under_category = [],
         base_curr_symbol,
@@ -59,7 +60,7 @@ export default function CategoryProducts() {
             if (!isLoggedIn) return;
 
             try {
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );

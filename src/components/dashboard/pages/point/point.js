@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
     pointToCashGetAPI,
     pointConvertAPI,
@@ -38,12 +38,13 @@ export default function PointsPage() {
     const [converting, setConverting] = useState(false);
     const [loading, setLoading] = useState(true);
     const t = useTranslations("Dashboard.account.pointToCash");
+    const lang = useLocale();
     const { baseCurrencySymbol } = getBaseCurrency(apiData);
 
     useEffect(() => {
         const fetchPoints = async () => {
             try {
-                const response = await pointToCashGetAPI();
+                const response = await pointToCashGetAPI(lang);
                 setApiData(response.data.data);
                 setPoints(response.data.data.points.data || []);
             } catch (error) {
@@ -65,6 +66,7 @@ export default function PointsPage() {
             const response = await pointConvertAPI(
                 selectedPoint.id,
                 selectedPoint.point_amount,
+                lang
             );
             setIsOpen(false);
             toast.success(response?.data?.message?.success[0]);

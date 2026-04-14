@@ -11,10 +11,11 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import getImageUrl from "@/components/utility/getImageUrl";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function Otp() {
     const t = useTranslations("Auth.otp");
+    const lang = useLocale();
 
     const [otp, setOtp] = useState("");
     const [countdown, setCountdown] = useState(59);
@@ -87,7 +88,7 @@ export default function Otp() {
         setError("");
 
         try {
-            const response = await resendforgotPasswordOtpAPI(phone);
+            const response = await resendforgotPasswordOtpAPI(phone, lang);
 
             if (response?.data?.message?.success) {
                 toast.success(
@@ -127,7 +128,7 @@ export default function Otp() {
 
         setLoading(true);
         try {
-            const response = await forgotPasswordOtpAPI(phone, cleanOtp);
+            const response = await forgotPasswordOtpAPI(phone, cleanOtp, lang);
             if (response?.data?.message?.success) {
                 response.data.message.success.forEach((msg) =>
                     toast.success(msg),

@@ -5,7 +5,7 @@ import { productOrderGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useRouter } from "@/i18n/navigation";
 import { ComputerDesktopIcon } from "@heroicons/react/24/outline";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 function SkeletonRow() {
@@ -47,12 +47,13 @@ export default function OrderSection() {
     const [orders, setOrders] = useState([]);
     const router = useRouter();
     const t = useTranslations("Dashboard.ecommerce.orderLog");
+    const lang = useLocale();
     const { baseCurrencySymbol } = getBaseCurrency(apiData);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await productOrderGetAPI();
+                const response = await productOrderGetAPI(lang);
                 setApiData(response.data.data);
                 setOrders(response.data.data.orders?.data || []);
             } catch (error) {

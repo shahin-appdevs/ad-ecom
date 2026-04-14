@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { exchangeGetAPI } from "@root/services/apiClient/apiClient";
 import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
@@ -45,6 +45,7 @@ export default function ExchangeMoneyHistorySection({ isRefetch }) {
     const t = useTranslations(
         "Dashboard.wallet.exchangeMoney.exchangeMoneyLog",
     );
+    const lang = useLocale();
 
     const [apiLoading, setApiLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
@@ -53,7 +54,7 @@ export default function ExchangeMoneyHistorySection({ isRefetch }) {
     useEffect(() => {
         const fetchExchangeData = async () => {
             try {
-                const response = await exchangeGetAPI();
+                const response = await exchangeGetAPI(lang);
                 setTransactions(response.data.data.transactions || []);
                 setApiLoading(false);
             } catch (error) {

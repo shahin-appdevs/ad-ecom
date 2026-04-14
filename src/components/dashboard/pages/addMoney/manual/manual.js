@@ -10,7 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
 import { ManualAddMoneyAPI } from "@root/services/apiClient/apiClient";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 function Skeleton({ className }) {
     return (
@@ -20,6 +20,7 @@ function Skeleton({ className }) {
 
 function ManualConfirmationPage() {
     const t = useTranslations("Dashboard.wallet.addMoney.manual");
+    const lang = useLocale();
 
     const [paymentData, setPaymentData] = useState(null);
     const [formValues, setFormValues] = useState({});
@@ -81,7 +82,7 @@ function ManualConfirmationPage() {
                 ...formValues,
             };
             // Submit to API
-            const response = await ManualAddMoneyAPI(submissionData);
+            const response = await ManualAddMoneyAPI(submissionData, lang);
 
             if (response.data.message?.success) {
                 toast.success(response.data.message.success[0]);

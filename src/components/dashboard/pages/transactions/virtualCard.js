@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { allTransactionsGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useRouter } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { format } from "date-fns";
 
 function SkeletonRow() {
@@ -45,12 +45,13 @@ export default function AllVirtualCardTransaction() {
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
     const t = useTranslations("Dashboard.transactions.virtualCard");
+    const lang = useLocale();
 
     useEffect(() => {
         const fetchBillPayData = async () => {
             try {
                 setIsLoading(true);
-                const response = await allTransactionsGetAPI();
+                const response = await allTransactionsGetAPI(lang);
                 setTransactions(
                     response.data.data.transactions?.virtual_card || [],
                 );

@@ -16,7 +16,7 @@ import Button from "@/components/utility/Button";
 import { toast } from "react-hot-toast";
 import { Menu } from "@headlessui/react";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 import { handleApiError } from "@/components/utility/handleApiError";
 
@@ -39,6 +39,7 @@ const ProductSkeleton = () => (
 
 function SubCategoryProduct() {
     const t = useTranslations("Category.subCategory");
+    const lang = useLocale();
 
     const [data, setData] = useState(null);
     const [products, setProducts] = useState([]);
@@ -66,7 +67,7 @@ function SubCategoryProduct() {
             if (!isLoggedIn) return;
 
             try {
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
 
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",

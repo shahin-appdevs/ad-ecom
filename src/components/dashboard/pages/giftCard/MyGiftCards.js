@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
 import { useRouter } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 
 function SkeletonRow() {
@@ -53,7 +53,7 @@ function SkeletonRow() {
 
 export default function MyGiftCards() {
     const t = useTranslations("Dashboard.cards.giftCard.myGiftCards");
-
+    const lang = useLocale();
     const [isLoading, setIsLoading] = useState(true);
     const [myGiftCards, setMyGiftCards] = useState([]);
     const router = useRouter();
@@ -62,7 +62,7 @@ export default function MyGiftCards() {
         const fetchGiftCardData = async () => {
             try {
                 setIsLoading(true);
-                const response = await myGiftCardGetAPI();
+                const response = await myGiftCardGetAPI(lang);
                 setMyGiftCards(response.data.data.gift_cards || []);
             } catch (error) {
                 const errorMessage = error.response?.data?.message?.error?.[0];

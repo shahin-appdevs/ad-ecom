@@ -48,7 +48,7 @@ export default function PaymentLinksSection() {
     const [modalAction, setModalAction] = useState("close");
     const router = useRouter();
     const t = useTranslations("Dashboard.transactions.paymentLinkTransaction");
-    const locale = useLocale();
+    const lang = useLocale();
     const toggleDropdown = (index) => {
         setDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
     };
@@ -69,7 +69,7 @@ export default function PaymentLinksSection() {
         const fetchPaymentLinks = async () => {
             try {
                 setLoading(true);
-                const response = await paymentLinkListAPI();
+                const response = await paymentLinkListAPI(lang);
                 if (response.data.data && response.data.data.payment_links) {
                     setPaymentLinks(response.data.data.payment_links);
                 }
@@ -160,7 +160,7 @@ export default function PaymentLinksSection() {
         if (!selectedLinkId) return;
 
         try {
-            const response = await paymentLinkStatusAPI(selectedLinkId);
+            const response = await paymentLinkStatusAPI(selectedLinkId, lang);
             toast.success(response?.data?.message?.success?.[0]);
             setPaymentLinks((prevLinks) =>
                 prevLinks.map((link) =>
@@ -293,7 +293,7 @@ export default function PaymentLinksSection() {
                                                 <button
                                                     onClick={() =>
                                                         copyToClipboard(
-                                                            `${window.location.origin}/${locale}/user/payment/link/share/token?token=${link?.token}`,
+                                                            `${window.location.origin}/${lang}/user/payment/link/share/token?token=${link?.token}`,
                                                         )
                                                     }
                                                 >

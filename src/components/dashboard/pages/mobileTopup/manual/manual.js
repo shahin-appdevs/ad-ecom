@@ -1,5 +1,5 @@
 "use client";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState, useEffect, useMemo } from "react";
 import {
     localMobileTopupInfoGetAPI,
@@ -33,6 +33,7 @@ function Skeleton({ className }) {
 
 export default function MobileTopupManualSection() {
     const t = useTranslations("Dashboard.services.topup.localTopup");
+    const lang = useLocale();
     const { wallet, updateSelectedCurrency, fetchWalletCurrencies } =
         useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
@@ -99,6 +100,7 @@ export default function MobileTopupManualSection() {
                     senderAmount,
                     currencyCode,
                     chargeId,
+                    lang
                 );
                 const data = result?.data?.data;
                 setRemainingLimit({
@@ -243,7 +245,7 @@ export default function MobileTopupManualSection() {
         const fetchData = async () => {
             try {
                 setApiLoading(true);
-                const response = await mobileTopupGetAPI();
+                const response = await mobileTopupGetAPI(lang);
                 const data = response.data.data;
 
                 setMobileTopupData((prevData) => ({
@@ -280,7 +282,7 @@ export default function MobileTopupManualSection() {
                 currency: selectedCurrency.code,
             };
 
-            const response = await submitLocalMobileTopupAPI(topupData);
+            const response = await submitLocalMobileTopupAPI(topupData, lang);
 
             toast.success(
                 response?.data?.message?.success?.[0] || t("topupSuccess"),

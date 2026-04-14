@@ -2,7 +2,7 @@
 import { useForm, Controller } from "react-hook-form";
 import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import GiftCardBuyConfirmModal from "./GiftCardBuyConfirmModal";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -15,6 +15,7 @@ function classNames(...classes) {
 
 export default function GiftCardPurchase() {
     const t = useTranslations("Dashboard.cards.giftCard.giftCardBuy");
+    const lang = useLocale();
     const searchParams = useSearchParams();
 
     const productId = searchParams.get("product_id");
@@ -32,7 +33,7 @@ export default function GiftCardPurchase() {
         setLoading(true);
         if (productId) {
             (async () => {
-                const result = await giftCardDetailsGetAPI(productId);
+                const result = await giftCardDetailsGetAPI(productId, lang);
                 const data = result?.data?.data;
                 setProduct(data?.product);
 

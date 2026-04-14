@@ -9,7 +9,7 @@ import {
 import { toast } from "react-hot-toast";
 import ProductSidebar from "@/components/partials/ProductSidebar";
 import Button from "@/components/utility/Button";
-import { useTranslations } from "next-intl"; // ← Added
+import { useLocale, useTranslations } from "next-intl"; // ← Added
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
 
@@ -25,6 +25,7 @@ const CampaignSkeleton = () => (
 
 export default function Campaign() {
     const t = useTranslations("Campaign"); // ← Added as requested
+    const lang = useLocale();
 
     const [campaigns, setCampaigns] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -39,7 +40,7 @@ export default function Campaign() {
         const fetchCampaigns = async () => {
             try {
                 setLoading(true);
-                const response = await campaignsGetAPI();
+                const response = await campaignsGetAPI(lang);
 
                 if (response?.data?.data?.all_campaigns?.data) {
                     const publicCampaigns =

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect, useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
     requestMoneyGetAPI,
     SubmitRequestMoneyAPI,
@@ -36,6 +36,7 @@ function Skeleton({ className }) {
 
 export default function RequestMoneySection({ setRefetch }) {
     const t = useTranslations("Dashboard.wallet.requestMoney");
+    const lang = useLocale();
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [defaultCurrency, setDefaultCurrency] = useState({
@@ -195,7 +196,7 @@ export default function RequestMoneySection({ setRefetch }) {
     const fetchRequestMoneyData = async () => {
         try {
             setIsLoading(true);
-            const response = await requestMoneyGetAPI();
+            const response = await requestMoneyGetAPI(lang);
             const data = response.data.data;
             setRequestMoneyData({
                 ...data,
@@ -244,6 +245,7 @@ export default function RequestMoneySection({ setRefetch }) {
                     senderAmount,
                     currencyCode,
                     chargeId,
+                    lang
                 );
                 const data = result?.data?.data;
                 setRemainingLimit({
@@ -272,6 +274,7 @@ export default function RequestMoneySection({ setRefetch }) {
                 selectedCurrency.code,
                 credentials,
                 remark,
+                lang
             );
 
             toast.success(t("requestSent"));
@@ -293,7 +296,7 @@ export default function RequestMoneySection({ setRefetch }) {
 
     const handleScanSuccess = async (qrCode) => {
         try {
-            const response = await requestMoneyScanAPI(qrCode);
+            const response = await requestMoneyScanAPI(qrCode, lang);
             const userData = response.data.data;
             setCredentials(userData.email || userData.mobile);
             toast.success("QR code scanned successfully");

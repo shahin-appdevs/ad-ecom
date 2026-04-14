@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { toast } from "react-hot-toast";
 import { ClipboardIcon, CheckIcon } from "@heroicons/react/24/outline";
 
@@ -30,6 +30,7 @@ const ShareLinkSkeleton = () => {
 export default function ShareLinkPage() {
     // Hooks
     const t = useTranslations("Dashboard.wallet.paymentLink.shareLinkPage");
+    const lang = useLocale();
     const router = useRouter();
     const { locale } = useParams();
 
@@ -46,7 +47,7 @@ export default function ShareLinkPage() {
 
             try {
                 setIsLoading(true);
-                const response = await paymentLinkListAPI();
+                const response = await paymentLinkListAPI(lang);
                 const foundLink = response.data?.data?.payment_links?.find(
                     (l) => l.token === token,
                 );

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect, useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
     sendMoneyGetAPI,
     SubmitSendMoneyAPI,
@@ -42,6 +42,7 @@ const transfer_types = [
 
 export default function SendMoneySection({ setRefetch }) {
     const t = useTranslations("Dashboard.wallet.sendMoney");
+    const lang = useLocale();
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [receiverCurrency, setReceiverCurrency] = useState(
@@ -113,6 +114,7 @@ export default function SendMoneySection({ setRefetch }) {
                     senderAmount,
                     currencyCode,
                     chargeId,
+                    lang
                 );
                 const data = result?.data?.data;
                 setRemainingLimit({
@@ -293,7 +295,7 @@ export default function SendMoneySection({ setRefetch }) {
     useEffect(() => {
         const fetchInitialData = async () => {
             try {
-                const response = await sendMoneyGetAPI();
+                const response = await sendMoneyGetAPI(lang);
                 const data = response.data.data;
                 setSendMoneyData({
                     ...data,
@@ -317,7 +319,7 @@ export default function SendMoneySection({ setRefetch }) {
         const checkUser = async () => {
             if (credentials && credentials.length > 3) {
                 try {
-                    await SendMoneyCheckUserAPI(credentials);
+                    await SendMoneyCheckUserAPI(credentials, lang);
                 } catch (error) {
                     toast.error(
                         error.response?.data?.message?.error?.[0] ||
@@ -364,7 +366,7 @@ export default function SendMoneySection({ setRefetch }) {
 
     const handleScanSuccess = async (qrCode) => {
         try {
-            const response = await SendMoneyScanAPI(qrCode);
+            const response = await SendMoneyScanAPI(qrCode, lang);
             setCredentials(response.data.data.credentials);
             closeCamera();
             toast.success(response?.data?.message?.success?.[0]);
@@ -384,6 +386,7 @@ export default function SendMoneySection({ setRefetch }) {
                 receiverAmount,
                 receiverCurrency.code,
                 remark,
+                lang
             );
 
             toast.success(response?.data?.message?.success?.[0]);

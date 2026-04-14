@@ -2,12 +2,14 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import { dashboardGetAPI } from "@root/services/apiClient/apiClient";
+import { useLocale } from "next-intl";
 
 const DashboardContext = createContext();
 
 export const useDashboardData = () => useContext(DashboardContext);
 
 export const DashboardProvider = ({ children, value }) => {
+    const lang = useLocale();
     const [dashboardData, setDashboardData] = useState(null);
     const [walletInfo, setWalletInfo] = useState({
         balance: null,
@@ -19,7 +21,7 @@ export const DashboardProvider = ({ children, value }) => {
     useEffect(() => {
         const fetchDashboardData = async () => {
             try {
-                const response = await dashboardGetAPI();
+                const response = await dashboardGetAPI(lang);
                 setDashboardData(response?.data?.data);
                 
                 // Find the wallet with currency.default === 1

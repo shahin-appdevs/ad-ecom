@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { withdrawGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
@@ -44,12 +44,13 @@ export default function WithdrawHistorySection() {
     const [transactions, setTransactions] = useState([]);
     const router = useRouter();
     const t = useTranslations("Dashboard.transactions.withdrawTransaction");
+    const lang = useLocale();
 
     useEffect(() => {
         const fetchWithdrawInfo = async () => {
             try {
                 setLoading(true);
-                const response = await withdrawGetAPI();
+                const response = await withdrawGetAPI(lang);
                 setTransactions(response.data.data.transactions || []);
             } catch (error) {
                 const errorMessage = error.response?.data?.message?.error?.[0];

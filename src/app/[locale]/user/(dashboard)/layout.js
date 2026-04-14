@@ -10,7 +10,7 @@ import { DashboardProvider } from "@/components/context/DashboardContext";
 import { WalletProvider } from "@/components/context/WalletContext";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-hot-toast";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function DashboardLayout({ children }) {
     const router = useRouter();
@@ -18,6 +18,7 @@ export default function DashboardLayout({ children }) {
     const [dashboardData, setDashboardData] = useState(null);
 
     const t = useTranslations("DashboardLayout");
+    const lang = useLocale();
 
     useEffect(() => {
         const searchParams = new URLSearchParams(window.location.search);
@@ -38,7 +39,7 @@ export default function DashboardLayout({ children }) {
             }
 
             try {
-                const response = await dashboardGetAPI();
+                const response = await dashboardGetAPI(lang);
 
                 const userData = response.data.data.user;
 

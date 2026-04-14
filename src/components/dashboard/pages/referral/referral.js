@@ -8,10 +8,11 @@ import {
 import { useState, useEffect } from "react";
 import { referralStatusGetAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export default function ReferralSection() {
     const t = useTranslations("Dashboard.account.referral");
+    const lang = useLocale();
     const [loading, setLoading] = useState(true);
     const [referData, setReferData] = useState(null);
     const [copySuccess, setCopySuccess] = useState(false);
@@ -44,7 +45,7 @@ export default function ReferralSection() {
     };
 
     useEffect(() => {
-        referralStatusGetAPI()
+        referralStatusGetAPI(lang)
             .then((response) => {
                 setReferData(response.data.data);
             })

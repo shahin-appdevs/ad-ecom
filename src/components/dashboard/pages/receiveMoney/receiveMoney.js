@@ -1,6 +1,6 @@
 "use client";
 import { Fragment, useState, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Dialog, Transition } from "@headlessui/react";
 import QRCode from "react-qr-code";
 import {
@@ -14,6 +14,7 @@ import { toast } from "react-hot-toast";
 
 export default function ReceiveMoneySection() {
     const t = useTranslations("Dashboard.wallet.receiveMoney");
+    const lang = useLocale();
     const [copied, setCopied] = useState(false);
     const [uniqueCode, setUniqueCode] = useState("");
     const [qrCode, setQrCode] = useState("");
@@ -33,7 +34,7 @@ export default function ReceiveMoneySection() {
         const fetchQrAddress = async () => {
             setLoading(true);
             try {
-                const response = await receiveMoneyGetAPI();
+                const response = await receiveMoneyGetAPI(lang);
                 const { uniqueCode, qrCode } = response.data?.data || {};
                 let extractedCode = uniqueCode;
                 if (qrCode) {

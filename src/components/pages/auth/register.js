@@ -13,6 +13,7 @@ import useGoogleRecaptcha from "@/hooks/useGoogleRecaptcha";
 import { useLocale, useTranslations } from "next-intl";
 import getImageUrl from "@/components/utility/getImageUrl";
 import { useAppSettings } from "@/hooks/useAppSettings";
+const logo = "/images/logo/logo.webp";
 
 function RegisterComp() {
     useAuthRedirect();
@@ -29,11 +30,9 @@ function RegisterComp() {
     const [showPassword, setShowPassword] = useState(false);
     const { recaptcha, recaptchaRef, recaptchaChange, loginBasicData } =
         useGoogleRecaptcha();
-    const locale = useLocale();
+    const lang = useLocale();
     const t = useTranslations("Auth.register");
-
     const searchParam = useSearchParams();
-
     const { appSettingsData } = useAppSettings();
 
     useEffect(() => {
@@ -68,13 +67,13 @@ function RegisterComp() {
             formData.append("password", password);
             formData.append("agree", agree.toString());
             formData.append("g-recaptcha-response", recaptcha);
-            formData.append("language", locale);
+            formData.append("language", lang);
 
             if (showReferralInput && referralCode) {
                 formData.append("referral_code", referralCode.trim());
             }
 
-            const response = await registerAPI(formData, locale);
+            const response = await registerAPI(formData, lang);
 
             if (response?.data?.data?.token) {
                 const token = response.data.data.token;
@@ -101,10 +100,10 @@ function RegisterComp() {
                 );
 
                 if (userInfo?.email_verified === 0) {
-                    await sendOtpAPI();
+                    await sendOtpAPI(lang);
                     router.push("/user/auth/email-verify");
                 } else if (userInfo?.sms_verified === 0) {
-                    await resendAuthorizationCodeAPI();
+                    await resendAuthorizationCodeAPI(lang);
                     router.push("/user/auth/phone-verify");
                 } else {
                     router.push("/user/dashboard");
@@ -137,12 +136,9 @@ function RegisterComp() {
 
                     <div className="relative z-10">
                         <div className="flex items-center space-x-3 mb-8">
-                            <div className="bg-white/10 p-2 rounded-lg backdrop-blur-sm">
+                            <div className="bg-white/10 p-2 w-[50px] h-[50px] rounded-full backdrop-blur-sm flex items-center justify-center">
                                 <Image
-                                    src={getImageUrl(
-                                        appSettingsData?.site_logo,
-                                        appSettingsData?.logo_image_path,
-                                    )}
+                                    src={logo}
                                     alt="Logo"
                                     width={40}
                                     height={40}
@@ -162,7 +158,10 @@ function RegisterComp() {
                     </div>
 
                     <div className="relative z-10 text-sm text-blue-200/60">
-                        {t("copyright", { year: new Date().getFullYear() })}
+                        {t("copyright", {
+                            year: new Date().getFullYear(),
+                            siteName: appSettingsData?.site_name,
+                        })}
                     </div>
                 </div>
 
@@ -362,7 +361,7 @@ function RegisterComp() {
                             >
                                 {t("agreeTo")}{" "}
                                 <Link
-                                    href="/terms"
+                                    href="/terms-and-conditions"
                                     className="font-medium text-gray-900 hover:underline"
                                 >
                                     {t("terms")}

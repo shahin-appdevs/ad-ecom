@@ -14,11 +14,12 @@ import RHFSelect from "@/components/ui/form/RHFSelect";
 import { RHFFileUpload } from "@/components/ui/form/RHFFileUpload";
 import { RHFTextarea } from "@/components/ui/form/RHFTextarea";
 import toast from "react-hot-toast";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 
 export default function UpdateCustomer() {
     const t = useTranslations("Dashboard.cards.virtualCard.updateCustomer");
+    const lang = useLocale();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
@@ -55,7 +56,7 @@ export default function UpdateCustomer() {
         (async () => {
             setLoading(true);
             try {
-                const result = await stroWalletPageInfoGetApi();
+                const result = await stroWalletPageInfoGetApi(lang);
                 const fields = result?.data?.data?.customer_create_fields || [];
                 setCustomerFields(fields);
                 const customerInfo = result?.data?.data?.customer_exist;
@@ -98,7 +99,7 @@ export default function UpdateCustomer() {
         // For demonstration: log FormData keys and values
 
         try {
-            const result = await updateCustomerAPI(formData);
+            const result = await updateCustomerAPI(formData, lang);
             const messages = result?.data?.message?.success;
             messages.forEach((message) => toast.success(message));
             router.replace("/user/cards/virtual-card");

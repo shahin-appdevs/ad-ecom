@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 import {
     paymentLinkShareAPI,
@@ -153,6 +153,7 @@ function PaymentLinkShareContent({
     setApiLoading,
 }) {
     const t = useTranslations("Dashboard.wallet.paymentLink.paymentLinkShare");
+    const lang = useLocale();
 
     const router = useRouter();
     const stripe = useStripe();
@@ -264,6 +265,7 @@ function PaymentLinkShareContent({
                 "WEB",
                 `${window.location.origin}/payment-link/sharelink-success`,
                 `${window.location.origin}/payment-link/sharelink-cancel`,
+                lang,
             );
 
             toast.success(t("success.paymentSubmitted"));
@@ -857,6 +859,7 @@ function PaymentLinkShareContent({
 // Main Page Component
 export default function PaymentLinkSharePage() {
     const t = useTranslations("Dashboard.wallet.paymentLink.paymentLinkShare");
+    const lang = useLocale();
 
     const router = useRouter();
     const searchParams = useSearchParams();
@@ -902,7 +905,7 @@ export default function PaymentLinkSharePage() {
                     }));
                 }
 
-                const response = await paymentLinkShareAPI(linkToken);
+                const response = await paymentLinkShareAPI(linkToken, lang);
                 setData(response.data.data);
 
                 const key = response?.data?.data?.payment_settings?.public_key;

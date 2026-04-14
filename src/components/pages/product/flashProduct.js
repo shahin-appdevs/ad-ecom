@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import ProductSidebar from "@/components/partials/ProductSidebar";
@@ -9,7 +9,7 @@ import {
     nextPageGetAPI,
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { handleApiError } from "@/components/utility/handleApiError";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -57,7 +57,9 @@ export default function FlashProduct() {
 
     // translation
     const t = useTranslations("HomePage.flashSale");
+    const lang = useLocale();
     const flashSaleTitle = t("flashSaleTitle");
+
 
     const [timeLeft, setTimeLeft] = useState({
         days: "00",
@@ -101,7 +103,7 @@ export default function FlashProduct() {
             if (!isLoggedIn) return;
 
             try {
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );

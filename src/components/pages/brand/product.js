@@ -12,7 +12,7 @@ import {
     profiledGetAPI,
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 
 const backendBaseURL = process.env.NEXT_PUBLIC_BACKEND_BASE_URL;
@@ -47,6 +47,7 @@ function BrandProduct() {
     const { baseCurrencySymbol } = getBaseCurrency(data);
     const t = useTranslations("HomePage.shopByBrand");
     const loadMore = t("loadMore");
+    const lang = useLocale();
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -58,7 +59,7 @@ function BrandProduct() {
             if (!isLoggedIn) return;
 
             try {
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );
@@ -88,7 +89,7 @@ function BrandProduct() {
             if (!brandId) return;
             try {
                 setLoading(true);
-                const response = await brandProductGetAPI(brandId);
+                const response = await brandProductGetAPI(brandId, lang);
                 if (response?.data?.data?.products) {
                     setData(response.data.data);
 

@@ -10,11 +10,12 @@ import {
 } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import getImageUrl from "@/components/utility/getImageUrl";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export default function SmsVerify() {
     const t = useTranslations("Auth.smsVerify");
+    const lang = useLocale();
     const [otp, setOtp] = useState("");
     const [countdown, setCountdown] = useState(59);
     const [canResend, setCanResend] = useState(false);
@@ -76,7 +77,7 @@ export default function SmsVerify() {
         setError("");
 
         try {
-            const response = await resendAuthorizationCodeAPI();
+            const response = await resendAuthorizationCodeAPI(lang);
 
             if (response?.data?.message?.success) {
                 // Success case
@@ -119,7 +120,7 @@ export default function SmsVerify() {
 
         setLoading(true);
         try {
-            const response = await authorizationCodeAPI(cleanOtp);
+            const response = await authorizationCodeAPI(cleanOtp, lang);
             if (response?.data?.message?.success) {
                 response.data.message.success.forEach((msg) =>
                     toast.success(msg),

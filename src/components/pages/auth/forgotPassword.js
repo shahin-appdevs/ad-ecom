@@ -7,11 +7,12 @@ import Button from "@/components/utility/Button";
 import { forgotPasswordAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import getImageUrl from "@/components/utility/getImageUrl";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useAppSettings } from "@/hooks/useAppSettings";
 
 export default function ForgotPassword() {
     const t = useTranslations("Auth.forgotPassword");
+    const lang = useLocale();
     const [credentials, setCredentials] = useState("");
     const router = useRouter();
     const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ export default function ForgotPassword() {
         setLoading(true);
 
         try {
-            const response = await forgotPasswordAPI({ credentials });
+            const response = await forgotPasswordAPI({ credentials }, lang);
 
             const successMessage = response?.data?.message?.success?.[0];
             const errorMessage = response?.data?.message?.error?.[0];

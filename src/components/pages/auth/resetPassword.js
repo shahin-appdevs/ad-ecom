@@ -7,11 +7,12 @@ import Button from "@/components/utility/Button";
 import { resetPasswordAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import getImageUrl from "@/components/utility/getImageUrl";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useAppSettings } from "@/hooks/useAppSettings";
 
 function ResetPasswordForm() {
     const t = useTranslations("Auth.resetPassword");
+    const lang = useLocale();
     const [password, setPassword] = useState("");
     const [passwordConfirmation, setPasswordConfirmation] = useState("");
     const [loading, setLoading] = useState(false);
@@ -32,6 +33,7 @@ function ResetPasswordForm() {
                 token,
                 password,
                 passwordConfirmation,
+                lang
             );
             response.data.message.success.forEach((msg) => {
                 toast.success(msg);

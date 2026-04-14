@@ -8,7 +8,7 @@ import {
 import { toast } from "react-hot-toast";
 import { Listbox } from "@headlessui/react";
 import Button from "@/components/utility/Button";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
     CurrencyDollarIcon,
     BanknotesIcon,
@@ -29,6 +29,7 @@ export default function AutomaticWithdrawPage() {
     const t = useTranslations(
         "Dashboard.wallet.withdrawMoney.withdrawAutomatic",
     );
+    const lang = useLocale();
     const [loading, setLoading] = useState(false);
     const [banksLoading, setBanksLoading] = useState(false);
     const [branchesLoading, setBranchesLoading] = useState(false);
@@ -51,7 +52,7 @@ export default function AutomaticWithdrawPage() {
     const fetchBanks = async (trx) => {
         setBanksLoading(true);
         try {
-            const response = await flutterwaveBanksGetAPI(trx);
+            const response = await flutterwaveBanksGetAPI(trx, lang);
             if (response.data?.data?.bank_info) {
                 setBanks(response.data.data.bank_info);
             }
@@ -72,6 +73,7 @@ export default function AutomaticWithdrawPage() {
             const response = await flutterwaveBankBranchesGetAPI(
                 transactionInfo.trx,
                 bankId,
+                lang
             );
             if (response.data?.data?.bank_branches) {
                 setBranches(response.data.data.bank_branches);
@@ -155,6 +157,7 @@ export default function AutomaticWithdrawPage() {
                 formData.beneficiaryName,
                 formData.beneficiaryAddress,
                 formData.beneficiaryCountry,
+                lang
             );
 
             if (response.data) {

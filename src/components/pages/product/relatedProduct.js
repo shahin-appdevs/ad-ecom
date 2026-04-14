@@ -2,7 +2,7 @@
 import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl"; // ← Added
+import { useLocale, useTranslations } from "next-intl"; // ← Added
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import {
@@ -32,7 +32,7 @@ const ProductSkeleton = () => (
 
 function RelatedProduct() {
     const t = useTranslations("ProductDetails.relatedProduct");
-
+    const lang = useLocale();
     // Translation variables
     const relatedProductsTitle = t("title");
     const noProductsFound = t("noProductsFound");
@@ -57,7 +57,7 @@ function RelatedProduct() {
             if (!isLoggedIn) return;
 
             try {
-                const response = await profiledGetAPI();
+                const response = await profiledGetAPI(lang);
                 setIsReseller(
                     response.data.data?.user?.reseller_verified === "1",
                 );

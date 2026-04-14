@@ -8,7 +8,7 @@ import {
     CreditCardIcon,
 } from "@heroicons/react/24/outline";
 import { submitGiftOrderAPI } from "@root/services/apiClient/apiClient";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import toast from "react-hot-toast";
 
 export default function GiftCardBuyConfirmModal({
@@ -19,6 +19,7 @@ export default function GiftCardBuyConfirmModal({
     const t = useTranslations(
         "Dashboard.cards.giftCard.giftCardBuy.confirmModal",
     );
+    const lang = useLocale();
     const [loading, setLoading] = useState(false);
     const handleOrderSubmit = async () => {
         // console.log(product);
@@ -37,7 +38,7 @@ export default function GiftCardBuyConfirmModal({
         formData.append("wallet_currency", product.walletCurrency || "");
 
         try {
-            const result = await submitGiftOrderAPI(formData);
+            const result = await submitGiftOrderAPI(formData, lang);
             const messages = result?.data?.message?.success;
             messages.forEach((message) => toast.success(message));
             closeModal();

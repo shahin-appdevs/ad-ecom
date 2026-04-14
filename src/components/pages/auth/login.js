@@ -16,6 +16,8 @@ import { handleApiError } from "@/components/utility/handleApiError";
 import getImageUrl from "@/components/utility/getImageUrl";
 import { useLocale, useTranslations } from "next-intl";
 import { useAppSettings } from "@/hooks/useAppSettings";
+import Loading from "@/components/partials/Loading";
+const logo = "/images/logo/logo.webp";
 
 function Login() {
     useAuthRedirect();
@@ -27,7 +29,7 @@ function Login() {
     const [recaptcha, setRecaptcha] = useState(null);
     const [loginBasicData, setLoginBasicData] = useState(null);
     const { appSettingsData } = useAppSettings();
-    const locale = useLocale();
+    const lang = useLocale();
     const t = useTranslations("Auth.login");
     const searchParams = useSearchParams();
     const payLinkToken = searchParams.get("pay_link_token");
@@ -49,7 +51,7 @@ function Login() {
     useEffect(() => {
         (async () => {
             try {
-                const result = await basicDataGetAPI(locale);
+                const result = await basicDataGetAPI(lang);
                 setLoginBasicData(result?.data?.data);
             } catch (error) {
                 handleApiError(error, t("failedToFetchBasicData"));
@@ -72,9 +74,9 @@ function Login() {
             formData.append("credentials", credentials.trim());
             formData.append("password", password);
             formData.append("g-recaptcha-response", recaptcha);
-            formData.append("language", locale);
+            formData.append("language", lang);
 
-            const response = await loginAPI(formData, locale);
+            const response = await loginAPI(formData, lang);
 
             if (response?.data?.data?.token) {
                 const token = response.data.data.token;
@@ -98,7 +100,7 @@ function Login() {
                 );
 
                 if (userInfo?.email_verified === 0) {
-                    await sendOtpAPI();
+                    await sendOtpAPI(lang);
                     router.push("/user/auth/email-verify");
                 } else if (userInfo?.sms_verified === 0) {
                     // await resendAuthorizationCodeAPI();
@@ -146,10 +148,7 @@ function Login() {
                         <div className="flex items-center space-x-3 mb-8">
                             <div className="bg-white/10 p-2 rounded-full backdrop-blur-sm w-[50px] h-[50px] flex items-center justify-center">
                                 <Image
-                                    src={getImageUrl(
-                                        appSettingsData?.site_logo,
-                                        appSettingsData?.logo_image_path,
-                                    )}
+                                    src={logo}
                                     alt="Logo"
                                     width={40}
                                     height={40}
@@ -343,7 +342,7 @@ function Login() {
 
 export default function LoginSection() {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading/>}>
             <Login />
         </Suspense>
     );

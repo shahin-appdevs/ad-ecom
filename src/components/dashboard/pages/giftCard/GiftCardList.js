@@ -5,7 +5,7 @@ import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Link } from "@/i18n/navigation";
 import { allGiftCardGetAPI } from "@root/services/apiClient/apiClient";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { handleApiError } from "@/components/utility/handleApiError";
 
@@ -15,6 +15,7 @@ function classNames(...classes) {
 
 export default function GiftCardList() {
     const t = useTranslations("Dashboard.cards.giftCard.giftCardList");
+    const lang = useLocale();
 
     const [selectedCountry, setSelectedCountry] = useState({});
     const [giftCards, setGiftCards] = useState([]);
@@ -37,6 +38,7 @@ export default function GiftCardList() {
                 const result = await allGiftCardGetAPI(
                     selectedCountry?.iso2 || "AF",
                     currentPage,
+                    lang
                 );
 
                 setCountries(result?.data?.data?.countries || []);

@@ -7,11 +7,12 @@ import { twoFactorAPI } from "@root/services/apiClient/apiClient";
 import { toast } from "react-hot-toast";
 import { Link } from "@/i18n/navigation";
 import getImageUrl from "@/components/utility/getImageUrl";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 export default function Otp() {
     const t = useTranslations("Auth.2fa");
+    const lang = useLocale();
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
@@ -35,7 +36,7 @@ export default function Otp() {
 
         setLoading(true);
         try {
-            const response = await twoFactorAPI(cleanOtp);
+            const response = await twoFactorAPI(cleanOtp, lang);
             if (response?.data?.message?.success) {
                 response.data.message.success.forEach((msg) =>
                     toast.success(msg),

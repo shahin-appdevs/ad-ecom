@@ -332,7 +332,7 @@ export default function SideNav() {
         return initialIndex === -1 ? null : initialIndex;
     });
     const { dashboardData, loading } = useDashboardData();
-    const locale = useLocale();
+    const lang = useLocale();
 
     if (loading) return <SidebarSkeleton />;
 
@@ -351,7 +351,7 @@ export default function SideNav() {
         e.preventDefault();
 
         try {
-            const response = await logoutAPI(locale);
+            const response = await logoutAPI(lang);
 
             const successMessage = response?.data?.message?.success;
 

@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
     paymentLinkListAPI,
     paymentLinkStoreAPI,
@@ -122,6 +122,7 @@ export default function CreateLinkSection() {
     const router = useRouter();
     const [showPinModal, setShowPinModal] = useState(false);
     const t = useTranslations("Dashboard.wallet.paymentLink.createPaymentLink");
+    const lang = useLocale();
     const { appSettingsData } = useAppSettings();
 
     const paymentTypes = [
@@ -144,7 +145,7 @@ export default function CreateLinkSection() {
     useEffect(() => {
         const fetchCurrencies = async () => {
             try {
-                const response = await paymentLinkListAPI();
+                const response = await paymentLinkListAPI(lang);
                 const currencyData = response.data.data.currency_data;
                 setCurrencies(currencyData);
 
@@ -210,7 +211,7 @@ export default function CreateLinkSection() {
                 formData.append("image", file);
             }
 
-            const response = await paymentLinkStoreAPI(formData);
+            const response = await paymentLinkStoreAPI(formData, lang);
 
             if (response.data?.data?.payment_link) {
                 toast.success(

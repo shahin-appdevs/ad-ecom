@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect, useMemo } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
     makePaymentGetAPI,
     submitMakePaymentAPI,
@@ -37,6 +37,7 @@ function Skeleton({ className }) {
 
 export default function MakePaymentSection({ setRefetch }) {
     const t = useTranslations("Dashboard.wallet.makePayment");
+    const lang = useLocale();
     const { wallet, updateSelectedCurrency } = useWallet();
     const [selectedCurrency, setSelectedCurrency] = useState(null);
     const [receiverCurrency, setReceiverCurrency] = useState(
@@ -106,6 +107,7 @@ export default function MakePaymentSection({ setRefetch }) {
                     senderAmount,
                     currencyCode,
                     chargeId,
+                    lang
                 );
                 const data = result?.data?.data;
                 setRemainingLimit({
@@ -289,7 +291,7 @@ export default function MakePaymentSection({ setRefetch }) {
     useEffect(() => {
         const fetchInitialData = async () => {
             try {
-                const response = await makePaymentGetAPI();
+                const response = await makePaymentGetAPI(lang);
                 const data = response.data.data;
                 setMakePaymentData({
                     ...data,
@@ -314,7 +316,7 @@ export default function MakePaymentSection({ setRefetch }) {
         const checkUser = async () => {
             if (credentials && credentials.length > 3) {
                 try {
-                    await makePaymentCheckMerchantAPI(credentials);
+                    await makePaymentCheckMerchantAPI(credentials, lang);
                 } catch (error) {
                     toast.error(
                         error.response?.data?.message?.error?.[0] ||
@@ -361,7 +363,7 @@ export default function MakePaymentSection({ setRefetch }) {
 
     const handleScanSuccess = async (qrCode) => {
         try {
-            const response = await makePaymentScanAPI(qrCode);
+            const response = await makePaymentScanAPI(qrCode, lang);
             setCredentials(response.data.data.credentials);
             closeCamera();
             toast.success(response?.data?.message?.success?.[0]);
@@ -382,6 +384,7 @@ export default function MakePaymentSection({ setRefetch }) {
                 receiverAmount,
                 receiverCurrency.code,
                 remark,
+                lang
             );
 
             toast.success(response?.data?.message?.success?.[0]);

@@ -19,7 +19,7 @@ import {
     SubmitBillPayAPI,
     walletCardRemainingLimitsGetAPI,
 } from "@root/services/apiClient/apiClient";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import PinVerificationModal from "@/components/dashboard/partials/PinVerificationModal";
 import { useWallet } from "@/components/context/WalletContext";
 import { handleApiError } from "@/components/utility/handleApiError";
@@ -32,6 +32,7 @@ function Skeleton({ className }) {
 
 const BillPaySection = ({ setBillPaySuccess }) => {
     const t = useTranslations("Dashboard.services.billPay");
+    const lang = useLocale();
 
     const [selectedBillType, setSelectedBillType] = useState(null);
     const [selectedBillMonth, setSelectedBillMonth] = useState(null);
@@ -67,7 +68,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
         const fetchBillPayData = async () => {
             try {
                 setIsLoading(true);
-                const response = await billPayGetAPI();
+                const response = await billPayGetAPI(lang);
                 const data = response.data.data;
 
                 setBillPayData({
@@ -123,6 +124,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                     senderAmount,
                     currencyCode,
                     chargeId,
+                    lang
                 );
                 const data = result?.data?.data;
                 setRemainingLimit({
@@ -277,6 +279,7 @@ const BillPaySection = ({ setBillPaySuccess }) => {
                 billNumber,
                 amount,
                 wallet.selectedCurrency.code,
+                lang,
             );
 
             toast.success(response.data.message.success[0]);

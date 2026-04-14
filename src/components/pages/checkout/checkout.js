@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useCallback, Suspense } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { PlusIcon, MinusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/utility/Button";
@@ -16,6 +16,7 @@ import { Listbox } from "@headlessui/react";
 import { useSearchParams } from "next/navigation";
 import { getBaseCurrency } from "@/components/utility/getBaseCurrency";
 import { handleApiError } from "@/components/utility/handleApiError";
+import Loading from "@/components/partials/Loading";
 
 const ProductSkeleton = () => (
     <div className="flex items-start gap-4 border-b pb-4">
@@ -69,6 +70,7 @@ const SummarySkeleton = () => (
 
 function Checkout() {
     const t = useTranslations("Checkout.orderCheckout");
+    const lang = useLocale()
     const [cartItems, setCartItems] = useState([]);
     const [isCheckout, setIsCheckout] = useState(false);
     const [isPayment, setIsPayment] = useState(false);
@@ -140,7 +142,7 @@ function Checkout() {
         const fetchDeliveryOptions = async () => {
             try {
                 setLoading(true);
-                const response = await deliveryOptionGetAPI();
+                const response = await deliveryOptionGetAPI(lang);
 
                 setApiData(response.data.data);
                 if (response.data.data) {
@@ -171,7 +173,7 @@ function Checkout() {
     useEffect(() => {
         const fetchPaymentGateways = async () => {
             try {
-                const response = await onlineGatewaysGetAPI();
+                const response = await onlineGatewaysGetAPI(lang);
                 if (response.data.data?.online_gateways) {
                     setPaymentGateways(response.data.data.online_gateways);
                 }
@@ -261,7 +263,7 @@ function Checkout() {
 
             formDataToSend.append("source", "WEB");
 
-            const response = await orderConfirmAPI(formDataToSend);
+            const response = await orderConfirmAPI(formDataToSend, lang);
 
             if (response.data.message.success) {
                 toast.success(response?.data?.message?.success?.[0]);
@@ -327,7 +329,7 @@ function Checkout() {
     useEffect(() => {
         const fetchDivisions = async () => {
             try {
-                const response = await divisionDataGetAPI();
+                const response = await divisionDataGetAPI(lang);
                 if (response.data.message.success) {
                     setDivisions(response.data.data.divisions);
                     setAllDistricts(response.data.data.districts);
@@ -357,7 +359,7 @@ function Checkout() {
     // Fetch upazillas when district is selected
     const fetchUpazillas = async (districtId) => {
         try {
-            const response = await divisionDataGetAPI();
+            const response = await divisionDataGetAPI(lang);
             if (response.data.message.success) {
                 const filteredUpazillas = response.data.data.upazilas.filter(
                     (upazilla) =>
@@ -1065,14 +1067,13 @@ function Checkout() {
                                     <div className="flex justify-between text-base font-semibold mb-4">
                                         <span>{t("totalProduct")}</span>
                                         <span>
-                                            {baseCurrencySymbol}{" "}
                                             {formatCurrency(total)}
                                         </span>
                                     </div>
                                     <p className="flex justify-between mb-2">
                                         <span>{t("deliveryFee")}:</span>
                                         <span className="font-medium">
-                                            {baseCurrencySymbol}{" "}
+                                            
                                             {formatCurrency(deliveryCharge)}
                                         </span>
                                     </p>
@@ -1089,7 +1090,7 @@ function Checkout() {
                                     <p className="flex justify-between text-base text-primary__color font-bold">
                                         <span>{t("grandTotal")}:</span>
                                         <span>
-                                            {baseCurrencySymbol}{" "}
+                                            
                                             {formatCurrency(
                                                 total +
                                                     parseFloat(deliveryCharge),
@@ -1130,14 +1131,14 @@ function Checkout() {
                                     <div className="flex justify-between text-base font-semibold mb-4">
                                         <span>{t("totalProduct")}</span>
                                         <span>
-                                            {baseCurrencySymbol}{" "}
+                                            
                                             {formatCurrency(total)}
                                         </span>
                                     </div>
                                     <p className="flex justify-between mb-2">
                                         <span>{t("deliveryFee")}:</span>
                                         <span className="font-medium">
-                                            {baseCurrencySymbol}{" "}
+                                            
                                             {formatCurrency(deliveryCharge)}
                                         </span>
                                     </p>
@@ -1181,7 +1182,7 @@ function Checkout() {
                                     <div className="flex justify-between text-base font-semibold mb-4">
                                         <span>{t("totalProduct")}</span>
                                         <span>
-                                            {baseCurrencySymbol}{" "}
+                                           
                                             {formatCurrency(total)}
                                         </span>
                                     </div>
@@ -1208,7 +1209,7 @@ function Checkout() {
 
 export default function CheckoutPage() {
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<div><Loading/></div>}>
             <Checkout />
         </Suspense>
     );

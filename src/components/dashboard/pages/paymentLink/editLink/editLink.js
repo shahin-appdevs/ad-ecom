@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "@/i18n/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
     paymentLinkUpdateAPI,
     paymentLinkEditAPI,
@@ -102,6 +102,7 @@ const CreateLinkSkeleton = () => {
 
 export default function EditLinkSection() {
     const t = useTranslations("Dashboard.wallet.paymentLink.createPaymentLink");
+    const lang = useLocale();
 
     const paymentTypes = [
         {
@@ -151,7 +152,7 @@ export default function EditLinkSection() {
     const fetchPaymentLink = async (id) => {
         try {
             setIsLoading(true);
-            const response = await paymentLinkEditAPI(id);
+            const response = await paymentLinkEditAPI(id, lang);
             const linkData = response.data.data.payment_link;
 
             // Set basic fields
@@ -252,7 +253,7 @@ export default function EditLinkSection() {
                 formData.append("image", file);
             }
 
-            const response = await paymentLinkUpdateAPI(formData);
+            const response = await paymentLinkUpdateAPI(formData, lang);
 
             if (response.data?.data?.payment_link) {
                 toast.success(response?.data?.message?.success?.[0]);
