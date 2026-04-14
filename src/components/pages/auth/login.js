@@ -17,7 +17,7 @@ import getImageUrl from "@/components/utility/getImageUrl";
 import { useLocale, useTranslations } from "next-intl";
 import { useAppSettings } from "@/hooks/useAppSettings";
 import Loading from "@/components/partials/Loading";
-const logo = "/images/logo/logo.webp";
+const logo = "/images/logo/favicon.png";
 
 function Login() {
     useAuthRedirect();
